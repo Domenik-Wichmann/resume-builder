@@ -1,4 +1,5 @@
 import { z } from "zod";
+export const projectImageLimit = 4 * 1024 * 1024;
 
 export function safeProjectUrl(value: string) {
   if (

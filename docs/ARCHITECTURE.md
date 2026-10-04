@@ -159,7 +159,9 @@ membership RLS protect metadata. The server media route requires a published,
 unarchived primary-account parent, or authenticated membership for private
 preview. Browser image requests bypass the Next image optimization cache and
 use no-store so an unpublish is checked on every request. Uploads are bounded to
-5 MB and reject SVG/HTML; only PNG/JPEG/WebP/GIF signatures are accepted.
+4 MB and reject SVG/HTML; only PNG/JPEG/WebP/GIF signatures are accepted. The app
+limit stays below [Vercel's function payload limit](https://vercel.com/docs/functions/limitations);
+the private bucket has a separate 5 MB ceiling.
 
 The category/skill explorer derives supporting records and co-occurring skills
 from relational links. It does not persist graph edges. Optional events require

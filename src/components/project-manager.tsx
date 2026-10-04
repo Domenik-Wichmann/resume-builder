@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
+import { projectImageLimit } from "@/lib/portfolio/model";
 import type {
   Project,
   ProjectInput,
@@ -334,6 +335,25 @@ export function ProjectManager({
                     ))}
                   </select>
                 </label>
+                <label>
+                  Display order
+                  <input
+                    type="number"
+                    min={0}
+                    max={10000}
+                    value={l.display_order}
+                    onChange={(e) =>
+                      change(
+                        "links",
+                        form.links.map((r, j) =>
+                          j === i
+                            ? { ...r, display_order: Number(e.target.value) }
+                            : r,
+                        ),
+                      )
+                    }
+                  />
+                </label>
                 <label className="check-label">
                   <input
                     type="checkbox"
@@ -381,8 +401,8 @@ export function ProjectManager({
               Add link
             </button>
             <p>
-              Link order follows the list. Use HTTPS or supported internal
-              portfolio routes.
+              Lower display-order values appear first. Use HTTPS or supported
+              internal portfolio routes.
             </p>
           </fieldset>
           <button disabled={busy} type="submit">
@@ -402,7 +422,7 @@ export function ProjectManager({
           <section>
             <h2>Project images</h2>
             <p>
-              PNG, JPEG, WebP or GIF; up to 5 MB. Saved changes on a published
+              PNG, JPEG, WebP or GIF; up to 4 MB. Saved changes on a published
               project appear publicly.
             </p>
             <label>
@@ -421,8 +441,8 @@ export function ProjectManager({
                 const file = e.target.files?.[0];
                 if (!file) return;
                 void run(async () => {
-                  if (file.size > 5242880)
-                    throw new Error("Image limit is 5 MB.");
+                  if (file.size > projectImageLimit)
+                    throw new Error("Image limit is 4 MB.");
                   const r = await fetch(
                     `/api/admin/project-media?project=${form.id}&alt=${encodeURIComponent(alt)}`,
                     {

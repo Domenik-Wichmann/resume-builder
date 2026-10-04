@@ -3,7 +3,7 @@ import { z } from "zod";
 import { requireAccount } from "@/lib/accounts";
 import { database } from "@/lib/db";
 import { readJson, requireOrigin, errorResponse, HttpError } from "@/lib/http";
-import { mediaSchema } from "@/lib/portfolio/model";
+import { mediaSchema, projectImageLimit } from "@/lib/portfolio/model";
 import { imageType } from "@/lib/portfolio/images";
 export async function POST(request: Request) {
   try {
@@ -37,9 +37,9 @@ export async function POST(request: Request) {
       const { done, value } = await reader.read();
       if (done) break;
       size += value.length;
-      if (size > 5242880) {
+      if (size > projectImageLimit) {
         await reader.cancel();
-        throw new HttpError(413, "Image limit is 5 MB.");
+        throw new HttpError(413, "Image limit is 4 MB.");
       }
       chunks.push(value);
     }

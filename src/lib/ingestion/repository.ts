@@ -4,11 +4,18 @@ import { kinds, tableFor, type Canonical } from "./model";
 export async function loadCanonical(
   db: SupabaseClient,
   accountId: string,
+  publicOnly = false,
 ): Promise<Canonical[]> {
   const results = await Promise.all(
-    kinds.map((kind) =>
-      db.from(tableFor[kind]).select("*").eq("account_id", accountId),
-    ),
+    kinds.map((kind) => {
+      let query = db
+        .from(tableFor[kind])
+        .select("*")
+        .eq("account_id", accountId);
+      if (publicOnly)
+        query = query.eq("is_public", true).is("archived_at", null);
+      return query;
+    }),
   );
   if (results.some((result) => result.error))
     throw new Error("Cannot load canonical career records.");
