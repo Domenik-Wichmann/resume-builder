@@ -3,7 +3,12 @@ import { currentMarket, getPresentation } from "@/lib/market-server";
 import { IdentityHeader } from "@/components/identity-header";
 import { WorkspaceList } from "@/components/workspace-list";
 export const dynamic = "force-dynamic";
-export default async function Workspaces() {
+export default async function Workspaces({
+  searchParams,
+}: {
+  searchParams: Promise<{ question?: string }>;
+}) {
+  const suggestedQuestion = (await searchParams).question?.slice(0, 1000) || "";
   const career = await getCareer(),
     presentation = await getPresentation(await currentMarket());
   return (
@@ -16,7 +21,7 @@ export default async function Workspaces() {
           Resume a saved exploration, or start with a job description or
           question. No recruiter account is needed.
         </p>
-        <WorkspaceList />
+        <WorkspaceList question={suggestedQuestion} />
       </main>
     </>
   );

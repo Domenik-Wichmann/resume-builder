@@ -8,7 +8,10 @@ import {
   browserDeleteWorkspace,
 } from "@/lib/workspaces/browser";
 import type { Workspace } from "@/lib/workspaces/model";
-export function WorkspaceList() {
+export function WorkspaceList({ question = "" }: { question?: string }) {
+  const questionQuery = question
+    ? `?question=${encodeURIComponent(question)}`
+    : "";
   const [items, setItems] = useState<
       Pick<Workspace, "id" | "title" | "market" | "updated_at">[]
     >([]),
@@ -31,7 +34,10 @@ export function WorkspaceList() {
               Last updated {new Date(workspace.updated_at).toLocaleDateString()}
             </p>
             <div className="workspace-actions">
-              <Link className="button" href={`/workspace/${workspace.id}`}>
+              <Link
+                className="button"
+                href={`/workspace/${workspace.id}${questionQuery}`}
+              >
                 Resume workspace ↗
               </Link>
               <button
@@ -68,7 +74,7 @@ export function WorkspaceList() {
           setBusy(true);
           try {
             const workspace = await browserCreateWorkspace();
-            router.push(`/workspace/${workspace.id}`);
+            router.push(`/workspace/${workspace.id}${questionQuery}`);
           } catch (err) {
             setError(
               err instanceof Error ? err.message : "Cannot create workspace.",

@@ -48,7 +48,16 @@ export async function complete<T>(
         },
       }),
     },
-  );
+  ).catch(async () => {
+    await recordUsage(
+      "OPENROUTER",
+      options.model || env.model!,
+      options.usage || {},
+      {},
+      "FAILED",
+    );
+    throw new ProviderError("AI provider request failed or timed out.");
+  });
   if (!response.ok) {
     await recordUsage(
       "OPENROUTER",

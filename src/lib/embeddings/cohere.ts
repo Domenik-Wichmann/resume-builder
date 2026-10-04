@@ -30,6 +30,15 @@ export async function embed(
       embedding_types: ["float"],
       truncate: "END",
     }),
+  }).catch(async () => {
+    await recordUsage(
+      "COHERE",
+      env.embeddingModel,
+      { ...usage, operation: usage.operation || inputType },
+      {},
+      "FAILED",
+    );
+    throw new EmbeddingError("Cohere request failed or timed out.");
   });
   if (!response.ok) {
     await recordUsage("COHERE", env.embeddingModel, usage, {}, "FAILED");

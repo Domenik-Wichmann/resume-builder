@@ -1,5 +1,4 @@
 import "server-only";
-import { NextRequest } from "next/server";
 import { database } from "../db";
 import { primaryAccountId } from "../account-id";
 import { readVisitor, visitorCookie } from "../workspaces/identity";
@@ -7,10 +6,18 @@ import { readSession, resolveLink } from "../tracking/service";
 import { validateEnv } from "../env";
 import { HttpError, reserveAIQuota } from "../http";
 import { accessConfig, requiresVerification } from "./config";
-export async function verificationStatus(request: NextRequest) {
+function cookieValue(request: Request, name: string) {
+  return request.headers
+    .get("cookie")
+    ?.split(";")
+    .map((c) => c.trim())
+    .find((c) => c.startsWith(`${name}=`))
+    ?.slice(name.length + 1);
+}
+export async function verificationStatus(request: Request) {
   const config = accessConfig(process.env),
-    visitor = readVisitor(request.cookies.get(visitorCookie)?.value);
-  const tracked = readSession(request.cookies.get("rb_ai_access")?.value || "");
+    visitor = readVisitor(cookieValue(request, visitorCookie));
+  const tracked = readSession(cookieValue(request, "rb_ai_access") || "");
   const link = tracked ? await resolveLink(tracked.code) : null;
   let verifiedUntil: string | null = null;
   if (visitor && validateEnv(process.env).mode === "live") {
@@ -35,7 +42,7 @@ export async function verificationStatus(request: NextRequest) {
   };
 }
 export async function reservePublicAction(
-  request: NextRequest,
+  request: Request,
   operation: "ask" | "match" | "compile",
   workspaceId?: string,
 ) {

@@ -1,5 +1,4 @@
 ﻿import "server-only";
-import { NextRequest } from "next/server";
 import { z } from "zod";
 import { analyze } from "./ai/service";
 import { readJson, errorResponse } from "./http";
@@ -7,9 +6,8 @@ import { reservePublicAction } from "./access/service";
 export async function handleAI(request: Request, task: "ask" | "match") {
   let release: (() => Promise<void>) | undefined;
   try {
-    const nextRequest = new NextRequest(request);
     const { input } = await readJson(
-      nextRequest,
+      request,
       z
         .object({
           input: z
@@ -20,7 +18,7 @@ export async function handleAI(request: Request, task: "ask" | "match") {
         })
         .strict(),
     );
-    release = await reservePublicAction(nextRequest, task);
+    release = await reservePublicAction(request, task);
     return Response.json(
       await analyze(task, input, undefined, { operation: task }),
       { headers: { "Cache-Control": "no-store" } },
