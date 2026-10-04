@@ -37,9 +37,15 @@ export default async function Home() {
               <span className="status-dot" /> A structured view of the work
             </p>
             <h1 id="hero-title">
-              Useful systems.
-              <br />
-              <span>Thoughtful engineering.</span>
+              {career.profile.name ? (
+                <>
+                  Useful systems.
+                  <br />
+                  <span>Thoughtful engineering.</span>
+                </>
+              ) : (
+                "Career profile pending publication."
+              )}
             </h1>
             <p className="hero-intro">{career.profile.introduction}</p>
             <div className="hero-actions">
@@ -65,7 +71,7 @@ export default async function Home() {
               <small>PHOTO PLACEHOLDER</small>
             </div>
             <div className="profile-caption">
-              <h2>{career.profile.name}</h2>
+              <h2>{career.profile.name || "Profile not published"}</h2>
               <p>{career.profile.title}</p>
               <p>
                 {[
@@ -80,7 +86,13 @@ export default async function Home() {
             </div>
             <div className="card-note">
               <span>01 / PROFILE</span>
-              <span>{career.demo ? "DEMO DATA" : "PUBLISHED EVIDENCE"}</span>
+              <span>
+                {career.demo
+                  ? "DEMO DATA"
+                  : career.profile.name
+                    ? "PUBLISHED EVIDENCE"
+                    : "AWAITING APPROVED PROFILE"}
+              </span>
             </div>
           </aside>
         </section>

@@ -54,8 +54,10 @@ has a UUID and slug; roles/projects use `title`, `subtitle`, `summary`. Skills u
 Use `profile_presentations` for approved US/BG contact details, referencing the
 same profile. Each presentation needs its own publication approval. Role
 organization/start/end dates are optional structured fields. No fictional seed
-is applied to your live database. Publish a profile before
-starting live mode. A future ingestion command can replace this small manual pass.
+is applied to your live database. Live mode also supports an empty database:
+the portfolio reports that the profile is awaiting publication, AI returns
+"No relevant evidence is currently stored," and reindexing reports zero records.
+A future ingestion command can replace this small manual pass.
 
 ## Cohere and OpenRouter
 
@@ -67,6 +69,11 @@ float output, `search_document` for indexing, and `search_query` for retrieval.
 Obtain an OpenRouter key from [OpenRouter Keys](https://openrouter.ai/settings/keys).
 Set `OPENROUTER_API_KEY` and `OPENROUTER_MODEL` to a model supporting JSON Schema
 structured outputs. Set provider spending limits appropriate for a small portfolio.
+The current recruiter Q&A and matching model is `openai/gpt-6-luna`.
+For future initial ingestion, start with `openai/gpt-6-luna-pro`; escalate difficult
+extraction to `openai/gpt-6.1-sol` with bounded delegated review when necessary.
+Ingestion and delegated review are not implemented yet. Publication still requires
+owner approval of extracted facts; model output cannot publish itself.
 The optional attribution fields are in `.env.example`. Keep all provider keys
 server-side. Review provider data policies before submitting confidential content.
 
@@ -96,10 +103,11 @@ or mix incompatible vectors.
 3. Verify homepage, Ask About Me, job matching, `/resume`, and a real short link.
    Check the functions' initialization errors if live configuration is incomplete.
 
-Vercel and Supabase CLI authentication were not configured in the inspected
-environment. Once their sessions and project details are available, Codex can
-continue provisioning/linking, migrations, indexing, deployment, and verification.
-No local fake deployment credentials or URLs are provided.
+This repository uses the existing GitHub-connected Vercel project `resume-builder`
+and the existing Supabase project `Resume Builder`. Link to these existing projects
+when local metadata is absent; do not create duplicates. Runtime variables come
+from the ignored `.env.local`. Production uses live mode; previews use demo mode.
+Provisioning tokens, project references and database passwords stay local.
 
 ## Owner tracking inspection
 

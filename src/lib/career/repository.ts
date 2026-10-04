@@ -32,8 +32,6 @@ export async function getCareer() {
     education,
     certifications,
   ] = results.map((result) => result.data || []);
-  if (!profiles[0])
-    throw new Error("Publish a profile before enabling live mode.");
   const links = await Promise.all(
     ["experience_skills", "project_skills", "achievement_skills"].map((table) =>
       db.from(table).select("*"),
@@ -57,7 +55,11 @@ export async function getCareer() {
     })) as CareerRecord[];
   }
   return careerSchema.parse({
-    profile: profiles[0],
+    profile: profiles[0] || {
+      name: "",
+      title: "",
+      introduction: "No approved career profile has been published yet.",
+    },
     experiences: records(experiences, 0, "experience_id"),
     projects: records(projects, 1, "project_id"),
     skills: skills.map((skill) => skill.name),

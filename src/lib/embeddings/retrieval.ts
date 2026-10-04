@@ -27,6 +27,11 @@ export async function retrieveCareerEvidence(
 ) {
   if (career.demo)
     return deduplicate(queries.flatMap((query) => retrieve(career, query)));
+  const entities = semanticEntities(career).filter(
+    (entity) =>
+      !options.entityTypes || options.entityTypes.includes(entity.type),
+  );
+  if (!entities.length) return [];
   const vectors = await embed(queries, "search_query");
   const env = validateEnv(process.env);
   const db = database();
@@ -45,10 +50,6 @@ export async function retrieveCareerEvidence(
         );
       return matchesSchema.parse(data);
     }),
-  );
-  const entities = semanticEntities(career).filter(
-    (entity) =>
-      !options.entityTypes || options.entityTypes.includes(entity.type),
   );
   const semantic = expandMatches(
     resultSets.flat().sort((a, b) => b.similarity - a.similarity),

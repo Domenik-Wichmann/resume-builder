@@ -116,7 +116,8 @@ full reindex, rather than merely changing an environment value.
 GitHub is the canonical source. Import the repository into Vercel, use the Next.js
 framework preset, add environment variables, and deploy from `main`. Supabase
 migrations are applied explicitly through its CLI. No Docker, Railway, queues,
-Redis, or custom hosting scripts are required. There is no claimed production URL.
+Redis, or custom hosting scripts are required. The canonical production domain is
+[resume-builder-amber-sigma.vercel.app](https://resume-builder-amber-sigma.vercel.app).
 
 ## Privacy and security
 

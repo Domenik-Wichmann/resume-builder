@@ -14,7 +14,7 @@ export default async function Resume() {
       </div>
       <article className="resume-sheet">
         {career.demo && <p className="eyebrow">Demo résumé · fictional data</p>}
-        <h1>{career.profile.name}</h1>
+        <h1>{career.profile.name || "Career profile pending publication"}</h1>
         <p className="resume-title">{career.profile.title}</p>
         <p className="muted">
           {[
