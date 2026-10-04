@@ -490,3 +490,98 @@ it("denies anonymous direct access to every new account-owned table", async () =
     await db.exec("reset role");
   }
 });
+
+it("isolates every new table and rejects cross-account workflow/usage references", async () => {
+  const visitor = randomUUID();
+  await db.query(
+    "insert into anonymous_visitors(id,account_id) values($1,$2)",
+    [visitor, b],
+  );
+  const workspace = (
+    await db.query<{ id: string }>(
+      "insert into workspaces(account_id,visitor_id,market) values($1,$2,'US') returning id",
+      [b, visitor],
+    )
+  ).rows[0].id;
+  await db.query(
+    "insert into explorer_events(account_id,workspace_id,event_type,skill_id) values($1,$2,'skill_explored',$3)",
+    [b, workspace, skillB],
+  );
+  await db.query(
+    "insert into project_links(account_id,project_id,label,link_type,url) values($1,$2,'B link','OTHER','https://example.com')",
+    [b, projectB],
+  );
+  await db.query(
+    "insert into project_media(account_id,project_id,storage_path,mime_type,alt) values($1,$2,$3,'image/png','B image')",
+    [b, projectB, `${b}/${projectB}/b.png`],
+  );
+  await db.query("select reserve_visitor_ai($1,$2,$3,'ask')", [
+    b,
+    visitor,
+    workspace,
+  ]);
+  const tables = [
+    "project_links",
+    "project_media",
+    "answer_cards",
+    "answer_card_sources",
+    "explorer_events",
+    "resume_experiments",
+    "experiment_variants",
+    "application_previews",
+    "application_snapshots",
+    "application_outcomes",
+    "visitor_ai_operations",
+    "provider_usage_events",
+    "credit_transactions",
+  ];
+  await asUser(userA, async () => {
+    for (const table of tables) {
+      const rows = (
+        await db.query<{ account_id: string }>(
+          `select account_id from ${table}`,
+        )
+      ).rows;
+      expect(
+        rows.every((r) => r.account_id === a),
+        table,
+      ).toBe(true);
+    }
+  });
+  await expect(
+    db.query(
+      "insert into explorer_events(account_id,workspace_id,event_type,skill_id) values($1,$2,'skill_explored',$3)",
+      [a, workspace, skillB],
+    ),
+  ).rejects.toThrow("CROSS_ACCOUNT_REFERENCE");
+  await expect(
+    db.query(
+      "insert into provider_usage_events(account_id,provider,model,operation_type,status,workspace_id) values($1,'COHERE','test','test','SUCCESS',$2)",
+      [a, workspace],
+    ),
+  ).rejects.toThrow("CROSS_ACCOUNT_REFERENCE");
+  const usage = (
+    await db.query<{ id: string }>(
+      "select id from provider_usage_events where account_id=$1 limit 1",
+      [b],
+    )
+  ).rows[0].id;
+  await expect(
+    db.query(
+      "insert into credit_transactions(account_id,amount_micro,reason,idempotency_key,usage_event_id) values($1,-1,'AI_USAGE','foreign-usage',$2)",
+      [a, usage],
+    ),
+  ).rejects.toThrow("CROSS_ACCOUNT_REFERENCE");
+  const app = (
+    await db.query<{ id: string }>(
+      "select id from job_applications where account_id=$1 limit 1",
+      [b],
+    )
+  ).rows[0].id;
+  await expect(
+    db.query(
+      "insert into application_outcomes(account_id,application_id,status) values($1,$2,'SENT')",
+      [a, app],
+    ),
+  ).rejects.toThrow("CROSS_ACCOUNT_REFERENCE");
+});
