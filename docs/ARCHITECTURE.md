@@ -49,7 +49,8 @@ No browser Supabase client or privileged API is exposed.
 Each supported canonical entity has a concise semantic representation and
 SHA-256 content hash. `reindexCareer()` compares hash and model, requests changed
 document embeddings in batches of 32, and upserts the vectors. It is an owner
-CLI operation, never a public endpoint. At this scale there is no job runner.
+CLI or authenticated account-management operation, never a public endpoint.
+At this scale there is no job runner.
 Reindex after publishing, changing relationships, or changing models. Concurrent
 edits are safe for grounding because stale hashes are excluded during retrieval;
 run indexing again to restore semantic coverage.
@@ -69,8 +70,9 @@ requirement lines. Evidence is deduplicated and capped at 12 records. The initia
 0.25 similarity threshold needs evaluation against real owner content.
 
 Demo uses keyword retrieval only; no arbitrary mock vectors or provider calls.
-Unpublished notes are not embedded or available to public flows. Private note
-ingestion can be designed later with an explicit visibility boundary.
+Private source documents and accepted unpublished facts are available only to
+their account members. They are not embedded into public retrieval. Career Master
+and interview answers share the authenticated ingestion/review boundary.
 
 ## Grounding and inference
 

@@ -70,7 +70,7 @@ Obtain an OpenRouter key from [OpenRouter Keys](https://openrouter.ai/settings/k
 Set `OPENROUTER_API_KEY` and `OPENROUTER_MODEL` to a model supporting JSON Schema
 structured outputs. Set provider spending limits appropriate for a small portfolio.
 The current recruiter Q&A and matching model is `openai/gpt-6-luna`.
-For future initial ingestion, start with `openai/gpt-6-luna-pro`; escalate difficult
+For initial ingestion, use `openai/gpt-6-luna-pro`; escalate difficult
 extraction to `openai/gpt-6.1-sol` with bounded delegated review when necessary.
 Career Master ingestion is implemented; automatic delegated review remains deferred. Publication still requires
 owner approval of extracted facts; model output cannot publish itself.

@@ -99,8 +99,8 @@ Follow [SETUP.md](docs/SETUP.md) for credentials, migrations, publishing, indexi
 and deployment. The live environment requires `NEXT_PUBLIC_SITE_URL`,
 `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SECRET_KEY`, `COHERE_API_KEY`,
 `OPENROUTER_API_KEY`, and `OPENROUTER_MODEL`. Cohere defaults to `embed-v4.0` at
-1024 dimensions. The publishable Supabase key is documented for optional future
-browser reads; the current app loads career data on the server.
+1024 dimensions. The publishable Supabase key supports Supabase Auth;
+the current app loads career data on the server.
 Owner access needs that publishable key and `OWNER_USER_ID`, the UUID of an
 owner-created Supabase Auth user. There is no public administrator signup.
 
@@ -127,8 +127,10 @@ Redis, or custom hosting scripts are required. The canonical production domain i
 
 ## Privacy and security
 
-- RLS exposes only approved career rows. Private tables, vector records, and
-  privileged RPCs have no browser access. Defaults are unpublished.
+- Anonymous clients have no direct career/private table access. Public server
+  paths select approved rows from the primary account. Authenticated members
+  can access only their own account's records through RLS. Bootstrap and public
+  retrieval RPCs remain privileged. New facts default to unpublished.
 - Public AI input is validated and size-bounded. A database row lock enforces
   10 requests per minute and 100 per database day across server instances.
   This bounds spending globally; it is not a per-person identity mechanism.
