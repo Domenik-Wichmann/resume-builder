@@ -5,7 +5,7 @@ import { getCareer } from "../career/repository";
 import { deriveExplorer } from "./explorer";
 export async function getExplorer() {
   const career = await getCareer();
-  if (career.demo) return deriveExplorer(career, [], []);
+  if (career.demo) return { ...deriveExplorer(career, [], []), demo: true };
   const db = database();
   const [categories, skills] = await Promise.all([
     db
@@ -23,5 +23,8 @@ export async function getExplorer() {
   ]);
   if (categories.error || skills.error)
     throw new Error("Cannot load explorer.");
-  return deriveExplorer(career, categories.data || [], skills.data || []);
+  return {
+    ...deriveExplorer(career, categories.data || [], skills.data || []),
+    demo: false,
+  };
 }

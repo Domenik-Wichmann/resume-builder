@@ -4,8 +4,14 @@ import { getExplorer } from "@/lib/portfolio/explorer-server";
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Career explorer · Resume Builder" };
 export default async function Explore() {
+  const data = await getExplorer();
   return (
     <>
+      {data.demo && (
+        <div className="demo-banner">
+          DEMO EXPLORER · fictional fixture data, not owner career evidence.
+        </div>
+      )}
       <PortfolioHeader />
       <main className="wrap portfolio-main">
         <p className="eyebrow">Skills connected to work</p>
@@ -14,7 +20,7 @@ export default async function Explore() {
           Select a skill to see the projects, experiences and achievements
           behind it.
         </p>
-        <CareerExplorer data={await getExplorer()} />
+        <CareerExplorer data={data} />
       </main>
     </>
   );
