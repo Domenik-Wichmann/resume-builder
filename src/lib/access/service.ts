@@ -1,0 +1,89 @@
+import "server-only";
+import { NextRequest } from "next/server";
+import { database } from "../db";
+import { primaryAccountId } from "../account-id";
+import { readVisitor, visitorCookie } from "../workspaces/identity";
+import { readSession, resolveLink } from "../tracking/service";
+import { validateEnv } from "../env";
+import { HttpError, reserveAIQuota } from "../http";
+import { accessConfig, requiresVerification } from "./config";
+export async function verificationStatus(request: NextRequest) {
+  const config = accessConfig(process.env),
+    visitor = readVisitor(request.cookies.get(visitorCookie)?.value);
+  const tracked = readSession(request.cookies.get("rb_ai_access")?.value || "");
+  const link = tracked ? await resolveLink(tracked.code) : null;
+  let verifiedUntil: string | null = null;
+  if (visitor && validateEnv(process.env).mode === "live") {
+    const row = await database()
+      .from("anonymous_visitors")
+      .select("verified_until")
+      .eq("account_id", primaryAccountId)
+      .eq("id", visitor)
+      .maybeSingle();
+    if (row.error) throw new Error("Verification state unavailable.");
+    verifiedUntil = row.data?.verified_until || null;
+  }
+  return {
+    visitor,
+    required: requiresVerification(
+      config.configured,
+      Boolean(link),
+      verifiedUntil,
+    ),
+    siteKey: config.siteKey,
+    mode: config.configured ? "TURNSTILE" : "LIMITS_ONLY",
+  };
+}
+export async function reservePublicAction(
+  request: NextRequest,
+  operation: "ask" | "match" | "compile",
+  workspaceId?: string,
+) {
+  if (validateEnv(process.env).mode === "demo") return async () => {};
+  const state = await verificationStatus(request);
+  if (!state.visitor)
+    throw new HttpError(
+      428,
+      "Create a visitor session or workspace before using AI.",
+    );
+  if (state.required)
+    throw new HttpError(
+      403,
+      "Complete human verification before your first AI operation.",
+    );
+  const c = accessConfig(process.env),
+    db = database();
+  const reserved = await db.rpc("reserve_visitor_ai", {
+    p_account: primaryAccountId,
+    p_visitor: state.visitor,
+    p_workspace: workspaceId || null,
+    p_operation: operation,
+    p_spacing: c.spacing,
+    p_daily: c.daily,
+    p_weekly: c.weekly,
+  });
+  if (reserved.error) throw new Error("Visitor quota service unavailable.");
+  if (reserved.data !== "OK")
+    throw new HttpError(
+      reserved.data === "WORKSPACE_FORBIDDEN" ? 404 : 429,
+      reserved.data === "CONCURRENT"
+        ? "Another AI operation is running. Please wait."
+        : reserved.data === "SPACING"
+          ? `Wait at least ${c.spacing} seconds between AI operations.`
+          : "Visitor AI limit reached. Please try later.",
+    );
+  const release = async () => {
+    await db
+      .from("anonymous_visitors")
+      .update({ ai_lease_until: null })
+      .eq("id", state.visitor!)
+      .eq("account_id", primaryAccountId);
+  };
+  try {
+    await reserveAIQuota();
+  } catch (e) {
+    await release();
+    throw e;
+  }
+  return release;
+}

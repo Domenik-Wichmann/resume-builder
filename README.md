@@ -33,13 +33,18 @@ career information is an explicit publishing step.
 - Existing-user email authentication and gated Google/GitHub PKCE flows.
 - Committed migrations, shared AI quotas, tests, and CI.
 
-**Scaffolded:** richer application history and additional tracking event types.
-**Planned:** project showcase/media management, interactive category/skill exploration,
-Quick Answers with staleness, application experiments, visitor quotas/Turnstile,
-credit ledger/trial foundations, and retrieval/grounding evaluation,
-more sophisticated tailoring, automatic PDF files, and richer skill navigation.
+**Phase 2B:** canonical project authoring, private Storage images and safe links;
+public `/projects`, `/explore` and `/answers`; direct FAQ staleness; reviewed JD
+previews, balanced A/B/C assignment, immutable snapshots and manual outcomes;
+observational experiment analytics and owner coverage suggestions; per-visitor
+quotas and configurable Turnstile; provider usage records and a service-only
+integer credit ledger. Browsing these public surfaces makes no AI calls.
+
+**Deferred:** retrieval/grounding evaluation, advanced tailoring, automatic PDF
+files, public signup/demo tenants, Stripe/subscriptions, tenant BYOK key storage,
+credit redemption/expiry allocation and statistical inference.
 Compilation selects canonical text without rewriting accomplishments. There is
-no admin CMS or visitor identification.
+no generalized CMS or visitor identification.
 
 ## Architecture
 

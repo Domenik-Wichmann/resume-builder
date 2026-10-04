@@ -20,7 +20,7 @@ export async function loadWorkspace(
     .maybeSingle();
   if (error) throw new Error("Cannot load workspace.");
   if (!row) throw new HttpError(404, "Workspace not found.");
-  const [evidence, questions, requirements] = await Promise.all([
+  const [evidence, questions, requirements, signals] = await Promise.all([
     db.from("workspace_evidence").select("*").eq("workspace_id", id),
     db
       .from("workspace_questions")
@@ -32,8 +32,17 @@ export async function loadWorkspace(
       .select("*")
       .eq("workspace_id", id)
       .order("position"),
+    db
+      .from("explorer_events")
+      .select("skill_id,project_id,category_id")
+      .eq("account_id", primaryAccountId)
+      .eq("workspace_id", id)
+      .order("created_at", { ascending: false })
+      .limit(100),
   ]);
-  if ([evidence, questions, requirements].some((result) => result.error))
+  if (
+    [evidence, questions, requirements, signals].some((result) => result.error)
+  )
     throw new Error("Cannot load workspace context.");
   const questionIds = (questions.data || []).map((question) => question.id);
   const [topics, citations] = questionIds.length
@@ -48,15 +57,42 @@ export async function loadWorkspace(
   if (topics.error || citations.error)
     throw new Error("Cannot load question evidence.");
   const entities = semanticEntities(await getCareer());
+  const selected = entities.filter((e) =>
+    (signals.data || []).some(
+      (s) => s.skill_id === e.record.id || s.project_id === e.record.id,
+    ),
+  );
+  const categories = await db
+    .from("skill_categories")
+    .select("id,title")
+    .eq("account_id", primaryAccountId)
+    .eq("is_public", true)
+    .is("archived_at", null);
+  if (categories.error) throw new Error("Cannot load published interests.");
+  const interests = [
+    ...new Set([
+      ...selected.map((e) => e.record.title),
+      ...(categories.data || [])
+        .filter((c) => (signals.data || []).some((s) => s.category_id === c.id))
+        .map((c) => c.title),
+    ]),
+  ].slice(0, 30);
   const refs = new Map((evidence.data || []).map((ref) => [ref.id, ref]));
   const canonical = deduplicate(
-    (evidence.data || []).flatMap((ref) => {
-      const found = entities.find(
-        (entity) =>
-          entity.type === ref.entity_type && entity.record.id === ref.entity_id,
-      );
-      return found ? [found.record] : [];
-    }),
+    [
+      ...(evidence.data || []).flatMap((ref) => {
+        const found = entities.find(
+          (entity) =>
+            entity.type === ref.entity_type &&
+            entity.record.id === ref.entity_id,
+        );
+        return found ? [found.record] : [];
+      }),
+      ...selected.map((e) => e.record),
+      ...entities
+        .filter((e) => e.record.skills.some((s) => interests.includes(s)))
+        .map((e) => e.record),
+    ],
     60,
   );
   return workspaceSchema.parse({
@@ -72,6 +108,7 @@ export async function loadWorkspace(
       (requirement) => requirement.requirement,
     ),
     evidence: canonical,
+    interests,
     questions: (questions.data || []).map((question) => ({
       question: question.question,
       answer: question.answer,

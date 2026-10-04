@@ -2,6 +2,7 @@
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { HumanVerification } from "./human-verification";
 import {
   browserCreateWorkspace,
   browserWorkspaceAction,
@@ -28,6 +29,7 @@ export function AIPanel({ kind }: { kind: "ask" | "match" }) {
   }
   return (
     <div className="ai-panel">
+      <HumanVerification />
       <form onSubmit={submit}>
         <label htmlFor={kind}>
           {kind === "ask"

@@ -26,6 +26,8 @@ export function semanticText(type: EntityType, record: CareerRecord) {
       `Dates: ${record.start_date} – ${record.end_date || "end date not recorded"}`,
     record.subtitle && `Context: ${record.subtitle}`,
     record.summary && `Evidence: ${record.summary}`,
+    record.description && `Description: ${record.description}`,
+    record.outcomes?.length && `Outcomes: ${record.outcomes.join("; ")}`,
     record.skills.length &&
       `Skills: ${[...new Set(record.skills)].sort().join(", ")}`,
   ]

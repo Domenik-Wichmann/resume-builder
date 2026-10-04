@@ -6,10 +6,12 @@ import { answerSchema, matchSchema, validateEvidence } from "./contracts";
 import { groundedPrompt } from "./prompts";
 import { complete } from "./openrouter";
 import type { Workspace } from "../workspaces/model";
+import type { UsageContext } from "../usage/service";
 export async function analyze(
   task: "ask" | "match",
   input: string,
   workspace?: Workspace,
+  usage: UsageContext = {},
 ) {
   const career = await getCareer();
   const context = workspace
@@ -19,11 +21,12 @@ export async function analyze(
           .slice(-3)
           .map((question) => question.question),
         topics: [
-          ...new Set(
-            workspace.questions.flatMap((question) =>
+          ...new Set([
+            ...(workspace.interests || []),
+            ...workspace.questions.flatMap((question) =>
               question.topics.map((topic) => topic.topic),
             ),
-          ),
+          ]),
         ].slice(0, 8),
       }
     : undefined;
@@ -41,7 +44,10 @@ export async function analyze(
               ]
             : []),
         ];
-  const retrieved = await retrieveCareerEvidence(queries, career);
+  const retrieved = await retrieveCareerEvidence(queries, career, {
+    ...usage,
+    operation: usage.operation || task,
+  });
   const evidence = retrieved.slice(0, 8);
   const ids = evidence.map((record) => record.id);
   if (task === "ask") {
@@ -60,6 +66,7 @@ export async function analyze(
                 : ""),
             input,
             answerSchema,
+            { usage: { ...usage, operation: usage.operation || task } },
           );
     validateEvidence(result.evidence_ids, ids);
     return { mode: career.demo ? "demo" : "live", result, evidence };
@@ -76,7 +83,9 @@ export async function analyze(
           gaps: ["Requirements without supporting evidence need owner review."],
           suggested_resume_emphasis: evidence.map((record) => record.title),
         }
-      : await complete(groundedPrompt(task, evidence), input, matchSchema);
+      : await complete(groundedPrompt(task, evidence), input, matchSchema, {
+          usage: { ...usage, operation: usage.operation || task },
+        });
   validateEvidence(result.supporting_experience, ids);
   const allowedSkills = evidence.flatMap((record) => record.skills);
   if (result.skills.some((skill) => !allowedSkills.includes(skill)))

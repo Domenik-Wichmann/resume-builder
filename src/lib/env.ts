@@ -1,6 +1,8 @@
 import { z } from "zod";
+import { accessConfig } from "./access/config";
 
 export function validateEnv(env: Record<string, string | undefined>) {
+  accessConfig(env);
   const mode = env.APP_MODE || (env.NODE_ENV === "production" ? "" : "demo");
   if (mode !== "demo" && mode !== "live")
     throw new Error("Set APP_MODE explicitly to demo or live in production.");

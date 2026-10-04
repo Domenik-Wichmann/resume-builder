@@ -5,6 +5,8 @@ export const recordSchema = z.object({
   title: z.string(),
   subtitle: z.string(),
   summary: z.string(),
+  description: z.string().optional(),
+  outcomes: z.array(z.string()).optional(),
   skills: z.array(z.string()),
   organization: z.string().nullable().optional(),
   start_date: z.iso.date().nullable().optional(),

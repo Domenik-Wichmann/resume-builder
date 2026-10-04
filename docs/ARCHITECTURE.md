@@ -97,13 +97,15 @@ a model risk even with valid IDs; grounded answer evaluation is a next step.
 Only valid application short links create a session. Codes use six random bytes
 (eight URL-safe characters, 48 bits). Database uniqueness and CLI retries handle
 collisions. Invalid and inactive codes share a 404 response. Tracking mappings and
-events are never accessible via anonymous/authenticated database roles.
+events are denied to anonymous roles; authenticated account members see only their
+own records through RLS.
 
 Landing events are best effort and contain no recruiter input or IP information.
 A signed, HttpOnly, same-site cookie associates future interaction work with the
-link for 24 hours. Only landing persistence is currently wired; other event types
-are schema foundations. `readSession()` validates signatures and expiry before
-future event collection. Browser privacy signals suppress tracking. A shared
+link for 24 hours. Workspace questions, previews/exports and explorer events are
+linked through owned workspaces; other legacy tracking event types remain schema
+foundations. `readSession()` validates signatures and expiry. Browser privacy
+signals suppress optional tracking. A shared
 forwarded link identifies link engagement, not a particular person.
 
 `prune_tracking_events()` deletes records older than 90 days and is called on
@@ -140,3 +142,81 @@ diff classification, transaction boundaries, publication and semantic hashes are
 application/database concerns. Interview questions are explainable deterministic
 probes; answers reuse extraction and review. No AI output becomes canonical or
 public without an authenticated human acceptance and publication action.
+
+## Phase 2B portfolio and experimentation loop
+
+Projects use the original canonical `projects` table. Showcase authoring and
+canonical skill/achievement links commit through a JWT/RLS transaction with an
+optimistic version check. Long descriptions support text-only Markdown headings,
+paragraphs and lists, with no raw HTML or executable Markdown links. CTA links
+accept credential-free HTTPS or a small internal-route allowlist. Description
+and approved outcomes participate in vector content hashes; reindexing scans
+projection state but embeds only changed published entities.
+
+Project images live in the private `project-media` Storage bucket. There are no
+anonymous/authenticated object policies. Tenant-prefixed paths, parent FKs and
+membership RLS protect metadata. The server media route requires a published,
+unarchived primary-account parent, or authenticated membership for private
+preview. Browser image requests bypass the Next image optimization cache and
+use no-store so an unpublish is checked on every request. Uploads are bounded to
+5 MB and reject SVG/HTML; only PNG/JPEG/WebP/GIF signatures are accepted.
+
+The category/skill explorer derives supporting records and co-occurring skills
+from relational links. It does not persist graph edges. Optional events require
+an existing browser-owned workspace, verify published targets and respect
+DNT/GPC. Repeated selections are debounced. Public workspace reads expand only
+current published evidence from these signals. They influence compilation and
+follow-up context without conferring truth on prior answer text.
+
+Quick Answers are explicit owner-reviewed cards with direct FK dependencies.
+Canonical content/publication/relationship updates mark referencing cards stale.
+Public reads exclude stale, expired, private cards or cards whose sources are no
+longer published. Manual saves and generated drafts require review and separate
+publication; no automatic regeneration or semantic answer interception occurs.
+Public projects, explorer and cards make zero inference/embedding calls.
+
+Applications use owner-reviewed small-vocabulary metadata (deterministic
+suggestions, no classifier inference). Published canonical retrieval produces
+three private Resume IR previews. Saving serializes assignment by account using
+an advisory transaction lock, chooses the least-assigned variant of the oldest
+eligible running experiment, then atomically stores an immutable snapshot and
+tracking link. Assignment counts all saved snapshots, including drafts. All
+variants keep the CLASSIC_V1 visual template: strategies affect evidence priority
+and section order, never factual wording. Snapshot generation time is the
+preview time; later career changes cannot rewrite it. Manual state transitions
+append immutable outcomes. Analytics deduplicate link/session visits, count
+observed engagement and show raw sent-application rates without a winner. The
+owner dashboard caps each input table at 1,000 rows and discloses truncation.
+Coverage suggestions are current published evidence versus observed interests
+and historical snapshot inclusion, not automatic strategy changes or causal
+claims.
+
+## Public AI access and usage boundaries
+
+Every public AI route, including standalone API calls, verifies an opaque signed
+visitor cookie and uses the same service-only atomic quota RPC. Defaults are
+5-second spacing, 25 operations per UTC day, 50 per rolling seven days, and a
+90-second visitor lease; workspaces also retain their existing action lease.
+The global spending fuse remains independent. A valid signed access cookie is
+rechecked against an active primary-account tracking link and skips only the
+initial challenge. It is separate from optional analytics, including DNT/GPC.
+Deleting cookies can obtain a new opaque identity; no fingerprinting/IP tracking
+is added, so the global fuse remains necessary.
+
+When both Turnstile keys are configured, untracked visitors must complete
+Siteverify before their first paid operation. Success, canonical hostname and
+`ai_access` action must match; tokens are single-use. No raw IP is sent. Missing
+keys retain quota-protected existing access (LIMITS_ONLY), not a simulated human
+check. Partial configuration fails startup. Verification lasts 24 hours.
+See [Cloudflare server validation](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/).
+
+Provider usage events record account/model/operation, quantities and available
+cost in integer micro-dollars, with nullable unknown values and no accounting
+prompt/response retention. Platform charges are unset: credit enforcement is not
+active. The service-only credit ledger provides signed integer transactions,
+idempotency, one trial grant per account and overdraft prevention. Gross ledger
+balance is auditable. Expiry metadata and a disabled eligibility-gated trial
+service prepare future work; redemption and expiry allocation are deferred.
+BYOK is still a billing-mode boundary without plaintext key storage or a UI.
+Stripe, subscriptions, public trial/purchase flows and cross-tenant aggregation
+remain outside this phase.

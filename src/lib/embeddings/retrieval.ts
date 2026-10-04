@@ -24,7 +24,13 @@ const matchesSchema = z.array(
 export async function retrieveCareerEvidence(
   queries: string[],
   career: Career,
-  options: { entityTypes?: EntityType[]; accountId?: string } = {},
+  options: {
+    entityTypes?: EntityType[];
+    accountId?: string;
+    workspaceId?: string;
+    applicationId?: string;
+    operation?: string;
+  } = {},
 ) {
   if (career.demo)
     return deduplicate(queries.flatMap((query) => retrieve(career, query)));
@@ -33,7 +39,7 @@ export async function retrieveCareerEvidence(
       !options.entityTypes || options.entityTypes.includes(entity.type),
   );
   if (!entities.length) return [];
-  const vectors = await embed(queries, "search_query");
+  const vectors = await embed(queries, "search_query", options);
   const env = validateEnv(process.env);
   const db = database();
   const resultSets = await Promise.all(

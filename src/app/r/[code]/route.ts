@@ -20,6 +20,14 @@ export async function GET(
   const response = NextResponse.redirect(new URL("/", request.url), 303);
   response.headers.set("Cache-Control", "no-store");
   response.headers.set("Referrer-Policy", "no-referrer");
+  // Necessary access cookie is separate from optional visit analytics, including DNT/GPC visitors.
+  response.cookies.set("rb_ai_access", createSession(code).cookie, {
+    httpOnly: true,
+    secure: request.nextUrl.protocol === "https:",
+    sameSite: "lax",
+    path: "/",
+    maxAge: 86400,
+  });
   // Market selection is a functional preference, independent of analytics consent/signals.
   response.cookies.set("rb_link_market", link.market, {
     httpOnly: true,

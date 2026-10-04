@@ -91,6 +91,10 @@ export default async function Admin() {
         <a href="#questions">Questions</a>
         <a href="#career">Career Data</a>
         <Link href="/admin/career">Career Master & Interview</Link>
+        <Link href="/admin/projects">Project showcase</Link>
+        <Link href="/admin/answers">Quick Answers</Link>
+        <Link href="/admin/applications">Applications & experiments</Link>
+        <Link href="/admin/usage">Usage & ledger</Link>
       </nav>
       <section id="overview" className="admin-metrics">
         {[

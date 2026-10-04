@@ -1,10 +1,12 @@
 import "server-only";
 import { z } from "zod";
 import { validateEnv } from "../env";
+import { recordUsage, cohereUsage, type UsageContext } from "../usage/service";
 export class EmbeddingError extends Error {}
 export async function embed(
   texts: string[],
   inputType: "search_document" | "search_query",
+  usage: UsageContext = {},
 ) {
   const env = validateEnv(process.env);
   if (!env.cohereKey)
@@ -29,8 +31,24 @@ export async function embed(
       truncate: "END",
     }),
   });
-  if (!response.ok)
+  if (!response.ok) {
+    await recordUsage("COHERE", env.embeddingModel, usage, {}, "FAILED");
     throw new EmbeddingError("Cohere embedding request failed.");
+  }
+  const raw: unknown = await response.json();
+  const reported = cohereUsage.safeParse((raw as { meta?: unknown })?.meta);
+  await recordUsage(
+    "COHERE",
+    env.embeddingModel,
+    { ...usage, operation: usage.operation || inputType },
+    {
+      input: reported.success
+        ? reported.data.billed_units?.input_tokens
+        : undefined,
+      units: texts.length,
+    },
+    "SUCCESS",
+  );
   const parsed = z
     .object({
       embeddings: z.object({
@@ -39,7 +57,7 @@ export async function embed(
           .length(texts.length),
       }),
     })
-    .parse(await response.json());
+    .parse(raw);
   if (
     parsed.embeddings.float.some((vector) =>
       vector.every((value) => value === 0),

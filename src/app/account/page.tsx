@@ -23,6 +23,12 @@ export default async function Account() {
       <Link className="button" href="/admin/career">
         Open Career Master & Interview
       </Link>
+      <div className="stack">
+        <Link href="/admin/projects">Manage project showcase →</Link>
+        <Link href="/admin/answers">Manage Quick Answers →</Link>
+        <Link href="/admin/applications">Applications & experiments →</Link>
+        <Link href="/admin/usage">Usage & credit ledger →</Link>
+      </div>
     </main>
   );
 }

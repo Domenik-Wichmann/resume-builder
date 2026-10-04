@@ -42,9 +42,12 @@ export async function getCareer(accountId = primaryAccountId) {
     languages,
   ] = results.map((result) => result.data || []);
   const links = await Promise.all(
-    ["experience_skills", "project_skills", "achievement_skills"].map((table) =>
-      db.from(table).select("*").eq("account_id", accountId),
-    ),
+    [
+      "experience_skills",
+      "project_skills",
+      "achievement_skills",
+      "project_achievements",
+    ].map((table) => db.from(table).select("*").eq("account_id", accountId)),
   );
   if (links.some((result) => result.error))
     throw new Error("Unable to load career relationships.");
@@ -56,6 +59,17 @@ export async function getCareer(accountId = primaryAccountId) {
   ): CareerRecord[] {
     return rows.map((row) => ({
       ...row,
+      ...(foreignKey === "project_id"
+        ? {
+            outcomes: (links[3].data || [])
+              .filter((link) => link.project_id === row.id)
+              .flatMap((link) =>
+                achievements
+                  .filter((a) => a.id === link.achievement_id)
+                  .map((a) => a.summary || a.title),
+              ),
+          }
+        : {}),
       skills: (links[junction].data || [])
         .filter((link) => link[foreignKey] === row.id)
         .flatMap((link) =>

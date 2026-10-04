@@ -138,7 +138,11 @@ export async function POST(request: NextRequest) {
           400,
           "Answers and interview context must fit within 40,000 characters.",
         );
-      const candidates = await extractCareer(source, current.map(identity));
+      const candidates = await extractCareer(
+        source,
+        current.map(identity),
+        accountId,
+      );
       // A quotation from interview questions alone is not owner evidence.
       const checked =
         input.kind === "INTERVIEW"

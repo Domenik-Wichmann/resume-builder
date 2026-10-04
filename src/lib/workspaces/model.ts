@@ -19,6 +19,7 @@ export const workspaceSchema = z.object({
   title: z.string().max(100),
   job_description: z.string().nullable(),
   requirements: z.array(z.string()),
+  interests: z.array(z.string().max(200)).max(30).optional(),
   match: matchSchema.nullable(),
   evidence: z.array(recordSchema).max(60),
   questions: z.array(questionSchema).max(50),

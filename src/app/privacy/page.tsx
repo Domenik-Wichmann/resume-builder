@@ -5,6 +5,29 @@ export default function Privacy() {
       <Link href="/">← Portfolio</Link>
       <h1>Privacy & data</h1>
       <p>
+        Public projects, the explorer and reviewed Quick Answers need no AI
+        provider call. Optional explorer selections save coarse interest events
+        only in an existing workspace; Do Not Track and Global Privacy Control
+        suppress these events.
+      </p>
+      <p>
+        Necessary first-party security cookies support visitor quotas and human
+        verification separately from optional landing analytics. A valid
+        tracking link may skip the initial challenge but never the quotas. When
+        configured, Cloudflare Turnstile verifies a challenge token without this
+        application sending or retaining your IP address. Without Turnstile
+        keys, visitor limits and the global spending fuse remain active.
+      </p>
+      <p>
+        AI operations are limited per opaque visitor: normally one at a time, at
+        least five seconds apart, 25 per UTC day and 50 in seven rolling days.
+        Resetting browser cookies creates a new identifier; the global fuse
+        still limits spending. Provider accounting stores model names, usage
+        quantities and costs when available, with no prompts or answers in the
+        accounting records. Recent quota reservations are pruned after seven
+        days when the visitor next uses AI.
+      </p>
+      <p>
         Ordinary portfolio visits do not create an analytics session. An
         application-specific short link can set an HttpOnly, same-site cookie
         lasting 24 hours and record a landing event tied to that application.

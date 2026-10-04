@@ -25,6 +25,17 @@ export const resumeIRSchema = z.object({
   certifications: z.array(sectionRecord),
   supporting_sections: z.array(sectionRecord),
   demo: z.boolean(),
+  section_order: z
+    .array(
+      z.enum([
+        "Experience",
+        "Projects",
+        "Achievements",
+        "Education",
+        "Certifications",
+      ]),
+    )
+    .optional(),
 });
 export type ResumeIR = z.infer<typeof resumeIRSchema>;
 /** Questions change selection priority; factual text remains canonical, never copied from Q&A. */
@@ -32,9 +43,12 @@ export function compileResumeIR(
   career: Career,
   workspace: Workspace,
   presentation: Presentation,
+  strategy:
+    "TRADITIONAL" | "PROJECT_FORWARD" | "OUTCOME_FORWARD" = "TRADITIONAL",
 ): ResumeIR {
   const allowed = new Set(workspace.evidence.map((record) => record.id));
   const signals = [
+    ...(workspace.interests || []),
     ...workspace.requirements,
     ...workspace.questions.flatMap((question) =>
       question.topics.map((topic) => topic.topic),
@@ -88,15 +102,40 @@ export function compileResumeIR(
     certifications: section(career.certifications),
     supporting_sections: section(career.achievements),
     demo: career.demo,
+    section_order:
+      strategy === "PROJECT_FORWARD"
+        ? [
+            "Projects",
+            "Experience",
+            "Achievements",
+            "Education",
+            "Certifications",
+          ]
+        : strategy === "OUTCOME_FORWARD"
+          ? [
+              "Achievements",
+              "Experience",
+              "Projects",
+              "Education",
+              "Certifications",
+            ]
+          : [
+              "Experience",
+              "Projects",
+              "Achievements",
+              "Education",
+              "Certifications",
+            ],
   });
 }
 export function expansionQueries(workspace: Workspace) {
   const topics = [
-    ...new Set(
-      workspace.questions.flatMap((question) =>
+    ...new Set([
+      ...(workspace.interests || []),
+      ...workspace.questions.flatMap((question) =>
         question.topics.map((topic) => topic.topic),
       ),
-    ),
+    ]),
   ];
   const related: Record<string, string> = {
     sql: "data analysis and data validation",

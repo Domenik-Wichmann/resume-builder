@@ -9,7 +9,10 @@ import {
 import { validateEnv } from "./env";
 import { database } from "./db";
 import { primaryAccountId } from "./account-id";
-export async function getPresentation(market: Market): Promise<Presentation> {
+export async function getPresentation(
+  market: Market,
+  accountId = primaryAccountId,
+): Promise<Presentation> {
   if (validateEnv(process.env).mode === "demo")
     return {
       market,
@@ -25,7 +28,8 @@ export async function getPresentation(market: Market): Promise<Presentation> {
   const profile = await db
     .from("profile")
     .select("id")
-    .eq("account_id", primaryAccountId)
+    .eq("account_id", accountId)
+    .is("archived_at", null)
     .eq("is_public", true)
     .order("created_at")
     .limit(1)
@@ -34,7 +38,7 @@ export async function getPresentation(market: Market): Promise<Presentation> {
   const result = await db
     .from("profile_presentations")
     .select("*")
-    .eq("account_id", primaryAccountId)
+    .eq("account_id", accountId)
     .eq(
       "profile_id",
       profile.data?.id || "00000000-0000-0000-0000-000000000000",

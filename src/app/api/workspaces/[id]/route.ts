@@ -1,12 +1,6 @@
 import { NextRequest } from "next/server";
 import { z } from "zod";
-import {
-  HttpError,
-  readJson,
-  errorResponse,
-  reserveAIQuota,
-  requireOrigin,
-} from "@/lib/http";
+import { HttpError, readJson, errorResponse, requireOrigin } from "@/lib/http";
 import { readVisitor, visitorCookie } from "@/lib/workspaces/identity";
 import { loadWorkspace, saveWorkspace } from "@/lib/workspaces/repository";
 import {
@@ -22,6 +16,7 @@ import { compileResumeIR, expansionQueries } from "@/lib/resume-ir";
 import { retrieveCareerEvidence } from "@/lib/embeddings/retrieval";
 import { deduplicate } from "@/lib/embeddings/content";
 import { getPresentation, currentMarket } from "@/lib/market-server";
+import { reservePublicAction } from "@/lib/access/service";
 export const maxDuration = 60;
 type Context = { params: Promise<{ id: string }> };
 function visitor(request: NextRequest) {
@@ -68,6 +63,7 @@ export async function DELETE(request: NextRequest, context: Context) {
 }
 export async function POST(request: NextRequest, context: Context) {
   let lockedId: string | null = null;
+  let release: (() => Promise<void>) | undefined;
   try {
     const action = await readJson(
       request,
@@ -118,6 +114,7 @@ export async function POST(request: NextRequest, context: Context) {
       );
     }
     const career = await getCareer();
+    release = await reservePublicAction(request, action.action, id);
     if (action.action === "compile") {
       const categories = [career.experiences, career.projects].filter(
         (records) =>
@@ -126,10 +123,10 @@ export async function POST(request: NextRequest, context: Context) {
           ),
       ).length;
       if (workspace.evidence.length < 4 || categories < 2) {
-        await reserveAIQuota();
         const related = await retrieveCareerEvidence(
           expansionQueries(workspace),
           career,
+          { workspaceId: id, operation: "compile" },
         );
         workspace = {
           ...workspace,
@@ -163,9 +160,11 @@ export async function POST(request: NextRequest, context: Context) {
         409,
         "This workspace has reached its 50-question limit.",
       );
-    await reserveAIQuota();
     // Prior explored topics influence selection without granting prior model text factual authority.
-    const result = await analyze(action.action, action.input, workspace);
+    const result = await analyze(action.action, action.input, workspace, {
+      workspaceId: id,
+      operation: action.action,
+    });
     workspace =
       action.action === "ask"
         ? applyQuestion(
@@ -189,6 +188,7 @@ export async function POST(request: NextRequest, context: Context) {
   } catch (error) {
     return errorResponse(error);
   } finally {
+    await release?.();
     if (lockedId)
       await database()
         .from("workspaces")

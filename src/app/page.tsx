@@ -23,6 +23,9 @@ export default async function Home() {
           rb<span> / </span>career, connected.
         </Link>
         <nav aria-label="Main navigation">
+          <Link href="/projects">Projects</Link>
+          <Link href="/explore">Explorer</Link>
+          <Link href="/answers">Quick Answers</Link>
           <a href="#work">Work</a>
           <a href="#skills">Skills</a>
           <a href="#ask">Ask me</a>

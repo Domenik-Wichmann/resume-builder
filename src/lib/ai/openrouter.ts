@@ -1,12 +1,22 @@
 import "server-only";
 import { z } from "zod";
 import { validateEnv } from "../env";
+import {
+  recordUsage,
+  openRouterUsage,
+  type UsageContext,
+} from "../usage/service";
 export class ProviderError extends Error {}
 export async function complete<T>(
   system: string,
   input: string,
   schema: z.ZodType<T>,
-  options: { model?: string; maxTokens?: number; timeoutMs?: number } = {},
+  options: {
+    model?: string;
+    maxTokens?: number;
+    timeoutMs?: number;
+    usage?: UsageContext;
+  } = {},
 ): Promise<T> {
   const env = validateEnv(process.env);
   const response = await fetch(
@@ -39,16 +49,41 @@ export async function complete<T>(
       }),
     },
   );
-  if (!response.ok)
+  if (!response.ok) {
+    await recordUsage(
+      "OPENROUTER",
+      options.model || env.model!,
+      options.usage || {},
+      {},
+      "FAILED",
+    );
     throw new ProviderError(
       "AI provider is unavailable. Please try again later.",
     );
+  }
+  const raw: unknown = await response.json();
+  const reported = openRouterUsage.safeParse(
+    (raw as { usage?: unknown })?.usage,
+  );
+  await recordUsage(
+    "OPENROUTER",
+    options.model || env.model!,
+    options.usage || {},
+    reported.success
+      ? {
+          input: reported.data.prompt_tokens,
+          output: reported.data.completion_tokens,
+          cost: reported.data.cost,
+        }
+      : {},
+    "SUCCESS",
+  );
   const envelope = z
     .object({
       choices: z
         .array(z.object({ message: z.object({ content: z.string() }) }))
         .min(1),
     })
-    .parse(await response.json());
+    .parse(raw);
   return schema.parse(JSON.parse(envelope.choices[0].message.content));
 }

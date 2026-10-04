@@ -39,6 +39,7 @@ export async function reindexCareer(accountId = primaryAccountId) {
     const vectors = await embed(
       batch.map((entity) => entity.content),
       "search_document",
+      { accountId, operation: "career_index" },
     );
     const rows = batch.map((entity, i) => ({
       account_id: accountId,

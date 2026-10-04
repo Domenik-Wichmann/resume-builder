@@ -11,6 +11,8 @@ import type { ResumeIR } from "@/lib/resume-ir";
 import { ResumeRenderer } from "./resume-renderer";
 import { exportWorkspaceText } from "@/lib/workspaces/export";
 import type { Market } from "@/lib/markets";
+import { HumanVerification } from "./human-verification";
+import { rememberWorkspace } from "./explore-signal";
 export function WorkspaceView({
   id,
   market,
@@ -30,6 +32,12 @@ export function WorkspaceView({
   useEffect(() => {
     browserLoadWorkspace(id)
       .then((value) => {
+        rememberWorkspace(id);
+        setInput(
+          new URLSearchParams(window.location.search)
+            .get("question")
+            ?.slice(0, 1000) || "",
+        );
         setWorkspace(value);
         setJob(value.job_description || "");
       })
@@ -166,6 +174,7 @@ export function WorkspaceView({
   }
   return (
     <main id="main" className="wrap workspace-main">
+      <HumanVerification />
       <div className="workspace-top">
         <div>
           <p className="eyebrow">

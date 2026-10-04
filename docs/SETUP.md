@@ -176,11 +176,10 @@ protection is needed. The owner indexing command remains synchronous and separat
 ## Phase 2: accounts and Career Brain
 
 The implemented Phase 2 slice follows priorities 1–4: accounts, Career Master
-review, selective projections, and career interviews. Showcase/media management,
-the interactive skill explorer, Quick Answers, application experiments, layered
-visitor quotas/Turnstile, and credit/trial ledgers are deferred as complete future
-slices. The existing portfolio, workspaces, owner analytics and global AI fuse
-continue working. No normal-account public portfolio router is exposed yet.
+review, selective projections, and career interviews. Phase 2B adds showcase/media,
+the explorer, Quick Answers, application experiments and layered visitor limits;
+see the management section below. No normal-account public portfolio router is
+exposed yet.
 
 `202610040004_accounts.sql` assigns existing durable records to the primary
 portfolio account without deleting them. An authenticated, server-verified user
@@ -219,15 +218,60 @@ reasons. Asking questions costs no model call. Owner conversational answers use
 Luna Pro extraction into the same draft/review path. Question context is stored
 separately from owner-authored evidence text; a question cannot serve as source
 proof. Published languages appear in the full résumé; language-specific vector
-retrieval and category explorer presentation remain future extensions.
+retrieval remains a future extension; approved categories now appear in the explorer.
 
 Existing Auth users can sign in at `/auth/login` and manage their own private
 Career Master via `/account`. This does not enable public signup, grant credits
 or provide BYOK secrets. Accounts have NORMAL/DEMO and PLATFORM_CREDITS/BYOK mode
-boundaries; accounting ledgers and secret persistence remain deferred.
+boundaries; an accounting ledger is available, while credit redemption and secure
+tenant secret persistence remain deferred.
 
 Google and GitHub are hidden by default. To enable a provider, configure its
 credentials in Supabase Auth, allow the canonical `/auth/callback` redirect, then
 set the matching `AUTH_GOOGLE_ENABLED=true` or `AUTH_GITHUB_ENABLED=true` runtime
 flag. OAuth uses a short-lived HttpOnly PKCE verifier and server-side code
 exchange. No provider credentials are stored in the application repository.
+
+## Phase 2B management and runtime setup
+
+Migrations 006–008 add portfolio/media/cards/events, experiments/previews/snapshots/
+outcomes, and visitor/provider/credit accounting. Apply them additively with
+`supabase db push --linked`; never reset or edit already applied migrations.
+The primary owner account and membership are preserved. Public routes expose
+only published, unarchived primary-account data; normal accounts remain private.
+
+From `/account` or the owner overview, open `/admin/projects`, `/admin/answers`,
+`/admin/applications` or `/admin/usage`. Project images upload to the private
+`project-media` bucket created by migration 006. Choose one cover, edit alt text,
+caption and order, then explicitly publish the parent. Publication exposes all
+its images; link publication remains independent. Public `/projects`, `/explore`
+and `/answers` have truthful empty states until content is approved.
+
+Quick Answer saves are private. Choose supporting canonical sources, review the
+answer and publish it separately. Source changes hide stale cards publicly;
+resave after review, or generate a new evidence-grounded draft. Default review
+period is 90 days, configurable per card. No automatic regeneration runs.
+
+Application preparation requires a published profile and relevant evidence.
+Review company/role/JD metadata and all three private previews, then approve and
+save. The final page contains the assigned historical snapshot, tracking URL and
+browser print/Save as PDF. Set SENT manually when actually sent, then record
+outcomes as they arrive. Experiments are created DRAFT with A/B/C; explicitly set
+RUNNING to enable eligible balanced assignment. The oldest eligible running
+experiment takes precedence. The dashboard reports observations, not a winner.
+
+Set both `TURNSTILE_SITE_KEY` and server-only `TURNSTILE_SECRET_KEY` in production
+to enable human checks. Register the canonical Vercel hostname with Cloudflare.
+Only the site key is returned to the browser; Siteverify checks hostname/action.
+Without keys, the UI has no fake challenge and per-visitor limits/global fuse
+remain active. Configure `AI_VISITOR_SPACING_SECONDS` (5),
+`AI_VISITOR_DAILY_LIMIT` (25) and `AI_VISITOR_WEEKLY_LIMIT` (50) if needed. Direct
+API callers must first POST `{}` to `/api/visitor`, retain its security cookie,
+and complete verification when required. Tracked links skip only verification.
+
+Leave `TRIAL_CREDIT_ENABLED=false`. There is no public trial grant, purchase,
+redemption or credit-expiry engine. The service-only eligibility function requires
+configured `TRIAL_CREDIT_MICRO` and `TRIAL_CREDIT_DAYS`; expiry is readiness metadata.
+Actual credit charging and secure tenant BYOK persistence remain future work.
+Provider accounting records only quantities/model/available cost, never prompts.
+No new infrastructure project, public demo tenant or payment provider is needed.
