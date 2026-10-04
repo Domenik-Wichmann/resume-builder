@@ -124,3 +124,17 @@ Provider references:
 - [Supabase cosine HNSW indexes](https://supabase.com/docs/guides/ai/vector-indexes/hnsw-indexes)
 - [Supabase API keys](https://supabase.com/docs/guides/getting-started/api-keys)
 - [OpenRouter structured outputs](https://openrouter.ai/docs/guides/features/structured-outputs)
+
+## Account and ingestion boundaries
+
+Public server reads are restricted to the original account and published records.
+Authenticated career management uses the user's verified Supabase JWT, so RLS,
+rather than a service key plus client-supplied tenant ID, authorizes each query.
+The service key is used only for verified bootstrap and explicitly scoped public
+projections. Tenant foreign-key checks defend against cross-account attachments.
+
+Extraction proposes typed facts with exact quotations. Accepted record identity,
+diff classification, transaction boundaries, publication and semantic hashes are
+application/database concerns. Interview questions are explainable deterministic
+probes; answers reuse extraction and review. No AI output becomes canonical or
+public without an authenticated human acceptance and publication action.

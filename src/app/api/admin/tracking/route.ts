@@ -3,7 +3,7 @@ import { z } from "zod";
 import { requireOwner } from "@/lib/admin";
 import { readJson, errorResponse } from "@/lib/http";
 import { marketSchema } from "@/lib/markets";
-import { database } from "@/lib/db";
+import { requireAccount } from "@/lib/accounts";
 import { createTrackingCode } from "@/lib/tracking/codes";
 import { validateEnv } from "@/lib/env";
 export async function POST(request: NextRequest) {
@@ -20,10 +20,11 @@ export async function POST(request: NextRequest) {
         })
         .strict(),
     );
-    const db = database();
+    const { db, accountId } = await requireAccount();
     const application = await db
       .from("job_applications")
       .insert({
+        account_id: accountId,
         organization: input.company || input.label,
         role: input.role,
         market: input.market,
@@ -35,6 +36,7 @@ export async function POST(request: NextRequest) {
     for (let attempt = 0; attempt < 3; attempt++) {
       const code = createTrackingCode();
       const { error } = await db.from("tracking_links").insert({
+        account_id: accountId,
         code,
         label: input.label,
         market: input.market,

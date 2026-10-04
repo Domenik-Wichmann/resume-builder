@@ -55,12 +55,16 @@ export function OwnerLogin() {
     </form>
   );
 }
-export function OwnerLogout() {
+export function OwnerLogout({
+  endpoint = "/api/admin/login",
+}: {
+  endpoint?: string;
+}) {
   const router = useRouter();
   return (
     <button
       onClick={async () => {
-        const response = await fetch("/api/admin/login", { method: "DELETE" });
+        const response = await fetch(endpoint, { method: "DELETE" });
         if (response.ok) router.refresh();
       }}
     >

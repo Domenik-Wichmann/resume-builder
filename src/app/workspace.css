@@ -302,3 +302,29 @@ td {
     white-space: pre-wrap;
   }
 }
+/* Owner review surfaces retain the portfolio's existing typography and cards. */
+.career-manager textarea {
+  width: 100%;
+  min-height: 8rem;
+}
+.import-change {
+  margin: 1rem 0;
+}
+.import-change h4 {
+  margin-top: 1rem;
+}
+.import-change label {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+.import-change input[type="checkbox"] {
+  width: auto;
+}
+.import-change blockquote {
+  border-left: 3px solid var(--accent, #31584b);
+  padding-left: 1rem;
+}
+.career-manager section > button {
+  margin: 0.4rem;
+}

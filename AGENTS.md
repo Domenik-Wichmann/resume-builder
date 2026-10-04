@@ -40,3 +40,12 @@ Use meaningful tests for security, grounding, and retrieval changes.
 After changing canonical evidence, run `npm run reindex`. When changing vector
 dimensions, update the schema and environment validation together, rebuild the
 index, and regenerate all vectors. Never mix embeddings from different models.
+
+Account-scoped owner career tools must use the verified user's Supabase JWT and
+membership RLS. Never accept account IDs from a browser as authority. Public
+server reads must explicitly scope the primary account and publication/archive
+state. Bootstrap is service-only and receives only a verified Auth user UUID.
+Imports preserve exact owner evidence quotes; questions are context, never proof.
+Accepted patches use optimistic baseline versions and one database transaction.
+Facts remain private until an explicit publication action. Keep applied migrations
+unchanged; add migrations for new database behavior.

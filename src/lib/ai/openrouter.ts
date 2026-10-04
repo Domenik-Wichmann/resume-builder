@@ -6,13 +6,14 @@ export async function complete<T>(
   system: string,
   input: string,
   schema: z.ZodType<T>,
+  options: { model?: string; maxTokens?: number; timeoutMs?: number } = {},
 ): Promise<T> {
   const env = validateEnv(process.env);
   const response = await fetch(
     "https://openrouter.ai/api/v1/chat/completions",
     {
       method: "POST",
-      signal: AbortSignal.timeout(25000),
+      signal: AbortSignal.timeout(options.timeoutMs || 25000),
       headers: {
         Authorization: `Bearer ${env.openrouterKey}`,
         "Content-Type": "application/json",
@@ -20,9 +21,9 @@ export async function complete<T>(
         "X-Title": process.env.OPENROUTER_APP_NAME || "Resume Builder",
       },
       body: JSON.stringify({
-        model: env.model,
+        model: options.model || env.model,
         temperature: 0,
-        max_tokens: 1800,
+        max_tokens: options.maxTokens || 1800,
         messages: [
           { role: "system", content: system },
           { role: "user", content: input },

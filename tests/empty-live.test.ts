@@ -8,6 +8,7 @@ vi.mock("../src/lib/db", () => ({
         error: null,
         select: () => query,
         eq: () => query,
+        is: () => query,
         order: () => query,
       };
       return query;

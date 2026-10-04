@@ -23,7 +23,7 @@ export function semanticText(type: EntityType, record: CareerRecord) {
     `Title: ${record.title}`,
     record.organization && `Organization: ${record.organization}`,
     record.start_date &&
-      `Dates: ${record.start_date} – ${record.end_date || "ongoing"}`,
+      `Dates: ${record.start_date} – ${record.end_date || "end date not recorded"}`,
     record.subtitle && `Context: ${record.subtitle}`,
     record.summary && `Evidence: ${record.summary}`,
     record.skills.length &&

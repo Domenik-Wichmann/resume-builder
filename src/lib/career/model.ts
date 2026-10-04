@@ -23,6 +23,7 @@ export const careerSchema = z.object({
   achievements: z.array(recordSchema),
   education: z.array(recordSchema),
   certifications: z.array(recordSchema),
+  languages: z.array(recordSchema).optional(),
   demo: z.boolean(),
 });
 export type Career = z.infer<typeof careerSchema>;

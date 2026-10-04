@@ -33,6 +33,7 @@ export default async function Resume() {
             ["Achievements", career.achievements],
             ["Education", career.education],
             ["Certifications", career.certifications],
+            ["Languages", career.languages || []],
           ] as const
         ).map(
           ([label, records]) =>

@@ -12,6 +12,7 @@ import { retrieve } from "../career/retrieval";
 import type { Career } from "../career/model";
 import { database } from "../db";
 import { validateEnv } from "../env";
+import { primaryAccountId } from "../account-id";
 const matchesSchema = z.array(
   z.object({
     entity_type: z.enum(entityTypes),
@@ -23,7 +24,7 @@ const matchesSchema = z.array(
 export async function retrieveCareerEvidence(
   queries: string[],
   career: Career,
-  options: { entityTypes?: EntityType[] } = {},
+  options: { entityTypes?: EntityType[]; accountId?: string } = {},
 ) {
   if (career.demo)
     return deduplicate(queries.flatMap((query) => retrieve(career, query)));
@@ -37,7 +38,8 @@ export async function retrieveCareerEvidence(
   const db = database();
   const resultSets = await Promise.all(
     vectors.map(async (vector) => {
-      const { data, error } = await db.rpc("match_career_embeddings", {
+      const { data, error } = await db.rpc("match_account_embeddings", {
+        p_account_id: options.accountId || primaryAccountId,
         query_embedding: JSON.stringify(vector),
         requested_model: env.embeddingModel,
         match_count: 8,

@@ -27,10 +27,16 @@ career information is an explicit publishing step.
   tracking-link generation with actual retained metrics.
 - Private short-link mappings, 48-bit random codes, anonymous landing events,
   signed 24-hour cookies, privacy-signal opt-out, and retention cleanup.
-- Committed migrations, RLS, shared AI quotas, tests, and CI.
+- Account membership RLS, idempotent owner bootstrap, tenant-scoped retrieval and provenance.
+- Career Master text/Markdown import with Luna Pro extraction, stable-key diffs, owner review/edit/reject, transactional acceptance and explicit publication.
+- General, job-targeted and record-focused interviews with explainable gap/novelty ranking; conversational answers return through the same review pipeline.
+- Existing-user email authentication and gated Google/GitHub PKCE flows.
+- Committed migrations, shared AI quotas, tests, and CI.
 
 **Scaffolded:** richer application history and additional tracking event types.
-**Planned:** approved owner content ingestion, retrieval/grounding evaluation,
+**Planned:** project showcase/media management, interactive category/skill exploration,
+Quick Answers with staleness, application experiments, visitor quotas/Turnstile,
+credit ledger/trial foundations, and retrieval/grounding evaluation,
 more sophisticated tailoring, automatic PDF files, and richer skill navigation.
 Compilation selects canonical text without rewriting accomplishments. There is
 no admin CMS or visitor identification.
@@ -164,5 +170,5 @@ docs/                Architecture and service setup
 .github/workflows/   Formatting, lint, types, tests, build
 ```
 
-The next useful iteration is importing a small set of approved owner records and
+The next useful iteration is using `/admin/career` to review a small set of approved owner records and
 evaluating retrieval and workspace résumé selection with recruiter questions.

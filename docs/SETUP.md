@@ -57,7 +57,7 @@ organization/start/end dates are optional structured fields. No fictional seed
 is applied to your live database. Live mode also supports an empty database:
 the portfolio reports that the profile is awaiting publication, AI returns
 "No relevant evidence is currently stored," and reindexing reports zero records.
-A future ingestion command can replace this small manual pass.
+The Career Master at `/admin/career` now provides structured import and review.
 
 ## Cohere and OpenRouter
 
@@ -72,7 +72,7 @@ structured outputs. Set provider spending limits appropriate for a small portfol
 The current recruiter Q&A and matching model is `openai/gpt-6-luna`.
 For future initial ingestion, start with `openai/gpt-6-luna-pro`; escalate difficult
 extraction to `openai/gpt-6.1-sol` with bounded delegated review when necessary.
-Ingestion and delegated review are not implemented yet. Publication still requires
+Career Master ingestion is implemented; automatic delegated review remains deferred. Publication still requires
 owner approval of extracted facts; model output cannot publish itself.
 The optional attribution fields are in `.env.example`. Keep all provider keys
 server-side. Review provider data policies before submitting confidential content.
@@ -172,3 +172,62 @@ over per-user fairness. Exhaustion returns 429. Embedding/provider/database fail
 returns a generic 503 without exposing input or upstream error bodies. Configure
 a Vercel WAF rule on `/api/ask` and `/api/match` if additional availability
 protection is needed. The owner indexing command remains synchronous and separate.
+
+## Phase 2: accounts and Career Brain
+
+The implemented Phase 2 slice follows priorities 1–4: accounts, Career Master
+review, selective projections, and career interviews. Showcase/media management,
+the interactive skill explorer, Quick Answers, application experiments, layered
+visitor quotas/Turnstile, and credit/trial ledgers are deferred as complete future
+slices. The existing portfolio, workspaces, owner analytics and global AI fuse
+continue working. No normal-account public portfolio router is exposed yet.
+
+`202610040004_accounts.sql` assigns existing durable records to the primary
+portfolio account without deleting them. An authenticated, server-verified user
+is bootstrapped idempotently into one OWNER membership. The configured original
+owner receives the existing account; other existing Auth users receive separate
+accounts. The server holds the bootstrap capability; browsers cannot request an
+arbitrary user UUID or claim the primary account. Membership RLS protects private
+reads and writes. Foreign-key attachment triggers reject cross-account sources,
+career links, vectors and analytics even for privileged writes. Public career
+queries run server-side and explicitly scope the primary account and publication.
+
+`202610040005_career_brain.sql` adds source documents/quotes, semantic hashes,
+archive state, languages, categories, achievement junctions and import drafts.
+Career Master imports compare stable kind/key identities. UUIDs remain database
+controlled. A complete Master may propose removals; interview answers are partial
+updates and never imply removals. Duplicate identity, unverified quotation and
+uncertainty become REVIEW. Editing a proposal recomputes its diff. A selected
+patch set commits atomically, records the authenticated reviewer, and rejects
+outdated baseline hashes/timestamps. Missing relationship references abort the
+whole transaction. Changes remain private, including updates to previously
+published facts. Archive hides a fact without destroying it. Explicit publication
+and reindexing update only changed approved vectors; unchanged semantic text
+makes no embedding call. Indexing failure leaves an actionable retry message,
+and existing freshness/visibility checks prevent stale vectors supplying facts.
+
+Open `/admin/career` after owner sign-in. Paste text or upload `.md`/`.txt` within
+40,000 characters. `OPENROUTER_INGEST_MODEL` defaults to
+`openai/gpt-6-luna-pro`; the normal Q&A/matching model remains Luna. This is one
+bounded extraction call, not an autonomous ingestion system. Inputs larger than
+the limit must be reduced; automatic chunk reconciliation is not implemented.
+The escalation policy is Sol with bounded delegated review when a real difficult
+source requires it. No automatic escalation or sub-agent service is implemented.
+
+Interview questions use deterministic gap/relevance/novelty scoring and show
+reasons. Asking questions costs no model call. Owner conversational answers use
+Luna Pro extraction into the same draft/review path. Question context is stored
+separately from owner-authored evidence text; a question cannot serve as source
+proof. Published languages appear in the full résumé; language-specific vector
+retrieval and category explorer presentation remain future extensions.
+
+Existing Auth users can sign in at `/auth/login` and manage their own private
+Career Master via `/account`. This does not enable public signup, grant credits
+or provide BYOK secrets. Accounts have NORMAL/DEMO and PLATFORM_CREDITS/BYOK mode
+boundaries; accounting ledgers and secret persistence remain deferred.
+
+Google and GitHub are hidden by default. To enable a provider, configure its
+credentials in Supabase Auth, allow the canonical `/auth/callback` redirect, then
+set the matching `AUTH_GOOGLE_ENABLED=true` or `AUTH_GITHUB_ENABLED=true` runtime
+flag. OAuth uses a short-lived HttpOnly PKCE verifier and server-side code
+exchange. No provider credentials are stored in the application repository.

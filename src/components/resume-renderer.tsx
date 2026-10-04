@@ -32,7 +32,8 @@ export function ResumeRenderer({ ir }: { ir: ResumeIR }) {
                   {record.organization && <p>{record.organization}</p>}
                   {record.dates.start && (
                     <p className="muted">
-                      {record.dates.start} – {record.dates.end || "Present"}
+                      {record.dates.start} –{" "}
+                      {record.dates.end || "End date not recorded"}
                     </p>
                   )}
                   <p className="muted">{record.context}</p>

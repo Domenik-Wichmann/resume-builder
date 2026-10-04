@@ -3,8 +3,9 @@ import { fixture } from "./fixture";
 import { careerSchema, type CareerRecord } from "./model";
 import { validateEnv } from "../env";
 import { database } from "../db";
+import { primaryAccountId } from "../account-id";
 
-export async function getCareer() {
+export async function getCareer(accountId = primaryAccountId) {
   if (validateEnv(process.env).mode === "demo") return fixture;
   const db = database();
   const tables = [
@@ -15,10 +16,17 @@ export async function getCareer() {
     "achievements",
     "education",
     "certifications",
+    "languages",
   ] as const;
   const results = await Promise.all(
     tables.map((table) =>
-      db.from(table).select("*").eq("is_public", true).order("created_at"),
+      db
+        .from(table)
+        .select("*")
+        .eq("account_id", accountId)
+        .eq("is_public", true)
+        .is("archived_at", null)
+        .order("created_at"),
     ),
   );
   if (results.some((result) => result.error))
@@ -31,10 +39,11 @@ export async function getCareer() {
     achievements,
     education,
     certifications,
+    languages,
   ] = results.map((result) => result.data || []);
   const links = await Promise.all(
     ["experience_skills", "project_skills", "achievement_skills"].map((table) =>
-      db.from(table).select("*"),
+      db.from(table).select("*").eq("account_id", accountId),
     ),
   );
   if (links.some((result) => result.error))
@@ -74,6 +83,7 @@ export async function getCareer() {
     achievements: records(achievements, 2, "achievement_id"),
     education: education.map((row) => ({ ...row, skills: [] })),
     certifications: certifications.map((row) => ({ ...row, skills: [] })),
+    languages: languages.map((row) => ({ ...row, skills: [] })),
     demo: false,
   });
 }

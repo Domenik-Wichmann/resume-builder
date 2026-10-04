@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { isOwner } from "@/lib/admin";
-import { database } from "@/lib/db";
+import { requireAccount } from "@/lib/accounts";
 import {
   OwnerLogin,
   OwnerLogout,
@@ -19,7 +19,7 @@ export default async function Admin() {
         <OwnerLogin />
       </main>
     );
-  const db = database();
+  const { db } = await requireAccount();
   const [landing, workspaces, questions, events, links, topics, career] =
     await Promise.all([
       db
@@ -90,6 +90,7 @@ export default async function Admin() {
         <a href="#workspaces">Workspaces</a>
         <a href="#questions">Questions</a>
         <a href="#career">Career Data</a>
+        <Link href="/admin/career">Career Master & Interview</Link>
       </nav>
       <section id="overview" className="admin-metrics">
         {[
@@ -185,8 +186,10 @@ export default async function Admin() {
       <section id="career" className="section">
         <h2>Career data foundation</h2>
         <p>
-          Maintain approved records in Supabase, then run{" "}
-          <code>npm run reindex</code>. Structured ingestion remains planned.
+          <Link href="/admin/career">
+            Import, review and publish career records.
+          </Link>
+          Indexing updates only changed published evidence.
         </p>
         {career.data?.map((project, index) => (
           <p key={index}>

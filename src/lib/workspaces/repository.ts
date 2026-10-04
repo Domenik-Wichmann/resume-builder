@@ -5,6 +5,7 @@ import { semanticEntities, deduplicate } from "../embeddings/content";
 import { workspaceSchema, type Workspace } from "./model";
 import { HttpError } from "../http";
 import { z } from "zod";
+import { primaryAccountId } from "../account-id";
 export async function loadWorkspace(
   id: string,
   visitorId: string,
@@ -15,6 +16,7 @@ export async function loadWorkspace(
     .select("*")
     .eq("id", id)
     .eq("visitor_id", visitorId)
+    .eq("account_id", primaryAccountId)
     .maybeSingle();
   if (error) throw new Error("Cannot load workspace.");
   if (!row) throw new HttpError(404, "Workspace not found.");
@@ -121,6 +123,7 @@ export async function listWorkspaces(visitorId: string) {
     .from("workspaces")
     .select("id,title,market,updated_at")
     .eq("visitor_id", visitorId)
+    .eq("account_id", primaryAccountId)
     .order("updated_at", { ascending: false });
   if (error) throw new Error("Cannot list workspaces.");
   return z

@@ -3,6 +3,7 @@ import { createHmac, timingSafeEqual, randomUUID } from "node:crypto";
 import { database } from "../db";
 import { validateEnv } from "../env";
 import { validTrackingCode } from "./codes";
+import { primaryAccountId } from "../account-id";
 export function trackingDisabled(headers: Headers) {
   return headers.get("dnt") === "1" || headers.get("sec-gpc") === "1";
 }
@@ -19,6 +20,7 @@ export async function resolveTrackingLink(
   const { data, error } = await database()
     .from("tracking_links")
     .select("id,market")
+    .eq("account_id", primaryAccountId)
     .eq("code", code)
     .eq("active", true)
     .maybeSingle();

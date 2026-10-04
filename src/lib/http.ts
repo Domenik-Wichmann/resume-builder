@@ -19,6 +19,7 @@ export function requireOrigin(request: Request) {
 export async function readJson<T>(
   request: Request,
   schema: z.ZodType<T>,
+  maxBytes = 50000,
 ): Promise<T> {
   requireOrigin(request);
   if (!request.headers.get("content-type")?.includes("application/json"))
@@ -31,7 +32,7 @@ export async function readJson<T>(
     const { done, value } = await reader.read();
     if (done) break;
     size += value.byteLength;
-    if (size > 50000) {
+    if (size > maxBytes) {
       await reader.cancel();
       throw new HttpError(413, "Request too large.");
     }
