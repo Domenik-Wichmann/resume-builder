@@ -368,6 +368,13 @@ Five E response bodies timed out before baseline accounting could save an event.
       "noEvidenceCorrect": true,
       "outsideCitations": 0
     }
+  },
+  "productionSmoke": {
+    "outcomeProbe": true,
+    "questions": 4,
+    "noRepeat": true,
+    "anonymousStatus": 403,
+    "publicTenantInvisible": true
   }
 }
 ```
@@ -419,6 +426,20 @@ OpenRouter published Luna token prices were checked before runs at [the official
   },
   {
     "stage": "end-to-end",
+    "accountRemoved": true,
+    "authRemoved": true,
+    "primaryRecordsBefore": 0,
+    "primaryRecordsAfter": 0
+  },
+  {
+    "stage": "production-smoke",
+    "accountRemoved": true,
+    "authRemoved": true,
+    "primaryRecordsBefore": 0,
+    "primaryRecordsAfter": 0
+  },
+  {
+    "stage": "production-smoke",
     "accountRemoved": true,
     "authRemoved": true,
     "primaryRecordsBefore": 0,

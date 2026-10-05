@@ -425,7 +425,7 @@ try {
     if (
       !smoke.outcomeProbe ||
       !smoke.noRepeat ||
-      anonymous.status !== 401 ||
+      anonymous.status !== 403 ||
       !smoke.publicTenantInvisible
     )
       throw new Error("Deployed qualification smoke failed");

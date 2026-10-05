@@ -230,8 +230,8 @@ examples, controlled ablations separating map benefit from prompt changes,
 repeated large-document architecture comparisons, full atomized human claim
 precision, better identity reconciliation and fact-preserving diff comparison,
 reliable negative retrieval and long-JD coverage. A live interview-answer import
-round trip and Sol escalation are deferred within the fixed call cap. Existing
-the owner route restricts quotations to the owner's answer, and deterministic
+round trip and Sol escalation are deferred within the fixed call cap. The existing
+owner route restricts quotations to the owner's answer, and deterministic
 tests cover partial imports not implying removals; that does not replace semantic
 interview testing.
 
@@ -247,8 +247,24 @@ from superficial similarity. Preserve the current safety boundaries throughout.
 - [Frozen baseline](../../experiments/career-brain/baseline/manifest.json)
 - [Sources and gold](../../experiments/career-brain/corpus/)
 - [Raw synthetic outputs and accounting](../../experiments/career-brain/results/results.json)
+- [Final database and Auth cleanup verification](../../experiments/career-brain/results/cleanup-verification.json)
 - [Claim-group audit](../../experiments/career-brain/results/claim-audit.json)
 - [Aggregate metrics and generated diffs](../../experiments/career-brain/results/summary.json)
 
 Commit, CI and deployment identifiers are supplied in the completion report.
 Account cleanup evidence is preserved in the raw results.
+
+The deployed production smoke test passed: an outcome probe was generated for a
+project without measured results, four bounded questions were returned, asked
+questions did not repeat, anonymous career access returned the established 403
+response, and the private qualification tenant was absent from public content.
+The harness initially expected 401; correcting that assertion required no
+application change. Both smoke attempts removed their disposable accounts and
+Auth users, with primary canonical record counts unchanged. Local verification
+passed formatting, lint, TypeScript, all 80 tests, the qualification suite and
+the production build; CI also passed.
+
+Final read-only verification found one original account, one membership and one
+Auth user, zero qualification Auth users, and zero canonical records, sources,
+imports, embeddings or other tested career/application records. The owner's 19
+pre-existing provider usage events were retained.

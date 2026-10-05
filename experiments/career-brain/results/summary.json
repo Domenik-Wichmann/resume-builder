@@ -1860,6 +1860,20 @@
       "authRemoved": true,
       "primaryRecordsBefore": 0,
       "primaryRecordsAfter": 0
+    },
+    {
+      "stage": "production-smoke",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryRecordsBefore": 0,
+      "primaryRecordsAfter": 0
+    },
+    {
+      "stage": "production-smoke",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryRecordsBefore": 0,
+      "primaryRecordsAfter": 0
     }
   ]
 }
