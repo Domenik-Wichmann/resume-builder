@@ -39,7 +39,7 @@ export async function GET(request: NextRequest) {
     const options = {
       httpOnly: true,
       secure: new URL(base).protocol === "https:",
-      sameSite: "strict" as const,
+      sameSite: "lax" as const,
       path: "/",
       maxAge: Math.min(data.session.expires_in, 600),
     };

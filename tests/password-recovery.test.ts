@@ -271,7 +271,7 @@ describe("password recovery security", () => {
     const cookie = response.headers.get("set-cookie")!;
     expect(cookie).toContain("HttpOnly");
     expect(cookie).toContain("Secure");
-    expect(cookie).toContain("SameSite=strict");
+    expect(cookie).toContain("SameSite=lax");
     expect(cookie).toContain("Max-Age=600");
     expect(cookie).not.toContain("rb_owner");
     expect(cookie).not.toContain("rb_account");
