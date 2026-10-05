@@ -34,11 +34,13 @@ export async function complete<T>(
         message = "Provider rejected the request; detailed response omitted.";
       detail = message.slice(0, 700);
       const path =
-        process.env.CAREER_QUALIFICATION_CLAIM_REPAIR === "1"
-          ? "experiments/career-brain/v2/claim-repair/results/provider-responses.json"
-          : process.env.CAREER_QUALIFICATION_CONTINUATION === "1"
-            ? "experiments/career-brain/v2/continuation/results/provider-responses.json"
-            : "experiments/career-brain/v2/results/provider-responses.json";
+        process.env.CAREER_QUALIFICATION_OMISSION_REPAIR === "1"
+          ? "experiments/career-brain/v2/omission-repair/results/provider-responses.json"
+          : process.env.CAREER_QUALIFICATION_CLAIM_REPAIR === "1"
+            ? "experiments/career-brain/v2/claim-repair/results/provider-responses.json"
+            : process.env.CAREER_QUALIFICATION_CONTINUATION === "1"
+              ? "experiments/career-brain/v2/continuation/results/provider-responses.json"
+              : "experiments/career-brain/v2/results/provider-responses.json";
       let observed: unknown[] = [];
       try {
         observed = JSON.parse(await readFile(path, "utf8"));
@@ -49,6 +51,9 @@ export async function complete<T>(
         finishReason: raw?.choices?.[0]?.finish_reason || null,
         outputTokens: raw?.usage?.completion_tokens || null,
         error: detail || null,
+        ...(process.env.CAREER_QUALIFICATION_OMISSION_REPAIR === "1"
+          ? { syntheticResponse: raw?.choices?.[0]?.message?.content || null }
+          : {}),
       });
       await writeFile(path, JSON.stringify(observed, null, 2) + "\n");
     }

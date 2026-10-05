@@ -1,0 +1,7 @@
+{
+  "label": "safety:answer-quantity",
+  "result": {
+    "answer": "Ada supervised eight direct reports; the earlier figure of five was corrected.",
+    "evidence_ids": ["corrected-supervision"]
+  }
+}

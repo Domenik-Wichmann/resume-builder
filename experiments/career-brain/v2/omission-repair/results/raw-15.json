@@ -1,0 +1,27 @@
+{
+  "label": "repeat:bounded-actor-factual-equivalence",
+  "result": {
+    "decisions": [
+      {
+        "key": "experience:operations-analyst-dd5de8b403",
+        "verdict": "ENRICHMENT",
+        "reason": "The confirmed correction adds the source-supported fact that Ada initially guessed the start date was in 2020; the existing date claim does not entail that prior guess."
+      },
+      {
+        "key": "achievement:reconciliation-time-reduction-aaf329a9ed",
+        "verdict": "EQUIVALENT",
+        "reason": "The added denial that delivery speed was measured restates the existing correction that delivery speed was not measured; the six-run metric and contribution facts are unchanged."
+      },
+      {
+        "key": "skill:postgresql-4b6475d427",
+        "verdict": "EQUIVALENT",
+        "reason": "The added production-database detail is already stated in the existing source quote; it does not add a new fact."
+      },
+      {
+        "key": "skill:git-820dc39c23",
+        "verdict": "EQUIVALENT",
+        "reason": "The added version-control detail is already stated in the existing source quote; it does not add a new fact."
+      }
+    ]
+  }
+}

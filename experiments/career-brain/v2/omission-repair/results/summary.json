@@ -1,0 +1,693 @@
+{
+  "lineage": "3c355444219edc4d0f375b3aaa6a9946c13011a7",
+  "repeat": {
+    "byRepeat": [
+      {
+        "repeat": 1,
+        "counts": {
+          "UNCHANGED": 11,
+          "UPDATED": 3,
+          "REVIEW": 1,
+          "ADDED": 0,
+          "REMOVED": 0
+        },
+        "omittedComponents": 11,
+        "preservedComponents": 11,
+        "losses": [],
+        "latencyMs": 123631
+      },
+      {
+        "repeat": 2,
+        "counts": {
+          "UNCHANGED": 14,
+          "UPDATED": 0,
+          "REVIEW": 1,
+          "ADDED": 0,
+          "REMOVED": 0
+        },
+        "omittedComponents": 12,
+        "preservedComponents": 12,
+        "losses": [],
+        "latencyMs": 109352
+      },
+      {
+        "repeat": 3,
+        "counts": {
+          "UNCHANGED": 12,
+          "UPDATED": 1,
+          "REVIEW": 2,
+          "ADDED": 0,
+          "REMOVED": 0
+        },
+        "omittedComponents": 6,
+        "preservedComponents": 6,
+        "losses": [],
+        "latencyMs": 130114
+      },
+      {
+        "repeat": 4,
+        "counts": {
+          "UNCHANGED": 14,
+          "UPDATED": 0,
+          "REVIEW": 1,
+          "ADDED": 0,
+          "REMOVED": 0
+        },
+        "omittedComponents": 6,
+        "preservedComponents": 6,
+        "losses": [],
+        "latencyMs": 102026
+      },
+      {
+        "repeat": 5,
+        "counts": {
+          "UNCHANGED": 11,
+          "UPDATED": 3,
+          "REVIEW": 1,
+          "ADDED": 0,
+          "REMOVED": 0
+        },
+        "omittedComponents": 7,
+        "preservedComponents": 7,
+        "losses": [],
+        "latencyMs": 119799
+      }
+    ],
+    "existingOpportunities": 75,
+    "unchanged": 62,
+    "reviews": 6,
+    "updated": 7,
+    "omittedComponents": 42,
+    "preservedComponents": 42,
+    "unsupportedComponentLosses": [],
+    "relationshipLosses": 0,
+    "identityMatched": 75
+  },
+  "sequence": [
+    {
+      "revision": "V2",
+      "changes": [
+        {
+          "identity": "profile:profile",
+          "status": "UNCHANGED",
+          "reason": ""
+        },
+        {
+          "identity": "experience:operations-analyst-dd5de8b403",
+          "status": "REVIEW",
+          "reason": "Grounding UNSUPPORTED: The role, dates, project work, training, and handbook are supported, but the claim that the end date was “corrected” is not: the source gives a date without describing any correction. Omitted claim Operations Analyst at Harbor Tools from 2021-02-01 to 2024-05-31: The current source gives a different end date for the same role."
+        },
+        {
+          "identity": "project:dispatch-loom-e00a8b6fe1",
+          "status": "REVIEW",
+          "reason": "Grounding UNCERTAIN: The project details and other claims are supported. However, the action “Worked through an example beside a supervisor” turns “I would sit beside a supervisor and work through an example” into a definite completed action; the source wording leaves that status ambiguous."
+        },
+        {
+          "identity": "project:roster-note-1b510e9f1f",
+          "status": "ADDED",
+          "reason": ""
+        },
+        {
+          "identity": "achievement:dispatch-coworker-training-184996f0f6",
+          "status": "UPDATED",
+          "reason": ""
+        },
+        {
+          "identity": "achievement:reconciliation-time-reduction-aaf329a9ed",
+          "status": "UNCHANGED",
+          "reason": ""
+        },
+        {
+          "identity": "skill:python-1678f77f15",
+          "status": "UNCHANGED",
+          "reason": ""
+        },
+        {
+          "identity": "skill:sql-a03e9bccab",
+          "status": "UPDATED",
+          "reason": ""
+        },
+        {
+          "identity": "skill:postgresql-4b6475d427",
+          "status": "UNCHANGED",
+          "reason": ""
+        },
+        {
+          "identity": "skill:git-820dc39c23",
+          "status": "UNCHANGED",
+          "reason": ""
+        },
+        {
+          "identity": "skill:coworker-training-888713667e",
+          "status": "REVIEW",
+          "reason": "Grounding UNCERTAIN: Training dispatch coworkers is supported. The additional claim that Ada “worked through” a workflow example converts “I would ... work through an example” into a definite completed action, which the wording leaves ambiguous."
+        },
+        {
+          "identity": "education:bsc-in-information-systems-ab520a51dc",
+          "status": "UNCHANGED",
+          "reason": ""
+        },
+        {
+          "identity": "certification:cedar-sql-foundations-ed912d30a4",
+          "status": "REVIEW",
+          "reason": "Grounding UNSUPPORTED: The source confirms a course-completion certificate, but does not identify it as “Cedar SQL Foundations” or otherwise establish its title or issuer. Omitted field 2020-08-15: The current source mentions a certificate only generically; it does not establish the named credential or its start date."
+        },
+        {
+          "identity": "language:english-3e0cd54cbb",
+          "status": "UNCHANGED",
+          "reason": ""
+        },
+        {
+          "identity": "category:data-tools-28c5fe8f0e",
+          "status": "UNCHANGED",
+          "reason": ""
+        },
+        {
+          "identity": "category:collaboration-91578d1f92",
+          "status": "UNCHANGED",
+          "reason": ""
+        }
+      ],
+      "omissions": [
+        {
+          "ref": "omission-0",
+          "verdict": "CONTRADICTED",
+          "reason": "The current source gives a different end date for the same role.",
+          "quotes": [
+            "I worked as Operations Analyst at Harbor Tools from 2021-02-01 to 2024-06-30."
+          ],
+          "method": "SEMANTIC",
+          "action": "REVIEW_SOURCE_CONTRADICTS"
+        },
+        {
+          "ref": "omission-1",
+          "verdict": "SUPPORTED_EQUIVALENT",
+          "reason": "The source supports the late-file condition and the operators’ preference for a visible warning.",
+          "quotes": [
+            "The source file could arrive late and the operators preferred a visible warning."
+          ],
+          "method": "SEMANTIC",
+          "action": "PRESERVED_SOURCE_STILL_SUPPORTS"
+        },
+        {
+          "ref": "omission-2",
+          "verdict": "SUPPORTED_EQUIVALENT",
+          "reason": "The source says Ada wrote the handbook and describes what it instructed coworkers to do.",
+          "quotes": [
+            "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+            "The handbook described where a coworker should look before raising an exception."
+          ],
+          "method": "SEMANTIC",
+          "action": "PRESERVED_SOURCE_STILL_SUPPORTS"
+        },
+        {
+          "ref": "omission-3",
+          "verdict": "SUPPORTED_EQUIVALENT",
+          "reason": "The source explicitly assigns Ada responsibility for the parser and checks.",
+          "quotes": [
+            "I was responsible for the parser and checks; I did not own the warehouse staffing budget, procurement, or the scheduling system."
+          ],
+          "method": "SEMANTIC",
+          "action": "PRESERVED_SOURCE_STILL_SUPPORTS"
+        },
+        {
+          "ref": "omission-4",
+          "verdict": "SUPPORTED_EQUIVALENT",
+          "reason": "The source explicitly connects Ada’s personal coworker training to Dispatch Loom and lists coworker training as a skill.",
+          "quotes": [
+            "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+            "My skill category is Data tools: Python, SQL and PostgreSQL. My separate skill category is Collaboration: Git and coworker training."
+          ],
+          "method": "SEMANTIC",
+          "action": "PRESERVED_SOURCE_STILL_SUPPORTS"
+        },
+        {
+          "ref": "omission-5",
+          "verdict": "SUPPORTED_EQUIVALENT",
+          "reason": "The source clarifies that the measured time was reconciliation work and that delivery speed was not measured.",
+          "quotes": [
+            "An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only."
+          ],
+          "method": "SEMANTIC",
+          "action": "PRESERVED_SOURCE_STILL_SUPPORTS"
+        },
+        {
+          "ref": "omission-6",
+          "verdict": "SUPPORTED_EQUIVALENT",
+          "reason": "The source identifies PostgreSQL as the production database used.",
+          "quotes": [
+            "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them. I used Git for version control and PostgreSQL for the production database."
+          ],
+          "method": "SEMANTIC",
+          "action": "PRESERVED_SOURCE_STILL_SUPPORTS"
+        },
+        {
+          "ref": "omission-7",
+          "verdict": "SUPPORTED_EQUIVALENT",
+          "reason": "The source identifies Git as the version-control tool used.",
+          "quotes": [
+            "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them. I used Git for version control and PostgreSQL for the production database."
+          ],
+          "method": "SEMANTIC",
+          "action": "PRESERVED_SOURCE_STILL_SUPPORTS"
+        },
+        {
+          "ref": "omission-8",
+          "verdict": "SUPPORTED_EQUIVALENT",
+          "reason": "The source supports the degree, institution, and dates.",
+          "quotes": [
+            "I earned a BSc in Information Systems at Cedar College from 2017-09-01 to 2020-06-30."
+          ],
+          "method": "SEMANTIC",
+          "action": "PRESERVED_SOURCE_STILL_SUPPORTS"
+        },
+        {
+          "ref": "omission-9",
+          "verdict": "AMBIGUOUS",
+          "reason": "The current source mentions a certificate only generically; it does not establish the named credential or its start date.",
+          "quotes": [
+            "The certificate was a course completion, not a professional license."
+          ],
+          "method": "SEMANTIC",
+          "action": "REVIEW_SOURCE_AMBIGUOUS"
+        },
+        {
+          "ref": "omission-10",
+          "verdict": "SUPPORTED_EQUIVALENT",
+          "reason": "The source explicitly places Python, SQL, and PostgreSQL in the Data tools category.",
+          "quotes": [
+            "My skill category is Data tools: Python, SQL and PostgreSQL. My separate skill category is Collaboration: Git and coworker training."
+          ],
+          "method": "SEMANTIC",
+          "action": "PRESERVED_SOURCE_STILL_SUPPORTS"
+        },
+        {
+          "ref": "omission-11",
+          "verdict": "SUPPORTED_EQUIVALENT",
+          "reason": "The source explicitly places Git and coworker training in the Collaboration category.",
+          "quotes": [
+            "My skill category is Data tools: Python, SQL and PostgreSQL. My separate skill category is Collaboration: Git and coworker training."
+          ],
+          "method": "SEMANTIC",
+          "action": "PRESERVED_SOURCE_STILL_SUPPORTS"
+        }
+      ],
+      "after": 16,
+      "preserved": 15,
+      "provenance": {
+        "total": 50,
+        "valid": 50,
+        "primaryTotal": 16,
+        "primaryValid": 16
+      }
+    },
+    {
+      "revision": "V3",
+      "changes": [
+        {
+          "identity": "profile:profile",
+          "status": "UNCHANGED",
+          "reason": ""
+        },
+        {
+          "identity": "experience:operations-analyst-dd5de8b403",
+          "status": "UPDATED",
+          "reason": ""
+        },
+        {
+          "identity": "project:dispatch-loom-e00a8b6fe1",
+          "status": "UPDATED",
+          "reason": ""
+        },
+        {
+          "identity": "project:roster-note-1b510e9f1f",
+          "status": "UPDATED",
+          "reason": ""
+        },
+        {
+          "identity": "achievement:dispatch-coworker-training-184996f0f6",
+          "status": "REVIEW",
+          "reason": "Workshop attendance is unresolved: Ada recalls 12 coworkers; a later attendance sheet says 14. Unresolved claim or correction requires review. Grounding UNCERTAIN: The training and handbook details are supported, but attendance is explicitly unresolved: recollection says 12 and a later sheet says 14."
+        },
+        {
+          "identity": "achievement:reconciliation-time-reduction-aaf329a9ed",
+          "status": "UNCHANGED",
+          "reason": ""
+        },
+        {
+          "identity": "achievement:roster-note-night-shift-handover-documentation-42641d1560",
+          "status": "ADDED",
+          "reason": ""
+        },
+        {
+          "identity": "skill:python-1678f77f15",
+          "status": "UNCHANGED",
+          "reason": ""
+        },
+        {
+          "identity": "skill:sql-a03e9bccab",
+          "status": "UPDATED",
+          "reason": ""
+        },
+        {
+          "identity": "skill:postgresql-4b6475d427",
+          "status": "UNCHANGED",
+          "reason": ""
+        },
+        {
+          "identity": "skill:git-820dc39c23",
+          "status": "UNCHANGED",
+          "reason": ""
+        },
+        {
+          "identity": "skill:coworker-training-888713667e",
+          "status": "REVIEW",
+          "reason": "Workshop attendee count is unresolved: 12 recalled, 14 on a later attendance sheet. Unresolved claim or correction requires review. Grounding UNCERTAIN: Coworker training and the two workshops are supported, but the record also includes an explicitly unresolved attendance figure: 12 by recollection or 14 on a later sheet."
+        },
+        {
+          "identity": "skill:docker-8ce2b643fd",
+          "status": "ADDED",
+          "reason": ""
+        },
+        {
+          "identity": "education:bsc-in-information-systems-ab520a51dc",
+          "status": "UNCHANGED",
+          "reason": ""
+        },
+        {
+          "identity": "certification:cedar-sql-foundations-ed912d30a4",
+          "status": "REVIEW",
+          "reason": "Grounding UNSUPPORTED: The source explicitly describes the certificate as fictional, but the record presents it as an unqualified received certificate and omits that qualification."
+        },
+        {
+          "identity": "language:english-3e0cd54cbb",
+          "status": "UNCHANGED",
+          "reason": ""
+        },
+        {
+          "identity": "category:data-tools-28c5fe8f0e",
+          "status": "UNCHANGED",
+          "reason": ""
+        },
+        {
+          "identity": "category:collaboration-91578d1f92",
+          "status": "UNCHANGED",
+          "reason": ""
+        }
+      ],
+      "omissions": [
+        {
+          "ref": "omission-0",
+          "verdict": "AMBIGUOUS",
+          "reason": "Retain prior unavailable history without affirmative serving or re-confirmation.",
+          "quotes": [],
+          "method": "AVAILABILITY_HISTORY",
+          "action": "PRESERVED_UNAVAILABLE_HISTORY"
+        },
+        {
+          "ref": "omission-11",
+          "verdict": "AMBIGUOUS",
+          "reason": "Retain prior unavailable history without affirmative serving or re-confirmation.",
+          "quotes": [],
+          "method": "AVAILABILITY_HISTORY",
+          "action": "PRESERVED_UNAVAILABLE_HISTORY"
+        },
+        {
+          "ref": "omission-1",
+          "verdict": "SUPPORTED_EQUIVALENT",
+          "reason": "The source explicitly attributes writing the Python parser to Ada personally.",
+          "quotes": ["I wrote the Python parser and SQL checks myself."],
+          "method": "SEMANTIC",
+          "action": "PRESERVED_SOURCE_STILL_SUPPORTS"
+        },
+        {
+          "ref": "omission-2",
+          "verdict": "SUPPORTED_EQUIVALENT",
+          "reason": "The source explicitly attributes writing the SQL checks to Ada personally.",
+          "quotes": ["I wrote the Python parser and SQL checks myself."],
+          "method": "SEMANTIC",
+          "action": "PRESERVED_SOURCE_STILL_SUPPORTS"
+        },
+        {
+          "ref": "omission-3",
+          "verdict": "SUPPORTED_EQUIVALENT",
+          "reason": "The source says Ada gathered Dispatch Loom requirements from warehouse supervisors.",
+          "quotes": [
+            "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them."
+          ],
+          "method": "SEMANTIC",
+          "action": "PRESERVED_SOURCE_STILL_SUPPORTS"
+        },
+        {
+          "ref": "omission-4",
+          "verdict": "SUPPORTED_EQUIVALENT",
+          "reason": "The source says Ada explained validation failures to the warehouse supervisors.",
+          "quotes": [
+            "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them."
+          ],
+          "method": "SEMANTIC",
+          "action": "PRESERVED_SOURCE_STILL_SUPPORTS"
+        },
+        {
+          "ref": "omission-5",
+          "verdict": "SUPPORTED_EQUIVALENT",
+          "reason": "The source explicitly links Ada’s use of Git to version control.",
+          "quotes": [
+            "I used Git for version control and PostgreSQL for the production database."
+          ],
+          "method": "SEMANTIC",
+          "action": "PRESERVED_SOURCE_STILL_SUPPORTS"
+        },
+        {
+          "ref": "omission-6",
+          "verdict": "SUPPORTED_EQUIVALENT",
+          "reason": "The source explicitly links Ada’s use of PostgreSQL to the production database.",
+          "quotes": [
+            "I used Git for version control and PostgreSQL for the production database."
+          ],
+          "method": "SEMANTIC",
+          "action": "PRESERVED_SOURCE_STILL_SUPPORTS"
+        },
+        {
+          "ref": "omission-7",
+          "verdict": "SUPPORTED_EQUIVALENT",
+          "reason": "The source states that supervisors wanted understandable exceptions for Dispatch Loom.",
+          "quotes": [
+            "The supervisors wanted understandable exceptions, not a dashboard with unexplained colors."
+          ],
+          "method": "SEMANTIC",
+          "action": "PRESERVED_SOURCE_STILL_SUPPORTS"
+        },
+        {
+          "ref": "omission-8",
+          "verdict": "SUPPORTED_EQUIVALENT",
+          "reason": "The source states that operators preferred a visible warning when the source file could arrive late.",
+          "quotes": [
+            "The source file could arrive late and the operators preferred a visible warning."
+          ],
+          "method": "SEMANTIC",
+          "action": "PRESERVED_SOURCE_STILL_SUPPORTS"
+        },
+        {
+          "ref": "omission-9",
+          "verdict": "SUPPORTED_EQUIVALENT",
+          "reason": "The source describes what the coworker handbook instructed readers to do before raising an exception.",
+          "quotes": [
+            "The handbook described where a coworker should look before raising an exception."
+          ],
+          "method": "SEMANTIC",
+          "action": "PRESERVED_SOURCE_STILL_SUPPORTS"
+        },
+        {
+          "ref": "omission-10",
+          "verdict": "SUPPORTED_EQUIVALENT",
+          "reason": "The source explicitly says Ada personally built Roster Note and identifies it as a separate SQL handover checklist.",
+          "quotes": [
+            "I personally built Roster Note at Harbor Tools, a separate SQL handover checklist."
+          ],
+          "method": "SEMANTIC",
+          "action": "PRESERVED_SOURCE_STILL_SUPPORTS"
+        },
+        {
+          "ref": "omission-12",
+          "verdict": "SUPPORTED_EQUIVALENT",
+          "reason": "The source explicitly says the Dispatch Loom handbook included five worked examples.",
+          "quotes": [
+            "For Dispatch Loom the handbook also included five worked examples."
+          ],
+          "method": "SEMANTIC",
+          "action": "PRESERVED_SOURCE_STILL_SUPPORTS"
+        },
+        {
+          "ref": "omission-13",
+          "verdict": "SUPPORTED_EQUIVALENT",
+          "reason": "The source confirms the 5-to-2-hours-per-week reconciliation result over six weekly runs, and explicitly limits attribution to a team result.",
+          "quotes": [
+            "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks."
+          ],
+          "method": "SEMANTIC",
+          "action": "PRESERVED_SOURCE_STILL_SUPPORTS"
+        },
+        {
+          "ref": "omission-14",
+          "verdict": "SUPPORTED_EQUIVALENT",
+          "reason": "The source explicitly distinguishes the measured reconciliation work from delivery speed, which was not measured.",
+          "quotes": [
+            "An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only."
+          ],
+          "method": "SEMANTIC",
+          "action": "PRESERVED_SOURCE_STILL_SUPPORTS"
+        },
+        {
+          "ref": "omission-15",
+          "verdict": "SUPPORTED_EQUIVALENT",
+          "reason": "The source states the BSc identity, institution, and dates.",
+          "quotes": [
+            "I earned a BSc in Information Systems at Cedar College from 2017-09-01 to 2020-06-30."
+          ],
+          "method": "SEMANTIC",
+          "action": "PRESERVED_SOURCE_STILL_SUPPORTS"
+        }
+      ],
+      "after": 17,
+      "preserved": 16,
+      "provenance": {
+        "total": 55,
+        "valid": 55,
+        "primaryTotal": 17,
+        "primaryValid": 17
+      }
+    }
+  ],
+  "evidence": {
+    "exactNative": 456,
+    "exactNativeValid": 456,
+    "nativeSpanCount": 456,
+    "spansWithOffsets": 456,
+    "multiSpanClaims": 23
+  },
+  "safety": {
+    "originalQaAuditPasses": 4,
+    "resumeGenerated": 4,
+    "resumeVerified": 4,
+    "unsafeBulletApprovals": 0,
+    "unsafeBulletTests": 4,
+    "qaTests": 5,
+    "qaAuditPasses": 5
+  },
+  "accounting": {
+    "newKnownUsd": 0.17744799999999997,
+    "newUnknownEvents": 0,
+    "calls": 63,
+    "usageEvents": 63,
+    "reservedUsd": 4.950000000000002,
+    "byModel": [
+      {
+        "model": "openai/gpt-6-luna-pro",
+        "calls": 55,
+        "knownUsd": 0.176113
+      },
+      {
+        "model": "openai/gpt-6-luna",
+        "calls": 8,
+        "knownUsd": 0.0013349999999999998
+      }
+    ],
+    "medianRepeatMs": 119799,
+    "sequenceMs": [168131, 227366]
+  },
+  "cleanup": [
+    {
+      "stage": "canaries",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "repeat",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "correction-propagation-replay",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "accepted-correction",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "sequence",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "semantic-canaries",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "representation",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "safety",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "relationship-persistence",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "qa-identity-audit",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "relationship-grounding",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "production-smoke",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    }
+  ],
+  "automatedGates": {
+    "zeroSameSourceComponentLosses": true,
+    "identity75": true,
+    "zeroUnsafeBulletApprovals": true,
+    "allTargetedAnswerAuditsPass": true,
+    "cleanup": true
+  },
+  "note": "Native automated counts are not adjudication accuracy. Final promotion requires separate current-source human adjudication, correction/availability checks and complete production integration verification. No old gold or accounting replaced."
+}

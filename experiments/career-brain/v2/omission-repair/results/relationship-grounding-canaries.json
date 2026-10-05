@@ -1,0 +1,248 @@
+{
+  "inputs": [
+    {
+      "kind": "achievement",
+      "key": "roster-note-night-shift-handover-documentation-42641d1560",
+      "title": "Roster Note night-shift handover documentation",
+      "subtitle": "Harbor Tools · Roster Note",
+      "summary": "Personally documented the Roster Note handover for the night shift. No measured impact is stated.",
+      "organization": "Harbor Tools",
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": ["sql-a03e9bccab"],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "I personally documented the Roster Note handover for the night shift; no measured impact is claimed.",
+      "uncertainties": [],
+      "aliases": ["Roster Note handover documentation", "night-shift handover"],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Personally documented the Roster Note handover for the night shift",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I personally documented the Roster Note handover for the night shift; no measured impact is claimed.",
+              "start": 4140,
+              "end": 4240
+            }
+          ],
+          "availability": "CONFIRMED"
+        }
+      ],
+      "id": "",
+      "hash": "",
+      "updated_at": "",
+      "archived": false,
+      "published": false
+    },
+    {
+      "kind": "project",
+      "key": "roster-note-1b510e9f1f",
+      "title": "Roster Note",
+      "subtitle": "SQL handover checklist",
+      "summary": "Personally built a separate SQL handover checklist at Harbor Tools and documented its handover for the night shift. No user count or measured outcome is stated.",
+      "organization": "Harbor Tools",
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": ["sql-a03e9bccab"],
+      "achievement_keys": [
+        "roster-note-night-shift-handover-documentation-42641d1560"
+      ],
+      "category_key": null,
+      "source_quote": "I personally built Roster Note at Harbor Tools, a separate SQL handover checklist.",
+      "uncertainties": [],
+      "aliases": ["Roster Note"],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Personally built Roster Note",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I personally built Roster Note at Harbor Tools, a separate SQL handover checklist.",
+              "start": 3560,
+              "end": 3642
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "attribute": "context",
+          "value": "Separate SQL handover checklist",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I personally built Roster Note at Harbor Tools, a separate SQL handover checklist.",
+              "start": 3560,
+              "end": 3642
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "attribute": "action",
+          "value": "Personally documented the Roster Note handover for the night shift",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I personally documented the Roster Note handover for the night shift; no measured impact is claimed.",
+              "start": 4140,
+              "end": 4240
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "value": "Personally built Roster Note, a separate SQL handover checklist",
+          "evidence": [
+            {
+              "quote": "I personally built Roster Note at Harbor Tools, a separate SQL handover checklist.",
+              "start": 3560,
+              "end": 3642
+            }
+          ],
+          "attribute": "action",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED"
+        }
+      ],
+      "id": "",
+      "hash": "",
+      "updated_at": "",
+      "archived": false,
+      "published": false
+    }
+  ],
+  "records": [
+    {
+      "kind": "achievement",
+      "key": "roster-note-night-shift-handover-documentation-42641d1560",
+      "title": "Roster Note night-shift handover documentation",
+      "subtitle": "Harbor Tools · Roster Note",
+      "summary": "Personally documented the Roster Note handover for the night shift. No measured impact is stated.",
+      "organization": "Harbor Tools",
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": ["sql-a03e9bccab"],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "I personally documented the Roster Note handover for the night shift; no measured impact is claimed.",
+      "uncertainties": [
+        "Grounding UNCERTAIN: The documentation and its night-shift context are supported. However, SQL is established as part of the parent Roster Note checklist, not as a technology used in the documentation achievement itself, so the SQL-to-achievement relationship needs owner review."
+      ],
+      "aliases": ["Roster Note handover documentation", "night-shift handover"],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Personally documented the Roster Note handover for the night shift",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I personally documented the Roster Note handover for the night shift; no measured impact is claimed.",
+              "start": 4140,
+              "end": 4240
+            }
+          ],
+          "availability": "CONFIRMED"
+        }
+      ],
+      "id": "",
+      "hash": "",
+      "updated_at": "",
+      "archived": false,
+      "published": false
+    },
+    {
+      "kind": "project",
+      "key": "roster-note-1b510e9f1f",
+      "title": "Roster Note",
+      "subtitle": "SQL handover checklist",
+      "summary": "Personally built a separate SQL handover checklist at Harbor Tools and documented its handover for the night shift. No user count or measured outcome is stated.",
+      "organization": "Harbor Tools",
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": ["sql-a03e9bccab"],
+      "achievement_keys": [
+        "roster-note-night-shift-handover-documentation-42641d1560"
+      ],
+      "category_key": null,
+      "source_quote": "I personally built Roster Note at Harbor Tools, a separate SQL handover checklist.",
+      "uncertainties": [],
+      "aliases": ["Roster Note"],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Personally built Roster Note",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I personally built Roster Note at Harbor Tools, a separate SQL handover checklist.",
+              "start": 3560,
+              "end": 3642
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "attribute": "context",
+          "value": "Separate SQL handover checklist",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I personally built Roster Note at Harbor Tools, a separate SQL handover checklist.",
+              "start": 3560,
+              "end": 3642
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "attribute": "action",
+          "value": "Personally documented the Roster Note handover for the night shift",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I personally documented the Roster Note handover for the night shift; no measured impact is claimed.",
+              "start": 4140,
+              "end": 4240
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "value": "Personally built Roster Note, a separate SQL handover checklist",
+          "evidence": [
+            {
+              "quote": "I personally built Roster Note at Harbor Tools, a separate SQL handover checklist.",
+              "start": 3560,
+              "end": 3642
+            }
+          ],
+          "attribute": "action",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED"
+        }
+      ],
+      "id": "",
+      "hash": "",
+      "updated_at": "",
+      "archived": false,
+      "published": false
+    }
+  ],
+  "decisions": [
+    {
+      "index": 0,
+      "verdict": "UNCERTAIN",
+      "reason": "The documentation and its night-shift context are supported. However, SQL is established as part of the parent Roster Note checklist, not as a technology used in the documentation achievement itself, so the SQL-to-achievement relationship needs owner review."
+    },
+    {
+      "index": 1,
+      "verdict": "SUPPORTED",
+      "reason": "The source supports that Ada personally built a separate SQL handover checklist called Roster Note at Harbor Tools and later personally documented its night-shift handover. The record does not claim a measured outcome or user count."
+    }
+  ],
+  "expected": ["UNCERTAIN", "SUPPORTED"],
+  "scope": "Measured native handover-to-SQL false approval vs directly source-backed Roster Note SQL implementation; no raw proposal/gold changed."
+}

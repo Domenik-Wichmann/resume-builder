@@ -1,0 +1,67 @@
+{
+  "label": "repeat:entailment-audit:openai/gpt-6-luna-pro:chunk-0",
+  "result": {
+    "decisions": [
+      {
+        "index": 0,
+        "verdict": "SUPPORTED",
+        "reason": "The name, professional description, and listed denials are supported by the transcript."
+      },
+      {
+        "index": 1,
+        "verdict": "SUPPORTED",
+        "reason": "The role, employer, dates, project work, coworker training, and handbook are supported; the linked skills and achievements are also grounded in the transcript."
+      },
+      {
+        "index": 2,
+        "verdict": "UNSUPPORTED",
+        "reason": "The source says supervisors wanted understandable exceptions and operators preferred a visible warning when a file arrived late. It does not establish that Dispatch Loom actually surfaced those warnings or exceptions as completed functionality; the summary converts preferences into implemented tool."
+      },
+      {
+        "index": 3,
+        "verdict": "SUPPORTED",
+        "reason": "The transcript gives the 5-to-2-hours-per-week reconciliation measurement over six runs, identifies it as a team result, and distinguishes Ada’s contribution from coworkers’ changed habits."
+      },
+      {
+        "index": 4,
+        "verdict": "SUPPORTED",
+        "reason": "The training count, two workshops, handbook, and absence of exact workshop dates are supported."
+      },
+      {
+        "index": 5,
+        "verdict": "SUPPORTED",
+        "reason": "The transcript states that Ada wrote the Python parser herself."
+      },
+      {
+        "index": 6,
+        "verdict": "SUPPORTED",
+        "reason": "The transcript states that Ada wrote the SQL checks herself."
+      },
+      {
+        "index": 7,
+        "verdict": "SUPPORTED",
+        "reason": "The transcript states that PostgreSQL was used for the production database."
+      },
+      {
+        "index": 8,
+        "verdict": "SUPPORTED",
+        "reason": "The transcript states that Git was used for version control."
+      },
+      {
+        "index": 9,
+        "verdict": "SUPPORTED",
+        "reason": "The transcript supports training dispatch coworkers and writing the handbook; the category is consistent with the stated collaboration skill category."
+      },
+      {
+        "index": 10,
+        "verdict": "SUPPORTED",
+        "reason": "The degree, field, institution, and dates are stated directly."
+      },
+      {
+        "index": 11,
+        "verdict": "SUPPORTED",
+        "reason": "The transcript supports the certificate and date, and clarifies that it was a course completion rather than a professional license."
+      }
+    ]
+  }
+}

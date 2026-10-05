@@ -1,0 +1,23 @@
+{
+  "label": "canaries:source-backed-omissions:0",
+  "result": {
+    "decisions": [
+      {
+        "ref": "omission-0",
+        "verdict": "CONTRADICTED",
+        "reason": "The current source gives a different end date for the Harbor Tools role.",
+        "quotes": [
+          "I worked as Operations Analyst at Harbor Tools from 2021-02-01 to 2024-06-30."
+        ]
+      },
+      {
+        "ref": "omission-1",
+        "verdict": "CONTRADICTED",
+        "reason": "The current source gives a different end date for the Harbor Tools role.",
+        "quotes": [
+          "I worked as Operations Analyst at Harbor Tools from 2021-02-01 to 2024-06-30."
+        ]
+      }
+    ]
+  }
+}

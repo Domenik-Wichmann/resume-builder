@@ -12,10 +12,11 @@ import { getCareer } from "@/lib/career/repository";
 import { retrieveCareerEvidence } from "@/lib/embeddings/retrieval";
 import { jobQueries } from "@/lib/embeddings/content";
 import { compileResumeIR } from "@/lib/resume-ir";
+import { compileGroundedResume } from "@/lib/career-brain/serving";
 import { newWorkspace } from "@/lib/workspaces/model";
 import { getPresentation } from "@/lib/market-server";
 import { createTrackingCode } from "@/lib/tracking/codes";
-export const maxDuration = 60;
+export const maxDuration = 300;
 export async function POST(request: Request) {
   try {
     const a = await requireAccount();
@@ -79,6 +80,13 @@ export async function POST(request: Request) {
           .filter(Boolean)
           .slice(0, 30),
       };
+      const verified = await compileGroundedResume(
+        career,
+        { ...workspace, evidence: evidence.slice(0, 8) },
+        presentation,
+        "TRADITIONAL",
+        { accountId: a.accountId, operation: "application_preview" },
+      );
       const options = Object.fromEntries(
         strategies.map((strategy) => {
           const ranked = [...evidence]
@@ -99,12 +107,22 @@ export async function POST(request: Request) {
             .slice(0, 12);
           return [
             strategy,
-            compileResumeIR(
-              career,
-              { ...workspace, evidence: ranked },
-              presentation,
-              strategy,
-            ),
+            career.demo
+              ? compileResumeIR(
+                  career,
+                  { ...workspace, evidence: ranked },
+                  presentation,
+                  strategy,
+                )
+              : {
+                  ...verified,
+                  section_order: compileResumeIR(
+                    career,
+                    { ...workspace, evidence: [] },
+                    presentation,
+                    strategy,
+                  ).section_order,
+                },
           ];
         }),
       );

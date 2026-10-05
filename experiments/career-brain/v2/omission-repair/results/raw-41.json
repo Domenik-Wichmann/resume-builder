@@ -1,0 +1,157 @@
+{
+  "label": "safety:individual-claim-admission",
+  "result": {
+    "decisions": [
+      {
+        "ref": "preferred-warning:0",
+        "label": "DIRECT_SUPPORT",
+        "reason": "The candidate explicitly says they personally wrote SQL validation checks for dispatch reconciliation."
+      },
+      {
+        "ref": "preferred-warning:1",
+        "label": "IRRELEVANT",
+        "reason": "This states what operators preferred, not SQL validation work the candidate performed."
+      },
+      {
+        "ref": "planned-completed:0",
+        "label": "DIRECT_SUPPORT",
+        "reason": "The candidate explicitly says they personally wrote SQL validation checks for dispatch reconciliation."
+      },
+      {
+        "ref": "planned-completed:1",
+        "label": "CONTRADICTS",
+        "reason": "The evidence says the rollout was planned but not completed."
+      },
+      {
+        "ref": "team-personal:0",
+        "label": "DIRECT_SUPPORT",
+        "reason": "The candidate explicitly says they personally wrote SQL validation checks for dispatch reconciliation."
+      },
+      {
+        "ref": "team-personal:1",
+        "label": "CONTRADICTS",
+        "reason": "The evidence attributes the time reduction to the team and identifies the candidate’s contribution as the SQL checks, not the entire saving."
+      },
+      {
+        "ref": "historical-warning:0",
+        "label": "RELATED_ONLY",
+        "reason": "The evidence says the candidate built a dispatch reconciliation tool using SQL, but does not specify SQL validation work."
+      },
+      {
+        "ref": "historical-warning:1",
+        "label": "RELATED_ONLY",
+        "reason": "Use of Python is adjacent context, not SQL validation work."
+      },
+      {
+        "ref": "historical-warning:2",
+        "label": "RELATED_ONLY",
+        "reason": "The evidence establishes SQL use but does not identify validation checks the candidate personally performed."
+      },
+      {
+        "ref": "historical-warning:3",
+        "label": "DIRECT_SUPPORT",
+        "reason": "The candidate explicitly says they wrote the SQL checks themselves."
+      },
+      {
+        "ref": "historical-warning:4",
+        "label": "RELATED_ONLY",
+        "reason": "This describes a team reconciliation-time result, not the SQL checks the candidate personally wrote."
+      },
+      {
+        "ref": "historical-warning:5",
+        "label": "PARTIAL_SUPPORT",
+        "reason": "The evidence identifies the checks as part of the candidate’s contribution, but does not specifically say they wrote them."
+      },
+      {
+        "ref": "historical-warning:6",
+        "label": "RELATED_ONLY",
+        "reason": "This describes operators’ comparison task, not the candidate’s SQL validation work."
+      },
+      {
+        "ref": "historical-warning:7",
+        "label": "RELATED_ONLY",
+        "reason": "This provides dispatch-work context but does not describe SQL checks the candidate performed."
+      },
+      {
+        "ref": "historical-warning:8",
+        "label": "RELATED_ONLY",
+        "reason": "Gathering requirements is adjacent project work, not SQL validation work."
+      },
+      {
+        "ref": "historical-warning:9",
+        "label": "RELATED_ONLY",
+        "reason": "Explaining validation failures is adjacent work, but does not establish which SQL checks the candidate wrote."
+      },
+      {
+        "ref": "historical-warning:10",
+        "label": "IRRELEVANT",
+        "reason": "Git use does not address the candidate’s SQL validation work."
+      },
+      {
+        "ref": "historical-warning:11",
+        "label": "RELATED_ONLY",
+        "reason": "PostgreSQL is relevant technical context, but the evidence does not describe SQL validation checks performed by the candidate."
+      },
+      {
+        "ref": "historical-warning:12",
+        "label": "RELATED_ONLY",
+        "reason": "This describes a team decision about displaying empty rows, not SQL checks the candidate personally wrote."
+      },
+      {
+        "ref": "historical-warning:13",
+        "label": "RELATED_ONLY",
+        "reason": "This describes the source-file delay and operator preference, not the candidate’s SQL validation work."
+      },
+      {
+        "ref": "historical-warning:14",
+        "label": "IRRELEVANT",
+        "reason": "The handbook’s contents do not address SQL validation work performed by the candidate."
+      },
+      {
+        "ref": "historical-warning:15",
+        "label": "IRRELEVANT",
+        "reason": "Who made the final dispatch decision does not address the SQL checks the candidate wrote."
+      },
+      {
+        "ref": "historical-warning:16",
+        "label": "IRRELEVANT",
+        "reason": "The denial concerns delivery-speed measurement, not SQL validation work."
+      },
+      {
+        "ref": "historical-warning:17",
+        "label": "IRRELEVANT",
+        "reason": "The absence of a machine-learning classifier does not address SQL validation work."
+      },
+      {
+        "ref": "historical-warning:18",
+        "label": "IRRELEVANT",
+        "reason": "The denial concerns ownership of the warehouse staffing budget, not SQL checks."
+      },
+      {
+        "ref": "historical-warning:19",
+        "label": "IRRELEVANT",
+        "reason": "The denial concerns procurement ownership, not SQL checks."
+      },
+      {
+        "ref": "historical-warning:20",
+        "label": "IRRELEVANT",
+        "reason": "The denial concerns scheduling-system ownership, not SQL checks."
+      },
+      {
+        "ref": "historical-warning:21",
+        "label": "RELATED_ONLY",
+        "reason": "This clarifies which time measure was used, but does not describe SQL validation work."
+      },
+      {
+        "ref": "historical-warning:22",
+        "label": "RELATED_ONLY",
+        "reason": "This limits attribution of overall improvement but does not specify the SQL checks the candidate wrote."
+      },
+      {
+        "ref": "historical-warning:23",
+        "label": "RELATED_ONLY",
+        "reason": "The evidence says the SQL checks and parser were used together, but does not establish that the candidate personally wrote the checks."
+      }
+    ]
+  }
+}

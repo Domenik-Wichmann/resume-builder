@@ -1,0 +1,42 @@
+{
+  "label": "production-smoke:entailment-audit:openai/gpt-6-luna-pro:chunk-12",
+  "result": {
+    "decisions": [
+      {
+        "index": 0,
+        "verdict": "UNSUPPORTED",
+        "reason": "The requirements-gathering action is supported, but the Collaboration category is not: the source assigns that category to Git and coworker training, not requirements gathering."
+      },
+      {
+        "index": 1,
+        "verdict": "UNSUPPORTED",
+        "reason": "The explanation of validation failures is supported. The source does not assign stakeholder communication to the Collaboration category, and “I would sit ... and work through an example” describes a habitual or conditional practice rather than unambiguously establishing the claimed completed action."
+      },
+      {
+        "index": 2,
+        "verdict": "SUPPORTED",
+        "reason": "The source says Ada personally wrote SQL checks and explained validation failures. SQL is explicitly listed under Data tools, supporting the category and the record’s actions."
+      },
+      {
+        "index": 3,
+        "verdict": "UNSUPPORTED",
+        "reason": "Writing a plain-language handbook is supported, but the source does not assign handbook writing or documentation to the Collaboration category."
+      },
+      {
+        "index": 4,
+        "verdict": "SUPPORTED",
+        "reason": "The degree, institution, and dates match the source; “Bachelor of Science” is a faithful expansion of BSc."
+      },
+      {
+        "index": 5,
+        "verdict": "SUPPORTED",
+        "reason": "The certificate name and award date match the source. The source also identifies it as a course completion, not a professional license, and calls it fictional."
+      },
+      {
+        "index": 6,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly says Ada speaks English fluently."
+      }
+    ]
+  }
+}

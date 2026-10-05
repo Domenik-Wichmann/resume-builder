@@ -1,0 +1,17 @@
+{
+  "label": "production-smoke:individual-claim-admission",
+  "result": {
+    "decisions": [
+      {
+        "ref": "a5667476-59dd-4ed5-8749-9dccab8007b5:0",
+        "label": "BLOCKED_BY_CONFLICT",
+        "reason": "The claim is disputed because the evidence gives conflicting attendance counts that cannot be resolved."
+      },
+      {
+        "ref": "a5667476-59dd-4ed5-8749-9dccab8007b5:1",
+        "label": "DIRECT_SUPPORT",
+        "reason": "The evidence states that the person personally trained dispatch coworkers in two workshops and wrote a plain-language handbook; the claim does not specify an attendance count."
+      }
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "verdict": "PROMOTE WITH OWNER REVIEW",
+  "recordedAt": "2026-10-05T16:34:00Z",
+  "lineage": "3c355444219edc4d0f375b3aaa6a9946c13011a7",
+  "format": "PASS",
+  "lint": "PASS",
+  "typescript": "PASS",
+  "tests": {
+    "files": 21,
+    "passed": 142,
+    "failed": 0
+  },
+  "qualificationSuites": {
+    "omission-repair": "PASS",
+    "claim-repair": "PASS",
+    "continuation": "PASS",
+    "original": "PASS",
+    "repair": "PASS"
+  },
+  "productionBuild": "PASS",
+  "historicalPreservation": {
+    "frozenHashesVerified": 214,
+    "archivedReportBytesPreservedByWrapper": true
+  },
+  "liveMigration": {
+    "name": "202610050009_career_evidence.sql",
+    "projectRef": "amuwgkwsdaeuheeifink",
+    "dryRunOnlyThisMigration": true,
+    "applied": true,
+    "remoteVersionsMatchLocal": true
+  },
+  "privateProductionSmoke": {
+    "status": "PASS",
+    "nativeIngest": true,
+    "ownerJWT": true,
+    "reviewedSequence": [15, 16, 17],
+    "metadataOnlyCredentialReview": true,
+    "resumeWholeBulletVerified": true,
+    "qaSupportAndFaithfulnessVerified": true,
+    "exactSpans": [48, 50, 55],
+    "preservedUUIDs": [15, 16],
+    "syntheticPublication": false,
+    "cleanup": "PASS"
+  },
+  "liveCleanup": {
+    "verifiedAt": "2026-10-05T16:25:07.599Z",
+    "remainingSyntheticAuth": 0,
+    "primaryCanonicalRecords": 0,
+    "totalEvidenceRows": 0,
+    "primaryUsageEvents": 19,
+    "migration": "202610050009_career_evidence",
+    "privateSmokeCleaned": true
+  },
+  "reindex": {
+    "mode": "live",
+    "indexed": 0,
+    "unchanged": 0
+  },
+  "remoteStatusAtThisPreCommitCheckpoint": {
+    "draftPR": 1,
+    "priorProductionCommit": "a41613980d43e80721a676b7110fbad67e524eaa",
+    "finalCIAndDeployment": "Recorded subsequently in PR #1 and final response; this artifact is a pre-commit checkpoint, not a claim of completed deployment."
+  },
+  "remainingBlocker": null
+}

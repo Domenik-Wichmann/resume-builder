@@ -1,0 +1,67 @@
+{
+  "label": "repeat:entailment-audit:openai/gpt-6-luna-pro:chunk-0",
+  "result": {
+    "decisions": [
+      {
+        "index": 0,
+        "verdict": "SUPPORTED",
+        "reason": "The profile title, summary, and listed denials are supported by the source."
+      },
+      {
+        "index": 1,
+        "verdict": "SUPPORTED",
+        "reason": "The Harbor Tools role and dates, personal work on Dispatch Loom, training, and handbook are supported. The improvement is correctly described as a team result."
+      },
+      {
+        "index": 2,
+        "verdict": "UNSUPPORTED",
+        "reason": "The source says operators preferred a visible warning, not that they used visible warnings. It also asks to distinguish operational use from an externally sold product without explicitly establishing that the tool was not sold externally; the summary and claim present these as settled facts."
+      },
+      {
+        "index": 3,
+        "verdict": "SUPPORTED",
+        "reason": "The reconciliation-time change, six weekly runs, team attribution, personal contribution, coworkers’ changed habits, and correction of the earlier figure are supported."
+      },
+      {
+        "index": 4,
+        "verdict": "SUPPORTED",
+        "reason": "The source supports personally training 12 coworkers in two workshops and writing the handbook; it also says exact workshop dates are unavailable."
+      },
+      {
+        "index": 5,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly supports using Python to write the Dispatch Loom parser."
+      },
+      {
+        "index": 6,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly supports writing SQL checks for Dispatch Loom."
+      },
+      {
+        "index": 7,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly supports using PostgreSQL for the production database."
+      },
+      {
+        "index": 8,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly supports using Git for version control and places it in the Collaboration skill category."
+      },
+      {
+        "index": 9,
+        "verdict": "SUPPORTED",
+        "reason": "The source supports personally training dispatch coworkers and places coworker training in the Collaboration skill category."
+      },
+      {
+        "index": 10,
+        "verdict": "SUPPORTED",
+        "reason": "The degree, institution, and dates are explicitly stated."
+      },
+      {
+        "index": 11,
+        "verdict": "SUPPORTED",
+        "reason": "The source supports the certificate and award date, and clarifies that it was a course completion rather than a professional license."
+      }
+    ]
+  }
+}

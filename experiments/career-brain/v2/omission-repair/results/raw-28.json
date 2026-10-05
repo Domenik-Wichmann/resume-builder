@@ -1,0 +1,105 @@
+{
+  "label": "sequence:source-backed-omissions:0",
+  "result": {
+    "decisions": [
+      {
+        "ref": "omission-0",
+        "verdict": "CONTRADICTED",
+        "reason": "The current source gives a different end date for the same role.",
+        "quotes": [
+          "I worked as Operations Analyst at Harbor Tools from 2021-02-01 to 2024-06-30."
+        ]
+      },
+      {
+        "ref": "omission-1",
+        "verdict": "SUPPORTED_EQUIVALENT",
+        "reason": "The source supports the late-file condition and the operators’ preference for a visible warning.",
+        "quotes": [
+          "The source file could arrive late and the operators preferred a visible warning."
+        ]
+      },
+      {
+        "ref": "omission-2",
+        "verdict": "SUPPORTED_EQUIVALENT",
+        "reason": "The source says Ada wrote the handbook and describes what it instructed coworkers to do.",
+        "quotes": [
+          "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+          "The handbook described where a coworker should look before raising an exception."
+        ]
+      },
+      {
+        "ref": "omission-3",
+        "verdict": "SUPPORTED_EQUIVALENT",
+        "reason": "The source explicitly assigns Ada responsibility for the parser and checks.",
+        "quotes": [
+          "I was responsible for the parser and checks; I did not own the warehouse staffing budget, procurement, or the scheduling system."
+        ]
+      },
+      {
+        "ref": "omission-4",
+        "verdict": "SUPPORTED_EQUIVALENT",
+        "reason": "The source explicitly connects Ada’s personal coworker training to Dispatch Loom and lists coworker training as a skill.",
+        "quotes": [
+          "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+          "My skill category is Data tools: Python, SQL and PostgreSQL. My separate skill category is Collaboration: Git and coworker training."
+        ]
+      },
+      {
+        "ref": "omission-5",
+        "verdict": "SUPPORTED_EQUIVALENT",
+        "reason": "The source clarifies that the measured time was reconciliation work and that delivery speed was not measured.",
+        "quotes": [
+          "An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only."
+        ]
+      },
+      {
+        "ref": "omission-6",
+        "verdict": "SUPPORTED_EQUIVALENT",
+        "reason": "The source identifies PostgreSQL as the production database used.",
+        "quotes": [
+          "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them. I used Git for version control and PostgreSQL for the production database."
+        ]
+      },
+      {
+        "ref": "omission-7",
+        "verdict": "SUPPORTED_EQUIVALENT",
+        "reason": "The source identifies Git as the version-control tool used.",
+        "quotes": [
+          "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them. I used Git for version control and PostgreSQL for the production database."
+        ]
+      },
+      {
+        "ref": "omission-8",
+        "verdict": "SUPPORTED_EQUIVALENT",
+        "reason": "The source supports the degree, institution, and dates.",
+        "quotes": [
+          "I earned a BSc in Information Systems at Cedar College from 2017-09-01 to 2020-06-30."
+        ]
+      },
+      {
+        "ref": "omission-9",
+        "verdict": "AMBIGUOUS",
+        "reason": "The current source mentions a certificate only generically; it does not establish the named credential or its start date.",
+        "quotes": [
+          "The certificate was a course completion, not a professional license."
+        ]
+      },
+      {
+        "ref": "omission-10",
+        "verdict": "SUPPORTED_EQUIVALENT",
+        "reason": "The source explicitly places Python, SQL, and PostgreSQL in the Data tools category.",
+        "quotes": [
+          "My skill category is Data tools: Python, SQL and PostgreSQL. My separate skill category is Collaboration: Git and coworker training."
+        ]
+      },
+      {
+        "ref": "omission-11",
+        "verdict": "SUPPORTED_EQUIVALENT",
+        "reason": "The source explicitly places Git and coworker training in the Collaboration category.",
+        "quotes": [
+          "My skill category is Data tools: Python, SQL and PostgreSQL. My separate skill category is Collaboration: Git and coworker training."
+        ]
+      }
+    ]
+  }
+}

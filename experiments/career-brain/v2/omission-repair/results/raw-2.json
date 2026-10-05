@@ -1,0 +1,13 @@
+{
+  "label": "canaries:source-backed-omissions:0",
+  "result": {
+    "decisions": [
+      {
+        "ref": "omission-0",
+        "verdict": "AMBIGUOUS",
+        "reason": "The current source mentions course completion but does not identify Cedar SQL Foundations or support the certificate and date details.",
+        "quotes": []
+      }
+    ]
+  }
+}

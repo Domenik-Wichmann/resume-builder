@@ -1,0 +1,67 @@
+{
+  "label": "production-smoke:entailment-audit:openai/gpt-6-luna-pro:chunk-0",
+  "result": {
+    "decisions": [
+      {
+        "index": 0,
+        "verdict": "SUPPORTED",
+        "reason": "The profile summary and claims, including the listed professional-use and employment denials, are supported by the source."
+      },
+      {
+        "index": 1,
+        "verdict": "UNCERTAIN",
+        "reason": "The employment and dates are supported, but the experience-level skill links are not established by this record’s work claim; the skills are evidenced in the related project instead."
+      },
+      {
+        "index": 2,
+        "verdict": "UNSUPPORTED",
+        "reason": "The source says operators preferred a visible warning, not that a late file could trigger one; it also says Rowan “would sit” with a supervisor, which does not establish the candidate’s definite past-tense action. The plain-language-documentation skill link is also not directly established at this’s"
+      },
+      {
+        "index": 3,
+        "verdict": "UNCERTAIN",
+        "reason": "The team result, measurement, and stated personal contribution are supported. The Python, SQL, and data-validation links are attached to the reduction achievement, but the source does not directly establish those skills as the cause or action of that measured result."
+      },
+      {
+        "index": 4,
+        "verdict": "UNCERTAIN",
+        "reason": "The training and handbook claims are supported. The stakeholder-communication skill link is not clearly established by this achievement’s actions; the source’s supervisor communication appears in the project context."
+      },
+      {
+        "index": 5,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly names Data tools as a skill category containing Python, SQL, and PostgreSQL."
+      },
+      {
+        "index": 6,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly names Collaboration as a separate skill category containing Git and coworker training."
+      },
+      {
+        "index": 7,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly says Rowan wrote the Python parser, and the skill’s category is stated in the source."
+      },
+      {
+        "index": 8,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly says Rowan wrote the SQL checks, and the skill’s category is stated in the source."
+      },
+      {
+        "index": 9,
+        "verdict": "SUPPORTED",
+        "reason": "The source says PostgreSQL was used for the production database and names it in the Data tools category."
+      },
+      {
+        "index": 10,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly says Rowan used Git for version control and names it in the Collaboration category."
+      },
+      {
+        "index": 11,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly says Rowan personally trained 12 dispatch coworkers in two workshops and names coworker training in the Collaboration category."
+      }
+    ]
+  }
+}

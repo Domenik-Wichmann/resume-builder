@@ -12,12 +12,13 @@ import { analyze } from "@/lib/ai/service";
 import { answerSchema, matchSchema } from "@/lib/ai/contracts";
 import { database } from "@/lib/db";
 import { getCareer } from "@/lib/career/repository";
-import { compileResumeIR, expansionQueries } from "@/lib/resume-ir";
+import { expansionQueries } from "@/lib/resume-ir";
+import { compileGroundedResume } from "@/lib/career-brain/serving";
 import { retrieveCareerEvidence } from "@/lib/embeddings/retrieval";
 import { deduplicate } from "@/lib/embeddings/content";
 import { getPresentation, currentMarket } from "@/lib/market-server";
 import { reservePublicAction } from "@/lib/access/service";
-export const maxDuration = 60;
+export const maxDuration = 300;
 type Context = { params: Promise<{ id: string }> };
 function visitor(request: NextRequest) {
   const id = readVisitor(request.cookies.get(visitorCookie)?.value);
@@ -133,10 +134,12 @@ export async function POST(request: NextRequest, context: Context) {
           evidence: deduplicate([...workspace.evidence, ...related], 60),
         };
       }
-      const ir = compileResumeIR(
+      const ir = await compileGroundedResume(
         career,
         workspace,
         await getPresentation(workspace.market),
+        "TRADITIONAL",
+        { workspaceId: id, operation: "compile" },
       );
       await saveWorkspace(workspace, visitorId, previousQuestionCount);
       const saved = await db

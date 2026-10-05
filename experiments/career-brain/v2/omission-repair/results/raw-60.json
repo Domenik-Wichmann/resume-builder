@@ -1,0 +1,26 @@
+{
+  "label": "production-smoke:whole-bullet:openai/gpt-6-luna-pro:0",
+  "result": {
+    "decisions": [
+      {
+        "id": "a5667476-59dd-4ed5-8749-9dccab8007b5",
+        "verdict": "PASS",
+        "assertions": [
+          {
+            "text": "Personally trained dispatch coworkers in two workshops",
+            "verdict": "SUPPORTED",
+            "claimRefs": ["a5667476-59dd-4ed5-8749-9dccab8007b5:1"],
+            "reason": "The admitted claim and source span support personally training dispatch coworkers in two workshops; the bullet does not assert an attendance count."
+          },
+          {
+            "text": " and wrote a plain-language handbook.",
+            "verdict": "SUPPORTED",
+            "claimRefs": ["a5667476-59dd-4ed5-8749-9dccab8007b5:1"],
+            "reason": "The admitted claim and source span support writing a plain-language handbook."
+          }
+        ],
+        "reason": "Every assertion is supported. The disputed attendance count is omitted."
+      }
+    ]
+  }
+}

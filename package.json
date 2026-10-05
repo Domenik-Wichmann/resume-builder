@@ -15,10 +15,11 @@
     "check": "npm run format:check && npm run lint && npm run typecheck && npm test",
     "reindex": "node --conditions=react-server --import tsx --env-file-if-exists=.env.local scripts/reindex.ts",
     "tracking": "node --conditions=react-server --import tsx --env-file-if-exists=.env.local scripts/tracking.ts",
-    "qualification": "node --conditions=react-server --import tsx experiments/career-brain/run.ts --stage=offline && node --import tsx experiments/career-brain/revisions.ts && vitest run tests/qualification.test.ts tests/provider-accounting.test.ts",
-    "requalification": "node --conditions=react-server --import tsx experiments/career-brain/v2/run.ts --stage=offline && vitest run tests/career-repair.test.ts",
-    "continuation:qualification": "node --conditions=react-server --import tsx experiments/career-brain/v2/continuation/run.ts --stage=verify-preserved && node --conditions=react-server --import tsx experiments/career-brain/v2/continuation/report.ts && vitest run tests/career-continuation.test.ts",
-    "claim-repair:qualification": "node --conditions=react-server --import tsx experiments/career-brain/v2/claim-repair/run.ts --stage=verify-preserved && node --conditions=react-server --import tsx experiments/career-brain/v2/claim-repair/report.ts && vitest run tests/career-claim-repair.test.ts"
+    "qualification": "node scripts/verify-qualification.mjs qualification",
+    "requalification": "node scripts/verify-qualification.mjs requalification",
+    "continuation:qualification": "node scripts/verify-qualification.mjs continuation:qualification",
+    "claim-repair:qualification": "node scripts/verify-qualification.mjs claim-repair:qualification",
+    "omission-repair:qualification": "node --conditions=react-server --import tsx experiments/career-brain/v2/omission-repair/run.ts --stage=verify-preserved && node --conditions=react-server --import tsx experiments/career-brain/v2/omission-repair/report.ts && vitest run tests/career-omission-repair.test.ts tests/career-brain-continuity.test.ts tests/career-brain-serving.test.ts tests/career-brain-database.test.ts tests/career-brain-repository.test.ts tests/career-brain-live-artifacts.test.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.117.2",

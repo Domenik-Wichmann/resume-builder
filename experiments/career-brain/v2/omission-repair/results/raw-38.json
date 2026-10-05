@@ -1,0 +1,15 @@
+{
+  "label": "semantic-canaries:source-backed-omissions:0",
+  "result": {
+    "decisions": [
+      {
+        "ref": "omission-0",
+        "verdict": "CONTRADICTED",
+        "reason": "The current source explicitly corrects the personal ownership claim: the team designed and built Dispatch Loom, and Ada assisted rather than personally designing and building it.",
+        "quotes": [
+          "Correction: Dispatch Loom was designed and built by the team. Ada only assisted with its design and did not personally design and build it; the earlier ownership claim was overstated."
+        ]
+      }
+    ]
+  }
+}

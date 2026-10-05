@@ -309,9 +309,12 @@ export async function detectConflicts(
         },
       ),
   );
-  if (process.env.CAREER_QUALIFICATION_CLAIM_REPAIR === "1")
+  if (
+    process.env.CAREER_QUALIFICATION_OMISSION_REPAIR === "1" ||
+    process.env.CAREER_QUALIFICATION_CLAIM_REPAIR === "1"
+  )
     await writeFile(
-      `experiments/career-brain/v2/claim-repair/results/conflict-raw-${Date.now()}.json`,
+      `experiments/career-brain/v2/${process.env.CAREER_QUALIFICATION_OMISSION_REPAIR === "1" ? "omission-repair" : "claim-repair"}/results/conflict-raw-${Date.now()}.json`,
       JSON.stringify(
         {
           sourceHash: createHash("sha256").update(source).digest("hex"),

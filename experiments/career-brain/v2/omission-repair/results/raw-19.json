@@ -1,0 +1,17 @@
+{
+  "label": "repeat:bounded-actor-factual-equivalence",
+  "result": {
+    "decisions": [
+      {
+        "key": "experience:operations-analyst-dd5de8b403",
+        "verdict": "EQUIVALENT",
+        "reason": "The after claims split out the handbook and training details already represented by the before claim; the underlying facts are unchanged."
+      },
+      {
+        "key": "skill:git-820dc39c23",
+        "verdict": "EQUIVALENT",
+        "reason": "The before evidence already states Git was used for version control; the after claim makes that existing fact explicit."
+      }
+    ]
+  }
+}

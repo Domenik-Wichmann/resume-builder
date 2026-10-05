@@ -1,0 +1,12 @@
+{
+  "label": "representation:bounded-actor-factual-equivalence",
+  "result": {
+    "decisions": [
+      {
+        "key": "achievement:reconciliation-time-reduction-aaf329a9ed",
+        "verdict": "EQUIVALENT",
+        "reason": "The metric, team attribution, personal contribution, context, and corrections are unchanged. The new denial that delivery speed was measured restates the existing correction that delivery speed was not measured."
+      }
+    ]
+  }
+}

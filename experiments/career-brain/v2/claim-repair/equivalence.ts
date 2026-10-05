@@ -74,6 +74,7 @@ export async function repairEquivalence(
   actor: ActorContext,
   accountId: string,
   gate: Gate,
+  continuity = false,
 ) {
   const available = records.map((r) => ({
     ...r,
@@ -101,7 +102,10 @@ export async function repairEquivalence(
     "OPENROUTER",
     () =>
       complete(
-        "Compare factual state, not display text or claim decomposition. Known actor context is application supplied; normalized values resolve ONLY known name/first-person references, never ownership strength. EQUIVALENT when all material facts match, including redundant restatement and 3 hours as arithmetic difference from 5 to 2. ENRICHMENT only a newly represented source-supported fact not already entailed by old claims. CHANGED for changed date/quantity/ownership/depth/relationship or omitted factual capability. REVIEW for uncertainty. My contribution vs the known candidate's contribution is equivalent; I built vs we built vs contributed vs led vs assisted remains materially distinct. Unchanged exact source language restated in new components is representation-only when old factual state already entails it. Do not count aliases or generated summary prose as new facts. Preserve all actual supported rich facts; never force compact gold. DISPUTED/PENDING/SUPERSEDED availability cannot become confirmed through equivalence. Return exactly one decision per key.",
+        "Compare factual state, not display text or claim decomposition. Known actor context is application supplied; normalized values resolve ONLY known name/first-person references, never ownership strength. EQUIVALENT when all material facts match, including redundant restatement and 3 hours as arithmetic difference from 5 to 2. ENRICHMENT only a newly represented source-supported fact not already entailed by old claims. CHANGED for changed date/quantity/ownership/depth/relationship or omitted factual capability. REVIEW for uncertainty. My contribution vs the known candidate's contribution is equivalent; I built vs we built vs contributed vs led vs assisted remains materially distinct. Unchanged exact source language restated in new components is representation-only when old factual state already entails it. Do not count aliases or generated summary prose as new facts. Preserve all actual supported rich facts; never force compact gold. DISPUTED/PENDING/SUPERSEDED availability cannot become confirmed through equivalence. Return exactly one decision per key." +
+          (continuity
+            ? " Measurement-scope corrections include their negative scope: an old correction specifying what was measured and what was NOT measured already entails a separate denial restating that same excluded measurement. Do not call a new denial component enrichment merely because it is now more explicit. Do not widen either claim to all other work or measurements; compare this record's exact scoped evidence. Ownership/metric/quantity changes remain material."
+            : ""),
         JSON.stringify({
           actor,
           pairs: possible.map((p) => ({
@@ -146,6 +150,25 @@ export async function repairEquivalence(
       );
       if (decision?.verdict === "EQUIVALENT") {
         const old = current.find((c) => c.kind === r.kind && c.key === r.key)!;
+        if (
+          continuity &&
+          r.claims.some((c) => {
+            const prior = old.claims.find(
+              (p) =>
+                p.attribute === c.attribute &&
+                p.attribution === c.attribution &&
+                actorValue(p.value, actor) === actorValue(c.value, actor),
+            );
+            return prior && prior.availability !== c.availability;
+          })
+        )
+          return {
+            ...r,
+            uncertainties: [
+              ...r.uncertainties,
+              "Claim availability changed; wording equivalence cannot restore prior confirmation. Owner review required.",
+            ],
+          };
         return { ...r, claims: old.claims };
       }
       if (decision?.verdict === "REVIEW")

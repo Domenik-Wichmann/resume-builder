@@ -1,0 +1,22 @@
+{
+  "label": "repeat:entailment-audit:openai/gpt-6-luna-pro:chunk-12",
+  "result": {
+    "decisions": [
+      {
+        "index": 0,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly states, “I speak English fluently,” supporting the title, summary, and personal language claim."
+      },
+      {
+        "index": 1,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly places Python, SQL, and PostgreSQL in the Data tools skill category. It also describes personal use of Python and SQL to build the tool and PostgreSQL for the production database."
+      },
+      {
+        "index": 2,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly places Git and coworker training in the Collaboration skill category, and separately states that the speaker used Git and personally trained 12 dispatch coworkers."
+      }
+    ]
+  }
+}

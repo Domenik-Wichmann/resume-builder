@@ -1,0 +1,33 @@
+{
+  "label": "canaries:source-backed-omissions:0",
+  "result": {
+    "decisions": [
+      {
+        "ref": "omission-0",
+        "verdict": "SUPPORTED_EQUIVALENT",
+        "reason": "The source identifies Dispatch Loom as Ada’s project and PostgreSQL as its production database.",
+        "quotes": [
+          "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL.",
+          "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them. I used Git for version control and PostgreSQL for the production database."
+        ]
+      },
+      {
+        "ref": "omission-1",
+        "verdict": "CONTRADICTED",
+        "reason": "A later explicit correction says Git was not used on Dispatch Loom and directs that the project relationship be removed.",
+        "quotes": [
+          "Correction: Git was not actually used on Dispatch Loom. Remove the Git relationship from this project; the earlier note about Git was wrong."
+        ]
+      },
+      {
+        "ref": "omission-2",
+        "verdict": "SUPPORTED_EQUIVALENT",
+        "reason": "Ada explicitly says she personally trained coworkers in workshops for Dispatch Loom, supporting the project-to-training relationship.",
+        "quotes": [
+          "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL.",
+          "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook."
+        ]
+      }
+    ]
+  }
+}

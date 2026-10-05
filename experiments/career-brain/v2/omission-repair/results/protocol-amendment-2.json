@@ -1,0 +1,6 @@
+﻿{
+  "scope": "Contrary-edge availability propagation and reviewed correction provenance",
+  "reason": "The first Git edge canary correctly required REVIEW but left an exact named Git claim confirmed. Final guard propagates contrary/ambiguous edge status only to matching named claims sharing its prior proof context; PostgreSQL is unaffected. Replay consumes the unchanged saved native response without another provider call. The first accepted-edge-removal tested RPC mechanics with old source only; a separate explicit-current-source correction replay replaces that as semantic qualification.",
+  "tests": "Added assertion first failed on nested shorter proof spans, then passed after exact quote-containment context matching.",
+  "sameSourceBehavior": "Unchanged; five fresh repeats completed before this contrary-edge-specific refinement."
+}
