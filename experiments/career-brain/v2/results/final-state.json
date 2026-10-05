@@ -1,0 +1,25 @@
+{
+  "counts": {
+    "accounts": 1,
+    "account_members": 1,
+    "career_sources": 0,
+    "career_imports": 0,
+    "profile": 0,
+    "experiences": 0,
+    "projects": 0,
+    "achievements": 0,
+    "skills": 0,
+    "skill_categories": 0,
+    "education": 0,
+    "certifications": 0,
+    "languages": 0,
+    "career_embeddings": 0,
+    "project_media": 0,
+    "workspaces": 0,
+    "job_applications": 0
+  },
+  "authUsers": 1,
+  "temporaryUsers": 0,
+  "primaryUsageEvents": 19,
+  "scope": "Read-only final state; no owner emails or credentials in this artifact"
+}

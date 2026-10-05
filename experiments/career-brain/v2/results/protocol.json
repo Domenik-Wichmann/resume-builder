@@ -1,0 +1,32 @@
+{
+  "benchmarkRevision": 2,
+  "models": {
+    "ingest": "openai/gpt-6-luna-pro",
+    "answer": "openai/gpt-6-luna",
+    "targetedAudit": "openai/gpt-6-sol",
+    "embedding": "embed-v4.0"
+  },
+  "timeouts": {
+    "ablationMs": 180000,
+    "richMs": 180000,
+    "answerMs": 60000
+  },
+  "hashes": {
+    "benchmark.ts": "bb2630799b3f293de974029aa15dff8580d1705dbe5edadf096d4787fd1954ea",
+    "evidence.ts": "3da4b3036d84902acce86a4804d4050eb9ac5faf3ceac747fc40f6528a2fd94a",
+    "pipeline.ts": "1043d80d01337841b872b1c58a61bec9bf31667e792774942b15ca4b16e80b09",
+    "packets.ts": "7ab690206a7c7426f98839cffa5ecd3cad39024b7435e68705d1d27b44be08d6",
+    "semantic-adjudication.ts": "d8e51f5dc980aba5bd40f8b717f6fc9cc60cca91bc131b9d184f4029426fbbd9",
+    "lexical.ts": "184e9fa7a2247176929e87eae9be74765a25cd7699273fc96d1a18366516d9d2",
+    "gold-packets.ts": "75be54fd2b3ce36b74836eecb2a67fa139e93c75c6c4e1dc52212e403ce78058",
+    "retrieval.ts": "4711b476c82453b0abdff8a8e6f811fa51ec30ab69387b124db2f69243f1d993"
+  },
+  "pricingChecked": "https://openrouter.ai/api/v1/models",
+  "pricingUsdPerMillion": {
+    "lunaInput": 0.1,
+    "lunaOutput": 0.5,
+    "solInput": 2,
+    "solOutput": 10
+  },
+  "scope": "Prototype under experiments; no production ingest change"
+}

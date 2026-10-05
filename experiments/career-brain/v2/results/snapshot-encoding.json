@@ -1,0 +1,70 @@
+{
+  "note": "Pre-run manifests hash original workspace bytes. Git normalizes text line endings; these additional hashes identify the committed snapshot content without replacing those original observations. Snapshots capture selected protocol revisions, not every interim execution.",
+  "snapshots": [
+    {
+      "file": "experiments/career-brain/v2/results/protocol-final/annotations.ts.snapshot",
+      "workspaceByteSha256": "9ca4c7efa8417e6ce2e26d90736bd6bc4cb5ee0581c6d6860bd4505c9473eecf",
+      "gitBlobSha256": "9ca4c7efa8417e6ce2e26d90736bd6bc4cb5ee0581c6d6860bd4505c9473eecf"
+    },
+    {
+      "file": "experiments/career-brain/v2/results/protocol-final/database-state.ts.snapshot",
+      "workspaceByteSha256": "3b68dd27cee32427ee8c2ef4ac018230924e49255355f0019e7ec510c7c8d58d",
+      "gitBlobSha256": "3b68dd27cee32427ee8c2ef4ac018230924e49255355f0019e7ec510c7c8d58d"
+    },
+    {
+      "file": "experiments/career-brain/v2/results/protocol-final/evidence.ts.snapshot",
+      "workspaceByteSha256": "cdd8e2e00aebb27eff6d957523e994a10e1fdb9d06dd65dfc7798608cd89dfd4",
+      "gitBlobSha256": "cdd8e2e00aebb27eff6d957523e994a10e1fdb9d06dd65dfc7798608cd89dfd4"
+    },
+    {
+      "file": "experiments/career-brain/v2/results/protocol-final/packets.ts.snapshot",
+      "workspaceByteSha256": "203f1c4c140a59770e67c3140c3b8f5c79945d5af3ef065e918cbc51b5eeb472",
+      "gitBlobSha256": "203f1c4c140a59770e67c3140c3b8f5c79945d5af3ef065e918cbc51b5eeb472"
+    },
+    {
+      "file": "experiments/career-brain/v2/results/protocol-final/pipeline.ts.snapshot",
+      "workspaceByteSha256": "39a881580507542fe70bc926a4a8a2c295f10a8a0934c92beb50f0fd88ad16b6",
+      "gitBlobSha256": "39a881580507542fe70bc926a4a8a2c295f10a8a0934c92beb50f0fd88ad16b6"
+    },
+    {
+      "file": "experiments/career-brain/v2/results/protocol-final/repair.ts.snapshot",
+      "workspaceByteSha256": "97c1beffdefa476075cd93db7cc586e13818c94ea96bda70bff2706ea85ba055",
+      "gitBlobSha256": "97c1beffdefa476075cd93db7cc586e13818c94ea96bda70bff2706ea85ba055"
+    },
+    {
+      "file": "experiments/career-brain/v2/results/protocol-final/retrieval.ts.snapshot",
+      "workspaceByteSha256": "e6b909e246b34b5a92661bc7d39aeec74d964278b701b9a43127b6f2d958b8a3",
+      "gitBlobSha256": "e6b909e246b34b5a92661bc7d39aeec74d964278b701b9a43127b6f2d958b8a3"
+    },
+    {
+      "file": "experiments/career-brain/v2/results/protocol-final/run.ts.snapshot",
+      "workspaceByteSha256": "1a847f1f3510216c258d53fa44f808925c269b08e7fb6c794080273fb5b955cf",
+      "gitBlobSha256": "1a847f1f3510216c258d53fa44f808925c269b08e7fb6c794080273fb5b955cf"
+    },
+    {
+      "file": "experiments/career-brain/v2/results/protocol-final/semantic-adjudication.ts.snapshot",
+      "workspaceByteSha256": "c4f16e66f4fbf6fc1e256835179166e2a94a5de79fa6856014a0883901098cc7",
+      "gitBlobSha256": "c4f16e66f4fbf6fc1e256835179166e2a94a5de79fa6856014a0883901098cc7"
+    },
+    {
+      "file": "experiments/career-brain/v2/results/protocol-final/typed-run.ts.snapshot",
+      "workspaceByteSha256": "4591a215bf139e8c7b57925c1d21f9d25f9e6c43bc2ddb10ea700be6ff709101",
+      "gitBlobSha256": "4591a215bf139e8c7b57925c1d21f9d25f9e6c43bc2ddb10ea700be6ff709101"
+    },
+    {
+      "file": "experiments/career-brain/v2/results/protocol-final/typed-semantic-adjudication.ts.snapshot",
+      "workspaceByteSha256": "d14a3c495ab2117e6b1e5fc442e0030e889b4a04104c6612fadd358f112dfc97",
+      "gitBlobSha256": "d14a3c495ab2117e6b1e5fc442e0030e889b4a04104c6612fadd358f112dfc97"
+    },
+    {
+      "file": "experiments/career-brain/v2/results/protocol-r1/evidence.ts.snapshot",
+      "workspaceByteSha256": "3da4b3036d84902acce86a4804d4050eb9ac5faf3ceac747fc40f6528a2fd94a",
+      "gitBlobSha256": "3da4b3036d84902acce86a4804d4050eb9ac5faf3ceac747fc40f6528a2fd94a"
+    },
+    {
+      "file": "experiments/career-brain/v2/results/protocol-r1/pipeline.ts.snapshot",
+      "workspaceByteSha256": "1043d80d01337841b872b1c58a61bec9bf31667e792774942b15ca4b16e80b09",
+      "gitBlobSha256": "1043d80d01337841b872b1c58a61bec9bf31667e792774942b15ca4b16e80b09"
+    }
+  ]
+}

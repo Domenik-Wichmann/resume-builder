@@ -15,7 +15,8 @@
     "check": "npm run format:check && npm run lint && npm run typecheck && npm test",
     "reindex": "node --conditions=react-server --import tsx --env-file-if-exists=.env.local scripts/reindex.ts",
     "tracking": "node --conditions=react-server --import tsx --env-file-if-exists=.env.local scripts/tracking.ts",
-    "qualification": "node --conditions=react-server --import tsx experiments/career-brain/run.ts --stage=offline && node --import tsx experiments/career-brain/revisions.ts && vitest run tests/qualification.test.ts tests/provider-accounting.test.ts"
+    "qualification": "node --conditions=react-server --import tsx experiments/career-brain/run.ts --stage=offline && node --import tsx experiments/career-brain/revisions.ts && vitest run tests/qualification.test.ts tests/provider-accounting.test.ts",
+    "requalification": "node --conditions=react-server --import tsx experiments/career-brain/v2/run.ts --stage=offline && vitest run tests/career-repair.test.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.117.2",

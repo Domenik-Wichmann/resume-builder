@@ -20,4 +20,5 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm run qualification
+      - run: npm run requalification
       - run: npm run build

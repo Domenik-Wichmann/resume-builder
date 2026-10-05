@@ -1,0 +1,49 @@
+{
+  "scope": "Targeted assistant source inspection of synthetic fixtures and all twelve generated answer texts. This is not a full human annotation of every generated claim or five-way packet label.",
+  "ingestFindings": [
+    {
+      "case": "R4 B repeat 1",
+      "finding": "Managed-employees quotation was rewritten and absent from source; exact-span validation caught it. Project plural examples/supervisors overstatement was also flagged by the model audit."
+    },
+    {
+      "case": "R4 G Dispatch Loom",
+      "finding": "Summary turns preferred warning into delivered warning despite source stating only operators preferred it. Model audit marked the record supported. At least one unsupported proposal escaped its review flags."
+    },
+    {
+      "case": "Sol R3 G Dispatch Loom",
+      "finding": "Sol caught wanted understandable exceptions becoming delivered functionality. This supports targeted escalation, but the selected subset and changed audit input are not a pure full-model ablation."
+    },
+    {
+      "case": "D Beacon",
+      "finding": "Personal user-guide work, brother model integration and team deployment remain separate; no positive AWS skill was created. Unverified users/testing remain review proposals."
+    },
+    {
+      "case": "I correction",
+      "finding": "Both R3 and R4 retain active eight direct reports and five as correction history. The initial inherited project aliases and official Supervisor title oracle were defective; supplemental annotation allows the explicit professional activity."
+    },
+    {
+      "case": "SEQ2 V3",
+      "finding": "12 versus 14 workshop attendance is REVIEW; generic coworker-training skill omits the disputed quantity. Docker is one-off EXPOSURE. Roster handover is present within the project rather than a separate achievement."
+    },
+    {
+      "case": "100-query course completion",
+      "finding": "Original manually authored packet gold omitted the source's explicit course-completion/not-license qualifier. Added source-backed context and denial claims plus a regression after native runs; no paid rerun or retroactive metric improvement is claimed."
+    }
+  ],
+  "answerInspection": {
+    "answers": 12,
+    "unsupportedQuestions": 7,
+    "unsupportedAffirmativeAnswers": 0,
+    "allReturnedCitationIdsValid": true,
+    "independentAuditUnsupportedPhrase": "nuance-leadership: collaborative leadership inferred from requirements gathering/explanation",
+    "humanDisposition": "Withhold the extra collaborative-leadership subtype; bounded instructional leadership from training is supported. One answer is not fully fact-faithful under this conservative interpretation.",
+    "positiveFalseAbstention": "automation-1 refuses the automation concept despite supplied parser/checking workflow evidence; do not treat the auditor's adequate=true as human proof of useful behavioral answering.",
+    "answerPromptFollowup": "Require concrete partial behaviors, avoid adding leadership subtypes and keep IDs out of prose. Prompt followup is covered by inspection/regressions, not new native answers."
+  },
+  "oracleLimitations": [
+    "Strict V2 certificate removal is underdetermined by the residual certificate course-completion sentence; REVIEW is a defensible safe proposal. The frozen oracle and strict score are retained.",
+    "V3 extensive SQL may be UPDATED for a newly explicit depth claim or UNCHANGED if previously accepted; handover may remain inside Roster Note. Strict literal decomposition scores are not the only interpretation.",
+    "Fixed compact gold versus richer native claim inventories can create legitimate factual enrichment. Native UPDATED counts are not all wording-only failures. A fresh repeat against a fully approved first rich import remains untested within this budget.",
+    "Boundary gold does not enumerate optional SQL relationships. Closed-set relationship precision of zero there does not establish unsupported SQL use."
+  ]
+}
