@@ -13,14 +13,12 @@ export const presentationSchema = z.object({
 export type Presentation = z.infer<typeof presentationSchema>;
 export function resolveMarket(
   tracking: unknown,
-  preference: unknown,
+  _preference: unknown,
   country: string | null,
 ): Market {
   const linked = marketSchema.safeParse(tracking);
   if (linked.success) return linked.data;
-  const selected = marketSchema.safeParse(preference);
-  if (selected.success) return selected.data;
-  return country && country !== "US" ? "BG" : "US";
+  return country?.toUpperCase() === "BG" ? "BG" : "US";
 }
 
 export const presentationSettingsSchema = presentationSchema

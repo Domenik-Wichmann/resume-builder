@@ -53,7 +53,7 @@
 .empty-state {
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 28px;
 }
 .empty-state {
@@ -77,10 +77,10 @@
 }
 .project-grid .project-card {
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
   padding: 0;
-  background: white;
+  background: var(--card);
   transition: transform 0.2s;
 }
 .project-grid .project-card:hover {
@@ -100,7 +100,7 @@
   border-radius: 10px;
   max-height: 650px;
   object-fit: contain;
-  background: #e8ece6;
+  background: #192e37;
 }
 .project-detail figure {
   margin: 30px 0;
@@ -134,7 +134,7 @@ figcaption {
   padding: 14px;
 }
 .choice-button:hover {
-  background: #e2ebe3;
+  background: #8870d322;
 }
 .choice-button small {
   display: block;
@@ -161,7 +161,7 @@ textarea {
   border: 1px solid var(--line);
   border-radius: 6px;
   padding: 10px;
-  background: white;
+  background: var(--card);
   max-width: 100%;
 }
 .editor-form input,
@@ -209,7 +209,7 @@ legend {
 }
 .skill-map {
   padding: 20px;
-  background: #e8eee6;
+  background: #283b4966;
   border-radius: 16px;
   border: 1px solid var(--line);
 }
@@ -239,7 +239,7 @@ legend {
 }
 .skill-node {
   border-radius: 100px;
-  background: white;
+  background: var(--card);
   color: var(--ink);
   border: 1px solid var(--line);
   display: block;
@@ -275,7 +275,7 @@ legend {
   margin: 20px 0;
 }
 .chips span {
-  background: #e8eee6;
+  background: #283b4966;
   padding: 6px 12px;
   border-radius: 30px;
   font-size: 0.9rem;
@@ -307,12 +307,17 @@ legend {
   }
 }
 :root {
-  --paper: #f5f4ef;
-  --ink: #202c29;
-  --muted: #64716a;
-  --accent: #266751;
-  --line: #d7ddd3;
-  --card: #ffffff;
+  --paper: #09131c;
+  --ink: #f2f5f7;
+  --muted: #a8b9c4;
+  --accent: #c98273;
+  --line: #ffffff18;
+  --card: #142733aa;
+  --purple: #c3a7ff;
+  --accent-hover: #d99b88;
+  --surface-hover: #8870d322;
+  --panel: #142733;
+  color-scheme: dark;
 }
 * {
   box-sizing: border-box;
@@ -324,7 +329,12 @@ html {
 body {
   margin: 0;
   color: var(--ink);
-  background: var(--paper);
+  background:
+    radial-gradient(ellipse at 85% 8%, #153e36 0, transparent 40%),
+    radial-gradient(ellipse at 12% 30%, #172d4b 0, transparent 50%),
+    var(--paper);
+  background-attachment: fixed;
+  min-height: 100dvh;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 1.6;
@@ -342,17 +352,17 @@ button,
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--ink);
-  color: white;
+  background: var(--accent);
+  color: #231b1b;
   border: 0;
-  border-radius: 5px;
+  border-radius: 16px;
   padding: 13px 20px;
   font-weight: 600;
   cursor: pointer;
 }
 button:hover,
 .button:hover {
-  background: var(--accent);
+  background: var(--accent-hover);
 }
 button:disabled {
   opacity: 0.55;
@@ -368,7 +378,7 @@ button:disabled {
 }
 .demo-banner {
   text-align: center;
-  background: #e7ecdd;
+  background: #172b34;
   padding: 8px 20px;
   font-size: 10px;
   letter-spacing: 0.12em;
@@ -393,7 +403,7 @@ button:disabled {
   letter-spacing: -0.04em;
 }
 .wordmark span {
-  color: #a1aa9e;
+  color: #b497ff;
   padding: 0 6px;
 }
 nav {
@@ -460,24 +470,24 @@ h1 span {
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 12px;
-  background: #e9ece3;
+  background: #283b4966;
   transform: rotate(2deg);
 }
 .portrait {
   min-height: 240px;
-  background: #d7dfce;
+  background: #8870d322;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
+  border-radius: 10px;
   position: relative;
   overflow: hidden;
 }
 .portrait:before,
 .portrait:after {
   content: "";
-  border: 1px solid #b8c5b1;
+  border: 1px solid #ad98ee45;
   position: absolute;
   border-radius: 50%;
   width: 280px;
@@ -490,13 +500,13 @@ h1 span {
 .portrait span {
   font-family: Georgia, serif;
   font-size: 76px;
-  color: #567253;
+  color: #a8c2cd;
   z-index: 1;
 }
 .portrait small {
   font-size: 8px;
   letter-spacing: 0.18em;
-  color: #536c50;
+  color: #a8c2cd;
 }
 .profile-caption {
   padding: 22px 12px 8px;
@@ -513,7 +523,7 @@ h1 span {
 .card-note {
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid #cdd5c5;
+  border-top: 1px solid #ffffff18;
   padding: 12px;
   font-size: 8px;
   letter-spacing: 0.12em;
@@ -598,7 +608,7 @@ h3 {
 .tags span {
   font-size: 10px;
   border: 1px solid var(--line);
-  border-radius: 4px;
+  border-radius: 10px;
   padding: 3px 8px;
   color: var(--muted);
 }
@@ -623,12 +633,12 @@ h3 {
   grid-template-columns: 180px 1fr;
   gap: 35px;
   align-items: center;
-  background: #e9ece3;
+  background: #283b4966;
   border-radius: 8px;
   padding: 35px;
 }
 .skill-center {
-  border: 1px solid #a8b8a0;
+  border: 1px solid #ad98ee45;
   border-radius: 50%;
   width: 145px;
   height: 145px;
@@ -639,7 +649,7 @@ h3 {
   text-align: center;
   line-height: 1.4;
   font-size: 18px;
-  background: #dce5d6;
+  background: #283b4966;
 }
 .skill-nodes {
   display: grid;
@@ -647,8 +657,8 @@ h3 {
   gap: 12px;
 }
 .skill-node {
-  border-left: 2px solid #9bab91;
-  background: #f6f7f2;
+  border-left: 2px solid #ad98ee60;
+  background: #142733aa;
   padding: 14px;
   border-radius: 3px;
 }
@@ -702,7 +712,7 @@ textarea {
   width: 100%;
   resize: vertical;
   border: 1px solid var(--line);
-  border-radius: 5px;
+  border-radius: 16px;
   padding: 14px;
   color: var(--ink);
   background: var(--paper);
@@ -743,14 +753,14 @@ textarea {
   list-style: disc;
 }
 .error {
-  color: #983f30;
+  color: #e6a092;
   font-size: 13px;
   margin-top: 16px;
 }
 .resume-callout {
   margin: 65px 0;
   padding: 35px;
-  background: #e7ecdd;
+  background: #172b34;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -778,8 +788,8 @@ textarea {
   position: absolute;
   top: -100px;
   left: 20px;
-  background: var(--ink);
-  color: white;
+  background: var(--accent);
+  color: #231b1b;
   padding: 10px;
   z-index: 10;
 }
@@ -800,7 +810,7 @@ textarea {
 }
 .resume-sheet {
   padding: 55px;
-  background: white;
+  background: var(--card);
   border: 1px solid var(--line);
 }
 .resume-sheet h1 {
@@ -976,6 +986,14 @@ textarea {
   }
 }
 @media print {
+  :root {
+    --paper: white;
+    --ink: #111;
+    --muted: #555;
+    --line: #ddd;
+    --card: white;
+    color-scheme: light;
+  }
   body {
     background: white;
     color: #111;

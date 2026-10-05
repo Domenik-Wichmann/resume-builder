@@ -9,6 +9,7 @@ import {
 import { validateEnv } from "./env";
 import { database } from "./db";
 import { primaryAccountId } from "./account-id";
+import { readSession, resolveTrackingLink } from "./tracking/service";
 export async function getPresentation(
   market: Market,
   accountId = primaryAccountId,
@@ -60,9 +61,12 @@ export async function getPresentation(
 export async function currentMarket() {
   const jar = await cookies(),
     requestHeaders = await headers();
+  // Only a signed, unexpired link session and an active database link may override country.
+  const session = readSession(jar.get("rb_ai_access")?.value || "");
+  const link = session ? await resolveTrackingLink(session.code) : null;
   return resolveMarket(
-    jar.get("rb_link_market")?.value,
-    jar.get("rb_market")?.value,
+    link?.market,
+    null,
     process.env.VERCEL === "1"
       ? requestHeaders.get("x-vercel-ip-country")
       : null,

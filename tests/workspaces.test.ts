@@ -21,7 +21,10 @@ import {
   browserDeleteWorkspace,
   browserLoadWorkspace,
   browserWorkspaceAction,
+  browserWorkspaceSlots,
+  browserRememberWorkspaceSlot,
 } from "../src/lib/workspaces/browser";
+import { assignWorkspaceSlots } from "../src/lib/workspaces/slots";
 const presentation = {
   market: "BG" as const,
   location: "Demo Bulgaria",
@@ -41,7 +44,7 @@ describe("workspace compilation and privacy", () => {
   });
   it("uses tracking market before preference or coarse location, with no precise geolocation", () => {
     expect(resolveMarket("US", "BG", "BG")).toBe("US");
-    expect(resolveMarket(null, "US", "BG")).toBe("US");
+    expect(resolveMarket(null, "US", "BG")).toBe("BG");
     expect(resolveMarket(null, null, "BG")).toBe("BG");
     expect(resolveMarket(null, null, null)).toBe("US");
   });
@@ -143,6 +146,18 @@ describe("workspace compilation and privacy", () => {
   });
 });
 describe("offline browser workspace persistence", () => {
+  it("retains slot labels when activity reorders the list and discards unverified stored IDs", () => {
+    expect(
+      assignWorkspaceSlots(["second", "first"], ["first", "second"]),
+    ).toEqual(["first", "second"]);
+    expect(
+      assignWorkspaceSlots(["second", "replacement"], ["deleted", "second"]),
+    ).toEqual(["replacement", "second"]);
+    expect(assignWorkspaceSlots(["allowed"], ["forged", "allowed"])).toEqual([
+      null,
+      "allowed",
+    ]);
+  });
   beforeEach(() => {
     const values = new Map<string, string>();
     vi.stubGlobal("localStorage", {
@@ -181,6 +196,19 @@ describe("offline browser workspace persistence", () => {
     await browserDeleteWorkspace(first.id);
     await browserCreateWorkspace();
     expect(await browserListWorkspaces()).toHaveLength(2);
+  });
+  it("supports starting Workspace 2 first and keeps both conversations in stable slots", async () => {
+    const second = await browserCreateWorkspace();
+    browserRememberWorkspaceSlot(second.id, 1);
+    expect(await browserWorkspaceSlots()).toEqual([null, second.id]);
+    const first = await browserCreateWorkspace();
+    browserRememberWorkspaceSlot(first.id, 0);
+    await browserWorkspaceAction(second, "ask", "What SQL experience?");
+    expect(await browserWorkspaceSlots()).toEqual([first.id, second.id]);
+    await expect(browserCreateWorkspace()).rejects.toThrow("slots");
+    await browserDeleteWorkspace(first.id);
+    expect(await browserWorkspaceSlots()).toEqual([null, second.id]);
+    expect((await browserLoadWorkspace(second.id)).questions).toHaveLength(1);
   });
   it("persists questions and compiles a current résumé through the offline vertical slice", async () => {
     const workspace = await browserCreateWorkspace();
