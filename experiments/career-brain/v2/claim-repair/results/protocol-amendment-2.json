@@ -1,0 +1,11 @@
+{
+  "beforeStage": "historical-compact",
+  "scope": "One bounded Pro diagnostic using the frozen historical case, its existing source-reviewed project claims and the exact known profile identity quote. No input relabeling or prior result overwrite.",
+  "inputs": [
+    "Ada Rowan wrote the Python parser and SQL checks; operators preferred a visible warning for late files.",
+    "Ada Rowan wrote the Python parser and SQL checks and implemented a visible warning for late files.",
+    "The unchanged historical R4 G summary from frozen inputs.json"
+  ],
+  "purpose": "Distinguish warning entailment failure from simply withholding unrelated material outside a SQL-only packet. The safe control should pass, both implementation assertions should fail.",
+  "budget": "Unchanged $5 / 70 calls. No new Sol request required: targeted Sol comparison is already preserved."
+}

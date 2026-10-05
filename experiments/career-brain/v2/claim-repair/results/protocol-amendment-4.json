@@ -1,0 +1,9 @@
+{
+  "beforeStages": ["persistence-repair", "qa"],
+  "observedFailure": "The earlier experimental metadata upsert stamps the current import source_id on a retained certificate primary quote absent from V2. Claim source references remain exact, but primary provenance would be wrong; prior artifacts and adapter snapshot are preserved.",
+  "repair": "Apply only canonical rows with exact current primary quotes. Atomically commit explicitly reviewed metadata in candidates under APPLIED import state, and hydrate that overlay without rewriting retained historical rows. Reconcile reviewed additions using application identity rules.",
+  "replay": "Zero new provider calls. Real member JWT/RLS V1/V2/V3 replay, checking primary quotes as well as every claim span at each step. Certificate stays PENDING_REVIEW in V2 and CONFIRMED in V3 with the same UUID.",
+  "ownerReview": "The detector withheld the composite quantity claim but did not propose a quantity-free safe action. Explicit source review accepts: Trained dispatch coworkers through workshops and wrote a plain-language handbook. Its exact span retains the original count as historical source language, while availability constraints prohibit affirming that count.",
+  "qa": "Uses persistence-v3.json explicitly; does not silently substitute corrected artifacts into older native measurements.",
+  "budget": "Unchanged $5 / 70-request cap; no reset, no retry of a provider request."
+}

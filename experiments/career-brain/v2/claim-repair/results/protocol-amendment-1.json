@@ -1,0 +1,8 @@
+{
+  "scope": "Additional bounded diagnostics using the already frozen cases and the planned reviewed V3 state; no architecture restart, input relabeling, or old artifact overwrite.",
+  "beforeStages": ["fallback-canaries", "sequence", "qa"],
+  "fallback": "For preserved Pro FAIL/REVIEW canaries, simplify once to a single admitted proposition and independently recheck. Never admit an unverified fallback.",
+  "conflicts": "Re-run the same component conflict detector on fresh V3 proposals to cover new decomposition, not just old claim indices. Persist owner-reviewed availability in accepted_changes through the existing optimistic member-JWT RPC.",
+  "staleQuantityCanary": "Trained 12 dispatch coworkers through two workshops and wrote a plain-language handbook.",
+  "budget": "Unchanged $5 / 70-request cap. Every call is reserved before submission. No new retrieval, vectors, or provider retries."
+}

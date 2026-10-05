@@ -34,9 +34,11 @@ export async function complete<T>(
         message = "Provider rejected the request; detailed response omitted.";
       detail = message.slice(0, 700);
       const path =
-        process.env.CAREER_QUALIFICATION_CONTINUATION === "1"
-          ? "experiments/career-brain/v2/continuation/results/provider-responses.json"
-          : "experiments/career-brain/v2/results/provider-responses.json";
+        process.env.CAREER_QUALIFICATION_CLAIM_REPAIR === "1"
+          ? "experiments/career-brain/v2/claim-repair/results/provider-responses.json"
+          : process.env.CAREER_QUALIFICATION_CONTINUATION === "1"
+            ? "experiments/career-brain/v2/continuation/results/provider-responses.json"
+            : "experiments/career-brain/v2/results/provider-responses.json";
       let observed: unknown[] = [];
       try {
         observed = JSON.parse(await readFile(path, "utf8"));

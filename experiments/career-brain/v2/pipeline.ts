@@ -144,7 +144,7 @@ export async function auditGrounding(
         ),
     );
     await writeFile(
-      `experiments/career-brain/v2/${process.env.CAREER_QUALIFICATION_CONTINUATION === "1" ? "continuation/results" : "results"}/audit-${Date.now()}-${offset}.json`,
+      `experiments/career-brain/v2/${process.env.CAREER_QUALIFICATION_CLAIM_REPAIR === "1" ? "claim-repair/results" : process.env.CAREER_QUALIFICATION_CONTINUATION === "1" ? "continuation/results" : "results"}/audit-${Date.now()}-${offset}.json`,
       JSON.stringify(
         { model, records: group, decisions: result.decisions },
         null,

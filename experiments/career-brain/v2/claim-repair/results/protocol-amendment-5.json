@@ -1,0 +1,8 @@
+{
+  "beforeStages": ["fallback-canaries", "warning-preference-fallback"],
+  "finding": "Full-context Pro audit withheld the expected-safe control because 'for late files' makes a purpose relationship not explicitly stated by the original coordinated source sentence. Personal SQL work and the literal operator preference were judged supported. Both unsafe implementation bullets were rejected, with the original warning clause explicitly identified.",
+  "originalScoring": "Keep the original expected-safe control and its FAIL result: one conservative false omission under frozen intent gold. Do not claim 100% verifier accuracy against that gold.",
+  "boundedSimplification": "Ada Rowan wrote the Python parser and SQL checks; operators preferred a visible warning.",
+  "purpose": "Verify a useful strictly source-supported wording after removing the disputed purpose relationship, rather than changing the verifier to fit an inferred relationship.",
+  "budget": "Unchanged $5 / 70-request cap. Two remaining small Pro requests, no Sol request or automatic retry."
+}

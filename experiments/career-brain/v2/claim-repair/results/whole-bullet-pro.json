@@ -1,0 +1,1564 @@
+{
+  "inputs": [
+    {
+      "id": "preferred-warning-safe",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "053d83a5-2ee2-45c7-8df7-2830ff696227",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "preferred-warning:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": [],
+      "bullet": "Wrote SQL validation checks for dispatch reconciliation."
+    },
+    {
+      "id": "preferred-warning-unsafe",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "053d83a5-2ee2-45c7-8df7-2830ff696227",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "preferred-warning:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": [],
+      "bullet": "Wrote SQL validation checks for dispatch reconciliation and implemented a visible warning for late files."
+    },
+    {
+      "id": "wanted-feature-safe",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "e0f3a4d5-5522-4470-8895-ab538c8b2fca",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "wanted-feature:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": [],
+      "bullet": "Wrote SQL validation checks for dispatch reconciliation."
+    },
+    {
+      "id": "wanted-feature-unsafe",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "e0f3a4d5-5522-4470-8895-ab538c8b2fca",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "wanted-feature:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": [],
+      "bullet": "Wrote SQL validation checks for dispatch reconciliation and implemented automatic exception emails."
+    },
+    {
+      "id": "planned-completed-safe",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "422b2686-997f-432b-870b-1b667ec54569",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "planned-completed:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": [],
+      "bullet": "Wrote SQL validation checks for dispatch reconciliation."
+    },
+    {
+      "id": "planned-completed-unsafe",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "422b2686-997f-432b-870b-1b667ec54569",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "planned-completed:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": [],
+      "bullet": "Wrote SQL validation checks for dispatch reconciliation and completed the Route Note rollout."
+    },
+    {
+      "id": "discussed-performed-safe",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "688aba87-25eb-4c4a-8c22-c2369e3a6ab9",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "discussed-performed:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": [],
+      "bullet": "Wrote SQL validation checks for dispatch reconciliation."
+    },
+    {
+      "id": "discussed-performed-unsafe",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "688aba87-25eb-4c4a-8c22-c2369e3a6ab9",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "discussed-performed:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": [],
+      "bullet": "Wrote SQL validation checks for dispatch reconciliation and performed the database migration."
+    },
+    {
+      "id": "recommended-delivered-safe",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "bff3fb3c-5076-411c-8df4-a61aef745eda",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "recommended-delivered:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": [],
+      "bullet": "Wrote SQL validation checks for dispatch reconciliation."
+    },
+    {
+      "id": "recommended-delivered-unsafe",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "bff3fb3c-5076-411c-8df4-a61aef745eda",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "recommended-delivered:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": [],
+      "bullet": "Wrote SQL validation checks for dispatch reconciliation and delivered an analytics dashboard."
+    },
+    {
+      "id": "team-personal-safe",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "85dac9a1-f628-4280-8eea-3ce7a5114560",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "team-personal:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": [],
+      "bullet": "Wrote SQL validation checks for dispatch reconciliation."
+    },
+    {
+      "id": "team-personal-unsafe",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "85dac9a1-f628-4280-8eea-3ce7a5114560",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "team-personal:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": [],
+      "bullet": "Wrote SQL validation checks for dispatch reconciliation and personally achieved the entire three-hour weekly saving."
+    },
+    {
+      "id": "exposure-proficiency-safe",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "5b4e3540-f342-4ffe-8375-76075a9766db",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "exposure-proficiency:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": [],
+      "bullet": "Wrote SQL validation checks for dispatch reconciliation."
+    },
+    {
+      "id": "exposure-proficiency-unsafe",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "5b4e3540-f342-4ffe-8375-76075a9766db",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "exposure-proficiency:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": [],
+      "bullet": "Wrote SQL validation checks for dispatch reconciliation and became proficient in production Docker engineering."
+    },
+    {
+      "id": "contributed-owned-safe",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "6d4479c6-0f26-4124-80bb-f54700670f34",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "contributed-owned:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": [],
+      "bullet": "Wrote SQL validation checks for dispatch reconciliation."
+    },
+    {
+      "id": "contributed-owned-unsafe",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "6d4479c6-0f26-4124-80bb-f54700670f34",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "contributed-owned:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": [],
+      "bullet": "Wrote SQL validation checks for dispatch reconciliation and owned the entire project."
+    },
+    {
+      "id": "trained-managed-safe",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "4955b84c-0e11-4f70-8e3f-4e39549a2d29",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "trained-managed:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": [],
+      "bullet": "Wrote SQL validation checks for dispatch reconciliation."
+    },
+    {
+      "id": "trained-managed-unsafe",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "4955b84c-0e11-4f70-8e3f-4e39549a2d29",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "trained-managed:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": [],
+      "bullet": "Wrote SQL validation checks for dispatch reconciliation and managed dispatch employees."
+    },
+    {
+      "id": "related-named-tech-safe",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "5676c63b-9b76-49df-8ee3-0c79a6b685da",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "related-named-tech:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": [],
+      "bullet": "Wrote SQL validation checks for dispatch reconciliation."
+    },
+    {
+      "id": "related-named-tech-unsafe",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "5676c63b-9b76-49df-8ee3-0c79a6b685da",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "related-named-tech:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": [],
+      "bullet": "Wrote SQL validation checks for dispatch reconciliation and implemented AWS infrastructure."
+    },
+    {
+      "id": "superseded-count-safe",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "400104d5-9354-4e54-8bd3-f938a2aa0863",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "superseded-count:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "value": "supervised five direct reports",
+          "availability": "SUPERSEDED",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I previously said five direct reports; correction: I supervised eight, not five.",
+              "start": 70,
+              "end": 150
+            }
+          ]
+        }
+      ],
+      "bullet": "Wrote SQL validation checks for dispatch reconciliation."
+    },
+    {
+      "id": "superseded-count-unsafe",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "400104d5-9354-4e54-8bd3-f938a2aa0863",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "superseded-count:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "value": "supervised five direct reports",
+          "availability": "SUPERSEDED",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I previously said five direct reports; correction: I supervised eight, not five.",
+              "start": 70,
+              "end": 150
+            }
+          ]
+        }
+      ],
+      "bullet": "Wrote SQL validation checks for dispatch reconciliation and supervised five direct reports."
+    },
+    {
+      "id": "disputed-count-safe",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "f88d9565-534f-4120-8c9d-d60f2a18b47d",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "disputed-count:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "value": "trained twelve coworkers",
+          "availability": "DISPUTED",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I remember twelve coworkers, but the roster says fourteen; I cannot resolve attendance.",
+              "start": 70,
+              "end": 157
+            }
+          ]
+        }
+      ],
+      "bullet": "Wrote SQL validation checks for dispatch reconciliation."
+    },
+    {
+      "id": "disputed-count-unsafe",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "f88d9565-534f-4120-8c9d-d60f2a18b47d",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "disputed-count:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "value": "trained twelve coworkers",
+          "availability": "DISPUTED",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I remember twelve coworkers, but the roster says fourteen; I cannot resolve attendance.",
+              "start": 70,
+              "end": 157
+            }
+          ]
+        }
+      ],
+      "bullet": "Wrote SQL validation checks for dispatch reconciliation and trained twelve coworkers."
+    },
+    {
+      "id": "training-safe-safe",
+      "requirement": "Training and documentation",
+      "record": {
+        "id": "3b5e88be-5f14-4825-8078-142a2fc0eb7e",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "training-safe:0",
+          "attribute": "action",
+          "value": "Trained dispatch coworkers through workshops and wrote a handbook",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I trained dispatch coworkers through workshops and wrote a handbook.",
+              "start": 0,
+              "end": 68
+            }
+          ]
+        }
+      ],
+      "constraints": [],
+      "bullet": "Trained dispatch coworkers through workshops and wrote a handbook."
+    },
+    {
+      "id": "team-safe-safe",
+      "requirement": "Measured team reconciliation result",
+      "record": {
+        "id": "210b4a3a-542c-4e03-86db-53c5f0ad4a29",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "team-safe:0",
+          "attribute": "metric",
+          "value": "Team reconciliation time fell from five to two hours per week over six runs; personal contribution was the checks",
+          "attribution": "TEAM",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "The team reduced weekly reconciliation time from five hours to two over six runs; my contribution was the checks.",
+              "start": 0,
+              "end": 113
+            }
+          ]
+        }
+      ],
+      "constraints": [],
+      "bullet": "Team reconciliation time fell from five to two hours per week over six runs; personal contribution was the checks."
+    },
+    {
+      "id": "exposure-safe-safe",
+      "requirement": "Limited Docker exposure only",
+      "record": {
+        "id": "8dcfc024-33a1-4547-86ac-7dd3b920e731",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "exposure-safe:0",
+          "attribute": "depth",
+          "value": "Completed one Docker exercise only",
+          "attribution": "EXPOSURE",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I completed one Docker exercise; no production use is claimed.",
+              "start": 0,
+              "end": 62
+            }
+          ]
+        }
+      ],
+      "constraints": [],
+      "bullet": "Completed one Docker exercise only."
+    },
+    {
+      "id": "reports-corrected-safe",
+      "requirement": "Supervision of eight direct reports",
+      "record": {
+        "id": "d2fe24f4-0b0d-4c36-84e3-c60ff2728d0d",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "reports-corrected:0",
+          "attribute": "scope",
+          "value": "Supervised eight direct reports",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I supervised eight direct reports, not five.",
+              "start": 0,
+              "end": 44
+            }
+          ]
+        }
+      ],
+      "constraints": [],
+      "bullet": "Supervised eight direct reports."
+    },
+    {
+      "id": "historical-warning-safe",
+      "requirement": "What SQL checks did the candidate personally write?",
+      "record": {
+        "id": "3605c4df-355a-41aa-8663-dbb483672a83",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "historical-warning:2",
+          "attribute": "tool",
+          "value": "SQL",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL.",
+              "start": 199,
+              "end": 315
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:3",
+          "attribute": "action",
+          "value": "Wrote the Python parser and SQL checks",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I wrote the Python parser and SQL checks myself.",
+              "start": 316,
+              "end": 364
+            }
+          ],
+          "availability": "CONFIRMED"
+        }
+      ],
+      "constraints": [
+        {
+          "value": "Delivery speed was not measured",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "Delivery speed was not measured.",
+              "start": 3472,
+              "end": 3504
+            }
+          ]
+        },
+        {
+          "value": "Machine-learning classifier was not involved in the rules",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "There was no machine-learning classifier involved in these rules.",
+              "start": 2784,
+              "end": 2849
+            }
+          ]
+        },
+        {
+          "value": "Did not own the warehouse staffing budget",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+              "start": 3030,
+              "end": 3113
+            }
+          ]
+        },
+        {
+          "value": "Did not own procurement",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+              "start": 3030,
+              "end": 3113
+            }
+          ]
+        },
+        {
+          "value": "Did not own the scheduling system",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+              "start": 3030,
+              "end": 3113
+            }
+          ]
+        }
+      ],
+      "bullet": "Wrote the Python parser and SQL checks."
+    },
+    {
+      "id": "historical-warning-unsafe",
+      "requirement": "What SQL checks did the candidate personally write?",
+      "record": {
+        "id": "3605c4df-355a-41aa-8663-dbb483672a83",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "historical-warning:2",
+          "attribute": "tool",
+          "value": "SQL",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL.",
+              "start": 199,
+              "end": 315
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:3",
+          "attribute": "action",
+          "value": "Wrote the Python parser and SQL checks",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I wrote the Python parser and SQL checks myself.",
+              "start": 316,
+              "end": 364
+            }
+          ],
+          "availability": "CONFIRMED"
+        }
+      ],
+      "constraints": [
+        {
+          "value": "Delivery speed was not measured",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "Delivery speed was not measured.",
+              "start": 3472,
+              "end": 3504
+            }
+          ]
+        },
+        {
+          "value": "Machine-learning classifier was not involved in the rules",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "There was no machine-learning classifier involved in these rules.",
+              "start": 2784,
+              "end": 2849
+            }
+          ]
+        },
+        {
+          "value": "Did not own the warehouse staffing budget",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+              "start": 3030,
+              "end": 3113
+            }
+          ]
+        },
+        {
+          "value": "Did not own procurement",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+              "start": 3030,
+              "end": 3113
+            }
+          ]
+        },
+        {
+          "value": "Did not own the scheduling system",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+              "start": 3030,
+              "end": 3113
+            }
+          ]
+        }
+      ],
+      "bullet": "Internal dispatch reconciliation tool for comparing an overnight spreadsheet with a daily export and surfacing understandable exceptions. Personally designed and built by Ada Rowan, who wrote the Python parser and SQL checks; coworkers also changed their checking habits, so the measured improvement was a team result. Operators kept empty rows visible because a blank reference could require a phone call, and late-arriving source files prompted a visible warning. The supervisor made the final dispatch decision."
+    }
+  ],
+  "decisions": [
+    {
+      "id": "preferred-warning-safe",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["preferred-warning:0"],
+          "reason": "The admitted personal claim and its source span support this work."
+        }
+      ],
+      "reason": "The complete bullet is supported."
+    },
+    {
+      "id": "preferred-warning-unsafe",
+      "verdict": "FAIL",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["preferred-warning:0"],
+          "reason": "The admitted personal claim and its source span support this work."
+        },
+        {
+          "text": " and implemented a visible warning for late files.",
+          "verdict": "UNSUPPORTED",
+          "claimRefs": [],
+          "reason": "No admitted claim or source span supports implementing a warning."
+        }
+      ],
+      "reason": "The added warning implementation is unsupported."
+    },
+    {
+      "id": "wanted-feature-safe",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["wanted-feature:0"],
+          "reason": "The admitted personal claim and its source span support this work."
+        }
+      ],
+      "reason": "The complete bullet is supported."
+    },
+    {
+      "id": "wanted-feature-unsafe",
+      "verdict": "FAIL",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["wanted-feature:0"],
+          "reason": "The admitted personal claim and its source span support this work."
+        },
+        {
+          "text": " and implemented automatic exception emails.",
+          "verdict": "UNSUPPORTED",
+          "claimRefs": [],
+          "reason": "No admitted claim or source span supports implementing automatic exception emails."
+        }
+      ],
+      "reason": "The added email implementation is unsupported."
+    },
+    {
+      "id": "planned-completed-safe",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["planned-completed:0"],
+          "reason": "The admitted personal claim and its source span support this work."
+        }
+      ],
+      "reason": "The complete bullet is supported."
+    },
+    {
+      "id": "planned-completed-unsafe",
+      "verdict": "FAIL",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["planned-completed:0"],
+          "reason": "The admitted personal claim and its source span support this work."
+        },
+        {
+          "text": " and completed the Route Note rollout.",
+          "verdict": "UNSUPPORTED",
+          "claimRefs": [],
+          "reason": "No admitted claim or source span supports completing the Route Note rollout."
+        }
+      ],
+      "reason": "The added rollout completion is unsupported."
+    },
+    {
+      "id": "discussed-performed-safe",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["discussed-performed:0"],
+          "reason": "The admitted personal claim and its source span support this work."
+        }
+      ],
+      "reason": "The complete bullet is supported."
+    },
+    {
+      "id": "discussed-performed-unsafe",
+      "verdict": "FAIL",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["discussed-performed:0"],
+          "reason": "The admitted personal claim and its source span support this work."
+        },
+        {
+          "text": " and performed the database migration.",
+          "verdict": "UNSUPPORTED",
+          "claimRefs": [],
+          "reason": "No admitted claim or source span supports performing a database migration."
+        }
+      ],
+      "reason": "The added migration work is unsupported."
+    },
+    {
+      "id": "recommended-delivered-safe",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["recommended-delivered:0"],
+          "reason": "The admitted personal claim and its source span support this work."
+        }
+      ],
+      "reason": "The complete bullet is supported."
+    },
+    {
+      "id": "recommended-delivered-unsafe",
+      "verdict": "FAIL",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["recommended-delivered:0"],
+          "reason": "The admitted personal claim and its source span support this work."
+        },
+        {
+          "text": " and delivered an analytics dashboard.",
+          "verdict": "UNSUPPORTED",
+          "claimRefs": [],
+          "reason": "No admitted claim or source span supports delivering an analytics dashboard."
+        }
+      ],
+      "reason": "The added dashboard delivery is unsupported."
+    },
+    {
+      "id": "team-personal-safe",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["team-personal:0"],
+          "reason": "The admitted personal claim and its source span support this work."
+        }
+      ],
+      "reason": "The complete bullet is supported."
+    },
+    {
+      "id": "team-personal-unsafe",
+      "verdict": "FAIL",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["team-personal:0"],
+          "reason": "The admitted personal claim and its source span support this work."
+        },
+        {
+          "text": " and personally achieved the entire three-hour weekly saving.",
+          "verdict": "UNSUPPORTED",
+          "claimRefs": [],
+          "reason": "No admitted claim or source span supports the saving amount or its personal attribution."
+        }
+      ],
+      "reason": "The additional quantified, personally attributed outcome is unsupported."
+    },
+    {
+      "id": "exposure-proficiency-safe",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["exposure-proficiency:0"],
+          "reason": "The admitted personal claim and its source span confirm this work."
+        }
+      ],
+      "reason": "The complete bullet is supported."
+    },
+    {
+      "id": "exposure-proficiency-unsafe",
+      "verdict": "FAIL",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["exposure-proficiency:0"],
+          "reason": "The admitted personal claim and its source span confirm this work."
+        },
+        {
+          "text": " and became proficient in production Docker engineering.",
+          "verdict": "UNSUPPORTED",
+          "claimRefs": [],
+          "reason": "There is no admitted evidence for Docker proficiency or production engineering."
+        }
+      ],
+      "reason": "The bullet adds an unsupported proficiency claim."
+    },
+    {
+      "id": "contributed-owned-safe",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["contributed-owned:0"],
+          "reason": "The admitted personal claim and its source span confirm this work."
+        }
+      ],
+      "reason": "The complete bullet is supported."
+    },
+    {
+      "id": "contributed-owned-unsafe",
+      "verdict": "FAIL",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["contributed-owned:0"],
+          "reason": "The admitted personal claim and its source span confirm this work."
+        },
+        {
+          "text": " and owned the entire project.",
+          "verdict": "UNSUPPORTED",
+          "claimRefs": [],
+          "reason": "The evidence supports writing the checks, not ownership of the entire project."
+        }
+      ],
+      "reason": "The bullet adds an unsupported project-ownership claim."
+    },
+    {
+      "id": "trained-managed-safe",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["trained-managed:0"],
+          "reason": "The admitted personal claim and its source span confirm this work."
+        }
+      ],
+      "reason": "The complete bullet is supported."
+    },
+    {
+      "id": "trained-managed-unsafe",
+      "verdict": "FAIL",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["trained-managed:0"],
+          "reason": "The admitted personal claim and its source span confirm this work."
+        },
+        {
+          "text": " and managed dispatch employees.",
+          "verdict": "UNSUPPORTED",
+          "claimRefs": [],
+          "reason": "The evidence does not establish that the candidate managed employees."
+        }
+      ],
+      "reason": "The bullet adds an unsupported employee-management claim."
+    },
+    {
+      "id": "related-named-tech-safe",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["related-named-tech:0"],
+          "reason": "The admitted personal claim and its source span confirm this work."
+        }
+      ],
+      "reason": "The complete bullet is supported."
+    },
+    {
+      "id": "related-named-tech-unsafe",
+      "verdict": "FAIL",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["related-named-tech:0"],
+          "reason": "The admitted personal claim and its source span confirm this work."
+        },
+        {
+          "text": " and implemented AWS infrastructure.",
+          "verdict": "UNSUPPORTED",
+          "claimRefs": [],
+          "reason": "The evidence does not establish implementation of AWS infrastructure."
+        }
+      ],
+      "reason": "The bullet adds an unsupported AWS implementation claim."
+    },
+    {
+      "id": "superseded-count-safe",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["superseded-count:0"],
+          "reason": "The admitted personal claim and its source span confirm this work."
+        }
+      ],
+      "reason": "The complete bullet is supported; the superseded constraint does not affect it."
+    },
+    {
+      "id": "superseded-count-unsafe",
+      "verdict": "FAIL",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["superseded-count:0"],
+          "reason": "The admitted personal claim and its source span confirm this work."
+        },
+        {
+          "text": " and supervised five direct reports.",
+          "verdict": "UNSUPPORTED",
+          "claimRefs": [],
+          "reason": "Five direct reports is superseded by the correction that the candidate supervised eight, not five."
+        }
+      ],
+      "reason": "The bullet asserts a superseded count that the source explicitly corrects."
+    },
+    {
+      "id": "disputed-count-safe",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["disputed-count:0"],
+          "reason": "The admitted personal claim and its source span confirm this work."
+        }
+      ],
+      "reason": "The complete bullet is supported; the disputed constraint does not affect it."
+    },
+    {
+      "id": "disputed-count-unsafe",
+      "verdict": "REVIEW",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["disputed-count:0"],
+          "reason": "The admitted personal claim and its source span confirm this work."
+        },
+        {
+          "text": " and trained twelve coworkers.",
+          "verdict": "UNCERTAIN",
+          "claimRefs": [],
+          "reason": "The source gives conflicting attendance counts and explicitly says the attendance cannot be resolved."
+        }
+      ],
+      "reason": "The added training count is disputed by the source, so it cannot be verified confidently."
+    },
+    {
+      "id": "training-safe-safe",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Trained dispatch coworkers through workshops and wrote a handbook.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["training-safe:0"],
+          "reason": "The confirmed personal claim and its source span state this exact training and handbook work."
+        }
+      ],
+      "reason": "Every assertion in the bullet is supported by the confirmed personal claim."
+    },
+    {
+      "id": "team-safe-safe",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Team reconciliation time fell from five to two hours per week over six runs;",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["team-safe:0"],
+          "reason": "The source states that the team's weekly reconciliation time fell from five hours to two over six runs."
+        },
+        {
+          "text": " personal contribution was the checks.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["team-safe:0"],
+          "reason": "The source states that the candidate's contribution was the checks."
+        }
+      ],
+      "reason": "Both the team metric and the distinction about the candidate's personal contribution are supported."
+    },
+    {
+      "id": "exposure-safe-safe",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Completed one Docker exercise only.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["exposure-safe:0"],
+          "reason": "The confirmed claim and source span support one Docker exercise only."
+        }
+      ],
+      "reason": "The bullet stays within the documented limited exposure."
+    },
+    {
+      "id": "reports-corrected-safe",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Supervised eight direct reports.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["reports-corrected:0"],
+          "reason": "The source explicitly says the candidate supervised eight direct reports."
+        }
+      ],
+      "reason": "The bullet matches the confirmed personal scope."
+    },
+    {
+      "id": "historical-warning-safe",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Wrote the Python parser and SQL checks.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["historical-warning:3"],
+          "reason": "The source explicitly states that the candidate wrote the Python parser and SQL checks."
+        }
+      ],
+      "reason": "The complete bullet is supported by the confirmed personal claim and its source span."
+    },
+    {
+      "id": "historical-warning-unsafe",
+      "verdict": "FAIL",
+      "assertions": [
+        {
+          "text": "Internal dispatch reconciliation tool for comparing an overnight spreadsheet with a daily export and surfacing understandable exceptions.",
+          "verdict": "UNSUPPORTED",
+          "claimRefs": [],
+          "reason": "No admitted claim or cited source span establishes these tool functions or inputs."
+        },
+        {
+          "text": " Personally designed and built by Ada Rowan, ",
+          "verdict": "UNSUPPORTED",
+          "claimRefs": [],
+          "reason": "The cited source mentions personal design and build of Dispatch Loom, but does not establish the name Ada Rowan or connect that name to the first-person account."
+        },
+        {
+          "text": "who wrote the Python parser and SQL checks;",
+          "verdict": "UNSUPPORTED",
+          "claimRefs": [],
+          "reason": "Although the candidate's writing of the parser and checks is supported, this clause attributes that work to Ada Rowan, which the evidence does not establish."
+        },
+        {
+          "text": " coworkers also changed their checking habits,",
+          "verdict": "UNSUPPORTED",
+          "claimRefs": [],
+          "reason": "No admitted claim or source span supports this coworker behavior."
+        },
+        {
+          "text": " so the measured improvement was a team result.",
+          "verdict": "UNSUPPORTED",
+          "claimRefs": [],
+          "reason": "This record contains no admitted evidence of a measured improvement or a team result."
+        },
+        {
+          "text": " Operators kept empty rows visible",
+          "verdict": "UNSUPPORTED",
+          "claimRefs": [],
+          "reason": "No admitted claim or source span supports this operator practice."
+        },
+        {
+          "text": " because a blank reference could require a phone call,",
+          "verdict": "UNSUPPORTED",
+          "claimRefs": [],
+          "reason": "No admitted claim or source span supports this explanation."
+        },
+        {
+          "text": " and late-arriving source files prompted a visible warning.",
+          "verdict": "UNSUPPORTED",
+          "claimRefs": [],
+          "reason": "No admitted claim or source span establishes late-arriving files or that a warning was produced."
+        },
+        {
+          "text": " The supervisor made the final dispatch decision.",
+          "verdict": "UNSUPPORTED",
+          "claimRefs": [],
+          "reason": "No admitted claim or source span supports this decision-making responsibility."
+        }
+      ],
+      "reason": "The bullet includes multiple factual assertions not supported by the admitted claims and source spans; the supported parser-and-checks detail does not validate its unsupported attribution or other clauses."
+    }
+  ]
+}

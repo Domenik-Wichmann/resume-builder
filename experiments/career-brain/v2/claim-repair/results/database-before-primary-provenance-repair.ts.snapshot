@@ -1,0 +1,31 @@
+import type { SupabaseClient } from "@supabase/supabase-js";
+import { contentHash } from "../../../../src/lib/embeddings/content";
+import { semanticHash } from "../../../../src/lib/ingestion/diff";
+import { richDatabaseState } from "../database-state";
+import type { RichCandidate } from "../evidence";
+import { hydrateClaims, type StateRecord } from "./claims";
+
+export async function checked<R extends {data:unknown;error:{message:string}|null}>(r:R):Promise<R["data"]>{if(r.error)throw new Error(r.error.message);return r.data;}
+export async function readState(owner:SupabaseClient,accountId:string) {
+ return (await richDatabaseState(owner,accountId)).map(r=>hydrateClaims(r));
+}
+export async function applyState(owner:SupabaseClient,accountId:string,sourceText:string,approved:RichCandidate[]) {
+ const before=await readState(owner,accountId);
+ const source=await checked(await owner.from("career_sources").insert({account_id:accountId,kind:"MASTER",content:sourceText,evidence_text:sourceText,content_hash:contentHash(sourceText)}).select("id").single());
+ const batch=await checked(await owner.from("career_imports").insert({account_id:accountId,source_id:source!.id,candidates:approved,model:"explicit-owner-reviewed-claim-repair"}).select("id").single());
+ const patches=approved.map(r=>{const old=before.find(c=>c.kind===r.kind&&c.key===r.key);return {...r,claims:r.claims.map(c=>({...c,evidence:c.evidence.map(s=>{
+  // Exact current spans receive this source ID. Retained historical references
+  // keep their actual original source; omitted certificate text is never forged.
+  if(sourceText.slice(s.start!,s.end!)===s.quote)return {...s,source_id:source!.id};
+  if(!(s as typeof s & {source_id?:string}).source_id)throw new Error(`Missing historical provenance: ${r.title}`);
+  return s;
+ })})),action:"UPSERT",baseline_hash:old?.hash||null,baseline_version:old?.updated_at||null,hash:semanticHash(r)};});
+ await checked(await owner.rpc("apply_career_import",{p_import:batch!.id,p_changes:patches}));
+ const after=await readState(owner,accountId);
+ return {sourceId:source!.id,before:before.length,after:after.length,preserved:before.filter(b=>after.some(a=>a.id===b.id)).length,state:after};
+}
+export async function provenance(owner:SupabaseClient,accountId:string,records:StateRecord[]) {
+ const sources=await checked(await owner.from("career_sources").select("id,evidence_text").eq("account_id",accountId));
+ const spans=records.flatMap(r=>r.claims.flatMap(c=>c.evidence));
+ return {total:spans.length,valid:spans.filter(s=>sources?.find(x=>x.id===(s as typeof s & {source_id?:string}).source_id)?.evidence_text?.slice(s.start!,s.end!)===s.quote).length};
+}

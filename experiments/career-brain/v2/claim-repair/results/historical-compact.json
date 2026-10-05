@@ -1,0 +1,1189 @@
+{
+  "inputs": [
+    {
+      "id": "historical-full-context-safe",
+      "requirement": "Describe personally written parser/checks and bounded project operational context",
+      "record": {
+        "id": "3605c4df-355a-41aa-8663-dbb483672a83",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "historical-warning:0",
+          "attribute": "action",
+          "value": "Designed and built Dispatch Loom",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL.",
+              "start": 199,
+              "end": 315
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:1",
+          "attribute": "tool",
+          "value": "Python",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL.",
+              "start": 199,
+              "end": 315
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:2",
+          "attribute": "tool",
+          "value": "SQL",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL.",
+              "start": 199,
+              "end": 315
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:3",
+          "attribute": "action",
+          "value": "Wrote the Python parser and SQL checks",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I wrote the Python parser and SQL checks myself.",
+              "start": 316,
+              "end": 364
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:4",
+          "attribute": "metric",
+          "value": "Reconciliation time reduced from 5 hours to 2 hours per week over six weekly runs",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks.",
+              "start": 366,
+              "end": 539
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:5",
+          "attribute": "ownership",
+          "value": "Parser and checks were Ada Rowan's contribution to the team result",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "This was a team result; my contribution was the parser and checks.",
+              "start": 473,
+              "end": 539
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:6",
+          "attribute": "context",
+          "value": "Compared the overnight spreadsheet against the daily export",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "Operators compared the overnight spreadsheet against the daily export.",
+              "start": 2032,
+              "end": 2102
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:7",
+          "attribute": "context",
+          "value": "Handled mismatched references rather than delivery route optimization",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "The dispatch desk dealt with mismatched references rather than delivery route optimization.",
+              "start": 1940,
+              "end": 2031
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:8",
+          "attribute": "action",
+          "value": "Gathered requirements from warehouse supervisors",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them.",
+              "start": 657,
+              "end": 764
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:9",
+          "attribute": "action",
+          "value": "Explained validation failures to warehouse supervisors",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them.",
+              "start": 657,
+              "end": 764
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:10",
+          "attribute": "tool",
+          "value": "Git for version control",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I used Git for version control and PostgreSQL for the production database.",
+              "start": 765,
+              "end": 839
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:11",
+          "attribute": "tool",
+          "value": "PostgreSQL for the production database",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I used Git for version control and PostgreSQL for the production database.",
+              "start": 765,
+              "end": 839
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:12",
+          "attribute": "action",
+          "value": "Kept empty rows visible because a blank reference might need a phone call",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "We kept them visible because a blank reference might need a phone call.",
+              "start": 2631,
+              "end": 2702
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:13",
+          "attribute": "context",
+          "value": "Source file could arrive late; operators preferred a visible warning",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "The source file could arrive late and the operators preferred a visible warning.",
+              "start": 2405,
+              "end": 2485
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:14",
+          "attribute": "action",
+          "value": "Handbook described where a coworker should look before raising an exception",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "The handbook described where a coworker should look before raising an exception.",
+              "start": 2703,
+              "end": 2783
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:15",
+          "attribute": "scope",
+          "value": "Supervisor made the final dispatch decision",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "The supervisor made the final dispatch decision.",
+              "start": 2936,
+              "end": 2984
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:21",
+          "attribute": "correction",
+          "value": "Reconciliation time, not delivery time, was measured",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only.",
+              "start": 3400,
+              "end": 3564
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:22",
+          "attribute": "context",
+          "value": "Coworkers also changed their checking habits; improvement cannot all be attributed to Ada Rowan",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "I cannot attribute all improvement to myself because coworkers also changed their checking habits.",
+              "start": 3565,
+              "end": 3663
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:23",
+          "attribute": "context",
+          "value": "One piece of work, not separate products for the SQL checks, Python parser, Git changes, or PostgreSQL data",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "These are different perspectives on one piece of work. The SQL checks and Python parser were useful together. Git held the changes, and PostgreSQL stored the production data; those were not separate products.",
+              "start": 3749,
+              "end": 3957
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "attribute": "context",
+          "value": "First-person source author is Ada Rowan",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "My name is Ada Rowan.",
+              "start": 33,
+              "end": 54
+            }
+          ],
+          "ref": "approved-profile-actor"
+        }
+      ],
+      "constraints": [
+        {
+          "value": "Delivery speed was not measured",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "Delivery speed was not measured.",
+              "start": 3472,
+              "end": 3504
+            }
+          ]
+        },
+        {
+          "value": "Machine-learning classifier was not involved in the rules",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "There was no machine-learning classifier involved in these rules.",
+              "start": 2784,
+              "end": 2849
+            }
+          ]
+        },
+        {
+          "value": "Did not own the warehouse staffing budget",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+              "start": 3030,
+              "end": 3113
+            }
+          ]
+        },
+        {
+          "value": "Did not own procurement",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+              "start": 3030,
+              "end": 3113
+            }
+          ]
+        },
+        {
+          "value": "Did not own the scheduling system",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+              "start": 3030,
+              "end": 3113
+            }
+          ]
+        }
+      ],
+      "bullet": "Ada Rowan wrote the Python parser and SQL checks; operators preferred a visible warning for late files."
+    },
+    {
+      "id": "historical-full-context-warning",
+      "requirement": "Describe personally written parser/checks and bounded project operational context",
+      "record": {
+        "id": "3605c4df-355a-41aa-8663-dbb483672a83",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "historical-warning:0",
+          "attribute": "action",
+          "value": "Designed and built Dispatch Loom",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL.",
+              "start": 199,
+              "end": 315
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:1",
+          "attribute": "tool",
+          "value": "Python",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL.",
+              "start": 199,
+              "end": 315
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:2",
+          "attribute": "tool",
+          "value": "SQL",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL.",
+              "start": 199,
+              "end": 315
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:3",
+          "attribute": "action",
+          "value": "Wrote the Python parser and SQL checks",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I wrote the Python parser and SQL checks myself.",
+              "start": 316,
+              "end": 364
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:4",
+          "attribute": "metric",
+          "value": "Reconciliation time reduced from 5 hours to 2 hours per week over six weekly runs",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks.",
+              "start": 366,
+              "end": 539
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:5",
+          "attribute": "ownership",
+          "value": "Parser and checks were Ada Rowan's contribution to the team result",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "This was a team result; my contribution was the parser and checks.",
+              "start": 473,
+              "end": 539
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:6",
+          "attribute": "context",
+          "value": "Compared the overnight spreadsheet against the daily export",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "Operators compared the overnight spreadsheet against the daily export.",
+              "start": 2032,
+              "end": 2102
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:7",
+          "attribute": "context",
+          "value": "Handled mismatched references rather than delivery route optimization",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "The dispatch desk dealt with mismatched references rather than delivery route optimization.",
+              "start": 1940,
+              "end": 2031
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:8",
+          "attribute": "action",
+          "value": "Gathered requirements from warehouse supervisors",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them.",
+              "start": 657,
+              "end": 764
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:9",
+          "attribute": "action",
+          "value": "Explained validation failures to warehouse supervisors",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them.",
+              "start": 657,
+              "end": 764
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:10",
+          "attribute": "tool",
+          "value": "Git for version control",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I used Git for version control and PostgreSQL for the production database.",
+              "start": 765,
+              "end": 839
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:11",
+          "attribute": "tool",
+          "value": "PostgreSQL for the production database",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I used Git for version control and PostgreSQL for the production database.",
+              "start": 765,
+              "end": 839
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:12",
+          "attribute": "action",
+          "value": "Kept empty rows visible because a blank reference might need a phone call",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "We kept them visible because a blank reference might need a phone call.",
+              "start": 2631,
+              "end": 2702
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:13",
+          "attribute": "context",
+          "value": "Source file could arrive late; operators preferred a visible warning",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "The source file could arrive late and the operators preferred a visible warning.",
+              "start": 2405,
+              "end": 2485
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:14",
+          "attribute": "action",
+          "value": "Handbook described where a coworker should look before raising an exception",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "The handbook described where a coworker should look before raising an exception.",
+              "start": 2703,
+              "end": 2783
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:15",
+          "attribute": "scope",
+          "value": "Supervisor made the final dispatch decision",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "The supervisor made the final dispatch decision.",
+              "start": 2936,
+              "end": 2984
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:21",
+          "attribute": "correction",
+          "value": "Reconciliation time, not delivery time, was measured",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only.",
+              "start": 3400,
+              "end": 3564
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:22",
+          "attribute": "context",
+          "value": "Coworkers also changed their checking habits; improvement cannot all be attributed to Ada Rowan",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "I cannot attribute all improvement to myself because coworkers also changed their checking habits.",
+              "start": 3565,
+              "end": 3663
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:23",
+          "attribute": "context",
+          "value": "One piece of work, not separate products for the SQL checks, Python parser, Git changes, or PostgreSQL data",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "These are different perspectives on one piece of work. The SQL checks and Python parser were useful together. Git held the changes, and PostgreSQL stored the production data; those were not separate products.",
+              "start": 3749,
+              "end": 3957
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "attribute": "context",
+          "value": "First-person source author is Ada Rowan",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "My name is Ada Rowan.",
+              "start": 33,
+              "end": 54
+            }
+          ],
+          "ref": "approved-profile-actor"
+        }
+      ],
+      "constraints": [
+        {
+          "value": "Delivery speed was not measured",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "Delivery speed was not measured.",
+              "start": 3472,
+              "end": 3504
+            }
+          ]
+        },
+        {
+          "value": "Machine-learning classifier was not involved in the rules",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "There was no machine-learning classifier involved in these rules.",
+              "start": 2784,
+              "end": 2849
+            }
+          ]
+        },
+        {
+          "value": "Did not own the warehouse staffing budget",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+              "start": 3030,
+              "end": 3113
+            }
+          ]
+        },
+        {
+          "value": "Did not own procurement",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+              "start": 3030,
+              "end": 3113
+            }
+          ]
+        },
+        {
+          "value": "Did not own the scheduling system",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+              "start": 3030,
+              "end": 3113
+            }
+          ]
+        }
+      ],
+      "bullet": "Ada Rowan wrote the Python parser and SQL checks and implemented a visible warning for late files."
+    },
+    {
+      "id": "historical-full-context-original",
+      "requirement": "Describe personally written parser/checks and bounded project operational context",
+      "record": {
+        "id": "3605c4df-355a-41aa-8663-dbb483672a83",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "historical-warning:0",
+          "attribute": "action",
+          "value": "Designed and built Dispatch Loom",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL.",
+              "start": 199,
+              "end": 315
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:1",
+          "attribute": "tool",
+          "value": "Python",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL.",
+              "start": 199,
+              "end": 315
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:2",
+          "attribute": "tool",
+          "value": "SQL",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL.",
+              "start": 199,
+              "end": 315
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:3",
+          "attribute": "action",
+          "value": "Wrote the Python parser and SQL checks",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I wrote the Python parser and SQL checks myself.",
+              "start": 316,
+              "end": 364
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:4",
+          "attribute": "metric",
+          "value": "Reconciliation time reduced from 5 hours to 2 hours per week over six weekly runs",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks.",
+              "start": 366,
+              "end": 539
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:5",
+          "attribute": "ownership",
+          "value": "Parser and checks were Ada Rowan's contribution to the team result",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "This was a team result; my contribution was the parser and checks.",
+              "start": 473,
+              "end": 539
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:6",
+          "attribute": "context",
+          "value": "Compared the overnight spreadsheet against the daily export",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "Operators compared the overnight spreadsheet against the daily export.",
+              "start": 2032,
+              "end": 2102
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:7",
+          "attribute": "context",
+          "value": "Handled mismatched references rather than delivery route optimization",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "The dispatch desk dealt with mismatched references rather than delivery route optimization.",
+              "start": 1940,
+              "end": 2031
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:8",
+          "attribute": "action",
+          "value": "Gathered requirements from warehouse supervisors",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them.",
+              "start": 657,
+              "end": 764
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:9",
+          "attribute": "action",
+          "value": "Explained validation failures to warehouse supervisors",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them.",
+              "start": 657,
+              "end": 764
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:10",
+          "attribute": "tool",
+          "value": "Git for version control",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I used Git for version control and PostgreSQL for the production database.",
+              "start": 765,
+              "end": 839
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:11",
+          "attribute": "tool",
+          "value": "PostgreSQL for the production database",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I used Git for version control and PostgreSQL for the production database.",
+              "start": 765,
+              "end": 839
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:12",
+          "attribute": "action",
+          "value": "Kept empty rows visible because a blank reference might need a phone call",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "We kept them visible because a blank reference might need a phone call.",
+              "start": 2631,
+              "end": 2702
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:13",
+          "attribute": "context",
+          "value": "Source file could arrive late; operators preferred a visible warning",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "The source file could arrive late and the operators preferred a visible warning.",
+              "start": 2405,
+              "end": 2485
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:14",
+          "attribute": "action",
+          "value": "Handbook described where a coworker should look before raising an exception",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "The handbook described where a coworker should look before raising an exception.",
+              "start": 2703,
+              "end": 2783
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:15",
+          "attribute": "scope",
+          "value": "Supervisor made the final dispatch decision",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "The supervisor made the final dispatch decision.",
+              "start": 2936,
+              "end": 2984
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:21",
+          "attribute": "correction",
+          "value": "Reconciliation time, not delivery time, was measured",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only.",
+              "start": 3400,
+              "end": 3564
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:22",
+          "attribute": "context",
+          "value": "Coworkers also changed their checking habits; improvement cannot all be attributed to Ada Rowan",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "I cannot attribute all improvement to myself because coworkers also changed their checking habits.",
+              "start": 3565,
+              "end": 3663
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "historical-warning:23",
+          "attribute": "context",
+          "value": "One piece of work, not separate products for the SQL checks, Python parser, Git changes, or PostgreSQL data",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "These are different perspectives on one piece of work. The SQL checks and Python parser were useful together. Git held the changes, and PostgreSQL stored the production data; those were not separate products.",
+              "start": 3749,
+              "end": 3957
+            }
+          ],
+          "availability": "CONFIRMED"
+        },
+        {
+          "attribute": "context",
+          "value": "First-person source author is Ada Rowan",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "My name is Ada Rowan.",
+              "start": 33,
+              "end": 54
+            }
+          ],
+          "ref": "approved-profile-actor"
+        }
+      ],
+      "constraints": [
+        {
+          "value": "Delivery speed was not measured",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "Delivery speed was not measured.",
+              "start": 3472,
+              "end": 3504
+            }
+          ]
+        },
+        {
+          "value": "Machine-learning classifier was not involved in the rules",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "There was no machine-learning classifier involved in these rules.",
+              "start": 2784,
+              "end": 2849
+            }
+          ]
+        },
+        {
+          "value": "Did not own the warehouse staffing budget",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+              "start": 3030,
+              "end": 3113
+            }
+          ]
+        },
+        {
+          "value": "Did not own procurement",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+              "start": 3030,
+              "end": 3113
+            }
+          ]
+        },
+        {
+          "value": "Did not own the scheduling system",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+              "start": 3030,
+              "end": 3113
+            }
+          ]
+        }
+      ],
+      "bullet": "Internal dispatch reconciliation tool for comparing an overnight spreadsheet with a daily export and surfacing understandable exceptions. Personally designed and built by Ada Rowan, who wrote the Python parser and SQL checks; coworkers also changed their checking habits, so the measured improvement was a team result. Operators kept empty rows visible because a blank reference could require a phone call, and late-arriving source files prompted a visible warning. The supervisor made the final dispatch decision."
+    }
+  ],
+  "decisions": [
+    {
+      "id": "historical-full-context-safe",
+      "verdict": "FAIL",
+      "assertions": [
+        {
+          "text": "Ada Rowan wrote the Python parser and SQL checks;",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["historical-warning:3", "approved-profile-actor"],
+          "reason": "The source says the first-person author wrote the Python parser and SQL checks, and identifies that author as Ada Rowan."
+        },
+        {
+          "text": " operators preferred a visible warning",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["historical-warning:13"],
+          "reason": "The claim says operators preferred a visible warning."
+        },
+        {
+          "text": " for late files.",
+          "verdict": "UNSUPPORTED",
+          "claimRefs": [],
+          "reason": "The evidence says a source file could arrive late and operators preferred a visible warning; it does not establish that the warning was specifically for late files."
+        }
+      ],
+      "reason": "The final phrase makes an unsupported connection between late files and the warning."
+    },
+    {
+      "id": "historical-full-context-warning",
+      "verdict": "FAIL",
+      "assertions": [
+        {
+          "text": "Ada Rowan wrote the Python parser and SQL checks",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["historical-warning:3", "approved-profile-actor"],
+          "reason": "The source says the first-person author wrote the Python parser and SQL checks, and identifies that author as Ada Rowan."
+        },
+        {
+          "text": " and implemented a visible warning for late files.",
+          "verdict": "UNSUPPORTED",
+          "claimRefs": [],
+          "reason": "The evidence records operators' preference for a visible warning, not that Ada implemented one or that it was for late files."
+        }
+      ],
+      "reason": "The bullet turns an operator preference into a personally implemented feature."
+    },
+    {
+      "id": "historical-full-context-original",
+      "verdict": "FAIL",
+      "assertions": [
+        {
+          "text": "Internal",
+          "verdict": "UNSUPPORTED",
+          "claimRefs": [],
+          "reason": "The evidence does not establish that the tool was internal."
+        },
+        {
+          "text": " dispatch reconciliation tool",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["historical-warning:0"],
+          "reason": "The source identifies Dispatch Loom as a dispatch reconciliation tool."
+        },
+        {
+          "text": " for comparing an overnight spreadsheet with a daily export",
+          "verdict": "UNCERTAIN",
+          "claimRefs": [],
+          "reason": "The evidence says operators compared the overnight spreadsheet with the daily export, but does not establish that this was the tool's function."
+        },
+        {
+          "text": " and surfacing understandable exceptions.",
+          "verdict": "UNSUPPORTED",
+          "claimRefs": [],
+          "reason": "The claims do not establish that the tool surfaced understandable exceptions."
+        },
+        {
+          "text": " Personally designed and built by Ada Rowan,",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["historical-warning:0", "approved-profile-actor"],
+          "reason": "The source says the first-person author personally designed and built Dispatch Loom and identifies the author as Ada Rowan."
+        },
+        {
+          "text": " who wrote the Python parser and SQL checks;",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["historical-warning:3", "approved-profile-actor"],
+          "reason": "The source says the first-person author wrote the Python parser and SQL checks and identifies the author as Ada Rowan."
+        },
+        {
+          "text": " coworkers also changed their checking habits,",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["historical-warning:22"],
+          "reason": "The source says coworkers also changed their checking habits."
+        },
+        {
+          "text": " so the measured improvement was a team result.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["historical-warning:4", "historical-warning:5"],
+          "reason": "The measured reconciliation-time improvement is explicitly described as a team result."
+        },
+        {
+          "text": " Operators kept empty rows visible because a blank reference could require a phone call,",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["historical-warning:12"],
+          "reason": "The source says the team kept empty rows visible because a blank reference might need a phone call."
+        },
+        {
+          "text": " and late-arriving source files prompted a visible warning.",
+          "verdict": "UNSUPPORTED",
+          "claimRefs": [],
+          "reason": "The evidence says a source file could arrive late and operators preferred a visible warning; it does not say late files prompted a warning."
+        },
+        {
+          "text": " The supervisor made the final dispatch decision.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["historical-warning:15"],
+          "reason": "The claim explicitly says the supervisor made the final dispatch decision."
+        }
+      ],
+      "reason": "The bullet includes unsupported internal status and exception-surfacing claims, and attributes warning behavior to late files without evidence; the comparison-function phrasing is also ambiguous."
+    }
+  ],
+  "scope": "All source-reviewed project context plus exact known profile identity, not a missing-evidence proxy; original paragraph retained unchanged. Warning implementation must still fail."
+}

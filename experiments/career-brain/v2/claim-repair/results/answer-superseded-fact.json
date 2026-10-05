@@ -1,0 +1,41 @@
+{
+  "id": "superseded-fact",
+  "question": "Did the candidate supervise five or eight direct reports?",
+  "packets": [
+    {
+      "id": "corrected-supervision",
+      "claims": [
+        {
+          "attribute": "scope",
+          "value": "Supervised five direct reports",
+          "attribution": "PERSONAL",
+          "availability": "SUPERSEDED",
+          "evidence": [
+            {
+              "quote": "I originally said five direct reports, but that was wrong.",
+              "start": 0,
+              "end": 58
+            }
+          ]
+        },
+        {
+          "attribute": "scope",
+          "value": "Supervised eight direct reports",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I supervised eight direct reports, not five.",
+              "start": 0,
+              "end": 44
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "answer": {
+    "answer": "The candidate supervised eight direct reports. The earlier figure of five was corrected and is superseded.",
+    "evidence_ids": ["corrected-supervision"]
+  }
+}

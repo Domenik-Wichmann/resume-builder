@@ -1,0 +1,20 @@
+{
+  "primaryCounts": {
+    "profile": 0,
+    "experiences": 0,
+    "projects": 0,
+    "achievements": 0,
+    "skills": 0,
+    "education": 0,
+    "certifications": 0,
+    "languages": 0,
+    "skill_categories": 0,
+    "career_sources": 0,
+    "career_imports": 0,
+    "career_embeddings": 0,
+    "provider_usage_events": 19
+  },
+  "remainingQualificationAuthUsers": 0,
+  "allPrimaryCareerTablesEmpty": true,
+  "readOnly": true
+}
