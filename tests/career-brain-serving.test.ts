@@ -12,6 +12,7 @@ import type { Gate } from "../src/lib/career-brain/provider";
 import { proposeBrain } from "../src/lib/career-brain/propose";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { BrainRecord } from "../src/lib/career-brain/repository";
+import { completeSource } from "../src/lib/career-brain/source";
 vi.mock("../src/lib/ai/openrouter", () => ({ complete: vi.fn() }));
 const gate: Gate = async (_label, _provider, call) => call();
 const presentation = {
@@ -36,6 +37,31 @@ async function input() {
   };
 }
 beforeEach(() => vi.mocked(complete).mockReset());
+it("MANUAL silence cannot archive unrelated approved career records", async () => {
+  const data = JSON.parse(
+    await readFile(
+      "experiments/career-brain/v2/omission-repair/results/repeat-state.json",
+      "utf8",
+    ),
+  );
+  const current = data.current.map((r: BrainRecord) => ({
+    ...r,
+    evidence_version: null,
+  })) as BrainRecord[];
+  vi.mocked(complete)
+    .mockResolvedValueOnce({ conflicts: [] })
+    .mockResolvedValueOnce({ records: [] });
+  const result = await proposeBrain(
+    {} as SupabaseClient,
+    "test",
+    "A supplemental source about another project.",
+    current,
+    completeSource("MANUAL"),
+    gate,
+  );
+  expect(result.changes).toEqual([]);
+  expect(current.length).toBeGreaterThan(0);
+});
 it("renders only independently verified admitted claims; summaries, sibling warnings, skills and profile claims cannot leak into Resume IR", async () => {
   const q = await input();
   vi.mocked(complete).mockResolvedValueOnce({
