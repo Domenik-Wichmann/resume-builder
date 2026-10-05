@@ -151,6 +151,7 @@ export async function applyBrain(
     before: Canonical | null;
     after: Candidate | null;
     status: string;
+    presentation_edit?: boolean;
   }[],
   current: BrainRecord[],
 ) {
@@ -175,7 +176,13 @@ export async function applyBrain(
         );
       return [];
     }
-    if (change.status === "UNCHANGED") return [];
+    // Factual equivalence remains UNCHANGED. Only an explicit owner revision
+    // may persist an editorial correction; generated rewording remains a no-op.
+    if (
+      change.status === "UNCHANGED" &&
+      (!change.presentation_edit || semanticHash(record) === old?.hash)
+    )
+      return [];
     return [
       { ...record, ...baseline, action: "UPSERT", hash: semanticHash(record) },
     ];

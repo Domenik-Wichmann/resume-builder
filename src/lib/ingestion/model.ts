@@ -87,6 +87,7 @@ export type Canonical = Candidate & {
   updated_at: string;
 };
 export type Change = {
+  presentation_edit?: boolean;
   identity: string;
   status: "ADDED" | "UNCHANGED" | "UPDATED" | "REMOVED" | "REVIEW";
   before: Canonical | null;
