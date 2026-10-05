@@ -238,6 +238,15 @@ export async function POST(request: NextRequest) {
           : []) as (typeof current)[number]["claims"],
       }));
       const revised = stateDiff(rich, current, actorFor(current), false);
+      const priorPresentationEdits = new Set(
+        changes.filter((c) => c.presentation_edit).map((c) => c.identity),
+      );
+      for (const change of revised)
+        if (
+          change.identity === changes[input.index].identity ||
+          priorPresentationEdits.has(change.identity)
+        )
+          change.presentation_edit = true;
       revised.push(
         ...changes.filter(
           (change) =>
