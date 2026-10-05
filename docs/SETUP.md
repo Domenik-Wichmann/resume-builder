@@ -119,6 +119,21 @@ requires the exact owner UUID before any private read or tracking-link creation.
 Sessions last at most one hour; sign in again after expiry. This application
 does not hash or store passwords, and has no public administrator signup.
 
+Both sign-in forms include **Forgot password?**, which opens
+`/auth/forgot-password`. Supabase emails a recovery link; open it in the same
+browser, then choose and confirm a password of at least 12 characters. Recovery
+uses a separate HttpOnly PKCE verifier and a ten-minute reset session. It never
+grants administrator access; sign in normally after changing the password.
+Expired or already-used links show a way to request another link.
+
+Set Supabase Auth's site URL to the canonical `NEXT_PUBLIC_SITE_URL` and allow
+`/auth/recovery` and `/auth/callback` redirects on that origin. The production
+values are declared in `supabase/config.toml`; review `npx supabase config diff`
+before applying them. Preserve existing email, MFA, and signup settings.
+Supabase's built-in email service only delivers to project team members; configure
+custom SMTP before enabling recovery for other existing accounts. Auth email
+rate limits remain enforced by Supabase.
+
 The owner area shows measured retained counts, recent questions/workspaces,
 topic signals, and tracking-link creation. Completed PDF saves and ordinary
 untracked visits are not claimed as measured metrics.

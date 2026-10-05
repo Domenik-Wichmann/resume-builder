@@ -1,6 +1,7 @@
 ﻿"use client";
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { ForgotPasswordButton } from "./password-recovery";
 export function AccountLogin({
   google,
   github,
@@ -58,6 +59,7 @@ export function AccountLogin({
         required
       />
       <button disabled={busy}>Sign in</button>
+      <ForgotPasswordButton />
       {google && (
         <a href="/api/auth/oauth?provider=google">Continue with Google</a>
       )}

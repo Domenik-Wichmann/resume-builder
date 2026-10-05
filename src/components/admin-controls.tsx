@@ -1,6 +1,7 @@
 "use client";
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { ForgotPasswordButton } from "./password-recovery";
 export function OwnerLogin() {
   const [error, setError] = useState(""),
     [busy, setBusy] = useState(false);
@@ -51,6 +52,7 @@ export function OwnerLogin() {
         required
       />
       <button disabled={busy}>{busy ? "Signing in…" : "Sign in"}</button>
+      <ForgotPasswordButton />
       {error && <p role="alert">{error}</p>}
     </form>
   );
