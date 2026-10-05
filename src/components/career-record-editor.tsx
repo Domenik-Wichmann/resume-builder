@@ -132,7 +132,9 @@ export function CareerRecordEditor({
         />
         {!["skill", "category"].includes(row.kind) && (
           <>
-            <label htmlFor="edit-record-subtitle">Subtitle</label>
+            <label htmlFor="edit-record-subtitle">
+              {row.kind === "profile" ? "Headline" : "Subtitle"}
+            </label>
             <input
               id="edit-record-subtitle"
               maxLength={300}

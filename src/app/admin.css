@@ -968,3 +968,7 @@
     -webkit-box-orient: vertical;
   }
 }
+
+.canonical-card {
+  scroll-margin-top: 20px;
+}

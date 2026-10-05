@@ -24,6 +24,7 @@ export const resumeIRSchema = z.object({
   education: z.array(sectionRecord),
   certifications: z.array(sectionRecord),
   supporting_sections: z.array(sectionRecord),
+  languages: z.array(sectionRecord).optional(),
   demo: z.boolean(),
   section_order: z
     .array(

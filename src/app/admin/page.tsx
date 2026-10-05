@@ -84,6 +84,27 @@ export default async function Admin() {
         </div>
         <OwnerLogout />
       </div>
+      <section
+        className="admin-shortcuts"
+        aria-label="Manage your career workspace"
+      >
+        <Link href="/admin/presentation">
+          <strong>Personal information & photos</strong>
+          <span>Name, introduction, contact details and portrait library</span>
+        </Link>
+        <Link href="/admin/templates">
+          <strong>Resume design & templates</strong>
+          <span>Upload a reference, draft a design, preview and reuse it</span>
+        </Link>
+        <Link href="/admin/explore">
+          <strong>Career explorer</strong>
+          <span>Review evidence, edit connected records and publish</span>
+        </Link>
+        <Link href="/admin/projects">
+          <strong>Project showcase</strong>
+          <span>Manage project pages, links and project images</span>
+        </Link>
+      </section>
       <section id="overview" className="admin-metrics">
         {[
           ["Tracked landing events", landing.count || 0],
