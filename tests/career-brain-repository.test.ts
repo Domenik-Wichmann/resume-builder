@@ -3,6 +3,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { loadCanonical } from "../src/lib/ingestion/repository";
 import { loadBrain, sourceRevision } from "../src/lib/career-brain/repository";
 import { readFile } from "node:fs/promises";
+import { semanticHash } from "../src/lib/ingestion/diff";
 import type { BrainRecord } from "../src/lib/career-brain/repository";
 vi.mock("../src/lib/ingestion/repository", () => ({ loadCanonical: vi.fn() }));
 async function sample(): Promise<BrainRecord> {
@@ -40,7 +41,7 @@ it("withholds legacy and stale canonical claims instead of fabricating evidence"
         kind: r.kind,
         entity_id: r.id,
         canonical_version: "stale",
-        canonical_hash: r.hash,
+        canonical_hash: "stale",
         claims: r.claims,
         aliases: [],
       },
@@ -102,4 +103,44 @@ it("does not mistake a partially accepted source revision for reviewed proof of 
   expect(await sourceRevision(db, "tenant", undefined, [current])).toContain(
     "Latest correction",
   );
+});
+it("retains approved proof after publication timestamp changes and rejects an actual edit carrying the old stored hash", async () => {
+  const r = await sample();
+  const row = {
+    ...r,
+    hash: semanticHash(r),
+    updated_at: "2026-10-05T00:00:00Z",
+    published: true,
+  };
+  const quote = r.claims[0].evidence[0].quote;
+  const sourceId = "11111111-1111-4111-8111-111111111111";
+  const db = database({
+    career_record_evidence: [
+      {
+        kind: r.kind,
+        entity_id: r.id,
+        canonical_version: r.updated_at,
+        canonical_hash: row.hash,
+        aliases: [],
+        claims: [
+          {
+            ...r.claims[0],
+            availability: "CONFIRMED",
+            evidence: [
+              { quote, start: 0, end: quote.length, source_id: sourceId },
+            ],
+          },
+        ],
+      },
+    ],
+    career_sources: [{ id: sourceId, evidence_text: quote }],
+  });
+  vi.mocked(loadCanonical).mockResolvedValue([row]);
+  expect((await loadBrain(db, "tenant", true))[0].claims[0].availability).toBe(
+    "CONFIRMED",
+  );
+  vi.mocked(loadCanonical).mockResolvedValue([
+    { ...row, summary: "Unreviewed implementation with the old stored hash" },
+  ]);
+  expect((await loadBrain(db, "tenant", true))[0].claims).toEqual([]);
 });

@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { it, expect } from "vitest";
 import type { BrainRecord } from "../src/lib/career-brain/repository";
 import { usable } from "../src/lib/career-brain/state";
+import { semanticHash } from "../src/lib/ingestion/diff";
 it("qualifies seven factual transitions using actual owner-reviewed production database states, without rewarding summary wording", async () => {
   const data = JSON.parse(
     await readFile(
@@ -14,6 +15,8 @@ it("qualifies seven factual transitions using actual owner-reviewed production d
     v3: { state: BrainRecord[] };
   };
   const [v1, v2, v3] = [data.v1.state, data.v2.state, data.v3.state];
+  for (const row of [...v1, ...v2, ...v3])
+    expect(semanticHash(row)).toBe(row.hash);
   expect(v1.find((r) => r.kind === "experience")!.end_date).toBe("2024-05-31");
   expect(v2.find((r) => r.kind === "experience")!.end_date).toBe("2024-06-30");
   const cert = (records: BrainRecord[]) =>

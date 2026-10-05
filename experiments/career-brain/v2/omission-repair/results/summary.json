@@ -680,6 +680,13 @@
       "authRemoved": true,
       "primaryBefore": 0,
       "primaryAfter": 0
+    },
+    {
+      "stage": "publication-smoke",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
     }
   ],
   "automatedGates": {

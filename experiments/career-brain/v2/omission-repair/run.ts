@@ -218,7 +218,10 @@ try {
         availability: "CONFIRMED" as const,
       })),
     }));
-  if (stage === "production-smoke") {
+  if (stage === "publication-smoke") {
+    const { publicationSmoke } = await import("./publication-smoke");
+    await publicationSmoke(owner, accountId, inputs, write);
+  } else if (stage === "production-smoke") {
     const { productionSmoke } = await import("./production-smoke");
     await productionSmoke(owner, accountId, gate, inputs, write);
   } else if (stage === "repeat" || stage === "canaries") {
@@ -899,7 +902,9 @@ try {
       "project_skills",
       "experience_skills",
       "achievement_skills",
-      ...(stage === "production-smoke" ? ["career_record_evidence"] : []),
+      ...(["production-smoke", "publication-smoke"].includes(stage)
+        ? ["career_record_evidence"]
+        : []),
       "career_imports",
       ...kinds.map((k) => tableFor[k]),
       "career_sources",

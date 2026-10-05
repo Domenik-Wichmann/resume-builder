@@ -73,8 +73,10 @@ export async function loadBrain(
     const claims = z.array(storedClaim).max(100).safeParse(e?.claims);
     const valid =
       claims.success &&
-      e?.canonical_version === r.updated_at &&
-      e.canonical_hash === r.hash;
+      e?.canonical_hash === r.hash &&
+      // Publication changes updated_at without changing approved facts. Recompute
+      // the actual canonical fields so a stale/forged stored hash cannot license edits.
+      semanticHash(r) === r.hash;
     return {
       ...r,
       aliases:
