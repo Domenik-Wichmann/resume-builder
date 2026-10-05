@@ -127,3 +127,14 @@ Independent audits are fallible, so imports are never automatically accepted.
 Legacy records need an evidence backfill before supporting generated claims.
 Initial ingest remains synchronous and bounded by the platform function duration.
 These are owner-review/product bounds; no remaining omission-promotion blocker.
+
+## Publication follow-up
+
+A visibility update changes the canonical row timestamp without changing facts.
+The loader now checks the approved hash against both the stored hash and a fresh
+hash of the actual canonical fields. This retains reviewed proof through publication
+while withholding direct edits that carry an old stored hash. Optimistic canonical
+and metadata versions still protect writes. A zero-provider live private smoke
+confirmed timestamp-only preservation and rejection of an unreviewed title edit.
+No fixture was published, even temporarily. The 48 actual reviewed production
+snapshot records also match their recomputed hashes.

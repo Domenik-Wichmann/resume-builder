@@ -1,0 +1,9 @@
+{
+  "providerCalls": 0,
+  "reviewedRecords": 2,
+  "originalClaims": 21,
+  "preservedClaimsAfterVisibilityTimestamp": 21,
+  "unpublishedThroughout": true,
+  "changedCanonicalFieldsWithOldStoredHashBlocked": true,
+  "primaryUntouched": true
+}

@@ -1047,6 +1047,9 @@
     },
     "production-smoke": {
       "outcome": "SUCCESS"
+    },
+    "publication-smoke": {
+      "outcome": "SUCCESS"
     }
   },
   "cleanup": [
@@ -1129,6 +1132,13 @@
     },
     {
       "stage": "production-smoke",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "publication-smoke",
       "accountRemoved": true,
       "authRemoved": true,
       "primaryBefore": 0,
