@@ -1,0 +1,49 @@
+{
+  "id": "support-docker-exposure",
+  "text": "Has Ada had any Docker exposure?",
+  "packets": [
+    {
+      "id": "e6169e95-8b37-4e86-8281-7b0f3e0bf450",
+      "kind": "skill",
+      "title": "Docker",
+      "organization": null,
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "summary": "Docker one-off guided local exposure, no production deployment",
+      "aliases": [],
+      "skills": [],
+      "outcomes": [],
+      "claims": [
+        {
+          "attribute": "depth",
+          "value": "Docker one-off guided local exposure, no production deployment",
+          "attribution": "EXPOSURE",
+          "evidence": [
+            {
+              "quote": "For Local Box, I tried Docker once in a guided local exercise; I have no production deployment experience.",
+              "start": 0,
+              "end": 106
+            }
+          ]
+        }
+      ],
+      "uncertainties": [],
+      "relatedIds": [],
+      "support": "PARTIALLY_SUPPORTS",
+      "reason": "Ada reports trying Docker once in a guided local exercise, which establishes limited exposure, not deeper proficiency."
+    }
+  ],
+  "expected": [
+    {
+      "id": "e6169e95-8b37-4e86-8281-7b0f3e0bf450",
+      "support": "SUPPORTS"
+    }
+  ],
+  "answerGroup": "DIRECT",
+  "result": {
+    "answer": "Yes. Ada tried Docker once in a guided local exercise and has no production deployment experience.",
+    "evidence_ids": ["e6169e95-8b37-4e86-8281-7b0f3e0bf450"]
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "id": "support-automation",
+  "text": "Has Ada automated repetitive reconciliation work?",
+  "packets": [
+    {
+      "id": "16639d0d-e746-4fca-8880-b459df8b978b",
+      "kind": "project",
+      "title": "Dispatch Loom",
+      "organization": "Harbor Tools",
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "summary": "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements.",
+      "aliases": ["Dispatch Loom", "Loom", "dispatch reconciliation tool"],
+      "skills": ["Python", "SQL", "PostgreSQL", "Git", "Coworker training"],
+      "outcomes": [
+        "Team reconciliation time fell from 5 to 2 hours per week over six runs; Ada contributed the parser and checks.",
+        "Personally trained 12 dispatch coworkers in two workshops and wrote a handbook."
+      ],
+      "claims": [
+        {
+          "attribute": "ownership",
+          "value": "Personal contribution was parser and checks",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks.",
+              "start": 333,
+              "end": 506
+            },
+            {
+              "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself.",
+              "start": 166,
+              "end": 331
+            }
+          ]
+        },
+        {
+          "attribute": "metric",
+          "value": "Team reconciliation time fell from 5 to 2 hours per week over six weekly runs",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks.",
+              "start": 333,
+              "end": 506
+            }
+          ]
+        },
+        {
+          "attribute": "action",
+          "value": "Personally designed Dispatch Loom; wrote Python parser and SQL checks",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself.",
+              "start": 166,
+              "end": 331
+            }
+          ]
+        },
+        {
+          "attribute": "action",
+          "value": "Personally trained 12 dispatch coworkers in two workshops and wrote a handbook",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+              "start": 508,
+              "end": 622
+            }
+          ]
+        },
+        {
+          "attribute": "tool",
+          "value": "Python; SQL; PostgreSQL; Git",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself.",
+              "start": 166,
+              "end": 331
+            },
+            {
+              "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them. I used Git for version control and PostgreSQL for the production database.",
+              "start": 624,
+              "end": 806
+            }
+          ]
+        },
+        {
+          "attribute": "context",
+          "value": "Gathered warehouse supervisor requirements and explained validation failures",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them. I used Git for version control and PostgreSQL for the production database.",
+              "start": 624,
+              "end": 806
+            }
+          ]
+        }
+      ],
+      "uncertainties": [],
+      "relatedIds": [
+        "96c237ee-893d-4e60-875a-aaba7d0023a6",
+        "aab4126b-3887-4b36-8e10-ab3d2d5558b4",
+        "797ce1db-ec3b-483f-805d-e57957539b51",
+        "61d13bb9-743b-44e8-8f78-45c2bcf6d55a",
+        "9c7c4d8c-0a88-4857-80e9-442ed17062b9",
+        "df3efca0-51a3-4617-8928-6b5460f826dd",
+        "fbbeb9e7-c524-4fc8-8dde-650af34ceb6e"
+      ],
+      "support": "PARTIALLY_SUPPORTS",
+      "reason": "Ada personally built a dispatch reconciliation tool with a parser and SQL checks, and the team recorded reduced reconciliation time; this is indirect evidence of automation, though automation is not explicitly stated."
+    }
+  ],
+  "expected": [
+    {
+      "id": "16639d0d-e746-4fca-8880-b459df8b978b",
+      "support": "SUPPORTS"
+    }
+  ],
+  "answerGroup": "DIRECT",
+  "result": {
+    "answer": "Ada personally built a dispatch reconciliation tool with a Python parser and SQL checks. The team’s reconciliation time fell from 5 to 2 hours per week over six runs. This is indirect evidence of automating repetitive reconciliation work; the evidence does not explicitly describe it as automation.",
+    "evidence_ids": ["16639d0d-e746-4fca-8880-b459df8b978b"]
+  }
+}

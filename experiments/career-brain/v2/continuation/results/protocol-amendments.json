@@ -1,0 +1,36 @@
+{
+  "scope": "Additive execution notes; initial inputs, source/gold labels and snapshots are preserved separately.",
+  "amendments": [
+    {
+      "phase": "Before sequential native calls",
+      "change": "Map the reviewed new Roster Note SQL relationship to the existing application-owned SQL key rather than the compact gold's temporary sql hint.",
+      "reason": "A fixture relationship must not reintroduce model-owned identity or refer to a nonexistent canonical key."
+    },
+    {
+      "phase": "Before targeted Sol call",
+      "change": "Add warning-sol stage using the unchanged retained R4 paragraph, original source and existing bounded audit contract.",
+      "reason": "Paired investigation of the full historical preference-to-implementation failure; no repaired model input and no provider-side subagents."
+    },
+    {
+      "phase": "Before first support call",
+      "change": "Apply separately frozen support-supplement-1.json while retaining the original input file and hash.",
+      "reason": "Source inspection distinguishes explicit Docker deployment denial from mere exposure, and a particular certificate's license status from all possible licenses."
+    },
+    {
+      "phase": "After retained V3 equivalence output",
+      "change": "Add post-equivalence diagnostic audit without changing or applying the earlier native output.",
+      "reason": "Check whether current-source conflicts survive claim restoration. Historical source-ID-aware span validation remains application-owned."
+    }
+  ],
+  "verification": {
+    "originalQualification": "PASS",
+    "repairQualification": "PASS",
+    "continuationQualification": "PASS",
+    "tests": 104,
+    "formatLintTypecheck": "PASS",
+    "build": "PASS",
+    "historicalArtifactHashes": 38,
+    "historicalArtifactsUnchanged": true,
+    "originalEnvironmentBytesRestored": true
+  }
+}

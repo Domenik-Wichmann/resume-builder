@@ -1,0 +1,49 @@
+{
+  "id": "support-discussion-performed",
+  "text": "Did Ada perform the Table Bridge database migration?",
+  "packets": [
+    {
+      "id": "d6e615f6-a8da-4d2d-8406-e482915d16e2",
+      "kind": "project",
+      "title": "Discussed migration",
+      "organization": null,
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "summary": "Team discussed a database migration without performing it",
+      "aliases": [],
+      "skills": [],
+      "outcomes": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Team discussed a database migration without performing it",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "For Table Bridge, we discussed a database migration, but did not perform it.",
+              "start": 0,
+              "end": 76
+            }
+          ]
+        }
+      ],
+      "uncertainties": [],
+      "relatedIds": [],
+      "support": "CONTRADICTS",
+      "reason": "The packet says the team discussed the database migration but did not perform it."
+    }
+  ],
+  "expected": [
+    {
+      "id": "d6e615f6-a8da-4d2d-8406-e482915d16e2",
+      "support": "CONTRADICTS"
+    }
+  ],
+  "answerGroup": "UNSUPPORTED",
+  "result": {
+    "answer": "No. The team discussed the Table Bridge database migration but did not perform it, so the evidence does not show Ada performing the migration.",
+    "evidence_ids": ["d6e615f6-a8da-4d2d-8406-e482915d16e2"]
+  }
+}

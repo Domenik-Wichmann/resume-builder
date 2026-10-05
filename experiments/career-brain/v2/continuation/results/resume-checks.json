@@ -1,0 +1,1564 @@
+{
+  "checks": [
+    {
+      "id": "support-warning-wanted",
+      "answerGroup": "DIRECT",
+      "expected": [
+        {
+          "id": "b379ea2c-9f3a-4c72-80f5-bf9d53a2eb91",
+          "support": "SUPPORTS"
+        }
+      ],
+      "admittedIds": ["b379ea2c-9f3a-4c72-80f5-bf9d53a2eb91"],
+      "compiledIds": ["b379ea2c-9f3a-4c72-80f5-bf9d53a2eb91"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Warning preference",
+            "context": "",
+            "organization": null,
+            "role": "Warning preference",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Operators preferred a visible warning; implementation is not stated"
+            ],
+            "evidence_ids": ["b379ea2c-9f3a-4c72-80f5-bf9d53a2eb91"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-warning-implemented",
+      "answerGroup": "UNSUPPORTED",
+      "expected": [
+        {
+          "id": "b379ea2c-9f3a-4c72-80f5-bf9d53a2eb91",
+          "support": "RELATED_ONLY"
+        }
+      ],
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-plan-completed",
+      "answerGroup": "UNSUPPORTED",
+      "expected": [
+        {
+          "id": "f420a553-30ce-4471-8345-a628fe32e030",
+          "support": "CONTRADICTS"
+        }
+      ],
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-plan-intended",
+      "answerGroup": "DIRECT",
+      "expected": [
+        {
+          "id": "f420a553-30ce-4471-8345-a628fe32e030",
+          "support": "SUPPORTS"
+        }
+      ],
+      "admittedIds": ["f420a553-30ce-4471-8345-a628fe32e030"],
+      "compiledIds": ["f420a553-30ce-4471-8345-a628fe32e030"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Planned rollout",
+            "context": "",
+            "organization": null,
+            "role": "Planned rollout",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": ["Planned a future rollout; not completed"],
+            "evidence_ids": ["f420a553-30ce-4471-8345-a628fe32e030"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-discussion-performed",
+      "answerGroup": "UNSUPPORTED",
+      "expected": [
+        {
+          "id": "d6e615f6-a8da-4d2d-8406-e482915d16e2",
+          "support": "CONTRADICTS"
+        }
+      ],
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-discussion-held",
+      "answerGroup": "DIRECT",
+      "expected": [
+        {
+          "id": "d6e615f6-a8da-4d2d-8406-e482915d16e2",
+          "support": "SUPPORTS"
+        }
+      ],
+      "admittedIds": ["d6e615f6-a8da-4d2d-8406-e482915d16e2"],
+      "compiledIds": ["d6e615f6-a8da-4d2d-8406-e482915d16e2"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Discussed migration",
+            "context": "",
+            "organization": null,
+            "role": "Discussed migration",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Team discussed a database migration without performing it"
+            ],
+            "evidence_ids": ["d6e615f6-a8da-4d2d-8406-e482915d16e2"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-guide-personal",
+      "answerGroup": "DIRECT",
+      "expected": [
+        {
+          "id": "c0973e9a-fb7d-4cf0-8ec2-9ee321072f4f",
+          "support": "SUPPORTS"
+        }
+      ],
+      "admittedIds": ["c0973e9a-fb7d-4cf0-8ec2-9ee321072f4f"],
+      "compiledIds": ["c0973e9a-fb7d-4cf0-8ec2-9ee321072f4f"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Beacon",
+            "context": "",
+            "organization": null,
+            "role": "Beacon",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally wrote only Beacon's user guide; did not build model or deployment"
+            ],
+            "evidence_ids": ["c0973e9a-fb7d-4cf0-8ec2-9ee321072f4f"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-guide-deploy",
+      "answerGroup": "UNSUPPORTED",
+      "expected": [
+        {
+          "id": "c0973e9a-fb7d-4cf0-8ec2-9ee321072f4f",
+          "support": "CONTRADICTS"
+        }
+      ],
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-docker-exposure",
+      "answerGroup": "DIRECT",
+      "expected": [
+        {
+          "id": "e6169e95-8b37-4e86-8281-7b0f3e0bf450",
+          "support": "SUPPORTS"
+        }
+      ],
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-docker-production",
+      "answerGroup": "UNSUPPORTED",
+      "expected": [
+        {
+          "id": "e6169e95-8b37-4e86-8281-7b0f3e0bf450",
+          "support": "CONTRADICTS"
+        }
+      ],
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-leadership-bounded",
+      "answerGroup": "PARTIAL",
+      "expected": [
+        {
+          "id": "aab4126b-3887-4b36-8e10-ab3d2d5558b4",
+          "support": "PARTIALLY_SUPPORTS"
+        }
+      ],
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-headcount-training",
+      "answerGroup": "UNSUPPORTED",
+      "expected": [
+        {
+          "id": "aab4126b-3887-4b36-8e10-ab3d2d5558b4",
+          "support": "RELATED_ONLY"
+        }
+      ],
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-sql-aws-mixed",
+      "answerGroup": "PARTIAL",
+      "expected": [
+        {
+          "id": "61d13bb9-743b-44e8-8f78-45c2bcf6d55a",
+          "support": "PARTIALLY_SUPPORTS"
+        }
+      ],
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-sql-certificate",
+      "answerGroup": "UNSUPPORTED",
+      "expected": [
+        {
+          "id": "61d13bb9-743b-44e8-8f78-45c2bcf6d55a",
+          "support": "RELATED_ONLY"
+        }
+      ],
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-aws-denial",
+      "answerGroup": "UNSUPPORTED",
+      "expected": [
+        {
+          "id": "5546f0f8-f047-42df-8150-95034cfd26b4",
+          "support": "CONTRADICTS"
+        }
+      ],
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-kubernetes-denial",
+      "answerGroup": "UNSUPPORTED",
+      "expected": [
+        {
+          "id": "5546f0f8-f047-42df-8150-95034cfd26b4",
+          "support": "CONTRADICTS"
+        }
+      ],
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-automation",
+      "answerGroup": "DIRECT",
+      "expected": [
+        {
+          "id": "16639d0d-e746-4fca-8880-b459df8b978b",
+          "support": "SUPPORTS"
+        }
+      ],
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-training",
+      "answerGroup": "DIRECT",
+      "expected": [
+        {
+          "id": "aab4126b-3887-4b36-8e10-ab3d2d5558b4",
+          "support": "SUPPORTS"
+        }
+      ],
+      "admittedIds": ["aab4126b-3887-4b36-8e10-ab3d2d5558b4"],
+      "compiledIds": ["aab4126b-3887-4b36-8e10-ab3d2d5558b4"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": ["Coworker training"]
+          }
+        ],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [
+          {
+            "title": "Dispatch coworker training",
+            "context": "",
+            "organization": null,
+            "role": "Dispatch coworker training",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally trained 12 dispatch coworkers in two workshops and wrote a handbook."
+            ],
+            "evidence_ids": ["aab4126b-3887-4b36-8e10-ab3d2d5558b4"],
+            "priority": 0
+          }
+        ],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-degree",
+      "answerGroup": "DIRECT",
+      "expected": [
+        {
+          "id": "01290c95-e5d4-40d8-8d52-b0f5870b9b91",
+          "support": "SUPPORTS"
+        }
+      ],
+      "admittedIds": ["01290c95-e5d4-40d8-8d52-b0f5870b9b91"],
+      "compiledIds": ["01290c95-e5d4-40d8-8d52-b0f5870b9b91"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [
+          {
+            "title": "BSc in Information Systems",
+            "context": "",
+            "organization": "Cedar College",
+            "role": "BSc in Information Systems",
+            "dates": {
+              "start": "2017-09-01",
+              "end": "2020-06-30"
+            },
+            "bullets": ["BSc in Information Systems."],
+            "evidence_ids": ["01290c95-e5d4-40d8-8d52-b0f5870b9b91"],
+            "priority": 0
+          }
+        ],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-course",
+      "answerGroup": "DIRECT",
+      "expected": [
+        {
+          "id": "30308006-3719-4f7a-8970-8330cb3fba73",
+          "support": "SUPPORTS"
+        }
+      ],
+      "admittedIds": ["30308006-3719-4f7a-8970-8330cb3fba73"],
+      "compiledIds": ["30308006-3719-4f7a-8970-8330cb3fba73"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [
+          {
+            "title": "Cedar SQL Foundations",
+            "context": "",
+            "organization": null,
+            "role": "Cedar SQL Foundations",
+            "dates": {
+              "start": "2020-08-15",
+              "end": null
+            },
+            "bullets": ["Fictional Cedar SQL Foundations certificate."],
+            "evidence_ids": ["30308006-3719-4f7a-8970-8330cb3fba73"],
+            "priority": 0
+          }
+        ],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-license",
+      "answerGroup": "UNSUPPORTED",
+      "expected": [
+        {
+          "id": "30308006-3719-4f7a-8970-8330cb3fba73",
+          "support": "CONTRADICTS"
+        }
+      ],
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-sql-personal",
+      "answerGroup": "DIRECT",
+      "expected": [
+        {
+          "id": "16639d0d-e746-4fca-8880-b459df8b978b",
+          "support": "SUPPORTS"
+        }
+      ],
+      "admittedIds": ["16639d0d-e746-4fca-8880-b459df8b978b"],
+      "compiledIds": ["16639d0d-e746-4fca-8880-b459df8b978b"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["16639d0d-e746-4fca-8880-b459df8b978b"],
+            "priority": 1
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-team-personal",
+      "answerGroup": "UNSUPPORTED",
+      "expected": [
+        {
+          "id": "96c237ee-893d-4e60-875a-aaba7d0023a6",
+          "support": "CONTRADICTS"
+        }
+      ],
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-team-result",
+      "answerGroup": "DIRECT",
+      "expected": [
+        {
+          "id": "96c237ee-893d-4e60-875a-aaba7d0023a6",
+          "support": "SUPPORTS"
+        }
+      ],
+      "admittedIds": ["96c237ee-893d-4e60-875a-aaba7d0023a6"],
+      "compiledIds": ["96c237ee-893d-4e60-875a-aaba7d0023a6"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": ["Python", "SQL"]
+          }
+        ],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [
+          {
+            "title": "Reconciliation time reduction",
+            "context": "",
+            "organization": null,
+            "role": "Reconciliation time reduction",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Team reconciliation time fell from 5 to 2 hours per week over six runs; Ada contributed the parser and checks."
+            ],
+            "evidence_ids": ["96c237ee-893d-4e60-875a-aaba7d0023a6"],
+            "priority": 0
+          }
+        ],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-reports-eight",
+      "answerGroup": "DIRECT",
+      "expected": [
+        {
+          "id": "48f8714c-b91f-4262-8d58-c11b23c5e0a6",
+          "support": "SUPPORTS"
+        }
+      ],
+      "admittedIds": ["48f8714c-b91f-4262-8d58-c11b23c5e0a6"],
+      "compiledIds": ["48f8714c-b91f-4262-8d58-c11b23c5e0a6"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Direct reports",
+            "context": "",
+            "organization": null,
+            "role": "Direct reports",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": ["Supervised eight direct reports, not five"],
+            "evidence_ids": ["48f8714c-b91f-4262-8d58-c11b23c5e0a6"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-reports-five",
+      "answerGroup": "UNSUPPORTED",
+      "expected": [
+        {
+          "id": "48f8714c-b91f-4262-8d58-c11b23c5e0a6",
+          "support": "CONTRADICTS"
+        }
+      ],
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-completed-warning",
+      "answerGroup": "DIRECT",
+      "expected": [
+        {
+          "id": "258c51aa-14d7-44bd-8a0f-53c435b2bf65",
+          "support": "SUPPORTS"
+        }
+      ],
+      "admittedIds": ["258c51aa-14d7-44bd-8a0f-53c435b2bf65"],
+      "compiledIds": ["258c51aa-14d7-44bd-8a0f-53c435b2bf65"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Alert Board",
+            "context": "",
+            "organization": null,
+            "role": "Alert Board",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally implemented the visible warning and completed rollout on 2024-06-30"
+            ],
+            "evidence_ids": ["258c51aa-14d7-44bd-8a0f-53c435b2bf65"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-unrelated-medical",
+      "answerGroup": "UNSUPPORTED",
+      "expected": [
+        {
+          "id": "01290c95-e5d4-40d8-8d52-b0f5870b9b91",
+          "support": "IRRELEVANT"
+        }
+      ],
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-unrelated-language",
+      "answerGroup": "UNSUPPORTED",
+      "expected": [
+        {
+          "id": "f420a553-30ce-4471-8345-a628fe32e030",
+          "support": "IRRELEVANT"
+        }
+      ],
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    },
+    {
+      "id": "support-unrelated-sales",
+      "answerGroup": "UNSUPPORTED",
+      "expected": [
+        {
+          "id": "b379ea2c-9f3a-4c72-80f5-bf9d53a2eb91",
+          "support": "IRRELEVANT"
+        }
+      ],
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedAdmissionIds": [],
+      "escapedIds": []
+    }
+  ],
+  "warningCanary": {
+    "scope": "Controlled malformed-canonical canary, distinct from clean-gold native query results",
+    "sourceFixture": "A-clean-v1",
+    "packet": {
+      "id": "8decb905-306e-489b-84c3-70a2c0a9a546",
+      "kind": "project",
+      "title": "Dispatch Loom",
+      "organization": "Harbor Tools",
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "summary": "Personally wrote SQL checks and implemented a visible warning for late files.",
+      "aliases": ["Dispatch Loom", "Loom", "dispatch reconciliation tool"],
+      "skills": [],
+      "outcomes": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Personally designed Dispatch Loom; wrote Python parser and SQL checks",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself.",
+              "start": 166,
+              "end": 331
+            }
+          ]
+        },
+        {
+          "attribute": "tool",
+          "value": "Python; SQL; PostgreSQL; Git",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself.",
+              "start": 166,
+              "end": 331
+            },
+            {
+              "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them. I used Git for version control and PostgreSQL for the production database.",
+              "start": 624,
+              "end": 806
+            }
+          ]
+        },
+        {
+          "attribute": "context",
+          "value": "Gathered warehouse supervisor requirements and explained validation failures",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them. I used Git for version control and PostgreSQL for the production database.",
+              "start": 624,
+              "end": 806
+            }
+          ]
+        }
+      ],
+      "uncertainties": [],
+      "relatedIds": [],
+      "support": "SUPPORTS"
+    },
+    "admittedIds": ["8decb905-306e-489b-84c3-70a2c0a9a546"],
+    "compiledIds": ["8decb905-306e-489b-84c3-70a2c0a9a546"],
+    "ir": {
+      "profile": {
+        "name": "Ada Rowan",
+        "contact": {
+          "market": "US",
+          "location": "",
+          "contact_email": "",
+          "phone": "",
+          "work_authorization": ""
+        }
+      },
+      "headline": "Operations Analyst",
+      "summary": "",
+      "skill_groups": [],
+      "experiences": [],
+      "projects": [
+        {
+          "title": "Dispatch Loom",
+          "context": "",
+          "organization": "Harbor Tools",
+          "role": "Dispatch Loom",
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "bullets": [
+            "Personally wrote SQL checks and implemented a visible warning for late files."
+          ],
+          "evidence_ids": ["8decb905-306e-489b-84c3-70a2c0a9a546"],
+          "priority": 0
+        }
+      ],
+      "education": [],
+      "certifications": [],
+      "supporting_sections": [],
+      "demo": true,
+      "section_order": [
+        "Experience",
+        "Projects",
+        "Achievements",
+        "Education",
+        "Certifications"
+      ]
+    },
+    "unsupportedWarningCompiled": true
+  }
+}

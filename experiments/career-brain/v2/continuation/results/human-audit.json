@@ -1,0 +1,88 @@
+{
+  "scope": "Assistant source inspection of all 30 new answer texts, the historical warning paragraph, all sequential proposals and identity/diff summaries. Full claim precision across every ingest record is not claimed.",
+  "verdict": "DO NOT PROMOTE",
+  "answerMetrics": {
+    "answers": 30,
+    "unsupportedQuestions": 15,
+    "unsupportedAffirmativeQualificationAnswers": 0,
+    "directlySupportedQuestions": 13,
+    "outrightSupportedQuestionFalseAbstentions": 0,
+    "partiallySupportedQuestions": 2,
+    "partialQuestionsInflatedToCompleteQualifications": 0,
+    "citationIdsValidAnswers": 30,
+    "primarySourceQualifierOmissions": 1,
+    "primarySourceQualifierOmissionIds": ["support-course"],
+    "sourceQualifierExplanation": "The answer omitted the explicitly fictional qualifier on the synthetic certificate. Preserve the independent auditor's finding conservatively; test-fixture status and real credential validity must not be silently conflated.",
+    "presentationPronounAssumptionIds": [
+      "support-guide-personal",
+      "support-docker-production",
+      "support-headcount-training",
+      "support-sql-aws-mixed",
+      "support-aws-denial",
+      "support-kubernetes-denial",
+      "support-team-personal",
+      "support-reports-eight",
+      "support-reports-five"
+    ],
+    "candidateAddressingAssumptionIds": ["support-leadership-bounded"],
+    "presentationExplanation": "The first-person source does not supply she/her pronouns. The leadership answer says 'you' although the intended product is recruiter Q&A. These are separate presentation/actor assumptions, not affirmative unsupported qualification errors.",
+    "falseAbstentionDefinition": "Complete refusal or denial of available supported facts. Bounded explanations preserving known facts while withholding unstored specifics are not counted as complete abstention. This does not certify perfect answer completeness.",
+    "cautiousAnswerIds": ["support-automation", "support-sql-personal"],
+    "cautiousAnswerExplanation": "Automation now describes the actual parser/checking work and team measurement instead of refusing all evidence, but still hedges because the packet does not use the word automation. The SQL answer accurately states that detailed check contents are unstored while acknowledging Ada personally wrote dispatch-reconciliation SQL checks. Report these limitations separately from outright false abstention.",
+    "reviewedAllAnswerIds": [
+      "support-warning-wanted",
+      "support-warning-implemented",
+      "support-plan-completed",
+      "support-plan-intended",
+      "support-discussion-performed",
+      "support-discussion-held",
+      "support-guide-personal",
+      "support-guide-deploy",
+      "support-docker-exposure",
+      "support-docker-production",
+      "support-leadership-bounded",
+      "support-headcount-training",
+      "support-sql-aws-mixed",
+      "support-sql-certificate",
+      "support-aws-denial",
+      "support-kubernetes-denial",
+      "support-automation",
+      "support-training",
+      "support-degree",
+      "support-course",
+      "support-license",
+      "support-sql-personal",
+      "support-team-personal",
+      "support-team-result",
+      "support-reports-eight",
+      "support-reports-five",
+      "support-completed-warning",
+      "support-unrelated-medical",
+      "support-unrelated-language",
+      "support-unrelated-sales"
+    ]
+  },
+  "groundingFindings": [
+    "Both bounded audits classified all 24 minimal contrastive records correctly at the model-verdict level and withheld all twelve overstated records. A deterministic team-display rule also unnecessarily held the safe warning-preference control for review.",
+    "The assertion-level audit nevertheless marked the unchanged longer historical R4 G summary supported, including late files prompting a warning. Exact spans and a correct preference claim did not prevent an unsupported displayed assertion.",
+    "A targeted Sol audit of the same retained R4 paragraph and original source rejected the warning overstatement. This is useful paired evidence for targeted escalation, not a general Sol qualification or evidence for mandatory document mapping or subagents.",
+    "The post-equivalence audit still accepted the experience's restored unqualified 12-coworker claim despite unresolved V3 attendance. It also compared two legitimately historical V1 source-referenced offsets against V3 text; the application source-ID-aware evaluator validates those spans. These audit errors do not invalidate otherwise exact referenced provenance.",
+    "The existing equivalence stage calls named Ada attribution a material change from 'my contribution' even though the profile establishes Ada as the speaker. Display changes and equivalent referents remain a false-update risk."
+  ],
+  "sequenceFindings": [
+    "Real rich database state evolved 15 to 16 to 17 records and preserved every pre-existing UUID. The named certificate was retained for review in V2, not confidently archived on an underdetermined residual course sentence.",
+    "Corrected proposal-status agreement is 16/17 for V2 and 12/17 for V3; scores include the visible generic certificate REVIEW proposal. Source-state recovery, safe REVIEW behavior and full native extraction precision are distinct metrics.",
+    "V3 captured Roster Note night-shift documentation and SQL extensive usage. Attendance remains REVIEW in the training achievement; Docker exposure is conservatively REVIEW although its one-off qualifier is supported.",
+    "Equivalence restored an old 12-coworker fact into the experience record without a fresh source-conflict verdict. Reviewed V3 import entries hold affected UUIDs in REVIEW, but existing canonical reads return the older unqualified 12-person claims with empty uncertainty arrays. This is a serving/admission gap, not an identity or vector-ranking failure."
+  ],
+  "supportFindings": [
+    "Full five-way exact-label agreement is 28/30 on the curated frozen probes with the separately preserved pre-call source supplement. Both errors downgrade direct Docker exposure and automation to partial support; none falsely upgrades unsupported evidence to direct support.",
+    "The corrected fixed-candidate 100-query comparison covers 74/80 positive questions and has zero direct-support labels for all 20 unsupported questions. Four coverage gaps have no sufficient packets; SQL-4 and certification-8 demonstrate overly restrictive direct-name gating. Completion of SQL Foundations is a credential request although its wording lacks the current credential keyword regex.",
+    "Broad related retrieval is permitted. A correctly labeled contradictory or related packet can be cited when explaining the actual career facts without affirming the requested unsupported proposition."
+  ],
+  "resumeFindings": [
+    "Actual ResumeIR compilation admits no unsupported evidence for the 20 cached negative queries or 17 non-direct curated probes. No compiled evidence ID escapes its admitted set. Conservative label errors also omit two genuinely supported curated cases.",
+    "A valid SQL-support packet can admit a complete canonical summary containing the unsupported warning implementation. Clean reviewed-gold admission safety therefore does not establish safety after the observed ingest error. Whole rendered assertions and review-conflict propagation must be qualified before rollout."
+  ],
+  "smallestBlockingFailure": "Correct support for one selected SQL fact can license a full canonical bullet whose warning implementation is not entailed; the default Luna Pro audits still pass the longer observed paragraph. Whole-assertion grounding must survive equivalence and admission, including pending source conflicts, before promotion."
+}

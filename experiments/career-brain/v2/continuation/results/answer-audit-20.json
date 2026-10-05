@@ -1,0 +1,84 @@
+{
+  "audits": [
+    {
+      "id": "support-license",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": false,
+      "reason": "The answer correctly says the certificate was course completion, not a professional license."
+    },
+    {
+      "id": "support-sql-personal",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": false,
+      "reason": "It accurately distinguishes the supported fact that Ada wrote SQL checks from the unavailable detail about what those checks tested."
+    },
+    {
+      "id": "support-team-personal",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": false,
+      "reason": "The answer correctly identifies the saving as a team result and Ada's personal contribution as the parser and checks."
+    },
+    {
+      "id": "support-team-result",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": true,
+      "reason": "The answer accurately reports the measured team reduction from 5 to 2 hours per week over six weekly runs."
+    },
+    {
+      "id": "support-reports-eight",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": true,
+      "reason": "The source says Ada directly supervised eight reports and corrected the earlier figure of five."
+    },
+    {
+      "id": "support-reports-five",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": false,
+      "reason": "The answer correctly denies five and reports the corrected count of eight."
+    },
+    {
+      "id": "support-completed-warning",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": true,
+      "reason": "The source supports Ada personally implementing the visible warning."
+    },
+    {
+      "id": "support-unrelated-medical",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": false,
+      "reason": "The packet provides no evidence of surgery; the answer accurately characterizes the supplied evidence as an Information Systems degree."
+    },
+    {
+      "id": "support-unrelated-language",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": false,
+      "reason": "The packet says nothing about German fluency, so the answer appropriately states that the supplied rollout evidence does not establish it."
+    },
+    {
+      "id": "support-unrelated-sales",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": false,
+      "reason": "The supplied evidence concerns operators' warning preference, not a sales quota owned by Ada."
+    }
+  ]
+}

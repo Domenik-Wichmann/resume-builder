@@ -1,0 +1,194 @@
+{
+  "model": "openai/gpt-6-luna-pro",
+  "records": [
+    {
+      "kind": "skill",
+      "key": "coworker-training-888713667e",
+      "title": "Coworker training",
+      "subtitle": "",
+      "summary": "Trained dispatch coworkers in workshops and created a plain-language handbook.",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": "collaboration-91578d1f92",
+      "source_quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+      "uncertainties": [],
+      "aliases": ["coworker training", "training"],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Trained dispatch coworkers",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+              "start": 383,
+              "end": 497
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "skill",
+      "key": "requirements-gathering",
+      "title": "Requirements gathering",
+      "subtitle": "",
+      "summary": "Gathered requirements from warehouse supervisors for Dispatch Loom.",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": "collaboration-91578d1f92",
+      "source_quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Gathered Dispatch Loom requirements from warehouse supervisors",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them.",
+              "start": 499,
+              "end": 606
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "skill",
+      "key": "stakeholder-communication",
+      "title": "Stakeholder communication",
+      "subtitle": "",
+      "summary": "Explained validation failures and walked supervisors through workflow examples.",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": "collaboration-91578d1f92",
+      "source_quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Explained validation failures to warehouse supervisors",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them.",
+              "start": 499,
+              "end": 606
+            }
+          ]
+        },
+        {
+          "attribute": "action",
+          "value": "Worked through an example beside a supervisor to explain the workflow",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "To explain the workflow I would sit beside a supervisor and work through an example.",
+              "start": 2137,
+              "end": 2221
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "category",
+      "key": "data-tools-28c5fe8f0e",
+      "title": "Data tools",
+      "subtitle": "",
+      "summary": "Python, SQL and PostgreSQL.",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "My skill category is Data tools: Python, SQL and PostgreSQL.",
+      "uncertainties": [],
+      "aliases": ["Data tools"],
+      "claims": [
+        {
+          "attribute": "context",
+          "value": "Python, SQL and PostgreSQL",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "My skill category is Data tools: Python, SQL and PostgreSQL.",
+              "start": 683,
+              "end": 743
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "category",
+      "key": "collaboration-91578d1f92",
+      "title": "Collaboration",
+      "subtitle": "",
+      "summary": "Git and coworker training.",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "My separate skill category is Collaboration: Git and coworker training.",
+      "uncertainties": [],
+      "aliases": ["Collaboration"],
+      "claims": [
+        {
+          "attribute": "context",
+          "value": "Git and coworker training",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "My separate skill category is Collaboration: Git and coworker training.",
+              "start": 744,
+              "end": 815
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "index": 0,
+      "verdict": "SUPPORTED",
+      "reason": "The source says Ada personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook. The summary does not invent workshop dates."
+    },
+    {
+      "index": 1,
+      "verdict": "SUPPORTED",
+      "reason": "The source explicitly says Ada gathered Dispatch Loom requirements from warehouse supervisors."
+    },
+    {
+      "index": 2,
+      "verdict": "UNCERTAIN",
+      "reason": "Explaining validation failures is explicit, but “I would sit beside a supervisor and work through an example” is ambiguous between a recurring practice and a hypothetical; it does not clearly establish the completed action stated in the record."
+    },
+    {
+      "index": 3,
+      "verdict": "SUPPORTED",
+      "reason": "The source explicitly lists Python, SQL, and PostgreSQL in Ada’s Data tools skill category."
+    },
+    {
+      "index": 4,
+      "verdict": "SUPPORTED",
+      "reason": "The source explicitly lists Git and coworker training in Ada’s Collaboration skill category."
+    }
+  ]
+}

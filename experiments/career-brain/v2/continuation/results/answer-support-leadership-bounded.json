@@ -1,0 +1,49 @@
+{
+  "id": "support-leadership-bounded",
+  "text": "What evidence supports leadership experience?",
+  "packets": [
+    {
+      "id": "aab4126b-3887-4b36-8e10-ab3d2d5558b4",
+      "kind": "achievement",
+      "title": "Dispatch coworker training",
+      "organization": null,
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "summary": "Personally trained 12 dispatch coworkers in two workshops and wrote a handbook.",
+      "aliases": ["training", "trained", "workshops"],
+      "skills": ["Coworker training"],
+      "outcomes": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Personally trained 12 dispatch coworkers in two workshops and wrote a handbook",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+              "start": 508,
+              "end": 622
+            }
+          ]
+        }
+      ],
+      "uncertainties": [],
+      "relatedIds": ["fbbeb9e7-c524-4fc8-8dde-650af34ceb6e"],
+      "support": "PARTIALLY_SUPPORTS",
+      "reason": "Personally training 12 coworkers in two workshops and writing a handbook is bounded evidence of leadership-related activity, but does not establish broader management experience."
+    }
+  ],
+  "expected": [
+    {
+      "id": "aab4126b-3887-4b36-8e10-ab3d2d5558b4",
+      "support": "PARTIALLY_SUPPORTS"
+    }
+  ],
+  "answerGroup": "PARTIAL",
+  "result": {
+    "answer": "You personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook. This is evidence of leadership-related activity, but it does not establish broader management experience.",
+    "evidence_ids": ["aab4126b-3887-4b36-8e10-ab3d2d5558b4"]
+  }
+}

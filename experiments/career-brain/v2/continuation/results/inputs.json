@@ -1,0 +1,4198 @@
+{
+  "grounding": {
+    "source": "SYNTHETIC contrastive career grounding qualification.\n\nFor Signal Desk, operators preferred a visible warning when the source file arrived late.\n\nFor Route Note, I planned a rollout next month; it has not been completed.\n\nFor Table Bridge, we discussed a database migration, but did not perform it.\n\nFor Beacon, my brother wrote the model integration and the team deployed it. I personally only wrote the user guide. I did not build its model or deployment.\n\nFor Local Box, I tried Docker once in a guided local exercise; I have no production deployment experience.\n\nFor Workshop Notes, I trained twelve coworkers in two workshops. I have not managed employees.\n\nFor Check Ledger, team reconciliation fell from five to two hours weekly; my contribution was the parser, and coworkers changed their checking habits.\n\nFor People Desk, I initially said five reports. Correction: eight direct reports, not five; I supervised the eight directly.\n\nFor Resume Notes, the sentence 'I led 100 employees' is an example of a misleading résumé, not my career history.\n\nFor Course Notes, I received a SQL course-completion certificate, not a professional license.\n\nFor Sheet Checks, I personally wrote SQL validation checks. Operators preferred a visible warning, with no implementation stated.\n\nFor Alert Board, I personally implemented the visible warning and completed its rollout on 2024-06-30.",
+    "cases": [
+      {
+        "id": "ground-1-safe",
+        "expected": "SUPPORTED",
+        "record": {
+          "kind": "project",
+          "key": "warning-preference",
+          "title": "Warning preference",
+          "subtitle": "",
+          "summary": "Operators preferred a visible warning for late source files",
+          "organization": null,
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": [],
+          "achievement_keys": [],
+          "category_key": null,
+          "source_quote": "For Signal Desk, operators preferred a visible warning when the source file arrived late.",
+          "uncertainties": [
+            "Team outcome must retain attribution in display text."
+          ],
+          "aliases": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Operators preferred a visible warning for late source files",
+              "attribution": "TEAM",
+              "evidence": [
+                {
+                  "quote": "For Signal Desk, operators preferred a visible warning when the source file arrived late.",
+                  "start": 55,
+                  "end": 144
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "ground-1-unsafe",
+        "expected": "UNSUPPORTED",
+        "record": {
+          "kind": "project",
+          "key": "warning-preference",
+          "title": "Warning preference",
+          "subtitle": "",
+          "summary": "Implemented a visible warning for late source files",
+          "organization": null,
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": [],
+          "achievement_keys": [],
+          "category_key": null,
+          "source_quote": "For Signal Desk, operators preferred a visible warning when the source file arrived late.",
+          "uncertainties": [],
+          "aliases": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Implemented a visible warning for late source files",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Signal Desk, operators preferred a visible warning when the source file arrived late.",
+                  "start": 55,
+                  "end": 144
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "ground-2-safe",
+        "expected": "SUPPORTED",
+        "record": {
+          "kind": "project",
+          "key": "planned-rollout",
+          "title": "Planned rollout",
+          "subtitle": "",
+          "summary": "Planned a future rollout; not completed",
+          "organization": null,
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": [],
+          "achievement_keys": [],
+          "category_key": null,
+          "source_quote": "For Route Note, I planned a rollout next month; it has not been completed.",
+          "uncertainties": [],
+          "aliases": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Planned a future rollout; not completed",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Route Note, I planned a rollout next month; it has not been completed.",
+                  "start": 146,
+                  "end": 220
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "ground-2-unsafe",
+        "expected": "UNSUPPORTED",
+        "record": {
+          "kind": "project",
+          "key": "planned-rollout",
+          "title": "Planned rollout",
+          "subtitle": "",
+          "summary": "Completed the Route Note rollout",
+          "organization": null,
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": [],
+          "achievement_keys": [],
+          "category_key": null,
+          "source_quote": "For Route Note, I planned a rollout next month; it has not been completed.",
+          "uncertainties": [],
+          "aliases": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Completed the Route Note rollout",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Route Note, I planned a rollout next month; it has not been completed.",
+                  "start": 146,
+                  "end": 220
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "ground-3-safe",
+        "expected": "SUPPORTED",
+        "record": {
+          "kind": "project",
+          "key": "discussed-migration",
+          "title": "Discussed migration",
+          "subtitle": "",
+          "summary": "Team discussed a database migration without performing it",
+          "organization": null,
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": [],
+          "achievement_keys": [],
+          "category_key": null,
+          "source_quote": "For Table Bridge, we discussed a database migration, but did not perform it.",
+          "uncertainties": [],
+          "aliases": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Team discussed a database migration without performing it",
+              "attribution": "TEAM",
+              "evidence": [
+                {
+                  "quote": "For Table Bridge, we discussed a database migration, but did not perform it.",
+                  "start": 222,
+                  "end": 298
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "ground-3-unsafe",
+        "expected": "UNSUPPORTED",
+        "record": {
+          "kind": "project",
+          "key": "discussed-migration",
+          "title": "Discussed migration",
+          "subtitle": "",
+          "summary": "Personally performed the database migration",
+          "organization": null,
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": [],
+          "achievement_keys": [],
+          "category_key": null,
+          "source_quote": "For Table Bridge, we discussed a database migration, but did not perform it.",
+          "uncertainties": [],
+          "aliases": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Personally performed the database migration",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Table Bridge, we discussed a database migration, but did not perform it.",
+                  "start": 222,
+                  "end": 298
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "ground-4-safe",
+        "expected": "SUPPORTED",
+        "record": {
+          "kind": "project",
+          "key": "team-deployment",
+          "title": "Team deployment",
+          "subtitle": "",
+          "summary": "Team deployed Beacon; personal contribution was only the user guide",
+          "organization": null,
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": [],
+          "achievement_keys": [],
+          "category_key": null,
+          "source_quote": "For Beacon, my brother wrote the model integration and the team deployed it. I personally only wrote the user guide. I did not build its model or deployment.",
+          "uncertainties": [],
+          "aliases": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Team deployed Beacon; personal contribution was only the user guide",
+              "attribution": "TEAM",
+              "evidence": [
+                {
+                  "quote": "For Beacon, my brother wrote the model integration and the team deployed it. I personally only wrote the user guide. I did not build its model or deployment.",
+                  "start": 300,
+                  "end": 457
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "ground-4-unsafe",
+        "expected": "UNSUPPORTED",
+        "record": {
+          "kind": "project",
+          "key": "team-deployment",
+          "title": "Team deployment",
+          "subtitle": "",
+          "summary": "Personally built the model integration and deployed Beacon",
+          "organization": null,
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": [],
+          "achievement_keys": [],
+          "category_key": null,
+          "source_quote": "For Beacon, my brother wrote the model integration and the team deployed it. I personally only wrote the user guide. I did not build its model or deployment.",
+          "uncertainties": [],
+          "aliases": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Personally built the model integration and deployed Beacon",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Beacon, my brother wrote the model integration and the team deployed it. I personally only wrote the user guide. I did not build its model or deployment.",
+                  "start": 300,
+                  "end": 457
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "ground-5-safe",
+        "expected": "SUPPORTED",
+        "record": {
+          "kind": "project",
+          "key": "docker-exposure",
+          "title": "Docker exposure",
+          "subtitle": "",
+          "summary": "Docker one-off guided local exposure, no production deployment",
+          "organization": null,
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": [],
+          "achievement_keys": [],
+          "category_key": null,
+          "source_quote": "For Local Box, I tried Docker once in a guided local exercise; I have no production deployment experience.",
+          "uncertainties": [],
+          "aliases": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Docker one-off guided local exposure, no production deployment",
+              "attribution": "EXPOSURE",
+              "evidence": [
+                {
+                  "quote": "For Local Box, I tried Docker once in a guided local exercise; I have no production deployment experience.",
+                  "start": 459,
+                  "end": 565
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "ground-5-unsafe",
+        "expected": "UNSUPPORTED",
+        "record": {
+          "kind": "project",
+          "key": "docker-exposure",
+          "title": "Docker exposure",
+          "subtitle": "",
+          "summary": "Proficient Docker engineer with production deployment experience",
+          "organization": null,
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": [],
+          "achievement_keys": [],
+          "category_key": null,
+          "source_quote": "For Local Box, I tried Docker once in a guided local exercise; I have no production deployment experience.",
+          "uncertainties": [],
+          "aliases": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Proficient Docker engineer with production deployment experience",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Local Box, I tried Docker once in a guided local exercise; I have no production deployment experience.",
+                  "start": 459,
+                  "end": 565
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "ground-6-safe",
+        "expected": "SUPPORTED",
+        "record": {
+          "kind": "project",
+          "key": "related-training",
+          "title": "Related training",
+          "subtitle": "",
+          "summary": "Trained twelve coworkers in two workshops",
+          "organization": null,
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": [],
+          "achievement_keys": [],
+          "category_key": null,
+          "source_quote": "For Workshop Notes, I trained twelve coworkers in two workshops. I have not managed employees.",
+          "uncertainties": [],
+          "aliases": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Trained twelve coworkers in two workshops",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Workshop Notes, I trained twelve coworkers in two workshops. I have not managed employees.",
+                  "start": 567,
+                  "end": 661
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "ground-6-unsafe",
+        "expected": "UNSUPPORTED",
+        "record": {
+          "kind": "project",
+          "key": "related-training",
+          "title": "Related training",
+          "subtitle": "",
+          "summary": "Managed twelve direct reports",
+          "organization": null,
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": [],
+          "achievement_keys": [],
+          "category_key": null,
+          "source_quote": "For Workshop Notes, I trained twelve coworkers in two workshops. I have not managed employees.",
+          "uncertainties": [],
+          "aliases": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Managed twelve direct reports",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Workshop Notes, I trained twelve coworkers in two workshops. I have not managed employees.",
+                  "start": 567,
+                  "end": 661
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "ground-7-safe",
+        "expected": "SUPPORTED",
+        "record": {
+          "kind": "project",
+          "key": "team-metric",
+          "title": "Team metric",
+          "subtitle": "",
+          "summary": "Team reconciliation fell from five to two hours weekly; personal contribution was the parser",
+          "organization": null,
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": [],
+          "achievement_keys": [],
+          "category_key": null,
+          "source_quote": "For Check Ledger, team reconciliation fell from five to two hours weekly; my contribution was the parser, and coworkers changed their checking habits.",
+          "uncertainties": [],
+          "aliases": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Team reconciliation fell from five to two hours weekly; personal contribution was the parser",
+              "attribution": "TEAM",
+              "evidence": [
+                {
+                  "quote": "For Check Ledger, team reconciliation fell from five to two hours weekly; my contribution was the parser, and coworkers changed their checking habits.",
+                  "start": 663,
+                  "end": 813
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "ground-7-unsafe",
+        "expected": "UNSUPPORTED",
+        "record": {
+          "kind": "project",
+          "key": "team-metric",
+          "title": "Team metric",
+          "subtitle": "",
+          "summary": "Personally achieved all reconciliation savings without help",
+          "organization": null,
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": [],
+          "achievement_keys": [],
+          "category_key": null,
+          "source_quote": "For Check Ledger, team reconciliation fell from five to two hours weekly; my contribution was the parser, and coworkers changed their checking habits.",
+          "uncertainties": [],
+          "aliases": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Personally achieved all reconciliation savings without help",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Check Ledger, team reconciliation fell from five to two hours weekly; my contribution was the parser, and coworkers changed their checking habits.",
+                  "start": 663,
+                  "end": 813
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "ground-8-safe",
+        "expected": "SUPPORTED",
+        "record": {
+          "kind": "project",
+          "key": "correction-precedence",
+          "title": "Correction precedence",
+          "subtitle": "",
+          "summary": "Supervised eight direct reports; five was corrected",
+          "organization": null,
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": [],
+          "achievement_keys": [],
+          "category_key": null,
+          "source_quote": "For People Desk, I initially said five reports. Correction: eight direct reports, not five; I supervised the eight directly.",
+          "uncertainties": [],
+          "aliases": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Supervised eight direct reports; five was corrected",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For People Desk, I initially said five reports. Correction: eight direct reports, not five; I supervised the eight directly.",
+                  "start": 815,
+                  "end": 939
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "ground-8-unsafe",
+        "expected": "UNSUPPORTED",
+        "record": {
+          "kind": "project",
+          "key": "correction-precedence",
+          "title": "Correction precedence",
+          "subtitle": "",
+          "summary": "Supervised five direct reports",
+          "organization": null,
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": [],
+          "achievement_keys": [],
+          "category_key": null,
+          "source_quote": "For People Desk, I initially said five reports. Correction: eight direct reports, not five; I supervised the eight directly.",
+          "uncertainties": [],
+          "aliases": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Supervised five direct reports",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For People Desk, I initially said five reports. Correction: eight direct reports, not five; I supervised the eight directly.",
+                  "start": 815,
+                  "end": 939
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "ground-9-safe",
+        "expected": "SUPPORTED",
+        "record": {
+          "kind": "project",
+          "key": "quoted-example",
+          "title": "Quoted example",
+          "subtitle": "",
+          "summary": "The 100-employee statement is a misleading résumé example, not career history",
+          "organization": null,
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": [],
+          "achievement_keys": [],
+          "category_key": null,
+          "source_quote": "For Resume Notes, the sentence 'I led 100 employees' is an example of a misleading résumé, not my career history.",
+          "uncertainties": [],
+          "aliases": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "The 100-employee statement is a misleading résumé example, not career history",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Resume Notes, the sentence 'I led 100 employees' is an example of a misleading résumé, not my career history.",
+                  "start": 941,
+                  "end": 1054
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "ground-9-unsafe",
+        "expected": "UNSUPPORTED",
+        "record": {
+          "kind": "project",
+          "key": "quoted-example",
+          "title": "Quoted example",
+          "subtitle": "",
+          "summary": "Led 100 employees",
+          "organization": null,
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": [],
+          "achievement_keys": [],
+          "category_key": null,
+          "source_quote": "For Resume Notes, the sentence 'I led 100 employees' is an example of a misleading résumé, not my career history.",
+          "uncertainties": [],
+          "aliases": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Led 100 employees",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Resume Notes, the sentence 'I led 100 employees' is an example of a misleading résumé, not my career history.",
+                  "start": 941,
+                  "end": 1054
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "ground-10-safe",
+        "expected": "SUPPORTED",
+        "record": {
+          "kind": "project",
+          "key": "credential-scope",
+          "title": "Credential scope",
+          "subtitle": "",
+          "summary": "SQL course-completion certificate, not a professional license",
+          "organization": null,
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": [],
+          "achievement_keys": [],
+          "category_key": null,
+          "source_quote": "For Course Notes, I received a SQL course-completion certificate, not a professional license.",
+          "uncertainties": [],
+          "aliases": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "SQL course-completion certificate, not a professional license",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Course Notes, I received a SQL course-completion certificate, not a professional license.",
+                  "start": 1056,
+                  "end": 1149
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "ground-10-unsafe",
+        "expected": "UNSUPPORTED",
+        "record": {
+          "kind": "project",
+          "key": "credential-scope",
+          "title": "Credential scope",
+          "subtitle": "",
+          "summary": "Licensed SQL professional",
+          "organization": null,
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": [],
+          "achievement_keys": [],
+          "category_key": null,
+          "source_quote": "For Course Notes, I received a SQL course-completion certificate, not a professional license.",
+          "uncertainties": [],
+          "aliases": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Licensed SQL professional",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Course Notes, I received a SQL course-completion certificate, not a professional license.",
+                  "start": 1056,
+                  "end": 1149
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "ground-11-safe",
+        "expected": "SUPPORTED",
+        "record": {
+          "kind": "project",
+          "key": "summary-inconsistency",
+          "title": "Summary inconsistency",
+          "subtitle": "",
+          "summary": "Personally wrote SQL validation checks; warning remained a preference",
+          "organization": null,
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": [],
+          "achievement_keys": [],
+          "category_key": null,
+          "source_quote": "For Sheet Checks, I personally wrote SQL validation checks. Operators preferred a visible warning, with no implementation stated.",
+          "uncertainties": [],
+          "aliases": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Personally wrote SQL validation checks; warning remained a preference",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Sheet Checks, I personally wrote SQL validation checks. Operators preferred a visible warning, with no implementation stated.",
+                  "start": 1151,
+                  "end": 1280
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "ground-11-unsafe",
+        "expected": "UNSUPPORTED",
+        "record": {
+          "kind": "project",
+          "key": "summary-inconsistency",
+          "title": "Summary inconsistency",
+          "subtitle": "",
+          "summary": "Personally wrote SQL checks and implemented the requested warning",
+          "organization": null,
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": [],
+          "achievement_keys": [],
+          "category_key": null,
+          "source_quote": "For Sheet Checks, I personally wrote SQL validation checks. Operators preferred a visible warning, with no implementation stated.",
+          "uncertainties": [],
+          "aliases": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Personally wrote SQL validation checks; warning remained a preference",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Sheet Checks, I personally wrote SQL validation checks. Operators preferred a visible warning, with no implementation stated.",
+                  "start": 1151,
+                  "end": 1280
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "ground-12-safe",
+        "expected": "SUPPORTED",
+        "record": {
+          "kind": "project",
+          "key": "completed-control",
+          "title": "Completed control",
+          "subtitle": "",
+          "summary": "Personally implemented the visible warning and completed rollout on 2024-06-30",
+          "organization": null,
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": [],
+          "achievement_keys": [],
+          "category_key": null,
+          "source_quote": "For Alert Board, I personally implemented the visible warning and completed its rollout on 2024-06-30.",
+          "uncertainties": [],
+          "aliases": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Personally implemented the visible warning and completed rollout on 2024-06-30",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Alert Board, I personally implemented the visible warning and completed its rollout on 2024-06-30.",
+                  "start": 1282,
+                  "end": 1384
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "ground-12-unsafe",
+        "expected": "UNSUPPORTED",
+        "record": {
+          "kind": "project",
+          "key": "completed-control",
+          "title": "Completed control",
+          "subtitle": "",
+          "summary": "Completed rollout on 2024-05-31",
+          "organization": null,
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": [],
+          "achievement_keys": [],
+          "category_key": null,
+          "source_quote": "For Alert Board, I personally implemented the visible warning and completed its rollout on 2024-06-30.",
+          "uncertainties": [],
+          "aliases": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Completed rollout on 2024-05-31",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Alert Board, I personally implemented the visible warning and completed its rollout on 2024-06-30.",
+                  "start": 1282,
+                  "end": 1384
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "support": [
+    {
+      "id": "support-warning-wanted",
+      "text": "Did operators want a visible warning?",
+      "packets": [
+        {
+          "id": "b379ea2c-9f3a-4c72-80f5-bf9d53a2eb91",
+          "kind": "project",
+          "title": "Warning preference",
+          "organization": null,
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "summary": "Operators preferred a visible warning; implementation is not stated",
+          "aliases": [],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "scope",
+              "value": "Operators preferred a visible warning; implementation is not stated",
+              "attribution": "TEAM",
+              "evidence": [
+                {
+                  "quote": "For Signal Desk, operators preferred a visible warning when the source file arrived late.",
+                  "start": 0,
+                  "end": 89
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": []
+        }
+      ],
+      "expected": [
+        {
+          "id": "b379ea2c-9f3a-4c72-80f5-bf9d53a2eb91",
+          "support": "SUPPORTS"
+        }
+      ],
+      "answerGroup": "DIRECT"
+    },
+    {
+      "id": "support-warning-implemented",
+      "text": "Did Ada implement a visible warning for late files?",
+      "packets": [
+        {
+          "id": "b379ea2c-9f3a-4c72-80f5-bf9d53a2eb91",
+          "kind": "project",
+          "title": "Warning preference",
+          "organization": null,
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "summary": "Operators preferred a visible warning; implementation is not stated",
+          "aliases": [],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "scope",
+              "value": "Operators preferred a visible warning; implementation is not stated",
+              "attribution": "TEAM",
+              "evidence": [
+                {
+                  "quote": "For Signal Desk, operators preferred a visible warning when the source file arrived late.",
+                  "start": 0,
+                  "end": 89
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": []
+        }
+      ],
+      "expected": [
+        {
+          "id": "b379ea2c-9f3a-4c72-80f5-bf9d53a2eb91",
+          "support": "RELATED_ONLY"
+        }
+      ],
+      "answerGroup": "UNSUPPORTED"
+    },
+    {
+      "id": "support-plan-completed",
+      "text": "Was the Route Note rollout completed?",
+      "packets": [
+        {
+          "id": "f420a553-30ce-4471-8345-a628fe32e030",
+          "kind": "project",
+          "title": "Planned rollout",
+          "organization": null,
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "summary": "Planned a future rollout; not completed",
+          "aliases": [],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Planned a future rollout; not completed",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Route Note, I planned a rollout next month; it has not been completed.",
+                  "start": 0,
+                  "end": 74
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": []
+        }
+      ],
+      "expected": [
+        {
+          "id": "f420a553-30ce-4471-8345-a628fe32e030",
+          "support": "CONTRADICTS"
+        }
+      ],
+      "answerGroup": "UNSUPPORTED"
+    },
+    {
+      "id": "support-plan-intended",
+      "text": "What rollout did Ada plan?",
+      "packets": [
+        {
+          "id": "f420a553-30ce-4471-8345-a628fe32e030",
+          "kind": "project",
+          "title": "Planned rollout",
+          "organization": null,
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "summary": "Planned a future rollout; not completed",
+          "aliases": [],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Planned a future rollout; not completed",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Route Note, I planned a rollout next month; it has not been completed.",
+                  "start": 0,
+                  "end": 74
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": []
+        }
+      ],
+      "expected": [
+        {
+          "id": "f420a553-30ce-4471-8345-a628fe32e030",
+          "support": "SUPPORTS"
+        }
+      ],
+      "answerGroup": "DIRECT"
+    },
+    {
+      "id": "support-discussion-performed",
+      "text": "Did Ada perform the Table Bridge database migration?",
+      "packets": [
+        {
+          "id": "d6e615f6-a8da-4d2d-8406-e482915d16e2",
+          "kind": "project",
+          "title": "Discussed migration",
+          "organization": null,
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "summary": "Team discussed a database migration without performing it",
+          "aliases": [],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Team discussed a database migration without performing it",
+              "attribution": "TEAM",
+              "evidence": [
+                {
+                  "quote": "For Table Bridge, we discussed a database migration, but did not perform it.",
+                  "start": 0,
+                  "end": 76
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": []
+        }
+      ],
+      "expected": [
+        {
+          "id": "d6e615f6-a8da-4d2d-8406-e482915d16e2",
+          "support": "CONTRADICTS"
+        }
+      ],
+      "answerGroup": "UNSUPPORTED"
+    },
+    {
+      "id": "support-discussion-held",
+      "text": "Did the team discuss a database migration?",
+      "packets": [
+        {
+          "id": "d6e615f6-a8da-4d2d-8406-e482915d16e2",
+          "kind": "project",
+          "title": "Discussed migration",
+          "organization": null,
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "summary": "Team discussed a database migration without performing it",
+          "aliases": [],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Team discussed a database migration without performing it",
+              "attribution": "TEAM",
+              "evidence": [
+                {
+                  "quote": "For Table Bridge, we discussed a database migration, but did not perform it.",
+                  "start": 0,
+                  "end": 76
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": []
+        }
+      ],
+      "expected": [
+        {
+          "id": "d6e615f6-a8da-4d2d-8406-e482915d16e2",
+          "support": "SUPPORTS"
+        }
+      ],
+      "answerGroup": "DIRECT"
+    },
+    {
+      "id": "support-guide-personal",
+      "text": "What did Ada personally contribute to Beacon?",
+      "packets": [
+        {
+          "id": "c0973e9a-fb7d-4cf0-8ec2-9ee321072f4f",
+          "kind": "project",
+          "title": "Beacon",
+          "organization": null,
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "summary": "Personally wrote only Beacon's user guide; did not build model or deployment",
+          "aliases": [],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Personally wrote only Beacon's user guide; did not build model or deployment",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Beacon, my brother wrote the model integration and the team deployed it. I personally only wrote the user guide. I did not build its model or deployment.",
+                  "start": 0,
+                  "end": 157
+                }
+              ]
+            },
+            {
+              "attribute": "denial",
+              "value": "Personal model integration and deployment",
+              "attribution": "NEGATED",
+              "evidence": [
+                {
+                  "quote": "For Beacon, my brother wrote the model integration and the team deployed it. I personally only wrote the user guide. I did not build its model or deployment.",
+                  "start": 0,
+                  "end": 157
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": []
+        }
+      ],
+      "expected": [
+        {
+          "id": "c0973e9a-fb7d-4cf0-8ec2-9ee321072f4f",
+          "support": "SUPPORTS"
+        }
+      ],
+      "answerGroup": "DIRECT"
+    },
+    {
+      "id": "support-guide-deploy",
+      "text": "Did Ada personally deploy Beacon?",
+      "packets": [
+        {
+          "id": "c0973e9a-fb7d-4cf0-8ec2-9ee321072f4f",
+          "kind": "project",
+          "title": "Beacon",
+          "organization": null,
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "summary": "Personally wrote only Beacon's user guide; did not build model or deployment",
+          "aliases": [],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Personally wrote only Beacon's user guide; did not build model or deployment",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Beacon, my brother wrote the model integration and the team deployed it. I personally only wrote the user guide. I did not build its model or deployment.",
+                  "start": 0,
+                  "end": 157
+                }
+              ]
+            },
+            {
+              "attribute": "denial",
+              "value": "Personal model integration and deployment",
+              "attribution": "NEGATED",
+              "evidence": [
+                {
+                  "quote": "For Beacon, my brother wrote the model integration and the team deployed it. I personally only wrote the user guide. I did not build its model or deployment.",
+                  "start": 0,
+                  "end": 157
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": []
+        }
+      ],
+      "expected": [
+        {
+          "id": "c0973e9a-fb7d-4cf0-8ec2-9ee321072f4f",
+          "support": "CONTRADICTS"
+        }
+      ],
+      "answerGroup": "UNSUPPORTED"
+    },
+    {
+      "id": "support-docker-exposure",
+      "text": "Has Ada had any Docker exposure?",
+      "packets": [
+        {
+          "id": "e6169e95-8b37-4e86-8281-7b0f3e0bf450",
+          "kind": "skill",
+          "title": "Docker",
+          "organization": null,
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "summary": "Docker one-off guided local exposure, no production deployment",
+          "aliases": [],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "depth",
+              "value": "Docker one-off guided local exposure, no production deployment",
+              "attribution": "EXPOSURE",
+              "evidence": [
+                {
+                  "quote": "For Local Box, I tried Docker once in a guided local exercise; I have no production deployment experience.",
+                  "start": 0,
+                  "end": 106
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": []
+        }
+      ],
+      "expected": [
+        {
+          "id": "e6169e95-8b37-4e86-8281-7b0f3e0bf450",
+          "support": "SUPPORTS"
+        }
+      ],
+      "answerGroup": "DIRECT"
+    },
+    {
+      "id": "support-docker-production",
+      "text": "Is Ada a proficient production Docker engineer?",
+      "packets": [
+        {
+          "id": "e6169e95-8b37-4e86-8281-7b0f3e0bf450",
+          "kind": "skill",
+          "title": "Docker",
+          "organization": null,
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "summary": "Docker one-off guided local exposure, no production deployment",
+          "aliases": [],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "depth",
+              "value": "Docker one-off guided local exposure, no production deployment",
+              "attribution": "EXPOSURE",
+              "evidence": [
+                {
+                  "quote": "For Local Box, I tried Docker once in a guided local exercise; I have no production deployment experience.",
+                  "start": 0,
+                  "end": 106
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": []
+        }
+      ],
+      "expected": [
+        {
+          "id": "e6169e95-8b37-4e86-8281-7b0f3e0bf450",
+          "support": "RELATED_ONLY"
+        }
+      ],
+      "answerGroup": "UNSUPPORTED"
+    },
+    {
+      "id": "support-leadership-bounded",
+      "text": "What evidence supports leadership experience?",
+      "packets": [
+        {
+          "id": "aab4126b-3887-4b36-8e10-ab3d2d5558b4",
+          "kind": "achievement",
+          "title": "Dispatch coworker training",
+          "organization": null,
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "summary": "Personally trained 12 dispatch coworkers in two workshops and wrote a handbook.",
+          "aliases": ["training", "trained", "workshops"],
+          "skills": ["Coworker training"],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Personally trained 12 dispatch coworkers in two workshops and wrote a handbook",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 508,
+                  "end": 622
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": ["fbbeb9e7-c524-4fc8-8dde-650af34ceb6e"]
+        }
+      ],
+      "expected": [
+        {
+          "id": "aab4126b-3887-4b36-8e10-ab3d2d5558b4",
+          "support": "PARTIALLY_SUPPORTS"
+        }
+      ],
+      "answerGroup": "PARTIAL"
+    },
+    {
+      "id": "support-headcount-training",
+      "text": "Did Ada manage 100 employees?",
+      "packets": [
+        {
+          "id": "aab4126b-3887-4b36-8e10-ab3d2d5558b4",
+          "kind": "achievement",
+          "title": "Dispatch coworker training",
+          "organization": null,
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "summary": "Personally trained 12 dispatch coworkers in two workshops and wrote a handbook.",
+          "aliases": ["training", "trained", "workshops"],
+          "skills": ["Coworker training"],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Personally trained 12 dispatch coworkers in two workshops and wrote a handbook",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 508,
+                  "end": 622
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": ["fbbeb9e7-c524-4fc8-8dde-650af34ceb6e"]
+        }
+      ],
+      "expected": [
+        {
+          "id": "aab4126b-3887-4b36-8e10-ab3d2d5558b4",
+          "support": "RELATED_ONLY"
+        }
+      ],
+      "answerGroup": "UNSUPPORTED"
+    },
+    {
+      "id": "support-sql-aws-mixed",
+      "text": "Does Ada have SQL and AWS skills?",
+      "packets": [
+        {
+          "id": "61d13bb9-743b-44e8-8f78-45c2bcf6d55a",
+          "kind": "skill",
+          "title": "SQL",
+          "organization": null,
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "summary": "Used SQL for Dispatch Loom.",
+          "aliases": ["SQL"],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "tool",
+              "value": "SQL",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself.",
+                  "start": 166,
+                  "end": 331
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": []
+        }
+      ],
+      "expected": [
+        {
+          "id": "61d13bb9-743b-44e8-8f78-45c2bcf6d55a",
+          "support": "PARTIALLY_SUPPORTS"
+        }
+      ],
+      "answerGroup": "PARTIAL"
+    },
+    {
+      "id": "support-sql-certificate",
+      "text": "Does the SQL skill establish a SQL certificate?",
+      "packets": [
+        {
+          "id": "61d13bb9-743b-44e8-8f78-45c2bcf6d55a",
+          "kind": "skill",
+          "title": "SQL",
+          "organization": null,
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "summary": "Used SQL for Dispatch Loom.",
+          "aliases": ["SQL"],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "tool",
+              "value": "SQL",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself.",
+                  "start": 166,
+                  "end": 331
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": []
+        }
+      ],
+      "expected": [
+        {
+          "id": "61d13bb9-743b-44e8-8f78-45c2bcf6d55a",
+          "support": "RELATED_ONLY"
+        }
+      ],
+      "answerGroup": "UNSUPPORTED"
+    },
+    {
+      "id": "support-aws-denial",
+      "text": "Has Ada used AWS professionally?",
+      "packets": [
+        {
+          "id": "5546f0f8-f047-42df-8150-95034cfd26b4",
+          "kind": "project",
+          "title": "Professional exclusions",
+          "organization": null,
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "summary": "Professional AWS and Kubernetes use",
+          "aliases": [],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "denial",
+              "value": "Professional AWS and Kubernetes use",
+              "attribution": "NEGATED",
+              "evidence": [
+                {
+                  "quote": "I have never used Kubernetes, AWS or medical compliance systems professionally.",
+                  "start": 0,
+                  "end": 79
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": []
+        }
+      ],
+      "expected": [
+        {
+          "id": "5546f0f8-f047-42df-8150-95034cfd26b4",
+          "support": "CONTRADICTS"
+        }
+      ],
+      "answerGroup": "UNSUPPORTED"
+    },
+    {
+      "id": "support-kubernetes-denial",
+      "text": "Has Ada used Kubernetes professionally?",
+      "packets": [
+        {
+          "id": "5546f0f8-f047-42df-8150-95034cfd26b4",
+          "kind": "project",
+          "title": "Professional exclusions",
+          "organization": null,
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "summary": "Professional AWS and Kubernetes use",
+          "aliases": [],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "denial",
+              "value": "Professional AWS and Kubernetes use",
+              "attribution": "NEGATED",
+              "evidence": [
+                {
+                  "quote": "I have never used Kubernetes, AWS or medical compliance systems professionally.",
+                  "start": 0,
+                  "end": 79
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": []
+        }
+      ],
+      "expected": [
+        {
+          "id": "5546f0f8-f047-42df-8150-95034cfd26b4",
+          "support": "CONTRADICTS"
+        }
+      ],
+      "answerGroup": "UNSUPPORTED"
+    },
+    {
+      "id": "support-automation",
+      "text": "Has Ada automated repetitive reconciliation work?",
+      "packets": [
+        {
+          "id": "16639d0d-e746-4fca-8880-b459df8b978b",
+          "kind": "project",
+          "title": "Dispatch Loom",
+          "organization": "Harbor Tools",
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "summary": "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements.",
+          "aliases": ["Dispatch Loom", "Loom", "dispatch reconciliation tool"],
+          "skills": ["Python", "SQL", "PostgreSQL", "Git", "Coworker training"],
+          "outcomes": [
+            "Team reconciliation time fell from 5 to 2 hours per week over six runs; Ada contributed the parser and checks.",
+            "Personally trained 12 dispatch coworkers in two workshops and wrote a handbook."
+          ],
+          "claims": [
+            {
+              "attribute": "ownership",
+              "value": "Personal contribution was parser and checks",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks.",
+                  "start": 333,
+                  "end": 506
+                },
+                {
+                  "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself.",
+                  "start": 166,
+                  "end": 331
+                }
+              ]
+            },
+            {
+              "attribute": "metric",
+              "value": "Team reconciliation time fell from 5 to 2 hours per week over six weekly runs",
+              "attribution": "TEAM",
+              "evidence": [
+                {
+                  "quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks.",
+                  "start": 333,
+                  "end": 506
+                }
+              ]
+            },
+            {
+              "attribute": "action",
+              "value": "Personally designed Dispatch Loom; wrote Python parser and SQL checks",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself.",
+                  "start": 166,
+                  "end": 331
+                }
+              ]
+            },
+            {
+              "attribute": "action",
+              "value": "Personally trained 12 dispatch coworkers in two workshops and wrote a handbook",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 508,
+                  "end": 622
+                }
+              ]
+            },
+            {
+              "attribute": "tool",
+              "value": "Python; SQL; PostgreSQL; Git",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself.",
+                  "start": 166,
+                  "end": 331
+                },
+                {
+                  "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them. I used Git for version control and PostgreSQL for the production database.",
+                  "start": 624,
+                  "end": 806
+                }
+              ]
+            },
+            {
+              "attribute": "context",
+              "value": "Gathered warehouse supervisor requirements and explained validation failures",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them. I used Git for version control and PostgreSQL for the production database.",
+                  "start": 624,
+                  "end": 806
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": [
+            "96c237ee-893d-4e60-875a-aaba7d0023a6",
+            "aab4126b-3887-4b36-8e10-ab3d2d5558b4",
+            "797ce1db-ec3b-483f-805d-e57957539b51",
+            "61d13bb9-743b-44e8-8f78-45c2bcf6d55a",
+            "9c7c4d8c-0a88-4857-80e9-442ed17062b9",
+            "df3efca0-51a3-4617-8928-6b5460f826dd",
+            "fbbeb9e7-c524-4fc8-8dde-650af34ceb6e"
+          ]
+        }
+      ],
+      "expected": [
+        {
+          "id": "16639d0d-e746-4fca-8880-b459df8b978b",
+          "support": "SUPPORTS"
+        }
+      ],
+      "answerGroup": "DIRECT"
+    },
+    {
+      "id": "support-training",
+      "text": "Has Ada trained coworkers?",
+      "packets": [
+        {
+          "id": "aab4126b-3887-4b36-8e10-ab3d2d5558b4",
+          "kind": "achievement",
+          "title": "Dispatch coworker training",
+          "organization": null,
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "summary": "Personally trained 12 dispatch coworkers in two workshops and wrote a handbook.",
+          "aliases": ["training", "trained", "workshops"],
+          "skills": ["Coworker training"],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Personally trained 12 dispatch coworkers in two workshops and wrote a handbook",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 508,
+                  "end": 622
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": ["fbbeb9e7-c524-4fc8-8dde-650af34ceb6e"]
+        }
+      ],
+      "expected": [
+        {
+          "id": "aab4126b-3887-4b36-8e10-ab3d2d5558b4",
+          "support": "SUPPORTS"
+        }
+      ],
+      "answerGroup": "DIRECT"
+    },
+    {
+      "id": "support-degree",
+      "text": "What degree did Ada earn?",
+      "packets": [
+        {
+          "id": "01290c95-e5d4-40d8-8d52-b0f5870b9b91",
+          "kind": "education",
+          "title": "BSc in Information Systems",
+          "organization": "Cedar College",
+          "dates": {
+            "start": "2017-09-01",
+            "end": "2020-06-30"
+          },
+          "summary": "BSc in Information Systems.",
+          "aliases": ["BSc", "Bachelor", "Information Systems"],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "credential",
+              "value": "BSc in Information Systems at Cedar College, 2017-09-01 to 2020-06-30",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "I earned a BSc in Information Systems at Cedar College from 2017-09-01 to 2020-06-30.",
+                  "start": 942,
+                  "end": 1027
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": []
+        }
+      ],
+      "expected": [
+        {
+          "id": "01290c95-e5d4-40d8-8d52-b0f5870b9b91",
+          "support": "SUPPORTS"
+        }
+      ],
+      "answerGroup": "DIRECT"
+    },
+    {
+      "id": "support-course",
+      "text": "What course completion is recorded?",
+      "packets": [
+        {
+          "id": "30308006-3719-4f7a-8970-8330cb3fba73",
+          "kind": "certification",
+          "title": "Cedar SQL Foundations",
+          "organization": null,
+          "dates": {
+            "start": "2020-08-15",
+            "end": null
+          },
+          "summary": "Fictional Cedar SQL Foundations certificate.",
+          "aliases": ["SQL Foundations"],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "denial",
+              "value": "Professional license",
+              "attribution": "NEGATED",
+              "evidence": [
+                {
+                  "quote": "The certificate was a course completion, not a professional license.",
+                  "start": 3490,
+                  "end": 3558
+                }
+              ]
+            },
+            {
+              "attribute": "credential",
+              "value": "Cedar SQL Foundations certificate awarded 2020-08-15; issuer unspecified",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "I received the fictional Cedar SQL Foundations certificate on 2020-08-15.",
+                  "start": 1029,
+                  "end": 1102
+                }
+              ]
+            },
+            {
+              "attribute": "context",
+              "value": "Course completion, not a professional license",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "The certificate was a course completion, not a professional license.",
+                  "start": 3490,
+                  "end": 3558
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": []
+        }
+      ],
+      "expected": [
+        {
+          "id": "30308006-3719-4f7a-8970-8330cb3fba73",
+          "support": "SUPPORTS"
+        }
+      ],
+      "answerGroup": "DIRECT"
+    },
+    {
+      "id": "support-license",
+      "text": "Does Ada hold a professional license?",
+      "packets": [
+        {
+          "id": "30308006-3719-4f7a-8970-8330cb3fba73",
+          "kind": "certification",
+          "title": "Cedar SQL Foundations",
+          "organization": null,
+          "dates": {
+            "start": "2020-08-15",
+            "end": null
+          },
+          "summary": "Fictional Cedar SQL Foundations certificate.",
+          "aliases": ["SQL Foundations"],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "denial",
+              "value": "Professional license",
+              "attribution": "NEGATED",
+              "evidence": [
+                {
+                  "quote": "The certificate was a course completion, not a professional license.",
+                  "start": 3490,
+                  "end": 3558
+                }
+              ]
+            },
+            {
+              "attribute": "credential",
+              "value": "Cedar SQL Foundations certificate awarded 2020-08-15; issuer unspecified",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "I received the fictional Cedar SQL Foundations certificate on 2020-08-15.",
+                  "start": 1029,
+                  "end": 1102
+                }
+              ]
+            },
+            {
+              "attribute": "context",
+              "value": "Course completion, not a professional license",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "The certificate was a course completion, not a professional license.",
+                  "start": 3490,
+                  "end": 3558
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": []
+        }
+      ],
+      "expected": [
+        {
+          "id": "30308006-3719-4f7a-8970-8330cb3fba73",
+          "support": "CONTRADICTS"
+        }
+      ],
+      "answerGroup": "UNSUPPORTED"
+    },
+    {
+      "id": "support-sql-personal",
+      "text": "What SQL checks did Ada personally implement?",
+      "packets": [
+        {
+          "id": "16639d0d-e746-4fca-8880-b459df8b978b",
+          "kind": "project",
+          "title": "Dispatch Loom",
+          "organization": "Harbor Tools",
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "summary": "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements.",
+          "aliases": ["Dispatch Loom", "Loom", "dispatch reconciliation tool"],
+          "skills": ["Python", "SQL", "PostgreSQL", "Git", "Coworker training"],
+          "outcomes": [
+            "Team reconciliation time fell from 5 to 2 hours per week over six runs; Ada contributed the parser and checks.",
+            "Personally trained 12 dispatch coworkers in two workshops and wrote a handbook."
+          ],
+          "claims": [
+            {
+              "attribute": "ownership",
+              "value": "Personal contribution was parser and checks",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks.",
+                  "start": 333,
+                  "end": 506
+                },
+                {
+                  "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself.",
+                  "start": 166,
+                  "end": 331
+                }
+              ]
+            },
+            {
+              "attribute": "metric",
+              "value": "Team reconciliation time fell from 5 to 2 hours per week over six weekly runs",
+              "attribution": "TEAM",
+              "evidence": [
+                {
+                  "quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks.",
+                  "start": 333,
+                  "end": 506
+                }
+              ]
+            },
+            {
+              "attribute": "action",
+              "value": "Personally designed Dispatch Loom; wrote Python parser and SQL checks",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself.",
+                  "start": 166,
+                  "end": 331
+                }
+              ]
+            },
+            {
+              "attribute": "action",
+              "value": "Personally trained 12 dispatch coworkers in two workshops and wrote a handbook",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 508,
+                  "end": 622
+                }
+              ]
+            },
+            {
+              "attribute": "tool",
+              "value": "Python; SQL; PostgreSQL; Git",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself.",
+                  "start": 166,
+                  "end": 331
+                },
+                {
+                  "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them. I used Git for version control and PostgreSQL for the production database.",
+                  "start": 624,
+                  "end": 806
+                }
+              ]
+            },
+            {
+              "attribute": "context",
+              "value": "Gathered warehouse supervisor requirements and explained validation failures",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them. I used Git for version control and PostgreSQL for the production database.",
+                  "start": 624,
+                  "end": 806
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": [
+            "96c237ee-893d-4e60-875a-aaba7d0023a6",
+            "aab4126b-3887-4b36-8e10-ab3d2d5558b4",
+            "797ce1db-ec3b-483f-805d-e57957539b51",
+            "61d13bb9-743b-44e8-8f78-45c2bcf6d55a",
+            "9c7c4d8c-0a88-4857-80e9-442ed17062b9",
+            "df3efca0-51a3-4617-8928-6b5460f826dd",
+            "fbbeb9e7-c524-4fc8-8dde-650af34ceb6e"
+          ]
+        }
+      ],
+      "expected": [
+        {
+          "id": "16639d0d-e746-4fca-8880-b459df8b978b",
+          "support": "SUPPORTS"
+        }
+      ],
+      "answerGroup": "DIRECT"
+    },
+    {
+      "id": "support-team-personal",
+      "text": "Did Ada alone cause the entire three-hour weekly saving?",
+      "packets": [
+        {
+          "id": "96c237ee-893d-4e60-875a-aaba7d0023a6",
+          "kind": "achievement",
+          "title": "Reconciliation time reduction",
+          "organization": null,
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "summary": "Team reconciliation time fell from 5 to 2 hours per week over six runs; Ada contributed the parser and checks.",
+          "aliases": ["reconciliation", "time", "hours"],
+          "skills": ["Python", "SQL"],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "ownership",
+              "value": "Personal contribution was parser and checks",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks.",
+                  "start": 333,
+                  "end": 506
+                },
+                {
+                  "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself.",
+                  "start": 166,
+                  "end": 331
+                }
+              ]
+            },
+            {
+              "attribute": "metric",
+              "value": "Team reconciliation time fell from 5 to 2 hours per week over six weekly runs",
+              "attribution": "TEAM",
+              "evidence": [
+                {
+                  "quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks.",
+                  "start": 333,
+                  "end": 506
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": [
+            "797ce1db-ec3b-483f-805d-e57957539b51",
+            "61d13bb9-743b-44e8-8f78-45c2bcf6d55a"
+          ]
+        }
+      ],
+      "expected": [
+        {
+          "id": "96c237ee-893d-4e60-875a-aaba7d0023a6",
+          "support": "CONTRADICTS"
+        }
+      ],
+      "answerGroup": "UNSUPPORTED"
+    },
+    {
+      "id": "support-team-result",
+      "text": "What measured team reconciliation result is recorded?",
+      "packets": [
+        {
+          "id": "96c237ee-893d-4e60-875a-aaba7d0023a6",
+          "kind": "achievement",
+          "title": "Reconciliation time reduction",
+          "organization": null,
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "summary": "Team reconciliation time fell from 5 to 2 hours per week over six runs; Ada contributed the parser and checks.",
+          "aliases": ["reconciliation", "time", "hours"],
+          "skills": ["Python", "SQL"],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "ownership",
+              "value": "Personal contribution was parser and checks",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks.",
+                  "start": 333,
+                  "end": 506
+                },
+                {
+                  "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself.",
+                  "start": 166,
+                  "end": 331
+                }
+              ]
+            },
+            {
+              "attribute": "metric",
+              "value": "Team reconciliation time fell from 5 to 2 hours per week over six weekly runs",
+              "attribution": "TEAM",
+              "evidence": [
+                {
+                  "quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks.",
+                  "start": 333,
+                  "end": 506
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": [
+            "797ce1db-ec3b-483f-805d-e57957539b51",
+            "61d13bb9-743b-44e8-8f78-45c2bcf6d55a"
+          ]
+        }
+      ],
+      "expected": [
+        {
+          "id": "96c237ee-893d-4e60-875a-aaba7d0023a6",
+          "support": "SUPPORTS"
+        }
+      ],
+      "answerGroup": "DIRECT"
+    },
+    {
+      "id": "support-reports-eight",
+      "text": "Did Ada supervise eight direct reports?",
+      "packets": [
+        {
+          "id": "48f8714c-b91f-4262-8d58-c11b23c5e0a6",
+          "kind": "project",
+          "title": "Direct reports",
+          "organization": null,
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "summary": "Supervised eight direct reports, not five",
+          "aliases": [],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "scope",
+              "value": "Supervised eight direct reports, not five",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For People Desk, I initially said five reports. Correction: eight direct reports, not five; I supervised the eight directly.",
+                  "start": 0,
+                  "end": 124
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": []
+        }
+      ],
+      "expected": [
+        {
+          "id": "48f8714c-b91f-4262-8d58-c11b23c5e0a6",
+          "support": "SUPPORTS"
+        }
+      ],
+      "answerGroup": "DIRECT"
+    },
+    {
+      "id": "support-reports-five",
+      "text": "Did Ada supervise five direct reports?",
+      "packets": [
+        {
+          "id": "48f8714c-b91f-4262-8d58-c11b23c5e0a6",
+          "kind": "project",
+          "title": "Direct reports",
+          "organization": null,
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "summary": "Supervised eight direct reports, not five",
+          "aliases": [],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "scope",
+              "value": "Supervised eight direct reports, not five",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For People Desk, I initially said five reports. Correction: eight direct reports, not five; I supervised the eight directly.",
+                  "start": 0,
+                  "end": 124
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": []
+        }
+      ],
+      "expected": [
+        {
+          "id": "48f8714c-b91f-4262-8d58-c11b23c5e0a6",
+          "support": "CONTRADICTS"
+        }
+      ],
+      "answerGroup": "UNSUPPORTED"
+    },
+    {
+      "id": "support-completed-warning",
+      "text": "Did Ada implement the Alert Board warning?",
+      "packets": [
+        {
+          "id": "258c51aa-14d7-44bd-8a0f-53c435b2bf65",
+          "kind": "project",
+          "title": "Alert Board",
+          "organization": null,
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "summary": "Personally implemented the visible warning and completed rollout on 2024-06-30",
+          "aliases": [],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Personally implemented the visible warning and completed rollout on 2024-06-30",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Alert Board, I personally implemented the visible warning and completed its rollout on 2024-06-30.",
+                  "start": 0,
+                  "end": 102
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": []
+        }
+      ],
+      "expected": [
+        {
+          "id": "258c51aa-14d7-44bd-8a0f-53c435b2bf65",
+          "support": "SUPPORTS"
+        }
+      ],
+      "answerGroup": "DIRECT"
+    },
+    {
+      "id": "support-unrelated-medical",
+      "text": "What emergency surgery did Ada perform?",
+      "packets": [
+        {
+          "id": "01290c95-e5d4-40d8-8d52-b0f5870b9b91",
+          "kind": "education",
+          "title": "BSc in Information Systems",
+          "organization": "Cedar College",
+          "dates": {
+            "start": "2017-09-01",
+            "end": "2020-06-30"
+          },
+          "summary": "BSc in Information Systems.",
+          "aliases": ["BSc", "Bachelor", "Information Systems"],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "credential",
+              "value": "BSc in Information Systems at Cedar College, 2017-09-01 to 2020-06-30",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "I earned a BSc in Information Systems at Cedar College from 2017-09-01 to 2020-06-30.",
+                  "start": 942,
+                  "end": 1027
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": []
+        }
+      ],
+      "expected": [
+        {
+          "id": "01290c95-e5d4-40d8-8d52-b0f5870b9b91",
+          "support": "IRRELEVANT"
+        }
+      ],
+      "answerGroup": "UNSUPPORTED"
+    },
+    {
+      "id": "support-unrelated-language",
+      "text": "What German fluency does Ada have?",
+      "packets": [
+        {
+          "id": "f420a553-30ce-4471-8345-a628fe32e030",
+          "kind": "project",
+          "title": "Planned rollout",
+          "organization": null,
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "summary": "Planned a future rollout; not completed",
+          "aliases": [],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "action",
+              "value": "Planned a future rollout; not completed",
+              "attribution": "PERSONAL",
+              "evidence": [
+                {
+                  "quote": "For Route Note, I planned a rollout next month; it has not been completed.",
+                  "start": 0,
+                  "end": 74
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": []
+        }
+      ],
+      "expected": [
+        {
+          "id": "f420a553-30ce-4471-8345-a628fe32e030",
+          "support": "IRRELEVANT"
+        }
+      ],
+      "answerGroup": "UNSUPPORTED"
+    },
+    {
+      "id": "support-unrelated-sales",
+      "text": "What sales quota did Ada own?",
+      "packets": [
+        {
+          "id": "b379ea2c-9f3a-4c72-80f5-bf9d53a2eb91",
+          "kind": "project",
+          "title": "Warning preference",
+          "organization": null,
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "summary": "Operators preferred a visible warning; implementation is not stated",
+          "aliases": [],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "attribute": "scope",
+              "value": "Operators preferred a visible warning; implementation is not stated",
+              "attribution": "TEAM",
+              "evidence": [
+                {
+                  "quote": "For Signal Desk, operators preferred a visible warning when the source file arrived late.",
+                  "start": 0,
+                  "end": 89
+                }
+              ]
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": []
+        }
+      ],
+      "expected": [
+        {
+          "id": "b379ea2c-9f3a-4c72-80f5-bf9d53a2eb91",
+          "support": "IRRELEVANT"
+        }
+      ],
+      "answerGroup": "UNSUPPORTED"
+    }
+  ],
+  "diffOracle": {
+    "version": "2.2-rich-state",
+    "basis": "Source-based factual changes; frozen before continuation provider calls. Original strict labels and runs stay preserved.",
+    "corrections": [
+      "V2 residual unnamed course-completion sentence makes named certificate removal underdetermined: REVIEW, not confident archival. Historical award remains known; no explicit revocation.",
+      "Same-source rich repeat allows supported new fact enrichment but counts it separately; semantically equivalent claim wording must not trigger UPDATED.",
+      "V2 handbook examples may update both training achievement and records already asserting handbook content; count factual assertions, not fixed record decomposition.",
+      "V3 attendance disagreement requires REVIEW wherever a canonical assertion retains unqualified 12-person attendance, including summaries and related context.",
+      "V3 SQL depth is a new explicit fact; UPDATE is correct. Night-shift handover may remain within Roster Note or a linked achievement.",
+      "Certificate continuity is REVIEW in V2 and unchanged/restated in V3 if never archived; a preserved UUID is mandatory."
+    ],
+    "requiredTransitions": {
+      "V2": [
+        "employment-end-2024-06-30",
+        "roster-added",
+        "handbook-five-examples",
+        "certificate-review",
+        "team-metric-stable",
+        "warning-still-preference"
+      ],
+      "V3": [
+        "employment-end-stable",
+        "roster-night-handover",
+        "training-attendance-review",
+        "sql-depth-extensive",
+        "docker-exposure-only",
+        "certificate-same-uuid",
+        "team-metric-stable",
+        "warning-still-preference"
+      ]
+    }
+  },
+  "richV1": {
+    "records": [
+      {
+        "kind": "profile",
+        "key": "profile",
+        "title": "Ada Rowan",
+        "subtitle": "Operations Analyst",
+        "summary": "Operations analyst who builds practical internal tools, with experience designing dispatch reconciliation workflows.",
+        "organization": null,
+        "start_date": null,
+        "end_date": null,
+        "skill_keys": [],
+        "achievement_keys": [],
+        "category_key": null,
+        "source_quote": "My name is Ada Rowan.",
+        "uncertainties": [],
+        "aliases": ["Ada Rowan"],
+        "claims": [
+          {
+            "attribute": "context",
+            "value": "Operations analyst who builds practical internal tools",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I am an operations analyst who builds practical internal tools.",
+                "start": 22,
+                "end": 85
+              }
+            ]
+          },
+          {
+            "attribute": "denial",
+            "value": "Professional use of Kubernetes",
+            "attribution": "NEGATED",
+            "evidence": [
+              {
+                "quote": "I have never used Kubernetes, AWS or medical compliance systems professionally.",
+                "start": 1130,
+                "end": 1209
+              }
+            ]
+          },
+          {
+            "attribute": "denial",
+            "value": "Professional use of AWS",
+            "attribution": "NEGATED",
+            "evidence": [
+              {
+                "quote": "I have never used Kubernetes, AWS or medical compliance systems professionally.",
+                "start": 1130,
+                "end": 1209
+              }
+            ]
+          },
+          {
+            "attribute": "denial",
+            "value": "Professional use of medical compliance systems",
+            "attribution": "NEGATED",
+            "evidence": [
+              {
+                "quote": "I have never used Kubernetes, AWS or medical compliance systems professionally.",
+                "start": 1130,
+                "end": 1209
+              }
+            ]
+          },
+          {
+            "attribute": "denial",
+            "value": "Employment at Google",
+            "attribution": "NEGATED",
+            "evidence": [
+              {
+                "quote": "I have not worked at Google",
+                "start": 1210,
+                "end": 1237
+              }
+            ]
+          },
+          {
+            "attribute": "denial",
+            "value": "Managed employees",
+            "attribution": "NEGATED",
+            "evidence": [
+              {
+                "quote": "I have not worked at Google and have not managed employees.",
+                "start": 1210,
+                "end": 1269
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "experience",
+        "key": "operations-analyst-dd5de8b403",
+        "title": "Operations Analyst",
+        "subtitle": "Harbor Tools",
+        "summary": "Worked as an Operations Analyst at Harbor Tools; personally designed Dispatch Loom and trained dispatch coworkers. The reconciliation-time improvement was a team result, with personal contribution to the parser and checks.",
+        "organization": "Harbor Tools",
+        "start_date": "2021-02-01",
+        "end_date": "2024-05-31",
+        "skill_keys": [
+          "python-1678f77f15",
+          "sql-a03e9bccab",
+          "postgresql-4b6475d427",
+          "git-820dc39c23",
+          "coworker-training-888713667e"
+        ],
+        "achievement_keys": [
+          "dispatch-coworker-training-0bcd131baf",
+          "reconciliation-time-reduction-5800f72729"
+        ],
+        "category_key": null,
+        "source_quote": "I worked as Operations Analyst at Harbor Tools from 2021-02-01 to 2024-05-31.",
+        "uncertainties": [],
+        "aliases": ["Operations Analyst"],
+        "claims": [
+          {
+            "attribute": "context",
+            "value": "Operations Analyst at Harbor Tools from 2021-02-01 to 2024-05-31",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I worked as Operations Analyst at Harbor Tools from 2021-02-01 to 2024-05-31.",
+                "start": 87,
+                "end": 164
+              }
+            ]
+          },
+          {
+            "attribute": "action",
+            "value": "Personally designed and built Dispatch Loom",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL.",
+                "start": 166,
+                "end": 282
+              }
+            ]
+          },
+          {
+            "attribute": "action",
+            "value": "Trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                "start": 508,
+                "end": 622
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "project",
+        "key": "dispatch-loom-e00a8b6fe1",
+        "title": "Dispatch Loom",
+        "subtitle": "Dispatch reconciliation tool",
+        "summary": "Personally designed and built Dispatch Loom and wrote its Python parser and SQL checks. Gathered warehouse supervisor requirements and explained validation failures. Operators compared overnight spreadsheets against daily exports; supervisors wanted understandable exceptions and made the final dispatch decisions.",
+        "organization": "Harbor Tools",
+        "start_date": null,
+        "end_date": null,
+        "skill_keys": [
+          "python-1678f77f15",
+          "sql-a03e9bccab",
+          "postgresql-4b6475d427",
+          "git-820dc39c23",
+          "coworker-training-888713667e"
+        ],
+        "achievement_keys": [
+          "dispatch-coworker-training-0bcd131baf",
+          "reconciliation-time-reduction-5800f72729"
+        ],
+        "category_key": null,
+        "source_quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL.",
+        "uncertainties": [],
+        "aliases": [
+          "Dispatch Loom",
+          "Loom",
+          "dispatch reconciliation tool",
+          "checking script"
+        ],
+        "claims": [
+          {
+            "attribute": "action",
+            "value": "Personally designed and built Dispatch Loom",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL.",
+                "start": 166,
+                "end": 282
+              }
+            ]
+          },
+          {
+            "attribute": "tool",
+            "value": "Python",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL.",
+                "start": 166,
+                "end": 282
+              }
+            ]
+          },
+          {
+            "attribute": "tool",
+            "value": "SQL",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL.",
+                "start": 166,
+                "end": 282
+              }
+            ]
+          },
+          {
+            "attribute": "action",
+            "value": "Wrote the Python parser",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I wrote the Python parser and SQL checks myself.",
+                "start": 283,
+                "end": 331
+              }
+            ]
+          },
+          {
+            "attribute": "action",
+            "value": "Wrote SQL checks",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I wrote the Python parser and SQL checks myself.",
+                "start": 283,
+                "end": 331
+              }
+            ]
+          },
+          {
+            "attribute": "action",
+            "value": "Gathered requirements from warehouse supervisors",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them.",
+                "start": 624,
+                "end": 731
+              }
+            ]
+          },
+          {
+            "attribute": "action",
+            "value": "Explained validation failures to warehouse supervisors",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them.",
+                "start": 624,
+                "end": 731
+              }
+            ]
+          },
+          {
+            "attribute": "tool",
+            "value": "Git for version control",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I used Git for version control and PostgreSQL for the production database.",
+                "start": 732,
+                "end": 806
+              }
+            ]
+          },
+          {
+            "attribute": "tool",
+            "value": "PostgreSQL for the production database",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I used Git for version control and PostgreSQL for the production database.",
+                "start": 732,
+                "end": 806
+              }
+            ]
+          },
+          {
+            "attribute": "scope",
+            "value": "Operators compared the overnight spreadsheet against the daily export",
+            "attribution": "TEAM",
+            "evidence": [
+              {
+                "quote": "Operators compared the overnight spreadsheet against the daily export.",
+                "start": 1363,
+                "end": 1433
+              }
+            ]
+          },
+          {
+            "attribute": "scope",
+            "value": "Supervisors wanted understandable exceptions",
+            "attribution": "TEAM",
+            "evidence": [
+              {
+                "quote": "The supervisors wanted understandable exceptions, not a dashboard with unexplained colors.",
+                "start": 1501,
+                "end": 1591
+              }
+            ]
+          },
+          {
+            "attribute": "scope",
+            "value": "A visible warning was preferred when the source file arrived late",
+            "attribution": "TEAM",
+            "evidence": [
+              {
+                "quote": "The source file could arrive late and the operators preferred a visible warning.",
+                "start": 1736,
+                "end": 1816
+              }
+            ]
+          },
+          {
+            "attribute": "scope",
+            "value": "Empty rows were kept visible because a blank reference might need a phone call",
+            "attribution": "TEAM",
+            "evidence": [
+              {
+                "quote": "We kept them visible because a blank reference might need a phone call.",
+                "start": 1962,
+                "end": 2033
+              }
+            ]
+          },
+          {
+            "attribute": "context",
+            "value": "Coworker handbook described where to look before raising an exception",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "The handbook described where a coworker should look before raising an exception.",
+                "start": 2034,
+                "end": 2114
+              }
+            ]
+          },
+          {
+            "attribute": "action",
+            "value": "Worked through an example beside a supervisor",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "To explain the workflow I would sit beside a supervisor and work through an example.",
+                "start": 2182,
+                "end": 2266
+              }
+            ]
+          },
+          {
+            "attribute": "ownership",
+            "value": "Supervisor made the final dispatch decision",
+            "attribution": "TEAM",
+            "evidence": [
+              {
+                "quote": "The supervisor made the final dispatch decision.",
+                "start": 2267,
+                "end": 2315
+              }
+            ]
+          },
+          {
+            "attribute": "ownership",
+            "value": "Responsible for the parser and checks",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I was responsible for the parser and checks; I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+                "start": 2316,
+                "end": 2444
+              }
+            ]
+          },
+          {
+            "attribute": "denial",
+            "value": "Ownership of warehouse staffing budget",
+            "attribution": "NEGATED",
+            "evidence": [
+              {
+                "quote": "I was responsible for the parser and checks; I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+                "start": 2316,
+                "end": 2444
+              }
+            ]
+          },
+          {
+            "attribute": "denial",
+            "value": "Ownership of procurement",
+            "attribution": "NEGATED",
+            "evidence": [
+              {
+                "quote": "I was responsible for the parser and checks; I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+                "start": 2316,
+                "end": 2444
+              }
+            ]
+          },
+          {
+            "attribute": "denial",
+            "value": "Ownership of the scheduling system",
+            "attribution": "NEGATED",
+            "evidence": [
+              {
+                "quote": "I was responsible for the parser and checks; I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+                "start": 2316,
+                "end": 2444
+              }
+            ]
+          },
+          {
+            "attribute": "denial",
+            "value": "Machine-learning classifier in the rules",
+            "attribution": "NEGATED",
+            "evidence": [
+              {
+                "quote": "There was no machine-learning classifier involved in these rules.",
+                "start": 2115,
+                "end": 2180
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "achievement",
+        "key": "dispatch-coworker-training-0bcd131baf",
+        "title": "Dispatch coworker training",
+        "subtitle": "12 coworkers · two workshops",
+        "summary": "Personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook. Exact workshop dates were not supplied.",
+        "organization": "Harbor Tools",
+        "start_date": null,
+        "end_date": null,
+        "skill_keys": ["coworker-training-888713667e"],
+        "achievement_keys": [],
+        "category_key": null,
+        "source_quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+        "uncertainties": [],
+        "aliases": ["training", "trained", "workshops"],
+        "claims": [
+          {
+            "attribute": "action",
+            "value": "Trained 12 dispatch coworkers",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                "start": 508,
+                "end": 622
+              }
+            ]
+          },
+          {
+            "attribute": "scope",
+            "value": "Two workshops",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                "start": 508,
+                "end": 622
+              }
+            ]
+          },
+          {
+            "attribute": "action",
+            "value": "Wrote a plain-language handbook",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                "start": 508,
+                "end": 622
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "achievement",
+        "key": "reconciliation-time-reduction-5800f72729",
+        "title": "Reconciliation time reduction",
+        "subtitle": "5 to 2 hours per week · six weekly runs",
+        "summary": "Team reconciliation time fell from 5 to 2 hours per week over six weekly runs. Personal contribution was the parser and checks; coworkers also changed their checking habits.",
+        "organization": "Harbor Tools",
+        "start_date": null,
+        "end_date": null,
+        "skill_keys": ["python-1678f77f15", "sql-a03e9bccab"],
+        "achievement_keys": [],
+        "category_key": null,
+        "source_quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs.",
+        "uncertainties": [],
+        "aliases": ["reconciliation", "time", "hours"],
+        "claims": [
+          {
+            "attribute": "metric",
+            "value": "Reconciliation time reduced from 5 hours to 2 hours per week over six weekly runs",
+            "attribution": "TEAM",
+            "evidence": [
+              {
+                "quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks.",
+                "start": 333,
+                "end": 506
+              }
+            ]
+          },
+          {
+            "attribute": "ownership",
+            "value": "Personal contribution was the parser and checks",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "This was a team result; my contribution was the parser and checks.",
+                "start": 440,
+                "end": 506
+              }
+            ]
+          },
+          {
+            "attribute": "context",
+            "value": "Coworkers also changed their checking habits",
+            "attribution": "TEAM",
+            "evidence": [
+              {
+                "quote": "I cannot attribute all improvement to myself because coworkers also changed their checking habits.",
+                "start": 2896,
+                "end": 2994
+              }
+            ]
+          },
+          {
+            "attribute": "correction",
+            "value": "The measured time was reconciliation time, not delivery time",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only.",
+                "start": 2731,
+                "end": 2895
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "skill",
+        "key": "python-1678f77f15",
+        "title": "Python",
+        "subtitle": "",
+        "summary": "Used to write the Dispatch Loom parser.",
+        "organization": null,
+        "start_date": null,
+        "end_date": null,
+        "skill_keys": [],
+        "achievement_keys": [],
+        "category_key": "data-tools-28c5fe8f0e",
+        "source_quote": "I wrote the Python parser and SQL checks myself.",
+        "uncertainties": [],
+        "aliases": ["Python"],
+        "claims": [
+          {
+            "attribute": "tool",
+            "value": "Python",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I wrote the Python parser and SQL checks myself.",
+                "start": 283,
+                "end": 331
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "skill",
+        "key": "sql-a03e9bccab",
+        "title": "SQL",
+        "subtitle": "",
+        "summary": "Used to write Dispatch Loom checks.",
+        "organization": null,
+        "start_date": null,
+        "end_date": null,
+        "skill_keys": [],
+        "achievement_keys": [],
+        "category_key": "data-tools-28c5fe8f0e",
+        "source_quote": "I wrote the Python parser and SQL checks myself.",
+        "uncertainties": [],
+        "aliases": ["SQL"],
+        "claims": [
+          {
+            "attribute": "tool",
+            "value": "SQL",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I wrote the Python parser and SQL checks myself.",
+                "start": 283,
+                "end": 331
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "skill",
+        "key": "postgresql-4b6475d427",
+        "title": "PostgreSQL",
+        "subtitle": "",
+        "summary": "Used PostgreSQL for Dispatch Loom.",
+        "organization": null,
+        "start_date": null,
+        "end_date": null,
+        "skill_keys": [],
+        "achievement_keys": [],
+        "category_key": "data-tools-28c5fe8f0e",
+        "source_quote": "I used Git for version control and PostgreSQL for the production database.",
+        "uncertainties": [],
+        "aliases": ["PostgreSQL"],
+        "claims": [
+          {
+            "value": "PostgreSQL",
+            "evidence": [
+              {
+                "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them. I used Git for version control and PostgreSQL for the production database.",
+                "start": 624,
+                "end": 806
+              }
+            ],
+            "attribute": "tool",
+            "attribution": "PERSONAL"
+          }
+        ]
+      },
+      {
+        "kind": "skill",
+        "key": "git-820dc39c23",
+        "title": "Git",
+        "subtitle": "",
+        "summary": "Used Git for Dispatch Loom.",
+        "organization": null,
+        "start_date": null,
+        "end_date": null,
+        "skill_keys": [],
+        "achievement_keys": [],
+        "category_key": "collaboration-91578d1f92",
+        "source_quote": "I used Git for version control and PostgreSQL for the production database.",
+        "uncertainties": [],
+        "aliases": ["Git"],
+        "claims": [
+          {
+            "value": "Git",
+            "evidence": [
+              {
+                "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them. I used Git for version control and PostgreSQL for the production database.",
+                "start": 624,
+                "end": 806
+              }
+            ],
+            "attribute": "tool",
+            "attribution": "PERSONAL"
+          }
+        ]
+      },
+      {
+        "kind": "skill",
+        "key": "coworker-training-888713667e",
+        "title": "Coworker training",
+        "subtitle": "",
+        "summary": "Personally trained dispatch coworkers and wrote a plain-language handbook.",
+        "organization": null,
+        "start_date": null,
+        "end_date": null,
+        "skill_keys": [],
+        "achievement_keys": [],
+        "category_key": "collaboration-91578d1f92",
+        "source_quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+        "uncertainties": [],
+        "aliases": ["training", "workshops", "coworker"],
+        "claims": [
+          {
+            "attribute": "action",
+            "value": "Trained dispatch coworkers",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                "start": 508,
+                "end": 622
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "education",
+        "key": "bsc-in-information-systems-ab520a51dc",
+        "title": "BSc in Information Systems",
+        "subtitle": "",
+        "summary": "BSc in Information Systems.",
+        "organization": "Cedar College",
+        "start_date": "2017-09-01",
+        "end_date": "2020-06-30",
+        "skill_keys": [],
+        "achievement_keys": [],
+        "category_key": null,
+        "source_quote": "I earned a BSc in Information Systems at Cedar College from 2017-09-01 to 2020-06-30.",
+        "uncertainties": [],
+        "aliases": ["BSc", "Bachelor", "Information Systems"],
+        "claims": [
+          {
+            "value": "BSc in Information Systems at Cedar College, 2017-09-01 to 2020-06-30",
+            "evidence": [
+              {
+                "quote": "I earned a BSc in Information Systems at Cedar College from 2017-09-01 to 2020-06-30.",
+                "start": 942,
+                "end": 1027
+              }
+            ],
+            "attribute": "credential",
+            "attribution": "PERSONAL"
+          }
+        ]
+      },
+      {
+        "kind": "certification",
+        "key": "cedar-sql-foundations-ed912d30a4",
+        "title": "Cedar SQL Foundations",
+        "subtitle": "",
+        "summary": "Fictional course-completion certificate received on 2020-08-15; not a professional license.",
+        "organization": null,
+        "start_date": "2020-08-15",
+        "end_date": null,
+        "skill_keys": [],
+        "achievement_keys": [],
+        "category_key": null,
+        "source_quote": "I received the fictional Cedar SQL Foundations certificate on 2020-08-15.",
+        "uncertainties": [],
+        "aliases": ["SQL Foundations"],
+        "claims": [
+          {
+            "attribute": "credential",
+            "value": "Cedar SQL Foundations certificate",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I received the fictional Cedar SQL Foundations certificate on 2020-08-15.",
+                "start": 1029,
+                "end": 1102
+              }
+            ]
+          },
+          {
+            "attribute": "context",
+            "value": "Course completion, not a professional license",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "The certificate was a course completion, not a professional license.",
+                "start": 3490,
+                "end": 3558
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "language",
+        "key": "english-3e0cd54cbb",
+        "title": "English",
+        "subtitle": "",
+        "summary": "Fluent English.",
+        "organization": null,
+        "start_date": null,
+        "end_date": null,
+        "skill_keys": [],
+        "achievement_keys": [],
+        "category_key": null,
+        "source_quote": "I speak English fluently.",
+        "uncertainties": [],
+        "aliases": ["English"],
+        "claims": [
+          {
+            "attribute": "language",
+            "value": "Fluent English",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I speak English fluently.",
+                "start": 1104,
+                "end": 1129
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "category",
+        "key": "data-tools-28c5fe8f0e",
+        "title": "Data tools",
+        "subtitle": "",
+        "summary": "Python, SQL and PostgreSQL.",
+        "organization": null,
+        "start_date": null,
+        "end_date": null,
+        "skill_keys": [],
+        "achievement_keys": [],
+        "category_key": null,
+        "source_quote": "My skill category is Data tools: Python, SQL and PostgreSQL.",
+        "uncertainties": [],
+        "aliases": ["Data tools"],
+        "claims": [
+          {
+            "value": "Python, SQL and PostgreSQL.",
+            "evidence": [
+              {
+                "quote": "My skill category is Data tools: Python, SQL and PostgreSQL. My separate skill category is Collaboration: Git and coworker training.",
+                "start": 808,
+                "end": 940
+              }
+            ],
+            "attribute": "context",
+            "attribution": "PERSONAL"
+          }
+        ]
+      },
+      {
+        "kind": "category",
+        "key": "collaboration-91578d1f92",
+        "title": "Collaboration",
+        "subtitle": "",
+        "summary": "Git and coworker training.",
+        "organization": null,
+        "start_date": null,
+        "end_date": null,
+        "skill_keys": [],
+        "achievement_keys": [],
+        "category_key": null,
+        "source_quote": "My separate skill category is Collaboration: Git and coworker training.",
+        "uncertainties": [],
+        "aliases": ["Collaboration"],
+        "claims": [
+          {
+            "value": "Git and coworker training.",
+            "evidence": [
+              {
+                "quote": "My skill category is Data tools: Python, SQL and PostgreSQL. My separate skill category is Collaboration: Git and coworker training.",
+                "start": 808,
+                "end": 940
+              }
+            ],
+            "attribute": "context",
+            "attribution": "PERSONAL"
+          }
+        ]
+      }
+    ],
+    "reviewNotes": [
+      "Reviewed all 15 factual records against frozen B source; corrected invented managed-employees quotation with exact source sentence.",
+      "Changed plural workflow examples/supervisors to the singular source assertion.",
+      "Reworded project summary to preserve stated supervisor preferences rather than asserting an implemented warning/exception feature.",
+      "Removed review flags only after these explicit source-based corrections. Application recomputes offsets and stamps the newly persisted source UUID before apply."
+    ]
+  },
+  "richB": {
+    "records": [
+      {
+        "kind": "profile",
+        "key": "profile",
+        "title": "Ada Rowan",
+        "subtitle": "Operations Analyst",
+        "summary": "Operations analyst who builds practical internal tools, with experience designing dispatch reconciliation workflows.",
+        "organization": null,
+        "start_date": null,
+        "end_date": null,
+        "skill_keys": [],
+        "achievement_keys": [],
+        "category_key": null,
+        "source_quote": "My name is Ada Rowan.",
+        "uncertainties": [],
+        "aliases": ["Ada Rowan"],
+        "claims": [
+          {
+            "attribute": "context",
+            "value": "Operations analyst who builds practical internal tools",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I am an operations analyst who builds practical internal tools.",
+                "start": 72,
+                "end": 135
+              }
+            ]
+          },
+          {
+            "attribute": "denial",
+            "value": "Professional use of Kubernetes",
+            "attribution": "NEGATED",
+            "evidence": [
+              {
+                "quote": "I have never used Kubernetes, AWS or medical compliance systems professionally.",
+                "start": 1005,
+                "end": 1084
+              }
+            ]
+          },
+          {
+            "attribute": "denial",
+            "value": "Professional use of AWS",
+            "attribution": "NEGATED",
+            "evidence": [
+              {
+                "quote": "I have never used Kubernetes, AWS or medical compliance systems professionally.",
+                "start": 1005,
+                "end": 1084
+              }
+            ]
+          },
+          {
+            "attribute": "denial",
+            "value": "Professional use of medical compliance systems",
+            "attribution": "NEGATED",
+            "evidence": [
+              {
+                "quote": "I have never used Kubernetes, AWS or medical compliance systems professionally.",
+                "start": 1005,
+                "end": 1084
+              }
+            ]
+          },
+          {
+            "attribute": "denial",
+            "value": "Employment at Google",
+            "attribution": "NEGATED",
+            "evidence": [
+              {
+                "quote": "I have not worked at Google",
+                "start": 1085,
+                "end": 1112
+              }
+            ]
+          },
+          {
+            "attribute": "denial",
+            "value": "Managed employees",
+            "attribution": "NEGATED",
+            "evidence": [
+              {
+                "quote": "I have not worked at Google and have not managed employees.",
+                "start": 1085,
+                "end": 1144
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "experience",
+        "key": "operations-analyst-dd5de8b403",
+        "title": "Operations Analyst",
+        "subtitle": "Harbor Tools",
+        "summary": "Worked as an Operations Analyst at Harbor Tools; personally designed Dispatch Loom and trained dispatch coworkers. The reconciliation-time improvement was a team result, with personal contribution to the parser and checks.",
+        "organization": "Harbor Tools",
+        "start_date": "2021-02-01",
+        "end_date": "2024-05-31",
+        "skill_keys": [
+          "python-1678f77f15",
+          "sql-a03e9bccab",
+          "postgresql-4b6475d427",
+          "git-820dc39c23",
+          "coworker-training-888713667e"
+        ],
+        "achievement_keys": [
+          "dispatch-coworker-training-0bcd131baf",
+          "reconciliation-time-reduction-5800f72729"
+        ],
+        "category_key": null,
+        "source_quote": "I worked as Operations Analyst at Harbor Tools from 2021-02-01 to 2024-05-31.",
+        "uncertainties": [],
+        "aliases": ["Operations Analyst"],
+        "claims": [
+          {
+            "attribute": "context",
+            "value": "Operations Analyst at Harbor Tools from 2021-02-01 to 2024-05-31",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I worked as Operations Analyst at Harbor Tools from 2021-02-01 to 2024-05-31.",
+                "start": 137,
+                "end": 214
+              }
+            ]
+          },
+          {
+            "attribute": "action",
+            "value": "Personally designed and built Dispatch Loom",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL.",
+                "start": 216,
+                "end": 332
+              }
+            ]
+          },
+          {
+            "attribute": "action",
+            "value": "Trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                "start": 383,
+                "end": 497
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "project",
+        "key": "dispatch-loom-e00a8b6fe1",
+        "title": "Dispatch Loom",
+        "subtitle": "Dispatch reconciliation tool",
+        "summary": "Personally designed and built Dispatch Loom and wrote its Python parser and SQL checks. Gathered warehouse supervisor requirements and explained validation failures. Operators compared overnight spreadsheets against daily exports; supervisors wanted understandable exceptions and made the final dispatch decisions.",
+        "organization": "Harbor Tools",
+        "start_date": null,
+        "end_date": null,
+        "skill_keys": [
+          "python-1678f77f15",
+          "sql-a03e9bccab",
+          "postgresql-4b6475d427",
+          "git-820dc39c23",
+          "coworker-training-888713667e"
+        ],
+        "achievement_keys": [
+          "dispatch-coworker-training-0bcd131baf",
+          "reconciliation-time-reduction-5800f72729"
+        ],
+        "category_key": null,
+        "source_quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL.",
+        "uncertainties": [],
+        "aliases": [
+          "Dispatch Loom",
+          "Loom",
+          "dispatch reconciliation tool",
+          "checking script"
+        ],
+        "claims": [
+          {
+            "attribute": "action",
+            "value": "Personally designed and built Dispatch Loom",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL.",
+                "start": 216,
+                "end": 332
+              }
+            ]
+          },
+          {
+            "attribute": "tool",
+            "value": "Python",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL.",
+                "start": 216,
+                "end": 332
+              }
+            ]
+          },
+          {
+            "attribute": "tool",
+            "value": "SQL",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL.",
+                "start": 216,
+                "end": 332
+              }
+            ]
+          },
+          {
+            "attribute": "action",
+            "value": "Wrote the Python parser",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I wrote the Python parser and SQL checks myself.",
+                "start": 333,
+                "end": 381
+              }
+            ]
+          },
+          {
+            "attribute": "action",
+            "value": "Wrote SQL checks",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I wrote the Python parser and SQL checks myself.",
+                "start": 333,
+                "end": 381
+              }
+            ]
+          },
+          {
+            "attribute": "action",
+            "value": "Gathered requirements from warehouse supervisors",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them.",
+                "start": 499,
+                "end": 606
+              }
+            ]
+          },
+          {
+            "attribute": "action",
+            "value": "Explained validation failures to warehouse supervisors",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them.",
+                "start": 499,
+                "end": 606
+              }
+            ]
+          },
+          {
+            "attribute": "tool",
+            "value": "Git for version control",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I used Git for version control and PostgreSQL for the production database.",
+                "start": 607,
+                "end": 681
+              }
+            ]
+          },
+          {
+            "attribute": "tool",
+            "value": "PostgreSQL for the production database",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I used Git for version control and PostgreSQL for the production database.",
+                "start": 607,
+                "end": 681
+              }
+            ]
+          },
+          {
+            "attribute": "scope",
+            "value": "Operators compared the overnight spreadsheet against the daily export",
+            "attribution": "TEAM",
+            "evidence": [
+              {
+                "quote": "Operators compared the overnight spreadsheet against the daily export.",
+                "start": 1258,
+                "end": 1328
+              }
+            ]
+          },
+          {
+            "attribute": "scope",
+            "value": "Supervisors wanted understandable exceptions",
+            "attribution": "TEAM",
+            "evidence": [
+              {
+                "quote": "The supervisors wanted understandable exceptions, not a dashboard with unexplained colors.",
+                "start": 1396,
+                "end": 1486
+              }
+            ]
+          },
+          {
+            "attribute": "scope",
+            "value": "A visible warning was preferred when the source file arrived late",
+            "attribution": "TEAM",
+            "evidence": [
+              {
+                "quote": "The source file could arrive late and the operators preferred a visible warning.",
+                "start": 1651,
+                "end": 1731
+              }
+            ]
+          },
+          {
+            "attribute": "scope",
+            "value": "Empty rows were kept visible because a blank reference might need a phone call",
+            "attribution": "TEAM",
+            "evidence": [
+              {
+                "quote": "We kept them visible because a blank reference might need a phone call.",
+                "start": 1897,
+                "end": 1968
+              }
+            ]
+          },
+          {
+            "attribute": "context",
+            "value": "Coworker handbook described where to look before raising an exception",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "The handbook described where a coworker should look before raising an exception.",
+                "start": 1969,
+                "end": 2049
+              }
+            ]
+          },
+          {
+            "attribute": "action",
+            "value": "Worked through an example beside a supervisor",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "To explain the workflow I would sit beside a supervisor and work through an example.",
+                "start": 2137,
+                "end": 2221
+              }
+            ]
+          },
+          {
+            "attribute": "ownership",
+            "value": "Supervisor made the final dispatch decision",
+            "attribution": "TEAM",
+            "evidence": [
+              {
+                "quote": "The supervisor made the final dispatch decision.",
+                "start": 2222,
+                "end": 2270
+              }
+            ]
+          },
+          {
+            "attribute": "ownership",
+            "value": "Responsible for the parser and checks",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I was responsible for the parser and checks; I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+                "start": 2271,
+                "end": 2399
+              }
+            ]
+          },
+          {
+            "attribute": "denial",
+            "value": "Ownership of warehouse staffing budget",
+            "attribution": "NEGATED",
+            "evidence": [
+              {
+                "quote": "I was responsible for the parser and checks; I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+                "start": 2271,
+                "end": 2399
+              }
+            ]
+          },
+          {
+            "attribute": "denial",
+            "value": "Ownership of procurement",
+            "attribution": "NEGATED",
+            "evidence": [
+              {
+                "quote": "I was responsible for the parser and checks; I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+                "start": 2271,
+                "end": 2399
+              }
+            ]
+          },
+          {
+            "attribute": "denial",
+            "value": "Ownership of the scheduling system",
+            "attribution": "NEGATED",
+            "evidence": [
+              {
+                "quote": "I was responsible for the parser and checks; I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+                "start": 2271,
+                "end": 2399
+              }
+            ]
+          },
+          {
+            "attribute": "denial",
+            "value": "Machine-learning classifier in the rules",
+            "attribution": "NEGATED",
+            "evidence": [
+              {
+                "quote": "There was no machine-learning classifier involved in these rules.",
+                "start": 2050,
+                "end": 2115
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "achievement",
+        "key": "dispatch-coworker-training-0bcd131baf",
+        "title": "Dispatch coworker training",
+        "subtitle": "12 coworkers · two workshops",
+        "summary": "Personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook. Exact workshop dates were not supplied.",
+        "organization": "Harbor Tools",
+        "start_date": null,
+        "end_date": null,
+        "skill_keys": ["coworker-training-888713667e"],
+        "achievement_keys": [],
+        "category_key": null,
+        "source_quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+        "uncertainties": [],
+        "aliases": ["training", "trained", "workshops"],
+        "claims": [
+          {
+            "attribute": "action",
+            "value": "Trained 12 dispatch coworkers",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                "start": 383,
+                "end": 497
+              }
+            ]
+          },
+          {
+            "attribute": "scope",
+            "value": "Two workshops",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                "start": 383,
+                "end": 497
+              }
+            ]
+          },
+          {
+            "attribute": "action",
+            "value": "Wrote a plain-language handbook",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                "start": 383,
+                "end": 497
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "achievement",
+        "key": "reconciliation-time-reduction-5800f72729",
+        "title": "Reconciliation time reduction",
+        "subtitle": "5 to 2 hours per week · six weekly runs",
+        "summary": "Team reconciliation time fell from 5 to 2 hours per week over six weekly runs. Personal contribution was the parser and checks; coworkers also changed their checking habits.",
+        "organization": "Harbor Tools",
+        "start_date": null,
+        "end_date": null,
+        "skill_keys": ["python-1678f77f15", "sql-a03e9bccab"],
+        "achievement_keys": [],
+        "category_key": null,
+        "source_quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs.",
+        "uncertainties": [],
+        "aliases": ["reconciliation", "time", "hours"],
+        "claims": [
+          {
+            "attribute": "metric",
+            "value": "Reconciliation time reduced from 5 hours to 2 hours per week over six weekly runs",
+            "attribution": "TEAM",
+            "evidence": [
+              {
+                "quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks.",
+                "start": 15322,
+                "end": 15495
+              },
+              {
+                "quote": "I first said 50% time saved, but that was wrong.",
+                "start": 15273,
+                "end": 15321
+              }
+            ]
+          },
+          {
+            "attribute": "ownership",
+            "value": "Personal contribution was the parser and checks",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "This was a team result; my contribution was the parser and checks.",
+                "start": 15429,
+                "end": 15495
+              }
+            ]
+          },
+          {
+            "attribute": "context",
+            "value": "Coworkers also changed their checking habits",
+            "attribution": "TEAM",
+            "evidence": [
+              {
+                "quote": "I cannot attribute all improvement to myself because coworkers also changed their checking habits.",
+                "start": 2891,
+                "end": 2989
+              }
+            ]
+          },
+          {
+            "attribute": "correction",
+            "value": "Earlier 50% time-saved figure was incorrect",
+            "attribution": "NEGATED",
+            "evidence": [
+              {
+                "quote": "I first said 50% time saved, but that was wrong.",
+                "start": 15273,
+                "end": 15321
+              }
+            ]
+          },
+          {
+            "attribute": "correction",
+            "value": "The measured time was reconciliation time, not delivery time",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only.",
+                "start": 2726,
+                "end": 2890
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "skill",
+        "key": "python-1678f77f15",
+        "title": "Python",
+        "subtitle": "",
+        "summary": "Used to write the Dispatch Loom parser.",
+        "organization": null,
+        "start_date": null,
+        "end_date": null,
+        "skill_keys": [],
+        "achievement_keys": [],
+        "category_key": "data-tools-28c5fe8f0e",
+        "source_quote": "I wrote the Python parser and SQL checks myself.",
+        "uncertainties": [],
+        "aliases": ["Python"],
+        "claims": [
+          {
+            "attribute": "tool",
+            "value": "Python",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I wrote the Python parser and SQL checks myself.",
+                "start": 333,
+                "end": 381
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "skill",
+        "key": "sql-a03e9bccab",
+        "title": "SQL",
+        "subtitle": "",
+        "summary": "Used to write Dispatch Loom checks.",
+        "organization": null,
+        "start_date": null,
+        "end_date": null,
+        "skill_keys": [],
+        "achievement_keys": [],
+        "category_key": "data-tools-28c5fe8f0e",
+        "source_quote": "I wrote the Python parser and SQL checks myself.",
+        "uncertainties": [],
+        "aliases": ["SQL"],
+        "claims": [
+          {
+            "attribute": "tool",
+            "value": "SQL",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I wrote the Python parser and SQL checks myself.",
+                "start": 333,
+                "end": 381
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "skill",
+        "key": "postgresql-4b6475d427",
+        "title": "PostgreSQL",
+        "subtitle": "",
+        "summary": "Used PostgreSQL for Dispatch Loom.",
+        "organization": null,
+        "start_date": null,
+        "end_date": null,
+        "skill_keys": [],
+        "achievement_keys": [],
+        "category_key": "data-tools-28c5fe8f0e",
+        "source_quote": "I used Git for version control and PostgreSQL for the production database.",
+        "uncertainties": [],
+        "aliases": ["PostgreSQL"],
+        "claims": [
+          {
+            "value": "PostgreSQL",
+            "evidence": [
+              {
+                "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them. I used Git for version control and PostgreSQL for the production database.",
+                "start": 499,
+                "end": 681
+              }
+            ],
+            "attribute": "tool",
+            "attribution": "PERSONAL"
+          }
+        ]
+      },
+      {
+        "kind": "skill",
+        "key": "git-820dc39c23",
+        "title": "Git",
+        "subtitle": "",
+        "summary": "Used Git for Dispatch Loom.",
+        "organization": null,
+        "start_date": null,
+        "end_date": null,
+        "skill_keys": [],
+        "achievement_keys": [],
+        "category_key": "collaboration-91578d1f92",
+        "source_quote": "I used Git for version control and PostgreSQL for the production database.",
+        "uncertainties": [],
+        "aliases": ["Git"],
+        "claims": [
+          {
+            "value": "Git",
+            "evidence": [
+              {
+                "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them. I used Git for version control and PostgreSQL for the production database.",
+                "start": 499,
+                "end": 681
+              }
+            ],
+            "attribute": "tool",
+            "attribution": "PERSONAL"
+          }
+        ]
+      },
+      {
+        "kind": "skill",
+        "key": "coworker-training-888713667e",
+        "title": "Coworker training",
+        "subtitle": "",
+        "summary": "Personally trained dispatch coworkers and wrote a plain-language handbook.",
+        "organization": null,
+        "start_date": null,
+        "end_date": null,
+        "skill_keys": [],
+        "achievement_keys": [],
+        "category_key": "collaboration-91578d1f92",
+        "source_quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+        "uncertainties": [],
+        "aliases": ["training", "workshops", "coworker"],
+        "claims": [
+          {
+            "attribute": "action",
+            "value": "Trained dispatch coworkers",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                "start": 383,
+                "end": 497
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "education",
+        "key": "bsc-in-information-systems-ab520a51dc",
+        "title": "BSc in Information Systems",
+        "subtitle": "",
+        "summary": "BSc in Information Systems.",
+        "organization": "Cedar College",
+        "start_date": "2017-09-01",
+        "end_date": "2020-06-30",
+        "skill_keys": [],
+        "achievement_keys": [],
+        "category_key": null,
+        "source_quote": "I earned a BSc in Information Systems at Cedar College from 2017-09-01 to 2020-06-30.",
+        "uncertainties": [],
+        "aliases": ["BSc", "Bachelor", "Information Systems"],
+        "claims": [
+          {
+            "value": "BSc in Information Systems at Cedar College, 2017-09-01 to 2020-06-30",
+            "evidence": [
+              {
+                "quote": "I earned a BSc in Information Systems at Cedar College from 2017-09-01 to 2020-06-30.",
+                "start": 817,
+                "end": 902
+              }
+            ],
+            "attribute": "credential",
+            "attribution": "PERSONAL"
+          }
+        ]
+      },
+      {
+        "kind": "certification",
+        "key": "cedar-sql-foundations-ed912d30a4",
+        "title": "Cedar SQL Foundations",
+        "subtitle": "",
+        "summary": "Fictional course-completion certificate received on 2020-08-15; not a professional license.",
+        "organization": null,
+        "start_date": "2020-08-15",
+        "end_date": null,
+        "skill_keys": [],
+        "achievement_keys": [],
+        "category_key": null,
+        "source_quote": "I received the fictional Cedar SQL Foundations certificate on 2020-08-15.",
+        "uncertainties": [],
+        "aliases": ["SQL Foundations"],
+        "claims": [
+          {
+            "attribute": "credential",
+            "value": "Cedar SQL Foundations certificate",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I received the fictional Cedar SQL Foundations certificate on 2020-08-15.",
+                "start": 904,
+                "end": 977
+              }
+            ]
+          },
+          {
+            "attribute": "context",
+            "value": "Course completion, not a professional license",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "The certificate was a course completion, not a professional license.",
+                "start": 3525,
+                "end": 3593
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "language",
+        "key": "english-3e0cd54cbb",
+        "title": "English",
+        "subtitle": "",
+        "summary": "Fluent English.",
+        "organization": null,
+        "start_date": null,
+        "end_date": null,
+        "skill_keys": [],
+        "achievement_keys": [],
+        "category_key": null,
+        "source_quote": "I speak English fluently.",
+        "uncertainties": [],
+        "aliases": ["English"],
+        "claims": [
+          {
+            "attribute": "language",
+            "value": "Fluent English",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I speak English fluently.",
+                "start": 979,
+                "end": 1004
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "category",
+        "key": "data-tools-28c5fe8f0e",
+        "title": "Data tools",
+        "subtitle": "",
+        "summary": "Python, SQL and PostgreSQL.",
+        "organization": null,
+        "start_date": null,
+        "end_date": null,
+        "skill_keys": [],
+        "achievement_keys": [],
+        "category_key": null,
+        "source_quote": "My skill category is Data tools: Python, SQL and PostgreSQL.",
+        "uncertainties": [],
+        "aliases": ["Data tools"],
+        "claims": [
+          {
+            "value": "Python, SQL and PostgreSQL.",
+            "evidence": [
+              {
+                "quote": "My skill category is Data tools: Python, SQL and PostgreSQL. My separate skill category is Collaboration: Git and coworker training.",
+                "start": 683,
+                "end": 815
+              }
+            ],
+            "attribute": "context",
+            "attribution": "PERSONAL"
+          }
+        ]
+      },
+      {
+        "kind": "category",
+        "key": "collaboration-91578d1f92",
+        "title": "Collaboration",
+        "subtitle": "",
+        "summary": "Git and coworker training.",
+        "organization": null,
+        "start_date": null,
+        "end_date": null,
+        "skill_keys": [],
+        "achievement_keys": [],
+        "category_key": null,
+        "source_quote": "My separate skill category is Collaboration: Git and coworker training.",
+        "uncertainties": [],
+        "aliases": ["Collaboration"],
+        "claims": [
+          {
+            "value": "Git and coworker training.",
+            "evidence": [
+              {
+                "quote": "My skill category is Data tools: Python, SQL and PostgreSQL. My separate skill category is Collaboration: Git and coworker training.",
+                "start": 683,
+                "end": 815
+              }
+            ],
+            "attribute": "context",
+            "attribution": "PERSONAL"
+          }
+        ]
+      }
+    ],
+    "reviewNotes": [
+      "Reviewed all 15 factual records against frozen B source; corrected invented managed-employees quotation with exact source sentence.",
+      "Changed plural workflow examples/supervisors to the singular source assertion.",
+      "Reworded project summary to preserve stated supervisor preferences rather than asserting an implemented warning/exception feature.",
+      "Removed review flags only after these explicit source-based corrections. Application recomputes offsets and stamps the newly persisted source UUID before apply."
+    ]
+  }
+}

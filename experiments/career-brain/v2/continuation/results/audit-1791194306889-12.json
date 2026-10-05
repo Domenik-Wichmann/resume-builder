@@ -1,0 +1,159 @@
+{
+  "model": "openai/gpt-6-luna-pro",
+  "records": [
+    {
+      "kind": "category",
+      "key": "collaboration-91578d1f92",
+      "title": "Collaboration",
+      "subtitle": "",
+      "summary": "Git and coworker training.",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "My separate skill category is Collaboration: Git and coworker training.",
+      "uncertainties": [],
+      "aliases": ["Collaboration"],
+      "claims": [
+        {
+          "attribute": "context",
+          "value": "Git and coworker training",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "My separate skill category is Collaboration: Git and coworker training.",
+              "start": 942,
+              "end": 1013
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "education",
+      "key": "bsc-in-information-systems-ab520a51dc",
+      "title": "BSc in Information Systems",
+      "subtitle": "Cedar College",
+      "summary": "Earned a BSc in Information Systems at Cedar College.",
+      "organization": "Cedar College",
+      "start_date": "2017-09-01",
+      "end_date": "2020-06-30",
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "I earned a BSc in Information Systems at Cedar College from 2017-09-01 to 2020-06-30.",
+      "uncertainties": [],
+      "aliases": ["BSc", "Bachelor", "Information Systems"],
+      "claims": [
+        {
+          "attribute": "credential",
+          "value": "BSc in Information Systems at Cedar College from 2017-09-01 to 2020-06-30",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I earned a BSc in Information Systems at Cedar College from 2017-09-01 to 2020-06-30.",
+              "start": 1015,
+              "end": 1100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "certification",
+      "key": "cedar-sql-foundations-ed912d30a4",
+      "title": "Course completion certificate",
+      "subtitle": "",
+      "summary": "A certificate described as course completion, not a professional license.",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "The certificate was a course completion, not a professional license.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "credential",
+          "value": "Course completion certificate",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "The certificate was a course completion, not a professional license.",
+              "start": 3490,
+              "end": 3558
+            }
+          ]
+        },
+        {
+          "attribute": "denial",
+          "value": "Professional license",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "The certificate was a course completion, not a professional license.",
+              "start": 3490,
+              "end": 3558
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "language",
+      "key": "english-3e0cd54cbb",
+      "title": "English",
+      "subtitle": "",
+      "summary": "Fluent.",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "I speak English fluently.",
+      "uncertainties": [],
+      "aliases": ["English"],
+      "claims": [
+        {
+          "attribute": "language",
+          "value": "Fluent English",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I speak English fluently.",
+              "start": 1104,
+              "end": 1129
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "index": 0,
+      "verdict": "SUPPORTED",
+      "reason": "The source identifies Collaboration as a skill category containing Git and coworker training, and separately confirms personal use of Git and personal training of coworkers."
+    },
+    {
+      "index": 1,
+      "verdict": "SUPPORTED",
+      "reason": "The source explicitly states the BSc in Information Systems, Cedar College, and the supplied dates."
+    },
+    {
+      "index": 2,
+      "verdict": "UNSUPPORTED",
+      "reason": "The source mentions an unspecified course-completion certificate, but does not identify it as Cedar SQL Foundations. The record key invents that specific association."
+    },
+    {
+      "index": 3,
+      "verdict": "SUPPORTED",
+      "reason": "The source explicitly states that Ada speaks English fluently."
+    }
+  ]
+}

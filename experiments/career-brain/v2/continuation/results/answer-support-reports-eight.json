@@ -1,0 +1,49 @@
+{
+  "id": "support-reports-eight",
+  "text": "Did Ada supervise eight direct reports?",
+  "packets": [
+    {
+      "id": "48f8714c-b91f-4262-8d58-c11b23c5e0a6",
+      "kind": "project",
+      "title": "Direct reports",
+      "organization": null,
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "summary": "Supervised eight direct reports, not five",
+      "aliases": [],
+      "skills": [],
+      "outcomes": [],
+      "claims": [
+        {
+          "attribute": "scope",
+          "value": "Supervised eight direct reports, not five",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For People Desk, I initially said five reports. Correction: eight direct reports, not five; I supervised the eight directly.",
+              "start": 0,
+              "end": 124
+            }
+          ]
+        }
+      ],
+      "uncertainties": [],
+      "relatedIds": [],
+      "support": "SUPPORTS",
+      "reason": "Ada explicitly corrects the count to eight direct reports and says she supervised them directly."
+    }
+  ],
+  "expected": [
+    {
+      "id": "48f8714c-b91f-4262-8d58-c11b23c5e0a6",
+      "support": "SUPPORTS"
+    }
+  ],
+  "answerGroup": "DIRECT",
+  "result": {
+    "answer": "Yes. Ada says she supervised eight direct reports directly, correcting an earlier figure of five.",
+    "evidence_ids": ["48f8714c-b91f-4262-8d58-c11b23c5e0a6"]
+  }
+}

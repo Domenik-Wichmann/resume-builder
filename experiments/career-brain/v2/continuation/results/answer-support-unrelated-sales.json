@@ -1,0 +1,49 @@
+{
+  "id": "support-unrelated-sales",
+  "text": "What sales quota did Ada own?",
+  "packets": [
+    {
+      "id": "b379ea2c-9f3a-4c72-80f5-bf9d53a2eb91",
+      "kind": "project",
+      "title": "Warning preference",
+      "organization": null,
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "summary": "Operators preferred a visible warning; implementation is not stated",
+      "aliases": [],
+      "skills": [],
+      "outcomes": [],
+      "claims": [
+        {
+          "attribute": "scope",
+          "value": "Operators preferred a visible warning; implementation is not stated",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "For Signal Desk, operators preferred a visible warning when the source file arrived late.",
+              "start": 0,
+              "end": 89
+            }
+          ]
+        }
+      ],
+      "uncertainties": [],
+      "relatedIds": [],
+      "support": "IRRELEVANT",
+      "reason": "The evidence describes operators' preference for a warning and says nothing about Ada owning a sales quota."
+    }
+  ],
+  "expected": [
+    {
+      "id": "b379ea2c-9f3a-4c72-80f5-bf9d53a2eb91",
+      "support": "IRRELEVANT"
+    }
+  ],
+  "answerGroup": "UNSUPPORTED",
+  "result": {
+    "answer": "No relevant evidence is currently stored about a sales quota Ada owned. The adjacent evidence concerns operators’ preference for a visible warning when a source file arrived late; it does not establish quota ownership.",
+    "evidence_ids": ["b379ea2c-9f3a-4c72-80f5-bf9d53a2eb91"]
+  }
+}

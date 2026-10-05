@@ -1,0 +1,49 @@
+{
+  "id": "support-warning-implemented",
+  "text": "Did Ada implement a visible warning for late files?",
+  "packets": [
+    {
+      "id": "b379ea2c-9f3a-4c72-80f5-bf9d53a2eb91",
+      "kind": "project",
+      "title": "Warning preference",
+      "organization": null,
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "summary": "Operators preferred a visible warning; implementation is not stated",
+      "aliases": [],
+      "skills": [],
+      "outcomes": [],
+      "claims": [
+        {
+          "attribute": "scope",
+          "value": "Operators preferred a visible warning; implementation is not stated",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "For Signal Desk, operators preferred a visible warning when the source file arrived late.",
+              "start": 0,
+              "end": 89
+            }
+          ]
+        }
+      ],
+      "uncertainties": [],
+      "relatedIds": [],
+      "support": "RELATED_ONLY",
+      "reason": "The packet records operators' preference but explicitly leaves implementation unstated; it does not establish that Ada implemented the warning."
+    }
+  ],
+  "expected": [
+    {
+      "id": "b379ea2c-9f3a-4c72-80f5-bf9d53a2eb91",
+      "support": "RELATED_ONLY"
+    }
+  ],
+  "answerGroup": "UNSUPPORTED",
+  "result": {
+    "answer": "No relevant evidence is currently stored showing that Ada implemented a visible warning. The available evidence says operators preferred one when a source file arrived late, but does not state that it was implemented.",
+    "evidence_ids": ["b379ea2c-9f3a-4c72-80f5-bf9d53a2eb91"]
+  }
+}

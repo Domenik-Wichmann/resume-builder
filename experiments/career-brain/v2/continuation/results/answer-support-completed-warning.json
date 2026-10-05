@@ -1,0 +1,49 @@
+{
+  "id": "support-completed-warning",
+  "text": "Did Ada implement the Alert Board warning?",
+  "packets": [
+    {
+      "id": "258c51aa-14d7-44bd-8a0f-53c435b2bf65",
+      "kind": "project",
+      "title": "Alert Board",
+      "organization": null,
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "summary": "Personally implemented the visible warning and completed rollout on 2024-06-30",
+      "aliases": [],
+      "skills": [],
+      "outcomes": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Personally implemented the visible warning and completed rollout on 2024-06-30",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For Alert Board, I personally implemented the visible warning and completed its rollout on 2024-06-30.",
+              "start": 0,
+              "end": 102
+            }
+          ]
+        }
+      ],
+      "uncertainties": [],
+      "relatedIds": [],
+      "support": "SUPPORTS",
+      "reason": "Ada personally implemented the Alert Board visible warning."
+    }
+  ],
+  "expected": [
+    {
+      "id": "258c51aa-14d7-44bd-8a0f-53c435b2bf65",
+      "support": "SUPPORTS"
+    }
+  ],
+  "answerGroup": "DIRECT",
+  "result": {
+    "answer": "Yes. Ada personally implemented the Alert Board warning.",
+    "evidence_ids": ["258c51aa-14d7-44bd-8a0f-53c435b2bf65"]
+  }
+}

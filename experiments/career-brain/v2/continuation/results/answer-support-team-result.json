@@ -1,0 +1,69 @@
+{
+  "id": "support-team-result",
+  "text": "What measured team reconciliation result is recorded?",
+  "packets": [
+    {
+      "id": "96c237ee-893d-4e60-875a-aaba7d0023a6",
+      "kind": "achievement",
+      "title": "Reconciliation time reduction",
+      "organization": null,
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "summary": "Team reconciliation time fell from 5 to 2 hours per week over six runs; Ada contributed the parser and checks.",
+      "aliases": ["reconciliation", "time", "hours"],
+      "skills": ["Python", "SQL"],
+      "outcomes": [],
+      "claims": [
+        {
+          "attribute": "ownership",
+          "value": "Personal contribution was parser and checks",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks.",
+              "start": 333,
+              "end": 506
+            },
+            {
+              "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself.",
+              "start": 166,
+              "end": 331
+            }
+          ]
+        },
+        {
+          "attribute": "metric",
+          "value": "Team reconciliation time fell from 5 to 2 hours per week over six weekly runs",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks.",
+              "start": 333,
+              "end": 506
+            }
+          ]
+        }
+      ],
+      "uncertainties": [],
+      "relatedIds": [
+        "797ce1db-ec3b-483f-805d-e57957539b51",
+        "61d13bb9-743b-44e8-8f78-45c2bcf6d55a"
+      ],
+      "support": "SUPPORTS",
+      "reason": "The recorded team result was a reduction from 5 to 2 reconciliation hours per week, measured over six weekly runs."
+    }
+  ],
+  "expected": [
+    {
+      "id": "96c237ee-893d-4e60-875a-aaba7d0023a6",
+      "support": "SUPPORTS"
+    }
+  ],
+  "answerGroup": "DIRECT",
+  "result": {
+    "answer": "Team reconciliation time fell from 5 to 2 hours per week, measured over six weekly runs.",
+    "evidence_ids": ["96c237ee-893d-4e60-875a-aaba7d0023a6"]
+  }
+}

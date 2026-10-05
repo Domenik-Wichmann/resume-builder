@@ -1,0 +1,49 @@
+{
+  "id": "support-warning-wanted",
+  "text": "Did operators want a visible warning?",
+  "packets": [
+    {
+      "id": "b379ea2c-9f3a-4c72-80f5-bf9d53a2eb91",
+      "kind": "project",
+      "title": "Warning preference",
+      "organization": null,
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "summary": "Operators preferred a visible warning; implementation is not stated",
+      "aliases": [],
+      "skills": [],
+      "outcomes": [],
+      "claims": [
+        {
+          "attribute": "scope",
+          "value": "Operators preferred a visible warning; implementation is not stated",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "For Signal Desk, operators preferred a visible warning when the source file arrived late.",
+              "start": 0,
+              "end": 89
+            }
+          ]
+        }
+      ],
+      "uncertainties": [],
+      "relatedIds": [],
+      "support": "SUPPORTS",
+      "reason": "The evidence explicitly says operators preferred a visible warning when the source file arrived late."
+    }
+  ],
+  "expected": [
+    {
+      "id": "b379ea2c-9f3a-4c72-80f5-bf9d53a2eb91",
+      "support": "SUPPORTS"
+    }
+  ],
+  "answerGroup": "DIRECT",
+  "result": {
+    "answer": "Yes. Operators preferred a visible warning when the source file arrived late. Whether it was implemented is not stated.",
+    "evidence_ids": ["b379ea2c-9f3a-4c72-80f5-bf9d53a2eb91"]
+  }
+}

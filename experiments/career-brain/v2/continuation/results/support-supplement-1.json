@@ -1,0 +1,16 @@
+{
+  "version": "continuation-support-1",
+  "scope": "Source inspection before the first continuation support call. Original frozen inputs and labels remain retained; these corrections do not use new model outputs.",
+  "corrections": [
+    {
+      "id": "support-docker-production",
+      "support": "CONTRADICTS",
+      "reason": "Unlike the original V3 one-off-exposure probe, this new contrastive packet explicitly says there is no production deployment experience. Explicit denial supports CONTRADICTS rather than RELATED_ONLY."
+    },
+    {
+      "id": "support-license",
+      "text": "Does the Cedar SQL Foundations certificate establish a professional license?",
+      "reason": "The source says this certificate is not a license; it does not disprove every possible unrelated license. Scope the proposition to this certificate."
+    }
+  ]
+}

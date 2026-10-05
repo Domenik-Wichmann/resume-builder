@@ -1,0 +1,152 @@
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { loadCanonical } from "../../../src/lib/ingestion/repository";
+import { semanticHash } from "../../../src/lib/ingestion/diff";
+import { contentHash } from "../../../src/lib/embeddings/content";
+import { goldPackets } from "./gold-packets";
+import {
+  richDiff,
+  ground,
+  reconcile,
+  type RichCandidate,
+  type RichCanonical,
+} from "./evidence";
+import type { Fixture } from "../fixtures";
+
+async function checked<
+  R extends { data: unknown; error: { message: string } | null },
+>(r: R): Promise<R["data"]> {
+  if (r.error) throw new Error(r.error.message);
+  return r.data;
+}
+export async function qualificationMember(db: SupabaseClient, email: string) {
+  const link = await checked(
+    await db.auth.admin.generateLink({ type: "magiclink", email }),
+  );
+  const auth = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+    { auth: { persistSession: false, autoRefreshToken: false } },
+  );
+  const session = await checked(
+    await auth.auth.verifyOtp({
+      type: "magiclink",
+      token_hash: link.properties!.hashed_token,
+    }),
+  );
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+    {
+      global: {
+        headers: { Authorization: `Bearer ${session.session!.access_token}` },
+      },
+      auth: { persistSession: false, autoRefreshToken: false },
+    },
+  );
+}
+export async function richDatabaseState(
+  owner: SupabaseClient,
+  accountId: string,
+): Promise<RichCanonical[]> {
+  const rows = await loadCanonical(owner, accountId);
+  const imports = await checked(
+    await owner
+      .from("career_imports")
+      .select("source_id,accepted_changes")
+      .eq("account_id", accountId)
+      .eq("status", "APPLIED")
+      .order("applied_at", { ascending: false }),
+  );
+  return rows.map((r) => {
+    const metadata = (imports || [])
+      .flatMap(
+        (batch) =>
+          batch.accepted_changes as (RichCandidate & { action: string })[],
+      )
+      .find(
+        (p) => p.kind === r.kind && p.key === r.key && p.action !== "ARCHIVE",
+      );
+    if (!metadata)
+      throw new Error("Missing approved experimental factual metadata");
+    // The existing RPC persists accepted_changes transactionally. This experimental
+    // adapter reads that metadata; production loadCanonical remains unchanged.
+    return { ...r, aliases: metadata.aliases, claims: metadata.claims };
+  });
+}
+export async function applyReviewedGold(
+  owner: SupabaseClient,
+  accountId: string,
+  fixture: Fixture,
+  approved: RichCandidate[] = goldPackets(fixture),
+) {
+  const current = await richDatabaseState(owner, accountId);
+  const proposed = reconcile(ground(approved, fixture.source), current).records;
+  const changes = richDiff(proposed, current, true);
+  const source = await checked(
+    await owner
+      .from("career_sources")
+      .insert({
+        account_id: accountId,
+        kind: "MASTER",
+        content: fixture.source,
+        evidence_text: fixture.source,
+        content_hash: contentHash(fixture.source),
+      })
+      .select("id")
+      .single(),
+  );
+  const batch = await checked(
+    await owner
+      .from("career_imports")
+      .insert({
+        account_id: accountId,
+        source_id: source!.id,
+        candidates: changes,
+        model: "manually-reviewed-revised-synthetic-gold",
+      })
+      .select("id")
+      .single(),
+  );
+  const patches = changes
+    .filter((c) => !["UNCHANGED", "REVIEW"].includes(c.status))
+    .map((c) => {
+      const record = (c.after || c.before)! as RichCandidate;
+      return {
+        ...record,
+        claims: record.claims.map((f) => ({
+          ...f,
+          evidence: f.evidence.map((s) => ({ ...s, source_id: source!.id })),
+        })),
+        action: c.status === "REMOVED" ? "ARCHIVE" : "UPSERT",
+        baseline_hash: c.before?.hash || null,
+        baseline_version: c.before?.updated_at || null,
+        hash: semanticHash(record),
+      };
+    });
+  await checked(
+    await owner.rpc("apply_career_import", {
+      p_import: batch!.id,
+      p_changes: patches,
+    }),
+  );
+  const after = await richDatabaseState(owner, accountId);
+  return {
+    sourceId: source!.id,
+    sourceFixture: fixture.id,
+    changes: changes.map((c) => ({
+      identity: c.identity,
+      status: c.status,
+      beforeId: c.before?.id || null,
+    })),
+    preserved: current.filter((c) => after.some((a) => a.id === c.id)).length,
+    before: current.length,
+    after: after.length,
+    canonicalIds: after.map((r) => ({
+      kind: r.kind,
+      key: r.key,
+      id: r.id,
+      archived: r.archived,
+    })),
+    archived: after.filter((c) => c.archived).length,
+  };
+}
