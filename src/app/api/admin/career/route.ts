@@ -16,15 +16,14 @@ import { interviewQuestions } from "@/lib/interview/questions";
 import { reindexCareer } from "@/lib/embeddings/indexer";
 import { contentHash } from "@/lib/embeddings/content";
 export const maxDuration = 300;
+import {
+  extractSourceSchema,
+  careerSourceLimit,
+  careerSourceBodyLimit,
+  completeSource,
+} from "@/lib/career-brain/source";
 const inputSchema = z.discriminatedUnion("action", [
-  z
-    .object({
-      action: z.literal("extract"),
-      text: z.string().trim().min(10).max(40000),
-      kind: z.enum(["MASTER", "INTERVIEW"]),
-      context: z.string().max(8000).optional(),
-    })
-    .strict(),
+  extractSourceSchema,
   z
     .object({
       action: z.literal("revise"),
@@ -96,7 +95,7 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const { db, accountId } = await requireAccount();
-    const input = await readJson(request, inputSchema, 200000);
+    const input = await readJson(request, inputSchema, careerSourceBodyLimit);
     if (input.action === "reindex")
       return Response.json(await reindexCareer(accountId));
     const current = await loadBrain(db, accountId);
@@ -143,17 +142,17 @@ export async function POST(request: NextRequest) {
     if (input.action === "extract") {
       await reserveAIQuota();
       const source = input.text;
-      if (source.length > 40000)
+      if (source.length > careerSourceLimit)
         throw new HttpError(
           400,
-          "Answers and interview context must fit within 40,000 characters.",
+          "Career source documents must fit within 100,000 characters.",
         );
       const { changes } = await proposeBrain(
         db,
         accountId,
         source,
         current,
-        input.kind === "MASTER",
+        completeSource(input.kind),
       );
       const savedSource = await db
         .from("career_sources")

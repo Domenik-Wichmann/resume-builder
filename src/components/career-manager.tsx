@@ -3,6 +3,7 @@ import { useState, type FormEvent } from "react";
 import type { Candidate, Canonical, Change } from "@/lib/ingestion/model";
 import type { InterviewQuestion } from "@/lib/interview/questions";
 import type { StateClaim } from "@/lib/career-brain/state";
+import { careerSourceLimit } from "@/lib/career-brain/source";
 function ClaimEvidence({ record }: { record: Candidate }) {
   const claims = (record as Candidate & { claims?: StateClaim[] }).claims || [];
   return claims.length ? (
@@ -52,6 +53,7 @@ export function CareerManager({
     [questions, setQuestions] = useState<InterviewQuestion[]>([]),
     [asked, setAsked] = useState<string[]>([]),
     [answers, setAnswers] = useState("");
+  const [sourceKind, setSourceKind] = useState<"MASTER" | "MANUAL">("MASTER");
   async function refresh() {
     const r = await fetch("/api/admin/career");
     const data = await r.json();
@@ -103,7 +105,7 @@ export function CareerManager({
   }
   function ingest(event: FormEvent) {
     event.preventDefault();
-    void action({ action: "extract", text, kind: "MASTER" });
+    void action({ action: "extract", text, kind: sourceKind });
   }
   return (
     <div className="career-manager">
@@ -111,11 +113,27 @@ export function CareerManager({
         <h2>Career Master</h2>
         <p>
           Paste your career document or upload plain text / Markdown (up to
-          40,000 characters). Extraction proposes facts; nothing is published
+          100,000 characters). Extraction proposes facts; nothing is published
           automatically. Treat each Master as a complete document. Omitted
           records are proposed for archive.
         </p>
         <form className="ai-panel" onSubmit={ingest}>
+          <label htmlFor="source-kind">Document role</label>
+          <select
+            id="source-kind"
+            value={sourceKind}
+            onChange={(event) =>
+              setSourceKind(
+                event.target.value === "MASTER" ? "MASTER" : "MANUAL",
+              )
+            }
+          >
+            <option value="MASTER">Complete Career Master</option>
+            <option value="MANUAL">
+              Supplemental document (adds evidence; does not replace unrelated
+              records)
+            </option>
+          </select>
           <label htmlFor="master-file">Text or Markdown file</label>
           <input
             id="master-file"
@@ -124,13 +142,13 @@ export function CareerManager({
             onChange={async (event) => {
               const file = event.target.files?.[0];
               if (file) {
-                if (file.size > 160000) {
+                if (file.size > careerSourceLimit * 4) {
                   setMessage("File is too large.");
                   return;
                 }
                 const value = await file.text();
-                if (value.length > 40000) {
-                  setMessage("Document exceeds 40,000 characters.");
+                if (value.length > careerSourceLimit) {
+                  setMessage("Document exceeds 100,000 characters.");
                   return;
                 }
                 setText(value);
@@ -143,7 +161,7 @@ export function CareerManager({
             rows={12}
             value={text}
             onChange={(event) => setText(event.target.value)}
-            maxLength={40000}
+            maxLength={careerSourceLimit}
             required
             minLength={10}
           />
