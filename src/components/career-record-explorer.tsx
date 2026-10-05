@@ -273,14 +273,32 @@ export function CareerRecordExplorer({
     selected.includes(row.id),
   ).length;
   function updateFilters(patch: Partial<RecordFilters>) {
+    if (editing) {
+      setError("Save or cancel your edit before changing filters.");
+      return;
+    }
     setFilters((old) => ({ ...old, ...patch }));
     setLimit(24);
   }
-  function open(id: string) {
+  function open(id: string, reveal = false) {
+    if (editing || busy) return;
+    if (reveal) {
+      setFilters(initialFilters);
+      setLimit(Math.max(24, records.length));
+    }
     setActiveId(id);
     setEditBaseline(null);
     setError("");
   }
+  useEffect(() => {
+    if (!activeId) return;
+    const frame = requestAnimationFrame(() => {
+      const toggle = document.getElementById(`record-toggle-${activeId}`);
+      toggle?.scrollIntoView({ block: "nearest" });
+      toggle?.focus({ preventScroll: true });
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [activeId]);
   async function refresh() {
     try {
       const response = await fetch("/api/admin/records", { cache: "no-store" });
@@ -624,12 +642,7 @@ export function CareerRecordExplorer({
                 key={row.id}
                 className={`canonical-card ${selected.includes(row.id) ? "selected" : ""}`}
               >
-                <div className="canonical-card-top">
-                  <span
-                    className={`record-type-dot ${row.kind}`}
-                    aria-hidden="true"
-                  />
-                  <span className="canonical-kind">{kindLabels[row.kind]}</span>
+                <div className="record-row-header">
                   <label className="record-select">
                     <input
                       type="checkbox"
@@ -641,54 +654,168 @@ export function CareerRecordExplorer({
                       }
                     />
                   </label>
+                  <button
+                    className="canonical-card-open"
+                    disabled={busy || editing}
+                    id={`record-toggle-${row.id}`}
+                    aria-expanded={activeId === row.id}
+                    aria-controls={
+                      activeId === row.id
+                        ? `record-details-${row.id}`
+                        : undefined
+                    }
+                    onClick={() => {
+                      if (activeId === row.id) {
+                        setActiveId(null);
+                        setError("");
+                      } else open(row.id);
+                    }}
+                  >
+                    <span className="record-row-content">
+                      <span className="record-row-title">
+                        <span
+                          className={`record-type-dot ${row.kind}`}
+                          aria-hidden="true"
+                        />
+                        <strong>{row.title}</strong>
+                        <span className="canonical-kind">
+                          {kindLabels[row.kind]}
+                        </span>
+                      </span>
+                      <span className="record-row-description">
+                        {[row.organization, row.summary || row.subtitle]
+                          .filter(Boolean)
+                          .join(" / ") || "Add a description to this record."}
+                      </span>
+                    </span>
+                    <span className="record-row-meta">
+                      <span
+                        className={`record-badge ${row.archived ? "trash" : row.published ? "published" : "private"}`}
+                      >
+                        {row.archived
+                          ? "In Trash"
+                          : row.published
+                            ? "Published"
+                            : "Private"}
+                      </span>
+                      <span>{links.length} connections</span>
+                      <span>
+                        {
+                          row.claims.filter(
+                            (c) => c.availability === "CONFIRMED",
+                          ).length
+                        }{" "}
+                        facts
+                      </span>
+                      {(!publishable(row) ||
+                        row.claims.some((c) =>
+                          ["PENDING_REVIEW", "DISPUTED"].includes(
+                            c.availability,
+                          ),
+                        )) && (
+                        <span className="record-review-indicator">
+                          Needs review
+                        </span>
+                      )}
+                      <span className="record-row-chevron" aria-hidden="true">
+                        {activeId === row.id ? "-" : "+"}
+                      </span>
+                    </span>
+                  </button>
                 </div>
-                <button
-                  className="canonical-card-open"
-                  onClick={() => open(row.id)}
-                  aria-label={`Open ${row.title}`}
-                >
-                  <h3>{row.title}</h3>
-                  {row.organization && (
-                    <span className="record-company">{row.organization}</span>
-                  )}
-                  <p>
-                    {row.summary ||
-                      row.subtitle ||
-                      "Add a description to tell this record’s story."}
-                  </p>
-                  <span className="canonical-card-footer">
-                    <span
-                      className={`record-badge ${row.archived ? "trash" : row.published ? "published" : "private"}`}
-                    >
-                      {row.archived
-                        ? "In Trash"
-                        : row.published
-                          ? "Published"
-                          : "Private"}
-                    </span>
-                    <span>
-                      {links.length} connections{" "}
-                      <span aria-hidden="true">↗</span>
-                    </span>
-                  </span>
-                </button>
-                <div className="canonical-card-evidence">
-                  <span>
-                    {
-                      row.claims.filter((c) => c.availability === "CONFIRMED")
-                        .length
-                    }{" "}
-                    confirmed facts
-                  </span>
-                  {(!publishable(row) ||
-                    row.claims.some((c) =>
-                      ["PENDING_REVIEW", "DISPUTED"].includes(c.availability),
-                    )) && (
-                    <span className="record-review-indicator">
-                      Needs review
-                    </span>
-                  )}
-                </div>
+                {active?.id === row.id && (
+                  <section
+                    className="record-inline-details"
+                    id={`record-details-${row.id}`}
+                    aria-label={`${row.title} details`}
+                  >
+                    <div className="record-detail-top">
+                      <div className="record-detail-labels">
+                        <span className="record-badge">
+                          {kindLabels[active.kind]}
+                        </span>
+                        <span
+                          className={`record-badge ${active.published ? "published" : "private"}`}
+                        >
+                          {active.archived
+                            ? "In Trash"
+                            : active.published
+                              ? "Published"
+                              : "Private"}
+                        </span>
+                      </div>
+                      {!editing && (
+                        <div className="record-detail-actions">
+                          {active.archived ? (
+                            <button
+                              className="record-button"
+                              disabled={busy}
+                              onClick={() => requestAction("restore", [active])}
+                            >
+                              Restore record
+                            </button>
+                          ) : (
+                            <>
+                              <button
+                                className="record-button"
+                                disabled={busy}
+                                onClick={() => setEditBaseline(active)}
+                              >
+                                Edit record
+                              </button>
+                              <button
+                                className="record-button secondary"
+                                disabled={
+                                  busy ||
+                                  (!active.published && !publishable(active))
+                                }
+                                onClick={() =>
+                                  requestAction(
+                                    active.published ? "unpublish" : "publish",
+                                    [active],
+                                  )
+                                }
+                              >
+                                {active.published ? "Unpublish" : "Publish"}
+                              </button>
+                              <button
+                                className="record-button danger"
+                                disabled={busy}
+                                onClick={() =>
+                                  requestAction("archive", [active])
+                                }
+                              >
+                                Move to Trash
+                              </button>
+                            </>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                    {error && (
+                      <p className="record-notice error" role="alert">
+                        {error}
+                      </p>
+                    )}
+                    {editing ? (
+                      <CareerRecordEditor
+                        key={active.id}
+                        row={editBaseline || active}
+                        records={records}
+                        busy={busy}
+                        onSave={saveEdit}
+                        onCancel={() => setEditBaseline(null)}
+                      />
+                    ) : (
+                      <RecordDetails
+                        row={active}
+                        records={records}
+                        sources={sources}
+                        onOpen={(id) => open(id, true)}
+                      />
+                    )}
+                  </section>
+                )}
               </article>
             );
           })}
@@ -704,97 +831,6 @@ export function CareerRecordExplorer({
             <span>({Math.min(24, filtered.length - limit)} more)</span>
           </button>
         </div>
-      )}
-      {active && (
-        <RecordDialog
-          title={active.title}
-          onClose={() => {
-            setActiveId(null);
-            setEditBaseline(null);
-          }}
-          busy={busy}
-        >
-          <div className="record-detail-top">
-            <div className="record-detail-labels">
-              <span className="record-badge">{kindLabels[active.kind]}</span>
-              <span
-                className={`record-badge ${active.published ? "published" : "private"}`}
-              >
-                {active.archived
-                  ? "In Trash"
-                  : active.published
-                    ? "Published"
-                    : "Private"}
-              </span>
-            </div>
-            {!editing && (
-              <div className="record-detail-actions">
-                {active.archived ? (
-                  <button
-                    className="record-button"
-                    disabled={busy}
-                    onClick={() => requestAction("restore", [active])}
-                  >
-                    Restore record
-                  </button>
-                ) : (
-                  <>
-                    <button
-                      className="record-button"
-                      disabled={busy}
-                      onClick={() => setEditBaseline(active)}
-                    >
-                      Edit record
-                    </button>
-                    <button
-                      className="record-button secondary"
-                      disabled={
-                        busy || (!active.published && !publishable(active))
-                      }
-                      onClick={() =>
-                        requestAction(
-                          active.published ? "unpublish" : "publish",
-                          [active],
-                        )
-                      }
-                    >
-                      {active.published ? "Unpublish" : "Publish"}
-                    </button>
-                    <button
-                      className="record-button danger"
-                      disabled={busy}
-                      onClick={() => requestAction("archive", [active])}
-                    >
-                      Move to Trash
-                    </button>
-                  </>
-                )}
-              </div>
-            )}
-          </div>
-          {error && (
-            <p className="record-notice error" role="alert">
-              {error}
-            </p>
-          )}
-          {editing ? (
-            <CareerRecordEditor
-              key={active.id}
-              row={editBaseline || active}
-              records={records}
-              busy={busy}
-              onSave={saveEdit}
-              onCancel={() => setEditBaseline(null)}
-            />
-          ) : (
-            <RecordDetails
-              row={active}
-              records={records}
-              sources={sources}
-              onOpen={open}
-            />
-          )}
-        </RecordDialog>
       )}
       {pending && (
         <RecordDialog
