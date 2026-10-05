@@ -1,5 +1,5 @@
 "use client";
-import { useState, type FormEvent } from "react";
+import { useState, type FormEvent, type ReactNode } from "react";
 import type { BrainRecord } from "@/lib/career-brain/repository";
 import type { ClaimEdit, RecordEdit } from "@/lib/career-brain/record-view";
 const attributes = [
@@ -30,18 +30,36 @@ const reviewStates = [
   "REMOVED",
 ] as const;
 const label = (text: string) => text.toLowerCase().replaceAll("_", " ");
+function EvidenceReview({
+  collapsed,
+  children,
+}: {
+  collapsed: boolean;
+  children: ReactNode;
+}) {
+  return collapsed ? (
+    <details className="record-evidence">
+      <summary>Review supporting facts & ownership</summary>
+      {children}
+    </details>
+  ) : (
+    children
+  );
+}
 export function CareerRecordEditor({
   row,
   records,
   busy,
   onSave,
   onCancel,
+  focusedProfile = false,
 }: {
   row: BrainRecord;
   records: BrainRecord[];
   busy: boolean;
   onSave: (edit: RecordEdit) => Promise<void>;
   onCancel: () => void;
+  focusedProfile?: boolean;
 }) {
   const [fields, setFields] = useState({
     title: row.title,
@@ -121,8 +139,10 @@ export function CareerRecordEditor({
         Your correction is retained as source evidence.
       </p>
       <fieldset disabled={busy}>
-        <legend>Record details</legend>
-        <label htmlFor="edit-record-title">Name / title</label>
+        <legend>{focusedProfile ? "Profile details" : "Record details"}</legend>
+        <label htmlFor="edit-record-title">
+          {focusedProfile ? "Name" : "Name / title"}
+        </label>
         <input
           id="edit-record-title"
           required
@@ -143,7 +163,9 @@ export function CareerRecordEditor({
             />
           </>
         )}
-        <label htmlFor="edit-record-summary">Description</label>
+        <label htmlFor="edit-record-summary">
+          {focusedProfile ? "Introduction" : "Description"}
+        </label>
         <textarea
           id="edit-record-summary"
           rows={5}
@@ -212,265 +234,276 @@ export function CareerRecordEditor({
             </p>
           </>
         )}
-        <label htmlFor="edit-aliases">
-          Other names <small>one per line</small>
-        </label>
-        <textarea
-          id="edit-aliases"
-          rows={2}
-          value={aliases}
-          onChange={(e) => setAliases(e.target.value)}
-        />
-      </fieldset>
-      <fieldset disabled={busy}>
-        <legend>Connections</legend>
-        {["experience", "project", "achievement"].includes(row.kind) && (
+        {!focusedProfile && (
           <>
-            <label htmlFor="connected-skill-search">
-              Skills <small>{skills.length} / 30 selected</small>
+            <label htmlFor="edit-aliases">
+              Other names <small>one per line</small>
             </label>
-            <input
-              id="connected-skill-search"
-              type="search"
-              placeholder="Find a skill…"
-              value={skillQuery}
-              onChange={(e) => setSkillQuery(e.target.value)}
+            <textarea
+              id="edit-aliases"
+              rows={2}
+              value={aliases}
+              onChange={(e) => setAliases(e.target.value)}
             />
-            <div className="record-link-picker">
-              {records
-                .filter(
-                  (r) =>
-                    r.kind === "skill" &&
-                    (!r.archived || skills.includes(r.key)) &&
-                    r.title.toLowerCase().includes(skillQuery.toLowerCase()),
-                )
-                .map((r) => (
-                  <label key={r.id}>
-                    <input
-                      type="checkbox"
-                      checked={skills.includes(r.key)}
-                      disabled={
-                        !skills.includes(r.key) &&
-                        (skills.length >= 30 || r.archived)
-                      }
-                      onChange={(e) =>
-                        setSkills(toggle(skills, r.key, e.target.checked))
-                      }
-                    />
-                    {r.title}
-                    {r.archived && <small>in Trash</small>}
-                  </label>
-                ))}
-            </div>
           </>
-        )}
-        {["experience", "project"].includes(row.kind) && (
-          <>
-            <p className="record-field-label">Achievements</p>
-            <div className="record-link-picker">
-              {records
-                .filter(
-                  (r) =>
-                    r.kind === "achievement" &&
-                    (!r.archived || achievements.includes(r.key)),
-                )
-                .map((r) => (
-                  <label key={r.id}>
-                    <input
-                      type="checkbox"
-                      checked={achievements.includes(r.key)}
-                      disabled={
-                        !achievements.includes(r.key) &&
-                        (achievements.length >= 30 || r.archived)
-                      }
-                      onChange={(e) =>
-                        setAchievements(
-                          toggle(achievements, r.key, e.target.checked),
-                        )
-                      }
-                    />
-                    {r.title}
-                  </label>
-                ))}
-            </div>
-          </>
-        )}
-        {row.kind === "skill" && (
-          <>
-            <label htmlFor="edit-category">Skill category</label>
-            <select
-              id="edit-category"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              <option value="">No category</option>
-              {records
-                .filter(
-                  (r) =>
-                    r.kind === "category" &&
-                    (!r.archived || r.key === category),
-                )
-                .map((r) => (
-                  <option key={r.id} value={r.key} disabled={r.archived}>
-                    {r.title}
-                    {r.archived ? " (in Trash)" : ""}
-                  </option>
-                ))}
-            </select>
-          </>
-        )}
-        {[
-          "profile",
-          "education",
-          "certification",
-          "language",
-          "category",
-        ].includes(row.kind) && (
-          <p className="muted">
-            Connections to this record appear in its details. Edit the connected
-            record to change a relationship.
-          </p>
         )}
       </fieldset>
-      <fieldset disabled={busy}>
-        <legend>Facts & ownership</legend>
-        <p className="muted">
-          Recruiter answers and résumés use confirmed facts. Keep team results,
-          exposure, plans and uncertainties accurate. Previous evidence is
-          retained when you correct or remove a fact.
-        </p>
-        {claims.map((claim, index) => (
-          <details
-            className="record-claim-edit"
-            key={index}
-            open={claim.index === null || undefined}
-          >
-            <summary>
-              <span>{claim.value || "New fact"}</span>
-              <small>{label(claim.availability)}</small>
-            </summary>
-            <div>
-              <label htmlFor={`fact-value-${index}`}>Fact</label>
-              <textarea
-                id={`fact-value-${index}`}
-                rows={3}
-                required
-                maxLength={500}
-                value={claim.value}
-                onChange={(e) => changeClaim(index, { value: e.target.value })}
-              />
-              <div className="record-form-columns">
-                <div>
-                  <label htmlFor={`fact-type-${index}`}>Type</label>
-                  <select
-                    id={`fact-type-${index}`}
-                    value={claim.attribute}
-                    onChange={(e) =>
-                      changeClaim(index, {
-                        attribute: e.target.value as ClaimEdit["attribute"],
-                      })
-                    }
-                  >
-                    {attributes.map((v) => (
-                      <option key={v} value={v}>
-                        {label(v)}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label htmlFor={`fact-owner-${index}`}>
-                    Ownership / qualification
-                  </label>
-                  <select
-                    id={`fact-owner-${index}`}
-                    value={claim.attribution}
-                    onChange={(e) =>
-                      changeClaim(index, {
-                        attribution: e.target.value as ClaimEdit["attribution"],
-                        ...(e.target.value === "UNCERTAIN"
-                          ? { availability: "PENDING_REVIEW" as const }
-                          : {}),
-                      })
-                    }
-                  >
-                    {ownership.map((v) => (
-                      <option key={v} value={v}>
-                        {label(v)}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-              <label htmlFor={`fact-status-${index}`}>Review status</label>
-              <select
-                id={`fact-status-${index}`}
-                value={claim.availability}
-                onChange={(e) =>
-                  changeClaim(index, {
-                    availability: e.target.value as ClaimEdit["availability"],
-                  })
-                }
-              >
-                {reviewStates.map((v) => (
-                  <option
-                    key={v}
-                    value={v}
-                    disabled={
-                      v === "CONFIRMED" && claim.attribution === "UNCERTAIN"
-                    }
-                  >
-                    {label(v)}
-                  </option>
-                ))}
-              </select>
-              <label htmlFor={`fact-conflict-${index}`}>
-                Uncertainty or conflict
+      {!focusedProfile && (
+        <fieldset disabled={busy}>
+          <legend>Connections</legend>
+          {["experience", "project", "achievement"].includes(row.kind) && (
+            <>
+              <label htmlFor="connected-skill-search">
+                Skills <small>{skills.length} / 30 selected</small>
               </label>
-              <textarea
-                id={`fact-conflict-${index}`}
-                rows={2}
-                maxLength={500}
-                value={claim.conflict}
-                onChange={(e) =>
-                  changeClaim(index, { conflict: e.target.value })
-                }
+              <input
+                id="connected-skill-search"
+                type="search"
+                placeholder="Find a skill…"
+                value={skillQuery}
+                onChange={(e) => setSkillQuery(e.target.value)}
               />
-              <button
-                className="record-button secondary"
-                type="button"
-                onClick={() =>
-                  claim.index === null
-                    ? setClaims((old) => old.filter((_, i) => i !== index))
-                    : changeClaim(index, { availability: "REMOVED" })
-                }
+              <div className="record-link-picker">
+                {records
+                  .filter(
+                    (r) =>
+                      r.kind === "skill" &&
+                      (!r.archived || skills.includes(r.key)) &&
+                      r.title.toLowerCase().includes(skillQuery.toLowerCase()),
+                  )
+                  .map((r) => (
+                    <label key={r.id}>
+                      <input
+                        type="checkbox"
+                        checked={skills.includes(r.key)}
+                        disabled={
+                          !skills.includes(r.key) &&
+                          (skills.length >= 30 || r.archived)
+                        }
+                        onChange={(e) =>
+                          setSkills(toggle(skills, r.key, e.target.checked))
+                        }
+                      />
+                      {r.title}
+                      {r.archived && <small>in Trash</small>}
+                    </label>
+                  ))}
+              </div>
+            </>
+          )}
+          {["experience", "project"].includes(row.kind) && (
+            <>
+              <p className="record-field-label">Achievements</p>
+              <div className="record-link-picker">
+                {records
+                  .filter(
+                    (r) =>
+                      r.kind === "achievement" &&
+                      (!r.archived || achievements.includes(r.key)),
+                  )
+                  .map((r) => (
+                    <label key={r.id}>
+                      <input
+                        type="checkbox"
+                        checked={achievements.includes(r.key)}
+                        disabled={
+                          !achievements.includes(r.key) &&
+                          (achievements.length >= 30 || r.archived)
+                        }
+                        onChange={(e) =>
+                          setAchievements(
+                            toggle(achievements, r.key, e.target.checked),
+                          )
+                        }
+                      />
+                      {r.title}
+                    </label>
+                  ))}
+              </div>
+            </>
+          )}
+          {row.kind === "skill" && (
+            <>
+              <label htmlFor="edit-category">Skill category</label>
+              <select
+                id="edit-category"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
               >
-                Remove fact
-              </button>
-            </div>
-          </details>
-        ))}
-        <button
-          type="button"
-          className="record-button secondary"
-          disabled={claims.length >= 100}
-          onClick={() =>
-            setClaims((old) => [
-              ...old,
-              {
-                index: null,
-                attribute: "action",
-                value: "",
-                attribution: "PERSONAL",
-                availability: "CONFIRMED",
-                conflict: "",
-              },
-            ])
-          }
-        >
-          + Add a fact
-        </button>
-      </fieldset>
+                <option value="">No category</option>
+                {records
+                  .filter(
+                    (r) =>
+                      r.kind === "category" &&
+                      (!r.archived || r.key === category),
+                  )
+                  .map((r) => (
+                    <option key={r.id} value={r.key} disabled={r.archived}>
+                      {r.title}
+                      {r.archived ? " (in Trash)" : ""}
+                    </option>
+                  ))}
+              </select>
+            </>
+          )}
+          {[
+            "profile",
+            "education",
+            "certification",
+            "language",
+            "category",
+          ].includes(row.kind) && (
+            <p className="muted">
+              Connections to this record appear in its details. Edit the
+              connected record to change a relationship.
+            </p>
+          )}
+        </fieldset>
+      )}
+      <EvidenceReview collapsed={focusedProfile}>
+        <fieldset disabled={busy}>
+          <legend>Facts & ownership</legend>
+          <p className="muted">
+            Recruiter answers and résumés use confirmed facts. Keep team
+            results, exposure, plans and uncertainties accurate. Previous
+            evidence is retained when you correct or remove a fact.
+          </p>
+          {claims.map((claim, index) => (
+            <details
+              className="record-claim-edit"
+              key={index}
+              open={claim.index === null || undefined}
+            >
+              <summary>
+                <span>{claim.value || "New fact"}</span>
+                <small>{label(claim.availability)}</small>
+              </summary>
+              <div>
+                <label htmlFor={`fact-value-${index}`}>Fact</label>
+                <textarea
+                  id={`fact-value-${index}`}
+                  rows={3}
+                  required
+                  maxLength={500}
+                  value={claim.value}
+                  onChange={(e) =>
+                    changeClaim(index, { value: e.target.value })
+                  }
+                />
+                <div className="record-form-columns">
+                  <div>
+                    <label htmlFor={`fact-type-${index}`}>Type</label>
+                    <select
+                      id={`fact-type-${index}`}
+                      value={claim.attribute}
+                      onChange={(e) =>
+                        changeClaim(index, {
+                          attribute: e.target.value as ClaimEdit["attribute"],
+                        })
+                      }
+                    >
+                      {attributes.map((v) => (
+                        <option key={v} value={v}>
+                          {label(v)}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label htmlFor={`fact-owner-${index}`}>
+                      Ownership / qualification
+                    </label>
+                    <select
+                      id={`fact-owner-${index}`}
+                      value={claim.attribution}
+                      onChange={(e) =>
+                        changeClaim(index, {
+                          attribution: e.target
+                            .value as ClaimEdit["attribution"],
+                          ...(e.target.value === "UNCERTAIN"
+                            ? { availability: "PENDING_REVIEW" as const }
+                            : {}),
+                        })
+                      }
+                    >
+                      {ownership.map((v) => (
+                        <option key={v} value={v}>
+                          {label(v)}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                <label htmlFor={`fact-status-${index}`}>Review status</label>
+                <select
+                  id={`fact-status-${index}`}
+                  value={claim.availability}
+                  onChange={(e) =>
+                    changeClaim(index, {
+                      availability: e.target.value as ClaimEdit["availability"],
+                    })
+                  }
+                >
+                  {reviewStates.map((v) => (
+                    <option
+                      key={v}
+                      value={v}
+                      disabled={
+                        v === "CONFIRMED" && claim.attribution === "UNCERTAIN"
+                      }
+                    >
+                      {label(v)}
+                    </option>
+                  ))}
+                </select>
+                <label htmlFor={`fact-conflict-${index}`}>
+                  Uncertainty or conflict
+                </label>
+                <textarea
+                  id={`fact-conflict-${index}`}
+                  rows={2}
+                  maxLength={500}
+                  value={claim.conflict}
+                  onChange={(e) =>
+                    changeClaim(index, { conflict: e.target.value })
+                  }
+                />
+                <button
+                  className="record-button secondary"
+                  type="button"
+                  onClick={() =>
+                    claim.index === null
+                      ? setClaims((old) => old.filter((_, i) => i !== index))
+                      : changeClaim(index, { availability: "REMOVED" })
+                  }
+                >
+                  Remove fact
+                </button>
+              </div>
+            </details>
+          ))}
+          <button
+            type="button"
+            className="record-button secondary"
+            disabled={claims.length >= 100}
+            onClick={() =>
+              setClaims((old) => [
+                ...old,
+                {
+                  index: null,
+                  attribute: "action",
+                  value: "",
+                  attribution: "PERSONAL",
+                  availability: "CONFIRMED",
+                  conflict: "",
+                },
+              ])
+            }
+          >
+            + Add a fact
+          </button>
+        </fieldset>
+      </EvidenceReview>
       <fieldset disabled={busy}>
         <legend>Save your correction</legend>
         <label htmlFor="edit-note">What changed?</label>
