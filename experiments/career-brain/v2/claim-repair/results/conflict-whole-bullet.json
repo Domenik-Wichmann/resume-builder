@@ -1,0 +1,273 @@
+{
+  "inputs": [
+    {
+      "id": "stale-quantity-conflict-resume-56224002-9a4e-4193-ae81-d156ba3e26af",
+      "requirement": "Training coworkers through workshops and documentation",
+      "record": {
+        "id": "56224002-9a4e-4193-ae81-d156ba3e26af",
+        "kind": "experience",
+        "title": "Operations Analyst",
+        "organization": "Harbor Tools"
+      },
+      "claims": [
+        {
+          "ref": "conflict-resume-56224002-9a4e-4193-ae81-d156ba3e26af:2",
+          "value": "Trained dispatch coworkers through workshops and wrote a plain-language handbook",
+          "evidence": [
+            {
+              "end": 695,
+              "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+              "start": 581,
+              "source_id": "e9f71ab2-dcfe-4aaf-b000-63791c5b36a1"
+            }
+          ],
+          "attribute": "action",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "conflict-resume-56224002-9a4e-4193-ae81-d156ba3e26af:4",
+          "value": "Wrote a plain-language handbook",
+          "evidence": [
+            {
+              "end": 695,
+              "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+              "start": 581,
+              "source_id": "e9f71ab2-dcfe-4aaf-b000-63791c5b36a1"
+            }
+          ],
+          "attribute": "action",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "conflict-resume-56224002-9a4e-4193-ae81-d156ba3e26af:5",
+          "value": "Trained dispatch coworkers through workshops and wrote a plain-language handbook",
+          "evidence": [
+            {
+              "end": 695,
+              "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+              "start": 581,
+              "source_id": "e9f71ab2-dcfe-4aaf-b000-63791c5b36a1"
+            }
+          ],
+          "attribute": "action",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "conflict-resume-56224002-9a4e-4193-ae81-d156ba3e26af:6",
+          "value": "Two workshops",
+          "evidence": [
+            {
+              "end": 695,
+              "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+              "start": 581,
+              "source_id": "e9f71ab2-dcfe-4aaf-b000-63791c5b36a1"
+            }
+          ],
+          "attribute": "scope",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "conflict-resume-56224002-9a4e-4193-ae81-d156ba3e26af:8",
+          "value": "Handbook included five worked examples",
+          "evidence": [
+            {
+              "end": 3747,
+              "quote": "For Dispatch Loom the handbook also included five worked examples.",
+              "start": 3681,
+              "source_id": "e9f71ab2-dcfe-4aaf-b000-63791c5b36a1"
+            }
+          ],
+          "attribute": "context",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED"
+        }
+      ],
+      "constraints": [
+        {
+          "value": "Trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook",
+          "availability": "DISPUTED",
+          "attribution": "PERSONAL",
+          "conflict": "The source gives 12 coworkers, then says a later attendance sheet lists 14 and explicitly says the discrepancy cannot be resolved. The count is unresolved; the underlying training action is not disputed.",
+          "evidence": [
+            {
+              "end": 695,
+              "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+              "start": 581,
+              "source_id": "e9f71ab2-dcfe-4aaf-b000-63791c5b36a1"
+            }
+          ]
+        },
+        {
+          "value": "Trained 12 dispatch coworkers",
+          "availability": "DISPUTED",
+          "attribution": "PERSONAL",
+          "conflict": "The source gives 12 coworkers, then says a later attendance sheet lists 14 and explicitly says the discrepancy cannot be resolved. The count is unresolved; the underlying training action is not disputed.",
+          "evidence": [
+            {
+              "end": 695,
+              "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+              "start": 581,
+              "source_id": "e9f71ab2-dcfe-4aaf-b000-63791c5b36a1"
+            }
+          ]
+        }
+      ],
+      "bullet": "Trained 12 dispatch coworkers through two workshops and wrote a plain-language handbook."
+    },
+    {
+      "id": "stale-quantity-conflict-resume-4f36d132-8224-4633-989e-695ad08f907b",
+      "requirement": "Training coworkers through workshops and documentation",
+      "record": {
+        "id": "4f36d132-8224-4633-989e-695ad08f907b",
+        "kind": "achievement",
+        "title": "Dispatch coworker training",
+        "organization": "Harbor Tools"
+      },
+      "claims": [
+        {
+          "ref": "conflict-resume-4f36d132-8224-4633-989e-695ad08f907b:1",
+          "value": "Wrote a plain-language handbook",
+          "evidence": [
+            {
+              "end": 695,
+              "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+              "start": 581,
+              "source_id": "e9f71ab2-dcfe-4aaf-b000-63791c5b36a1"
+            }
+          ],
+          "attribute": "action",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "conflict-resume-4f36d132-8224-4633-989e-695ad08f907b:2",
+          "value": "Trained dispatch coworkers through workshops and wrote a plain-language handbook",
+          "evidence": [
+            {
+              "end": 695,
+              "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+              "start": 581,
+              "source_id": "e9f71ab2-dcfe-4aaf-b000-63791c5b36a1"
+            }
+          ],
+          "attribute": "action",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "conflict-resume-4f36d132-8224-4633-989e-695ad08f907b:3",
+          "value": "Two workshops",
+          "evidence": [
+            {
+              "end": 695,
+              "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+              "start": 581,
+              "source_id": "e9f71ab2-dcfe-4aaf-b000-63791c5b36a1"
+            }
+          ],
+          "attribute": "scope",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED"
+        },
+        {
+          "ref": "conflict-resume-4f36d132-8224-4633-989e-695ad08f907b:4",
+          "value": "Handbook included five worked examples",
+          "evidence": [
+            {
+              "end": 3747,
+              "quote": "For Dispatch Loom the handbook also included five worked examples.",
+              "start": 3681,
+              "source_id": "e9f71ab2-dcfe-4aaf-b000-63791c5b36a1"
+            }
+          ],
+          "attribute": "context",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED"
+        }
+      ],
+      "constraints": [
+        {
+          "value": "Trained 12 dispatch coworkers",
+          "availability": "DISPUTED",
+          "attribution": "PERSONAL",
+          "conflict": "The source gives 12 coworkers, then says a later attendance sheet lists 14 and explicitly says the discrepancy cannot be resolved. The count is unresolved; the underlying training action is not disputed.",
+          "evidence": [
+            {
+              "end": 695,
+              "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+              "start": 581,
+              "source_id": "e9f71ab2-dcfe-4aaf-b000-63791c5b36a1"
+            }
+          ]
+        }
+      ],
+      "bullet": "Trained 12 dispatch coworkers through two workshops and wrote a plain-language handbook."
+    }
+  ],
+  "decisions": [
+    {
+      "id": "stale-quantity-conflict-resume-56224002-9a4e-4193-ae81-d156ba3e26af",
+      "verdict": "REVIEW",
+      "assertions": [
+        {
+          "text": "Trained 12 dispatch coworkers",
+          "verdict": "UNCERTAIN",
+          "claimRefs": [],
+          "reason": "The training action is supported, but the exact count is disputed: the source reports 12, while a later attendance sheet reportedly lists 14, and the discrepancy is unresolved."
+        },
+        {
+          "text": " through two workshops",
+          "verdict": "SUPPORTED",
+          "claimRefs": [
+            "conflict-resume-56224002-9a4e-4193-ae81-d156ba3e26af:5",
+            "conflict-resume-56224002-9a4e-4193-ae81-d156ba3e26af:6"
+          ],
+          "reason": "The admitted claims support training coworkers through two workshops."
+        },
+        {
+          "text": " and wrote a plain-language handbook.",
+          "verdict": "SUPPORTED",
+          "claimRefs": [
+            "conflict-resume-56224002-9a4e-4193-ae81-d156ba3e26af:4"
+          ],
+          "reason": "The admitted claim supports writing a plain-language handbook."
+        }
+      ],
+      "reason": "The bullet’s training count is unresolved, so it cannot be affirmed as written; the workshops and handbook are supported."
+    },
+    {
+      "id": "stale-quantity-conflict-resume-4f36d132-8224-4633-989e-695ad08f907b",
+      "verdict": "REVIEW",
+      "assertions": [
+        {
+          "text": "Trained 12 dispatch coworkers",
+          "verdict": "UNCERTAIN",
+          "claimRefs": [],
+          "reason": "The training action is supported, but the exact count is disputed: the source reports 12, while a later attendance sheet reportedly lists 14, and the discrepancy is unresolved."
+        },
+        {
+          "text": " through two workshops",
+          "verdict": "SUPPORTED",
+          "claimRefs": [
+            "conflict-resume-4f36d132-8224-4633-989e-695ad08f907b:2",
+            "conflict-resume-4f36d132-8224-4633-989e-695ad08f907b:3"
+          ],
+          "reason": "The admitted claims support training coworkers through two workshops."
+        },
+        {
+          "text": " and wrote a plain-language handbook.",
+          "verdict": "SUPPORTED",
+          "claimRefs": [
+            "conflict-resume-4f36d132-8224-4633-989e-695ad08f907b:1"
+          ],
+          "reason": "The admitted claim supports writing a plain-language handbook."
+        }
+      ],
+      "reason": "The bullet’s training count is unresolved, so it cannot be affirmed as written; the workshops and handbook are supported."
+    }
+  ]
+}

@@ -1,0 +1,229 @@
+{
+  "model": "openai/gpt-6-luna-pro",
+  "records": [
+    {
+      "kind": "skill",
+      "key": "documentation-ada",
+      "title": "Documentation",
+      "subtitle": "",
+      "summary": "Wrote a plain-language handbook for dispatch coworkers.",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": "collaboration-91578d1f92",
+      "source_quote": "I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Wrote a plain-language handbook",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "wrote a plain-language handbook.",
+              "start": 465,
+              "end": 497
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "education",
+      "key": "bsc-in-information-systems-ab520a51dc",
+      "title": "BSc in Information Systems",
+      "subtitle": "Cedar College",
+      "summary": "Earned a BSc in Information Systems at Cedar College.",
+      "organization": "Cedar College",
+      "start_date": "2017-09-01",
+      "end_date": "2020-06-30",
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "I earned a BSc in Information Systems at Cedar College from 2017-09-01 to 2020-06-30.",
+      "uncertainties": [],
+      "aliases": ["BSc", "Bachelor", "Information Systems"],
+      "claims": [
+        {
+          "attribute": "credential",
+          "value": "BSc in Information Systems at Cedar College from 2017-09-01 to 2020-06-30",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I earned a BSc in Information Systems at Cedar College from 2017-09-01 to 2020-06-30.",
+              "start": 817,
+              "end": 902
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "certification",
+      "key": "cedar-sql-foundations-ed912d30a4",
+      "title": "Cedar SQL Foundations",
+      "subtitle": "",
+      "summary": "Fictional certificate described as course completion, not a professional license.",
+      "organization": null,
+      "start_date": "2020-08-15",
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "I received the fictional Cedar SQL Foundations certificate on 2020-08-15.",
+      "uncertainties": [],
+      "aliases": ["SQL Foundations"],
+      "claims": [
+        {
+          "attribute": "credential",
+          "value": "Cedar SQL Foundations certificate",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I received the fictional Cedar SQL Foundations certificate",
+              "start": 904,
+              "end": 962
+            }
+          ]
+        },
+        {
+          "attribute": "context",
+          "value": "Course completion, not a professional license",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "The certificate was a course completion, not a professional license.",
+              "start": 3525,
+              "end": 3593
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "language",
+      "key": "english-3e0cd54cbb",
+      "title": "English",
+      "subtitle": "",
+      "summary": "Fluent English.",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "I speak English fluently.",
+      "uncertainties": [],
+      "aliases": ["English"],
+      "claims": [
+        {
+          "attribute": "language",
+          "value": "Fluent English",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I speak English fluently.",
+              "start": 979,
+              "end": 1004
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "category",
+      "key": "data-tools-28c5fe8f0e",
+      "title": "Data tools",
+      "subtitle": "",
+      "summary": "Python, SQL and PostgreSQL.",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "My skill category is Data tools: Python, SQL and PostgreSQL.",
+      "uncertainties": [],
+      "aliases": ["Data tools"],
+      "claims": [
+        {
+          "attribute": "context",
+          "value": "Python, SQL and PostgreSQL",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "Data tools: Python, SQL and PostgreSQL.",
+              "start": 704,
+              "end": 743
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "category",
+      "key": "collaboration-91578d1f92",
+      "title": "Collaboration",
+      "subtitle": "",
+      "summary": "Git and coworker training.",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "My separate skill category is Collaboration: Git and coworker training.",
+      "uncertainties": [],
+      "aliases": ["Collaboration"],
+      "claims": [
+        {
+          "attribute": "context",
+          "value": "Git and coworker training",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "Collaboration: Git and coworker training.",
+              "start": 774,
+              "end": 815
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "index": 0,
+      "verdict": "SUPPORTED",
+      "reason": "The source says Ada personally wrote a plain-language handbook for the Dispatch Loom work and personally trained dispatch coworkers."
+    },
+    {
+      "index": 1,
+      "verdict": "SUPPORTED",
+      "reason": "The degree, institution, and dates match the source’s explicit education statement."
+    },
+    {
+      "index": 2,
+      "verdict": "SUPPORTED",
+      "reason": "The source identifies the fictional Cedar SQL Foundations certificate, gives its date, and clarifies it was course completion rather than a professional license."
+    },
+    {
+      "index": 3,
+      "verdict": "SUPPORTED",
+      "reason": "The source explicitly says Ada speaks English fluently."
+    },
+    {
+      "index": 4,
+      "verdict": "SUPPORTED",
+      "reason": "The source explicitly lists Python, SQL, and PostgreSQL in the Data tools skill category."
+    },
+    {
+      "index": 5,
+      "verdict": "SUPPORTED",
+      "reason": "The source explicitly lists Git and coworker training in the separate Collaboration skill category."
+    }
+  ]
+}

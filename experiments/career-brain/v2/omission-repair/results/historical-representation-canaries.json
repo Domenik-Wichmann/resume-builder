@@ -1,0 +1,636 @@
+[
+  {
+    "historicalRepeat": 2,
+    "records": [
+      {
+        "kind": "achievement",
+        "key": "reconciliation-time-reduction-aaf329a9ed",
+        "title": "Reconciliation time reduction",
+        "subtitle": "Harbor Tools",
+        "summary": "Team result: Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. Personal contribution was the parser and checks; coworkers also changed their checking habits. Delivery speed was not measured.",
+        "organization": "Harbor Tools",
+        "start_date": null,
+        "end_date": null,
+        "skill_keys": ["python-1678f77f15", "sql-a03e9bccab"],
+        "achievement_keys": [],
+        "category_key": null,
+        "source_quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs.",
+        "uncertainties": [],
+        "aliases": [
+          "reconciliation",
+          "time",
+          "hours",
+          "reconciliation time reduction",
+          "six-run measurement"
+        ],
+        "claims": [
+          {
+            "value": "Reconciliation time reduced from 5 hours to 2 hours per week over six weekly runs",
+            "evidence": [
+              {
+                "end": 15495,
+                "quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks.",
+                "start": 15322,
+                "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+              },
+              {
+                "end": 15321,
+                "quote": "I first said 50% time saved, but that was wrong.",
+                "start": 15273,
+                "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+              }
+            ],
+            "attribute": "metric",
+            "attribution": "TEAM",
+            "availability": "CONFIRMED"
+          },
+          {
+            "value": "Personal contribution was the parser and checks",
+            "evidence": [
+              {
+                "end": 15495,
+                "quote": "This was a team result; my contribution was the parser and checks.",
+                "start": 15429,
+                "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+              }
+            ],
+            "attribute": "ownership",
+            "attribution": "PERSONAL",
+            "availability": "CONFIRMED"
+          },
+          {
+            "value": "Coworkers also changed their checking habits",
+            "evidence": [
+              {
+                "end": 2989,
+                "quote": "I cannot attribute all improvement to myself because coworkers also changed their checking habits.",
+                "start": 2891,
+                "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+              }
+            ],
+            "attribute": "context",
+            "attribution": "TEAM",
+            "availability": "CONFIRMED"
+          },
+          {
+            "value": "Earlier 50% time-saved figure was incorrect",
+            "evidence": [
+              {
+                "end": 15321,
+                "quote": "I first said 50% time saved, but that was wrong.",
+                "start": 15273,
+                "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+              }
+            ],
+            "attribute": "correction",
+            "attribution": "NEGATED",
+            "availability": "CONFIRMED"
+          },
+          {
+            "value": "The measured time was reconciliation time, not delivery time",
+            "evidence": [
+              {
+                "end": 2890,
+                "quote": "An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only.",
+                "start": 2726,
+                "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+              }
+            ],
+            "attribute": "correction",
+            "attribution": "PERSONAL",
+            "availability": "CONFIRMED"
+          }
+        ]
+      }
+    ],
+    "decisions": [
+      {
+        "key": "achievement:reconciliation-time-reduction-aaf329a9ed",
+        "verdict": "EQUIVALENT",
+        "reason": "The material facts are unchanged. The new denial that delivery speed was not measured is already entailed by the earlier scoped correction that the six-run measurement covered reconciliation time, not delivery time; the metric, team attribution, personal contribution, and other corrections also match."
+      }
+    ],
+    "changes": [
+      {
+        "identity": "achievement:reconciliation-time-reduction-aaf329a9ed",
+        "before": {
+          "id": "9d55dcb3-aa5b-473f-b01b-06edfbcbcf41",
+          "kind": "achievement",
+          "key": "reconciliation-time-reduction-aaf329a9ed",
+          "title": "Reconciliation time reduction",
+          "subtitle": "5 to 2 hours per week · six weekly runs",
+          "summary": "Team reconciliation time fell from 5 to 2 hours per week over six weekly runs. Personal contribution was the parser and checks; coworkers also changed their checking habits.",
+          "organization": "Harbor Tools",
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": ["python-1678f77f15", "sql-a03e9bccab"],
+          "source_quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs.",
+          "achievement_keys": [],
+          "category_key": null,
+          "uncertainties": [],
+          "hash": "cedba353773170a2456b06333ca67d3be0b895bc32711f89ce1a05fbbc0a75d6",
+          "published": false,
+          "archived": false,
+          "updated_at": "2026-10-05T14:48:31.707338+00:00",
+          "aliases": ["reconciliation", "time", "hours"],
+          "claims": [
+            {
+              "value": "Reconciliation time reduced from 5 hours to 2 hours per week over six weekly runs",
+              "evidence": [
+                {
+                  "end": 15495,
+                  "quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks.",
+                  "start": 15322,
+                  "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+                },
+                {
+                  "end": 15321,
+                  "quote": "I first said 50% time saved, but that was wrong.",
+                  "start": 15273,
+                  "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+                }
+              ],
+              "attribute": "metric",
+              "attribution": "TEAM",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Personal contribution was the parser and checks",
+              "evidence": [
+                {
+                  "end": 15495,
+                  "quote": "This was a team result; my contribution was the parser and checks.",
+                  "start": 15429,
+                  "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+                }
+              ],
+              "attribute": "ownership",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Coworkers also changed their checking habits",
+              "evidence": [
+                {
+                  "end": 2989,
+                  "quote": "I cannot attribute all improvement to myself because coworkers also changed their checking habits.",
+                  "start": 2891,
+                  "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+                }
+              ],
+              "attribute": "context",
+              "attribution": "TEAM",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Earlier 50% time-saved figure was incorrect",
+              "evidence": [
+                {
+                  "end": 15321,
+                  "quote": "I first said 50% time saved, but that was wrong.",
+                  "start": 15273,
+                  "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+                }
+              ],
+              "attribute": "correction",
+              "attribution": "NEGATED",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "The measured time was reconciliation time, not delivery time",
+              "evidence": [
+                {
+                  "end": 2890,
+                  "quote": "An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only.",
+                  "start": 2726,
+                  "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+                }
+              ],
+              "attribute": "correction",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            }
+          ]
+        },
+        "after": {
+          "kind": "achievement",
+          "key": "reconciliation-time-reduction-aaf329a9ed",
+          "title": "Reconciliation time reduction",
+          "subtitle": "Harbor Tools",
+          "summary": "Team result: Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. Personal contribution was the parser and checks; coworkers also changed their checking habits. Delivery speed was not measured.",
+          "organization": "Harbor Tools",
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": ["python-1678f77f15", "sql-a03e9bccab"],
+          "achievement_keys": [],
+          "category_key": null,
+          "source_quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs.",
+          "uncertainties": [],
+          "aliases": [
+            "reconciliation",
+            "time",
+            "hours",
+            "reconciliation time reduction",
+            "six-run measurement"
+          ],
+          "claims": [
+            {
+              "value": "Reconciliation time reduced from 5 hours to 2 hours per week over six weekly runs",
+              "evidence": [
+                {
+                  "end": 15495,
+                  "quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks.",
+                  "start": 15322,
+                  "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+                },
+                {
+                  "end": 15321,
+                  "quote": "I first said 50% time saved, but that was wrong.",
+                  "start": 15273,
+                  "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+                }
+              ],
+              "attribute": "metric",
+              "attribution": "TEAM",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Personal contribution was the parser and checks",
+              "evidence": [
+                {
+                  "end": 15495,
+                  "quote": "This was a team result; my contribution was the parser and checks.",
+                  "start": 15429,
+                  "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+                }
+              ],
+              "attribute": "ownership",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Coworkers also changed their checking habits",
+              "evidence": [
+                {
+                  "end": 2989,
+                  "quote": "I cannot attribute all improvement to myself because coworkers also changed their checking habits.",
+                  "start": 2891,
+                  "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+                }
+              ],
+              "attribute": "context",
+              "attribution": "TEAM",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Earlier 50% time-saved figure was incorrect",
+              "evidence": [
+                {
+                  "end": 15321,
+                  "quote": "I first said 50% time saved, but that was wrong.",
+                  "start": 15273,
+                  "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+                }
+              ],
+              "attribute": "correction",
+              "attribution": "NEGATED",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "The measured time was reconciliation time, not delivery time",
+              "evidence": [
+                {
+                  "end": 2890,
+                  "quote": "An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only.",
+                  "start": 2726,
+                  "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+                }
+              ],
+              "attribute": "correction",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            }
+          ]
+        },
+        "status": "UNCHANGED",
+        "reason": ""
+      }
+    ]
+  },
+  {
+    "historicalRepeat": 4,
+    "records": [
+      {
+        "kind": "achievement",
+        "key": "reconciliation-time-reduction-aaf329a9ed",
+        "title": "Reconciliation time reduction",
+        "subtitle": "Harbor Tools",
+        "summary": "Team result: Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week over six weekly runs. Ada's contribution was the parser and checks; coworkers also changed their checking habits. Delivery speed was not measured, and the earlier 50% time-saved figure was incorrect.",
+        "organization": "Harbor Tools",
+        "start_date": null,
+        "end_date": null,
+        "skill_keys": ["python-1678f77f15", "sql-a03e9bccab"],
+        "achievement_keys": [],
+        "category_key": null,
+        "source_quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs.",
+        "uncertainties": [],
+        "aliases": [
+          "reconciliation",
+          "time",
+          "hours",
+          "reconciliation time reduction"
+        ],
+        "claims": [
+          {
+            "value": "Reconciliation time reduced from 5 hours to 2 hours per week over six weekly runs",
+            "evidence": [
+              {
+                "end": 15495,
+                "quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks.",
+                "start": 15322,
+                "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+              },
+              {
+                "end": 15321,
+                "quote": "I first said 50% time saved, but that was wrong.",
+                "start": 15273,
+                "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+              }
+            ],
+            "attribute": "metric",
+            "attribution": "TEAM",
+            "availability": "CONFIRMED"
+          },
+          {
+            "value": "Personal contribution was the parser and checks",
+            "evidence": [
+              {
+                "end": 15495,
+                "quote": "This was a team result; my contribution was the parser and checks.",
+                "start": 15429,
+                "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+              }
+            ],
+            "attribute": "ownership",
+            "attribution": "PERSONAL",
+            "availability": "CONFIRMED"
+          },
+          {
+            "value": "Coworkers also changed their checking habits",
+            "evidence": [
+              {
+                "end": 2989,
+                "quote": "I cannot attribute all improvement to myself because coworkers also changed their checking habits.",
+                "start": 2891,
+                "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+              }
+            ],
+            "attribute": "context",
+            "attribution": "TEAM",
+            "availability": "CONFIRMED"
+          },
+          {
+            "value": "Earlier 50% time-saved figure was incorrect",
+            "evidence": [
+              {
+                "end": 15321,
+                "quote": "I first said 50% time saved, but that was wrong.",
+                "start": 15273,
+                "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+              }
+            ],
+            "attribute": "correction",
+            "attribution": "NEGATED",
+            "availability": "CONFIRMED"
+          },
+          {
+            "value": "The measured time was reconciliation time, not delivery time",
+            "evidence": [
+              {
+                "end": 2890,
+                "quote": "An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only.",
+                "start": 2726,
+                "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+              }
+            ],
+            "attribute": "correction",
+            "attribution": "PERSONAL",
+            "availability": "CONFIRMED"
+          }
+        ]
+      }
+    ],
+    "decisions": [
+      {
+        "key": "achievement:reconciliation-time-reduction-aaf329a9ed",
+        "verdict": "EQUIVALENT",
+        "reason": "The metric, team attribution, personal contribution, context, and corrections are unchanged. The new denial that delivery speed was measured restates the existing correction that delivery speed was not measured."
+      }
+    ],
+    "changes": [
+      {
+        "identity": "achievement:reconciliation-time-reduction-aaf329a9ed",
+        "before": {
+          "id": "9d55dcb3-aa5b-473f-b01b-06edfbcbcf41",
+          "kind": "achievement",
+          "key": "reconciliation-time-reduction-aaf329a9ed",
+          "title": "Reconciliation time reduction",
+          "subtitle": "5 to 2 hours per week · six weekly runs",
+          "summary": "Team reconciliation time fell from 5 to 2 hours per week over six weekly runs. Personal contribution was the parser and checks; coworkers also changed their checking habits.",
+          "organization": "Harbor Tools",
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": ["python-1678f77f15", "sql-a03e9bccab"],
+          "source_quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs.",
+          "achievement_keys": [],
+          "category_key": null,
+          "uncertainties": [],
+          "hash": "cedba353773170a2456b06333ca67d3be0b895bc32711f89ce1a05fbbc0a75d6",
+          "published": false,
+          "archived": false,
+          "updated_at": "2026-10-05T14:48:31.707338+00:00",
+          "aliases": ["reconciliation", "time", "hours"],
+          "claims": [
+            {
+              "value": "Reconciliation time reduced from 5 hours to 2 hours per week over six weekly runs",
+              "evidence": [
+                {
+                  "end": 15495,
+                  "quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks.",
+                  "start": 15322,
+                  "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+                },
+                {
+                  "end": 15321,
+                  "quote": "I first said 50% time saved, but that was wrong.",
+                  "start": 15273,
+                  "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+                }
+              ],
+              "attribute": "metric",
+              "attribution": "TEAM",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Personal contribution was the parser and checks",
+              "evidence": [
+                {
+                  "end": 15495,
+                  "quote": "This was a team result; my contribution was the parser and checks.",
+                  "start": 15429,
+                  "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+                }
+              ],
+              "attribute": "ownership",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Coworkers also changed their checking habits",
+              "evidence": [
+                {
+                  "end": 2989,
+                  "quote": "I cannot attribute all improvement to myself because coworkers also changed their checking habits.",
+                  "start": 2891,
+                  "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+                }
+              ],
+              "attribute": "context",
+              "attribution": "TEAM",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Earlier 50% time-saved figure was incorrect",
+              "evidence": [
+                {
+                  "end": 15321,
+                  "quote": "I first said 50% time saved, but that was wrong.",
+                  "start": 15273,
+                  "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+                }
+              ],
+              "attribute": "correction",
+              "attribution": "NEGATED",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "The measured time was reconciliation time, not delivery time",
+              "evidence": [
+                {
+                  "end": 2890,
+                  "quote": "An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only.",
+                  "start": 2726,
+                  "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+                }
+              ],
+              "attribute": "correction",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            }
+          ]
+        },
+        "after": {
+          "kind": "achievement",
+          "key": "reconciliation-time-reduction-aaf329a9ed",
+          "title": "Reconciliation time reduction",
+          "subtitle": "Harbor Tools",
+          "summary": "Team result: Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week over six weekly runs. Ada's contribution was the parser and checks; coworkers also changed their checking habits. Delivery speed was not measured, and the earlier 50% time-saved figure was incorrect.",
+          "organization": "Harbor Tools",
+          "start_date": null,
+          "end_date": null,
+          "skill_keys": ["python-1678f77f15", "sql-a03e9bccab"],
+          "achievement_keys": [],
+          "category_key": null,
+          "source_quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs.",
+          "uncertainties": [],
+          "aliases": [
+            "reconciliation",
+            "time",
+            "hours",
+            "reconciliation time reduction"
+          ],
+          "claims": [
+            {
+              "value": "Reconciliation time reduced from 5 hours to 2 hours per week over six weekly runs",
+              "evidence": [
+                {
+                  "end": 15495,
+                  "quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks.",
+                  "start": 15322,
+                  "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+                },
+                {
+                  "end": 15321,
+                  "quote": "I first said 50% time saved, but that was wrong.",
+                  "start": 15273,
+                  "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+                }
+              ],
+              "attribute": "metric",
+              "attribution": "TEAM",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Personal contribution was the parser and checks",
+              "evidence": [
+                {
+                  "end": 15495,
+                  "quote": "This was a team result; my contribution was the parser and checks.",
+                  "start": 15429,
+                  "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+                }
+              ],
+              "attribute": "ownership",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Coworkers also changed their checking habits",
+              "evidence": [
+                {
+                  "end": 2989,
+                  "quote": "I cannot attribute all improvement to myself because coworkers also changed their checking habits.",
+                  "start": 2891,
+                  "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+                }
+              ],
+              "attribute": "context",
+              "attribution": "TEAM",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Earlier 50% time-saved figure was incorrect",
+              "evidence": [
+                {
+                  "end": 15321,
+                  "quote": "I first said 50% time saved, but that was wrong.",
+                  "start": 15273,
+                  "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+                }
+              ],
+              "attribute": "correction",
+              "attribution": "NEGATED",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "The measured time was reconciliation time, not delivery time",
+              "evidence": [
+                {
+                  "end": 2890,
+                  "quote": "An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only.",
+                  "start": 2726,
+                  "source_id": "3465db2c-1674-4682-a7b6-de12739dc9a8"
+                }
+              ],
+              "attribute": "correction",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            }
+          ]
+        },
+        "status": "UNCHANGED",
+        "reason": ""
+      }
+    ]
+  }
+]

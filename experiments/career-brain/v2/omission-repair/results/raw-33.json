@@ -1,0 +1,37 @@
+{
+  "label": "sequence:entailment-audit:openai/gpt-6-luna-pro:chunk-12",
+  "result": {
+    "decisions": [
+      {
+        "index": 0,
+        "verdict": "SUPPORTED",
+        "reason": "The source says Docker remains a one-off exercise and does not establish broader or professional use."
+      },
+      {
+        "index": 1,
+        "verdict": "SUPPORTED",
+        "reason": "The degree, institution, and dates match the source."
+      },
+      {
+        "index": 2,
+        "verdict": "UNSUPPORTED",
+        "reason": "The source explicitly describes the certificate as fictional, but the record presents it as an unqualified received certificate and omits that qualification."
+      },
+      {
+        "index": 3,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly states that Ada speaks English fluently."
+      },
+      {
+        "index": 4,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly lists Python, SQL, and PostgreSQL under the Data tools skill category."
+      },
+      {
+        "index": 5,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly lists Git and coworker training under the Collaboration skill category."
+      }
+    ]
+  }
+}

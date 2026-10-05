@@ -1,0 +1,1645 @@
+[
+  {
+    "id": "preferred-warning",
+    "selected": {
+      "id": "preferred-warning",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "053d83a5-2ee2-45c7-8df7-2830ff696227",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "preferred-warning:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": []
+    },
+    "bullet": "Wrote SQL validation checks for dispatch reconciliation.",
+    "verdict": {
+      "id": "preferred-warning",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["preferred-warning:0"],
+          "reason": "The admitted personal action and its source span confirm this work."
+        }
+      ],
+      "reason": "The full bullet is supported by the confirmed personal action."
+    },
+    "admittedIds": ["053d83a5-2ee2-45c7-8df7-2830ff696227"],
+    "compiledIds": ["053d83a5-2ee2-45c7-8df7-2830ff696227"],
+    "ir": {
+      "profile": {
+        "name": "Ada Rowan",
+        "contact": {
+          "market": "US",
+          "location": "",
+          "contact_email": "",
+          "phone": "",
+          "work_authorization": ""
+        }
+      },
+      "headline": "Operations Analyst",
+      "summary": "",
+      "skill_groups": [],
+      "experiences": [],
+      "projects": [
+        {
+          "title": "Dispatch reconciliation",
+          "context": "",
+          "organization": null,
+          "role": "Dispatch reconciliation",
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "bullets": [
+            "Wrote SQL validation checks for dispatch reconciliation."
+          ],
+          "evidence_ids": ["053d83a5-2ee2-45c7-8df7-2830ff696227"],
+          "priority": 0
+        }
+      ],
+      "education": [],
+      "certifications": [],
+      "supporting_sections": [],
+      "demo": true,
+      "section_order": [
+        "Experience",
+        "Projects",
+        "Achievements",
+        "Education",
+        "Certifications"
+      ]
+    }
+  },
+  {
+    "id": "wanted-feature",
+    "selected": {
+      "id": "wanted-feature",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "e0f3a4d5-5522-4470-8895-ab538c8b2fca",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "wanted-feature:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": []
+    },
+    "bullet": "Wrote SQL validation checks for dispatch reconciliation.",
+    "verdict": {
+      "id": "wanted-feature",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["wanted-feature:0"],
+          "reason": "The admitted personal action and its source span confirm this work."
+        }
+      ],
+      "reason": "The full bullet is supported by the confirmed personal action."
+    },
+    "admittedIds": ["e0f3a4d5-5522-4470-8895-ab538c8b2fca"],
+    "compiledIds": ["e0f3a4d5-5522-4470-8895-ab538c8b2fca"],
+    "ir": {
+      "profile": {
+        "name": "Ada Rowan",
+        "contact": {
+          "market": "US",
+          "location": "",
+          "contact_email": "",
+          "phone": "",
+          "work_authorization": ""
+        }
+      },
+      "headline": "Operations Analyst",
+      "summary": "",
+      "skill_groups": [],
+      "experiences": [],
+      "projects": [
+        {
+          "title": "Dispatch reconciliation",
+          "context": "",
+          "organization": null,
+          "role": "Dispatch reconciliation",
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "bullets": [
+            "Wrote SQL validation checks for dispatch reconciliation."
+          ],
+          "evidence_ids": ["e0f3a4d5-5522-4470-8895-ab538c8b2fca"],
+          "priority": 0
+        }
+      ],
+      "education": [],
+      "certifications": [],
+      "supporting_sections": [],
+      "demo": true,
+      "section_order": [
+        "Experience",
+        "Projects",
+        "Achievements",
+        "Education",
+        "Certifications"
+      ]
+    }
+  },
+  {
+    "id": "planned-completed",
+    "selected": {
+      "id": "planned-completed",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "422b2686-997f-432b-870b-1b667ec54569",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "planned-completed:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": []
+    },
+    "bullet": "Wrote SQL validation checks for dispatch reconciliation.",
+    "verdict": {
+      "id": "planned-completed",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["planned-completed:0"],
+          "reason": "The admitted personal action and its source span confirm this work."
+        }
+      ],
+      "reason": "The full bullet is supported by the confirmed personal action."
+    },
+    "admittedIds": ["422b2686-997f-432b-870b-1b667ec54569"],
+    "compiledIds": ["422b2686-997f-432b-870b-1b667ec54569"],
+    "ir": {
+      "profile": {
+        "name": "Ada Rowan",
+        "contact": {
+          "market": "US",
+          "location": "",
+          "contact_email": "",
+          "phone": "",
+          "work_authorization": ""
+        }
+      },
+      "headline": "Operations Analyst",
+      "summary": "",
+      "skill_groups": [],
+      "experiences": [],
+      "projects": [
+        {
+          "title": "Dispatch reconciliation",
+          "context": "",
+          "organization": null,
+          "role": "Dispatch reconciliation",
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "bullets": [
+            "Wrote SQL validation checks for dispatch reconciliation."
+          ],
+          "evidence_ids": ["422b2686-997f-432b-870b-1b667ec54569"],
+          "priority": 0
+        }
+      ],
+      "education": [],
+      "certifications": [],
+      "supporting_sections": [],
+      "demo": true,
+      "section_order": [
+        "Experience",
+        "Projects",
+        "Achievements",
+        "Education",
+        "Certifications"
+      ]
+    }
+  },
+  {
+    "id": "discussed-performed",
+    "selected": {
+      "id": "discussed-performed",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "688aba87-25eb-4c4a-8c22-c2369e3a6ab9",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "discussed-performed:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": []
+    },
+    "bullet": "Wrote SQL validation checks for dispatch reconciliation.",
+    "verdict": {
+      "id": "discussed-performed",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["discussed-performed:0"],
+          "reason": "The admitted personal action and its source span confirm this work."
+        }
+      ],
+      "reason": "The full bullet is supported by the confirmed personal action."
+    },
+    "admittedIds": ["688aba87-25eb-4c4a-8c22-c2369e3a6ab9"],
+    "compiledIds": ["688aba87-25eb-4c4a-8c22-c2369e3a6ab9"],
+    "ir": {
+      "profile": {
+        "name": "Ada Rowan",
+        "contact": {
+          "market": "US",
+          "location": "",
+          "contact_email": "",
+          "phone": "",
+          "work_authorization": ""
+        }
+      },
+      "headline": "Operations Analyst",
+      "summary": "",
+      "skill_groups": [],
+      "experiences": [],
+      "projects": [
+        {
+          "title": "Dispatch reconciliation",
+          "context": "",
+          "organization": null,
+          "role": "Dispatch reconciliation",
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "bullets": [
+            "Wrote SQL validation checks for dispatch reconciliation."
+          ],
+          "evidence_ids": ["688aba87-25eb-4c4a-8c22-c2369e3a6ab9"],
+          "priority": 0
+        }
+      ],
+      "education": [],
+      "certifications": [],
+      "supporting_sections": [],
+      "demo": true,
+      "section_order": [
+        "Experience",
+        "Projects",
+        "Achievements",
+        "Education",
+        "Certifications"
+      ]
+    }
+  },
+  {
+    "id": "recommended-delivered",
+    "selected": {
+      "id": "recommended-delivered",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "bff3fb3c-5076-411c-8df4-a61aef745eda",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "recommended-delivered:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": []
+    },
+    "bullet": "Wrote SQL validation checks for dispatch reconciliation.",
+    "verdict": {
+      "id": "recommended-delivered",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["recommended-delivered:0"],
+          "reason": "The admitted personal action and its source span confirm this work."
+        }
+      ],
+      "reason": "The full bullet is supported by the confirmed personal action."
+    },
+    "admittedIds": ["bff3fb3c-5076-411c-8df4-a61aef745eda"],
+    "compiledIds": ["bff3fb3c-5076-411c-8df4-a61aef745eda"],
+    "ir": {
+      "profile": {
+        "name": "Ada Rowan",
+        "contact": {
+          "market": "US",
+          "location": "",
+          "contact_email": "",
+          "phone": "",
+          "work_authorization": ""
+        }
+      },
+      "headline": "Operations Analyst",
+      "summary": "",
+      "skill_groups": [],
+      "experiences": [],
+      "projects": [
+        {
+          "title": "Dispatch reconciliation",
+          "context": "",
+          "organization": null,
+          "role": "Dispatch reconciliation",
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "bullets": [
+            "Wrote SQL validation checks for dispatch reconciliation."
+          ],
+          "evidence_ids": ["bff3fb3c-5076-411c-8df4-a61aef745eda"],
+          "priority": 0
+        }
+      ],
+      "education": [],
+      "certifications": [],
+      "supporting_sections": [],
+      "demo": true,
+      "section_order": [
+        "Experience",
+        "Projects",
+        "Achievements",
+        "Education",
+        "Certifications"
+      ]
+    }
+  },
+  {
+    "id": "team-personal",
+    "selected": {
+      "id": "team-personal",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "85dac9a1-f628-4280-8eea-3ce7a5114560",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "team-personal:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": []
+    },
+    "bullet": "Wrote SQL validation checks for dispatch reconciliation.",
+    "verdict": {
+      "id": "team-personal",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["team-personal:0"],
+          "reason": "The admitted action is attributed personally and its source span confirms the work."
+        }
+      ],
+      "reason": "The full bullet is supported by the confirmed personal action."
+    },
+    "admittedIds": ["85dac9a1-f628-4280-8eea-3ce7a5114560"],
+    "compiledIds": ["85dac9a1-f628-4280-8eea-3ce7a5114560"],
+    "ir": {
+      "profile": {
+        "name": "Ada Rowan",
+        "contact": {
+          "market": "US",
+          "location": "",
+          "contact_email": "",
+          "phone": "",
+          "work_authorization": ""
+        }
+      },
+      "headline": "Operations Analyst",
+      "summary": "",
+      "skill_groups": [],
+      "experiences": [],
+      "projects": [
+        {
+          "title": "Dispatch reconciliation",
+          "context": "",
+          "organization": null,
+          "role": "Dispatch reconciliation",
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "bullets": [
+            "Wrote SQL validation checks for dispatch reconciliation."
+          ],
+          "evidence_ids": ["85dac9a1-f628-4280-8eea-3ce7a5114560"],
+          "priority": 0
+        }
+      ],
+      "education": [],
+      "certifications": [],
+      "supporting_sections": [],
+      "demo": true,
+      "section_order": [
+        "Experience",
+        "Projects",
+        "Achievements",
+        "Education",
+        "Certifications"
+      ]
+    }
+  },
+  {
+    "id": "exposure-proficiency",
+    "selected": {
+      "id": "exposure-proficiency",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "5b4e3540-f342-4ffe-8375-76075a9766db",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "exposure-proficiency:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": []
+    },
+    "bullet": "Wrote SQL validation checks for dispatch reconciliation.",
+    "verdict": {
+      "id": "exposure-proficiency",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["exposure-proficiency:0"],
+          "reason": "The admitted personal action and its source span confirm writing SQL validation checks."
+        }
+      ],
+      "reason": "The bullet asserts this specific work, not broader proficiency."
+    },
+    "admittedIds": ["5b4e3540-f342-4ffe-8375-76075a9766db"],
+    "compiledIds": ["5b4e3540-f342-4ffe-8375-76075a9766db"],
+    "ir": {
+      "profile": {
+        "name": "Ada Rowan",
+        "contact": {
+          "market": "US",
+          "location": "",
+          "contact_email": "",
+          "phone": "",
+          "work_authorization": ""
+        }
+      },
+      "headline": "Operations Analyst",
+      "summary": "",
+      "skill_groups": [],
+      "experiences": [],
+      "projects": [
+        {
+          "title": "Dispatch reconciliation",
+          "context": "",
+          "organization": null,
+          "role": "Dispatch reconciliation",
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "bullets": [
+            "Wrote SQL validation checks for dispatch reconciliation."
+          ],
+          "evidence_ids": ["5b4e3540-f342-4ffe-8375-76075a9766db"],
+          "priority": 0
+        }
+      ],
+      "education": [],
+      "certifications": [],
+      "supporting_sections": [],
+      "demo": true,
+      "section_order": [
+        "Experience",
+        "Projects",
+        "Achievements",
+        "Education",
+        "Certifications"
+      ]
+    }
+  },
+  {
+    "id": "contributed-owned",
+    "selected": {
+      "id": "contributed-owned",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "6d4479c6-0f26-4124-80bb-f54700670f34",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "contributed-owned:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": []
+    },
+    "bullet": "Wrote SQL validation checks for dispatch reconciliation.",
+    "verdict": {
+      "id": "contributed-owned",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["contributed-owned:0"],
+          "reason": "The admitted personal action and its source span confirm that the candidate wrote the checks."
+        }
+      ],
+      "reason": "The full bullet is supported by the confirmed personal action."
+    },
+    "admittedIds": ["6d4479c6-0f26-4124-80bb-f54700670f34"],
+    "compiledIds": ["6d4479c6-0f26-4124-80bb-f54700670f34"],
+    "ir": {
+      "profile": {
+        "name": "Ada Rowan",
+        "contact": {
+          "market": "US",
+          "location": "",
+          "contact_email": "",
+          "phone": "",
+          "work_authorization": ""
+        }
+      },
+      "headline": "Operations Analyst",
+      "summary": "",
+      "skill_groups": [],
+      "experiences": [],
+      "projects": [
+        {
+          "title": "Dispatch reconciliation",
+          "context": "",
+          "organization": null,
+          "role": "Dispatch reconciliation",
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "bullets": [
+            "Wrote SQL validation checks for dispatch reconciliation."
+          ],
+          "evidence_ids": ["6d4479c6-0f26-4124-80bb-f54700670f34"],
+          "priority": 0
+        }
+      ],
+      "education": [],
+      "certifications": [],
+      "supporting_sections": [],
+      "demo": true,
+      "section_order": [
+        "Experience",
+        "Projects",
+        "Achievements",
+        "Education",
+        "Certifications"
+      ]
+    }
+  },
+  {
+    "id": "trained-managed",
+    "selected": {
+      "id": "trained-managed",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "4955b84c-0e11-4f70-8e3f-4e39549a2d29",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "trained-managed:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": []
+    },
+    "bullet": "Wrote SQL validation checks for dispatch reconciliation.",
+    "verdict": {
+      "id": "trained-managed",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["trained-managed:0"],
+          "reason": "The admitted personal action and its source span confirm this work."
+        }
+      ],
+      "reason": "The bullet makes no claim about training or management."
+    },
+    "admittedIds": ["4955b84c-0e11-4f70-8e3f-4e39549a2d29"],
+    "compiledIds": ["4955b84c-0e11-4f70-8e3f-4e39549a2d29"],
+    "ir": {
+      "profile": {
+        "name": "Ada Rowan",
+        "contact": {
+          "market": "US",
+          "location": "",
+          "contact_email": "",
+          "phone": "",
+          "work_authorization": ""
+        }
+      },
+      "headline": "Operations Analyst",
+      "summary": "",
+      "skill_groups": [],
+      "experiences": [],
+      "projects": [
+        {
+          "title": "Dispatch reconciliation",
+          "context": "",
+          "organization": null,
+          "role": "Dispatch reconciliation",
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "bullets": [
+            "Wrote SQL validation checks for dispatch reconciliation."
+          ],
+          "evidence_ids": ["4955b84c-0e11-4f70-8e3f-4e39549a2d29"],
+          "priority": 0
+        }
+      ],
+      "education": [],
+      "certifications": [],
+      "supporting_sections": [],
+      "demo": true,
+      "section_order": [
+        "Experience",
+        "Projects",
+        "Achievements",
+        "Education",
+        "Certifications"
+      ]
+    }
+  },
+  {
+    "id": "related-named-tech",
+    "selected": {
+      "id": "related-named-tech",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "5676c63b-9b76-49df-8ee3-0c79a6b685da",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "related-named-tech:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": []
+    },
+    "bullet": "Wrote SQL validation checks for dispatch reconciliation.",
+    "verdict": {
+      "id": "related-named-tech",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["related-named-tech:0"],
+          "reason": "The admitted personal action and its source span confirm this work."
+        }
+      ],
+      "reason": "The bullet identifies SQL validation work, which is supported by the claim and source span."
+    },
+    "admittedIds": ["5676c63b-9b76-49df-8ee3-0c79a6b685da"],
+    "compiledIds": ["5676c63b-9b76-49df-8ee3-0c79a6b685da"],
+    "ir": {
+      "profile": {
+        "name": "Ada Rowan",
+        "contact": {
+          "market": "US",
+          "location": "",
+          "contact_email": "",
+          "phone": "",
+          "work_authorization": ""
+        }
+      },
+      "headline": "Operations Analyst",
+      "summary": "",
+      "skill_groups": [],
+      "experiences": [],
+      "projects": [
+        {
+          "title": "Dispatch reconciliation",
+          "context": "",
+          "organization": null,
+          "role": "Dispatch reconciliation",
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "bullets": [
+            "Wrote SQL validation checks for dispatch reconciliation."
+          ],
+          "evidence_ids": ["5676c63b-9b76-49df-8ee3-0c79a6b685da"],
+          "priority": 0
+        }
+      ],
+      "education": [],
+      "certifications": [],
+      "supporting_sections": [],
+      "demo": true,
+      "section_order": [
+        "Experience",
+        "Projects",
+        "Achievements",
+        "Education",
+        "Certifications"
+      ]
+    }
+  },
+  {
+    "id": "superseded-count",
+    "selected": {
+      "id": "superseded-count",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "400104d5-9354-4e54-8bd3-f938a2aa0863",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "superseded-count:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "value": "supervised five direct reports",
+          "availability": "SUPERSEDED",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I previously said five direct reports; correction: I supervised eight, not five.",
+              "start": 70,
+              "end": 150
+            }
+          ]
+        }
+      ]
+    },
+    "bullet": "Wrote SQL validation checks for dispatch reconciliation.",
+    "verdict": {
+      "id": "superseded-count",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["superseded-count:0"],
+          "reason": "The admitted personal action and its source span confirm this work; the unrelated superseded count does not affect it."
+        }
+      ],
+      "reason": "The full bullet is supported by the confirmed personal action."
+    },
+    "admittedIds": ["400104d5-9354-4e54-8bd3-f938a2aa0863"],
+    "compiledIds": ["400104d5-9354-4e54-8bd3-f938a2aa0863"],
+    "ir": {
+      "profile": {
+        "name": "Ada Rowan",
+        "contact": {
+          "market": "US",
+          "location": "",
+          "contact_email": "",
+          "phone": "",
+          "work_authorization": ""
+        }
+      },
+      "headline": "Operations Analyst",
+      "summary": "",
+      "skill_groups": [],
+      "experiences": [],
+      "projects": [
+        {
+          "title": "Dispatch reconciliation",
+          "context": "",
+          "organization": null,
+          "role": "Dispatch reconciliation",
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "bullets": [
+            "Wrote SQL validation checks for dispatch reconciliation."
+          ],
+          "evidence_ids": ["400104d5-9354-4e54-8bd3-f938a2aa0863"],
+          "priority": 0
+        }
+      ],
+      "education": [],
+      "certifications": [],
+      "supporting_sections": [],
+      "demo": true,
+      "section_order": [
+        "Experience",
+        "Projects",
+        "Achievements",
+        "Education",
+        "Certifications"
+      ]
+    }
+  },
+  {
+    "id": "disputed-count",
+    "selected": {
+      "id": "disputed-count",
+      "requirement": "What SQL validation work did the candidate personally perform?",
+      "record": {
+        "id": "f88d9565-534f-4120-8c9d-d60f2a18b47d",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "disputed-count:0",
+          "attribute": "action",
+          "value": "Wrote SQL validation checks for dispatch reconciliation",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I personally wrote SQL validation checks for dispatch reconciliation.",
+              "start": 0,
+              "end": 69
+            }
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "value": "trained twelve coworkers",
+          "availability": "DISPUTED",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I remember twelve coworkers, but the roster says fourteen; I cannot resolve attendance.",
+              "start": 70,
+              "end": 157
+            }
+          ]
+        }
+      ]
+    },
+    "bullet": "Wrote SQL validation checks for dispatch reconciliation.",
+    "verdict": {
+      "id": "disputed-count",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Wrote SQL validation checks for dispatch reconciliation.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["disputed-count:0"],
+          "reason": "The admitted personal action and its source span confirm this work; the unrelated disputed count does not affect it."
+        }
+      ],
+      "reason": "The full bullet is supported by the confirmed personal action."
+    },
+    "admittedIds": ["f88d9565-534f-4120-8c9d-d60f2a18b47d"],
+    "compiledIds": ["f88d9565-534f-4120-8c9d-d60f2a18b47d"],
+    "ir": {
+      "profile": {
+        "name": "Ada Rowan",
+        "contact": {
+          "market": "US",
+          "location": "",
+          "contact_email": "",
+          "phone": "",
+          "work_authorization": ""
+        }
+      },
+      "headline": "Operations Analyst",
+      "summary": "",
+      "skill_groups": [],
+      "experiences": [],
+      "projects": [
+        {
+          "title": "Dispatch reconciliation",
+          "context": "",
+          "organization": null,
+          "role": "Dispatch reconciliation",
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "bullets": [
+            "Wrote SQL validation checks for dispatch reconciliation."
+          ],
+          "evidence_ids": ["f88d9565-534f-4120-8c9d-d60f2a18b47d"],
+          "priority": 0
+        }
+      ],
+      "education": [],
+      "certifications": [],
+      "supporting_sections": [],
+      "demo": true,
+      "section_order": [
+        "Experience",
+        "Projects",
+        "Achievements",
+        "Education",
+        "Certifications"
+      ]
+    }
+  },
+  {
+    "id": "training-safe",
+    "selected": {
+      "id": "training-safe",
+      "requirement": "Training and documentation",
+      "record": {
+        "id": "3b5e88be-5f14-4825-8078-142a2fc0eb7e",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "training-safe:0",
+          "attribute": "action",
+          "value": "Trained dispatch coworkers through workshops and wrote a handbook",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I trained dispatch coworkers through workshops and wrote a handbook.",
+              "start": 0,
+              "end": 68
+            }
+          ]
+        }
+      ],
+      "constraints": []
+    },
+    "bullet": "Trained dispatch coworkers through workshops and wrote a handbook.",
+    "verdict": {
+      "id": "training-safe",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Trained dispatch coworkers through workshops ",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["training-safe:0"],
+          "reason": "The admitted personal claim says the candidate trained dispatch coworkers through workshops."
+        },
+        {
+          "text": "and wrote a handbook.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["training-safe:0"],
+          "reason": "The admitted personal claim says the candidate wrote a handbook."
+        }
+      ],
+      "reason": "Both clauses are supported by the admitted personal claim."
+    },
+    "admittedIds": ["3b5e88be-5f14-4825-8078-142a2fc0eb7e"],
+    "compiledIds": ["3b5e88be-5f14-4825-8078-142a2fc0eb7e"],
+    "ir": {
+      "profile": {
+        "name": "Ada Rowan",
+        "contact": {
+          "market": "US",
+          "location": "",
+          "contact_email": "",
+          "phone": "",
+          "work_authorization": ""
+        }
+      },
+      "headline": "Operations Analyst",
+      "summary": "",
+      "skill_groups": [],
+      "experiences": [],
+      "projects": [
+        {
+          "title": "Dispatch reconciliation",
+          "context": "",
+          "organization": null,
+          "role": "Dispatch reconciliation",
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "bullets": [
+            "Trained dispatch coworkers through workshops and wrote a handbook."
+          ],
+          "evidence_ids": ["3b5e88be-5f14-4825-8078-142a2fc0eb7e"],
+          "priority": 0
+        }
+      ],
+      "education": [],
+      "certifications": [],
+      "supporting_sections": [],
+      "demo": true,
+      "section_order": [
+        "Experience",
+        "Projects",
+        "Achievements",
+        "Education",
+        "Certifications"
+      ]
+    }
+  },
+  {
+    "id": "team-safe",
+    "selected": {
+      "id": "team-safe",
+      "requirement": "Measured team reconciliation result",
+      "record": {
+        "id": "210b4a3a-542c-4e03-86db-53c5f0ad4a29",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "team-safe:0",
+          "attribute": "metric",
+          "value": "Team reconciliation time fell from five to two hours per week over six runs; personal contribution was the checks",
+          "attribution": "TEAM",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "The team reduced weekly reconciliation time from five hours to two over six runs; my contribution was the checks.",
+              "start": 0,
+              "end": 113
+            }
+          ]
+        }
+      ],
+      "constraints": []
+    },
+    "bullet": "The team reduced weekly reconciliation time from five hours to two over six runs; contributed the checks.",
+    "verdict": {
+      "id": "team-safe",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "The team reduced weekly reconciliation time from five hours to two over six runs; ",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["team-safe:0"],
+          "reason": "The claim attributes this measured result to the team and gives the same figures and number of runs."
+        },
+        {
+          "text": "contributed the checks.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["team-safe:0"],
+          "reason": "The claim identifies checks as the candidate’s personal contribution."
+        }
+      ],
+      "reason": "The team result is attributed to the team, and the checks are correctly described as the candidate’s contribution."
+    },
+    "admittedIds": ["210b4a3a-542c-4e03-86db-53c5f0ad4a29"],
+    "compiledIds": ["210b4a3a-542c-4e03-86db-53c5f0ad4a29"],
+    "ir": {
+      "profile": {
+        "name": "Ada Rowan",
+        "contact": {
+          "market": "US",
+          "location": "",
+          "contact_email": "",
+          "phone": "",
+          "work_authorization": ""
+        }
+      },
+      "headline": "Operations Analyst",
+      "summary": "",
+      "skill_groups": [],
+      "experiences": [],
+      "projects": [
+        {
+          "title": "Dispatch reconciliation",
+          "context": "",
+          "organization": null,
+          "role": "Dispatch reconciliation",
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "bullets": [
+            "The team reduced weekly reconciliation time from five hours to two over six runs; contributed the checks."
+          ],
+          "evidence_ids": ["210b4a3a-542c-4e03-86db-53c5f0ad4a29"],
+          "priority": 0
+        }
+      ],
+      "education": [],
+      "certifications": [],
+      "supporting_sections": [],
+      "demo": true,
+      "section_order": [
+        "Experience",
+        "Projects",
+        "Achievements",
+        "Education",
+        "Certifications"
+      ]
+    }
+  },
+  {
+    "id": "exposure-safe",
+    "selected": {
+      "id": "exposure-safe",
+      "requirement": "Limited Docker exposure only",
+      "record": {
+        "id": "8dcfc024-33a1-4547-86ac-7dd3b920e731",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "exposure-safe:0",
+          "attribute": "depth",
+          "value": "Completed one Docker exercise only",
+          "attribution": "EXPOSURE",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I completed one Docker exercise; no production use is claimed.",
+              "start": 0,
+              "end": 62
+            }
+          ]
+        }
+      ],
+      "constraints": []
+    },
+    "bullet": "Completed one Docker exercise; no production use is claimed.",
+    "verdict": {
+      "id": "exposure-safe",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Completed one Docker exercise; ",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["exposure-safe:0"],
+          "reason": "The admitted exposure claim confirms completion of one Docker exercise."
+        },
+        {
+          "text": "no production use is claimed.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["exposure-safe:0"],
+          "reason": "The evidence explicitly says no production use is claimed."
+        }
+      ],
+      "reason": "The bullet accurately limits the Docker experience to one exercise and makes no production-use claim."
+    },
+    "admittedIds": ["8dcfc024-33a1-4547-86ac-7dd3b920e731"],
+    "compiledIds": ["8dcfc024-33a1-4547-86ac-7dd3b920e731"],
+    "ir": {
+      "profile": {
+        "name": "Ada Rowan",
+        "contact": {
+          "market": "US",
+          "location": "",
+          "contact_email": "",
+          "phone": "",
+          "work_authorization": ""
+        }
+      },
+      "headline": "Operations Analyst",
+      "summary": "",
+      "skill_groups": [],
+      "experiences": [],
+      "projects": [
+        {
+          "title": "Dispatch reconciliation",
+          "context": "",
+          "organization": null,
+          "role": "Dispatch reconciliation",
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "bullets": [
+            "Completed one Docker exercise; no production use is claimed."
+          ],
+          "evidence_ids": ["8dcfc024-33a1-4547-86ac-7dd3b920e731"],
+          "priority": 0
+        }
+      ],
+      "education": [],
+      "certifications": [],
+      "supporting_sections": [],
+      "demo": true,
+      "section_order": [
+        "Experience",
+        "Projects",
+        "Achievements",
+        "Education",
+        "Certifications"
+      ]
+    }
+  },
+  {
+    "id": "reports-corrected",
+    "selected": {
+      "id": "reports-corrected",
+      "requirement": "Supervision of eight direct reports",
+      "record": {
+        "id": "d2fe24f4-0b0d-4c36-84e3-c60ff2728d0d",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "reports-corrected:0",
+          "attribute": "scope",
+          "value": "Supervised eight direct reports",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "I supervised eight direct reports, not five.",
+              "start": 0,
+              "end": 44
+            }
+          ]
+        }
+      ],
+      "constraints": []
+    },
+    "bullet": "Supervised eight direct reports, not five.",
+    "verdict": {
+      "id": "reports-corrected",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Supervised eight direct reports, ",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["reports-corrected:0"],
+          "reason": "The admitted personal claim confirms supervision of eight direct reports."
+        },
+        {
+          "text": "not five.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["reports-corrected:0"],
+          "reason": "The evidence explicitly contrasts eight direct reports with five."
+        }
+      ],
+      "reason": "Both the count and the correction are supported by the admitted personal claim."
+    },
+    "admittedIds": ["d2fe24f4-0b0d-4c36-84e3-c60ff2728d0d"],
+    "compiledIds": ["d2fe24f4-0b0d-4c36-84e3-c60ff2728d0d"],
+    "ir": {
+      "profile": {
+        "name": "Ada Rowan",
+        "contact": {
+          "market": "US",
+          "location": "",
+          "contact_email": "",
+          "phone": "",
+          "work_authorization": ""
+        }
+      },
+      "headline": "Operations Analyst",
+      "summary": "",
+      "skill_groups": [],
+      "experiences": [],
+      "projects": [
+        {
+          "title": "Dispatch reconciliation",
+          "context": "",
+          "organization": null,
+          "role": "Dispatch reconciliation",
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "bullets": ["Supervised eight direct reports, not five."],
+          "evidence_ids": ["d2fe24f4-0b0d-4c36-84e3-c60ff2728d0d"],
+          "priority": 0
+        }
+      ],
+      "education": [],
+      "certifications": [],
+      "supporting_sections": [],
+      "demo": true,
+      "section_order": [
+        "Experience",
+        "Projects",
+        "Achievements",
+        "Education",
+        "Certifications"
+      ]
+    }
+  },
+  {
+    "id": "historical-warning",
+    "selected": {
+      "id": "historical-warning",
+      "requirement": "What SQL checks did the candidate personally write?",
+      "record": {
+        "id": "3605c4df-355a-41aa-8663-dbb483672a83",
+        "kind": "project",
+        "title": "Dispatch reconciliation",
+        "organization": null
+      },
+      "claims": [
+        {
+          "ref": "historical-warning:3",
+          "attribute": "action",
+          "value": "Wrote the Python parser and SQL checks",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I wrote the Python parser and SQL checks myself.",
+              "start": 316,
+              "end": 364
+            }
+          ],
+          "availability": "CONFIRMED"
+        }
+      ],
+      "constraints": [
+        {
+          "value": "Delivery speed was not measured",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "Delivery speed was not measured.",
+              "start": 3472,
+              "end": 3504
+            }
+          ]
+        },
+        {
+          "value": "Machine-learning classifier was not involved in the rules",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "There was no machine-learning classifier involved in these rules.",
+              "start": 2784,
+              "end": 2849
+            }
+          ]
+        },
+        {
+          "value": "Did not own the warehouse staffing budget",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+              "start": 3030,
+              "end": 3113
+            }
+          ]
+        },
+        {
+          "value": "Did not own procurement",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+              "start": 3030,
+              "end": 3113
+            }
+          ]
+        },
+        {
+          "value": "Did not own the scheduling system",
+          "availability": "CONFIRMED",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+              "start": 3030,
+              "end": 3113
+            }
+          ]
+        }
+      ]
+    },
+    "bullet": "Wrote the Python parser and SQL checks myself.",
+    "verdict": {
+      "id": "historical-warning",
+      "verdict": "PASS",
+      "assertions": [
+        {
+          "text": "Wrote the Python parser ",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["historical-warning:3"],
+          "reason": "The admitted personal claim says the candidate wrote the Python parser."
+        },
+        {
+          "text": "and SQL checks myself.",
+          "verdict": "SUPPORTED",
+          "claimRefs": ["historical-warning:3"],
+          "reason": "The admitted personal claim says the candidate wrote the SQL checks themself."
+        }
+      ],
+      "reason": "The admitted personal claim supports both writing actions and the personal attribution."
+    },
+    "admittedIds": ["3605c4df-355a-41aa-8663-dbb483672a83"],
+    "compiledIds": ["3605c4df-355a-41aa-8663-dbb483672a83"],
+    "ir": {
+      "profile": {
+        "name": "Ada Rowan",
+        "contact": {
+          "market": "US",
+          "location": "",
+          "contact_email": "",
+          "phone": "",
+          "work_authorization": ""
+        }
+      },
+      "headline": "Operations Analyst",
+      "summary": "",
+      "skill_groups": [],
+      "experiences": [],
+      "projects": [
+        {
+          "title": "Dispatch reconciliation",
+          "context": "",
+          "organization": null,
+          "role": "Dispatch reconciliation",
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "bullets": ["Wrote the Python parser and SQL checks myself."],
+          "evidence_ids": ["3605c4df-355a-41aa-8663-dbb483672a83"],
+          "priority": 0
+        }
+      ],
+      "education": [],
+      "certifications": [],
+      "supporting_sections": [],
+      "demo": true,
+      "section_order": [
+        "Experience",
+        "Projects",
+        "Achievements",
+        "Education",
+        "Certifications"
+      ]
+    }
+  }
+]

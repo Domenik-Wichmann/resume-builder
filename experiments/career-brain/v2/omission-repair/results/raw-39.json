@@ -1,0 +1,12 @@
+{
+  "label": "representation:bounded-actor-factual-equivalence",
+  "result": {
+    "decisions": [
+      {
+        "key": "achievement:reconciliation-time-reduction-aaf329a9ed",
+        "verdict": "EQUIVALENT",
+        "reason": "The material facts are unchanged. The new denial that delivery speed was not measured is already entailed by the earlier scoped correction that the six-run measurement covered reconciliation time, not delivery time; the metric, team attribution, personal contribution, and other corrections also match."
+      }
+    ]
+  }
+}

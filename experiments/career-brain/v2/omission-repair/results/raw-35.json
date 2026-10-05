@@ -1,0 +1,32 @@
+{
+  "label": "sequence:bounded-actor-factual-equivalence",
+  "result": {
+    "decisions": [
+      {
+        "key": "project:dispatch-loom-e00a8b6fe1",
+        "verdict": "ENRICHMENT",
+        "reason": "Adds supported context about what the tool reconciled, how its names referred to the same project, and how the parser, checks, Git, and PostgreSQL fit together; prior facts remain represented."
+      },
+      {
+        "key": "achievement:reconciliation-time-reduction-aaf329a9ed",
+        "verdict": "EQUIVALENT",
+        "reason": "The 3 hours saved per week is the arithmetic difference between 5 and 2 hours. The metric, team attribution, personal contribution, and measurement scope are unchanged."
+      },
+      {
+        "key": "skill:python-1678f77f15",
+        "verdict": "EQUIVALENT",
+        "reason": "The added parser action is already entailed by the prior source quote that Ada wrote the Python parser and SQL checks herself."
+      },
+      {
+        "key": "skill:sql-a03e9bccab",
+        "verdict": "ENRICHMENT",
+        "reason": "Adds supported facts that SQL was used extensively and was used in the separate Roster Note checklist; existing SQL facts remain."
+      },
+      {
+        "key": "education:bsc-in-information-systems-ab520a51dc",
+        "verdict": "EQUIVALENT",
+        "reason": "The degree, institution, and dates are unchanged; the added wording and subtitle restate the same credential."
+      }
+    ]
+  }
+}

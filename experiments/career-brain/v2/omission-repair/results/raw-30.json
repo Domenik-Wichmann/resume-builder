@@ -1,0 +1,19 @@
+{
+  "label": "sequence:cross-record-factual-conflicts",
+  "result": {
+    "conflicts": [
+      {
+        "key": "dispatch-coworker-training-count",
+        "reason": "The source gives conflicting training counts: 12 coworkers, then says a later attendance sheet records 14 and that the discrepancy cannot be resolved.",
+        "refs": [
+          "experience:operations-analyst-dd5de8b403:2",
+          "achievement:dispatch-coworker-training-184996f0f6:0"
+        ],
+        "quotes": [
+          "I remember 12 coworkers at the workshops, but a later attendance sheet says 14; I cannot resolve this."
+        ],
+        "safeClaims": []
+      }
+    ]
+  }
+}

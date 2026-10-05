@@ -1,0 +1,67 @@
+{
+  "label": "repeat:entailment-audit:openai/gpt-6-luna-pro:chunk-0",
+  "result": {
+    "decisions": [
+      {
+        "index": 0,
+        "verdict": "SUPPORTED",
+        "reason": "The name and professional summary are stated in the source; the listed negative claims also accurately reflect the explicit denials."
+      },
+      {
+        "index": 1,
+        "verdict": "SUPPORTED",
+        "reason": "The role, employer, dates, personal project work, coworker training, and handbook are directly supported."
+      },
+      {
+        "index": 2,
+        "verdict": "UNCERTAIN",
+        "reason": "The project details and responsibilities are supported, but the source does not unambiguously establish that the tool was not also sold to external customers; it asks to distinguish operational use from a product sold externally."
+      },
+      {
+        "index": 3,
+        "verdict": "SUPPORTED",
+        "reason": "The corrected six-run reconciliation metric, team attribution, personal contribution, coworkers’ changed habits, and exclusion of delivery speed are supported."
+      },
+      {
+        "index": 4,
+        "verdict": "SUPPORTED",
+        "reason": "The source supports training 12 coworkers in two workshops, writing the handbook, and not supplying exact workshop dates."
+      },
+      {
+        "index": 5,
+        "verdict": "SUPPORTED",
+        "reason": "The source identifies Python as a tool used to build Dispatch Loom and write its parser; the Data tools category is explicitly stated."
+      },
+      {
+        "index": 6,
+        "verdict": "SUPPORTED",
+        "reason": "The source identifies SQL as a tool used to build Dispatch Loom and write its checks; the Data tools category is explicitly stated."
+      },
+      {
+        "index": 7,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly says PostgreSQL was used for the production database and places it in the Data tools category."
+      },
+      {
+        "index": 8,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly says Git was used for version control and places it in the Collaboration category."
+      },
+      {
+        "index": 9,
+        "verdict": "SUPPORTED",
+        "reason": "The source supports personally training dispatch coworkers and places coworker training in the Collaboration category."
+      },
+      {
+        "index": 10,
+        "verdict": "SUPPORTED",
+        "reason": "The degree, institution, and attendance dates are directly stated."
+      },
+      {
+        "index": 11,
+        "verdict": "SUPPORTED",
+        "reason": "The source identifies the certificate as fictional, gives its date, and clarifies it was course completion rather than a professional license."
+      }
+    ]
+  }
+}

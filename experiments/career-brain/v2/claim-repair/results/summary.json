@@ -1,0 +1,739 @@
+{
+  "admission": {
+    "expectedSupportedClaims": 18,
+    "supportedAdmitted": 17,
+    "falseOmissionRefs": ["historical-warning:2"],
+    "unsupportedSiblingClaims": 12,
+    "unsupportedAdmitted": 0,
+    "unavailableCanaryClaims": 2,
+    "unavailableCanaryAdmitted": 0
+  },
+  "bullets": {
+    "generated": 17,
+    "compiled": 17,
+    "generatedWithheld": [],
+    "pro": {
+      "total": 30,
+      "correct": 30,
+      "unsupportedPasses": 0,
+      "safeWithheld": []
+    },
+    "historicalContext": {
+      "total": 3,
+      "correct": 2,
+      "unsupportedPasses": 0,
+      "safeWithheld": ["historical-full-context-safe"]
+    },
+    "sol": {
+      "escalated": 13,
+      "passed": 0,
+      "agreementWithPro": 13
+    },
+    "fallback": {
+      "tested": 12,
+      "passed": 12
+    }
+  },
+  "conflict": {
+    "persistedUnavailableQuantityClaims": 2,
+    "admittedUnavailableRefs": [],
+    "quantityFreeCompiled": 2,
+    "generated": [
+      {
+        "id": "conflict-resume-56224002-9a4e-4193-ae81-d156ba3e26af",
+        "bullet": "Personally trained dispatch coworkers in two workshops and wrote a plain-language handbook with five worked examples."
+      },
+      {
+        "id": "conflict-resume-4f36d132-8224-4633-989e-695ad08f907b",
+        "bullet": "Personally trained dispatch coworkers in two workshops and wrote a plain-language handbook with five worked examples."
+      }
+    ],
+    "staleWholeBullets": {
+      "total": 2,
+      "correct": 2,
+      "unsupportedPasses": 0,
+      "safeWithheld": []
+    }
+  },
+  "repeated": {
+    "baselineRecords": 15,
+    "existingMatches": 75,
+    "existingOpportunities": 75,
+    "counts": [
+      {
+        "UNCHANGED": 11,
+        "UPDATED": 3,
+        "REVIEW": 1
+      },
+      {
+        "UNCHANGED": 8,
+        "REVIEW": 1,
+        "UPDATED": 6
+      },
+      {
+        "UNCHANGED": 11,
+        "UPDATED": 4
+      },
+      {
+        "UNCHANGED": 12,
+        "UPDATED": 2,
+        "REVIEW": 1
+      },
+      {
+        "UNCHANGED": 11,
+        "UPDATED": 3,
+        "REVIEW": 1
+      }
+    ],
+    "totalUnchanged": 53,
+    "representationComparisonsResolved": 20,
+    "medianLatencyMs": 125320,
+    "allNonUnchanged": [
+      {
+        "repeat": 1,
+        "identity": "experience:operations-analyst-dd5de8b403",
+        "status": "UPDATED",
+        "reason": "",
+        "equivalence": {
+          "key": "experience:operations-analyst-dd5de8b403",
+          "verdict": "ENRICHMENT",
+          "reason": "Adds the confirmed team reconciliation-time result, including the 5-to-2-hours-per-week measurement over six runs; the prior experience claims did not state that metric."
+        }
+      },
+      {
+        "repeat": 1,
+        "identity": "project:dispatch-loom-e00a8b6fe1",
+        "status": "REVIEW",
+        "reason": "Grounding UNSUPPORTED: The summary says operators used visible warnings, but the source only says they preferred a visible warning when the source file arrived late. That turns a stated preference into an assertion of use."
+      },
+      {
+        "repeat": 1,
+        "identity": "skill:postgresql-4b6475d427",
+        "status": "UPDATED",
+        "reason": "",
+        "equivalence": {
+          "key": "skill:postgresql-4b6475d427",
+          "verdict": "ENRICHMENT",
+          "reason": "Adds the supported detail that PostgreSQL was used for the production database; the prior claim only named PostgreSQL."
+        }
+      },
+      {
+        "repeat": 1,
+        "identity": "skill:git-820dc39c23",
+        "status": "UPDATED",
+        "reason": "",
+        "equivalence": {
+          "key": "skill:git-820dc39c23",
+          "verdict": "ENRICHMENT",
+          "reason": "Adds the supported detail that Git was used for version control; the prior claim only named Git."
+        }
+      },
+      {
+        "repeat": 2,
+        "identity": "project:dispatch-loom-e00a8b6fe1",
+        "status": "REVIEW",
+        "reason": "Grounding UNSUPPORTED: The summary says operators used visible warnings and understandable exceptions, but the source says operators preferred a warning and supervisors wanted understandable exceptions. It turns preferences into implemented use and misattributes whose preference it was."
+      },
+      {
+        "repeat": 2,
+        "identity": "achievement:dispatch-coworker-training-184996f0f6",
+        "status": "UPDATED",
+        "reason": "",
+        "equivalence": {
+          "key": "achievement:dispatch-coworker-training-184996f0f6",
+          "verdict": "ENRICHMENT",
+          "reason": "Adds the source-supported context that the workshops happened after coworkers could use the tool."
+        }
+      },
+      {
+        "repeat": 2,
+        "identity": "achievement:reconciliation-time-reduction-aaf329a9ed",
+        "status": "UPDATED",
+        "reason": "",
+        "equivalence": {
+          "key": "achievement:reconciliation-time-reduction-aaf329a9ed",
+          "verdict": "ENRICHMENT",
+          "reason": "Adds the explicit fact that delivery speed was not measured; the prior claims distinguish reconciliation time from delivery time but do not state this as directly."
+        }
+      },
+      {
+        "repeat": 2,
+        "identity": "skill:python-1678f77f15",
+        "status": "UPDATED",
+        "reason": "",
+        "equivalence": {
+          "key": "skill:python-1678f77f15",
+          "verdict": "ENRICHMENT",
+          "reason": "Adds the personal action of writing the Python parser, beyond the previously represented Python skill."
+        }
+      },
+      {
+        "repeat": 2,
+        "identity": "skill:sql-a03e9bccab",
+        "status": "UPDATED",
+        "reason": "",
+        "equivalence": {
+          "key": "skill:sql-a03e9bccab",
+          "verdict": "ENRICHMENT",
+          "reason": "Adds the personal action of writing SQL checks, beyond the previously represented SQL skill."
+        }
+      },
+      {
+        "repeat": 2,
+        "identity": "skill:postgresql-4b6475d427",
+        "status": "UPDATED",
+        "reason": "",
+        "equivalence": {
+          "key": "skill:postgresql-4b6475d427",
+          "verdict": "ENRICHMENT",
+          "reason": "Adds the specific use of PostgreSQL for the production database."
+        }
+      },
+      {
+        "repeat": 2,
+        "identity": "skill:git-820dc39c23",
+        "status": "UPDATED",
+        "reason": "",
+        "equivalence": {
+          "key": "skill:git-820dc39c23",
+          "verdict": "ENRICHMENT",
+          "reason": "Adds the specific use of Git for version control."
+        }
+      },
+      {
+        "repeat": 3,
+        "identity": "experience:operations-analyst-dd5de8b403",
+        "status": "UPDATED",
+        "reason": "",
+        "equivalence": {
+          "key": "experience:operations-analyst-dd5de8b403",
+          "verdict": "ENRICHMENT",
+          "reason": "Adds source-supported facts about the reconciliation result, Ada’s parser-and-checks contribution, and corrections not already represented in the prior experience claims."
+        }
+      },
+      {
+        "repeat": 3,
+        "identity": "project:dispatch-loom-e00a8b6fe1",
+        "status": "UPDATED",
+        "reason": ""
+      },
+      {
+        "repeat": 3,
+        "identity": "skill:postgresql-4b6475d427",
+        "status": "UPDATED",
+        "reason": "",
+        "equivalence": {
+          "key": "skill:postgresql-4b6475d427",
+          "verdict": "ENRICHMENT",
+          "reason": "Adds the source-supported fact that PostgreSQL was used for the production database."
+        }
+      },
+      {
+        "repeat": 3,
+        "identity": "skill:git-820dc39c23",
+        "status": "UPDATED",
+        "reason": "",
+        "equivalence": {
+          "key": "skill:git-820dc39c23",
+          "verdict": "ENRICHMENT",
+          "reason": "Adds the source-supported fact that Git was used for version control."
+        }
+      },
+      {
+        "repeat": 4,
+        "identity": "experience:operations-analyst-dd5de8b403",
+        "status": "UPDATED",
+        "reason": ""
+      },
+      {
+        "repeat": 4,
+        "identity": "project:dispatch-loom-e00a8b6fe1",
+        "status": "REVIEW",
+        "reason": "Grounding UNSUPPORTED: The source says operators preferred a visible warning when the source file arrived late; it does not establish that the tool itself warned them. The project summary asserts that behavior as completed functionality."
+      },
+      {
+        "repeat": 4,
+        "identity": "achievement:reconciliation-time-reduction-aaf329a9ed",
+        "status": "UPDATED",
+        "reason": "",
+        "equivalence": {
+          "key": "achievement:reconciliation-time-reduction-aaf329a9ed",
+          "verdict": "ENRICHMENT",
+          "reason": "The after state explicitly represents that delivery speed was not measured. The prior correction identifies the measured work as reconciliation rather than delivery, but does not establish this broader denial."
+        }
+      },
+      {
+        "repeat": 5,
+        "identity": "experience:operations-analyst-dd5de8b403",
+        "status": "UPDATED",
+        "reason": "",
+        "equivalence": {
+          "key": "experience:operations-analyst-dd5de8b403",
+          "verdict": "CHANGED",
+          "reason": "The new claims add requirements gathering and explaining validation failures, but omit the previously represented facts about training 12 coworkers in two workshops and writing a handbook."
+        }
+      },
+      {
+        "repeat": 5,
+        "identity": "project:dispatch-loom-e00a8b6fe1",
+        "status": "REVIEW",
+        "reason": "Grounding UNSUPPORTED: The summary says the tool provided understandable exceptions and a visible warning, but the source only reports that supervisors wanted understandable exceptions and operators preferred a warning. Those preferences do not establish that these features were implemented."
+      },
+      {
+        "repeat": 5,
+        "identity": "skill:postgresql-4b6475d427",
+        "status": "UPDATED",
+        "reason": "",
+        "equivalence": {
+          "key": "skill:postgresql-4b6475d427",
+          "verdict": "ENRICHMENT",
+          "reason": "The new claim adds the source-supported detail that PostgreSQL was used for the production database."
+        }
+      },
+      {
+        "repeat": 5,
+        "identity": "skill:git-820dc39c23",
+        "status": "UPDATED",
+        "reason": "",
+        "equivalence": {
+          "key": "skill:git-820dc39c23",
+          "verdict": "ENRICHMENT",
+          "reason": "The new claim adds the source-supported detail that Git was used for version control."
+        }
+      }
+    ]
+  },
+  "sequence": {
+    "native": [
+      {
+        "revision": "V2",
+        "latencyMs": 161373,
+        "changes": [
+          {
+            "identity": "profile:profile",
+            "status": "UNCHANGED",
+            "reason": ""
+          },
+          {
+            "identity": "experience:operations-analyst-dd5de8b403",
+            "status": "UPDATED",
+            "reason": ""
+          },
+          {
+            "identity": "project:dispatch-loom-e00a8b6fe1",
+            "status": "REVIEW",
+            "reason": "Grounding UNSUPPORTED: The source says operators preferred a visible warning, but does not establish that Dispatch Loom implemented late-file warnings. It also asks to distinguish operational use from an externally sold product without explicitly stating that the tool was not sold externally; the summary and denial claim,"
+          },
+          {
+            "identity": "project:roster-note-1b510e9f1f",
+            "status": "ADDED",
+            "reason": ""
+          },
+          {
+            "identity": "achievement:reconciliation-time-reduction-aaf329a9ed",
+            "status": "UNCHANGED",
+            "reason": ""
+          },
+          {
+            "identity": "achievement:dispatch-coworker-training-184996f0f6",
+            "status": "UPDATED",
+            "reason": ""
+          },
+          {
+            "identity": "skill:python-1678f77f15",
+            "status": "UNCHANGED",
+            "reason": ""
+          },
+          {
+            "identity": "skill:sql-a03e9bccab",
+            "status": "UNCHANGED",
+            "reason": ""
+          },
+          {
+            "identity": "skill:postgresql-4b6475d427",
+            "status": "UNCHANGED",
+            "reason": ""
+          },
+          {
+            "identity": "skill:git-820dc39c23",
+            "status": "UNCHANGED",
+            "reason": ""
+          },
+          {
+            "identity": "skill:coworker-training-888713667e",
+            "status": "UNCHANGED",
+            "reason": ""
+          },
+          {
+            "identity": "education:bsc-in-information-systems-ab520a51dc",
+            "status": "UNCHANGED",
+            "reason": ""
+          },
+          {
+            "identity": "certification:course-completion-certificate-3c05e7374c",
+            "status": "ADDED",
+            "reason": ""
+          },
+          {
+            "identity": "language:english-3e0cd54cbb",
+            "status": "UNCHANGED",
+            "reason": ""
+          },
+          {
+            "identity": "category:data-tools-28c5fe8f0e",
+            "status": "UNCHANGED",
+            "reason": ""
+          },
+          {
+            "identity": "category:collaboration-91578d1f92",
+            "status": "UNCHANGED",
+            "reason": ""
+          },
+          {
+            "identity": "certification:cedar-sql-foundations-ed912d30a4",
+            "status": "REVIEW",
+            "reason": "Omitted existing entity needs review: The source mentions a certificate but does not identify it as Cedar SQL Foundations or support its date. The reference is too ambiguous to confirm that this is the same credential or conclude the entity is absent."
+          }
+        ]
+      },
+      {
+        "revision": "V3",
+        "latencyMs": 193624,
+        "changes": [
+          {
+            "identity": "profile:profile",
+            "status": "UNCHANGED",
+            "reason": ""
+          },
+          {
+            "identity": "experience:operations-analyst-dd5de8b403",
+            "status": "UNCHANGED",
+            "reason": ""
+          },
+          {
+            "identity": "project:dispatch-loom-e00a8b6fe1",
+            "status": "UPDATED",
+            "reason": ""
+          },
+          {
+            "identity": "project:roster-note",
+            "status": "UPDATED",
+            "reason": ""
+          },
+          {
+            "identity": "achievement:reconciliation-time-reduction-aaf329a9ed",
+            "status": "UNCHANGED",
+            "reason": ""
+          },
+          {
+            "identity": "achievement:dispatch-coworker-training-184996f0f6",
+            "status": "REVIEW",
+            "reason": "Workshop attendance count is unresolved: Ada remembers 12 coworkers, while a later attendance sheet says 14. Unresolved claim or correction requires review. Grounding UNCERTAIN: The record accurately reports that the source gives conflicting attendance counts—12 in the initial account and 14 on a later sheet—and says the discrepancy cannot be resolved."
+          },
+          {
+            "identity": "achievement:roster-note-night-shift-handover-documentation-42641d1560",
+            "status": "REVIEW",
+            "reason": "Grounding UNSUPPORTED: The documentation claim is supported, but the SQL skill link is not established for the documentation work itself; the source identifies Roster Note as a SQL checklist but does not say SQL was used to document its handover."
+          },
+          {
+            "identity": "skill:python-1678f77f15",
+            "status": "UNCHANGED",
+            "reason": ""
+          },
+          {
+            "identity": "skill:sql-a03e9bccab",
+            "status": "UPDATED",
+            "reason": ""
+          },
+          {
+            "identity": "skill:postgresql-4b6475d427",
+            "status": "UNCHANGED",
+            "reason": ""
+          },
+          {
+            "identity": "skill:git-820dc39c23",
+            "status": "UNCHANGED",
+            "reason": ""
+          },
+          {
+            "identity": "skill:coworker-training-888713667e",
+            "status": "REVIEW",
+            "reason": "Workshop attendance count is unresolved: 12 remembered; later attendance sheet says 14. Unresolved claim or correction requires review. Grounding UNCERTAIN: The record accurately preserves the conflicting workshop attendance counts of 12 and 14 and the source's statement that the discrepancy cannot be resolved."
+          },
+          {
+            "identity": "skill:docker-8ce2b643fd",
+            "status": "ADDED",
+            "reason": ""
+          },
+          {
+            "identity": "education:bsc-in-information-systems-ab520a51dc",
+            "status": "UNCHANGED",
+            "reason": ""
+          },
+          {
+            "identity": "certification:cedar-sql-foundations-ed912d30a4",
+            "status": "UNCHANGED",
+            "reason": ""
+          },
+          {
+            "identity": "language:english-3e0cd54cbb",
+            "status": "UNCHANGED",
+            "reason": ""
+          },
+          {
+            "identity": "category:data-tools-28c5fe8f0e",
+            "status": "UNCHANGED",
+            "reason": ""
+          },
+          {
+            "identity": "category:collaboration-91578d1f92",
+            "status": "UNCHANGED",
+            "reason": ""
+          }
+        ]
+      }
+    ],
+    "reviewed": [
+      {
+        "revision": "V1",
+        "before": 0,
+        "after": 15,
+        "preserved": 0,
+        "metadataOnly": [],
+        "provenance": {
+          "total": 48,
+          "valid": 48,
+          "primaryTotal": 15,
+          "primaryValid": 15
+        }
+      },
+      {
+        "revision": "V2",
+        "before": 15,
+        "after": 16,
+        "preserved": 15,
+        "metadataOnly": ["certification:cedar-sql-foundations-ed912d30a4"],
+        "provenance": {
+          "total": 50,
+          "valid": 50,
+          "primaryTotal": 16,
+          "primaryValid": 16
+        }
+      },
+      {
+        "revision": "V3",
+        "before": 16,
+        "after": 17,
+        "preserved": 16,
+        "metadataOnly": [],
+        "provenance": {
+          "total": 55,
+          "valid": 55,
+          "primaryTotal": 17,
+          "primaryValid": 17
+        }
+      }
+    ]
+  },
+  "provenance": {
+    "repeats": [
+      {
+        "total": 58,
+        "valid": 58
+      },
+      {
+        "total": 58,
+        "valid": 58
+      },
+      {
+        "total": 61,
+        "valid": 61
+      },
+      {
+        "total": 60,
+        "valid": 60
+      },
+      {
+        "total": 56,
+        "valid": 56
+      }
+    ],
+    "nativeSequence": [
+      {
+        "total": 60,
+        "valid": 60
+      },
+      {
+        "total": 67,
+        "valid": 67
+      }
+    ],
+    "reviewed": [
+      {
+        "total": 48,
+        "valid": 48,
+        "primaryTotal": 15,
+        "primaryValid": 15
+      },
+      {
+        "total": 50,
+        "valid": 50,
+        "primaryTotal": 16,
+        "primaryValid": 16
+      },
+      {
+        "total": 55,
+        "valid": 55,
+        "primaryTotal": 17,
+        "primaryValid": 17
+      }
+    ]
+  },
+  "qa": {
+    "total": 4,
+    "staleAffirmations": 0,
+    "unsupportedAnswers": 0,
+    "falseAbstentions": 0,
+    "faithfulCitations": 4,
+    "originalAudienceAssumptions": 1,
+    "targetedAudienceRepair": {
+      "staleAffirmation": false,
+      "unsupportedAssertions": [],
+      "requesterAsCandidate": false,
+      "falseAbstention": false,
+      "faithfulCitations": true,
+      "reason": "The answer correctly says the exact count is unresolved because the records conflict (12 versus 14), and offers only confirmed, count-free training and handbook claims. The evidence IDs support those statements."
+    }
+  },
+  "costs": {
+    "budget": {
+      "maxUsd": 5,
+      "inferenceCalls": 70,
+      "noAutomaticRetries": true
+    },
+    "attempts": 55,
+    "knownUsd": 0.206403,
+    "unknownUsage": 0,
+    "accountedUsage": 55,
+    "reservedUsd": 4.970000000000004,
+    "byModel": {
+      "openai/gpt-6-luna-pro": {
+        "calls": 46,
+        "costUsd": 0.175142,
+        "input": 871501,
+        "output": 215177
+      },
+      "openai/gpt-6-luna": {
+        "calls": 7,
+        "costUsd": 0.002025,
+        "input": 9780,
+        "output": 1629
+      },
+      "openai/gpt-6-sol": {
+        "calls": 2,
+        "costUsd": 0.029236,
+        "input": 3125,
+        "output": 2187
+      }
+    },
+    "historicalKnownUsd": 0.948904,
+    "cumulativeKnownUsd": 1.155307,
+    "historicalUnknownAttempts": 17
+  },
+  "stages": {
+    "resume": {
+      "outcome": "SUCCESS"
+    },
+    "repeat": {
+      "outcome": "SUCCESS"
+    },
+    "sequence": {
+      "outcome": "FAILED",
+      "error": "Invalid conflict adjudication; withhold affected state for review"
+    },
+    "sequence-repair-1": {
+      "outcome": "SUCCESS"
+    },
+    "historical-compact": {
+      "outcome": "SUCCESS"
+    },
+    "persistence-repair": {
+      "outcome": "SUCCESS"
+    },
+    "qa": {
+      "outcome": "SUCCESS"
+    },
+    "fallback-canaries": {
+      "outcome": "SUCCESS"
+    },
+    "qa-audience-repair": {
+      "outcome": "SUCCESS"
+    }
+  },
+  "cleanup": [
+    {
+      "stage": "resume",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "repeat",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "sequence",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "sequence-repair-1",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "historical-compact",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "persistence-repair",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "qa",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "fallback-canaries",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "qa-audience-repair",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    }
+  ],
+  "scope": "Machine calculations only. Final source-based human assessment separately classifies enrichments, representation-only updates, semantic disagreements, and the promotion gate; no historic labels or provider outputs changed."
+}

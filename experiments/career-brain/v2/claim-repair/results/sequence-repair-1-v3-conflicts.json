@@ -1,0 +1,17 @@
+{
+  "conflicts": [
+    {
+      "key": "Dispatch Loom workshop attendee count",
+      "reason": "The source gives 12 coworkers, then says a later attendance sheet lists 14 and explicitly says the discrepancy cannot be resolved. The count is unresolved; the underlying training action is not disputed.",
+      "refs": [
+        "experience:operations-analyst-dd5de8b403:2",
+        "achievement:dispatch-coworker-training-184996f0f6:0"
+      ],
+      "quotes": [
+        "I remember 12 coworkers at the workshops",
+        "a later attendance sheet says 14; I cannot resolve this."
+      ],
+      "safeClaims": []
+    }
+  ]
+}

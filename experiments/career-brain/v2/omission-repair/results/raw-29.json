@@ -1,0 +1,52 @@
+{
+  "label": "sequence:bounded-actor-factual-equivalence",
+  "result": {
+    "decisions": [
+      {
+        "key": "achievement:dispatch-coworker-training-184996f0f6",
+        "verdict": "ENRICHMENT",
+        "reason": "Adds the source-supported fact that the handbook included five worked examples."
+      },
+      {
+        "key": "achievement:reconciliation-time-reduction-aaf329a9ed",
+        "verdict": "EQUIVALENT",
+        "reason": "The three-hours-saved figure is the arithmetic difference between five and two hours; the repeated correction restates the same measurement scope and exclusion."
+      },
+      {
+        "key": "skill:python-1678f77f15",
+        "verdict": "EQUIVALENT",
+        "reason": "The Python tool and parser facts are already represented; the changed source wording adds no distinct skill fact."
+      },
+      {
+        "key": "skill:sql-a03e9bccab",
+        "verdict": "ENRICHMENT",
+        "reason": "Adds the distinct, source-supported fact that SQL was used for the separate Roster Note checklist."
+      },
+      {
+        "key": "skill:postgresql-4b6475d427",
+        "verdict": "EQUIVALENT",
+        "reason": "Production-database use is already stated in the prior source evidence; the claim wording is more specific but adds no fact."
+      },
+      {
+        "key": "skill:git-820dc39c23",
+        "verdict": "EQUIVALENT",
+        "reason": "Version-control use is already stated in the prior source evidence; the claim wording is more specific but adds no fact."
+      },
+      {
+        "key": "education:bsc-in-information-systems-ab520a51dc",
+        "verdict": "EQUIVALENT",
+        "reason": "The credential, institution, and dates are unchanged."
+      },
+      {
+        "key": "category:data-tools-28c5fe8f0e",
+        "verdict": "EQUIVALENT",
+        "reason": "The category and its listed skills are already represented; the added wording only makes the category label explicit."
+      },
+      {
+        "key": "category:collaboration-91578d1f92",
+        "verdict": "EQUIVALENT",
+        "reason": "The category and its listed skills are already represented; the added wording only makes the category label explicit."
+      }
+    ]
+  }
+}

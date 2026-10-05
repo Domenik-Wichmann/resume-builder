@@ -1,0 +1,37 @@
+{
+  "label": "repeat:bounded-actor-factual-equivalence",
+  "result": {
+    "decisions": [
+      {
+        "key": "experience:operations-analyst-dd5de8b403",
+        "verdict": "ENRICHMENT",
+        "reason": "Adds the source-supported fact that Ada initially guessed the start date was 2020 and corrected it to 2021; the prior claims did not state that correction. The training and handbook claims are otherwise restatements of existing facts."
+      },
+      {
+        "key": "achievement:reconciliation-time-reduction-aaf329a9ed",
+        "verdict": "EQUIVALENT",
+        "reason": "The metric, team result, personal contribution, and measurement scope are unchanged. The added denial that delivery speed was measured restates the prior correction that it was not measured."
+      },
+      {
+        "key": "skill:postgresql-4b6475d427",
+        "verdict": "ENRICHMENT",
+        "reason": "Adds the source-supported purpose that PostgreSQL was used for the production database."
+      },
+      {
+        "key": "skill:git-820dc39c23",
+        "verdict": "ENRICHMENT",
+        "reason": "Adds the source-supported purpose that Git was used for version control."
+      },
+      {
+        "key": "education:bsc-in-information-systems-ab520a51dc",
+        "verdict": "EQUIVALENT",
+        "reason": "The credential, institution, and dates match; the added date claim restates facts already represented."
+      },
+      {
+        "key": "certification:cedar-sql-foundations-ed912d30a4",
+        "verdict": "EQUIVALENT",
+        "reason": "The certificate, award date, and course-completion-not-license context match; the added date context restates the existing date."
+      }
+    ]
+  }
+}

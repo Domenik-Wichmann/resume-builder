@@ -1,0 +1,5504 @@
+{
+  "scope": "Actual ResumeIR compiler over the cached packets, including supported skill groups. Constant source-supported name/title and blank introduction isolate admission; malformed-canonical field safety is a separate canary.",
+  "rows": [
+    {
+      "id": "sql-1",
+      "negative": false,
+      "admittedIds": [
+        "176b7b8d-e10b-4da5-bd7a-f2a81218c7cb",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"
+      ],
+      "compiledIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 1
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "sql-2",
+      "negative": false,
+      "admittedIds": [
+        "176b7b8d-e10b-4da5-bd7a-f2a81218c7cb",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"
+      ],
+      "compiledIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 1
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "sql-3",
+      "negative": false,
+      "admittedIds": [
+        "176b7b8d-e10b-4da5-bd7a-f2a81218c7cb",
+        "75268cb5-6b7c-45fc-819f-74d7812ff677"
+      ],
+      "compiledIds": ["75268cb5-6b7c-45fc-819f-74d7812ff677"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": ["Python", "SQL"]
+          }
+        ],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [
+          {
+            "title": "Reconciliation time reduction",
+            "context": "",
+            "organization": null,
+            "role": "Reconciliation time reduction",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Team reconciliation time fell from 5 to 2 hours per week over six runs; Ada contributed the parser and checks."
+            ],
+            "evidence_ids": ["75268cb5-6b7c-45fc-819f-74d7812ff677"],
+            "priority": 0
+          }
+        ],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "sql-4",
+      "negative": false,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "sql-5",
+      "negative": false,
+      "admittedIds": [
+        "176b7b8d-e10b-4da5-bd7a-f2a81218c7cb",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"
+      ],
+      "compiledIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 1
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "sql-6",
+      "negative": false,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "sql-7",
+      "negative": false,
+      "admittedIds": [
+        "176b7b8d-e10b-4da5-bd7a-f2a81218c7cb",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"
+      ],
+      "compiledIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 1
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "sql-8",
+      "negative": false,
+      "admittedIds": [
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "176b7b8d-e10b-4da5-bd7a-f2a81218c7cb"
+      ],
+      "compiledIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 1
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "sql-9",
+      "negative": false,
+      "admittedIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "compiledIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "sql-10",
+      "negative": false,
+      "admittedIds": [
+        "176b7b8d-e10b-4da5-bd7a-f2a81218c7cb",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"
+      ],
+      "compiledIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 1
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "python-1",
+      "negative": false,
+      "admittedIds": [
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "7d136057-715e-4ff6-893e-99e1d0cace9e"
+      ],
+      "compiledIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 1
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "python-2",
+      "negative": false,
+      "admittedIds": [
+        "75268cb5-6b7c-45fc-819f-74d7812ff677",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "7d136057-715e-4ff6-893e-99e1d0cace9e",
+        "176b7b8d-e10b-4da5-bd7a-f2a81218c7cb",
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc"
+      ],
+      "compiledIds": [
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "75268cb5-6b7c-45fc-819f-74d7812ff677"
+      ],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [
+          {
+            "title": "Operations Analyst",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Operations Analyst",
+            "dates": {
+              "start": "2021-02-01",
+              "end": "2024-05-31"
+            },
+            "bullets": [
+              "Designed Dispatch Loom and trained dispatch coworkers."
+            ],
+            "evidence_ids": ["0e96c4d5-fca5-4610-ad8d-3d733cba41dc"],
+            "priority": 0
+          }
+        ],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [
+          {
+            "title": "Reconciliation time reduction",
+            "context": "",
+            "organization": null,
+            "role": "Reconciliation time reduction",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Team reconciliation time fell from 5 to 2 hours per week over six runs; Ada contributed the parser and checks."
+            ],
+            "evidence_ids": ["75268cb5-6b7c-45fc-819f-74d7812ff677"],
+            "priority": 0
+          }
+        ],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "python-3",
+      "negative": false,
+      "admittedIds": [
+        "7d136057-715e-4ff6-893e-99e1d0cace9e",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"
+      ],
+      "compiledIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 1
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "python-4",
+      "negative": false,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "python-5",
+      "negative": false,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "python-6",
+      "negative": false,
+      "admittedIds": ["7d136057-715e-4ff6-893e-99e1d0cace9e"],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "python-7",
+      "negative": false,
+      "admittedIds": [
+        "7d136057-715e-4ff6-893e-99e1d0cace9e",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"
+      ],
+      "compiledIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 1
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "python-8",
+      "negative": false,
+      "admittedIds": [
+        "7d136057-715e-4ff6-893e-99e1d0cace9e",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"
+      ],
+      "compiledIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 1
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "python-9",
+      "negative": false,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "python-10",
+      "negative": false,
+      "admittedIds": [
+        "7d136057-715e-4ff6-893e-99e1d0cace9e",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"
+      ],
+      "compiledIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 1
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "automation-1",
+      "negative": false,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "automation-2",
+      "negative": false,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "automation-3",
+      "negative": false,
+      "admittedIds": [
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "75268cb5-6b7c-45fc-819f-74d7812ff677"
+      ],
+      "compiledIds": [
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "75268cb5-6b7c-45fc-819f-74d7812ff677"
+      ],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [
+          {
+            "title": "Reconciliation time reduction",
+            "context": "",
+            "organization": null,
+            "role": "Reconciliation time reduction",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Team reconciliation time fell from 5 to 2 hours per week over six runs; Ada contributed the parser and checks."
+            ],
+            "evidence_ids": ["75268cb5-6b7c-45fc-819f-74d7812ff677"],
+            "priority": 0
+          }
+        ],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "automation-4",
+      "negative": false,
+      "admittedIds": [
+        "75268cb5-6b7c-45fc-819f-74d7812ff677",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"
+      ],
+      "compiledIds": [
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "75268cb5-6b7c-45fc-819f-74d7812ff677"
+      ],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [
+          {
+            "title": "Reconciliation time reduction",
+            "context": "",
+            "organization": null,
+            "role": "Reconciliation time reduction",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Team reconciliation time fell from 5 to 2 hours per week over six runs; Ada contributed the parser and checks."
+            ],
+            "evidence_ids": ["75268cb5-6b7c-45fc-819f-74d7812ff677"],
+            "priority": 0
+          }
+        ],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "automation-5",
+      "negative": false,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "automation-6",
+      "negative": false,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "automation-7",
+      "negative": false,
+      "admittedIds": [
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc"
+      ],
+      "compiledIds": [
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"
+      ],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [
+          {
+            "title": "Operations Analyst",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Operations Analyst",
+            "dates": {
+              "start": "2021-02-01",
+              "end": "2024-05-31"
+            },
+            "bullets": [
+              "Designed Dispatch Loom and trained dispatch coworkers."
+            ],
+            "evidence_ids": ["0e96c4d5-fca5-4610-ad8d-3d733cba41dc"],
+            "priority": 0
+          }
+        ],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "automation-8",
+      "negative": false,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "automation-9",
+      "negative": false,
+      "admittedIds": [
+        "75268cb5-6b7c-45fc-819f-74d7812ff677",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"
+      ],
+      "compiledIds": [
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "75268cb5-6b7c-45fc-819f-74d7812ff677"
+      ],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [
+          {
+            "title": "Reconciliation time reduction",
+            "context": "",
+            "organization": null,
+            "role": "Reconciliation time reduction",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Team reconciliation time fell from 5 to 2 hours per week over six runs; Ada contributed the parser and checks."
+            ],
+            "evidence_ids": ["75268cb5-6b7c-45fc-819f-74d7812ff677"],
+            "priority": 0
+          }
+        ],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "automation-10",
+      "negative": false,
+      "admittedIds": [
+        "75268cb5-6b7c-45fc-819f-74d7812ff677",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"
+      ],
+      "compiledIds": [
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "75268cb5-6b7c-45fc-819f-74d7812ff677"
+      ],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [
+          {
+            "title": "Reconciliation time reduction",
+            "context": "",
+            "organization": null,
+            "role": "Reconciliation time reduction",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Team reconciliation time fell from 5 to 2 hours per week over six runs; Ada contributed the parser and checks."
+            ],
+            "evidence_ids": ["75268cb5-6b7c-45fc-819f-74d7812ff677"],
+            "priority": 0
+          }
+        ],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "training-1",
+      "negative": false,
+      "admittedIds": [
+        "c5782fad-412f-420a-8203-4f3e5d4d6d97",
+        "2d0f5e20-ec68-49f9-86be-de9aacb89356",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc"
+      ],
+      "compiledIds": [
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "2d0f5e20-ec68-49f9-86be-de9aacb89356"
+      ],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [
+          {
+            "title": "Operations Analyst",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Operations Analyst",
+            "dates": {
+              "start": "2021-02-01",
+              "end": "2024-05-31"
+            },
+            "bullets": [
+              "Designed Dispatch Loom and trained dispatch coworkers."
+            ],
+            "evidence_ids": ["0e96c4d5-fca5-4610-ad8d-3d733cba41dc"],
+            "priority": 0
+          }
+        ],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [
+          {
+            "title": "Dispatch coworker training",
+            "context": "",
+            "organization": null,
+            "role": "Dispatch coworker training",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally trained 12 dispatch coworkers in two workshops and wrote a handbook."
+            ],
+            "evidence_ids": ["2d0f5e20-ec68-49f9-86be-de9aacb89356"],
+            "priority": 0
+          }
+        ],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "training-2",
+      "negative": false,
+      "admittedIds": [
+        "c5782fad-412f-420a-8203-4f3e5d4d6d97",
+        "2d0f5e20-ec68-49f9-86be-de9aacb89356",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc"
+      ],
+      "compiledIds": [
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "2d0f5e20-ec68-49f9-86be-de9aacb89356"
+      ],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [
+          {
+            "title": "Operations Analyst",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Operations Analyst",
+            "dates": {
+              "start": "2021-02-01",
+              "end": "2024-05-31"
+            },
+            "bullets": [
+              "Designed Dispatch Loom and trained dispatch coworkers."
+            ],
+            "evidence_ids": ["0e96c4d5-fca5-4610-ad8d-3d733cba41dc"],
+            "priority": 0
+          }
+        ],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [
+          {
+            "title": "Dispatch coworker training",
+            "context": "",
+            "organization": null,
+            "role": "Dispatch coworker training",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally trained 12 dispatch coworkers in two workshops and wrote a handbook."
+            ],
+            "evidence_ids": ["2d0f5e20-ec68-49f9-86be-de9aacb89356"],
+            "priority": 0
+          }
+        ],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "training-3",
+      "negative": false,
+      "admittedIds": [
+        "2d0f5e20-ec68-49f9-86be-de9aacb89356",
+        "c5782fad-412f-420a-8203-4f3e5d4d6d97",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc"
+      ],
+      "compiledIds": [
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "2d0f5e20-ec68-49f9-86be-de9aacb89356"
+      ],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [
+          {
+            "title": "Operations Analyst",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Operations Analyst",
+            "dates": {
+              "start": "2021-02-01",
+              "end": "2024-05-31"
+            },
+            "bullets": [
+              "Designed Dispatch Loom and trained dispatch coworkers."
+            ],
+            "evidence_ids": ["0e96c4d5-fca5-4610-ad8d-3d733cba41dc"],
+            "priority": 0
+          }
+        ],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [
+          {
+            "title": "Dispatch coworker training",
+            "context": "",
+            "organization": null,
+            "role": "Dispatch coworker training",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally trained 12 dispatch coworkers in two workshops and wrote a handbook."
+            ],
+            "evidence_ids": ["2d0f5e20-ec68-49f9-86be-de9aacb89356"],
+            "priority": 0
+          }
+        ],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "training-4",
+      "negative": false,
+      "admittedIds": [
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "c5782fad-412f-420a-8203-4f3e5d4d6d97",
+        "2d0f5e20-ec68-49f9-86be-de9aacb89356",
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc"
+      ],
+      "compiledIds": [
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "2d0f5e20-ec68-49f9-86be-de9aacb89356"
+      ],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [
+          {
+            "title": "Operations Analyst",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Operations Analyst",
+            "dates": {
+              "start": "2021-02-01",
+              "end": "2024-05-31"
+            },
+            "bullets": [
+              "Designed Dispatch Loom and trained dispatch coworkers."
+            ],
+            "evidence_ids": ["0e96c4d5-fca5-4610-ad8d-3d733cba41dc"],
+            "priority": 0
+          }
+        ],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [
+          {
+            "title": "Dispatch coworker training",
+            "context": "",
+            "organization": null,
+            "role": "Dispatch coworker training",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally trained 12 dispatch coworkers in two workshops and wrote a handbook."
+            ],
+            "evidence_ids": ["2d0f5e20-ec68-49f9-86be-de9aacb89356"],
+            "priority": 0
+          }
+        ],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "training-5",
+      "negative": false,
+      "admittedIds": [
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "c5782fad-412f-420a-8203-4f3e5d4d6d97",
+        "2d0f5e20-ec68-49f9-86be-de9aacb89356",
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc"
+      ],
+      "compiledIds": [
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "2d0f5e20-ec68-49f9-86be-de9aacb89356"
+      ],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [
+          {
+            "title": "Operations Analyst",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Operations Analyst",
+            "dates": {
+              "start": "2021-02-01",
+              "end": "2024-05-31"
+            },
+            "bullets": [
+              "Designed Dispatch Loom and trained dispatch coworkers."
+            ],
+            "evidence_ids": ["0e96c4d5-fca5-4610-ad8d-3d733cba41dc"],
+            "priority": 0
+          }
+        ],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [
+          {
+            "title": "Dispatch coworker training",
+            "context": "",
+            "organization": null,
+            "role": "Dispatch coworker training",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally trained 12 dispatch coworkers in two workshops and wrote a handbook."
+            ],
+            "evidence_ids": ["2d0f5e20-ec68-49f9-86be-de9aacb89356"],
+            "priority": 0
+          }
+        ],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "training-6",
+      "negative": false,
+      "admittedIds": [
+        "2d0f5e20-ec68-49f9-86be-de9aacb89356",
+        "c5782fad-412f-420a-8203-4f3e5d4d6d97"
+      ],
+      "compiledIds": ["2d0f5e20-ec68-49f9-86be-de9aacb89356"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": ["Coworker training"]
+          }
+        ],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [
+          {
+            "title": "Dispatch coworker training",
+            "context": "",
+            "organization": null,
+            "role": "Dispatch coworker training",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally trained 12 dispatch coworkers in two workshops and wrote a handbook."
+            ],
+            "evidence_ids": ["2d0f5e20-ec68-49f9-86be-de9aacb89356"],
+            "priority": 0
+          }
+        ],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "training-7",
+      "negative": false,
+      "admittedIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "compiledIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "training-8",
+      "negative": false,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "training-9",
+      "negative": false,
+      "admittedIds": [
+        "2d0f5e20-ec68-49f9-86be-de9aacb89356",
+        "c5782fad-412f-420a-8203-4f3e5d4d6d97",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc"
+      ],
+      "compiledIds": [
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "2d0f5e20-ec68-49f9-86be-de9aacb89356"
+      ],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [
+          {
+            "title": "Operations Analyst",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Operations Analyst",
+            "dates": {
+              "start": "2021-02-01",
+              "end": "2024-05-31"
+            },
+            "bullets": [
+              "Designed Dispatch Loom and trained dispatch coworkers."
+            ],
+            "evidence_ids": ["0e96c4d5-fca5-4610-ad8d-3d733cba41dc"],
+            "priority": 0
+          }
+        ],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [
+          {
+            "title": "Dispatch coworker training",
+            "context": "",
+            "organization": null,
+            "role": "Dispatch coworker training",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally trained 12 dispatch coworkers in two workshops and wrote a handbook."
+            ],
+            "evidence_ids": ["2d0f5e20-ec68-49f9-86be-de9aacb89356"],
+            "priority": 0
+          }
+        ],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "training-10",
+      "negative": false,
+      "admittedIds": [
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc",
+        "2d0f5e20-ec68-49f9-86be-de9aacb89356",
+        "c5782fad-412f-420a-8203-4f3e5d4d6d97",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"
+      ],
+      "compiledIds": [
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "2d0f5e20-ec68-49f9-86be-de9aacb89356"
+      ],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [
+          {
+            "title": "Operations Analyst",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Operations Analyst",
+            "dates": {
+              "start": "2021-02-01",
+              "end": "2024-05-31"
+            },
+            "bullets": [
+              "Designed Dispatch Loom and trained dispatch coworkers."
+            ],
+            "evidence_ids": ["0e96c4d5-fca5-4610-ad8d-3d733cba41dc"],
+            "priority": 0
+          }
+        ],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [
+          {
+            "title": "Dispatch coworker training",
+            "context": "",
+            "organization": null,
+            "role": "Dispatch coworker training",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally trained 12 dispatch coworkers in two workshops and wrote a handbook."
+            ],
+            "evidence_ids": ["2d0f5e20-ec68-49f9-86be-de9aacb89356"],
+            "priority": 0
+          }
+        ],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "stakeholders-1",
+      "negative": false,
+      "admittedIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "compiledIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "stakeholders-2",
+      "negative": false,
+      "admittedIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "compiledIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "stakeholders-3",
+      "negative": false,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "stakeholders-4",
+      "negative": false,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "stakeholders-5",
+      "negative": false,
+      "admittedIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "compiledIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "stakeholders-6",
+      "negative": false,
+      "admittedIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "compiledIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "stakeholders-7",
+      "negative": false,
+      "admittedIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "compiledIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "stakeholders-8",
+      "negative": false,
+      "admittedIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "compiledIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "stakeholders-9",
+      "negative": false,
+      "admittedIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "compiledIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "stakeholders-10",
+      "negative": false,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "project-1",
+      "negative": false,
+      "admittedIds": [
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc"
+      ],
+      "compiledIds": [
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"
+      ],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [
+          {
+            "title": "Operations Analyst",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Operations Analyst",
+            "dates": {
+              "start": "2021-02-01",
+              "end": "2024-05-31"
+            },
+            "bullets": [
+              "Designed Dispatch Loom and trained dispatch coworkers."
+            ],
+            "evidence_ids": ["0e96c4d5-fca5-4610-ad8d-3d733cba41dc"],
+            "priority": 0
+          }
+        ],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "project-2",
+      "negative": false,
+      "admittedIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "compiledIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "project-3",
+      "negative": false,
+      "admittedIds": [
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc"
+      ],
+      "compiledIds": [
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"
+      ],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [
+          {
+            "title": "Operations Analyst",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Operations Analyst",
+            "dates": {
+              "start": "2021-02-01",
+              "end": "2024-05-31"
+            },
+            "bullets": [
+              "Designed Dispatch Loom and trained dispatch coworkers."
+            ],
+            "evidence_ids": ["0e96c4d5-fca5-4610-ad8d-3d733cba41dc"],
+            "priority": 0
+          }
+        ],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "project-4",
+      "negative": false,
+      "admittedIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "compiledIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "project-5",
+      "negative": false,
+      "admittedIds": [
+        "f8759c02-72d1-4f26-bb94-c6c9e516f1e5",
+        "7d136057-715e-4ff6-893e-99e1d0cace9e",
+        "176b7b8d-e10b-4da5-bd7a-f2a81218c7cb",
+        "38d9e8ad-d829-4a1e-8720-f3615d355c91",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc"
+      ],
+      "compiledIds": [
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"
+      ],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [
+          {
+            "title": "Operations Analyst",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Operations Analyst",
+            "dates": {
+              "start": "2021-02-01",
+              "end": "2024-05-31"
+            },
+            "bullets": [
+              "Designed Dispatch Loom and trained dispatch coworkers."
+            ],
+            "evidence_ids": ["0e96c4d5-fca5-4610-ad8d-3d733cba41dc"],
+            "priority": 0
+          }
+        ],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "project-6",
+      "negative": false,
+      "admittedIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "compiledIds": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "project-7",
+      "negative": false,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "project-8",
+      "negative": false,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "project-9",
+      "negative": false,
+      "admittedIds": [
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc"
+      ],
+      "compiledIds": [
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"
+      ],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [
+          {
+            "title": "Operations Analyst",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Operations Analyst",
+            "dates": {
+              "start": "2021-02-01",
+              "end": "2024-05-31"
+            },
+            "bullets": [
+              "Designed Dispatch Loom and trained dispatch coworkers."
+            ],
+            "evidence_ids": ["0e96c4d5-fca5-4610-ad8d-3d733cba41dc"],
+            "priority": 0
+          }
+        ],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "project-10",
+      "negative": false,
+      "admittedIds": [
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b",
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc"
+      ],
+      "compiledIds": [
+        "0e96c4d5-fca5-4610-ad8d-3d733cba41dc",
+        "ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"
+      ],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [
+          {
+            "label": "Supported capabilities",
+            "skills": [
+              "Python",
+              "SQL",
+              "PostgreSQL",
+              "Git",
+              "Coworker training"
+            ]
+          }
+        ],
+        "experiences": [
+          {
+            "title": "Operations Analyst",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Operations Analyst",
+            "dates": {
+              "start": "2021-02-01",
+              "end": "2024-05-31"
+            },
+            "bullets": [
+              "Designed Dispatch Loom and trained dispatch coworkers."
+            ],
+            "evidence_ids": ["0e96c4d5-fca5-4610-ad8d-3d733cba41dc"],
+            "priority": 0
+          }
+        ],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements."
+            ],
+            "evidence_ids": ["ea46c9c7-ba1a-40cd-bbeb-f52d66253c3b"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "education-1",
+      "negative": false,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "education-2",
+      "negative": false,
+      "admittedIds": ["54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c"],
+      "compiledIds": ["54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [
+          {
+            "title": "BSc in Information Systems",
+            "context": "",
+            "organization": "Cedar College",
+            "role": "BSc in Information Systems",
+            "dates": {
+              "start": "2017-09-01",
+              "end": "2020-06-30"
+            },
+            "bullets": ["BSc in Information Systems."],
+            "evidence_ids": ["54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c"],
+            "priority": 0
+          }
+        ],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "education-3",
+      "negative": false,
+      "admittedIds": ["54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c"],
+      "compiledIds": ["54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [
+          {
+            "title": "BSc in Information Systems",
+            "context": "",
+            "organization": "Cedar College",
+            "role": "BSc in Information Systems",
+            "dates": {
+              "start": "2017-09-01",
+              "end": "2020-06-30"
+            },
+            "bullets": ["BSc in Information Systems."],
+            "evidence_ids": ["54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c"],
+            "priority": 0
+          }
+        ],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "education-4",
+      "negative": false,
+      "admittedIds": ["54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c"],
+      "compiledIds": ["54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [
+          {
+            "title": "BSc in Information Systems",
+            "context": "",
+            "organization": "Cedar College",
+            "role": "BSc in Information Systems",
+            "dates": {
+              "start": "2017-09-01",
+              "end": "2020-06-30"
+            },
+            "bullets": ["BSc in Information Systems."],
+            "evidence_ids": ["54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c"],
+            "priority": 0
+          }
+        ],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "education-5",
+      "negative": false,
+      "admittedIds": ["54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c"],
+      "compiledIds": ["54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [
+          {
+            "title": "BSc in Information Systems",
+            "context": "",
+            "organization": "Cedar College",
+            "role": "BSc in Information Systems",
+            "dates": {
+              "start": "2017-09-01",
+              "end": "2020-06-30"
+            },
+            "bullets": ["BSc in Information Systems."],
+            "evidence_ids": ["54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c"],
+            "priority": 0
+          }
+        ],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "education-6",
+      "negative": false,
+      "admittedIds": ["54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c"],
+      "compiledIds": ["54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [
+          {
+            "title": "BSc in Information Systems",
+            "context": "",
+            "organization": "Cedar College",
+            "role": "BSc in Information Systems",
+            "dates": {
+              "start": "2017-09-01",
+              "end": "2020-06-30"
+            },
+            "bullets": ["BSc in Information Systems."],
+            "evidence_ids": ["54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c"],
+            "priority": 0
+          }
+        ],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "education-7",
+      "negative": false,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "education-8",
+      "negative": false,
+      "admittedIds": ["54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c"],
+      "compiledIds": ["54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [
+          {
+            "title": "BSc in Information Systems",
+            "context": "",
+            "organization": "Cedar College",
+            "role": "BSc in Information Systems",
+            "dates": {
+              "start": "2017-09-01",
+              "end": "2020-06-30"
+            },
+            "bullets": ["BSc in Information Systems."],
+            "evidence_ids": ["54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c"],
+            "priority": 0
+          }
+        ],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "education-9",
+      "negative": false,
+      "admittedIds": ["54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c"],
+      "compiledIds": ["54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [
+          {
+            "title": "BSc in Information Systems",
+            "context": "",
+            "organization": "Cedar College",
+            "role": "BSc in Information Systems",
+            "dates": {
+              "start": "2017-09-01",
+              "end": "2020-06-30"
+            },
+            "bullets": ["BSc in Information Systems."],
+            "evidence_ids": ["54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c"],
+            "priority": 0
+          }
+        ],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "education-10",
+      "negative": false,
+      "admittedIds": ["54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c"],
+      "compiledIds": ["54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [
+          {
+            "title": "BSc in Information Systems",
+            "context": "",
+            "organization": "Cedar College",
+            "role": "BSc in Information Systems",
+            "dates": {
+              "start": "2017-09-01",
+              "end": "2020-06-30"
+            },
+            "bullets": ["BSc in Information Systems."],
+            "evidence_ids": ["54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c"],
+            "priority": 0
+          }
+        ],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "certification-1",
+      "negative": false,
+      "admittedIds": ["f4e14be0-5325-4efa-b64d-f2c733426775"],
+      "compiledIds": ["f4e14be0-5325-4efa-b64d-f2c733426775"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [
+          {
+            "title": "Cedar SQL Foundations",
+            "context": "",
+            "organization": null,
+            "role": "Cedar SQL Foundations",
+            "dates": {
+              "start": "2020-08-15",
+              "end": null
+            },
+            "bullets": ["Fictional Cedar SQL Foundations certificate."],
+            "evidence_ids": ["f4e14be0-5325-4efa-b64d-f2c733426775"],
+            "priority": 0
+          }
+        ],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "certification-2",
+      "negative": false,
+      "admittedIds": ["f4e14be0-5325-4efa-b64d-f2c733426775"],
+      "compiledIds": ["f4e14be0-5325-4efa-b64d-f2c733426775"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [
+          {
+            "title": "Cedar SQL Foundations",
+            "context": "",
+            "organization": null,
+            "role": "Cedar SQL Foundations",
+            "dates": {
+              "start": "2020-08-15",
+              "end": null
+            },
+            "bullets": ["Fictional Cedar SQL Foundations certificate."],
+            "evidence_ids": ["f4e14be0-5325-4efa-b64d-f2c733426775"],
+            "priority": 0
+          }
+        ],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "certification-3",
+      "negative": false,
+      "admittedIds": ["f4e14be0-5325-4efa-b64d-f2c733426775"],
+      "compiledIds": ["f4e14be0-5325-4efa-b64d-f2c733426775"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [
+          {
+            "title": "Cedar SQL Foundations",
+            "context": "",
+            "organization": null,
+            "role": "Cedar SQL Foundations",
+            "dates": {
+              "start": "2020-08-15",
+              "end": null
+            },
+            "bullets": ["Fictional Cedar SQL Foundations certificate."],
+            "evidence_ids": ["f4e14be0-5325-4efa-b64d-f2c733426775"],
+            "priority": 0
+          }
+        ],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "certification-4",
+      "negative": false,
+      "admittedIds": ["f4e14be0-5325-4efa-b64d-f2c733426775"],
+      "compiledIds": ["f4e14be0-5325-4efa-b64d-f2c733426775"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [
+          {
+            "title": "Cedar SQL Foundations",
+            "context": "",
+            "organization": null,
+            "role": "Cedar SQL Foundations",
+            "dates": {
+              "start": "2020-08-15",
+              "end": null
+            },
+            "bullets": ["Fictional Cedar SQL Foundations certificate."],
+            "evidence_ids": ["f4e14be0-5325-4efa-b64d-f2c733426775"],
+            "priority": 0
+          }
+        ],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "certification-5",
+      "negative": false,
+      "admittedIds": ["f4e14be0-5325-4efa-b64d-f2c733426775"],
+      "compiledIds": ["f4e14be0-5325-4efa-b64d-f2c733426775"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [
+          {
+            "title": "Cedar SQL Foundations",
+            "context": "",
+            "organization": null,
+            "role": "Cedar SQL Foundations",
+            "dates": {
+              "start": "2020-08-15",
+              "end": null
+            },
+            "bullets": ["Fictional Cedar SQL Foundations certificate."],
+            "evidence_ids": ["f4e14be0-5325-4efa-b64d-f2c733426775"],
+            "priority": 0
+          }
+        ],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "certification-6",
+      "negative": false,
+      "admittedIds": ["f4e14be0-5325-4efa-b64d-f2c733426775"],
+      "compiledIds": ["f4e14be0-5325-4efa-b64d-f2c733426775"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [
+          {
+            "title": "Cedar SQL Foundations",
+            "context": "",
+            "organization": null,
+            "role": "Cedar SQL Foundations",
+            "dates": {
+              "start": "2020-08-15",
+              "end": null
+            },
+            "bullets": ["Fictional Cedar SQL Foundations certificate."],
+            "evidence_ids": ["f4e14be0-5325-4efa-b64d-f2c733426775"],
+            "priority": 0
+          }
+        ],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "certification-7",
+      "negative": false,
+      "admittedIds": ["f4e14be0-5325-4efa-b64d-f2c733426775"],
+      "compiledIds": ["f4e14be0-5325-4efa-b64d-f2c733426775"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [
+          {
+            "title": "Cedar SQL Foundations",
+            "context": "",
+            "organization": null,
+            "role": "Cedar SQL Foundations",
+            "dates": {
+              "start": "2020-08-15",
+              "end": null
+            },
+            "bullets": ["Fictional Cedar SQL Foundations certificate."],
+            "evidence_ids": ["f4e14be0-5325-4efa-b64d-f2c733426775"],
+            "priority": 0
+          }
+        ],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "certification-8",
+      "negative": false,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "certification-9",
+      "negative": false,
+      "admittedIds": [
+        "54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c",
+        "f4e14be0-5325-4efa-b64d-f2c733426775"
+      ],
+      "compiledIds": [
+        "54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c",
+        "f4e14be0-5325-4efa-b64d-f2c733426775"
+      ],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [
+          {
+            "title": "BSc in Information Systems",
+            "context": "",
+            "organization": "Cedar College",
+            "role": "BSc in Information Systems",
+            "dates": {
+              "start": "2017-09-01",
+              "end": "2020-06-30"
+            },
+            "bullets": ["BSc in Information Systems."],
+            "evidence_ids": ["54b8a58b-4ff7-4f87-ae5c-e6af2d39fa6c"],
+            "priority": 0
+          }
+        ],
+        "certifications": [
+          {
+            "title": "Cedar SQL Foundations",
+            "context": "",
+            "organization": null,
+            "role": "Cedar SQL Foundations",
+            "dates": {
+              "start": "2020-08-15",
+              "end": null
+            },
+            "bullets": ["Fictional Cedar SQL Foundations certificate."],
+            "evidence_ids": ["f4e14be0-5325-4efa-b64d-f2c733426775"],
+            "priority": 0
+          }
+        ],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "certification-10",
+      "negative": false,
+      "admittedIds": ["f4e14be0-5325-4efa-b64d-f2c733426775"],
+      "compiledIds": ["f4e14be0-5325-4efa-b64d-f2c733426775"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [
+          {
+            "title": "Cedar SQL Foundations",
+            "context": "",
+            "organization": null,
+            "role": "Cedar SQL Foundations",
+            "dates": {
+              "start": "2020-08-15",
+              "end": null
+            },
+            "bullets": ["Fictional Cedar SQL Foundations certificate."],
+            "evidence_ids": ["f4e14be0-5325-4efa-b64d-f2c733426775"],
+            "priority": 0
+          }
+        ],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "negative-1",
+      "negative": true,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "negative-2",
+      "negative": true,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "negative-3",
+      "negative": true,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "negative-4",
+      "negative": true,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "negative-5",
+      "negative": true,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "negative-6",
+      "negative": true,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "negative-7",
+      "negative": true,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "negative-8",
+      "negative": true,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "negative-9",
+      "negative": true,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "negative-10",
+      "negative": true,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "negative-11",
+      "negative": true,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "negative-12",
+      "negative": true,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "negative-13",
+      "negative": true,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "negative-14",
+      "negative": true,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "negative-15",
+      "negative": true,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "negative-16",
+      "negative": true,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "negative-17",
+      "negative": true,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "negative-18",
+      "negative": true,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "negative-19",
+      "negative": true,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    },
+    {
+      "id": "negative-20",
+      "negative": true,
+      "admittedIds": [],
+      "compiledIds": [],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "escapedIds": []
+    }
+  ]
+}

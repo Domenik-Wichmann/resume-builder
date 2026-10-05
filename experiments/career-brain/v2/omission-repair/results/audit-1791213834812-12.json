@@ -1,0 +1,287 @@
+{
+  "model": "openai/gpt-6-luna-pro",
+  "records": [
+    {
+      "kind": "skill",
+      "key": "docker-8ce2b643fd",
+      "title": "Docker",
+      "subtitle": "",
+      "summary": "One-off exercise; the source does not establish broader or professional use.",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "I used SQL extensively, while Docker remains a one-off exercise.",
+      "uncertainties": [],
+      "aliases": ["Docker"],
+      "claims": [
+        {
+          "attribute": "tool",
+          "value": "Docker",
+          "attribution": "EXPOSURE",
+          "evidence": [
+            {
+              "quote": "I used SQL extensively, while Docker remains a one-off exercise.",
+              "start": 3972,
+              "end": 4036
+            }
+          ],
+          "availability": "CONFIRMED"
+        }
+      ],
+      "id": "",
+      "hash": "",
+      "updated_at": "",
+      "archived": false,
+      "published": false
+    },
+    {
+      "kind": "education",
+      "key": "bsc-in-information-systems-ab520a51dc",
+      "title": "BSc in Information Systems",
+      "subtitle": "Cedar College",
+      "summary": "BSc in Information Systems at Cedar College.",
+      "organization": "Cedar College",
+      "start_date": "2017-09-01",
+      "end_date": "2020-06-30",
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "I earned a BSc in Information Systems at Cedar College from 2017-09-01 to 2020-06-30.",
+      "uncertainties": [],
+      "aliases": [
+        "BSc",
+        "Bachelor",
+        "Information Systems",
+        "BSc in Information Systems"
+      ],
+      "claims": [
+        {
+          "value": "BSc in Information Systems at Cedar College, 2017-09-01 to 2020-06-30",
+          "evidence": [
+            {
+              "end": 1100,
+              "quote": "I earned a BSc in Information Systems at Cedar College from 2017-09-01 to 2020-06-30.",
+              "start": 1015,
+              "source_id": "3a15d054-992e-4d9c-99a9-77c87ab8e0c2"
+            }
+          ],
+          "attribute": "credential",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED"
+        }
+      ],
+      "id": "",
+      "hash": "",
+      "updated_at": "",
+      "archived": false,
+      "published": false
+    },
+    {
+      "kind": "certification",
+      "key": "cedar-sql-foundations-ed912d30a4",
+      "title": "Cedar SQL Foundations",
+      "subtitle": "Course completion",
+      "summary": "Received the Cedar SQL Foundations certificate as a course completion, not a professional license.",
+      "organization": null,
+      "start_date": "2020-08-15",
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "I received the fictional Cedar SQL Foundations certificate on 2020-08-15.",
+      "uncertainties": [
+        "Grounding UNSUPPORTED: The source explicitly describes the certificate as fictional, but the record presents it as an unqualified received certificate and omits that qualification."
+      ],
+      "aliases": ["SQL Foundations", "Cedar SQL Foundations"],
+      "claims": [
+        {
+          "attribute": "credential",
+          "value": "Cedar SQL Foundations certificate",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I received the fictional Cedar SQL Foundations certificate on 2020-08-15.",
+              "start": 3827,
+              "end": 3900
+            }
+          ],
+          "availability": "PENDING_REVIEW"
+        },
+        {
+          "attribute": "context",
+          "value": "Course completion, not a professional license",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "The certificate was a course completion, not a professional license.",
+              "start": 3490,
+              "end": 3558
+            }
+          ],
+          "availability": "PENDING_REVIEW"
+        },
+        {
+          "attribute": "context",
+          "value": "Certificate received on 2020-08-15",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I received the fictional Cedar SQL Foundations certificate on 2020-08-15.",
+              "start": 3827,
+              "end": 3900
+            }
+          ],
+          "availability": "CONFIRMED"
+        }
+      ],
+      "id": "",
+      "hash": "",
+      "updated_at": "",
+      "archived": false,
+      "published": false
+    },
+    {
+      "kind": "language",
+      "key": "english-3e0cd54cbb",
+      "title": "English",
+      "subtitle": "",
+      "summary": "Fluent English.",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "I speak English fluently.",
+      "uncertainties": [],
+      "aliases": ["English"],
+      "claims": [
+        {
+          "attribute": "language",
+          "value": "Fluent English",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I speak English fluently.",
+              "start": 1104,
+              "end": 1129
+            }
+          ],
+          "availability": "CONFIRMED"
+        }
+      ],
+      "id": "",
+      "hash": "",
+      "updated_at": "",
+      "archived": false,
+      "published": false
+    },
+    {
+      "kind": "category",
+      "key": "data-tools-28c5fe8f0e",
+      "title": "Data tools",
+      "subtitle": "",
+      "summary": "Category for Python, SQL, and PostgreSQL.",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "My skill category is Data tools: Python, SQL and PostgreSQL.",
+      "uncertainties": [],
+      "aliases": ["Data tools"],
+      "claims": [
+        {
+          "attribute": "context",
+          "value": "Python, SQL and PostgreSQL",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "My skill category is Data tools: Python, SQL and PostgreSQL.",
+              "start": 881,
+              "end": 941
+            }
+          ],
+          "availability": "CONFIRMED"
+        }
+      ],
+      "id": "",
+      "hash": "",
+      "updated_at": "",
+      "archived": false,
+      "published": false
+    },
+    {
+      "kind": "category",
+      "key": "collaboration-91578d1f92",
+      "title": "Collaboration",
+      "subtitle": "",
+      "summary": "Category for Git and coworker training.",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "My separate skill category is Collaboration: Git and coworker training.",
+      "uncertainties": [],
+      "aliases": ["Collaboration"],
+      "claims": [
+        {
+          "attribute": "context",
+          "value": "Git and coworker training",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "My separate skill category is Collaboration: Git and coworker training.",
+              "start": 942,
+              "end": 1013
+            }
+          ],
+          "availability": "CONFIRMED"
+        }
+      ],
+      "id": "",
+      "hash": "",
+      "updated_at": "",
+      "archived": false,
+      "published": false
+    }
+  ],
+  "decisions": [
+    {
+      "index": 0,
+      "verdict": "SUPPORTED",
+      "reason": "The source identifies Docker as a one-off exercise and does not claim broader or professional use; the record accurately limits the claim to exposure."
+    },
+    {
+      "index": 1,
+      "verdict": "SUPPORTED",
+      "reason": "The BSc, field of study, institution, and dates are stated directly in the source."
+    },
+    {
+      "index": 2,
+      "verdict": "UNSUPPORTED",
+      "reason": "The source explicitly calls the certificate fictional. The record presents it as a received credential without preserving that qualification, making its summary and credential claims misleading."
+    },
+    {
+      "index": 3,
+      "verdict": "SUPPORTED",
+      "reason": "The source explicitly says the person speaks English fluently."
+    },
+    {
+      "index": 4,
+      "verdict": "SUPPORTED",
+      "reason": "The source explicitly names Data tools as the category for Python, SQL, and PostgreSQL."
+    },
+    {
+      "index": 5,
+      "verdict": "SUPPORTED",
+      "reason": "The source explicitly names Collaboration as the category for Git and coworker training."
+    }
+  ]
+}

@@ -1,0 +1,1620 @@
+{
+  "grounding": {
+    "baseline": {
+      "modelVerdictsCorrect": 24,
+      "total": 24,
+      "unsafeMisses": 0,
+      "safeReviewFalsePositives": 1,
+      "rows": [
+        {
+          "id": "ground-1-safe",
+          "expected": "SUPPORTED",
+          "verdict": "SUPPORTED",
+          "withheld": true
+        },
+        {
+          "id": "ground-1-unsafe",
+          "expected": "UNSUPPORTED",
+          "verdict": "UNSUPPORTED",
+          "withheld": true
+        },
+        {
+          "id": "ground-2-safe",
+          "expected": "SUPPORTED",
+          "verdict": "SUPPORTED",
+          "withheld": false
+        },
+        {
+          "id": "ground-2-unsafe",
+          "expected": "UNSUPPORTED",
+          "verdict": "UNSUPPORTED",
+          "withheld": true
+        },
+        {
+          "id": "ground-3-safe",
+          "expected": "SUPPORTED",
+          "verdict": "SUPPORTED",
+          "withheld": false
+        },
+        {
+          "id": "ground-3-unsafe",
+          "expected": "UNSUPPORTED",
+          "verdict": "UNSUPPORTED",
+          "withheld": true
+        },
+        {
+          "id": "ground-4-safe",
+          "expected": "SUPPORTED",
+          "verdict": "SUPPORTED",
+          "withheld": false
+        },
+        {
+          "id": "ground-4-unsafe",
+          "expected": "UNSUPPORTED",
+          "verdict": "UNSUPPORTED",
+          "withheld": true
+        },
+        {
+          "id": "ground-5-safe",
+          "expected": "SUPPORTED",
+          "verdict": "SUPPORTED",
+          "withheld": false
+        },
+        {
+          "id": "ground-5-unsafe",
+          "expected": "UNSUPPORTED",
+          "verdict": "UNSUPPORTED",
+          "withheld": true
+        },
+        {
+          "id": "ground-6-safe",
+          "expected": "SUPPORTED",
+          "verdict": "SUPPORTED",
+          "withheld": false
+        },
+        {
+          "id": "ground-6-unsafe",
+          "expected": "UNSUPPORTED",
+          "verdict": "UNSUPPORTED",
+          "withheld": true
+        },
+        {
+          "id": "ground-7-safe",
+          "expected": "SUPPORTED",
+          "verdict": "SUPPORTED",
+          "withheld": false
+        },
+        {
+          "id": "ground-7-unsafe",
+          "expected": "UNSUPPORTED",
+          "verdict": "UNSUPPORTED",
+          "withheld": true
+        },
+        {
+          "id": "ground-8-safe",
+          "expected": "SUPPORTED",
+          "verdict": "SUPPORTED",
+          "withheld": false
+        },
+        {
+          "id": "ground-8-unsafe",
+          "expected": "UNSUPPORTED",
+          "verdict": "UNSUPPORTED",
+          "withheld": true
+        },
+        {
+          "id": "ground-9-safe",
+          "expected": "SUPPORTED",
+          "verdict": "SUPPORTED",
+          "withheld": false
+        },
+        {
+          "id": "ground-9-unsafe",
+          "expected": "UNSUPPORTED",
+          "verdict": "UNSUPPORTED",
+          "withheld": true
+        },
+        {
+          "id": "ground-10-safe",
+          "expected": "SUPPORTED",
+          "verdict": "SUPPORTED",
+          "withheld": false
+        },
+        {
+          "id": "ground-10-unsafe",
+          "expected": "UNSUPPORTED",
+          "verdict": "UNSUPPORTED",
+          "withheld": true
+        },
+        {
+          "id": "ground-11-safe",
+          "expected": "SUPPORTED",
+          "verdict": "SUPPORTED",
+          "withheld": false
+        },
+        {
+          "id": "ground-11-unsafe",
+          "expected": "UNSUPPORTED",
+          "verdict": "UNSUPPORTED",
+          "withheld": true
+        },
+        {
+          "id": "ground-12-safe",
+          "expected": "SUPPORTED",
+          "verdict": "SUPPORTED",
+          "withheld": false
+        },
+        {
+          "id": "ground-12-unsafe",
+          "expected": "UNSUPPORTED",
+          "verdict": "UNSUPPORTED",
+          "withheld": true
+        }
+      ]
+    },
+    "assertions": {
+      "modelVerdictsCorrect": 24,
+      "total": 24,
+      "unsafeMisses": 0,
+      "safeReviewFalsePositives": 1,
+      "rows": [
+        {
+          "id": "ground-1-safe",
+          "expected": "SUPPORTED",
+          "verdict": "SUPPORTED",
+          "withheld": true
+        },
+        {
+          "id": "ground-1-unsafe",
+          "expected": "UNSUPPORTED",
+          "verdict": "UNSUPPORTED",
+          "withheld": true
+        },
+        {
+          "id": "ground-2-safe",
+          "expected": "SUPPORTED",
+          "verdict": "SUPPORTED",
+          "withheld": false
+        },
+        {
+          "id": "ground-2-unsafe",
+          "expected": "UNSUPPORTED",
+          "verdict": "UNSUPPORTED",
+          "withheld": true
+        },
+        {
+          "id": "ground-3-safe",
+          "expected": "SUPPORTED",
+          "verdict": "SUPPORTED",
+          "withheld": false
+        },
+        {
+          "id": "ground-3-unsafe",
+          "expected": "UNSUPPORTED",
+          "verdict": "UNSUPPORTED",
+          "withheld": true
+        },
+        {
+          "id": "ground-4-safe",
+          "expected": "SUPPORTED",
+          "verdict": "SUPPORTED",
+          "withheld": false
+        },
+        {
+          "id": "ground-4-unsafe",
+          "expected": "UNSUPPORTED",
+          "verdict": "UNSUPPORTED",
+          "withheld": true
+        },
+        {
+          "id": "ground-5-safe",
+          "expected": "SUPPORTED",
+          "verdict": "SUPPORTED",
+          "withheld": false
+        },
+        {
+          "id": "ground-5-unsafe",
+          "expected": "UNSUPPORTED",
+          "verdict": "UNSUPPORTED",
+          "withheld": true
+        },
+        {
+          "id": "ground-6-safe",
+          "expected": "SUPPORTED",
+          "verdict": "SUPPORTED",
+          "withheld": false
+        },
+        {
+          "id": "ground-6-unsafe",
+          "expected": "UNSUPPORTED",
+          "verdict": "UNSUPPORTED",
+          "withheld": true
+        },
+        {
+          "id": "ground-7-safe",
+          "expected": "SUPPORTED",
+          "verdict": "SUPPORTED",
+          "withheld": false
+        },
+        {
+          "id": "ground-7-unsafe",
+          "expected": "UNSUPPORTED",
+          "verdict": "UNSUPPORTED",
+          "withheld": true
+        },
+        {
+          "id": "ground-8-safe",
+          "expected": "SUPPORTED",
+          "verdict": "SUPPORTED",
+          "withheld": false
+        },
+        {
+          "id": "ground-8-unsafe",
+          "expected": "UNSUPPORTED",
+          "verdict": "UNSUPPORTED",
+          "withheld": true
+        },
+        {
+          "id": "ground-9-safe",
+          "expected": "SUPPORTED",
+          "verdict": "SUPPORTED",
+          "withheld": false
+        },
+        {
+          "id": "ground-9-unsafe",
+          "expected": "UNSUPPORTED",
+          "verdict": "UNSUPPORTED",
+          "withheld": true
+        },
+        {
+          "id": "ground-10-safe",
+          "expected": "SUPPORTED",
+          "verdict": "SUPPORTED",
+          "withheld": false
+        },
+        {
+          "id": "ground-10-unsafe",
+          "expected": "UNSUPPORTED",
+          "verdict": "UNSUPPORTED",
+          "withheld": true
+        },
+        {
+          "id": "ground-11-safe",
+          "expected": "SUPPORTED",
+          "verdict": "SUPPORTED",
+          "withheld": false
+        },
+        {
+          "id": "ground-11-unsafe",
+          "expected": "UNSUPPORTED",
+          "verdict": "UNSUPPORTED",
+          "withheld": true
+        },
+        {
+          "id": "ground-12-safe",
+          "expected": "SUPPORTED",
+          "verdict": "SUPPORTED",
+          "withheld": false
+        },
+        {
+          "id": "ground-12-unsafe",
+          "expected": "UNSUPPORTED",
+          "verdict": "UNSUPPORTED",
+          "withheld": true
+        }
+      ]
+    },
+    "observedWarningCaught": false,
+    "observedWarningDisplayVerdict": {
+      "id": "0:display",
+      "verdict": "SUPPORTED",
+      "reason": "The source describes Dispatch Loom as an operational reconciliation tool, personally designed and built by Ada, with the stated parser, checks, workflow, warning, empty-row handling, team improvement context, and supervisor decision authority."
+    }
+  },
+  "targetedSol": [
+    {
+      "index": 0,
+      "verdict": "UNSUPPORTED",
+      "reason": "The summary says late-arriving source files prompted a visible warning, but the source says only that a file could arrive late and operators preferred a warning. It does not establish that a warning was implemented."
+    }
+  ],
+  "observedWarningCompiler": {
+    "scope": "Deterministic actual ResumeIR replay of the retained unmodified R4 G proposal, not an accepted owner record or new generated answer",
+    "packet": [
+      {
+        "id": "6c0464bb-9ba6-4437-8deb-c51e67002486",
+        "kind": "project",
+        "title": "Dispatch Loom",
+        "organization": "Harbor Tools",
+        "dates": {
+          "start": null,
+          "end": null
+        },
+        "summary": "Internal dispatch reconciliation tool for comparing an overnight spreadsheet with a daily export and surfacing understandable exceptions. Personally designed and built by Ada Rowan, who wrote the Python parser and SQL checks; coworkers also changed their checking habits, so the measured improvement was a team result. Operators kept empty rows visible because a blank reference could require a phone call, and late-arriving source files prompted a visible warning. The supervisor made the final dispatch decision.",
+        "aliases": [
+          "Loom",
+          "dispatch reconciliation tool",
+          "the checking script"
+        ],
+        "skills": [],
+        "outcomes": [],
+        "claims": [
+          {
+            "attribute": "ownership",
+            "value": "Parser and checks were Ada Rowan's contribution to the team result",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "This was a team result; my contribution was the parser and checks.",
+                "start": 473,
+                "end": 539
+              }
+            ]
+          },
+          {
+            "attribute": "metric",
+            "value": "Reconciliation time reduced from 5 hours to 2 hours per week over six weekly runs",
+            "attribution": "TEAM",
+            "evidence": [
+              {
+                "quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks.",
+                "start": 366,
+                "end": 539
+              }
+            ]
+          },
+          {
+            "attribute": "denial",
+            "value": "Delivery speed was not measured",
+            "attribution": "NEGATED",
+            "evidence": [
+              {
+                "quote": "Delivery speed was not measured.",
+                "start": 3472,
+                "end": 3504
+              }
+            ]
+          },
+          {
+            "attribute": "denial",
+            "value": "Machine-learning classifier was not involved in the rules",
+            "attribution": "NEGATED",
+            "evidence": [
+              {
+                "quote": "There was no machine-learning classifier involved in these rules.",
+                "start": 2784,
+                "end": 2849
+              }
+            ]
+          },
+          {
+            "attribute": "denial",
+            "value": "Did not own the warehouse staffing budget",
+            "attribution": "NEGATED",
+            "evidence": [
+              {
+                "quote": "I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+                "start": 3030,
+                "end": 3113
+              }
+            ]
+          },
+          {
+            "attribute": "denial",
+            "value": "Did not own procurement",
+            "attribution": "NEGATED",
+            "evidence": [
+              {
+                "quote": "I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+                "start": 3030,
+                "end": 3113
+              }
+            ]
+          },
+          {
+            "attribute": "denial",
+            "value": "Did not own the scheduling system",
+            "attribution": "NEGATED",
+            "evidence": [
+              {
+                "quote": "I did not own the warehouse staffing budget, procurement, or the scheduling system.",
+                "start": 3030,
+                "end": 3113
+              }
+            ]
+          },
+          {
+            "attribute": "correction",
+            "value": "Reconciliation time, not delivery time, was measured",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only.",
+                "start": 3400,
+                "end": 3564
+              }
+            ]
+          },
+          {
+            "attribute": "action",
+            "value": "Designed and built Dispatch Loom",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL.",
+                "start": 199,
+                "end": 315
+              }
+            ]
+          },
+          {
+            "attribute": "action",
+            "value": "Wrote the Python parser and SQL checks",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I wrote the Python parser and SQL checks myself.",
+                "start": 316,
+                "end": 364
+              }
+            ]
+          },
+          {
+            "attribute": "action",
+            "value": "Gathered requirements from warehouse supervisors",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them.",
+                "start": 657,
+                "end": 764
+              }
+            ]
+          },
+          {
+            "attribute": "action",
+            "value": "Explained validation failures to warehouse supervisors",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them.",
+                "start": 657,
+                "end": 764
+              }
+            ]
+          },
+          {
+            "attribute": "action",
+            "value": "Kept empty rows visible because a blank reference might need a phone call",
+            "attribution": "TEAM",
+            "evidence": [
+              {
+                "quote": "We kept them visible because a blank reference might need a phone call.",
+                "start": 2631,
+                "end": 2702
+              }
+            ]
+          },
+          {
+            "attribute": "action",
+            "value": "Handbook described where a coworker should look before raising an exception",
+            "attribution": "TEAM",
+            "evidence": [
+              {
+                "quote": "The handbook described where a coworker should look before raising an exception.",
+                "start": 2703,
+                "end": 2783
+              }
+            ]
+          },
+          {
+            "attribute": "tool",
+            "value": "Python",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL.",
+                "start": 199,
+                "end": 315
+              }
+            ]
+          },
+          {
+            "attribute": "tool",
+            "value": "SQL",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL.",
+                "start": 199,
+                "end": 315
+              }
+            ]
+          }
+        ],
+        "uncertainties": [],
+        "relatedIds": [],
+        "support": "SUPPORTS",
+        "reason": "Exact named qualification is supported by approved factual components."
+      }
+    ],
+    "admittedIds": ["6c0464bb-9ba6-4437-8deb-c51e67002486"],
+    "compiledIds": ["6c0464bb-9ba6-4437-8deb-c51e67002486"],
+    "ir": {
+      "profile": {
+        "name": "Ada Rowan",
+        "contact": {
+          "market": "US",
+          "location": "",
+          "contact_email": "",
+          "phone": "",
+          "work_authorization": ""
+        }
+      },
+      "headline": "Operations Analyst",
+      "summary": "",
+      "skill_groups": [],
+      "experiences": [],
+      "projects": [
+        {
+          "title": "Dispatch Loom",
+          "context": "",
+          "organization": "Harbor Tools",
+          "role": "Dispatch Loom",
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "bullets": [
+            "Internal dispatch reconciliation tool for comparing an overnight spreadsheet with a daily export and surfacing understandable exceptions. Personally designed and built by Ada Rowan, who wrote the Python parser and SQL checks; coworkers also changed their checking habits, so the measured improvement was a team result. Operators kept empty rows visible because a blank reference could require a phone call, and late-arriving source files prompted a visible warning. The supervisor made the final dispatch decision."
+          ],
+          "evidence_ids": ["6c0464bb-9ba6-4437-8deb-c51e67002486"],
+          "priority": 0
+        }
+      ],
+      "education": [],
+      "certifications": [],
+      "supporting_sections": [],
+      "demo": true,
+      "section_order": [
+        "Experience",
+        "Projects",
+        "Achievements",
+        "Education",
+        "Certifications"
+      ]
+    },
+    "unsupportedWarningCompiled": true
+  },
+  "richRepeats": {
+    "repeats": [
+      {
+        "repetition": 1,
+        "records": 15,
+        "existingMatches": 15,
+        "uniqueExistingIds": 15,
+        "unchanged": 11,
+        "coreChanges": 15,
+        "newCandidates": 0,
+        "totalChanges": 15,
+        "statuses": {
+          "UNCHANGED": 11,
+          "UPDATED": 2,
+          "REVIEW": 2,
+          "ADDED": 0,
+          "REMOVED": 0
+        },
+        "provenance": {
+          "claims": 55,
+          "spans": 60,
+          "exactReferencedSpans": 60,
+          "unknownSourceReferences": 0,
+          "multiSpanClaims": 5
+        },
+        "latencyMs": 90833
+      },
+      {
+        "repetition": 2,
+        "records": 15,
+        "existingMatches": 15,
+        "uniqueExistingIds": 15,
+        "unchanged": 11,
+        "coreChanges": 15,
+        "newCandidates": 0,
+        "totalChanges": 15,
+        "statuses": {
+          "UNCHANGED": 11,
+          "UPDATED": 3,
+          "REVIEW": 1,
+          "ADDED": 0,
+          "REMOVED": 0
+        },
+        "provenance": {
+          "claims": 50,
+          "spans": 55,
+          "exactReferencedSpans": 55,
+          "unknownSourceReferences": 0,
+          "multiSpanClaims": 4
+        },
+        "latencyMs": 91186
+      },
+      {
+        "repetition": 3,
+        "records": 15,
+        "existingMatches": 15,
+        "uniqueExistingIds": 15,
+        "unchanged": 13,
+        "coreChanges": 15,
+        "newCandidates": 0,
+        "totalChanges": 15,
+        "statuses": {
+          "UNCHANGED": 13,
+          "UPDATED": 1,
+          "REVIEW": 1,
+          "ADDED": 0,
+          "REMOVED": 0
+        },
+        "provenance": {
+          "claims": 50,
+          "spans": 53,
+          "exactReferencedSpans": 53,
+          "unknownSourceReferences": 0,
+          "multiSpanClaims": 3
+        },
+        "latencyMs": 101130
+      },
+      {
+        "repetition": 4,
+        "records": 17,
+        "existingMatches": 15,
+        "uniqueExistingIds": 15,
+        "unchanged": 11,
+        "coreChanges": 15,
+        "newCandidates": 2,
+        "totalChanges": 17,
+        "statuses": {
+          "UNCHANGED": 11,
+          "UPDATED": 3,
+          "REVIEW": 2,
+          "ADDED": 1,
+          "REMOVED": 0
+        },
+        "provenance": {
+          "claims": 57,
+          "spans": 62,
+          "exactReferencedSpans": 62,
+          "unknownSourceReferences": 0,
+          "multiSpanClaims": 4
+        },
+        "latencyMs": 111257
+      },
+      {
+        "repetition": 5,
+        "records": 18,
+        "existingMatches": 15,
+        "uniqueExistingIds": 15,
+        "unchanged": 11,
+        "coreChanges": 15,
+        "newCandidates": 3,
+        "totalChanges": 18,
+        "statuses": {
+          "UNCHANGED": 11,
+          "UPDATED": 3,
+          "REVIEW": 2,
+          "ADDED": 2,
+          "REMOVED": 0
+        },
+        "provenance": {
+          "claims": 60,
+          "spans": 63,
+          "exactReferencedSpans": 63,
+          "unknownSourceReferences": 0,
+          "multiSpanClaims": 3
+        },
+        "latencyMs": 130582
+      }
+    ],
+    "existingMatches": 75,
+    "unchanged": 57,
+    "totalChanges": 80,
+    "medianLatencyMs": 101130
+  },
+  "sequence": {
+    "v2": {
+      "scope": "Source-corrected record-status score against previous reviewed rich state. Supported contextual propagation allowances are explicit. Extra decompositions remain visible; no free relabeling based on model outcomes.",
+      "correct": 16,
+      "total": 17,
+      "accuracy": 0.9411764705882353,
+      "rows": [
+        {
+          "kind": "profile",
+          "title": "Ada Rowan",
+          "status": "UNCHANGED",
+          "expected": "UNCHANGED",
+          "allowed": [],
+          "correct": true,
+          "reason": ""
+        },
+        {
+          "kind": "experience",
+          "title": "Operations Analyst",
+          "status": "UPDATED",
+          "expected": "UPDATED",
+          "allowed": [],
+          "correct": true,
+          "reason": ""
+        },
+        {
+          "kind": "project",
+          "title": "Dispatch Loom",
+          "status": "REVIEW",
+          "expected": "UNCHANGED",
+          "allowed": [],
+          "correct": false,
+          "reason": "Grounding UNSUPPORTED: The source says operators preferred a visible warning and supervisors wanted understandable exceptions; it does not establish that operators used those features. The request to distinguish operational use from external sale does not itself establish that the tool was not sold externally."
+        },
+        {
+          "kind": "project",
+          "title": "Roster Note",
+          "status": "ADDED",
+          "expected": "ADDED",
+          "allowed": [],
+          "correct": true,
+          "reason": ""
+        },
+        {
+          "kind": "achievement",
+          "title": "Reconciliation time reduction",
+          "status": "UNCHANGED",
+          "expected": "UNCHANGED",
+          "allowed": [],
+          "correct": true,
+          "reason": ""
+        },
+        {
+          "kind": "achievement",
+          "title": "Dispatch coworker training and handbook",
+          "status": "UPDATED",
+          "expected": "UPDATED",
+          "allowed": [],
+          "correct": true,
+          "reason": ""
+        },
+        {
+          "kind": "skill",
+          "title": "Python",
+          "status": "UNCHANGED",
+          "expected": "UNCHANGED",
+          "allowed": [],
+          "correct": true,
+          "reason": ""
+        },
+        {
+          "kind": "skill",
+          "title": "SQL",
+          "status": "UNCHANGED",
+          "expected": "UNCHANGED",
+          "allowed": [],
+          "correct": true,
+          "reason": ""
+        },
+        {
+          "kind": "skill",
+          "title": "PostgreSQL",
+          "status": "UNCHANGED",
+          "expected": "UNCHANGED",
+          "allowed": [],
+          "correct": true,
+          "reason": ""
+        },
+        {
+          "kind": "skill",
+          "title": "Git",
+          "status": "UNCHANGED",
+          "expected": "UNCHANGED",
+          "allowed": [],
+          "correct": true,
+          "reason": ""
+        },
+        {
+          "kind": "skill",
+          "title": "Coworker training",
+          "status": "UNCHANGED",
+          "expected": "UNCHANGED",
+          "allowed": [],
+          "correct": true,
+          "reason": ""
+        },
+        {
+          "kind": "category",
+          "title": "Data tools",
+          "status": "UNCHANGED",
+          "expected": "UNCHANGED",
+          "allowed": [],
+          "correct": true,
+          "reason": ""
+        },
+        {
+          "kind": "category",
+          "title": "Collaboration",
+          "status": "UNCHANGED",
+          "expected": "UNCHANGED",
+          "allowed": [],
+          "correct": true,
+          "reason": ""
+        },
+        {
+          "kind": "education",
+          "title": "BSc in Information Systems",
+          "status": "UNCHANGED",
+          "expected": "UNCHANGED",
+          "allowed": [],
+          "correct": true,
+          "reason": ""
+        },
+        {
+          "kind": "certification",
+          "title": "Course completion certificate",
+          "status": "REVIEW",
+          "expected": "REVIEW",
+          "allowed": [],
+          "correct": true,
+          "reason": "Grounding UNSUPPORTED: The source mentions an unspecified course-completion certificate, but does not identify it as Cedar SQL Foundations. The record key invents that specific association. Canonical identity is ambiguous; select the intended existing entity before accepting. Canonical identity is ambiguous; select the intended existing entity before accepting."
+        },
+        {
+          "kind": "language",
+          "title": "English",
+          "status": "UNCHANGED",
+          "expected": "UNCHANGED",
+          "allowed": [],
+          "correct": true,
+          "reason": ""
+        },
+        {
+          "kind": "certification",
+          "title": "Cedar SQL Foundations",
+          "status": "REVIEW",
+          "expected": "REVIEW",
+          "allowed": [],
+          "correct": true,
+          "reason": "Omitted existing entity needs review: The source mentions a certificate but does not identify it as Cedar SQL Foundations or support the recorded date. Its identity cannot be confirmed from the source."
+        }
+      ]
+    },
+    "v3": {
+      "scope": "Source-corrected record-status score against previous reviewed rich state. Supported contextual propagation allowances are explicit. Extra decompositions remain visible; no free relabeling based on model outcomes.",
+      "correct": 12,
+      "total": 17,
+      "accuracy": 0.7058823529411765,
+      "rows": [
+        {
+          "kind": "profile",
+          "title": "Ada Rowan",
+          "status": "UNCHANGED",
+          "expected": "UNCHANGED",
+          "allowed": [],
+          "correct": true,
+          "reason": ""
+        },
+        {
+          "kind": "experience",
+          "title": "Operations Analyst",
+          "status": "UNCHANGED",
+          "expected": "REVIEW",
+          "allowed": [],
+          "correct": false,
+          "reason": ""
+        },
+        {
+          "kind": "project",
+          "title": "Dispatch Loom",
+          "status": "REVIEW",
+          "expected": "UNCHANGED",
+          "allowed": [],
+          "correct": false,
+          "reason": "Grounding UNSUPPORTED: The record overstates preferences and requirements as implemented tool behavior: the source says supervisors wanted understandable exceptions and operators preferred a visible warning for late files, but does not establish that the tool surfaced those exceptions or implemented the warning. The other"
+        },
+        {
+          "kind": "project",
+          "title": "Roster Note",
+          "status": "UPDATED",
+          "expected": "UPDATED",
+          "allowed": [],
+          "correct": true,
+          "reason": ""
+        },
+        {
+          "kind": "achievement",
+          "title": "Reconciliation time reduction",
+          "status": "UPDATED",
+          "expected": "UNCHANGED",
+          "allowed": [],
+          "correct": false,
+          "reason": ""
+        },
+        {
+          "kind": "achievement",
+          "title": "Dispatch coworker training",
+          "status": "REVIEW",
+          "expected": "REVIEW",
+          "allowed": [],
+          "correct": true,
+          "reason": "Coworker attendance count is unresolved: Ada recalls 12, while a later attendance sheet says 14. Unresolved claim or correction requires review."
+        },
+        {
+          "kind": "skill",
+          "title": "SQL",
+          "status": "UPDATED",
+          "expected": "UPDATED",
+          "allowed": [],
+          "correct": true,
+          "reason": ""
+        },
+        {
+          "kind": "skill",
+          "title": "PostgreSQL",
+          "status": "UNCHANGED",
+          "expected": "UNCHANGED",
+          "allowed": [],
+          "correct": true,
+          "reason": ""
+        },
+        {
+          "kind": "skill",
+          "title": "Git",
+          "status": "UNCHANGED",
+          "expected": "UNCHANGED",
+          "allowed": [],
+          "correct": true,
+          "reason": ""
+        },
+        {
+          "kind": "skill",
+          "title": "Coworker training",
+          "status": "UPDATED",
+          "expected": "UNCHANGED",
+          "allowed": [],
+          "correct": false,
+          "reason": ""
+        },
+        {
+          "kind": "skill",
+          "title": "Python",
+          "status": "UNCHANGED",
+          "expected": "UNCHANGED",
+          "allowed": [],
+          "correct": true,
+          "reason": ""
+        },
+        {
+          "kind": "skill",
+          "title": "Docker",
+          "status": "REVIEW",
+          "expected": "ADDED",
+          "allowed": [],
+          "correct": false,
+          "reason": "Grounding UNCERTAIN: The source supports Docker exposure as a one-off exercise, and the summary clearly qualifies that exposure. However, the record is categorized as a skill, while a one-off exercise alone does not establish Docker competence."
+        },
+        {
+          "kind": "education",
+          "title": "BSc in Information Systems",
+          "status": "UNCHANGED",
+          "expected": "UNCHANGED",
+          "allowed": [],
+          "correct": true,
+          "reason": ""
+        },
+        {
+          "kind": "certification",
+          "title": "Cedar SQL Foundations",
+          "status": "UNCHANGED",
+          "expected": "UNCHANGED",
+          "allowed": [],
+          "correct": true,
+          "reason": ""
+        },
+        {
+          "kind": "language",
+          "title": "English",
+          "status": "UNCHANGED",
+          "expected": "UNCHANGED",
+          "allowed": [],
+          "correct": true,
+          "reason": ""
+        },
+        {
+          "kind": "category",
+          "title": "Data tools",
+          "status": "UNCHANGED",
+          "expected": "UNCHANGED",
+          "allowed": [],
+          "correct": true,
+          "reason": ""
+        },
+        {
+          "kind": "category",
+          "title": "Collaboration",
+          "status": "UNCHANGED",
+          "expected": "UNCHANGED",
+          "allowed": [],
+          "correct": true,
+          "reason": ""
+        }
+      ]
+    },
+    "preservedV2": 15,
+    "preservedV3": 16,
+    "stateCounts": [15, 16, 17],
+    "provenanceV2": {
+      "claims": 58,
+      "spans": 58,
+      "exactReferencedSpans": 58,
+      "unknownSourceReferences": 0,
+      "multiSpanClaims": 0
+    },
+    "provenanceV3": {
+      "claims": 59,
+      "spans": 63,
+      "exactReferencedSpans": 63,
+      "unknownSourceReferences": 0,
+      "multiSpanClaims": 4
+    },
+    "latencyMs": [125861, 164729],
+    "unresolvedCanonicalQuantity": [
+      {
+        "id": "d1b715e0-50a4-4ead-bc6a-c845885ec8ff",
+        "title": "Operations Analyst",
+        "uncertaintyCount": 0
+      },
+      {
+        "id": "deea0e57-3198-42aa-8307-cb049e9a236f",
+        "title": "Dispatch coworker training",
+        "uncertaintyCount": 0
+      }
+    ],
+    "scope": "Real V1 rich seed → reviewed rich V2 → reviewed rich V3. Pending review entries are not silently applied; archived certificate never recreated."
+  },
+  "postEquivalenceAudit": [
+    {
+      "index": 0,
+      "verdict": "SUPPORTED",
+      "reason": "The profile, summary, and all listed negations are supported by the source."
+    },
+    {
+      "index": 1,
+      "verdict": "SUPPORTED",
+      "reason": "The role, employer, dates, personal work, training, skills, and team-result attribution are supported."
+    },
+    {
+      "index": 2,
+      "verdict": "UNSUPPORTED",
+      "reason": "The summary turns a preference for a visible late-file warning into a feature the tool actually surfaced, and says operators and supervisors used the tool without direct support for that usage claim. The source asks to distinguish operational use from an externally sold product but does not definitw"
+    },
+    {
+      "index": 3,
+      "verdict": "SUPPORTED",
+      "reason": "The source supports the separate SQL handover checklist, its construction and night-shift handover documentation, and the absence of a claimed measured impact."
+    },
+    {
+      "index": 4,
+      "verdict": "SUPPORTED",
+      "reason": "The time reduction, six-run measurement, team attribution, personal contribution, coworker changes, and delivery-speed correction are all supported."
+    },
+    {
+      "index": 5,
+      "verdict": "SUPPORTED",
+      "reason": "The record reports the workshops and handbook, preserves the conflicting coworker counts as unresolved, and includes the supported five examples."
+    },
+    {
+      "index": 6,
+      "verdict": "SUPPORTED",
+      "reason": "The source supports writing SQL checks, building the separate SQL checklist, and using SQL extensively."
+    },
+    {
+      "index": 7,
+      "verdict": "UNSUPPORTED",
+      "reason": "The PostgreSQL use is supported in context, but the cited evidence span (624–806) does not match its quoted source passage, which appears at 697–879."
+    },
+    {
+      "index": 8,
+      "verdict": "UNSUPPORTED",
+      "reason": "The Git use is supported in context, but the cited evidence span (624–806) does not match its quoted source passage, which appears at 697–879."
+    },
+    {
+      "index": 9,
+      "verdict": "UNSUPPORTED",
+      "reason": "The source says Ada would sit with a supervisor and work through an example; the record converts this into a completed action of explaining the workflow. The source does support explaining validation failures, but not that completed workflow explanation."
+    },
+    {
+      "index": 10,
+      "verdict": "SUPPORTED",
+      "reason": "The source directly supports writing the Python parser for Dispatch Loom."
+    },
+    {
+      "index": 11,
+      "verdict": "SUPPORTED",
+      "reason": "The source describes Docker as a one-off exercise; the summary appropriately distinguishes that exposure from implementation experience."
+    },
+    {
+      "index": 12,
+      "verdict": "SUPPORTED",
+      "reason": "The degree, institution, and attendance dates are explicitly stated in the source."
+    },
+    {
+      "index": 13,
+      "verdict": "SUPPORTED",
+      "reason": "The source explicitly names the fictional Cedar SQL Foundations certificate, gives the date received, and clarifies that it was course completion rather than a professional license."
+    },
+    {
+      "index": 14,
+      "verdict": "SUPPORTED",
+      "reason": "The source explicitly states that the person speaks English fluently."
+    },
+    {
+      "index": 15,
+      "verdict": "SUPPORTED",
+      "reason": "The source explicitly identifies Data tools as a skill category containing Python, SQL, and PostgreSQL."
+    },
+    {
+      "index": 16,
+      "verdict": "SUPPORTED",
+      "reason": "The source explicitly identifies Collaboration as a separate skill category containing Git and coworker training."
+    }
+  ],
+  "cached100": {
+    "positives": 80,
+    "covered": 74,
+    "evidenceCoverage": 0.925,
+    "negatives": 20,
+    "unsupportedDirectSupport": [],
+    "falseAbstentionCandidateGaps": [
+      "sql-4",
+      "automation-6",
+      "automation-8",
+      "education-1",
+      "education-7",
+      "certification-8"
+    ],
+    "scope": "Same cached rankings and candidate IDs. Only source-backed course-completion/not-license packet claims corrected; raw original retained. No fresh index or ranking metric claimed."
+  },
+  "cached100Resume": {
+    "checks": 100,
+    "negativeCases": 20,
+    "unsupportedNegativeAdmissions": [],
+    "escapedIds": []
+  },
+  "support": {
+    "correct": 28,
+    "total": 30,
+    "accuracy": 0.9333333333333333,
+    "confusion": [
+      {
+        "queryId": "support-warning-wanted",
+        "expected": "SUPPORTS",
+        "actual": "SUPPORTS"
+      },
+      {
+        "queryId": "support-warning-implemented",
+        "expected": "RELATED_ONLY",
+        "actual": "RELATED_ONLY"
+      },
+      {
+        "queryId": "support-plan-completed",
+        "expected": "CONTRADICTS",
+        "actual": "CONTRADICTS"
+      },
+      {
+        "queryId": "support-plan-intended",
+        "expected": "SUPPORTS",
+        "actual": "SUPPORTS"
+      },
+      {
+        "queryId": "support-discussion-performed",
+        "expected": "CONTRADICTS",
+        "actual": "CONTRADICTS"
+      },
+      {
+        "queryId": "support-discussion-held",
+        "expected": "SUPPORTS",
+        "actual": "SUPPORTS"
+      },
+      {
+        "queryId": "support-guide-personal",
+        "expected": "SUPPORTS",
+        "actual": "SUPPORTS"
+      },
+      {
+        "queryId": "support-guide-deploy",
+        "expected": "CONTRADICTS",
+        "actual": "CONTRADICTS"
+      },
+      {
+        "queryId": "support-docker-exposure",
+        "expected": "SUPPORTS",
+        "actual": "PARTIALLY_SUPPORTS"
+      },
+      {
+        "queryId": "support-docker-production",
+        "expected": "CONTRADICTS",
+        "actual": "CONTRADICTS"
+      },
+      {
+        "queryId": "support-leadership-bounded",
+        "expected": "PARTIALLY_SUPPORTS",
+        "actual": "PARTIALLY_SUPPORTS"
+      },
+      {
+        "queryId": "support-headcount-training",
+        "expected": "RELATED_ONLY",
+        "actual": "RELATED_ONLY"
+      },
+      {
+        "queryId": "support-sql-aws-mixed",
+        "expected": "PARTIALLY_SUPPORTS",
+        "actual": "PARTIALLY_SUPPORTS"
+      },
+      {
+        "queryId": "support-sql-certificate",
+        "expected": "RELATED_ONLY",
+        "actual": "RELATED_ONLY"
+      },
+      {
+        "queryId": "support-aws-denial",
+        "expected": "CONTRADICTS",
+        "actual": "CONTRADICTS"
+      },
+      {
+        "queryId": "support-kubernetes-denial",
+        "expected": "CONTRADICTS",
+        "actual": "CONTRADICTS"
+      },
+      {
+        "queryId": "support-automation",
+        "expected": "SUPPORTS",
+        "actual": "PARTIALLY_SUPPORTS"
+      },
+      {
+        "queryId": "support-training",
+        "expected": "SUPPORTS",
+        "actual": "SUPPORTS"
+      },
+      {
+        "queryId": "support-degree",
+        "expected": "SUPPORTS",
+        "actual": "SUPPORTS"
+      },
+      {
+        "queryId": "support-course",
+        "expected": "SUPPORTS",
+        "actual": "SUPPORTS"
+      },
+      {
+        "queryId": "support-license",
+        "expected": "CONTRADICTS",
+        "actual": "CONTRADICTS"
+      },
+      {
+        "queryId": "support-sql-personal",
+        "expected": "SUPPORTS",
+        "actual": "SUPPORTS"
+      },
+      {
+        "queryId": "support-team-personal",
+        "expected": "CONTRADICTS",
+        "actual": "CONTRADICTS"
+      },
+      {
+        "queryId": "support-team-result",
+        "expected": "SUPPORTS",
+        "actual": "SUPPORTS"
+      },
+      {
+        "queryId": "support-reports-eight",
+        "expected": "SUPPORTS",
+        "actual": "SUPPORTS"
+      },
+      {
+        "queryId": "support-reports-five",
+        "expected": "CONTRADICTS",
+        "actual": "CONTRADICTS"
+      },
+      {
+        "queryId": "support-completed-warning",
+        "expected": "SUPPORTS",
+        "actual": "SUPPORTS"
+      },
+      {
+        "queryId": "support-unrelated-medical",
+        "expected": "IRRELEVANT",
+        "actual": "IRRELEVANT"
+      },
+      {
+        "queryId": "support-unrelated-language",
+        "expected": "IRRELEVANT",
+        "actual": "IRRELEVANT"
+      },
+      {
+        "queryId": "support-unrelated-sales",
+        "expected": "IRRELEVANT",
+        "actual": "IRRELEVANT"
+      }
+    ],
+    "directFalsePositiveQueries": []
+  },
+  "resume": {
+    "checks": 30,
+    "nonDirectCases": 17,
+    "unsupportedAdmissions": [],
+    "escapedIds": [],
+    "compiledDirectCases": 11,
+    "warningCanary": {
+      "scope": "Controlled malformed-canonical canary, distinct from clean-gold native query results",
+      "sourceFixture": "A-clean-v1",
+      "packet": {
+        "id": "8decb905-306e-489b-84c3-70a2c0a9a546",
+        "kind": "project",
+        "title": "Dispatch Loom",
+        "organization": "Harbor Tools",
+        "dates": {
+          "start": null,
+          "end": null
+        },
+        "summary": "Personally wrote SQL checks and implemented a visible warning for late files.",
+        "aliases": ["Dispatch Loom", "Loom", "dispatch reconciliation tool"],
+        "skills": [],
+        "outcomes": [],
+        "claims": [
+          {
+            "attribute": "action",
+            "value": "Personally designed Dispatch Loom; wrote Python parser and SQL checks",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself.",
+                "start": 166,
+                "end": 331
+              }
+            ]
+          },
+          {
+            "attribute": "tool",
+            "value": "Python; SQL; PostgreSQL; Git",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself.",
+                "start": 166,
+                "end": 331
+              },
+              {
+                "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them. I used Git for version control and PostgreSQL for the production database.",
+                "start": 624,
+                "end": 806
+              }
+            ]
+          },
+          {
+            "attribute": "context",
+            "value": "Gathered warehouse supervisor requirements and explained validation failures",
+            "attribution": "PERSONAL",
+            "evidence": [
+              {
+                "quote": "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them. I used Git for version control and PostgreSQL for the production database.",
+                "start": 624,
+                "end": 806
+              }
+            ]
+          }
+        ],
+        "uncertainties": [],
+        "relatedIds": [],
+        "support": "SUPPORTS"
+      },
+      "admittedIds": ["8decb905-306e-489b-84c3-70a2c0a9a546"],
+      "compiledIds": ["8decb905-306e-489b-84c3-70a2c0a9a546"],
+      "ir": {
+        "profile": {
+          "name": "Ada Rowan",
+          "contact": {
+            "market": "US",
+            "location": "",
+            "contact_email": "",
+            "phone": "",
+            "work_authorization": ""
+          }
+        },
+        "headline": "Operations Analyst",
+        "summary": "",
+        "skill_groups": [],
+        "experiences": [],
+        "projects": [
+          {
+            "title": "Dispatch Loom",
+            "context": "",
+            "organization": "Harbor Tools",
+            "role": "Dispatch Loom",
+            "dates": {
+              "start": null,
+              "end": null
+            },
+            "bullets": [
+              "Personally wrote SQL checks and implemented a visible warning for late files."
+            ],
+            "evidence_ids": ["8decb905-306e-489b-84c3-70a2c0a9a546"],
+            "priority": 0
+          }
+        ],
+        "education": [],
+        "certifications": [],
+        "supporting_sections": [],
+        "demo": true,
+        "section_order": [
+          "Experience",
+          "Projects",
+          "Achievements",
+          "Education",
+          "Certifications"
+        ]
+      },
+      "unsupportedWarningCompiled": true
+    }
+  },
+  "accounting": {
+    "attempts": 77,
+    "usageEvents": 77,
+    "knownCostUsd": 0.196778,
+    "unknownCostEvents": 0,
+    "attemptsWithoutUsageEvent": 0,
+    "reservedUsd": 4.7299999999999995,
+    "ceilingUsd": 5,
+    "stages": {
+      "grounding": {
+        "outcome": "SUCCESS"
+      },
+      "repeat": {
+        "outcome": "SUCCESS"
+      },
+      "sequence": {
+        "outcome": "SUCCESS"
+      },
+      "support": {
+        "outcome": "SUCCESS"
+      },
+      "answers": {
+        "outcome": "SUCCESS"
+      },
+      "answer-audit": {
+        "outcome": "SUCCESS"
+      },
+      "warning-sol": {
+        "outcome": "SUCCESS"
+      },
+      "post-equivalence": {
+        "outcome": "SUCCESS"
+      }
+    },
+    "cleanup": [
+      {
+        "stage": "grounding",
+        "accountRemoved": true,
+        "authRemoved": true,
+        "primaryBefore": 0,
+        "primaryAfter": 0
+      },
+      {
+        "stage": "repeat",
+        "accountRemoved": true,
+        "authRemoved": true,
+        "primaryBefore": 0,
+        "primaryAfter": 0
+      },
+      {
+        "stage": "sequence",
+        "accountRemoved": true,
+        "authRemoved": true,
+        "primaryBefore": 0,
+        "primaryAfter": 0
+      },
+      {
+        "stage": "support",
+        "accountRemoved": true,
+        "authRemoved": true,
+        "primaryBefore": 0,
+        "primaryAfter": 0
+      },
+      {
+        "stage": "answers",
+        "accountRemoved": true,
+        "authRemoved": true,
+        "primaryBefore": 0,
+        "primaryAfter": 0
+      },
+      {
+        "stage": "answer-audit",
+        "accountRemoved": true,
+        "authRemoved": true,
+        "primaryBefore": 0,
+        "primaryAfter": 0
+      },
+      {
+        "stage": "warning-sol",
+        "accountRemoved": true,
+        "authRemoved": true,
+        "primaryBefore": 0,
+        "primaryAfter": 0
+      },
+      {
+        "stage": "post-equivalence",
+        "accountRemoved": true,
+        "authRemoved": true,
+        "primaryBefore": 0,
+        "primaryAfter": 0
+      }
+    ]
+  },
+  "answers": {
+    "answers": 30,
+    "unsupportedQuestions": 15,
+    "unsupportedAffirmativeQualificationAnswers": 0,
+    "directlySupportedQuestions": 13,
+    "outrightSupportedQuestionFalseAbstentions": 0,
+    "partiallySupportedQuestions": 2,
+    "partialQuestionsInflatedToCompleteQualifications": 0,
+    "citationIdsValidAnswers": 30,
+    "primarySourceQualifierOmissions": 1,
+    "primarySourceQualifierOmissionIds": ["support-course"],
+    "sourceQualifierExplanation": "The answer omitted the explicitly fictional qualifier on the synthetic certificate. Preserve the independent auditor's finding conservatively; test-fixture status and real credential validity must not be silently conflated.",
+    "presentationPronounAssumptionIds": [
+      "support-guide-personal",
+      "support-docker-production",
+      "support-headcount-training",
+      "support-sql-aws-mixed",
+      "support-aws-denial",
+      "support-kubernetes-denial",
+      "support-team-personal",
+      "support-reports-eight",
+      "support-reports-five"
+    ],
+    "candidateAddressingAssumptionIds": ["support-leadership-bounded"],
+    "presentationExplanation": "The first-person source does not supply she/her pronouns. The leadership answer says 'you' although the intended product is recruiter Q&A. These are separate presentation/actor assumptions, not affirmative unsupported qualification errors.",
+    "falseAbstentionDefinition": "Complete refusal or denial of available supported facts. Bounded explanations preserving known facts while withholding unstored specifics are not counted as complete abstention. This does not certify perfect answer completeness.",
+    "cautiousAnswerIds": ["support-automation", "support-sql-personal"],
+    "cautiousAnswerExplanation": "Automation now describes the actual parser/checking work and team measurement instead of refusing all evidence, but still hedges because the packet does not use the word automation. The SQL answer accurately states that detailed check contents are unstored while acknowledging Ada personally wrote dispatch-reconciliation SQL checks. Report these limitations separately from outright false abstention.",
+    "reviewedAllAnswerIds": [
+      "support-warning-wanted",
+      "support-warning-implemented",
+      "support-plan-completed",
+      "support-plan-intended",
+      "support-discussion-performed",
+      "support-discussion-held",
+      "support-guide-personal",
+      "support-guide-deploy",
+      "support-docker-exposure",
+      "support-docker-production",
+      "support-leadership-bounded",
+      "support-headcount-training",
+      "support-sql-aws-mixed",
+      "support-sql-certificate",
+      "support-aws-denial",
+      "support-kubernetes-denial",
+      "support-automation",
+      "support-training",
+      "support-degree",
+      "support-course",
+      "support-license",
+      "support-sql-personal",
+      "support-team-personal",
+      "support-team-result",
+      "support-reports-eight",
+      "support-reports-five",
+      "support-completed-warning",
+      "support-unrelated-medical",
+      "support-unrelated-language",
+      "support-unrelated-sales"
+    ],
+    "scope": "All thirty texts inspected; model citation audit and conservative source/presentation findings reported separately. Useful scoped answers are not treated as blanket refusals.",
+    "nativeAuditUnsupportedIds": ["support-course"],
+    "nativeAuditUnfaithfulCitationIds": ["support-course"],
+    "nativeAuditFalseAbstentionIds": []
+  }
+}

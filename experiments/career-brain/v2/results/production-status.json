@@ -1,0 +1,26 @@
+{
+  "scope": "Read-only production deployment metadata; experimental repair has not been deployed",
+  "deployments": [
+    {
+      "id": "dpl_6HaZ66XEE5FycVbqYvrzWDNh6WRZ",
+      "state": "READY",
+      "url": "resume-builder-exhc4ltrp-dingus-dong.vercel.app",
+      "target": "production",
+      "gitSha": "a41613980d43e80721a676b7110fbad67e524eaa"
+    },
+    {
+      "id": "dpl_GNJGnQiH7mPGGgQ8KLEwRvKevz6T",
+      "state": "READY",
+      "url": "resume-builder-jdhw32rs0-dingus-dong.vercel.app",
+      "target": "production",
+      "gitSha": "5f14ad53045d3f005a6ba923498b3d1b753b2a27"
+    },
+    {
+      "id": "dpl_Fx5vGthP8X2ojmd1h9qpvzj1vWT4",
+      "state": "READY",
+      "url": "resume-builder-al2652ikc-dingus-dong.vercel.app",
+      "target": "production",
+      "gitSha": "56a286e6750be96dccfa35f378862f1d7d33507a"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "label": "relationship-grounding:entailment-audit:openai/gpt-6-luna-pro:chunk-0",
+  "result": {
+    "decisions": [
+      {
+        "index": 0,
+        "verdict": "SUPPORTED",
+        "reason": "The profile summary and claims, including the stated professional denials, are supported by the source."
+      },
+      {
+        "index": 1,
+        "verdict": "SUPPORTED",
+        "reason": "The employment dates, actions, tools, and training are supported. The attendance-count conflict is explicitly represented as disputed; the summary does not assert a resolved count."
+      },
+      {
+        "index": 2,
+        "verdict": "UNSUPPORTED",
+        "reason": "The summary says “The supervisors made the final dispatch decisions,” but the source says “The supervisor made the final dispatch decision.” The plural assertion is not established by that source statement."
+      },
+      {
+        "index": 3,
+        "verdict": "UNCERTAIN",
+        "reason": "Building a SQL checklist supports the SQL relationship for the project. But SQL is also attached to the handover-documentation achievement, whose action is documenting the handover; the source does not establish SQL use in that documentation action."
+      },
+      {
+        "index": 4,
+        "verdict": "SUPPORTED",
+        "reason": "The workshops, handbook, five worked examples, and unresolved 12-versus-14 attendance count are represented consistently with the source."
+      },
+      {
+        "index": 5,
+        "verdict": "UNCERTAIN",
+        "reason": "The team result, metric, and personal contribution are supported. The Python and SQL skill relationships on this achievement are not directly established by its action or achievement claims: the source identifies the contribution as the parser and checks, while the language-specific details occur in"
+      },
+      {
+        "index": 6,
+        "verdict": "UNCERTAIN",
+        "reason": "The documentation action and lack of measured impact are supported. However, SQL is attached as a skill although the source establishes SQL for the parent Roster Note checklist, not for the act of documenting its handover."
+      },
+      {
+        "index": 7,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly says Ada used Python to build Dispatch Loom and personally wrote its Python parser."
+      },
+      {
+        "index": 8,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly supports writing SQL checks, extensive SQL use, and building the separate SQL Roster Note checklist."
+      },
+      {
+        "index": 9,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly says PostgreSQL was used for the production database."
+      },
+      {
+        "index": 10,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly says Git was used for version control."
+      },
+      {
+        "index": 11,
+        "verdict": "SUPPORTED",
+        "reason": "Coworker training and the two workshops are supported, and the conflicting attendance count is accurately marked disputed."
+      }
+    ]
+  }
+}

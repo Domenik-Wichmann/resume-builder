@@ -1,0 +1,49 @@
+{
+  "id": "support-sql-certificate",
+  "text": "Does the SQL skill establish a SQL certificate?",
+  "packets": [
+    {
+      "id": "61d13bb9-743b-44e8-8f78-45c2bcf6d55a",
+      "kind": "skill",
+      "title": "SQL",
+      "organization": null,
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "summary": "Used SQL for Dispatch Loom.",
+      "aliases": ["SQL"],
+      "skills": [],
+      "outcomes": [],
+      "claims": [
+        {
+          "attribute": "tool",
+          "value": "SQL",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself.",
+              "start": 166,
+              "end": 331
+            }
+          ]
+        }
+      ],
+      "uncertainties": [],
+      "relatedIds": [],
+      "support": "RELATED_ONLY",
+      "reason": "The packet supports personal SQL use, but SQL skill evidence does not establish a SQL certificate."
+    }
+  ],
+  "expected": [
+    {
+      "id": "61d13bb9-743b-44e8-8f78-45c2bcf6d55a",
+      "support": "RELATED_ONLY"
+    }
+  ],
+  "answerGroup": "UNSUPPORTED",
+  "result": {
+    "answer": "No relevant evidence is currently stored for a SQL certificate. The available evidence shows personal use of SQL to build a dispatch reconciliation tool, but does not establish a certificate.",
+    "evidence_ids": ["61d13bb9-743b-44e8-8f78-45c2bcf6d55a"]
+  }
+}

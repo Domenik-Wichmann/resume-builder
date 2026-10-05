@@ -1,0 +1,49 @@
+{
+  "id": "support-discussion-held",
+  "text": "Did the team discuss a database migration?",
+  "packets": [
+    {
+      "id": "d6e615f6-a8da-4d2d-8406-e482915d16e2",
+      "kind": "project",
+      "title": "Discussed migration",
+      "organization": null,
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "summary": "Team discussed a database migration without performing it",
+      "aliases": [],
+      "skills": [],
+      "outcomes": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Team discussed a database migration without performing it",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "For Table Bridge, we discussed a database migration, but did not perform it.",
+              "start": 0,
+              "end": 76
+            }
+          ]
+        }
+      ],
+      "uncertainties": [],
+      "relatedIds": [],
+      "support": "SUPPORTS",
+      "reason": "The evidence explicitly records a team discussion of a database migration."
+    }
+  ],
+  "expected": [
+    {
+      "id": "d6e615f6-a8da-4d2d-8406-e482915d16e2",
+      "support": "SUPPORTS"
+    }
+  ],
+  "answerGroup": "DIRECT",
+  "result": {
+    "answer": "Yes. The team discussed a database migration, but did not perform it.",
+    "evidence_ids": ["d6e615f6-a8da-4d2d-8406-e482915d16e2"]
+  }
+}

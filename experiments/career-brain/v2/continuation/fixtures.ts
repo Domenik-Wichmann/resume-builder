@@ -1,0 +1,496 @@
+import { createHash } from "node:crypto";
+import { readFile } from "node:fs/promises";
+import { annotated } from "../annotations";
+import { goldPackets } from "../gold-packets";
+import { ground, type RichCandidate, type RichCanonical } from "../evidence";
+import { packets, type EvidencePacket, type Support } from "../packets";
+
+export const root = "experiments/career-brain/v2/continuation/results";
+export const fixture = (id: string) => annotated.find((f) => f.id === id)!;
+export const stableId = (value: string) => {
+  const h = createHash("sha256").update(value).digest("hex");
+  return `${h.slice(0, 8)}-${h.slice(8, 12)}-4${h.slice(13, 16)}-8${h.slice(17, 20)}-${h.slice(20, 32)}`;
+};
+
+// Source-reviewed native B seed is reused, not regenerated or replaced by compact gold.
+// V1 drops only the B-specific superseded 50% statement absent from the V1 source.
+export async function reviewedSeed(id: "B-messy" | "A-clean-v1") {
+  const saved: { records: RichCandidate[]; reviewNotes: string[] } = JSON.parse(
+    await readFile(
+      "experiments/career-brain/v2/results/reviewed-rich-seed.json",
+      "utf8",
+    ),
+  );
+  const source = fixture(id).source;
+  const records = structuredClone(saved.records);
+  for (const r of records) {
+    if (id === "A-clean-v1")
+      for (const c of r.claims)
+        if (c.attribute === "metric")
+          c.evidence = c.evidence.filter(
+            (s) =>
+              s.quote !== "I first said 50% time saved, but that was wrong.",
+          );
+    r.claims = r.claims.filter((c) => {
+      if (c.evidence.every((s) => source.includes(s.quote))) return true;
+      if (
+        id === "A-clean-v1" &&
+        c.attribute === "correction" &&
+        /50%/.test(c.value)
+      )
+        return false;
+      throw new Error(`Unreviewed source mismatch: ${r.title}: ${c.value}`);
+    });
+    if (!source.includes(r.source_quote))
+      throw new Error(`Invalid seed primary quote: ${r.title}`);
+  }
+  const grounded = ground(records, source);
+  if (grounded.some((r) => r.uncertainties.length))
+    throw new Error("Reviewed seed has unresolved grounding");
+  return { records: grounded, reviewNotes: saved.reviewNotes };
+}
+
+type Claim = RichCandidate["claims"][number];
+function record(
+  title: string,
+  value: string,
+  quote: string,
+  attribution: Claim["attribution"] = "PERSONAL",
+  attribute: Claim["attribute"] = "action",
+): RichCandidate {
+  return {
+    kind: "project",
+    key: title.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+    title,
+    subtitle: "",
+    summary: value,
+    organization: null,
+    start_date: null,
+    end_date: null,
+    skill_keys: [],
+    achievement_keys: [],
+    category_key: null,
+    source_quote: quote,
+    uncertainties: [],
+    aliases: [],
+    claims: [
+      {
+        attribute,
+        value,
+        attribution,
+        evidence: [{ quote, start: null, end: null }],
+      },
+    ],
+  };
+}
+
+const contrasts = [
+  {
+    name: "Warning preference",
+    quote:
+      "For Signal Desk, operators preferred a visible warning when the source file arrived late.",
+    good: "Operators preferred a visible warning for late source files",
+    bad: "Implemented a visible warning for late source files",
+    owner: "TEAM" as const,
+  },
+  {
+    name: "Planned rollout",
+    quote:
+      "For Route Note, I planned a rollout next month; it has not been completed.",
+    good: "Planned a future rollout; not completed",
+    bad: "Completed the Route Note rollout",
+    owner: "PERSONAL" as const,
+  },
+  {
+    name: "Discussed migration",
+    quote:
+      "For Table Bridge, we discussed a database migration, but did not perform it.",
+    good: "Team discussed a database migration without performing it",
+    bad: "Personally performed the database migration",
+    owner: "TEAM" as const,
+  },
+  {
+    name: "Team deployment",
+    quote:
+      "For Beacon, my brother wrote the model integration and the team deployed it. I personally only wrote the user guide. I did not build its model or deployment.",
+    good: "Team deployed Beacon; personal contribution was only the user guide",
+    bad: "Personally built the model integration and deployed Beacon",
+    owner: "TEAM" as const,
+  },
+  {
+    name: "Docker exposure",
+    quote:
+      "For Local Box, I tried Docker once in a guided local exercise; I have no production deployment experience.",
+    good: "Docker one-off guided local exposure, no production deployment",
+    bad: "Proficient Docker engineer with production deployment experience",
+    owner: "EXPOSURE" as const,
+  },
+  {
+    name: "Related training",
+    quote:
+      "For Workshop Notes, I trained twelve coworkers in two workshops. I have not managed employees.",
+    good: "Trained twelve coworkers in two workshops",
+    bad: "Managed twelve direct reports",
+    owner: "PERSONAL" as const,
+  },
+  {
+    name: "Team metric",
+    quote:
+      "For Check Ledger, team reconciliation fell from five to two hours weekly; my contribution was the parser, and coworkers changed their checking habits.",
+    good: "Team reconciliation fell from five to two hours weekly; personal contribution was the parser",
+    bad: "Personally achieved all reconciliation savings without help",
+    owner: "TEAM" as const,
+  },
+  {
+    name: "Correction precedence",
+    quote:
+      "For People Desk, I initially said five reports. Correction: eight direct reports, not five; I supervised the eight directly.",
+    good: "Supervised eight direct reports; five was corrected",
+    bad: "Supervised five direct reports",
+    owner: "PERSONAL" as const,
+  },
+  {
+    name: "Quoted example",
+    quote:
+      "For Resume Notes, the sentence 'I led 100 employees' is an example of a misleading résumé, not my career history.",
+    good: "The 100-employee statement is a misleading résumé example, not career history",
+    bad: "Led 100 employees",
+    owner: "PERSONAL" as const,
+  },
+  {
+    name: "Credential scope",
+    quote:
+      "For Course Notes, I received a SQL course-completion certificate, not a professional license.",
+    good: "SQL course-completion certificate, not a professional license",
+    bad: "Licensed SQL professional",
+    owner: "PERSONAL" as const,
+  },
+  {
+    name: "Summary inconsistency",
+    quote:
+      "For Sheet Checks, I personally wrote SQL validation checks. Operators preferred a visible warning, with no implementation stated.",
+    good: "Personally wrote SQL validation checks; warning remained a preference",
+    bad: "Personally wrote SQL checks and implemented the requested warning",
+    owner: "PERSONAL" as const,
+  },
+  {
+    name: "Completed control",
+    quote:
+      "For Alert Board, I personally implemented the visible warning and completed its rollout on 2024-06-30.",
+    good: "Personally implemented the visible warning and completed rollout on 2024-06-30",
+    bad: "Completed rollout on 2024-05-31",
+    owner: "PERSONAL" as const,
+  },
+];
+export function groundingCases() {
+  const source =
+    "SYNTHETIC contrastive career grounding qualification.\n\n" +
+    contrasts.map((c) => c.quote).join("\n\n");
+  const rows = contrasts.flatMap((c, index) => {
+    const good = record(c.name, c.good, c.quote, c.owner);
+    const bad = record(c.name, c.bad, c.quote);
+    if (c.name === "Summary inconsistency") bad.claims = good.claims;
+    return [
+      {
+        id: `ground-${index + 1}-safe`,
+        expected: "SUPPORTED" as const,
+        record: good,
+      },
+      {
+        id: `ground-${index + 1}-unsafe`,
+        expected: "UNSUPPORTED" as const,
+        record: bad,
+      },
+    ];
+  });
+  return {
+    source,
+    cases: rows.map((r) => ({ ...r, record: ground([r.record], source)[0] })),
+  };
+}
+
+export type SupportCase = {
+  id: string;
+  text: string;
+  expected: { id: string; support: Support }[];
+  packets: EvidencePacket[];
+  answerGroup: "DIRECT" | "PARTIAL" | "UNSUPPORTED";
+};
+export function supportCases() {
+  const clean = goldPackets(fixture("A-clean-v1")).map((r) => ({
+    ...r,
+    id: stableId(`clean:${r.kind}:${r.key}`),
+  }));
+  const packet = (key: string) =>
+    packets(clean, [clean.find((r) => r.key === key)!.id])[0];
+  const custom = (
+    name: string,
+    value: string,
+    quote: string,
+    attribution: Claim["attribution"] = "PERSONAL",
+    attribute: Claim["attribute"] = "action",
+  ) => {
+    const r = ground(
+      [record(name, value, quote, attribution, attribute)],
+      quote,
+    )[0];
+    const canonical: RichCanonical = {
+      ...r,
+      id: stableId(name),
+      hash: "fixture",
+      archived: false,
+      published: true,
+      updated_at: "2026-10-05T00:00:00Z",
+    };
+    return packets([canonical], [canonical.id])[0];
+  };
+  const warning = custom(
+    "Warning preference",
+    "Operators preferred a visible warning; implementation is not stated",
+    contrasts[0].quote,
+    "TEAM",
+    "scope",
+  );
+  const planned = custom(
+    "Planned rollout",
+    contrasts[1].good,
+    contrasts[1].quote,
+  );
+  const discussed = custom(
+    "Discussed migration",
+    contrasts[2].good,
+    contrasts[2].quote,
+    "TEAM",
+  );
+  const guide = custom(
+    "Beacon",
+    "Personally wrote only Beacon's user guide; did not build model or deployment",
+    contrasts[3].quote,
+  );
+  guide.claims.push({
+    attribute: "denial",
+    value: "Personal model integration and deployment",
+    attribution: "NEGATED",
+    evidence: guide.claims[0].evidence,
+  });
+  const docker = custom(
+    "Docker",
+    contrasts[4].good,
+    contrasts[4].quote,
+    "EXPOSURE",
+    "depth",
+  );
+  docker.kind = "skill";
+  const training = packet("loom-training"),
+    project = packet("dispatch-loom"),
+    sql = packet("sql"),
+    degree = packet("cedar-bsc"),
+    certificate = packet("cedar-sql");
+  const denied = custom(
+    "Professional exclusions",
+    "Professional AWS and Kubernetes use",
+    "I have never used Kubernetes, AWS or medical compliance systems professionally.",
+    "NEGATED",
+    "denial",
+  );
+  const reports = custom(
+    "Direct reports",
+    "Supervised eight direct reports, not five",
+    contrasts[7].quote,
+    "PERSONAL",
+    "scope",
+  );
+  const completed = custom(
+    "Alert Board",
+    contrasts[11].good,
+    contrasts[11].quote,
+  );
+  const definitions: [string, string, EvidencePacket, Support][] = [
+    [
+      "warning-wanted",
+      "Did operators want a visible warning?",
+      warning,
+      "SUPPORTS",
+    ],
+    [
+      "warning-implemented",
+      "Did Ada implement a visible warning for late files?",
+      warning,
+      "RELATED_ONLY",
+    ],
+    [
+      "plan-completed",
+      "Was the Route Note rollout completed?",
+      planned,
+      "CONTRADICTS",
+    ],
+    ["plan-intended", "What rollout did Ada plan?", planned, "SUPPORTS"],
+    [
+      "discussion-performed",
+      "Did Ada perform the Table Bridge database migration?",
+      discussed,
+      "CONTRADICTS",
+    ],
+    [
+      "discussion-held",
+      "Did the team discuss a database migration?",
+      discussed,
+      "SUPPORTS",
+    ],
+    [
+      "guide-personal",
+      "What did Ada personally contribute to Beacon?",
+      guide,
+      "SUPPORTS",
+    ],
+    ["guide-deploy", "Did Ada personally deploy Beacon?", guide, "CONTRADICTS"],
+    ["docker-exposure", "Has Ada had any Docker exposure?", docker, "SUPPORTS"],
+    [
+      "docker-production",
+      "Is Ada a proficient production Docker engineer?",
+      docker,
+      "RELATED_ONLY",
+    ],
+    [
+      "leadership-bounded",
+      "What evidence supports leadership experience?",
+      training,
+      "PARTIALLY_SUPPORTS",
+    ],
+    [
+      "headcount-training",
+      "Did Ada manage 100 employees?",
+      training,
+      "RELATED_ONLY",
+    ],
+    [
+      "sql-aws-mixed",
+      "Does Ada have SQL and AWS skills?",
+      sql,
+      "PARTIALLY_SUPPORTS",
+    ],
+    [
+      "sql-certificate",
+      "Does the SQL skill establish a SQL certificate?",
+      sql,
+      "RELATED_ONLY",
+    ],
+    ["aws-denial", "Has Ada used AWS professionally?", denied, "CONTRADICTS"],
+    [
+      "kubernetes-denial",
+      "Has Ada used Kubernetes professionally?",
+      denied,
+      "CONTRADICTS",
+    ],
+    [
+      "automation",
+      "Has Ada automated repetitive reconciliation work?",
+      project,
+      "SUPPORTS",
+    ],
+    ["training", "Has Ada trained coworkers?", training, "SUPPORTS"],
+    ["degree", "What degree did Ada earn?", degree, "SUPPORTS"],
+    ["course", "What course completion is recorded?", certificate, "SUPPORTS"],
+    [
+      "license",
+      "Does Ada hold a professional license?",
+      certificate,
+      "CONTRADICTS",
+    ],
+    [
+      "sql-personal",
+      "What SQL checks did Ada personally implement?",
+      project,
+      "SUPPORTS",
+    ],
+    [
+      "team-personal",
+      "Did Ada alone cause the entire three-hour weekly saving?",
+      packet("loom-time"),
+      "CONTRADICTS",
+    ],
+    [
+      "team-result",
+      "What measured team reconciliation result is recorded?",
+      packet("loom-time"),
+      "SUPPORTS",
+    ],
+    [
+      "reports-eight",
+      "Did Ada supervise eight direct reports?",
+      reports,
+      "SUPPORTS",
+    ],
+    [
+      "reports-five",
+      "Did Ada supervise five direct reports?",
+      reports,
+      "CONTRADICTS",
+    ],
+    [
+      "completed-warning",
+      "Did Ada implement the Alert Board warning?",
+      completed,
+      "SUPPORTS",
+    ],
+    [
+      "unrelated-medical",
+      "What emergency surgery did Ada perform?",
+      degree,
+      "IRRELEVANT",
+    ],
+    [
+      "unrelated-language",
+      "What German fluency does Ada have?",
+      planned,
+      "IRRELEVANT",
+    ],
+    ["unrelated-sales", "What sales quota did Ada own?", warning, "IRRELEVANT"],
+  ];
+  return definitions.map(([id, text, p, support]): SupportCase => ({
+    id: `support-${id}`,
+    text,
+    packets: [p],
+    expected: [{ id: p.id, support }],
+    answerGroup:
+      support === "SUPPORTS"
+        ? "DIRECT"
+        : support === "PARTIALLY_SUPPORTS"
+          ? "PARTIAL"
+          : "UNSUPPORTED",
+  }));
+}
+
+export const diffOracle = {
+  version: "2.2-rich-state",
+  basis:
+    "Source-based factual changes; frozen before continuation provider calls. Original strict labels and runs stay preserved.",
+  corrections: [
+    "V2 residual unnamed course-completion sentence makes named certificate removal underdetermined: REVIEW, not confident archival. Historical award remains known; no explicit revocation.",
+    "Same-source rich repeat allows supported new fact enrichment but counts it separately; semantically equivalent claim wording must not trigger UPDATED.",
+    "V2 handbook examples may update both training achievement and records already asserting handbook content; count factual assertions, not fixed record decomposition.",
+    "V3 attendance disagreement requires REVIEW wherever a canonical assertion retains unqualified 12-person attendance, including summaries and related context.",
+    "V3 SQL depth is a new explicit fact; UPDATE is correct. Night-shift handover may remain within Roster Note or a linked achievement.",
+    "Certificate continuity is REVIEW in V2 and unchanged/restated in V3 if never archived; a preserved UUID is mandatory.",
+  ],
+  requiredTransitions: {
+    V2: [
+      "employment-end-2024-06-30",
+      "roster-added",
+      "handbook-five-examples",
+      "certificate-review",
+      "team-metric-stable",
+      "warning-still-preference",
+    ],
+    V3: [
+      "employment-end-stable",
+      "roster-night-handover",
+      "training-attendance-review",
+      "sql-depth-extensive",
+      "docker-exposure-only",
+      "certificate-same-uuid",
+      "team-metric-stable",
+      "warning-still-preference",
+    ],
+  },
+};

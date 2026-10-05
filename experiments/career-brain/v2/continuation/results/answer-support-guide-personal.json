@@ -1,0 +1,61 @@
+{
+  "id": "support-guide-personal",
+  "text": "What did Ada personally contribute to Beacon?",
+  "packets": [
+    {
+      "id": "c0973e9a-fb7d-4cf0-8ec2-9ee321072f4f",
+      "kind": "project",
+      "title": "Beacon",
+      "organization": null,
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "summary": "Personally wrote only Beacon's user guide; did not build model or deployment",
+      "aliases": [],
+      "skills": [],
+      "outcomes": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Personally wrote only Beacon's user guide; did not build model or deployment",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For Beacon, my brother wrote the model integration and the team deployed it. I personally only wrote the user guide. I did not build its model or deployment.",
+              "start": 0,
+              "end": 157
+            }
+          ]
+        },
+        {
+          "attribute": "denial",
+          "value": "Personal model integration and deployment",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "For Beacon, my brother wrote the model integration and the team deployed it. I personally only wrote the user guide. I did not build its model or deployment.",
+              "start": 0,
+              "end": 157
+            }
+          ]
+        }
+      ],
+      "uncertainties": [],
+      "relatedIds": [],
+      "support": "SUPPORTS",
+      "reason": "Ada says she personally wrote Beacon's user guide; the model integration and deployment were done by others."
+    }
+  ],
+  "expected": [
+    {
+      "id": "c0973e9a-fb7d-4cf0-8ec2-9ee321072f4f",
+      "support": "SUPPORTS"
+    }
+  ],
+  "answerGroup": "DIRECT",
+  "result": {
+    "answer": "Ada personally wrote Beacon’s user guide. She did not build its model or deployment.",
+    "evidence_ids": ["c0973e9a-fb7d-4cf0-8ec2-9ee321072f4f"]
+  }
+}

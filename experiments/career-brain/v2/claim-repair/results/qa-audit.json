@@ -1,0 +1,36 @@
+{
+  "audits": [
+    {
+      "id": "unresolved-quantity",
+      "staleAffirmation": false,
+      "unsupportedAssertions": [],
+      "falseAbstention": false,
+      "faithfulCitations": true,
+      "reason": "Correctly identifies the coworker count as unresolved and avoids affirming either number. The two-workshop training action is confirmed and supported by the cited packet."
+    },
+    {
+      "id": "old-value-new-conflict",
+      "staleAffirmation": false,
+      "unsupportedAssertions": [],
+      "falseAbstention": false,
+      "faithfulCitations": true,
+      "reason": "Correctly advises against stating exactly 12, identifies the unresolved 12-versus-14 discrepancy, and offers confirmed training and handbook details without a count. The cited packets support these claims."
+    },
+    {
+      "id": "superseded-fact",
+      "staleAffirmation": false,
+      "unsupportedAssertions": [],
+      "falseAbstention": false,
+      "faithfulCitations": true,
+      "reason": "Affirms the confirmed figure of eight and mentions five only as corrected, superseded history. The citation supports both statements."
+    },
+    {
+      "id": "team-personal-conflict",
+      "staleAffirmation": false,
+      "unsupportedAssertions": [],
+      "falseAbstention": false,
+      "faithfulCitations": true,
+      "reason": "Explicitly identifies personal model ownership as unresolved and does not claim Ada built it. The user-guide detail is confirmed and supported by the citation."
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+﻿{
+  "scope": "Scoped measurement-equivalence clarification before repeat equivalence calls",
+  "reason": "The two historical representation-only updates decomposed a correction identifying reconciliation, not delivery, into a separate delivery-measurement denial. The selected bounded comparator now treats a scoped denial entailed by an existing measurement-scope correction as representation only, without widening it to unrelated measurements.",
+  "protocol": "No architecture or model change. Optional continuity flag; historical comparator default and all raw artifacts remain unchanged."
+}

@@ -1,0 +1,53 @@
+{
+  "label": "sequence:cross-record-factual-conflicts",
+  "result": {
+    "conflicts": [
+      {
+        "key": "Dispatch Loom workshop attendance",
+        "reason": "The source gives conflicting attendance counts—12 coworkers in the initial account and 14 on a later attendance sheet—and explicitly says the discrepancy cannot be resolved.",
+        "refs": [
+          "experience:operations-analyst-dd5de8b403:7",
+          "achievement:dispatch-coworker-training-184996f0f6:2",
+          "achievement:dispatch-coworker-training-184996f0f6:5",
+          "skill:coworker-training-888713667e:2"
+        ],
+        "quotes": [
+          "I personally trained 12 dispatch coworkers in two workshops",
+          "I remember 12 coworkers at the workshops, but a later attendance sheet says 14; I cannot resolve this."
+        ],
+        "safeClaims": [
+          {
+            "recordKey": "experience:operations-analyst-dd5de8b403",
+            "value": "Personally trained dispatch coworkers in two workshops",
+            "attribute": "action",
+            "attribution": "PERSONAL",
+            "quotes": [
+              "I personally trained",
+              "dispatch coworkers in two workshops"
+            ]
+          },
+          {
+            "recordKey": "achievement:dispatch-coworker-training-184996f0f6",
+            "value": "Personally trained dispatch coworkers in two workshops",
+            "attribute": "action",
+            "attribution": "PERSONAL",
+            "quotes": [
+              "I personally trained",
+              "dispatch coworkers in two workshops"
+            ]
+          },
+          {
+            "recordKey": "skill:coworker-training-888713667e",
+            "value": "Personally trained dispatch coworkers in two workshops",
+            "attribute": "action",
+            "attribution": "PERSONAL",
+            "quotes": [
+              "I personally trained",
+              "dispatch coworkers in two workshops"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

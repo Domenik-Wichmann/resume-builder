@@ -1,0 +1,1404 @@
+{
+  "budget": {
+    "maxUsd": 5,
+    "inferenceCalls": 80,
+    "noRetries": true
+  },
+  "ledger": [
+    {
+      "label": "grounding:entailment-audit:openai/gpt-6-luna-pro:chunk-0",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 18770
+    },
+    {
+      "label": "grounding:entailment-audit:openai/gpt-6-luna-pro:chunk-12",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 14655
+    },
+    {
+      "label": "grounding:assertion-grounding-0",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 12491
+    },
+    {
+      "label": "grounding:assertion-grounding-24",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 16620
+    },
+    {
+      "label": "grounding:assertion-grounding-0",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 19563
+    },
+    {
+      "label": "grounding:assertion-grounding-24",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 5375
+    },
+    {
+      "label": "repeat:rich-extract",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 49277
+    },
+    {
+      "label": "repeat:entailment-audit:openai/gpt-6-luna-pro:chunk-0",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 23067
+    },
+    {
+      "label": "repeat:entailment-audit:openai/gpt-6-luna-pro:chunk-12",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 8978
+    },
+    {
+      "label": "repeat:bounded-fact-equivalence",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 9485
+    },
+    {
+      "label": "repeat:rich-extract",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 45944
+    },
+    {
+      "label": "repeat:entailment-audit:openai/gpt-6-luna-pro:chunk-0",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 25411
+    },
+    {
+      "label": "repeat:entailment-audit:openai/gpt-6-luna-pro:chunk-12",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 9532
+    },
+    {
+      "label": "repeat:bounded-fact-equivalence",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 10273
+    },
+    {
+      "label": "repeat:rich-extract",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 49429
+    },
+    {
+      "label": "repeat:entailment-audit:openai/gpt-6-luna-pro:chunk-0",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 26194
+    },
+    {
+      "label": "repeat:entailment-audit:openai/gpt-6-luna-pro:chunk-12",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 9756
+    },
+    {
+      "label": "repeat:bounded-fact-equivalence",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 15726
+    },
+    {
+      "label": "repeat:rich-extract",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 55554
+    },
+    {
+      "label": "repeat:entailment-audit:openai/gpt-6-luna-pro:chunk-0",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 36355
+    },
+    {
+      "label": "repeat:entailment-audit:openai/gpt-6-luna-pro:chunk-12",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 11206
+    },
+    {
+      "label": "repeat:bounded-fact-equivalence",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 8118
+    },
+    {
+      "label": "repeat:rich-extract",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 60168
+    },
+    {
+      "label": "repeat:entailment-audit:openai/gpt-6-luna-pro:chunk-0",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 40564
+    },
+    {
+      "label": "repeat:entailment-audit:openai/gpt-6-luna-pro:chunk-12",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 16612
+    },
+    {
+      "label": "repeat:bounded-fact-equivalence",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 13211
+    },
+    {
+      "label": "sequence:rich-extract",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 46303
+    },
+    {
+      "label": "sequence:entailment-audit:openai/gpt-6-luna-pro:chunk-0",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 38092
+    },
+    {
+      "label": "sequence:entailment-audit:openai/gpt-6-luna-pro:chunk-12",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 13587
+    },
+    {
+      "label": "sequence:conditional-source-coverage",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 12166
+    },
+    {
+      "label": "sequence:bounded-fact-equivalence",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 15683
+    },
+    {
+      "label": "sequence:rich-extract",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 66373
+    },
+    {
+      "label": "sequence:entailment-audit:openai/gpt-6-luna-pro:chunk-0",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 52926
+    },
+    {
+      "label": "sequence:entailment-audit:openai/gpt-6-luna-pro:chunk-12",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 23779
+    },
+    {
+      "label": "sequence:bounded-fact-equivalence",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 21637
+    },
+    {
+      "label": "support:support-adjudication-0",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 78100
+    },
+    {
+      "label": "support:support-adjudication-25",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 60907
+    },
+    {
+      "label": "support:support-adjudication-50",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 87126
+    },
+    {
+      "label": "support:support-adjudication-75",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 60253
+    },
+    {
+      "label": "support:support-adjudication-0",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 36284
+    },
+    {
+      "label": "support:support-adjudication-25",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 7945
+    },
+    {
+      "label": "answers:answer-support-warning-wanted",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 3761
+    },
+    {
+      "label": "answers:answer-support-warning-implemented",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 3397
+    },
+    {
+      "label": "answers:answer-support-plan-completed",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 2587
+    },
+    {
+      "label": "answers:answer-support-plan-intended",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 2715
+    },
+    {
+      "label": "answers:answer-support-discussion-performed",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 3105
+    },
+    {
+      "label": "answers:answer-support-discussion-held",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 3506
+    },
+    {
+      "label": "answers:answer-support-guide-personal",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 1669
+    },
+    {
+      "label": "answers:answer-support-guide-deploy",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 2824
+    },
+    {
+      "label": "answers:answer-support-docker-exposure",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 2108
+    },
+    {
+      "label": "answers:answer-support-docker-production",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 2419
+    },
+    {
+      "label": "answers:answer-support-leadership-bounded",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 4009
+    },
+    {
+      "label": "answers:answer-support-headcount-training",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 3380
+    },
+    {
+      "label": "answers:answer-support-sql-aws-mixed",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 3070
+    },
+    {
+      "label": "answers:answer-support-sql-certificate",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 3061
+    },
+    {
+      "label": "answers:answer-support-aws-denial",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 1790
+    },
+    {
+      "label": "answers:answer-support-kubernetes-denial",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 1821
+    },
+    {
+      "label": "answers:answer-support-automation",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 3366
+    },
+    {
+      "label": "answers:answer-support-training",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 2702
+    },
+    {
+      "label": "answers:answer-support-degree",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 2011
+    },
+    {
+      "label": "answers:answer-support-course",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 3002
+    },
+    {
+      "label": "answers:answer-support-license",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 2545
+    },
+    {
+      "label": "answers:answer-support-sql-personal",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 2851
+    },
+    {
+      "label": "answers:answer-support-team-personal",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 1603
+    },
+    {
+      "label": "answers:answer-support-team-result",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 1793
+    },
+    {
+      "label": "answers:answer-support-reports-eight",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 1434
+    },
+    {
+      "label": "answers:answer-support-reports-five",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 2393
+    },
+    {
+      "label": "answers:answer-support-completed-warning",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 3267
+    },
+    {
+      "label": "answers:answer-support-unrelated-medical",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 3418
+    },
+    {
+      "label": "answers:answer-support-unrelated-language",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 1626
+    },
+    {
+      "label": "answers:answer-support-unrelated-sales",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.025,
+      "outcome": "SUCCESS",
+      "latencyMs": 3170
+    },
+    {
+      "label": "answer-audit:faithfulness-audit-0",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 21197
+    },
+    {
+      "label": "answer-audit:faithfulness-audit-10",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 31949
+    },
+    {
+      "label": "answer-audit:faithfulness-audit-20",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 26041
+    },
+    {
+      "label": "warning-sol:entailment-audit:openai/gpt-6-sol:chunk-0",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.3,
+      "outcome": "SUCCESS",
+      "latencyMs": 6738
+    },
+    {
+      "label": "post-equivalence:entailment-audit:openai/gpt-6-luna-pro:chunk-0",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 59575
+    },
+    {
+      "label": "post-equivalence:entailment-audit:openai/gpt-6-luna-pro:chunk-12",
+      "provider": "OPENROUTER",
+      "reservedUsd": 0.08,
+      "outcome": "SUCCESS",
+      "latencyMs": 12237
+    }
+  ],
+  "usage": [
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_entailment",
+      "input_tokens": 9703,
+      "output_tokens": 2209,
+      "units": null,
+      "provider_cost_micro": 1930,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_entailment",
+      "input_tokens": 9955,
+      "output_tokens": 2054,
+      "units": null,
+      "provider_cost_micro": 1869,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "career_continuation_assertion_audit",
+      "input_tokens": 10304,
+      "output_tokens": 2158,
+      "units": null,
+      "provider_cost_micro": 1955,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "career_continuation_assertion_audit",
+      "input_tokens": 10857,
+      "output_tokens": 2603,
+      "units": null,
+      "provider_cost_micro": 2159,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "career_continuation_assertion_audit",
+      "input_tokens": 14308,
+      "output_tokens": 2842,
+      "units": null,
+      "provider_cost_micro": 2527,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "career_continuation_assertion_audit",
+      "input_tokens": 5168,
+      "output_tokens": 545,
+      "units": null,
+      "provider_cost_micro": 712,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_rich",
+      "input_tokens": 32103,
+      "output_tokens": 11597,
+      "units": null,
+      "provider_cost_micro": 8325,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_entailment",
+      "input_tokens": 26543,
+      "output_tokens": 2780,
+      "units": null,
+      "provider_cost_micro": 3361,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_entailment",
+      "input_tokens": 12361,
+      "output_tokens": 909,
+      "units": null,
+      "provider_cost_micro": 1461,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_equivalence",
+      "input_tokens": 7928,
+      "output_tokens": 1015,
+      "units": null,
+      "provider_cost_micro": 1174,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_rich",
+      "input_tokens": 32403,
+      "output_tokens": 11782,
+      "units": null,
+      "provider_cost_micro": 7763,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_entailment",
+      "input_tokens": 25755,
+      "output_tokens": 3479,
+      "units": null,
+      "provider_cost_micro": 3660,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_entailment",
+      "input_tokens": 12458,
+      "output_tokens": 809,
+      "units": null,
+      "provider_cost_micro": 1421,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_equivalence",
+      "input_tokens": 7994,
+      "output_tokens": 1084,
+      "units": null,
+      "provider_cost_micro": 1217,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_rich",
+      "input_tokens": 32954,
+      "output_tokens": 12684,
+      "units": null,
+      "provider_cost_micro": 8269,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_entailment",
+      "input_tokens": 26821,
+      "output_tokens": 3327,
+      "units": null,
+      "provider_cost_micro": 3675,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_entailment",
+      "input_tokens": 12412,
+      "output_tokens": 881,
+      "units": null,
+      "provider_cost_micro": 1046,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_equivalence",
+      "input_tokens": 19498,
+      "output_tokens": 2074,
+      "units": null,
+      "provider_cost_micro": 2492,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_rich",
+      "input_tokens": 32689,
+      "output_tokens": 12804,
+      "units": null,
+      "provider_cost_micro": 8302,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_entailment",
+      "input_tokens": 27477,
+      "output_tokens": 3925,
+      "units": null,
+      "provider_cost_micro": 4035,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_entailment",
+      "input_tokens": 14119,
+      "output_tokens": 1271,
+      "units": null,
+      "provider_cost_micro": 1792,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_equivalence",
+      "input_tokens": 7095,
+      "output_tokens": 831,
+      "units": null,
+      "provider_cost_micro": 964,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_rich",
+      "input_tokens": 33136,
+      "output_tokens": 12462,
+      "units": null,
+      "provider_cost_micro": 8176,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_entailment",
+      "input_tokens": 27209,
+      "output_tokens": 5001,
+      "units": null,
+      "provider_cost_micro": 4577,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_entailment",
+      "input_tokens": 14548,
+      "output_tokens": 1769,
+      "units": null,
+      "provider_cost_micro": 2075,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_equivalence",
+      "input_tokens": 8462,
+      "output_tokens": 1510,
+      "units": null,
+      "provider_cost_micro": 1419,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_rich",
+      "input_tokens": 23731,
+      "output_tokens": 9464,
+      "units": null,
+      "provider_cost_micro": 6614,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_entailment",
+      "input_tokens": 21054,
+      "output_tokens": 5249,
+      "units": null,
+      "provider_cost_micro": 4256,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_entailment",
+      "input_tokens": 6953,
+      "output_tokens": 1267,
+      "units": null,
+      "provider_cost_micro": 1185,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_coverage",
+      "input_tokens": 7283,
+      "output_tokens": 1212,
+      "units": null,
+      "provider_cost_micro": 1176,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_equivalence",
+      "input_tokens": 12054,
+      "output_tokens": 1683,
+      "units": null,
+      "provider_cost_micro": 1759,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_rich",
+      "input_tokens": 25534,
+      "output_tokens": 10906,
+      "units": null,
+      "provider_cost_micro": 7641,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_entailment",
+      "input_tokens": 22749,
+      "output_tokens": 5526,
+      "units": null,
+      "provider_cost_micro": 4537,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_entailment",
+      "input_tokens": 7991,
+      "output_tokens": 2029,
+      "units": null,
+      "provider_cost_micro": 1691,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_equivalence",
+      "input_tokens": 21722,
+      "output_tokens": 3042,
+      "units": null,
+      "provider_cost_micro": 3303,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_support",
+      "input_tokens": 37244,
+      "output_tokens": 16417,
+      "units": null,
+      "provider_cost_micro": 11320,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_support",
+      "input_tokens": 30582,
+      "output_tokens": 13214,
+      "units": null,
+      "provider_cost_micro": 9142,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_support",
+      "input_tokens": 36126,
+      "output_tokens": 15878,
+      "units": null,
+      "provider_cost_micro": 10948,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_support",
+      "input_tokens": 28297,
+      "output_tokens": 11719,
+      "units": null,
+      "provider_cost_micro": 8325,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_support",
+      "input_tokens": 21511,
+      "output_tokens": 7184,
+      "units": null,
+      "provider_cost_micro": 5333,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_support",
+      "input_tokens": 6478,
+      "output_tokens": 1209,
+      "units": null,
+      "provider_cost_micro": 1126,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 413,
+      "output_tokens": 100,
+      "units": null,
+      "provider_cost_micro": 92,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 422,
+      "output_tokens": 134,
+      "units": null,
+      "provider_cost_micro": 110,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 402,
+      "output_tokens": 98,
+      "units": null,
+      "provider_cost_micro": 90,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 407,
+      "output_tokens": 95,
+      "units": null,
+      "provider_cost_micro": 89,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 410,
+      "output_tokens": 118,
+      "units": null,
+      "provider_cost_micro": 100,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 404,
+      "output_tokens": 95,
+      "units": null,
+      "provider_cost_micro": 88,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 507,
+      "output_tokens": 81,
+      "units": null,
+      "provider_cost_micro": 92,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 504,
+      "output_tokens": 109,
+      "units": null,
+      "provider_cost_micro": 105,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 424,
+      "output_tokens": 61,
+      "units": null,
+      "provider_cost_micro": 73,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 427,
+      "output_tokens": 159,
+      "units": null,
+      "provider_cost_micro": 123,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 472,
+      "output_tokens": 153,
+      "units": null,
+      "provider_cost_micro": 124,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 464,
+      "output_tokens": 216,
+      "units": null,
+      "provider_cost_micro": 155,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 417,
+      "output_tokens": 133,
+      "units": null,
+      "provider_cost_micro": 109,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 418,
+      "output_tokens": 186,
+      "units": null,
+      "provider_cost_micro": 135,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 392,
+      "output_tokens": 79,
+      "units": null,
+      "provider_cost_micro": 79,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 392,
+      "output_tokens": 85,
+      "units": null,
+      "provider_cost_micro": 82,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 1112,
+      "output_tokens": 185,
+      "units": null,
+      "provider_cost_micro": 232,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 455,
+      "output_tokens": 83,
+      "units": null,
+      "provider_cost_micro": 87,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 424,
+      "output_tokens": 108,
+      "units": null,
+      "provider_cost_micro": 97,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 456,
+      "output_tokens": 75,
+      "units": null,
+      "provider_cost_micro": 84,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 455,
+      "output_tokens": 169,
+      "units": null,
+      "provider_cost_micro": 130,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 521,
+      "output_tokens": 97,
+      "units": null,
+      "provider_cost_micro": 101,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 405,
+      "output_tokens": 44,
+      "units": null,
+      "provider_cost_micro": 63,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 527,
+      "output_tokens": 84,
+      "units": null,
+      "provider_cost_micro": 95,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 417,
+      "output_tokens": 213,
+      "units": null,
+      "provider_cost_micro": 149,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 1087,
+      "output_tokens": 195,
+      "units": null,
+      "provider_cost_micro": 234,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 640,
+      "output_tokens": 79,
+      "units": null,
+      "provider_cost_micro": 104,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 629,
+      "output_tokens": 94,
+      "units": null,
+      "provider_cost_micro": 110,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 418,
+      "output_tokens": 60,
+      "units": null,
+      "provider_cost_micro": 72,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna",
+      "operation_type": "career_continuation_answer",
+      "input_tokens": 421,
+      "output_tokens": 87,
+      "units": null,
+      "provider_cost_micro": 86,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "career_continuation_answer_audit",
+      "input_tokens": 12288,
+      "output_tokens": 2674,
+      "units": null,
+      "provider_cost_micro": 2378,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "career_continuation_answer_audit",
+      "input_tokens": 16652,
+      "output_tokens": 4611,
+      "units": null,
+      "provider_cost_micro": 3729,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "career_continuation_answer_audit",
+      "input_tokens": 17109,
+      "output_tokens": 4149,
+      "units": null,
+      "provider_cost_micro": 3526,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-sol",
+      "operation_type": "requalification_entailment",
+      "input_tokens": 2646,
+      "output_tokens": 363,
+      "units": null,
+      "provider_cost_micro": 10244,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_entailment",
+      "input_tokens": 28286,
+      "output_tokens": 10348,
+      "units": null,
+      "provider_cost_micro": 7630,
+      "status": "SUCCESS"
+    },
+    {
+      "provider": "OPENROUTER",
+      "model": "openai/gpt-6-luna-pro",
+      "operation_type": "requalification_entailment",
+      "input_tokens": 7951,
+      "output_tokens": 1295,
+      "units": null,
+      "provider_cost_micro": 1269,
+      "status": "SUCCESS"
+    }
+  ],
+  "stages": {
+    "grounding": {
+      "outcome": "SUCCESS"
+    },
+    "repeat": {
+      "outcome": "SUCCESS"
+    },
+    "sequence": {
+      "outcome": "SUCCESS"
+    },
+    "support": {
+      "outcome": "SUCCESS"
+    },
+    "answers": {
+      "outcome": "SUCCESS"
+    },
+    "answer-audit": {
+      "outcome": "SUCCESS"
+    },
+    "warning-sol": {
+      "outcome": "SUCCESS"
+    },
+    "post-equivalence": {
+      "outcome": "SUCCESS"
+    }
+  },
+  "cleanup": [
+    {
+      "stage": "grounding",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "repeat",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "sequence",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "support",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "answers",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "answer-audit",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "warning-sol",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    },
+    {
+      "stage": "post-equivalence",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryBefore": 0,
+      "primaryAfter": 0
+    }
+  ]
+}

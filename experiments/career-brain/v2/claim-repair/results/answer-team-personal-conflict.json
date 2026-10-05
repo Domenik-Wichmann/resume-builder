@@ -1,0 +1,41 @@
+{
+  "id": "team-personal-conflict",
+  "question": "Did Ada personally build the predictive model?",
+  "packets": [
+    {
+      "id": "ownership-conflict",
+      "claims": [
+        {
+          "attribute": "ownership",
+          "value": "Ada built the predictive model",
+          "attribution": "PERSONAL",
+          "availability": "DISPUTED",
+          "evidence": [
+            {
+              "quote": "The first notes said Ada built the model; later team notes attribute it to Mira. Ownership cannot be resolved.",
+              "start": 0,
+              "end": 110
+            }
+          ]
+        },
+        {
+          "attribute": "action",
+          "value": "Wrote the user guide",
+          "attribution": "PERSONAL",
+          "availability": "CONFIRMED",
+          "evidence": [
+            {
+              "quote": "Ada wrote the user guide.",
+              "start": 0,
+              "end": 25
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "answer": {
+    "answer": "Whether Ada personally built the predictive model is unresolved; the ownership claim is disputed. Confirmed: Ada wrote the user guide.",
+    "evidence_ids": ["ownership-conflict"]
+  }
+}

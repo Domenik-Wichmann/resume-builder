@@ -1,0 +1,387 @@
+[
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 6176,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 559,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 2243,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 3199,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 2834,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 3022,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 7239,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-sol",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 1501,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-sol",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 686,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 14449,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 3307,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 577,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 6438,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 11612,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 3192,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 711,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 4298,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 13105,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 3149,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 1224,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 3558,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 11455,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 4394,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 1240,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 1418,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 12810,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 3365,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 5986,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 2470,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 3033,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 712,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 15965,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 4699,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 1414,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 1680,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 964,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 1901,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 16209,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 5348,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 1510,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 3571,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 3206,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 6424,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 115,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 178,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 62,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 105,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 1547,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 2788,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 319,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 2710,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 3699,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 3657,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 291,
+    "error": null
+  },
+  {
+    "model": "openai/gpt-6-luna-pro",
+    "status": 200,
+    "finishReason": "stop",
+    "outputTokens": 669,
+    "error": null
+  }
+]

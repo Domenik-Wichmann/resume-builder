@@ -1,0 +1,27 @@
+{
+  "label": "repeat:bounded-actor-factual-equivalence",
+  "result": {
+    "decisions": [
+      {
+        "key": "experience:operations-analyst-dd5de8b403",
+        "verdict": "ENRICHMENT",
+        "reason": "The added correction claim—that an initial 2020 estimate was corrected by the 2021-02-01 payroll date—is source-supported and was not entailed by the prior claims. The training and handbook claims restate already represented facts."
+      },
+      {
+        "key": "skill:postgresql-4b6475d427",
+        "verdict": "ENRICHMENT",
+        "reason": "The added claim specifies PostgreSQL’s use for the production database, a source-supported purpose not represented in the prior generic PostgreSQL claim."
+      },
+      {
+        "key": "skill:git-820dc39c23",
+        "verdict": "ENRICHMENT",
+        "reason": "The added claim specifies Git’s use for version control, a source-supported purpose not represented in the prior generic Git claim."
+      },
+      {
+        "key": "certification:cedar-sql-foundations-ed912d30a4",
+        "verdict": "EQUIVALENT",
+        "reason": "The added context claim restates the certificate’s 2020-08-15 receipt date, already represented by the prior credential claim and record date. The course-completion and not-a-license context is unchanged."
+      }
+    ]
+  }
+}

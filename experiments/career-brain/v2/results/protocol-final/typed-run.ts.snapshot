@@ -1,0 +1,563 @@
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { randomUUID } from "node:crypto";
+import { database } from "../../../src/lib/db";
+import { primaryAccountId } from "../../../src/lib/account-id";
+import { loadCanonical } from "../../../src/lib/ingestion/repository";
+import {
+  kinds,
+  tableFor,
+  type Candidate,
+} from "../../../src/lib/ingestion/model";
+import { evaluate } from "../metrics";
+import type { Gate } from "../variants";
+import { freezeBenchmark, revised } from "./benchmark";
+import { annotated, freezeAnnotations } from "./annotations";
+import {
+  ablation,
+  extractRich,
+  resolveFactualEquivalence,
+  auditGrounding,
+  type Ablation,
+} from "./pipeline";
+import {
+  factualHash,
+  richDiff,
+  type RichCandidate,
+  type RichCanonical,
+} from "./evidence";
+import { retrievalQualification } from "./retrieval";
+import {
+  qualificationMember,
+  richDatabaseState,
+  applyReviewedGold,
+} from "./database-state";
+import { repairExtract } from "./repair";
+import { complete } from "./provider";
+import { extractionSchema } from "../../../src/lib/ingestion/model";
+import { improvedInstructions } from "./pipeline";
+import { semanticAdjudication } from "./semantic-adjudication";
+import type { EvidencePacket } from "./packets";
+
+type Run = {
+  fixture: string;
+  variant: string;
+  repetition: number;
+  rows: Candidate[];
+  rich?: RichCandidate[];
+  metrics: ReturnType<typeof evaluate>;
+  latencyMs: number;
+  error?: string;
+  decisions?: unknown;
+  changes?: unknown;
+};
+type Ledger = {
+  label: string;
+  provider: string;
+  reservedUsd: number;
+  latencyMs: number;
+  outcome: string;
+};
+type Results = {
+  benchmarkHash: string;
+  budget: {
+    maxUsd: number;
+    inferenceCalls: number;
+    embeddingCalls: number;
+    noRetries: boolean;
+  };
+  budgetAmendments?: unknown[];
+  ledger: Ledger[];
+  runs: Run[];
+  usage: Record<string, unknown>[];
+  cleanup: Record<string, unknown>[];
+};
+const root = "experiments/career-brain/v2/results";
+await mkdir(root, { recursive: true });
+const benchmarkHash = await freezeBenchmark();
+await freezeAnnotations();
+let results: Results;
+try {
+  results = JSON.parse(await readFile(root + "/results.json", "utf8"));
+} catch {
+  results = {
+    benchmarkHash,
+    budget: {
+      maxUsd: 12,
+      inferenceCalls: 80,
+      embeddingCalls: 16,
+      noRetries: true,
+    },
+    ledger: [],
+    runs: [],
+    usage: [],
+    cleanup: [],
+  };
+}
+if (results.benchmarkHash !== benchmarkHash)
+  throw new Error("Benchmark changed after ledger initialized");
+if (results.budget.inferenceCalls === 80) {
+  results.budgetAmendments = [
+    {
+      reason:
+        "Cover controlled ablation, repeats, revision chain, boundaries and downstream safety within unchanged dollar cap. Later private, non-primary qualification stages use this separate hard budget gate, leaving the shared public 100-request quota unchanged; no quota reset or production limit increase.",
+      originalInferenceCap: 80,
+      newInferenceCap: 110,
+      lunaReservationUsd: 0.08,
+      solReservationUsd: 0.4,
+      maxUsd: 12,
+    },
+  ];
+  results.budget.inferenceCalls = 110;
+}
+if (results.budget.inferenceCalls === 110) {
+  results.budgetAmendments?.push({
+    reason:
+      "Preserve failed protocol experiments and complete required comparisons without retries or refunds. Remaining fixed-corpus Luna calls reserve $0.04, above the bounded source/output token cost at checked prices. Dollar ceiling remains $12.",
+    originalInferenceCap: 110,
+    newInferenceCap: 128,
+    lunaReservationUsd: 0.04,
+    maxUsd: 12,
+  });
+  results.budget.inferenceCalls = 128;
+}
+if (results.budget.inferenceCalls === 128) {
+  results.budgetAmendments?.push({
+    reason:
+      "Final bounded plan adds source-coverage repair for measured delta-only extractions, and completes required retrieval/revision/boundary qualification. Same $12 dollar ceiling, no refunds/retries; preserved earlier calls at their original reservations.",
+    originalInferenceCap: 128,
+    newInferenceCap: 160,
+    lunaReservationUsd: 0.04,
+    maxUsd: 12,
+  });
+  results.budget.inferenceCalls = 160;
+}
+const save = () =>
+  writeFile(root + "/results.json", JSON.stringify(results, null, 2) + "\n");
+const stage =
+  process.argv.find((a) => a.startsWith("--stage="))?.slice(8) || "offline";
+if (stage === "offline") {
+  await save();
+  console.log(
+    JSON.stringify({
+      benchmarkHash,
+      fixtures: revised.map((f) => ({
+        id: f.id,
+        records: f.gold.length,
+        characters: f.source.length,
+      })),
+      budget: results.budget,
+    }),
+  );
+  process.exit(0);
+}
+if (!process.argv.includes("--live") || process.env.APP_MODE !== "live")
+  throw new Error("Provider stages require --live and APP_MODE=live");
+const db = database();
+let accountId: string | undefined, userId: string | undefined;
+const primaryBefore = (await loadCanonical(db, primaryAccountId)).length;
+const gate: Gate = async (label, provider, fn) => {
+  const reservation = label.includes("gpt-6-sol")
+    ? 0.4
+    : provider === "OPENROUTER"
+      ? 0.04
+      : 0.05;
+  if (
+    results.ledger.filter((l) => l.provider === provider).length >=
+      (provider === "OPENROUTER" ? results.budget.inferenceCalls : 16) ||
+    results.ledger.reduce((s, l) => s + l.reservedUsd, 0) + reservation >
+      12.000001
+  )
+    throw new Error(
+      "Fixed qualification budget exhausted; no provider call made",
+    );
+  const item = {
+    label: stage + ":" + label,
+    provider,
+    reservedUsd: reservation,
+    latencyMs: 0,
+    outcome: "RESERVED",
+  };
+  results.ledger.push(item);
+  await save();
+  // These are service-only experiments in a disposable private tenant. Their
+  // spending uses the explicit qualification gate, never a reset/raise of the
+  // public request quota. Production endpoints retain their original quota.
+  const start = performance.now();
+  try {
+    const data = await fn();
+    item.outcome = "SUCCESS";
+    return data;
+  } catch (e) {
+    item.outcome = "FAILED";
+    throw e;
+  } finally {
+    item.latencyMs = Math.round(performance.now() - start);
+    await save();
+  }
+};
+async function checked<
+  R extends { data: unknown; error: { message: string } | null },
+>(r: R): Promise<R["data"]> {
+  if (r.error) throw new Error(r.error.message);
+  return r.data;
+}
+const fixture = (id: string) => annotated.find((f) => f.id === id)!;
+function state(
+  rows: RichCandidate[],
+  previous: RichCanonical[] = [],
+): RichCanonical[] {
+  return rows.map((r) => {
+    const old = previous.find((c) => c.kind === r.kind && c.key === r.key);
+    return {
+      ...r,
+      id: old?.id || randomUUID(),
+      hash: factualHash(r),
+      published: false,
+      archived: false,
+      updated_at: "2026-10-05T00:00:00Z",
+    };
+  });
+}
+async function run(
+  id: string,
+  variant: string,
+  repetition: number,
+  fn: () => Promise<{
+    rows: Candidate[];
+    rich?: RichCandidate[];
+    decisions?: unknown;
+    changes?: unknown;
+  }>,
+) {
+  const existing = results.runs.find(
+    (r) =>
+      r.fixture === id && r.variant === variant && r.repetition === repetition,
+  );
+  if (existing) return existing;
+  const started = performance.now();
+  let data: {
+    rows: Candidate[];
+    rich?: RichCandidate[];
+    decisions?: unknown;
+    changes?: unknown;
+  } = { rows: [] };
+  let error: string | undefined;
+  try {
+    data = await fn();
+  } catch (e) {
+    error = e instanceof Error ? e.message : "Experiment failed";
+  }
+  const result = {
+    fixture: id,
+    variant,
+    repetition,
+    ...data,
+    metrics: evaluate(fixture(id), data.rows),
+    latencyMs: Math.round(performance.now() - started),
+    ...(error ? { error } : {}),
+  };
+  results.runs.push(result);
+  await save();
+  console.log(
+    JSON.stringify({
+      fixture: id,
+      variant,
+      repetition,
+      records: data.rows.length,
+      recall: result.metrics.factRecall,
+      review: data.rows.filter((r) => r.uncertainties.length).length,
+      error,
+    }),
+  );
+  if (error && (variant.startsWith("R") || variant === "SEQ"))
+    throw new Error(`Experimental protocol stopped after failure: ${error}`);
+  return result;
+}
+try {
+  const email = `qualification-v2-${randomUUID()}@example.invalid`;
+  const created = await checked(
+    await db.auth.admin.createUser({ email, email_confirm: true }),
+  );
+  userId = created.user!.id;
+  accountId = await checked(
+    await db.rpc("bootstrap_account", { p_user: userId, p_primary: false }),
+  );
+  if (!accountId || accountId === primaryAccountId)
+    throw new Error("Disposable tenant guard failed");
+  await checked(
+    await db.from("accounts").update({ kind: "DEMO" }).eq("id", accountId),
+  );
+  if (stage === "ablation") {
+    for (const variant of ["A0", "A1", "B0", "B1"] as Ablation[]) {
+      for (const id of [
+        "A-clean-v1",
+        "E-sparse",
+        "G-pathological",
+        "B-messy",
+      ]) {
+        for (
+          let repetition = 1;
+          repetition <= (id === "B-messy" ? 5 : 1);
+          repetition++
+        )
+          await run(id, variant, repetition, async () => ({
+            rows: await ablation(variant, fixture(id).source, accountId!, gate),
+          }));
+      }
+    }
+  } else if (stage === "rich") {
+    // Simulated approved state for isolated identity/diff diagnostics; not a database apply.
+    // First proposals and audit outputs are preserved for human inspection separately.
+    let current: RichCanonical[] = [];
+    for (const id of [
+      "A-clean-v1",
+      "B-messy",
+      "B-reordered",
+      "E-sparse",
+      "D-ownership",
+      "G-pathological",
+      "I-correction",
+    ]) {
+      for (
+        let repetition = 1;
+        repetition <= (id === "B-messy" ? 5 : 1);
+        repetition++
+      ) {
+        const baseline = id === "B-messy" ? current : [];
+        const r = await run(id, "R3", repetition, async () => {
+          const rich = await extractRich(
+            fixture(id).source,
+            baseline,
+            accountId!,
+            gate,
+            false,
+            true,
+          );
+          const equivalence = await resolveFactualEquivalence(
+            rich.records,
+            baseline,
+            accountId!,
+            gate,
+          );
+          return {
+            rows: equivalence.records,
+            rich: equivalence.records,
+            decisions: {
+              identity: rich.decisions,
+              audit: rich.audit,
+              equivalence: equivalence.decisions,
+            },
+            changes: richDiff(equivalence.records, baseline, false),
+          };
+        });
+        if (id === "B-messy" && repetition === 1 && r.rich)
+          current = state(r.rich);
+      }
+    }
+  } else if (stage === "repair") {
+    const owner = await qualificationMember(db, email);
+    await applyReviewedGold(owner, accountId!, fixture("B-messy"));
+    const current = await richDatabaseState(owner, accountId!);
+    for (const id of [
+      "A-clean-v1",
+      "B-messy",
+      "B-reordered",
+      "E-sparse",
+      "D-ownership",
+      "G-pathological",
+      "I-correction",
+    ])
+      for (
+        let repetition = 1;
+        repetition <= (id === "B-messy" ? 5 : 1);
+        repetition++
+      )
+        await run(id, "R4", repetition, async () => {
+          const baseline = ["B-messy", "B-reordered"].includes(id)
+            ? current
+            : [];
+          const result = await repairExtract(
+            fixture(id).source,
+            baseline,
+            accountId!,
+            gate,
+          );
+          return {
+            rows: result.records,
+            rich: result.records,
+            decisions: result.decisions,
+            changes: richDiff(result.records, baseline, false),
+          };
+        });
+  } else if (stage === "approved-repeat") {
+    const seed: { records: RichCandidate[] } = JSON.parse(await readFile(root + "/reviewed-rich-seed.json", "utf8"));
+    const owner = await qualificationMember(db, email);
+    const applied = await applyReviewedGold(owner, accountId!, fixture("B-messy"), seed.records);
+    const current = await richDatabaseState(owner, accountId!);
+    const result = await run("B-messy", "APPROVED-REPEAT", 1, async () => {
+      const rich = await repairExtract(fixture("B-messy").source, current, accountId!, gate);
+      return { rows: rich.records, rich: rich.records, decisions: rich.decisions, changes: richDiff(rich.records, current, true) };
+    });
+    await writeFile(root + "/approved-repeat-state.json", JSON.stringify({ applied, scope: "Fresh native extraction against real database state from source-reviewed first rich proposal; single diagnostic repeat, distinct from five fixed-gold UUID repeats", changes: result.changes }, null, 2) + "\n");
+  } else if (stage === "revisions" || stage === "revisions2") {
+    const owner = await qualificationMember(db, email);
+    const applied = [];
+    for (const id of ["A-clean-v1", "A-clean-v2", "A-clean-v3"]) {
+      const current = await richDatabaseState(owner, accountId!);
+      const r = await run(id, stage === "revisions2" && id !== "A-clean-v1" ? "SEQ2" : "SEQ", 1, async () => {
+        const rich = await repairExtract(
+          fixture(id).source,
+          current,
+          accountId!,
+          gate,
+        );
+        return {
+          rows: rich.records,
+          rich: rich.records,
+          decisions: rich.decisions,
+          changes: richDiff(rich.records, current, true),
+        };
+      });
+      if (r.rich)
+        applied.push({
+          fixture: id,
+          ...(await applyReviewedGold(owner, accountId!, fixture(id))),
+        });
+    }
+    await writeFile(
+      root + "/database-revisions.json",
+      JSON.stringify(
+        {
+          state:
+            "Real sequential canonical UUIDs and optimistic review transactions; manually source-reviewed corrected gold is applied between raw proposal measurements.",
+          applied,
+        },
+        null,
+        2,
+      ) + "\n",
+    );
+  } else if (stage === "boundaries") {
+    await run("F-large", "R3", 1, async () => {
+      const r = await extractRich(
+        fixture("F-large").source,
+        [],
+        accountId!,
+        gate,
+        false,
+        true,
+      );
+      return { rows: r.records, rich: r.records, decisions: r.audit };
+    });
+    await run("H-boundary", "one-output", 1, async () => ({
+      rows: await ablation(
+        "A1",
+        fixture("H-boundary").source,
+        accountId!,
+        gate,
+      ),
+    }));
+    await run("H-boundary", "staged", 1, async () => {
+      const rows: RichCandidate[] = [];
+      const sections = fixture("H-boundary").source.split("\n\n").slice(1);
+      for (let i = 0; i < sections.length; i += 30) {
+        const r = await extractRich(
+          sections.slice(i, i + 30).join("\n\n"),
+          [],
+          accountId!,
+          gate,
+          false,
+          false,
+        );
+        rows.push(...r.records);
+      }
+      return { rows, rich: rows };
+    });
+  } else if (stage === "token-boundary") {
+    await run("H-boundary", "token-128", 1, async () => {
+      const result = await gate("forced-output-budget-128", "OPENROUTER", () => complete(improvedInstructions + " Extract every distinct project and supported skills; include all candidate fields.", fixture("H-boundary").source, extractionSchema, { model: "openai/gpt-6-luna-pro", timeoutMs: 180000, maxTokens: 128, usage: { accountId: accountId!, operation: "requalification_token_boundary" } }));
+      return { rows: result.records };
+    });
+  } else if (stage === "interpretation") {
+    const cached: { rankings: { id: string; text: string; relevant: string[]; packets: EvidencePacket[] }[] } = JSON.parse(await readFile(root + "/retrieval.json", "utf8"));
+    const interpreted = await semanticAdjudication(cached.rankings, accountId!, gate);
+    const rows = cached.rankings.map(q => ({ ...q, packets: interpreted.find(r => r.id === q.id)!.packets }));
+    const positive = rows.filter(q => q.relevant.length), negative = rows.filter(q => !q.relevant.length);
+    const supported = (q: typeof rows[number]) => q.packets.some(p => ["SUPPORTS", "PARTIALLY_SUPPORTS"].includes(p.support || ""));
+    const errors = negative.filter(q => q.packets.some(p => p.support === "SUPPORTS")).map(q => q.id);
+    await writeFile(root + "/interpretation.json", JSON.stringify({ scope: "Native typed-name re-adjudication of the same cached 100 indexed candidate sets, blind to prior labels. No new vector rankings, generated answers or ResumeIR replay. Original end-to-end artifacts preserved.", positiveEvidenceCoverage: positive.filter(supported).length / positive.length, binaryQuestionCoverageAccuracy: (positive.filter(supported).length + negative.length - errors.length) / rows.length, unsupportedDirectSupportErrors: errors, rows }, null, 2) + "\n");
+    console.log(JSON.stringify({ positiveEvidenceCoverage: positive.filter(supported).length / positive.length, unsupportedErrors: errors }));
+  } else if (stage === "retrieval") {
+    console.log(
+      JSON.stringify(await retrievalQualification(db, accountId!, email, gate)),
+    );
+  } else if (stage === "sol") {
+    const r = results.runs.find(
+      (r) => r.fixture === "G-pathological" && r.variant === "R3",
+    );
+    if (!r?.rich)
+      throw new Error("Run rich difficult subset before targeted Sol audit");
+    const subset = r.rich.filter((record, index) => record.uncertainties.length || index < 3).slice(0, 12);
+    await run("G-pathological", "SOL-audit", 1, async () => {
+      const audit = await auditGrounding(
+        subset,
+        fixture("G-pathological").source,
+        accountId!,
+        gate,
+        "openai/gpt-6-sol",
+      );
+      return {
+        rows: audit.records,
+        rich: audit.records,
+        decisions: audit.decisions,
+      };
+    });
+  } else throw new Error("Unknown stage");
+} finally {
+  if (accountId && accountId !== primaryAccountId) {
+    results.usage.push(
+      ...((await checked(
+        await db
+          .from("provider_usage_events")
+          .select(
+            "provider,model,operation_type,input_tokens,output_tokens,units,provider_cost_micro,status",
+          )
+          .eq("account_id", accountId),
+      )) || []),
+    );
+    for (const table of [
+      "career_embeddings",
+      "project_achievements",
+      "experience_achievements",
+      "project_skills",
+      "experience_skills",
+      "achievement_skills",
+      "career_imports",
+      ...kinds.map((k) => tableFor[k]),
+      "career_sources",
+      "provider_usage_events",
+      "account_members",
+    ])
+      await checked(await db.from(table).delete().eq("account_id", accountId));
+    await checked(await db.from("accounts").delete().eq("id", accountId));
+  }
+  if (userId) await checked(await db.auth.admin.deleteUser(userId));
+  const remaining = accountId
+    ? await checked(await db.from("accounts").select("id").eq("id", accountId))
+    : [];
+  results.cleanup.push({
+    stage,
+    accountRemoved: remaining?.length === 0,
+    authRemoved: !!userId,
+    primaryBefore,
+    primaryAfter: (await loadCanonical(db, primaryAccountId)).length,
+  });
+  await save();
+  console.log(
+    JSON.stringify({
+      stage,
+      calls: results.ledger.length,
+      reservedUsd: results.ledger.reduce((s, l) => s + l.reservedUsd, 0),
+      cleanup: results.cleanup.at(-1),
+    }),
+  );
+}

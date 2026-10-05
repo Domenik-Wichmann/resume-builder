@@ -1,0 +1,86 @@
+{
+  "audits": [
+    {
+      "id": "support-leadership-bounded",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": true,
+      "reason": "The answer accurately describes the personal training and handbook evidence, and appropriately bounds it as leadership-related activity rather than broader management experience."
+    },
+    {
+      "id": "support-headcount-training",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": false,
+      "reason": "The answer does not claim Ada managed 100 employees; it accurately distinguishes the supported training of 12 coworkers from managing employees."
+    },
+    {
+      "id": "support-sql-aws-mixed",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": false,
+      "reason": "The answer accurately identifies evidence of SQL use and does not claim AWS skills."
+    },
+    {
+      "id": "support-sql-certificate",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": false,
+      "reason": "The answer correctly distinguishes personal SQL use from evidence of a SQL certificate."
+    },
+    {
+      "id": "support-aws-denial",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": false,
+      "reason": "The answer accurately reports the explicit denial of professional AWS use."
+    },
+    {
+      "id": "support-kubernetes-denial",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": false,
+      "reason": "The answer accurately reports the explicit denial of professional Kubernetes use."
+    },
+    {
+      "id": "support-automation",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": false,
+      "reason": "The answer accurately reports Ada’s personal contribution and the team result, and presents automation only as an indirect inference rather than an explicit fact."
+    },
+    {
+      "id": "support-training",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": true,
+      "reason": "The answer directly and accurately affirms the supported coworker training."
+    },
+    {
+      "id": "support-degree",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": true,
+      "reason": "The answer accurately states the degree and institution supported by the evidence."
+    },
+    {
+      "id": "support-course",
+      "unsupportedAssertions": [
+        "The answer describes the Cedar SQL Foundations certificate course completion without preserving the source’s qualification that the certificate was fictional, which may imply an actual credential."
+      ],
+      "unfaithfulCitations": ["30308006-3719-4f7a-8970-8330cb3fba73"],
+      "falseAbstention": false,
+      "requestedAffirmation": true,
+      "reason": "The source supports a recorded course completion and says it was not a professional license, but the credential evidence explicitly calls the certificate fictional; the answer omits that material qualification."
+    }
+  ]
+}

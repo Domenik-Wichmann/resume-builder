@@ -1,0 +1,328 @@
+{
+  "version": "omission-continuity-human-adjudication-1",
+  "verdict": "PROMOTE WITH OWNER REVIEW",
+  "scoring": "Source-compatible factual dispositions, not exact generated-summary wording or strict legacy whole-record labels. Conservative REVIEW is allowed for an owner-reviewed product; it is not automatic acceptance accuracy. Two original unsafe V3 dispositions are retained and counted separately.",
+  "repeat": {
+    "supportedEnrichments": [
+      {
+        "repeat": 1,
+        "identity": "experience:operations-analyst-dd5de8b403",
+        "classification": "SUPPORTED_ENRICHMENT",
+        "rationale": "Exact source adds corrected initial-2020 history while active 2021 start remains unchanged"
+      },
+      {
+        "repeat": 1,
+        "identity": "skill:postgresql-4b6475d427",
+        "classification": "SUPPORTED_ENRICHMENT",
+        "rationale": "Exact source adds production-database or version-control purpose; named tool identity unchanged"
+      },
+      {
+        "repeat": 1,
+        "identity": "skill:git-820dc39c23",
+        "classification": "SUPPORTED_ENRICHMENT",
+        "rationale": "Exact source adds production-database or version-control purpose; named tool identity unchanged"
+      },
+      {
+        "repeat": 3,
+        "identity": "experience:operations-analyst-dd5de8b403",
+        "classification": "SUPPORTED_ENRICHMENT",
+        "rationale": "Exact source adds corrected initial-2020 history while active 2021 start remains unchanged"
+      },
+      {
+        "repeat": 5,
+        "identity": "experience:operations-analyst-dd5de8b403",
+        "classification": "SUPPORTED_ENRICHMENT",
+        "rationale": "Exact source adds corrected initial-2020 history while active 2021 start remains unchanged"
+      },
+      {
+        "repeat": 5,
+        "identity": "skill:postgresql-4b6475d427",
+        "classification": "SUPPORTED_ENRICHMENT",
+        "rationale": "Exact source adds production-database or version-control purpose; named tool identity unchanged"
+      },
+      {
+        "repeat": 5,
+        "identity": "skill:git-820dc39c23",
+        "classification": "SUPPORTED_ENRICHMENT",
+        "rationale": "Exact source adds production-database or version-control purpose; named tool identity unchanged"
+      }
+    ],
+    "reviews": [
+      {
+        "repeat": 1,
+        "identity": "project:dispatch-loom-e00a8b6fe1",
+        "reason": "Grounding UNSUPPORTED: The source says operators preferred a visible warning, not that they used visible warnings. It also asks to distinguish operational use from an externally sold product without explicitly establishing that the tool was not sold externally; the summary and claim present these as settled facts.",
+        "classification": "SAFE_OWNER_REVIEW"
+      },
+      {
+        "repeat": 2,
+        "identity": "project:dispatch-loom-e00a8b6fe1",
+        "reason": "Grounding UNCERTAIN: The project details and responsibilities are supported, but the source does not unambiguously establish that the tool was not also sold to external customers; it asks to distinguish operational use from a product sold externally.",
+        "classification": "SAFE_OWNER_REVIEW"
+      },
+      {
+        "repeat": 3,
+        "identity": "project:dispatch-loom-e00a8b6fe1",
+        "reason": "Grounding UNSUPPORTED: The source says operators preferred a visible warning when a source file arrived late, but does not establish that the tool actually surfaced late-file warnings. The project summary presents that preference as implemented functionality.",
+        "classification": "SAFE_OWNER_REVIEW"
+      },
+      {
+        "repeat": 3,
+        "identity": "certification:cedar-sql-foundations-ed912d30a4",
+        "reason": "Grounding UNSUPPORTED: The source explicitly qualifies this as a fictional certificate. The record presents it as an ordinary earned credential without preserving that material qualification.",
+        "classification": "SAFE_OWNER_REVIEW"
+      },
+      {
+        "repeat": 4,
+        "identity": "project:dispatch-loom-e00a8b6fe1",
+        "reason": "Grounding UNSUPPORTED: The source says supervisors wanted understandable exceptions and operators preferred a visible warning when a file arrived late. It does not establish that Dispatch Loom actually surfaced those warnings or exceptions as completed functionality; the summary converts preferences into implemented tool.",
+        "classification": "SAFE_OWNER_REVIEW"
+      },
+      {
+        "repeat": 5,
+        "identity": "project:dispatch-loom-e00a8b6fe1",
+        "reason": "Team outcome must retain attribution in display text. Grounding UNSUPPORTED: The summary turns preferences into completed tool features: supervisors wanted understandable exceptions, and operators preferred a warning for late files, but the source does not say the tool implemented either. The claim that the tool was not sold externally is not established by a request to “是”（",
+        "classification": "SAFE_OWNER_REVIEW"
+      }
+    ],
+    "falseUpdates": 0,
+    "unsupportedRemovalProposals": 0,
+    "relationshipLosses": 0,
+    "claimsOmittedAndPreserved": 39,
+    "relationshipsOmittedAndPreserved": 3
+  },
+  "sequence": {
+    "originalNativeV2Compatible": 16,
+    "originalNativeV2Total": 16,
+    "originalNativeV3Compatible": 16,
+    "originalNativeV3Total": 18,
+    "originalNativeV3Failures": [
+      {
+        "identity": "project:dispatch-loom-e00a8b6fe1",
+        "failure": "Summary plural supervisors expands singular source supervisor; supplemental current-source audit requires REVIEW"
+      },
+      {
+        "identity": "achievement:roster-note-night-shift-handover-documentation-42641d1560",
+        "failure": "SQL used for parent checklist does not prove SQL used to document it; supplemental component-local audit requires REVIEW"
+      }
+    ],
+    "correctedV2": [
+      {
+        "identity": "profile:profile",
+        "status": "UNCHANGED",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "experience:operations-analyst-dd5de8b403",
+        "status": "REVIEW",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "project:dispatch-loom-e00a8b6fe1",
+        "status": "REVIEW",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "project:roster-note-1b510e9f1f",
+        "status": "ADDED",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "achievement:dispatch-coworker-training-184996f0f6",
+        "status": "UPDATED",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "achievement:reconciliation-time-reduction-aaf329a9ed",
+        "status": "UNCHANGED",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "skill:python-1678f77f15",
+        "status": "UNCHANGED",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "skill:sql-a03e9bccab",
+        "status": "UPDATED",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "skill:postgresql-4b6475d427",
+        "status": "UNCHANGED",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "skill:git-820dc39c23",
+        "status": "UNCHANGED",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "skill:coworker-training-888713667e",
+        "status": "REVIEW",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "education:bsc-in-information-systems-ab520a51dc",
+        "status": "UNCHANGED",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "certification:cedar-sql-foundations-ed912d30a4",
+        "status": "REVIEW",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "language:english-3e0cd54cbb",
+        "status": "UNCHANGED",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "category:data-tools-28c5fe8f0e",
+        "status": "UNCHANGED",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "category:collaboration-91578d1f92",
+        "status": "UNCHANGED",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      }
+    ],
+    "correctedV3": [
+      {
+        "identity": "profile:profile",
+        "status": "UNCHANGED",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "experience:operations-analyst-dd5de8b403",
+        "status": "UPDATED",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "project:dispatch-loom-e00a8b6fe1",
+        "status": "REVIEW",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "project:roster-note-1b510e9f1f",
+        "status": "REVIEW",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "achievement:dispatch-coworker-training-184996f0f6",
+        "status": "REVIEW",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "achievement:reconciliation-time-reduction-aaf329a9ed",
+        "status": "REVIEW",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "achievement:roster-note-night-shift-handover-documentation-42641d1560",
+        "status": "REVIEW",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "skill:python-1678f77f15",
+        "status": "UNCHANGED",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "skill:sql-a03e9bccab",
+        "status": "UPDATED",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "skill:postgresql-4b6475d427",
+        "status": "UNCHANGED",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "skill:git-820dc39c23",
+        "status": "UNCHANGED",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "skill:coworker-training-888713667e",
+        "status": "REVIEW",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "skill:docker-8ce2b643fd",
+        "status": "ADDED",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "education:bsc-in-information-systems-ab520a51dc",
+        "status": "UNCHANGED",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "certification:cedar-sql-foundations-ed912d30a4",
+        "status": "REVIEW",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "language:english-3e0cd54cbb",
+        "status": "UNCHANGED",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "category:data-tools-28c5fe8f0e",
+        "status": "UNCHANGED",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      },
+      {
+        "identity": "category:collaboration-91578d1f92",
+        "status": "UNCHANGED",
+        "assessment": "SOURCE_COMPATIBLE_OWNER_REVIEW_DISPOSITION"
+      }
+    ],
+    "correctedSourceCompatible": 34,
+    "correctedOpportunities": 34,
+    "targetedReviewedTransitions": [
+      "role end date May31 -> June30",
+      "named credential V2 PENDING -> explicit owner-confirmed V3 same UUID",
+      "unresolved attendee quantity remains DISPUTED in parent/child/skill claims",
+      "training relationships retained",
+      "Roster Note addition and handover enrichment retained",
+      "SQL extensive-usage enrichment retained without proficiency inflation",
+      "Docker one-off exposure admitted with qualifier"
+    ],
+    "targetedTransitionsPassed": 7,
+    "targetedTransitionsTotal": 7,
+    "databaseReviewedRecords": [15, 16, 17],
+    "note": "New native V3 child achievement is a supported alternative grouping, with its unsafe skill edge withheld for review. Reviewed fixture represents handover in parent project; original 17-record gold is not rewritten."
+  },
+  "qa": {
+    "humanFaithful": 5,
+    "targetedQuestions": 5,
+    "unsupportedExactPropositions": 3,
+    "unsupportedAffirmations": 0,
+    "supportedQuestions": 2,
+    "falseAbstentions": 0,
+    "citationFaithful": 5,
+    "originalAuditorPasses": 4,
+    "knownActorContextAuditorPasses": 5,
+    "productionMixedQuestionSmokePassed": true
+  },
+  "resume": {
+    "targetedUsefulVerifiedBullets": 4,
+    "targetedBadCompleteBullets": 4,
+    "unsafeBulletPasses": 0,
+    "unsupportedClaimAdmissions": 0,
+    "productionVerifiedUsefulBulletPassed": true
+  },
+  "limitations": [
+    "Extraction still produces warning-preference inflation; independent grounding and owner review block it",
+    "Source rephrasing can receive conservative REVIEW after an invalid copied historical quote",
+    "Credential fictional qualifier and component-local skill scope may require conservative owner review",
+    "17/18 historical supported-claim retention remains unchanged; one limited ownership claim excluded",
+    "Independent Q&A/bullet audits are fallible; no automatic owner import acceptance",
+    "Mixed source versions use conservative semantic comparison rather than assuming global import approval",
+    "No new Sol escalation; no ingest/retrieval architecture comparison restarted"
+  ],
+  "historicalArtifacts": "214 frozen files and old gold/accounting preserved; offline suite wrapper restores derived historical report bytes"
+}

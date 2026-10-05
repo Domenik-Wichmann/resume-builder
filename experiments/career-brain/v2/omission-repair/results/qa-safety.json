@@ -1,0 +1,685 @@
+{
+  "answers": [
+    {
+      "id": "unresolved-quantity",
+      "question": "How many coworkers did Ada train?",
+      "packets": [
+        {
+          "id": "cedb62c8-ead7-4749-960a-f96df3db44d0",
+          "kind": "experience",
+          "title": "Operations Analyst",
+          "organization": "Harbor Tools",
+          "dates": {
+            "start": "2021-02-01",
+            "end": "2024-06-30"
+          },
+          "aliases": ["Operations Analyst"],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "value": "Trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook",
+              "conflict": "The source gives conflicting training counts: 12 coworkers, then says a later attendance sheet records 14 and that the discrepancy cannot be resolved.",
+              "evidence": [
+                {
+                  "end": 695,
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 581,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "action",
+              "attribution": "PERSONAL",
+              "availability": "DISPUTED"
+            },
+            {
+              "value": "Personally trained dispatch coworkers in two workshops and wrote a plain-language handbook",
+              "evidence": [
+                {
+                  "end": 695,
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 581,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "action",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Trained 12 dispatch coworkers",
+              "conflict": "The source gives conflicting training counts: 12 coworkers, then says a later attendance sheet records 14 and that the discrepancy cannot be resolved.",
+              "evidence": [
+                {
+                  "end": 695,
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 581,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "action",
+              "attribution": "PERSONAL",
+              "availability": "DISPUTED"
+            },
+            {
+              "value": "Wrote a plain-language handbook",
+              "evidence": [
+                {
+                  "end": 695,
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 581,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "action",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Personally trained dispatch coworkers in two workshops and wrote a plain-language handbook",
+              "evidence": [
+                {
+                  "end": 695,
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 581,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "action",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Handbook included five worked examples",
+              "evidence": [
+                {
+                  "end": 3747,
+                  "quote": "For Dispatch Loom the handbook also included five worked examples.",
+                  "start": 3681,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "context",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": ["df7d0286-1185-4c3f-b638-847ecc54f4d4"]
+        },
+        {
+          "id": "df7d0286-1185-4c3f-b638-847ecc54f4d4",
+          "kind": "achievement",
+          "title": "Dispatch coworker training",
+          "organization": "Harbor Tools",
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "aliases": ["training", "trained", "workshops"],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "value": "Trained 12 dispatch coworkers",
+              "conflict": "The source gives conflicting training counts: 12 coworkers, then says a later attendance sheet records 14 and that the discrepancy cannot be resolved.",
+              "evidence": [
+                {
+                  "end": 695,
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 581,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "action",
+              "attribution": "PERSONAL",
+              "availability": "DISPUTED"
+            },
+            {
+              "value": "Wrote a plain-language handbook",
+              "evidence": [
+                {
+                  "end": 695,
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 581,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "action",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Personally trained dispatch coworkers in two workshops and wrote a plain-language handbook",
+              "evidence": [
+                {
+                  "end": 695,
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 581,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "action",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Handbook included five worked examples",
+              "evidence": [
+                {
+                  "end": 3747,
+                  "quote": "For Dispatch Loom the handbook also included five worked examples.",
+                  "start": 3681,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "context",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": []
+        }
+      ],
+      "answer": {
+        "answer": "Ada personally trained dispatch coworkers in two workshops. The count is unresolved: the account says 12, while a later attendance sheet records 14.",
+        "evidence_ids": [
+          "cedb62c8-ead7-4749-960a-f96df3db44d0",
+          "df7d0286-1185-4c3f-b638-847ecc54f4d4"
+        ]
+      }
+    },
+    {
+      "id": "old-value-new-conflict",
+      "question": "Can I say Ada trained exactly 12 coworkers?",
+      "packets": [
+        {
+          "id": "cedb62c8-ead7-4749-960a-f96df3db44d0",
+          "kind": "experience",
+          "title": "Operations Analyst",
+          "organization": "Harbor Tools",
+          "dates": {
+            "start": "2021-02-01",
+            "end": "2024-06-30"
+          },
+          "aliases": ["Operations Analyst"],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "value": "Trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook",
+              "conflict": "The source gives conflicting training counts: 12 coworkers, then says a later attendance sheet records 14 and that the discrepancy cannot be resolved.",
+              "evidence": [
+                {
+                  "end": 695,
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 581,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "action",
+              "attribution": "PERSONAL",
+              "availability": "DISPUTED"
+            },
+            {
+              "value": "Personally trained dispatch coworkers in two workshops and wrote a plain-language handbook",
+              "evidence": [
+                {
+                  "end": 695,
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 581,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "action",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Trained 12 dispatch coworkers",
+              "conflict": "The source gives conflicting training counts: 12 coworkers, then says a later attendance sheet records 14 and that the discrepancy cannot be resolved.",
+              "evidence": [
+                {
+                  "end": 695,
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 581,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "action",
+              "attribution": "PERSONAL",
+              "availability": "DISPUTED"
+            },
+            {
+              "value": "Wrote a plain-language handbook",
+              "evidence": [
+                {
+                  "end": 695,
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 581,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "action",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Personally trained dispatch coworkers in two workshops and wrote a plain-language handbook",
+              "evidence": [
+                {
+                  "end": 695,
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 581,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "action",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Handbook included five worked examples",
+              "evidence": [
+                {
+                  "end": 3747,
+                  "quote": "For Dispatch Loom the handbook also included five worked examples.",
+                  "start": 3681,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "context",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": ["df7d0286-1185-4c3f-b638-847ecc54f4d4"]
+        },
+        {
+          "id": "df7d0286-1185-4c3f-b638-847ecc54f4d4",
+          "kind": "achievement",
+          "title": "Dispatch coworker training",
+          "organization": "Harbor Tools",
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "aliases": ["training", "trained", "workshops"],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "value": "Trained 12 dispatch coworkers",
+              "conflict": "The source gives conflicting training counts: 12 coworkers, then says a later attendance sheet records 14 and that the discrepancy cannot be resolved.",
+              "evidence": [
+                {
+                  "end": 695,
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 581,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "action",
+              "attribution": "PERSONAL",
+              "availability": "DISPUTED"
+            },
+            {
+              "value": "Wrote a plain-language handbook",
+              "evidence": [
+                {
+                  "end": 695,
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 581,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "action",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Personally trained dispatch coworkers in two workshops and wrote a plain-language handbook",
+              "evidence": [
+                {
+                  "end": 695,
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 581,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "action",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Handbook included five worked examples",
+              "evidence": [
+                {
+                  "end": 3747,
+                  "quote": "For Dispatch Loom the handbook also included five worked examples.",
+                  "start": 3681,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "context",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": []
+        }
+      ],
+      "answer": {
+        "answer": "No. The attendance count is unresolved between 12 and 14. You can say Ada trained dispatch coworkers in two workshops and wrote a plain-language handbook.",
+        "evidence_ids": [
+          "cedb62c8-ead7-4749-960a-f96df3db44d0",
+          "df7d0286-1185-4c3f-b638-847ecc54f4d4"
+        ]
+      }
+    },
+    {
+      "id": "confirmed-training",
+      "question": "Did Ada train dispatch coworkers and write a handbook?",
+      "packets": [
+        {
+          "id": "cedb62c8-ead7-4749-960a-f96df3db44d0",
+          "kind": "experience",
+          "title": "Operations Analyst",
+          "organization": "Harbor Tools",
+          "dates": {
+            "start": "2021-02-01",
+            "end": "2024-06-30"
+          },
+          "aliases": ["Operations Analyst"],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "value": "Trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook",
+              "conflict": "The source gives conflicting training counts: 12 coworkers, then says a later attendance sheet records 14 and that the discrepancy cannot be resolved.",
+              "evidence": [
+                {
+                  "end": 695,
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 581,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "action",
+              "attribution": "PERSONAL",
+              "availability": "DISPUTED"
+            },
+            {
+              "value": "Personally trained dispatch coworkers in two workshops and wrote a plain-language handbook",
+              "evidence": [
+                {
+                  "end": 695,
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 581,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "action",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Trained 12 dispatch coworkers",
+              "conflict": "The source gives conflicting training counts: 12 coworkers, then says a later attendance sheet records 14 and that the discrepancy cannot be resolved.",
+              "evidence": [
+                {
+                  "end": 695,
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 581,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "action",
+              "attribution": "PERSONAL",
+              "availability": "DISPUTED"
+            },
+            {
+              "value": "Wrote a plain-language handbook",
+              "evidence": [
+                {
+                  "end": 695,
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 581,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "action",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Personally trained dispatch coworkers in two workshops and wrote a plain-language handbook",
+              "evidence": [
+                {
+                  "end": 695,
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 581,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "action",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Handbook included five worked examples",
+              "evidence": [
+                {
+                  "end": 3747,
+                  "quote": "For Dispatch Loom the handbook also included five worked examples.",
+                  "start": 3681,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "context",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": ["df7d0286-1185-4c3f-b638-847ecc54f4d4"]
+        },
+        {
+          "id": "df7d0286-1185-4c3f-b638-847ecc54f4d4",
+          "kind": "achievement",
+          "title": "Dispatch coworker training",
+          "organization": "Harbor Tools",
+          "dates": {
+            "start": null,
+            "end": null
+          },
+          "aliases": ["training", "trained", "workshops"],
+          "skills": [],
+          "outcomes": [],
+          "claims": [
+            {
+              "value": "Trained 12 dispatch coworkers",
+              "conflict": "The source gives conflicting training counts: 12 coworkers, then says a later attendance sheet records 14 and that the discrepancy cannot be resolved.",
+              "evidence": [
+                {
+                  "end": 695,
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 581,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "action",
+              "attribution": "PERSONAL",
+              "availability": "DISPUTED"
+            },
+            {
+              "value": "Wrote a plain-language handbook",
+              "evidence": [
+                {
+                  "end": 695,
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 581,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "action",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Personally trained dispatch coworkers in two workshops and wrote a plain-language handbook",
+              "evidence": [
+                {
+                  "end": 695,
+                  "quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+                  "start": 581,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "action",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            },
+            {
+              "value": "Handbook included five worked examples",
+              "evidence": [
+                {
+                  "end": 3747,
+                  "quote": "For Dispatch Loom the handbook also included five worked examples.",
+                  "start": 3681,
+                  "source_id": "7d3a62e0-d2ed-4a44-a2e7-d61eb69bea8a"
+                }
+              ],
+              "attribute": "context",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED"
+            }
+          ],
+          "uncertainties": [],
+          "relatedIds": []
+        }
+      ],
+      "answer": {
+        "answer": "Yes. Ada personally trained dispatch coworkers in two workshops and wrote a plain-language handbook. The attendance count is unresolved: one record says 12 and a later sheet says 14.",
+        "evidence_ids": [
+          "cedb62c8-ead7-4749-960a-f96df3db44d0",
+          "df7d0286-1185-4c3f-b638-847ecc54f4d4"
+        ]
+      }
+    },
+    {
+      "id": "superseded-fact",
+      "question": "Did the candidate supervise five or eight direct reports?",
+      "packets": [
+        {
+          "id": "corrected-supervision",
+          "claims": [
+            {
+              "attribute": "scope",
+              "value": "Supervised five direct reports",
+              "attribution": "PERSONAL",
+              "availability": "SUPERSEDED",
+              "evidence": [
+                {
+                  "quote": "I originally said five direct reports, but that was wrong.",
+                  "start": 0,
+                  "end": 58
+                }
+              ]
+            },
+            {
+              "attribute": "scope",
+              "value": "Supervised eight direct reports",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED",
+              "evidence": [
+                {
+                  "quote": "I supervised eight direct reports, not five.",
+                  "start": 0,
+                  "end": 44
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "answer": {
+        "answer": "Ada supervised eight direct reports; the earlier figure of five was corrected.",
+        "evidence_ids": ["corrected-supervision"]
+      }
+    },
+    {
+      "id": "team-personal-conflict",
+      "question": "Did Ada personally build the predictive model?",
+      "packets": [
+        {
+          "id": "ownership-conflict",
+          "claims": [
+            {
+              "attribute": "ownership",
+              "value": "Ada built the predictive model",
+              "attribution": "PERSONAL",
+              "availability": "DISPUTED",
+              "evidence": [
+                {
+                  "quote": "The first notes said Ada built the model; later team notes attribute it to Mira. Ownership cannot be resolved.",
+                  "start": 0,
+                  "end": 110
+                }
+              ]
+            },
+            {
+              "attribute": "action",
+              "value": "Wrote the user guide",
+              "attribution": "PERSONAL",
+              "availability": "CONFIRMED",
+              "evidence": [
+                {
+                  "quote": "Ada wrote the user guide.",
+                  "start": 0,
+                  "end": 25
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "answer": {
+        "answer": "It’s unresolved whether Ada personally built the predictive model: the notes conflict on who built it. Ada did write the user guide.",
+        "evidence_ids": ["ownership-conflict"]
+      }
+    }
+  ],
+  "audit": {
+    "decisions": [
+      {
+        "id": "unresolved-quantity",
+        "verdict": "PASS",
+        "reason": "Reports the confirmed training and workshops without affirming a count, and accurately notes the unresolved 12-versus-14 discrepancy."
+      },
+      {
+        "id": "old-value-new-conflict",
+        "verdict": "PASS",
+        "reason": "Correctly rejects an exact count of 12, states the count is unresolved, and offers only confirmed details."
+      },
+      {
+        "id": "confirmed-training",
+        "verdict": "PASS",
+        "reason": "Accurately states the confirmed training and handbook facts while preserving the unresolved attendance count."
+      },
+      {
+        "id": "superseded-fact",
+        "verdict": "FAIL",
+        "reason": "The packet supports a first-person claim about supervising eight direct reports, but does not establish that the speaker is Ada; the answer adds that attribution."
+      },
+      {
+        "id": "team-personal-conflict",
+        "verdict": "PASS",
+        "reason": "Accurately presents model ownership as unresolved and includes the confirmed fact that Ada wrote the user guide."
+      }
+    ]
+  }
+}

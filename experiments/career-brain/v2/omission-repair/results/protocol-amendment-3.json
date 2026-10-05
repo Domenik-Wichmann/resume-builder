@@ -1,0 +1,21 @@
+{
+  "scope": "Post-qualification production verification; no new architecture research",
+  "changes": [
+    "Preserved original Q&A audit; repeated audit of identical answers with application-known actor context",
+    "Added component-local technology relationship grounding after native V3 documentation-to-SQL false support",
+    "Availability changes cannot be undone by model EQUIVALENT classification",
+    "Ported validated modules to production; historical results untouched"
+  ],
+  "budget_before_production_calls": {
+    "existing_calls": 54,
+    "existing_reserved_usd": 4.35,
+    "unchanged_max_usd": 5,
+    "unchanged_max_calls": 70,
+    "future_production_smoke_luna_composition_reserve_usd": 0.02,
+    "other_reservations_unchanged": true,
+    "planned_calls": 9,
+    "planned_additional_reserved_usd": 0.6,
+    "automatic_retries": false
+  },
+  "production_smoke": "Verified member JWT, actual additive persistence, reviewed V1/V2/V3 and metadata-only certificate, private claim-only resume + independent verifier + compact-packet QA. No publication."
+}

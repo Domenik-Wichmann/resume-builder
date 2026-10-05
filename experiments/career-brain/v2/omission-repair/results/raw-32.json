@@ -1,0 +1,67 @@
+{
+  "label": "sequence:entailment-audit:openai/gpt-6-luna-pro:chunk-0",
+  "result": {
+    "decisions": [
+      {
+        "index": 0,
+        "verdict": "SUPPORTED",
+        "reason": "The name, role description, and all listed denials are supported by the source."
+      },
+      {
+        "index": 1,
+        "verdict": "SUPPORTED",
+        "reason": "The employer, dates, project contributions, supervisor interactions, tools, training, and linked outcomes are supported in the employment context. The record does not assert a disputed workshop headcount."
+      },
+      {
+        "index": 2,
+        "verdict": "SUPPORTED",
+        "reason": "The project description, aliases, workflow, personal contributions, team context, tools, and stated limitations are supported by the source and its clarifications."
+      },
+      {
+        "index": 3,
+        "verdict": "SUPPORTED",
+        "reason": "The separate SQL checklist, personal construction, night-shift handover documentation, and absence of a recorded user count or measured outcome are supported."
+      },
+      {
+        "index": 4,
+        "verdict": "UNCERTAIN",
+        "reason": "The training and handbook details are supported, but attendance is explicitly unresolved: recollection says 12 and a later sheet says 14."
+      },
+      {
+        "index": 5,
+        "verdict": "SUPPORTED",
+        "reason": "The 5-to-2-hour weekly reconciliation result over six runs, its team attribution, the 3-hour calculation, Ada's stated contribution, and the delivery-speed clarification are supported."
+      },
+      {
+        "index": 6,
+        "verdict": "SUPPORTED",
+        "reason": "The personal Roster Note handover documentation and absence of a claimed measured impact are supported."
+      },
+      {
+        "index": 7,
+        "verdict": "SUPPORTED",
+        "reason": "The source supports Python use for Dispatch Loom and Ada's personal authorship of its parser."
+      },
+      {
+        "index": 8,
+        "verdict": "SUPPORTED",
+        "reason": "The source supports SQL use for Dispatch Loom checks, extensive SQL use, and the SQL Roster Note checklist."
+      },
+      {
+        "index": 9,
+        "verdict": "SUPPORTED",
+        "reason": "The source identifies PostgreSQL as the production database; context clarifies this was part of the same Dispatch Loom work."
+      },
+      {
+        "index": 10,
+        "verdict": "SUPPORTED",
+        "reason": "The source identifies Git for version control and clarifies that it held changes for the same work."
+      },
+      {
+        "index": 11,
+        "verdict": "UNCERTAIN",
+        "reason": "Coworker training and the two workshops are supported, but the record also includes an explicitly unresolved attendance figure: 12 by recollection or 14 on a later sheet."
+      }
+    ]
+  }
+}

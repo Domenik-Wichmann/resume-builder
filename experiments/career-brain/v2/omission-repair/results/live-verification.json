@@ -1,0 +1,9 @@
+{
+  "verifiedAt": "2026-10-05T16:25:07.599Z",
+  "remainingSyntheticAuth": 0,
+  "primaryCanonicalRecords": 0,
+  "totalEvidenceRows": 0,
+  "primaryUsageEvents": 19,
+  "migration": "202610050009_career_evidence",
+  "privateSmokeCleaned": true
+}

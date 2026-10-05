@@ -2,6 +2,34 @@
 import { useState, type FormEvent } from "react";
 import type { Candidate, Canonical, Change } from "@/lib/ingestion/model";
 import type { InterviewQuestion } from "@/lib/interview/questions";
+import type { StateClaim } from "@/lib/career-brain/state";
+function ClaimEvidence({ record }: { record: Candidate }) {
+  const claims = (record as Candidate & { claims?: StateClaim[] }).claims || [];
+  return claims.length ? (
+    <details>
+      <summary>Review individual claims and source evidence</summary>
+      <ul>
+        {claims.map((claim, index) => (
+          <li key={index}>
+            <p>
+              {claim.value} · {claim.attribution} ·{" "}
+              {claim.availability || "PENDING_REVIEW"}
+            </p>
+            {claim.conflict && <p>{claim.conflict}</p>}
+            {claim.evidence.map((span, i) => (
+              <blockquote key={i}>{span.quote}</blockquote>
+            ))}
+          </li>
+        ))}
+      </ul>
+    </details>
+  ) : (
+    <p>
+      Claim evidence is pending review. This record cannot yet support generated
+      qualifications.
+    </p>
+  );
+}
 export type ImportDraft = { id: string; status: string; candidates: Change[] };
 export function CareerManager({
   initialRecords,
@@ -176,7 +204,7 @@ export function CareerManager({
               )
             }
           >
-            Select safe additions and updates
+            Select additions and updates for approval
           </button>
           {draft.candidates.map((change, index) => (
             <article
@@ -208,6 +236,7 @@ export function CareerManager({
                     {change.before.title} · {change.before.subtitle}
                   </p>
                   <p>{change.before.summary}</p>
+                  <ClaimEvidence record={change.before} />
                   <small>
                     Skills: {change.before.skill_keys.join(", ") || "None"} ·
                     Dates: {change.before.start_date || "Unknown"} –{" "}
@@ -228,6 +257,7 @@ export function CareerManager({
                     {change.after.end_date || "Unknown"}
                   </small>
                   <blockquote>{change.after.source_quote}</blockquote>
+                  <ClaimEvidence record={change.after} />
                   <details>
                     <summary>Edit structured proposal</summary>
                     <p>

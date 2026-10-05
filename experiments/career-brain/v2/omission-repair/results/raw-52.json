@@ -1,0 +1,17 @@
+{
+  "label": "relationship-grounding:entailment-audit:openai/gpt-6-luna-pro:chunk-0",
+  "result": {
+    "decisions": [
+      {
+        "index": 0,
+        "verdict": "UNCERTAIN",
+        "reason": "The documentation and its night-shift context are supported. However, SQL is established as part of the parent Roster Note checklist, not as a technology used in the documentation achievement itself, so the SQL-to-achievement relationship needs owner review."
+      },
+      {
+        "index": 1,
+        "verdict": "SUPPORTED",
+        "reason": "The source supports that Ada personally built a separate SQL handover checklist called Roster Note at Harbor Tools and later personally documented its night-shift handover. The record does not claim a measured outcome or user count."
+      }
+    ]
+  }
+}

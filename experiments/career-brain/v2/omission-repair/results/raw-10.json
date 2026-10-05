@@ -1,0 +1,22 @@
+{
+  "label": "repeat:entailment-audit:openai/gpt-6-luna-pro:chunk-12",
+  "result": {
+    "decisions": [
+      {
+        "index": 0,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly states, “I speak English fluently,” supporting the language and fluency claim."
+      },
+      {
+        "index": 1,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly names the personal skill category “Data tools” and lists Python, SQL, and PostgreSQL."
+      },
+      {
+        "index": 2,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly names the personal skill category “Collaboration” and lists Git and coworker training; it also states that Ada used Git and personally trained coworkers."
+      }
+    ]
+  }
+}

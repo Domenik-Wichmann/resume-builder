@@ -1,0 +1,84 @@
+{
+  "audits": [
+    {
+      "id": "support-warning-wanted",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": true,
+      "reason": "The source explicitly says operators preferred a visible warning and leaves implementation unstated, as the answer notes."
+    },
+    {
+      "id": "support-warning-implemented",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": false,
+      "reason": "The source records a preference but does not establish that Ada implemented the warning; the answer accurately describes that limitation."
+    },
+    {
+      "id": "support-plan-completed",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": false,
+      "reason": "The source says the rollout was planned and had not been completed."
+    },
+    {
+      "id": "support-plan-intended",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": true,
+      "reason": "The source says Ada planned a Route Note rollout for next month and that it had not been completed."
+    },
+    {
+      "id": "support-discussion-performed",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": false,
+      "reason": "The source says the team discussed the migration but did not perform it; the answer does not claim Ada performed it."
+    },
+    {
+      "id": "support-discussion-held",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": true,
+      "reason": "The source explicitly confirms the team discussed a database migration."
+    },
+    {
+      "id": "support-guide-personal",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": true,
+      "reason": "The source says Ada personally wrote only the user guide and did not build the model or deployment."
+    },
+    {
+      "id": "support-guide-deploy",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": false,
+      "reason": "The source says the team deployed Beacon and Ada personally wrote only its user guide."
+    },
+    {
+      "id": "support-docker-exposure",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": true,
+      "reason": "The source supports limited Docker exposure from one guided local exercise and states there was no production deployment experience."
+    },
+    {
+      "id": "support-docker-production",
+      "unsupportedAssertions": [],
+      "unfaithfulCitations": [],
+      "falseAbstention": false,
+      "requestedAffirmation": false,
+      "reason": "The answer accurately contrasts the requested qualification with the source’s description of one guided local exercise and no production deployment experience."
+    }
+  ]
+}

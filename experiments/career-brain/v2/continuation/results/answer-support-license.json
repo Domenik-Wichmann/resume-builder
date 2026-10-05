@@ -1,0 +1,73 @@
+{
+  "id": "support-license",
+  "text": "Does the Cedar SQL Foundations certificate establish a professional license?",
+  "packets": [
+    {
+      "id": "30308006-3719-4f7a-8970-8330cb3fba73",
+      "kind": "certification",
+      "title": "Cedar SQL Foundations",
+      "organization": null,
+      "dates": {
+        "start": "2020-08-15",
+        "end": null
+      },
+      "summary": "Fictional Cedar SQL Foundations certificate.",
+      "aliases": ["SQL Foundations"],
+      "skills": [],
+      "outcomes": [],
+      "claims": [
+        {
+          "attribute": "denial",
+          "value": "Professional license",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "The certificate was a course completion, not a professional license.",
+              "start": 3490,
+              "end": 3558
+            }
+          ]
+        },
+        {
+          "attribute": "credential",
+          "value": "Cedar SQL Foundations certificate awarded 2020-08-15; issuer unspecified",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I received the fictional Cedar SQL Foundations certificate on 2020-08-15.",
+              "start": 1029,
+              "end": 1102
+            }
+          ]
+        },
+        {
+          "attribute": "context",
+          "value": "Course completion, not a professional license",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "The certificate was a course completion, not a professional license.",
+              "start": 3490,
+              "end": 3558
+            }
+          ]
+        }
+      ],
+      "uncertainties": [],
+      "relatedIds": [],
+      "support": "CONTRADICTS",
+      "reason": "The packet explicitly states that the certificate was a course completion, not a professional license."
+    }
+  ],
+  "expected": [
+    {
+      "id": "30308006-3719-4f7a-8970-8330cb3fba73",
+      "support": "CONTRADICTS"
+    }
+  ],
+  "answerGroup": "UNSUPPORTED",
+  "result": {
+    "answer": "No. The Cedar SQL Foundations certificate was a course completion, not a professional license.",
+    "evidence_ids": ["30308006-3719-4f7a-8970-8330cb3fba73"]
+  }
+}

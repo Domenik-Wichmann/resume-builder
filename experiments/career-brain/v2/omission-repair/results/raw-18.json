@@ -1,0 +1,22 @@
+{
+  "label": "repeat:entailment-audit:openai/gpt-6-luna-pro:chunk-12",
+  "result": {
+    "decisions": [
+      {
+        "index": 0,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly states, “I speak English fluently,” supporting the language and fluency summary and claim."
+      },
+      {
+        "index": 1,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly identifies Data tools as a skill category containing Python, SQL, and PostgreSQL; the summary and claim accurately reflect it."
+      },
+      {
+        "index": 2,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly identifies Collaboration as a separate skill category containing Git and coworker training; the summary and claim accurately reflect it."
+      }
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": "support-unrelated-medical",
+  "text": "What emergency surgery did Ada perform?",
+  "packets": [
+    {
+      "id": "01290c95-e5d4-40d8-8d52-b0f5870b9b91",
+      "kind": "education",
+      "title": "BSc in Information Systems",
+      "organization": "Cedar College",
+      "dates": {
+        "start": "2017-09-01",
+        "end": "2020-06-30"
+      },
+      "summary": "BSc in Information Systems.",
+      "aliases": ["BSc", "Bachelor", "Information Systems"],
+      "skills": [],
+      "outcomes": [],
+      "claims": [
+        {
+          "attribute": "credential",
+          "value": "BSc in Information Systems at Cedar College, 2017-09-01 to 2020-06-30",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "I earned a BSc in Information Systems at Cedar College from 2017-09-01 to 2020-06-30.",
+              "start": 942,
+              "end": 1027
+            }
+          ]
+        }
+      ],
+      "uncertainties": [],
+      "relatedIds": [],
+      "support": "IRRELEVANT",
+      "reason": "The evidence concerns an Information Systems degree, not emergency surgery."
+    }
+  ],
+  "expected": [
+    {
+      "id": "01290c95-e5d4-40d8-8d52-b0f5870b9b91",
+      "support": "IRRELEVANT"
+    }
+  ],
+  "answerGroup": "UNSUPPORTED",
+  "result": {
+    "answer": "No relevant evidence is currently stored about emergency surgery performed by Ada. The available evidence records a BSc in Information Systems, not surgery.",
+    "evidence_ids": ["01290c95-e5d4-40d8-8d52-b0f5870b9b91"]
+  }
+}

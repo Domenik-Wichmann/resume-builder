@@ -1,0 +1,23 @@
+{
+  "label": "safety:luna-claim-only-composition",
+  "result": {
+    "bullets": [
+      {
+        "id": "preferred-warning",
+        "bullet": "Personally wrote SQL validation checks for dispatch reconciliation."
+      },
+      {
+        "id": "planned-completed",
+        "bullet": "Personally wrote SQL validation checks for dispatch reconciliation."
+      },
+      {
+        "id": "team-personal",
+        "bullet": "Personally wrote SQL validation checks for dispatch reconciliation."
+      },
+      {
+        "id": "historical-warning",
+        "bullet": "Personally wrote SQL checks."
+      }
+    ]
+  }
+}

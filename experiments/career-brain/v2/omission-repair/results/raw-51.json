@@ -1,0 +1,32 @@
+{
+  "label": "qa-identity-audit:targeted-answer-audit-known-actor",
+  "result": {
+    "decisions": [
+      {
+        "id": "unresolved-quantity",
+        "verdict": "PASS",
+        "reason": "The answer avoids affirming either disputed count, accurately reports the unresolved 12-versus-14 discrepancy, and preserves the confirmed training details."
+      },
+      {
+        "id": "old-value-new-conflict",
+        "verdict": "PASS",
+        "reason": "It correctly rejects saying exactly 12, reports the unresolved discrepancy, and offers the confirmed training and handbook facts."
+      },
+      {
+        "id": "confirmed-training",
+        "verdict": "PASS",
+        "reason": "It answers yes using confirmed training and handbook claims, while accurately noting the count remains unresolved."
+      },
+      {
+        "id": "superseded-fact",
+        "verdict": "PASS",
+        "reason": "It gives the confirmed figure of eight and correctly identifies five as superseded."
+      },
+      {
+        "id": "team-personal-conflict",
+        "verdict": "PASS",
+        "reason": "It does not attribute the disputed model-building to Ada and includes the confirmed user-guide authorship."
+      }
+    ]
+  }
+}

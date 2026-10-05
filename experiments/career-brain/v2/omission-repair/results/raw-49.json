@@ -1,0 +1,7 @@
+{
+  "label": "safety:answer-quantity",
+  "result": {
+    "answer": "It’s unresolved whether Ada personally built the predictive model: the notes conflict on who built it. Ada did write the user guide.",
+    "evidence_ids": ["ownership-conflict"]
+  }
+}

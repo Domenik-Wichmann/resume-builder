@@ -19,5 +19,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run check
+      - run: npm run omission-repair:qualification
+      - run: npm run claim-repair:qualification
+      - run: npm run continuation:qualification
       - run: npm run qualification
+      - run: npm run requalification
       - run: npm run build

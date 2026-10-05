@@ -1,0 +1,61 @@
+{
+  "id": "support-guide-deploy",
+  "text": "Did Ada personally deploy Beacon?",
+  "packets": [
+    {
+      "id": "c0973e9a-fb7d-4cf0-8ec2-9ee321072f4f",
+      "kind": "project",
+      "title": "Beacon",
+      "organization": null,
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "summary": "Personally wrote only Beacon's user guide; did not build model or deployment",
+      "aliases": [],
+      "skills": [],
+      "outcomes": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Personally wrote only Beacon's user guide; did not build model or deployment",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For Beacon, my brother wrote the model integration and the team deployed it. I personally only wrote the user guide. I did not build its model or deployment.",
+              "start": 0,
+              "end": 157
+            }
+          ]
+        },
+        {
+          "attribute": "denial",
+          "value": "Personal model integration and deployment",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "For Beacon, my brother wrote the model integration and the team deployed it. I personally only wrote the user guide. I did not build its model or deployment.",
+              "start": 0,
+              "end": 157
+            }
+          ]
+        }
+      ],
+      "uncertainties": [],
+      "relatedIds": [],
+      "support": "CONTRADICTS",
+      "reason": "Ada explicitly says she did not build Beacon's deployment and that the team deployed it."
+    }
+  ],
+  "expected": [
+    {
+      "id": "c0973e9a-fb7d-4cf0-8ec2-9ee321072f4f",
+      "support": "CONTRADICTS"
+    }
+  ],
+  "answerGroup": "UNSUPPORTED",
+  "result": {
+    "answer": "No. The team deployed Beacon; Ada personally wrote only its user guide and did not build or deploy it.",
+    "evidence_ids": ["c0973e9a-fb7d-4cf0-8ec2-9ee321072f4f"]
+  }
+}

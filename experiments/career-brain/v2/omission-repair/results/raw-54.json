@@ -1,0 +1,37 @@
+{
+  "label": "relationship-grounding:entailment-audit:openai/gpt-6-luna-pro:chunk-12",
+  "result": {
+    "decisions": [
+      {
+        "index": 0,
+        "verdict": "SUPPORTED",
+        "reason": "The source identifies Docker as a one-off exercise and does not claim broader or professional use; the record accurately limits the claim to exposure."
+      },
+      {
+        "index": 1,
+        "verdict": "SUPPORTED",
+        "reason": "The BSc, field of study, institution, and dates are stated directly in the source."
+      },
+      {
+        "index": 2,
+        "verdict": "UNSUPPORTED",
+        "reason": "The source explicitly calls the certificate fictional. The record presents it as a received credential without preserving that qualification, making its summary and credential claims misleading."
+      },
+      {
+        "index": 3,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly says the person speaks English fluently."
+      },
+      {
+        "index": 4,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly names Data tools as the category for Python, SQL, and PostgreSQL."
+      },
+      {
+        "index": 5,
+        "verdict": "SUPPORTED",
+        "reason": "The source explicitly names Collaboration as the category for Git and coworker training."
+      }
+    ]
+  }
+}

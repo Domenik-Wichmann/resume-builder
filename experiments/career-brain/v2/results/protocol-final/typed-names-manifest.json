@@ -1,0 +1,7 @@
+{
+  "scope": "Four-call typed named-requirement comparison on identical cached candidate packets; no new retrieval/answers",
+  "hashes": {
+    "semantic-adjudication.ts": "d14a3c495ab2117e6b1e5fc442e0030e889b4a04104c6612fadd358f112dfc97",
+    "run.ts": "4591a215bf139e8c7b57925c1d21f9d25f9e6c43bc2ddb10ea700be6ff709101"
+  }
+}

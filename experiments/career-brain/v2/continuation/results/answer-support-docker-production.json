@@ -1,0 +1,49 @@
+{
+  "id": "support-docker-production",
+  "text": "Is Ada a proficient production Docker engineer?",
+  "packets": [
+    {
+      "id": "e6169e95-8b37-4e86-8281-7b0f3e0bf450",
+      "kind": "skill",
+      "title": "Docker",
+      "organization": null,
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "summary": "Docker one-off guided local exposure, no production deployment",
+      "aliases": [],
+      "skills": [],
+      "outcomes": [],
+      "claims": [
+        {
+          "attribute": "depth",
+          "value": "Docker one-off guided local exposure, no production deployment",
+          "attribution": "EXPOSURE",
+          "evidence": [
+            {
+              "quote": "For Local Box, I tried Docker once in a guided local exercise; I have no production deployment experience.",
+              "start": 0,
+              "end": 106
+            }
+          ]
+        }
+      ],
+      "uncertainties": [],
+      "relatedIds": [],
+      "support": "CONTRADICTS",
+      "reason": "The packet explicitly says Ada has no production deployment experience with Docker, contrary to the requested production-engineer qualification."
+    }
+  ],
+  "expected": [
+    {
+      "id": "e6169e95-8b37-4e86-8281-7b0f3e0bf450",
+      "support": "CONTRADICTS"
+    }
+  ],
+  "answerGroup": "UNSUPPORTED",
+  "result": {
+    "answer": "No. The stored evidence describes only one guided local Docker exercise and explicitly says Ada has no production deployment experience, so it does not support calling her a proficient production Docker engineer.",
+    "evidence_ids": ["e6169e95-8b37-4e86-8281-7b0f3e0bf450"]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": "support-plan-intended",
+  "text": "What rollout did Ada plan?",
+  "packets": [
+    {
+      "id": "f420a553-30ce-4471-8345-a628fe32e030",
+      "kind": "project",
+      "title": "Planned rollout",
+      "organization": null,
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "summary": "Planned a future rollout; not completed",
+      "aliases": [],
+      "skills": [],
+      "outcomes": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Planned a future rollout; not completed",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For Route Note, I planned a rollout next month; it has not been completed.",
+              "start": 0,
+              "end": 74
+            }
+          ]
+        }
+      ],
+      "uncertainties": [],
+      "relatedIds": [],
+      "support": "SUPPORTS",
+      "reason": "Ada explicitly says she planned a future rollout for Route Note, while noting it was not yet completed."
+    }
+  ],
+  "expected": [
+    {
+      "id": "f420a553-30ce-4471-8345-a628fe32e030",
+      "support": "SUPPORTS"
+    }
+  ],
+  "answerGroup": "DIRECT",
+  "result": {
+    "answer": "Ada planned a future rollout for Route Note next month; it had not been completed.",
+    "evidence_ids": ["f420a553-30ce-4471-8345-a628fe32e030"]
+  }
+}

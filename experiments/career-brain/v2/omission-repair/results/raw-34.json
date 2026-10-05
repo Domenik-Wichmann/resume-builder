@@ -1,0 +1,115 @@
+{
+  "label": "sequence:source-backed-omissions:0",
+  "result": {
+    "decisions": [
+      {
+        "ref": "omission-1",
+        "verdict": "SUPPORTED_EQUIVALENT",
+        "reason": "The source explicitly attributes writing the Python parser to Ada personally.",
+        "quotes": ["I wrote the Python parser and SQL checks myself."]
+      },
+      {
+        "ref": "omission-2",
+        "verdict": "SUPPORTED_EQUIVALENT",
+        "reason": "The source explicitly attributes writing the SQL checks to Ada personally.",
+        "quotes": ["I wrote the Python parser and SQL checks myself."]
+      },
+      {
+        "ref": "omission-3",
+        "verdict": "SUPPORTED_EQUIVALENT",
+        "reason": "The source says Ada gathered Dispatch Loom requirements from warehouse supervisors.",
+        "quotes": [
+          "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them."
+        ]
+      },
+      {
+        "ref": "omission-4",
+        "verdict": "SUPPORTED_EQUIVALENT",
+        "reason": "The source says Ada explained validation failures to the warehouse supervisors.",
+        "quotes": [
+          "I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them."
+        ]
+      },
+      {
+        "ref": "omission-5",
+        "verdict": "SUPPORTED_EQUIVALENT",
+        "reason": "The source explicitly links Ada’s use of Git to version control.",
+        "quotes": [
+          "I used Git for version control and PostgreSQL for the production database."
+        ]
+      },
+      {
+        "ref": "omission-6",
+        "verdict": "SUPPORTED_EQUIVALENT",
+        "reason": "The source explicitly links Ada’s use of PostgreSQL to the production database.",
+        "quotes": [
+          "I used Git for version control and PostgreSQL for the production database."
+        ]
+      },
+      {
+        "ref": "omission-7",
+        "verdict": "SUPPORTED_EQUIVALENT",
+        "reason": "The source states that supervisors wanted understandable exceptions for Dispatch Loom.",
+        "quotes": [
+          "The supervisors wanted understandable exceptions, not a dashboard with unexplained colors."
+        ]
+      },
+      {
+        "ref": "omission-8",
+        "verdict": "SUPPORTED_EQUIVALENT",
+        "reason": "The source states that operators preferred a visible warning when the source file could arrive late.",
+        "quotes": [
+          "The source file could arrive late and the operators preferred a visible warning."
+        ]
+      },
+      {
+        "ref": "omission-9",
+        "verdict": "SUPPORTED_EQUIVALENT",
+        "reason": "The source describes what the coworker handbook instructed readers to do before raising an exception.",
+        "quotes": [
+          "The handbook described where a coworker should look before raising an exception."
+        ]
+      },
+      {
+        "ref": "omission-10",
+        "verdict": "SUPPORTED_EQUIVALENT",
+        "reason": "The source explicitly says Ada personally built Roster Note and identifies it as a separate SQL handover checklist.",
+        "quotes": [
+          "I personally built Roster Note at Harbor Tools, a separate SQL handover checklist."
+        ]
+      },
+      {
+        "ref": "omission-12",
+        "verdict": "SUPPORTED_EQUIVALENT",
+        "reason": "The source explicitly says the Dispatch Loom handbook included five worked examples.",
+        "quotes": [
+          "For Dispatch Loom the handbook also included five worked examples."
+        ]
+      },
+      {
+        "ref": "omission-13",
+        "verdict": "SUPPORTED_EQUIVALENT",
+        "reason": "The source confirms the 5-to-2-hours-per-week reconciliation result over six weekly runs, and explicitly limits attribution to a team result.",
+        "quotes": [
+          "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks."
+        ]
+      },
+      {
+        "ref": "omission-14",
+        "verdict": "SUPPORTED_EQUIVALENT",
+        "reason": "The source explicitly distinguishes the measured reconciliation work from delivery speed, which was not measured.",
+        "quotes": [
+          "An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only."
+        ]
+      },
+      {
+        "ref": "omission-15",
+        "verdict": "SUPPORTED_EQUIVALENT",
+        "reason": "The source states the BSc identity, institution, and dates.",
+        "quotes": [
+          "I earned a BSc in Information Systems at Cedar College from 2017-09-01 to 2020-06-30."
+        ]
+      }
+    ]
+  }
+}

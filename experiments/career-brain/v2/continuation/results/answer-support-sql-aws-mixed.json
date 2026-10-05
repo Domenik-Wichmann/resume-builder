@@ -1,0 +1,49 @@
+{
+  "id": "support-sql-aws-mixed",
+  "text": "Does Ada have SQL and AWS skills?",
+  "packets": [
+    {
+      "id": "61d13bb9-743b-44e8-8f78-45c2bcf6d55a",
+      "kind": "skill",
+      "title": "SQL",
+      "organization": null,
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "summary": "Used SQL for Dispatch Loom.",
+      "aliases": ["SQL"],
+      "skills": [],
+      "outcomes": [],
+      "claims": [
+        {
+          "attribute": "tool",
+          "value": "SQL",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself.",
+              "start": 166,
+              "end": 331
+            }
+          ]
+        }
+      ],
+      "uncertainties": [],
+      "relatedIds": [],
+      "support": "PARTIALLY_SUPPORTS",
+      "reason": "Ada explicitly used SQL, but this packet provides no evidence of AWS skills."
+    }
+  ],
+  "expected": [
+    {
+      "id": "61d13bb9-743b-44e8-8f78-45c2bcf6d55a",
+      "support": "PARTIALLY_SUPPORTS"
+    }
+  ],
+  "answerGroup": "PARTIAL",
+  "result": {
+    "answer": "Ada has evidence of SQL experience: she personally used SQL to build checks for a dispatch reconciliation tool. No relevant evidence is currently stored for AWS skills; the available evidence is about SQL, not AWS.",
+    "evidence_ids": ["61d13bb9-743b-44e8-8f78-45c2bcf6d55a"]
+  }
+}

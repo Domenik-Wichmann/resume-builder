@@ -1,0 +1,8 @@
+{
+  "staleAffirmation": false,
+  "unsupportedAssertions": [],
+  "requesterAsCandidate": false,
+  "falseAbstention": false,
+  "faithfulCitations": true,
+  "reason": "The answer correctly says the exact count is unresolved because the records conflict (12 versus 14), and offers only confirmed, count-free training and handbook claims. The evidence IDs support those statements."
+}

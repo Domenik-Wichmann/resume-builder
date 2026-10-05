@@ -3,13 +3,19 @@ import { z } from "zod";
 import { requireAccount } from "@/lib/accounts";
 import { readJson, errorResponse, HttpError, reserveAIQuota } from "@/lib/http";
 import { candidateSchema, tableFor, type Change } from "@/lib/ingestion/model";
-import { loadCanonical } from "@/lib/ingestion/repository";
-import { diffCareer, identity, semanticHash } from "@/lib/ingestion/diff";
-import { extractCareer, ingestionModel } from "@/lib/ingestion/extract";
+import { identity, semanticHash } from "@/lib/ingestion/diff";
+import {
+  loadBrain,
+  reviewedSchema,
+  applyBrain,
+  actorFor,
+} from "@/lib/career-brain/repository";
+import { proposeBrain } from "@/lib/career-brain/propose";
+import { stateDiff } from "@/lib/career-brain/equivalence";
 import { interviewQuestions } from "@/lib/interview/questions";
 import { reindexCareer } from "@/lib/embeddings/indexer";
 import { contentHash } from "@/lib/embeddings/content";
-export const maxDuration = 60;
+export const maxDuration = 300;
 const inputSchema = z.discriminatedUnion("action", [
   z
     .object({
@@ -24,7 +30,7 @@ const inputSchema = z.discriminatedUnion("action", [
       action: z.literal("revise"),
       id: z.uuid(),
       index: z.number().int().min(0),
-      candidate: candidateSchema,
+      candidate: z.union([reviewedSchema.strip(), candidateSchema]),
     })
     .strict(),
   z
@@ -63,7 +69,7 @@ export async function GET() {
   try {
     const { db, accountId } = await requireAccount();
     const [records, imports] = await Promise.all([
-      loadCanonical(db, accountId),
+      loadBrain(db, accountId),
       db
         .from("career_imports")
         .select("id,status,model,created_at,candidates")
@@ -77,6 +83,13 @@ export async function GET() {
       { headers: { "Cache-Control": "no-store" } },
     );
   } catch (error) {
+    if (error instanceof Error && error.message === "STALE_IMPORT")
+      return errorResponse(
+        new HttpError(
+          409,
+          "Career evidence changed since this review. Re-import to compare again.",
+        ),
+      );
     return errorResponse(error);
   }
 }
@@ -86,7 +99,7 @@ export async function POST(request: NextRequest) {
     const input = await readJson(request, inputSchema, 200000);
     if (input.action === "reindex")
       return Response.json(await reindexCareer(accountId));
-    const current = await loadCanonical(db, accountId);
+    const current = await loadBrain(db, accountId);
     if (input.action === "interview") {
       if (
         input.mode === "record" &&
@@ -129,34 +142,19 @@ export async function POST(request: NextRequest) {
     }
     if (input.action === "extract") {
       await reserveAIQuota();
-      const source =
-        input.kind === "INTERVIEW"
-          ? `${input.context ? `Interview context (questions, not career evidence):\n${input.context}\n` : ""}Owner answers:\n${input.text}`
-          : input.text;
+      const source = input.text;
       if (source.length > 40000)
         throw new HttpError(
           400,
           "Answers and interview context must fit within 40,000 characters.",
         );
-      const candidates = await extractCareer(
-        source,
-        current.map(identity),
+      const { changes } = await proposeBrain(
+        db,
         accountId,
+        source,
+        current,
+        input.kind === "MASTER",
       );
-      // A quotation from interview questions alone is not owner evidence.
-      const checked =
-        input.kind === "INTERVIEW"
-          ? candidates.map((row) => ({
-              ...row,
-              uncertainties: [
-                ...row.uncertainties,
-                ...(!input.text.includes(row.source_quote)
-                  ? ["Quotation is not from the owner's answer."]
-                  : []),
-              ],
-            }))
-          : candidates;
-      const changes = diffCareer(checked, current, input.kind === "MASTER");
       const savedSource = await db
         .from("career_sources")
         .insert({
@@ -175,7 +173,7 @@ export async function POST(request: NextRequest) {
           account_id: accountId,
           source_id: savedSource.data.id,
           candidates: changes,
-          model: ingestionModel(),
+          model: "openai/gpt-6-luna-pro:career-brain-owner-review",
         })
         .select("id,candidates,status")
         .single();
@@ -212,7 +210,17 @@ export async function POST(request: NextRequest) {
         .eq("id", batch.data.source_id)
         .single();
       if (source.error) throw new Error("Cannot load provenance.");
-      if (!source.data.evidence_text.includes(input.candidate.source_quote))
+      const prior = current.find(
+        (r) => identity(r) === changes[input.index].identity,
+      );
+      const historicalOnly =
+        prior &&
+        input.candidate.source_quote === prior.source_quote &&
+        semanticHash(input.candidate) === prior.hash;
+      if (
+        !source.data.evidence_text.includes(input.candidate.source_quote) &&
+        !historicalOnly
+      )
         throw new HttpError(400, "Provide a quotation from the stored source.");
       const incoming = changes.flatMap((change, index) =>
         index === input.index
@@ -221,7 +229,16 @@ export async function POST(request: NextRequest) {
             ? [change.after]
             : [],
       );
-      const revised = diffCareer(incoming, current, false);
+      // Explicit owner revisions are intentional edits, not extractor omissions.
+      // Basic legacy edits retain pending evidence until a rich source backfill.
+      const rich = incoming.map((r) => ({
+        ...r,
+        aliases: ("aliases" in r ? r.aliases : []) as string[],
+        claims: ("claims" in r
+          ? r.claims
+          : []) as (typeof current)[number]["claims"],
+      }));
+      const revised = stateDiff(rich, current, actorFor(current), false);
       revised.push(
         ...changes.filter(
           (change) =>
@@ -249,34 +266,36 @@ export async function POST(request: NextRequest) {
         400,
         "Resolve review items by editing and saving their candidate first.",
       );
-    const patches = accepted
-      .filter((change) => change.status !== "UNCHANGED")
-      .map((change) => ({
-        ...(change.after || change.before!),
-        skill_keys: [...new Set((change.after || change.before!).skill_keys)],
-        achievement_keys: [
-          ...new Set((change.after || change.before!).achievement_keys),
-        ],
-        action: change.status === "REMOVED" ? "ARCHIVE" : "UPSERT",
-        baseline_hash: change.before?.hash || null,
-        baseline_version: change.before?.updated_at || null,
-        hash: change.after ? semanticHash(change.after) : change.before!.hash,
-      }));
-    const applied = await db.rpc("apply_career_import", {
-      p_import: input.id,
-      p_changes: patches,
-    });
-    if (applied.error) {
-      if (applied.error.message.includes("STALE_IMPORT"))
+    const sourceResult = await db
+      .from("career_sources")
+      .select("evidence_text")
+      .eq("id", batch.data.source_id)
+      .eq("account_id", accountId)
+      .single();
+    if (sourceResult.error) throw new Error("Cannot load approved source");
+    // Compare against the proposal's baseline, including metadata-only state.
+    for (const change of accepted) {
+      const now = current.find((r) => identity(r) === change.identity);
+      const before = change.before as (typeof current)[number] | null;
+      if (
+        now?.hash !== before?.hash ||
+        now?.updated_at !== before?.updated_at ||
+        now?.evidence_version !== before?.evidence_version
+      )
         throw new HttpError(
           409,
-          "Career data changed since this review. Re-import to compare again.",
+          "Career evidence changed since this review. Re-import to compare again.",
         );
-      throw new HttpError(
-        409,
-        "Import was not applied. Check accepted relationship references and draft state.",
-      );
     }
+    const applied = await applyBrain(
+      db,
+      accountId,
+      input.id,
+      batch.data.source_id,
+      sourceResult.data.evidence_text,
+      accepted,
+      current,
+    );
     let indexing;
     try {
       indexing = await reindexCareer(accountId);
@@ -286,7 +305,7 @@ export async function POST(request: NextRequest) {
         message: "Canonical changes saved; retry indexing.",
       };
     }
-    return Response.json({ applied: applied.data, indexing });
+    return Response.json({ applied, indexing });
   } catch (error) {
     return errorResponse(error);
   }

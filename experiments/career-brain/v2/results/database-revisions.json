@@ -1,0 +1,572 @@
+{
+  "state": "Real sequential canonical UUIDs and optimistic review transactions; manually source-reviewed corrected gold is applied between raw proposal measurements.",
+  "applied": [
+    {
+      "fixture": "A-clean-v1",
+      "sourceId": "c29fddd7-243d-4623-b025-fbdd22873221",
+      "sourceFixture": "A-clean-v1",
+      "changes": [
+        {
+          "identity": "profile:profile",
+          "status": "ADDED",
+          "beforeId": null
+        },
+        {
+          "identity": "experience:operations-analyst-dd5de8b403",
+          "status": "ADDED",
+          "beforeId": null
+        },
+        {
+          "identity": "project:dispatch-loom-e00a8b6fe1",
+          "status": "ADDED",
+          "beforeId": null
+        },
+        {
+          "identity": "achievement:reconciliation-time-reduction-5800f72729",
+          "status": "ADDED",
+          "beforeId": null
+        },
+        {
+          "identity": "achievement:dispatch-coworker-training-0bcd131baf",
+          "status": "ADDED",
+          "beforeId": null
+        },
+        {
+          "identity": "skill:python-1678f77f15",
+          "status": "ADDED",
+          "beforeId": null
+        },
+        {
+          "identity": "skill:sql-a03e9bccab",
+          "status": "ADDED",
+          "beforeId": null
+        },
+        {
+          "identity": "skill:postgresql-4b6475d427",
+          "status": "ADDED",
+          "beforeId": null
+        },
+        {
+          "identity": "skill:git-820dc39c23",
+          "status": "ADDED",
+          "beforeId": null
+        },
+        {
+          "identity": "skill:coworker-training-888713667e",
+          "status": "ADDED",
+          "beforeId": null
+        },
+        {
+          "identity": "category:data-tools-28c5fe8f0e",
+          "status": "ADDED",
+          "beforeId": null
+        },
+        {
+          "identity": "category:collaboration-91578d1f92",
+          "status": "ADDED",
+          "beforeId": null
+        },
+        {
+          "identity": "education:bsc-in-information-systems-ab520a51dc",
+          "status": "ADDED",
+          "beforeId": null
+        },
+        {
+          "identity": "certification:cedar-sql-foundations-ed912d30a4",
+          "status": "ADDED",
+          "beforeId": null
+        },
+        {
+          "identity": "language:english-3e0cd54cbb",
+          "status": "ADDED",
+          "beforeId": null
+        }
+      ],
+      "preserved": 0,
+      "before": 0,
+      "after": 15,
+      "canonicalIds": [
+        {
+          "kind": "profile",
+          "key": "profile",
+          "id": "48939704-6c02-46ed-919e-e3f6cc387357",
+          "archived": false
+        },
+        {
+          "kind": "experience",
+          "key": "operations-analyst-dd5de8b403",
+          "id": "dbad904e-be33-49e5-91fb-e99745cbc6eb",
+          "archived": false
+        },
+        {
+          "kind": "project",
+          "key": "dispatch-loom-e00a8b6fe1",
+          "id": "f61556d3-be90-47cd-970b-2c930d947707",
+          "archived": false
+        },
+        {
+          "kind": "achievement",
+          "key": "dispatch-coworker-training-0bcd131baf",
+          "id": "aff827ee-9676-4481-8044-26832793edfc",
+          "archived": false
+        },
+        {
+          "kind": "achievement",
+          "key": "reconciliation-time-reduction-5800f72729",
+          "id": "83635428-ceb7-464e-a0c2-e9bb195e129d",
+          "archived": false
+        },
+        {
+          "kind": "skill",
+          "key": "coworker-training-888713667e",
+          "id": "e26036c0-6fa7-422d-93cd-df1b2a8000b2",
+          "archived": false
+        },
+        {
+          "kind": "skill",
+          "key": "python-1678f77f15",
+          "id": "f4bc8d9c-8b41-42a7-b79a-ac02bc52decb",
+          "archived": false
+        },
+        {
+          "kind": "skill",
+          "key": "sql-a03e9bccab",
+          "id": "0c7d09cf-20b8-4293-a3cd-c123b7a70f25",
+          "archived": false
+        },
+        {
+          "kind": "skill",
+          "key": "postgresql-4b6475d427",
+          "id": "93d8488d-4531-46f3-946d-0bf9ab0344c2",
+          "archived": false
+        },
+        {
+          "kind": "skill",
+          "key": "git-820dc39c23",
+          "id": "923ce4f8-88c0-48f3-8e97-f9157fd63c38",
+          "archived": false
+        },
+        {
+          "kind": "education",
+          "key": "bsc-in-information-systems-ab520a51dc",
+          "id": "c1c9a7bb-433e-4c2d-8835-4b16c305ecf1",
+          "archived": false
+        },
+        {
+          "kind": "certification",
+          "key": "cedar-sql-foundations-ed912d30a4",
+          "id": "3920028a-1427-4c06-86c4-4fe58c7323b3",
+          "archived": false
+        },
+        {
+          "kind": "language",
+          "key": "english-3e0cd54cbb",
+          "id": "dcd1be83-b59e-4d36-aa61-d95aad86f49b",
+          "archived": false
+        },
+        {
+          "kind": "category",
+          "key": "data-tools-28c5fe8f0e",
+          "id": "266d03ce-aeec-4ab5-b372-c1b3591e38d7",
+          "archived": false
+        },
+        {
+          "kind": "category",
+          "key": "collaboration-91578d1f92",
+          "id": "8059b539-bc02-419a-8a11-ff3ea344b568",
+          "archived": false
+        }
+      ],
+      "archived": 0
+    },
+    {
+      "fixture": "A-clean-v2",
+      "sourceId": "e48c117e-9575-48cf-941d-c820d963b734",
+      "sourceFixture": "A-clean-v2",
+      "changes": [
+        {
+          "identity": "profile:profile",
+          "status": "UNCHANGED",
+          "beforeId": "48939704-6c02-46ed-919e-e3f6cc387357"
+        },
+        {
+          "identity": "experience:operations-analyst-dd5de8b403",
+          "status": "UPDATED",
+          "beforeId": "dbad904e-be33-49e5-91fb-e99745cbc6eb"
+        },
+        {
+          "identity": "project:dispatch-loom-e00a8b6fe1",
+          "status": "UNCHANGED",
+          "beforeId": "f61556d3-be90-47cd-970b-2c930d947707"
+        },
+        {
+          "identity": "achievement:reconciliation-time-reduction-5800f72729",
+          "status": "UNCHANGED",
+          "beforeId": "83635428-ceb7-464e-a0c2-e9bb195e129d"
+        },
+        {
+          "identity": "achievement:dispatch-coworker-training-0bcd131baf",
+          "status": "UPDATED",
+          "beforeId": "aff827ee-9676-4481-8044-26832793edfc"
+        },
+        {
+          "identity": "skill:python-1678f77f15",
+          "status": "UNCHANGED",
+          "beforeId": "f4bc8d9c-8b41-42a7-b79a-ac02bc52decb"
+        },
+        {
+          "identity": "skill:sql-a03e9bccab",
+          "status": "UNCHANGED",
+          "beforeId": "0c7d09cf-20b8-4293-a3cd-c123b7a70f25"
+        },
+        {
+          "identity": "skill:postgresql-4b6475d427",
+          "status": "UNCHANGED",
+          "beforeId": "93d8488d-4531-46f3-946d-0bf9ab0344c2"
+        },
+        {
+          "identity": "skill:git-820dc39c23",
+          "status": "UNCHANGED",
+          "beforeId": "923ce4f8-88c0-48f3-8e97-f9157fd63c38"
+        },
+        {
+          "identity": "skill:coworker-training-888713667e",
+          "status": "UNCHANGED",
+          "beforeId": "e26036c0-6fa7-422d-93cd-df1b2a8000b2"
+        },
+        {
+          "identity": "category:data-tools-28c5fe8f0e",
+          "status": "UNCHANGED",
+          "beforeId": "266d03ce-aeec-4ab5-b372-c1b3591e38d7"
+        },
+        {
+          "identity": "category:collaboration-91578d1f92",
+          "status": "UNCHANGED",
+          "beforeId": "8059b539-bc02-419a-8a11-ff3ea344b568"
+        },
+        {
+          "identity": "education:bsc-in-information-systems-ab520a51dc",
+          "status": "UNCHANGED",
+          "beforeId": "c1c9a7bb-433e-4c2d-8835-4b16c305ecf1"
+        },
+        {
+          "identity": "language:english-3e0cd54cbb",
+          "status": "UNCHANGED",
+          "beforeId": "dcd1be83-b59e-4d36-aa61-d95aad86f49b"
+        },
+        {
+          "identity": "project:roster-note-1b510e9f1f",
+          "status": "ADDED",
+          "beforeId": null
+        },
+        {
+          "identity": "certification:cedar-sql-foundations-ed912d30a4",
+          "status": "REMOVED",
+          "beforeId": "3920028a-1427-4c06-86c4-4fe58c7323b3"
+        }
+      ],
+      "preserved": 15,
+      "before": 15,
+      "after": 16,
+      "canonicalIds": [
+        {
+          "kind": "profile",
+          "key": "profile",
+          "id": "48939704-6c02-46ed-919e-e3f6cc387357",
+          "archived": false
+        },
+        {
+          "kind": "experience",
+          "key": "operations-analyst-dd5de8b403",
+          "id": "dbad904e-be33-49e5-91fb-e99745cbc6eb",
+          "archived": false
+        },
+        {
+          "kind": "project",
+          "key": "dispatch-loom-e00a8b6fe1",
+          "id": "f61556d3-be90-47cd-970b-2c930d947707",
+          "archived": false
+        },
+        {
+          "kind": "project",
+          "key": "roster-note-1b510e9f1f",
+          "id": "8103185e-2368-4a66-9eb4-3094276ab1b3",
+          "archived": false
+        },
+        {
+          "kind": "achievement",
+          "key": "dispatch-coworker-training-0bcd131baf",
+          "id": "aff827ee-9676-4481-8044-26832793edfc",
+          "archived": false
+        },
+        {
+          "kind": "achievement",
+          "key": "reconciliation-time-reduction-5800f72729",
+          "id": "83635428-ceb7-464e-a0c2-e9bb195e129d",
+          "archived": false
+        },
+        {
+          "kind": "skill",
+          "key": "coworker-training-888713667e",
+          "id": "e26036c0-6fa7-422d-93cd-df1b2a8000b2",
+          "archived": false
+        },
+        {
+          "kind": "skill",
+          "key": "python-1678f77f15",
+          "id": "f4bc8d9c-8b41-42a7-b79a-ac02bc52decb",
+          "archived": false
+        },
+        {
+          "kind": "skill",
+          "key": "sql-a03e9bccab",
+          "id": "0c7d09cf-20b8-4293-a3cd-c123b7a70f25",
+          "archived": false
+        },
+        {
+          "kind": "skill",
+          "key": "postgresql-4b6475d427",
+          "id": "93d8488d-4531-46f3-946d-0bf9ab0344c2",
+          "archived": false
+        },
+        {
+          "kind": "skill",
+          "key": "git-820dc39c23",
+          "id": "923ce4f8-88c0-48f3-8e97-f9157fd63c38",
+          "archived": false
+        },
+        {
+          "kind": "education",
+          "key": "bsc-in-information-systems-ab520a51dc",
+          "id": "c1c9a7bb-433e-4c2d-8835-4b16c305ecf1",
+          "archived": false
+        },
+        {
+          "kind": "certification",
+          "key": "cedar-sql-foundations-ed912d30a4",
+          "id": "3920028a-1427-4c06-86c4-4fe58c7323b3",
+          "archived": true
+        },
+        {
+          "kind": "language",
+          "key": "english-3e0cd54cbb",
+          "id": "dcd1be83-b59e-4d36-aa61-d95aad86f49b",
+          "archived": false
+        },
+        {
+          "kind": "category",
+          "key": "data-tools-28c5fe8f0e",
+          "id": "266d03ce-aeec-4ab5-b372-c1b3591e38d7",
+          "archived": false
+        },
+        {
+          "kind": "category",
+          "key": "collaboration-91578d1f92",
+          "id": "8059b539-bc02-419a-8a11-ff3ea344b568",
+          "archived": false
+        }
+      ],
+      "archived": 1
+    },
+    {
+      "fixture": "A-clean-v3",
+      "sourceId": "e815ec9c-5b41-4de0-b2c7-d79fe56b56f4",
+      "sourceFixture": "A-clean-v3",
+      "changes": [
+        {
+          "identity": "profile:profile",
+          "status": "UNCHANGED",
+          "beforeId": "48939704-6c02-46ed-919e-e3f6cc387357"
+        },
+        {
+          "identity": "experience:operations-analyst-dd5de8b403",
+          "status": "UNCHANGED",
+          "beforeId": "dbad904e-be33-49e5-91fb-e99745cbc6eb"
+        },
+        {
+          "identity": "project:dispatch-loom-e00a8b6fe1",
+          "status": "UNCHANGED",
+          "beforeId": "f61556d3-be90-47cd-970b-2c930d947707"
+        },
+        {
+          "identity": "achievement:reconciliation-time-reduction-5800f72729",
+          "status": "UNCHANGED",
+          "beforeId": "83635428-ceb7-464e-a0c2-e9bb195e129d"
+        },
+        {
+          "identity": "achievement:dispatch-coworker-training-0bcd131baf",
+          "status": "REVIEW",
+          "beforeId": "aff827ee-9676-4481-8044-26832793edfc"
+        },
+        {
+          "identity": "skill:python-1678f77f15",
+          "status": "UNCHANGED",
+          "beforeId": "f4bc8d9c-8b41-42a7-b79a-ac02bc52decb"
+        },
+        {
+          "identity": "skill:sql-a03e9bccab",
+          "status": "UPDATED",
+          "beforeId": "0c7d09cf-20b8-4293-a3cd-c123b7a70f25"
+        },
+        {
+          "identity": "skill:postgresql-4b6475d427",
+          "status": "UNCHANGED",
+          "beforeId": "93d8488d-4531-46f3-946d-0bf9ab0344c2"
+        },
+        {
+          "identity": "skill:git-820dc39c23",
+          "status": "UNCHANGED",
+          "beforeId": "923ce4f8-88c0-48f3-8e97-f9157fd63c38"
+        },
+        {
+          "identity": "skill:coworker-training-888713667e",
+          "status": "UNCHANGED",
+          "beforeId": "e26036c0-6fa7-422d-93cd-df1b2a8000b2"
+        },
+        {
+          "identity": "category:data-tools-28c5fe8f0e",
+          "status": "UNCHANGED",
+          "beforeId": "266d03ce-aeec-4ab5-b372-c1b3591e38d7"
+        },
+        {
+          "identity": "category:collaboration-91578d1f92",
+          "status": "UNCHANGED",
+          "beforeId": "8059b539-bc02-419a-8a11-ff3ea344b568"
+        },
+        {
+          "identity": "education:bsc-in-information-systems-ab520a51dc",
+          "status": "UNCHANGED",
+          "beforeId": "c1c9a7bb-433e-4c2d-8835-4b16c305ecf1"
+        },
+        {
+          "identity": "language:english-3e0cd54cbb",
+          "status": "UNCHANGED",
+          "beforeId": "dcd1be83-b59e-4d36-aa61-d95aad86f49b"
+        },
+        {
+          "identity": "project:roster-note-1b510e9f1f",
+          "status": "UPDATED",
+          "beforeId": "8103185e-2368-4a66-9eb4-3094276ab1b3"
+        },
+        {
+          "identity": "certification:cedar-sql-foundations-ed912d30a4",
+          "status": "UPDATED",
+          "beforeId": "3920028a-1427-4c06-86c4-4fe58c7323b3"
+        },
+        {
+          "identity": "achievement:night-shift-handover-documentation-83ca2c1015",
+          "status": "ADDED",
+          "beforeId": null
+        }
+      ],
+      "preserved": 16,
+      "before": 16,
+      "after": 17,
+      "canonicalIds": [
+        {
+          "kind": "profile",
+          "key": "profile",
+          "id": "48939704-6c02-46ed-919e-e3f6cc387357",
+          "archived": false
+        },
+        {
+          "kind": "experience",
+          "key": "operations-analyst-dd5de8b403",
+          "id": "dbad904e-be33-49e5-91fb-e99745cbc6eb",
+          "archived": false
+        },
+        {
+          "kind": "project",
+          "key": "roster-note-1b510e9f1f",
+          "id": "8103185e-2368-4a66-9eb4-3094276ab1b3",
+          "archived": false
+        },
+        {
+          "kind": "project",
+          "key": "dispatch-loom-e00a8b6fe1",
+          "id": "f61556d3-be90-47cd-970b-2c930d947707",
+          "archived": false
+        },
+        {
+          "kind": "achievement",
+          "key": "dispatch-coworker-training-0bcd131baf",
+          "id": "aff827ee-9676-4481-8044-26832793edfc",
+          "archived": false
+        },
+        {
+          "kind": "achievement",
+          "key": "night-shift-handover-documentation-83ca2c1015",
+          "id": "ff32997c-c484-4450-8c01-9c5a26c80dd8",
+          "archived": false
+        },
+        {
+          "kind": "achievement",
+          "key": "reconciliation-time-reduction-5800f72729",
+          "id": "83635428-ceb7-464e-a0c2-e9bb195e129d",
+          "archived": false
+        },
+        {
+          "kind": "skill",
+          "key": "coworker-training-888713667e",
+          "id": "e26036c0-6fa7-422d-93cd-df1b2a8000b2",
+          "archived": false
+        },
+        {
+          "kind": "skill",
+          "key": "python-1678f77f15",
+          "id": "f4bc8d9c-8b41-42a7-b79a-ac02bc52decb",
+          "archived": false
+        },
+        {
+          "kind": "skill",
+          "key": "sql-a03e9bccab",
+          "id": "0c7d09cf-20b8-4293-a3cd-c123b7a70f25",
+          "archived": false
+        },
+        {
+          "kind": "skill",
+          "key": "postgresql-4b6475d427",
+          "id": "93d8488d-4531-46f3-946d-0bf9ab0344c2",
+          "archived": false
+        },
+        {
+          "kind": "skill",
+          "key": "git-820dc39c23",
+          "id": "923ce4f8-88c0-48f3-8e97-f9157fd63c38",
+          "archived": false
+        },
+        {
+          "kind": "education",
+          "key": "bsc-in-information-systems-ab520a51dc",
+          "id": "c1c9a7bb-433e-4c2d-8835-4b16c305ecf1",
+          "archived": false
+        },
+        {
+          "kind": "certification",
+          "key": "cedar-sql-foundations-ed912d30a4",
+          "id": "3920028a-1427-4c06-86c4-4fe58c7323b3",
+          "archived": false
+        },
+        {
+          "kind": "language",
+          "key": "english-3e0cd54cbb",
+          "id": "dcd1be83-b59e-4d36-aa61-d95aad86f49b",
+          "archived": false
+        },
+        {
+          "kind": "category",
+          "key": "data-tools-28c5fe8f0e",
+          "id": "266d03ce-aeec-4ab5-b372-c1b3591e38d7",
+          "archived": false
+        },
+        {
+          "kind": "category",
+          "key": "collaboration-91578d1f92",
+          "id": "8059b539-bc02-419a-8a11-ff3ea344b568",
+          "archived": false
+        }
+      ],
+      "archived": 0
+    }
+  ]
+}

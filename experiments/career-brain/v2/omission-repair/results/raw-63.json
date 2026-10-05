@@ -1,0 +1,7 @@
+{
+  "label": "production-smoke:answer-faithfulness",
+  "result": {
+    "verdict": "PASS",
+    "reason": "The answer faithfully reports Ada’s confirmed training and handbook work, while correctly withholding an exact attendee count because the packet says the counts of 12 and 14 conflict and cannot be resolved."
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "beforeStages": [
+    "sequence-repair-1",
+    "qa",
+    "fallback-canaries",
+    "historical-compact"
+  ],
+  "failurePreserved": "sequence failed closed after its first successful provider call; ledger, usage, provider metadata and original V1 applied state remain. Its parsed invalid conflict result was not retained by the original validator; no content can be reconstructed or relabeled.",
+  "repair": "Bind conflict ref/recordKey fields to application-owned enums; clarify explicit unresolved conflict versus definite update or omitted certificate; save parsed synthetic conflict results before validation.",
+  "retest": "New sequence-repair-1 stage and artifact prefix, never overwrite sequence-v1 or repeat files. The original failed stage stays FAILED. Q&A explicitly uses the repaired reviewed state.",
+  "fallbackBound": "Twelve minimal failed mixed-clause canaries each get one fallback and fresh audit. The historical paragraph already produced a safe generated SQL bullet; its broader-context diagnostic is separate.",
+  "budget": "Same original $5 and 70-request cap, not reset. Failed attempt remains charged."
+}

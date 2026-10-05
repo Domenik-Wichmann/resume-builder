@@ -1,0 +1,14 @@
+{
+  "scope": "Bounded per-12-record audit / SEQ2 and subsequent semantic retrieval prototype; prior outputs are preserved under their original variants",
+  "hashes": {
+    "pipeline.ts": "39a881580507542fe70bc926a4a8a2c295f10a8a0934c92beb50f0fd88ad16b6",
+    "evidence.ts": "cdd8e2e00aebb27eff6d957523e994a10e1fdb9d06dd65dfc7798608cd89dfd4",
+    "repair.ts": "97c1beffdefa476075cd93db7cc586e13818c94ea96bda70bff2706ea85ba055",
+    "packets.ts": "203f1c4c140a59770e67c3140c3b8f5c79945d5af3ef065e918cbc51b5eeb472",
+    "semantic-adjudication.ts": "c4f16e66f4fbf6fc1e256835179166e2a94a5de79fa6856014a0883901098cc7",
+    "retrieval.ts": "e6b909e246b34b5a92661bc7d39aeec74d964278b701b9a43127b6f2d958b8a3",
+    "run.ts": "1a847f1f3510216c258d53fa44f808925c269b08e7fb6c794080273fb5b955cf",
+    "database-state.ts": "3b68dd27cee32427ee8c2ef4ac018230924e49255355f0019e7ec510c7c8d58d",
+    "annotations.ts": "9ca4c7efa8417e6ce2e26d90736bd6bc4cb5ee0581c6d6860bd4505c9473eecf"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": "support-aws-denial",
+  "text": "Has Ada used AWS professionally?",
+  "packets": [
+    {
+      "id": "5546f0f8-f047-42df-8150-95034cfd26b4",
+      "kind": "project",
+      "title": "Professional exclusions",
+      "organization": null,
+      "dates": {
+        "start": null,
+        "end": null
+      },
+      "summary": "Professional AWS and Kubernetes use",
+      "aliases": [],
+      "skills": [],
+      "outcomes": [],
+      "claims": [
+        {
+          "attribute": "denial",
+          "value": "Professional AWS and Kubernetes use",
+          "attribution": "NEGATED",
+          "evidence": [
+            {
+              "quote": "I have never used Kubernetes, AWS or medical compliance systems professionally.",
+              "start": 0,
+              "end": 79
+            }
+          ]
+        }
+      ],
+      "uncertainties": [],
+      "relatedIds": [],
+      "support": "CONTRADICTS",
+      "reason": "Ada explicitly says she has never used AWS professionally."
+    }
+  ],
+  "expected": [
+    {
+      "id": "5546f0f8-f047-42df-8150-95034cfd26b4",
+      "support": "CONTRADICTS"
+    }
+  ],
+  "answerGroup": "UNSUPPORTED",
+  "result": {
+    "answer": "No. Ada states that she has never used AWS professionally.",
+    "evidence_ids": ["5546f0f8-f047-42df-8150-95034cfd26b4"]
+  }
+}

@@ -1,0 +1,253 @@
+[
+  {
+    "id": "preferred-warning",
+    "verdict": "PASS",
+    "assertions": [
+      {
+        "text": "Wrote SQL validation checks for dispatch reconciliation.",
+        "verdict": "SUPPORTED",
+        "claimRefs": ["preferred-warning:0"],
+        "reason": "The admitted personal action and its source span confirm this work."
+      }
+    ],
+    "reason": "The full bullet is supported by the confirmed personal action."
+  },
+  {
+    "id": "wanted-feature",
+    "verdict": "PASS",
+    "assertions": [
+      {
+        "text": "Wrote SQL validation checks for dispatch reconciliation.",
+        "verdict": "SUPPORTED",
+        "claimRefs": ["wanted-feature:0"],
+        "reason": "The admitted personal action and its source span confirm this work."
+      }
+    ],
+    "reason": "The full bullet is supported by the confirmed personal action."
+  },
+  {
+    "id": "planned-completed",
+    "verdict": "PASS",
+    "assertions": [
+      {
+        "text": "Wrote SQL validation checks for dispatch reconciliation.",
+        "verdict": "SUPPORTED",
+        "claimRefs": ["planned-completed:0"],
+        "reason": "The admitted personal action and its source span confirm this work."
+      }
+    ],
+    "reason": "The full bullet is supported by the confirmed personal action."
+  },
+  {
+    "id": "discussed-performed",
+    "verdict": "PASS",
+    "assertions": [
+      {
+        "text": "Wrote SQL validation checks for dispatch reconciliation.",
+        "verdict": "SUPPORTED",
+        "claimRefs": ["discussed-performed:0"],
+        "reason": "The admitted personal action and its source span confirm this work."
+      }
+    ],
+    "reason": "The full bullet is supported by the confirmed personal action."
+  },
+  {
+    "id": "recommended-delivered",
+    "verdict": "PASS",
+    "assertions": [
+      {
+        "text": "Wrote SQL validation checks for dispatch reconciliation.",
+        "verdict": "SUPPORTED",
+        "claimRefs": ["recommended-delivered:0"],
+        "reason": "The admitted personal action and its source span confirm this work."
+      }
+    ],
+    "reason": "The full bullet is supported by the confirmed personal action."
+  },
+  {
+    "id": "team-personal",
+    "verdict": "PASS",
+    "assertions": [
+      {
+        "text": "Wrote SQL validation checks for dispatch reconciliation.",
+        "verdict": "SUPPORTED",
+        "claimRefs": ["team-personal:0"],
+        "reason": "The admitted action is attributed personally and its source span confirms the work."
+      }
+    ],
+    "reason": "The full bullet is supported by the confirmed personal action."
+  },
+  {
+    "id": "exposure-proficiency",
+    "verdict": "PASS",
+    "assertions": [
+      {
+        "text": "Wrote SQL validation checks for dispatch reconciliation.",
+        "verdict": "SUPPORTED",
+        "claimRefs": ["exposure-proficiency:0"],
+        "reason": "The admitted personal action and its source span confirm writing SQL validation checks."
+      }
+    ],
+    "reason": "The bullet asserts this specific work, not broader proficiency."
+  },
+  {
+    "id": "contributed-owned",
+    "verdict": "PASS",
+    "assertions": [
+      {
+        "text": "Wrote SQL validation checks for dispatch reconciliation.",
+        "verdict": "SUPPORTED",
+        "claimRefs": ["contributed-owned:0"],
+        "reason": "The admitted personal action and its source span confirm that the candidate wrote the checks."
+      }
+    ],
+    "reason": "The full bullet is supported by the confirmed personal action."
+  },
+  {
+    "id": "trained-managed",
+    "verdict": "PASS",
+    "assertions": [
+      {
+        "text": "Wrote SQL validation checks for dispatch reconciliation.",
+        "verdict": "SUPPORTED",
+        "claimRefs": ["trained-managed:0"],
+        "reason": "The admitted personal action and its source span confirm this work."
+      }
+    ],
+    "reason": "The bullet makes no claim about training or management."
+  },
+  {
+    "id": "related-named-tech",
+    "verdict": "PASS",
+    "assertions": [
+      {
+        "text": "Wrote SQL validation checks for dispatch reconciliation.",
+        "verdict": "SUPPORTED",
+        "claimRefs": ["related-named-tech:0"],
+        "reason": "The admitted personal action and its source span confirm this work."
+      }
+    ],
+    "reason": "The bullet identifies SQL validation work, which is supported by the claim and source span."
+  },
+  {
+    "id": "superseded-count",
+    "verdict": "PASS",
+    "assertions": [
+      {
+        "text": "Wrote SQL validation checks for dispatch reconciliation.",
+        "verdict": "SUPPORTED",
+        "claimRefs": ["superseded-count:0"],
+        "reason": "The admitted personal action and its source span confirm this work; the unrelated superseded count does not affect it."
+      }
+    ],
+    "reason": "The full bullet is supported by the confirmed personal action."
+  },
+  {
+    "id": "disputed-count",
+    "verdict": "PASS",
+    "assertions": [
+      {
+        "text": "Wrote SQL validation checks for dispatch reconciliation.",
+        "verdict": "SUPPORTED",
+        "claimRefs": ["disputed-count:0"],
+        "reason": "The admitted personal action and its source span confirm this work; the unrelated disputed count does not affect it."
+      }
+    ],
+    "reason": "The full bullet is supported by the confirmed personal action."
+  },
+  {
+    "id": "training-safe",
+    "verdict": "PASS",
+    "assertions": [
+      {
+        "text": "Trained dispatch coworkers through workshops ",
+        "verdict": "SUPPORTED",
+        "claimRefs": ["training-safe:0"],
+        "reason": "The admitted personal claim says the candidate trained dispatch coworkers through workshops."
+      },
+      {
+        "text": "and wrote a handbook.",
+        "verdict": "SUPPORTED",
+        "claimRefs": ["training-safe:0"],
+        "reason": "The admitted personal claim says the candidate wrote a handbook."
+      }
+    ],
+    "reason": "Both clauses are supported by the admitted personal claim."
+  },
+  {
+    "id": "team-safe",
+    "verdict": "PASS",
+    "assertions": [
+      {
+        "text": "The team reduced weekly reconciliation time from five hours to two over six runs; ",
+        "verdict": "SUPPORTED",
+        "claimRefs": ["team-safe:0"],
+        "reason": "The claim attributes this measured result to the team and gives the same figures and number of runs."
+      },
+      {
+        "text": "contributed the checks.",
+        "verdict": "SUPPORTED",
+        "claimRefs": ["team-safe:0"],
+        "reason": "The claim identifies checks as the candidate’s personal contribution."
+      }
+    ],
+    "reason": "The team result is attributed to the team, and the checks are correctly described as the candidate’s contribution."
+  },
+  {
+    "id": "exposure-safe",
+    "verdict": "PASS",
+    "assertions": [
+      {
+        "text": "Completed one Docker exercise; ",
+        "verdict": "SUPPORTED",
+        "claimRefs": ["exposure-safe:0"],
+        "reason": "The admitted exposure claim confirms completion of one Docker exercise."
+      },
+      {
+        "text": "no production use is claimed.",
+        "verdict": "SUPPORTED",
+        "claimRefs": ["exposure-safe:0"],
+        "reason": "The evidence explicitly says no production use is claimed."
+      }
+    ],
+    "reason": "The bullet accurately limits the Docker experience to one exercise and makes no production-use claim."
+  },
+  {
+    "id": "reports-corrected",
+    "verdict": "PASS",
+    "assertions": [
+      {
+        "text": "Supervised eight direct reports, ",
+        "verdict": "SUPPORTED",
+        "claimRefs": ["reports-corrected:0"],
+        "reason": "The admitted personal claim confirms supervision of eight direct reports."
+      },
+      {
+        "text": "not five.",
+        "verdict": "SUPPORTED",
+        "claimRefs": ["reports-corrected:0"],
+        "reason": "The evidence explicitly contrasts eight direct reports with five."
+      }
+    ],
+    "reason": "Both the count and the correction are supported by the admitted personal claim."
+  },
+  {
+    "id": "historical-warning",
+    "verdict": "PASS",
+    "assertions": [
+      {
+        "text": "Wrote the Python parser ",
+        "verdict": "SUPPORTED",
+        "claimRefs": ["historical-warning:3"],
+        "reason": "The admitted personal claim says the candidate wrote the Python parser."
+      },
+      {
+        "text": "and SQL checks myself.",
+        "verdict": "SUPPORTED",
+        "claimRefs": ["historical-warning:3"],
+        "reason": "The admitted personal claim says the candidate wrote the SQL checks themself."
+      }
+    ],
+    "reason": "The admitted personal claim supports both writing actions and the personal attribution."
+  }
+]

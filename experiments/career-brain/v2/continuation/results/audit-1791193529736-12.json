@@ -1,0 +1,427 @@
+{
+  "model": "openai/gpt-6-luna-pro",
+  "records": [
+    {
+      "kind": "project",
+      "key": "team-metric",
+      "title": "Team metric",
+      "subtitle": "",
+      "summary": "Team reconciliation fell from five to two hours weekly; personal contribution was the parser",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "For Check Ledger, team reconciliation fell from five to two hours weekly; my contribution was the parser, and coworkers changed their checking habits.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Team reconciliation fell from five to two hours weekly; personal contribution was the parser",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "For Check Ledger, team reconciliation fell from five to two hours weekly; my contribution was the parser, and coworkers changed their checking habits.",
+              "start": 663,
+              "end": 813
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "key": "team-metric",
+      "title": "Team metric",
+      "subtitle": "",
+      "summary": "Personally achieved all reconciliation savings without help",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "For Check Ledger, team reconciliation fell from five to two hours weekly; my contribution was the parser, and coworkers changed their checking habits.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Personally achieved all reconciliation savings without help",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For Check Ledger, team reconciliation fell from five to two hours weekly; my contribution was the parser, and coworkers changed their checking habits.",
+              "start": 663,
+              "end": 813
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "key": "correction-precedence",
+      "title": "Correction precedence",
+      "subtitle": "",
+      "summary": "Supervised eight direct reports; five was corrected",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "For People Desk, I initially said five reports. Correction: eight direct reports, not five; I supervised the eight directly.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Supervised eight direct reports; five was corrected",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For People Desk, I initially said five reports. Correction: eight direct reports, not five; I supervised the eight directly.",
+              "start": 815,
+              "end": 939
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "key": "correction-precedence",
+      "title": "Correction precedence",
+      "subtitle": "",
+      "summary": "Supervised five direct reports",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "For People Desk, I initially said five reports. Correction: eight direct reports, not five; I supervised the eight directly.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Supervised five direct reports",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For People Desk, I initially said five reports. Correction: eight direct reports, not five; I supervised the eight directly.",
+              "start": 815,
+              "end": 939
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "key": "quoted-example",
+      "title": "Quoted example",
+      "subtitle": "",
+      "summary": "The 100-employee statement is a misleading résumé example, not career history",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "For Resume Notes, the sentence 'I led 100 employees' is an example of a misleading résumé, not my career history.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "The 100-employee statement is a misleading résumé example, not career history",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For Resume Notes, the sentence 'I led 100 employees' is an example of a misleading résumé, not my career history.",
+              "start": 941,
+              "end": 1054
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "key": "quoted-example",
+      "title": "Quoted example",
+      "subtitle": "",
+      "summary": "Led 100 employees",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "For Resume Notes, the sentence 'I led 100 employees' is an example of a misleading résumé, not my career history.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Led 100 employees",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For Resume Notes, the sentence 'I led 100 employees' is an example of a misleading résumé, not my career history.",
+              "start": 941,
+              "end": 1054
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "key": "credential-scope",
+      "title": "Credential scope",
+      "subtitle": "",
+      "summary": "SQL course-completion certificate, not a professional license",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "For Course Notes, I received a SQL course-completion certificate, not a professional license.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "SQL course-completion certificate, not a professional license",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For Course Notes, I received a SQL course-completion certificate, not a professional license.",
+              "start": 1056,
+              "end": 1149
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "key": "credential-scope",
+      "title": "Credential scope",
+      "subtitle": "",
+      "summary": "Licensed SQL professional",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "For Course Notes, I received a SQL course-completion certificate, not a professional license.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Licensed SQL professional",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For Course Notes, I received a SQL course-completion certificate, not a professional license.",
+              "start": 1056,
+              "end": 1149
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "key": "summary-inconsistency",
+      "title": "Summary inconsistency",
+      "subtitle": "",
+      "summary": "Personally wrote SQL validation checks; warning remained a preference",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "For Sheet Checks, I personally wrote SQL validation checks. Operators preferred a visible warning, with no implementation stated.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Personally wrote SQL validation checks; warning remained a preference",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For Sheet Checks, I personally wrote SQL validation checks. Operators preferred a visible warning, with no implementation stated.",
+              "start": 1151,
+              "end": 1280
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "key": "summary-inconsistency",
+      "title": "Summary inconsistency",
+      "subtitle": "",
+      "summary": "Personally wrote SQL checks and implemented the requested warning",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "For Sheet Checks, I personally wrote SQL validation checks. Operators preferred a visible warning, with no implementation stated.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Personally wrote SQL validation checks; warning remained a preference",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For Sheet Checks, I personally wrote SQL validation checks. Operators preferred a visible warning, with no implementation stated.",
+              "start": 1151,
+              "end": 1280
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "key": "completed-control",
+      "title": "Completed control",
+      "subtitle": "",
+      "summary": "Personally implemented the visible warning and completed rollout on 2024-06-30",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "For Alert Board, I personally implemented the visible warning and completed its rollout on 2024-06-30.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Personally implemented the visible warning and completed rollout on 2024-06-30",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For Alert Board, I personally implemented the visible warning and completed its rollout on 2024-06-30.",
+              "start": 1282,
+              "end": 1384
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "key": "completed-control",
+      "title": "Completed control",
+      "subtitle": "",
+      "summary": "Completed rollout on 2024-05-31",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "For Alert Board, I personally implemented the visible warning and completed its rollout on 2024-06-30.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Completed rollout on 2024-05-31",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For Alert Board, I personally implemented the visible warning and completed its rollout on 2024-06-30.",
+              "start": 1282,
+              "end": 1384
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "index": 0,
+      "verdict": "SUPPORTED",
+      "reason": "The source says team reconciliation fell from five to two hours weekly, identifies the parser as the person’s contribution, and says coworkers changed their checking habits. The summary and TEAM attribution preserve that distinction."
+    },
+    {
+      "index": 1,
+      "verdict": "UNSUPPORTED",
+      "reason": "The source attributes only the parser to the person and says coworkers changed their checking habits; it does not support personally achieving all the savings without help."
+    },
+    {
+      "index": 2,
+      "verdict": "SUPPORTED",
+      "reason": "The source explicitly corrects the count to eight direct reports and says the person supervised those eight directly."
+    },
+    {
+      "index": 3,
+      "verdict": "UNSUPPORTED",
+      "reason": "Five is explicitly corrected: the source says eight direct reports, not five."
+    },
+    {
+      "index": 4,
+      "verdict": "SUPPORTED",
+      "reason": "The source explicitly identifies the 100-employee sentence as a misleading résumé example, not the person’s career history."
+    },
+    {
+      "index": 5,
+      "verdict": "UNSUPPORTED",
+      "reason": "The source explicitly says the 100-employee sentence is not the person’s career history."
+    },
+    {
+      "index": 6,
+      "verdict": "SUPPORTED",
+      "reason": "The source says the person received a SQL course-completion certificate and explicitly distinguishes it from a professional license."
+    },
+    {
+      "index": 7,
+      "verdict": "UNSUPPORTED",
+      "reason": "The source explicitly says the person received a course-completion certificate, not a professional license."
+    },
+    {
+      "index": 8,
+      "verdict": "SUPPORTED",
+      "reason": "The source says the person personally wrote SQL validation checks and that operators preferred a visible warning, with no implementation stated."
+    },
+    {
+      "index": 9,
+      "verdict": "UNSUPPORTED",
+      "reason": "The source explicitly states that no implementation of the preferred warning was stated; it does not support that the person implemented it."
+    },
+    {
+      "index": 10,
+      "verdict": "SUPPORTED",
+      "reason": "The source says the person personally implemented the visible warning and completed the rollout on 2024-06-30."
+    },
+    {
+      "index": 11,
+      "verdict": "UNSUPPORTED",
+      "reason": "The source gives the rollout date as 2024-06-30, not 2024-05-31."
+    }
+  ]
+}

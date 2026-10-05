@@ -1,0 +1,429 @@
+{
+  "model": "openai/gpt-6-luna-pro",
+  "records": [
+    {
+      "kind": "project",
+      "key": "warning-preference",
+      "title": "Warning preference",
+      "subtitle": "",
+      "summary": "Operators preferred a visible warning for late source files",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "For Signal Desk, operators preferred a visible warning when the source file arrived late.",
+      "uncertainties": [
+        "Team outcome must retain attribution in display text."
+      ],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Operators preferred a visible warning for late source files",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "For Signal Desk, operators preferred a visible warning when the source file arrived late.",
+              "start": 55,
+              "end": 144
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "key": "warning-preference",
+      "title": "Warning preference",
+      "subtitle": "",
+      "summary": "Implemented a visible warning for late source files",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "For Signal Desk, operators preferred a visible warning when the source file arrived late.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Implemented a visible warning for late source files",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For Signal Desk, operators preferred a visible warning when the source file arrived late.",
+              "start": 55,
+              "end": 144
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "key": "planned-rollout",
+      "title": "Planned rollout",
+      "subtitle": "",
+      "summary": "Planned a future rollout; not completed",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "For Route Note, I planned a rollout next month; it has not been completed.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Planned a future rollout; not completed",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For Route Note, I planned a rollout next month; it has not been completed.",
+              "start": 146,
+              "end": 220
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "key": "planned-rollout",
+      "title": "Planned rollout",
+      "subtitle": "",
+      "summary": "Completed the Route Note rollout",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "For Route Note, I planned a rollout next month; it has not been completed.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Completed the Route Note rollout",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For Route Note, I planned a rollout next month; it has not been completed.",
+              "start": 146,
+              "end": 220
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "key": "discussed-migration",
+      "title": "Discussed migration",
+      "subtitle": "",
+      "summary": "Team discussed a database migration without performing it",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "For Table Bridge, we discussed a database migration, but did not perform it.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Team discussed a database migration without performing it",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "For Table Bridge, we discussed a database migration, but did not perform it.",
+              "start": 222,
+              "end": 298
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "key": "discussed-migration",
+      "title": "Discussed migration",
+      "subtitle": "",
+      "summary": "Personally performed the database migration",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "For Table Bridge, we discussed a database migration, but did not perform it.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Personally performed the database migration",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For Table Bridge, we discussed a database migration, but did not perform it.",
+              "start": 222,
+              "end": 298
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "key": "team-deployment",
+      "title": "Team deployment",
+      "subtitle": "",
+      "summary": "Team deployed Beacon; personal contribution was only the user guide",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "For Beacon, my brother wrote the model integration and the team deployed it. I personally only wrote the user guide. I did not build its model or deployment.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Team deployed Beacon; personal contribution was only the user guide",
+          "attribution": "TEAM",
+          "evidence": [
+            {
+              "quote": "For Beacon, my brother wrote the model integration and the team deployed it. I personally only wrote the user guide. I did not build its model or deployment.",
+              "start": 300,
+              "end": 457
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "key": "team-deployment",
+      "title": "Team deployment",
+      "subtitle": "",
+      "summary": "Personally built the model integration and deployed Beacon",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "For Beacon, my brother wrote the model integration and the team deployed it. I personally only wrote the user guide. I did not build its model or deployment.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Personally built the model integration and deployed Beacon",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For Beacon, my brother wrote the model integration and the team deployed it. I personally only wrote the user guide. I did not build its model or deployment.",
+              "start": 300,
+              "end": 457
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "key": "docker-exposure",
+      "title": "Docker exposure",
+      "subtitle": "",
+      "summary": "Docker one-off guided local exposure, no production deployment",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "For Local Box, I tried Docker once in a guided local exercise; I have no production deployment experience.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Docker one-off guided local exposure, no production deployment",
+          "attribution": "EXPOSURE",
+          "evidence": [
+            {
+              "quote": "For Local Box, I tried Docker once in a guided local exercise; I have no production deployment experience.",
+              "start": 459,
+              "end": 565
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "key": "docker-exposure",
+      "title": "Docker exposure",
+      "subtitle": "",
+      "summary": "Proficient Docker engineer with production deployment experience",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "For Local Box, I tried Docker once in a guided local exercise; I have no production deployment experience.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Proficient Docker engineer with production deployment experience",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For Local Box, I tried Docker once in a guided local exercise; I have no production deployment experience.",
+              "start": 459,
+              "end": 565
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "key": "related-training",
+      "title": "Related training",
+      "subtitle": "",
+      "summary": "Trained twelve coworkers in two workshops",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "For Workshop Notes, I trained twelve coworkers in two workshops. I have not managed employees.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Trained twelve coworkers in two workshops",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For Workshop Notes, I trained twelve coworkers in two workshops. I have not managed employees.",
+              "start": 567,
+              "end": 661
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "key": "related-training",
+      "title": "Related training",
+      "subtitle": "",
+      "summary": "Managed twelve direct reports",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "For Workshop Notes, I trained twelve coworkers in two workshops. I have not managed employees.",
+      "uncertainties": [],
+      "aliases": [],
+      "claims": [
+        {
+          "attribute": "action",
+          "value": "Managed twelve direct reports",
+          "attribution": "PERSONAL",
+          "evidence": [
+            {
+              "quote": "For Workshop Notes, I trained twelve coworkers in two workshops. I have not managed employees.",
+              "start": 567,
+              "end": 661
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "index": 0,
+      "verdict": "SUPPORTED",
+      "reason": "The source says operators preferred a visible warning when the source file arrived late; the summary and TEAM attribution preserve that preference without claiming implementation."
+    },
+    {
+      "index": 1,
+      "verdict": "UNSUPPORTED",
+      "reason": "The source establishes only that operators preferred a warning. It does not say the warning was implemented or attribute implementation to the person."
+    },
+    {
+      "index": 2,
+      "verdict": "SUPPORTED",
+      "reason": "The source says the person planned a rollout for next month and explicitly says it was not completed; the summary accurately preserves both points."
+    },
+    {
+      "index": 3,
+      "verdict": "UNSUPPORTED",
+      "reason": "The source explicitly says the planned rollout has not been completed."
+    },
+    {
+      "index": 4,
+      "verdict": "SUPPORTED",
+      "reason": "The source says “we discussed” the database migration and did not perform it; the team-level summary accurately reflects that."
+    },
+    {
+      "index": 5,
+      "verdict": "UNSUPPORTED",
+      "reason": "The source says the migration was discussed but not performed, contradicting the claim that the person performed it."
+    },
+    {
+      "index": 6,
+      "verdict": "SUPPORTED",
+      "reason": "The source says the team deployed Beacon and that the person's only contribution was writing the user guide; it also says the person did not build the model or deployment."
+    },
+    {
+      "index": 7,
+      "verdict": "UNSUPPORTED",
+      "reason": "The source attributes the model integration to the person's brother and explicitly says the person did not build the model or deployment."
+    },
+    {
+      "index": 8,
+      "verdict": "SUPPORTED",
+      "reason": "The source supports one-time Docker exposure in a guided local exercise and explicitly states there was no production deployment experience; the summary and EXPOSURE attribution retain those qualifications."
+    },
+    {
+      "index": 9,
+      "verdict": "UNSUPPORTED",
+      "reason": "The source describes only a one-time guided local exercise and explicitly denies production deployment experience; it does not support proficiency."
+    },
+    {
+      "index": 10,
+      "verdict": "SUPPORTED",
+      "reason": "The source says the person trained twelve coworkers in two workshops; the personal attribution is accurate."
+    },
+    {
+      "index": 11,
+      "verdict": "UNSUPPORTED",
+      "reason": "The source says the person trained coworkers but had not managed employees, so it does not support managing twelve direct reports."
+    }
+  ]
+}

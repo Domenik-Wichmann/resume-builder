@@ -1,0 +1,7 @@
+{
+  "beforeStage": "qa-audience-repair",
+  "observedFinding": "All four original Q&A answers withheld stale/superseded or disputed affirmations, and the independent audit passed them. Human inspection found 'You can say you trained...' in the old-value-new-conflict answer, incorrectly addressing a recruiter as the candidate.",
+  "repair": "Explicit recruiter audience / third-person candidate boundary. Re-run only that unchanged question and its unchanged compact packets, then a targeted independent audit including requester/candidate ownership. Preserve all original answers and audit verdicts.",
+  "priority": "Two remaining requests (Luna $0.03 reservation, Pro $0.08) fit the existing $5 cap. Omit the optional warning-preference native simplification stage from this budget; retain the original conservative false-omission finding and all twelve completed fallback canaries.",
+  "budget": "Same ledger, no reset, maximum reservations $4.97."
+}
