@@ -1,0 +1,195 @@
+{
+  "commit": "56a286e6750be96dccfa35f378862f1d7d33507a",
+  "frozenBeforeRuns": true,
+  "date": "2026-10-05",
+  "model": "openai/gpt-6-luna-pro",
+  "maxTokens": 12000,
+  "timeoutMs": 55000,
+  "embeddingModel": "embed-v4.0",
+  "dimension": 1024,
+  "minSimilarity": 0.25,
+  "matchCount": 8,
+  "schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "records": {
+        "maxItems": 150,
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "profile",
+                "experience",
+                "project",
+                "achievement",
+                "skill",
+                "education",
+                "certification",
+                "language",
+                "category"
+              ]
+            },
+            "key": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            },
+            "title": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "subtitle": {
+              "type": "string",
+              "maxLength": 300
+            },
+            "summary": {
+              "type": "string",
+              "maxLength": 4000
+            },
+            "organization": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 200
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "start_date": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "end_date": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "skill_keys": {
+              "maxItems": 30,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 100
+              }
+            },
+            "achievement_keys": {
+              "maxItems": 30,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 100
+              }
+            },
+            "category_key": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 100
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "source_quote": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            },
+            "uncertainties": {
+              "maxItems": 10,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 300
+              }
+            }
+          },
+          "required": [
+            "kind",
+            "key",
+            "title",
+            "subtitle",
+            "summary",
+            "organization",
+            "start_date",
+            "end_date",
+            "skill_keys",
+            "achievement_keys",
+            "category_key",
+            "source_quote",
+            "uncertainties"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": ["records"],
+    "additionalProperties": false
+  },
+  "hashes": {
+    "src/lib/ingestion/extract.ts": "4f497a2f948c6f5475ed827bb876c620cd0fe825a731d687990bbd7a7b17bb95",
+    "src/lib/ingestion/model.ts": "13680baa1de4d6c6af243c69ac2e63289073b18b81ed2da66a011ec543b73903",
+    "src/lib/ingestion/diff.ts": "a4a254ef7ba6989de721d5281c04528cf3d72e0dad8350591ff3a39c2082764d",
+    "src/lib/embeddings/content.ts": "65f2ce44c0c7ac3880ba89ff75b270aaee153cda4ca16ac012d2d1c90da02398",
+    "src/lib/embeddings/indexer.ts": "8252fb594abefc65707ba549b83d687e5ae6ce36f2f8db3f858b033689cfcd69",
+    "src/lib/embeddings/retrieval.ts": "009d85cfb745d82c5d3cc2f86ac3756d2999c45376289f782e31f3b31af3326b",
+    "src/lib/embeddings/cohere.ts": "a3b11bbb250ba51c1138904477529c9802aa34c2b131d32ac960c9ef20e0822a",
+    "src/lib/career/retrieval.ts": "3bba558c9b5d05770431b748bfbf866d2ecd179f3db7dc48418b803fa019e493",
+    "src/lib/ai/openrouter.ts": "7039037155b6c704f55e72740e6197ce606a8e5a2ac39324f90e040f266fc00b",
+    "src/lib/usage/service.ts": "f569b2bf8d3d941aeb6fceb4864b9467c625da6dc34a7e797543f7a8319512c7",
+    "supabase/migrations/202610040004_accounts.sql": "4226fe16cde8acfd28d378c20453e19da7dd80350053e76dc62f3e898b60d830",
+    "src/lib/interview/questions.ts": "8f92c2475f3cf7d34404e1db9c0deb2d62b389e6aadd6c1ae68fa66532fa6376"
+  },
+  "budget": {
+    "usdCeiling": 5,
+    "maxInferenceCalls": 40,
+    "maxEmbeddingCalls": 20,
+    "reserveUsdPerInference": 0.1,
+    "reserveUsdPerEmbedding": 0.05,
+    "retries": 0
+  },
+  "limitations": [
+    "Similarity is cosine. Semantic results precede lexical results; lexical substring matching includes stopwords and excludes skill records.",
+    "Identity is exact kind:key. Title collision requires REVIEW. Content hash is normalized byte equality, not semantic equivalence.",
+    "Cohere cost is not returned by current usage accounting; unknown is never treated as zero."
+  ],
+  "normalizedHashes": {
+    "src/lib/ingestion/extract.ts": "4f497a2f948c6f5475ed827bb876c620cd0fe825a731d687990bbd7a7b17bb95",
+    "src/lib/ingestion/model.ts": "13680baa1de4d6c6af243c69ac2e63289073b18b81ed2da66a011ec543b73903",
+    "src/lib/ingestion/diff.ts": "a4a254ef7ba6989de721d5281c04528cf3d72e0dad8350591ff3a39c2082764d",
+    "src/lib/embeddings/content.ts": "65f2ce44c0c7ac3880ba89ff75b270aaee153cda4ca16ac012d2d1c90da02398",
+    "src/lib/embeddings/indexer.ts": "8252fb594abefc65707ba549b83d687e5ae6ce36f2f8db3f858b033689cfcd69",
+    "src/lib/embeddings/retrieval.ts": "009d85cfb745d82c5d3cc2f86ac3756d2999c45376289f782e31f3b31af3326b",
+    "src/lib/embeddings/cohere.ts": "a3b11bbb250ba51c1138904477529c9802aa34c2b131d32ac960c9ef20e0822a",
+    "src/lib/career/retrieval.ts": "3bba558c9b5d05770431b748bfbf866d2ecd179f3db7dc48418b803fa019e493",
+    "src/lib/ai/openrouter.ts": "7039037155b6c704f55e72740e6197ce606a8e5a2ac39324f90e040f266fc00b",
+    "src/lib/usage/service.ts": "f569b2bf8d3d941aeb6fceb4864b9467c625da6dc34a7e797543f7a8319512c7",
+    "supabase/migrations/202610040004_accounts.sql": "a2ee53a2cb98f4dec78740454b76d49bfdce7b6a8391d2c86624c251fb2441aa",
+    "src/lib/interview/questions.ts": "8f92c2475f3cf7d34404e1db9c0deb2d62b389e6aadd6c1ae68fa66532fa6376"
+  },
+  "hashNote": "hashes preserves capture-time bytes; normalizedHashes uses LF for cross-platform snapshot verification."
+}

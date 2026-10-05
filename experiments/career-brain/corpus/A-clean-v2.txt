@@ -1,0 +1,38 @@
+My name is Ada Rowan. I am an operations analyst who builds practical internal tools.
+
+I worked as Operations Analyst at Harbor Tools from 2021-02-01 to 2024-06-30.
+
+At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself. The tool's purpose was reconciling dispatch records, stated another way.
+
+Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks.
+
+For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.
+
+I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them. I used Git for version control and PostgreSQL for the production database.
+
+My skill category is Data tools: Python, SQL and PostgreSQL. My separate skill category is Collaboration: Git and coworker training.
+
+I earned a BSc in Information Systems at Cedar College from 2017-09-01 to 2020-06-30.
+
+
+
+I speak English fluently. I have never used Kubernetes, AWS or medical compliance systems professionally. I have not worked at Google and have not managed employees.
+
+The dispatch desk dealt with mismatched references rather than delivery route optimization. Operators compared the overnight spreadsheet against the daily export. I am describing the same Dispatch Loom here, not a second project. The supervisors wanted understandable exceptions, not a dashboard with unexplained colors.
+
+People used different names in conversations: Loom, dispatch reconciliation tool, or the checking script. Those names all meant Dispatch Loom. The source file could arrive late and the operators preferred a visible warning. Please distinguish operational use from a product sold to external customers.
+
+I remember a meeting where we debated whether to hide empty rows. We kept them visible because a blank reference might need a phone call. The handbook described where a coworker should look before raising an exception. There was no machine-learning classifier involved in these rules.
+
+To explain the workflow I would sit beside a supervisor and work through an example. The supervisor made the final dispatch decision. I was responsible for the parser and checks; I did not own the warehouse staffing budget, procurement, or the scheduling system.
+
+The first draft was unpolished. We talked about naming columns and what counted as an exception. I do not want that discussion inflated into a separate project. It was ordinary refinement of Dispatch Loom. The purpose remained reducing repetitive reconciliation at the dispatch desk.
+
+An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only. I cannot attribute all improvement to myself because coworkers also changed their checking habits.
+
+Sometimes the story starts with training and sometimes it starts with the database. These are different perspectives on one piece of work. The SQL checks and Python parser were useful together. Git held the changes, and PostgreSQL stored the production data; those were not separate products.
+
+I tend to tell this story out of order. College happened before Harbor Tools. Workshops happened after coworkers could use the tool. I cannot supply exact workshop dates, so please keep them unknown. The certificate was a course completion, not a professional license.
+
+I personally built Roster Note at Harbor Tools, a separate SQL handover checklist. No user count or outcome is recorded.
+For Dispatch Loom the handbook also included five worked examples. The six-run result remained 5 hours to 2 hours weekly; that is 3 hours saved.

@@ -70,17 +70,7 @@ export async function complete<T>(
       "AI provider is unavailable. Please try again later.",
     );
   }
-  const raw: unknown = await response.json().catch(async () => {
-    // Fetch can resolve headers before the response body times out or disconnects.
-    await recordUsage(
-      "OPENROUTER",
-      options.model || env.model!,
-      options.usage || {},
-      {},
-      "FAILED",
-    );
-    throw new ProviderError("AI provider response failed or timed out.");
-  });
+  const raw: unknown = await response.json();
   const reported = openRouterUsage.safeParse(
     (raw as { usage?: unknown })?.usage,
   );

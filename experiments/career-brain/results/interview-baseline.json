@@ -1,0 +1,6 @@
+{
+  "projects": 38,
+  "missingOutcomeProbes": 38,
+  "cause": "Numeric department labels suppress outcome questions despite no measured results.",
+  "capturedBeforeRepair": true
+}

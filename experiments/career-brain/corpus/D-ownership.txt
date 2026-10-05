@@ -1,0 +1,17 @@
+SYNTHETIC ownership interview
+
+My name is Ada Rowan. I am an operations analyst who builds practical internal tools.
+
+I worked as Operations Analyst at Harbor Tools from 2021-02-01 to 2024-05-31.
+
+At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself.
+
+We built Beacon, an AI assistant. My brother wrote the model integration and the team deployed it. I personally only wrote Beacon's user guide. I did not build its model or deployment. We served 200 users; I cannot verify that number or who counted them. I may have helped with testing but cannot remember. My brother used AWS; I did not.
+
+The dispatch desk dealt with mismatched references rather than delivery route optimization. Operators compared the overnight spreadsheet against the daily export. I am describing the same Dispatch Loom here, not a second project. The supervisors wanted understandable exceptions, not a dashboard with unexplained colors.
+
+People used different names in conversations: Loom, dispatch reconciliation tool, or the checking script. Those names all meant Dispatch Loom. The source file could arrive late and the operators preferred a visible warning. Please distinguish operational use from a product sold to external customers.
+
+I remember a meeting where we debated whether to hide empty rows. We kept them visible because a blank reference might need a phone call. The handbook described where a coworker should look before raising an exception. There was no machine-learning classifier involved in these rules.
+
+To explain the workflow I would sit beside a supervisor and work through an example. The supervisor made the final dispatch decision. I was responsible for the parser and checks; I did not own the warehouse staffing budget, procurement, or the scheduling system.

@@ -1,0 +1,237 @@
+My name is Ada Rowan. I am an operations analyst who builds practical internal tools.
+
+I worked as Operations Analyst at Harbor Tools from 2021-02-01 to 2024-05-31.
+
+At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself.
+
+Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks.
+
+For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.
+
+I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them. I used Git for version control and PostgreSQL for the production database.
+
+My skill category is Data tools: Python, SQL and PostgreSQL. My separate skill category is Collaboration: Git and coworker training.
+
+I earned a BSc in Information Systems at Cedar College from 2017-09-01 to 2020-06-30.
+
+I received the fictional Cedar SQL Foundations certificate on 2020-08-15.
+
+I speak English fluently. I have never used Kubernetes, AWS or medical compliance systems professionally. I have not worked at Google and have not managed employees.
+
+Conversation note 1
+The dispatch desk dealt with mismatched references rather than delivery route optimization. Operators compared the overnight spreadsheet against the daily export. I am describing the same Dispatch Loom here, not a second project. The supervisors wanted understandable exceptions, not a dashboard with unexplained colors.
+
+Conversation note 2
+People used different names in conversations: Loom, dispatch reconciliation tool, or the checking script. Those names all meant Dispatch Loom. The source file could arrive late and the operators preferred a visible warning. Please distinguish operational use from a product sold to external customers.
+
+Conversation note 3
+I remember a meeting where we debated whether to hide empty rows. We kept them visible because a blank reference might need a phone call. The handbook described where a coworker should look before raising an exception. There was no machine-learning classifier involved in these rules.
+
+Conversation note 4
+To explain the workflow I would sit beside a supervisor and work through an example. The supervisor made the final dispatch decision. I was responsible for the parser and checks; I did not own the warehouse staffing budget, procurement, or the scheduling system.
+
+Conversation note 5
+The first draft was unpolished. We talked about naming columns and what counted as an exception. I do not want that discussion inflated into a separate project. It was ordinary refinement of Dispatch Loom. The purpose remained reducing repetitive reconciliation at the dispatch desk.
+
+Conversation note 6
+An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only. I cannot attribute all improvement to myself because coworkers also changed their checking habits.
+
+Conversation note 7
+Sometimes the story starts with training and sometimes it starts with the database. These are different perspectives on one piece of work. The SQL checks and Python parser were useful together. Git held the changes, and PostgreSQL stored the production data; those were not separate products.
+
+Conversation note 8
+I tend to tell this story out of order. College happened before Harbor Tools. Workshops happened after coworkers could use the tool. I cannot supply exact workshop dates, so please keep them unknown. The certificate was a course completion, not a professional license.
+
+Conversation note 9
+The dispatch desk dealt with mismatched references rather than delivery route optimization. Operators compared the overnight spreadsheet against the daily export. I am describing the same Dispatch Loom here, not a second project. The supervisors wanted understandable exceptions, not a dashboard with unexplained colors.
+
+Conversation note 10
+People used different names in conversations: Loom, dispatch reconciliation tool, or the checking script. Those names all meant Dispatch Loom. The source file could arrive late and the operators preferred a visible warning. Please distinguish operational use from a product sold to external customers.
+
+Conversation note 11
+I remember a meeting where we debated whether to hide empty rows. We kept them visible because a blank reference might need a phone call. The handbook described where a coworker should look before raising an exception. There was no machine-learning classifier involved in these rules.
+
+Conversation note 12
+To explain the workflow I would sit beside a supervisor and work through an example. The supervisor made the final dispatch decision. I was responsible for the parser and checks; I did not own the warehouse staffing budget, procurement, or the scheduling system.
+
+Conversation note 13
+The first draft was unpolished. We talked about naming columns and what counted as an exception. I do not want that discussion inflated into a separate project. It was ordinary refinement of Dispatch Loom. The purpose remained reducing repetitive reconciliation at the dispatch desk.
+
+Conversation note 14
+An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only. I cannot attribute all improvement to myself because coworkers also changed their checking habits.
+
+Conversation note 15
+Sometimes the story starts with training and sometimes it starts with the database. These are different perspectives on one piece of work. The SQL checks and Python parser were useful together. Git held the changes, and PostgreSQL stored the production data; those were not separate products.
+
+Conversation note 16
+I tend to tell this story out of order. College happened before Harbor Tools. Workshops happened after coworkers could use the tool. I cannot supply exact workshop dates, so please keep them unknown. The certificate was a course completion, not a professional license.
+
+Conversation note 17
+The dispatch desk dealt with mismatched references rather than delivery route optimization. Operators compared the overnight spreadsheet against the daily export. I am describing the same Dispatch Loom here, not a second project. The supervisors wanted understandable exceptions, not a dashboard with unexplained colors.
+
+Conversation note 18
+People used different names in conversations: Loom, dispatch reconciliation tool, or the checking script. Those names all meant Dispatch Loom. The source file could arrive late and the operators preferred a visible warning. Please distinguish operational use from a product sold to external customers.
+
+Conversation note 19
+I remember a meeting where we debated whether to hide empty rows. We kept them visible because a blank reference might need a phone call. The handbook described where a coworker should look before raising an exception. There was no machine-learning classifier involved in these rules.
+
+Conversation note 20
+To explain the workflow I would sit beside a supervisor and work through an example. The supervisor made the final dispatch decision. I was responsible for the parser and checks; I did not own the warehouse staffing budget, procurement, or the scheduling system.
+
+Conversation note 21
+The first draft was unpolished. We talked about naming columns and what counted as an exception. I do not want that discussion inflated into a separate project. It was ordinary refinement of Dispatch Loom. The purpose remained reducing repetitive reconciliation at the dispatch desk.
+
+Conversation note 22
+An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only. I cannot attribute all improvement to myself because coworkers also changed their checking habits.
+
+Conversation note 23
+Sometimes the story starts with training and sometimes it starts with the database. These are different perspectives on one piece of work. The SQL checks and Python parser were useful together. Git held the changes, and PostgreSQL stored the production data; those were not separate products.
+
+Conversation note 24
+I tend to tell this story out of order. College happened before Harbor Tools. Workshops happened after coworkers could use the tool. I cannot supply exact workshop dates, so please keep them unknown. The certificate was a course completion, not a professional license.
+
+Conversation note 25
+The dispatch desk dealt with mismatched references rather than delivery route optimization. Operators compared the overnight spreadsheet against the daily export. I am describing the same Dispatch Loom here, not a second project. The supervisors wanted understandable exceptions, not a dashboard with unexplained colors.
+
+Conversation note 26
+People used different names in conversations: Loom, dispatch reconciliation tool, or the checking script. Those names all meant Dispatch Loom. The source file could arrive late and the operators preferred a visible warning. Please distinguish operational use from a product sold to external customers.
+
+Conversation note 27
+I remember a meeting where we debated whether to hide empty rows. We kept them visible because a blank reference might need a phone call. The handbook described where a coworker should look before raising an exception. There was no machine-learning classifier involved in these rules.
+
+Conversation note 28
+To explain the workflow I would sit beside a supervisor and work through an example. The supervisor made the final dispatch decision. I was responsible for the parser and checks; I did not own the warehouse staffing budget, procurement, or the scheduling system.
+
+Conversation note 29
+The first draft was unpolished. We talked about naming columns and what counted as an exception. I do not want that discussion inflated into a separate project. It was ordinary refinement of Dispatch Loom. The purpose remained reducing repetitive reconciliation at the dispatch desk.
+
+Conversation note 30
+An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only. I cannot attribute all improvement to myself because coworkers also changed their checking habits.
+
+Conversation note 31
+Sometimes the story starts with training and sometimes it starts with the database. These are different perspectives on one piece of work. The SQL checks and Python parser were useful together. Git held the changes, and PostgreSQL stored the production data; those were not separate products.
+
+Conversation note 32
+I tend to tell this story out of order. College happened before Harbor Tools. Workshops happened after coworkers could use the tool. I cannot supply exact workshop dates, so please keep them unknown. The certificate was a course completion, not a professional license.
+
+Conversation note 33
+The dispatch desk dealt with mismatched references rather than delivery route optimization. Operators compared the overnight spreadsheet against the daily export. I am describing the same Dispatch Loom here, not a second project. The supervisors wanted understandable exceptions, not a dashboard with unexplained colors.
+
+Conversation note 34
+People used different names in conversations: Loom, dispatch reconciliation tool, or the checking script. Those names all meant Dispatch Loom. The source file could arrive late and the operators preferred a visible warning. Please distinguish operational use from a product sold to external customers.
+
+Conversation note 35
+I remember a meeting where we debated whether to hide empty rows. We kept them visible because a blank reference might need a phone call. The handbook described where a coworker should look before raising an exception. There was no machine-learning classifier involved in these rules.
+
+Conversation note 36
+To explain the workflow I would sit beside a supervisor and work through an example. The supervisor made the final dispatch decision. I was responsible for the parser and checks; I did not own the warehouse staffing budget, procurement, or the scheduling system.
+
+Conversation note 37
+The first draft was unpolished. We talked about naming columns and what counted as an exception. I do not want that discussion inflated into a separate project. It was ordinary refinement of Dispatch Loom. The purpose remained reducing repetitive reconciliation at the dispatch desk.
+
+Conversation note 38
+An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only. I cannot attribute all improvement to myself because coworkers also changed their checking habits.
+
+Conversation note 39
+Sometimes the story starts with training and sometimes it starts with the database. These are different perspectives on one piece of work. The SQL checks and Python parser were useful together. Git held the changes, and PostgreSQL stored the production data; those were not separate products.
+
+Conversation note 40
+I tend to tell this story out of order. College happened before Harbor Tools. Workshops happened after coworkers could use the tool. I cannot supply exact workshop dates, so please keep them unknown. The certificate was a course completion, not a professional license.
+
+Conversation note 41
+The dispatch desk dealt with mismatched references rather than delivery route optimization. Operators compared the overnight spreadsheet against the daily export. I am describing the same Dispatch Loom here, not a second project. The supervisors wanted understandable exceptions, not a dashboard with unexplained colors.
+
+Conversation note 42
+People used different names in conversations: Loom, dispatch reconciliation tool, or the checking script. Those names all meant Dispatch Loom. The source file could arrive late and the operators preferred a visible warning. Please distinguish operational use from a product sold to external customers.
+
+Conversation note 43
+I remember a meeting where we debated whether to hide empty rows. We kept them visible because a blank reference might need a phone call. The handbook described where a coworker should look before raising an exception. There was no machine-learning classifier involved in these rules.
+
+Conversation note 44
+To explain the workflow I would sit beside a supervisor and work through an example. The supervisor made the final dispatch decision. I was responsible for the parser and checks; I did not own the warehouse staffing budget, procurement, or the scheduling system.
+
+Conversation note 45
+The first draft was unpolished. We talked about naming columns and what counted as an exception. I do not want that discussion inflated into a separate project. It was ordinary refinement of Dispatch Loom. The purpose remained reducing repetitive reconciliation at the dispatch desk.
+
+Conversation note 46
+An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only. I cannot attribute all improvement to myself because coworkers also changed their checking habits.
+
+Conversation note 47
+Sometimes the story starts with training and sometimes it starts with the database. These are different perspectives on one piece of work. The SQL checks and Python parser were useful together. Git held the changes, and PostgreSQL stored the production data; those were not separate products.
+
+Conversation note 48
+I tend to tell this story out of order. College happened before Harbor Tools. Workshops happened after coworkers could use the tool. I cannot supply exact workshop dates, so please keep them unknown. The certificate was a course completion, not a professional license.
+
+Conversation note 49
+The dispatch desk dealt with mismatched references rather than delivery route optimization. Operators compared the overnight spreadsheet against the daily export. I am describing the same Dispatch Loom here, not a second project. The supervisors wanted understandable exceptions, not a dashboard with unexplained colors.
+
+Conversation note 50
+People used different names in conversations: Loom, dispatch reconciliation tool, or the checking script. Those names all meant Dispatch Loom. The source file could arrive late and the operators preferred a visible warning. Please distinguish operational use from a product sold to external customers.
+
+Conversation note 51
+I remember a meeting where we debated whether to hide empty rows. We kept them visible because a blank reference might need a phone call. The handbook described where a coworker should look before raising an exception. There was no machine-learning classifier involved in these rules.
+
+Conversation note 52
+To explain the workflow I would sit beside a supervisor and work through an example. The supervisor made the final dispatch decision. I was responsible for the parser and checks; I did not own the warehouse staffing budget, procurement, or the scheduling system.
+
+Conversation note 53
+The first draft was unpolished. We talked about naming columns and what counted as an exception. I do not want that discussion inflated into a separate project. It was ordinary refinement of Dispatch Loom. The purpose remained reducing repetitive reconciliation at the dispatch desk.
+
+Conversation note 54
+An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only. I cannot attribute all improvement to myself because coworkers also changed their checking habits.
+
+Conversation note 55
+Sometimes the story starts with training and sometimes it starts with the database. These are different perspectives on one piece of work. The SQL checks and Python parser were useful together. Git held the changes, and PostgreSQL stored the production data; those were not separate products.
+
+Conversation note 56
+I tend to tell this story out of order. College happened before Harbor Tools. Workshops happened after coworkers could use the tool. I cannot supply exact workshop dates, so please keep them unknown. The certificate was a course completion, not a professional license.
+
+Conversation note 57
+The dispatch desk dealt with mismatched references rather than delivery route optimization. Operators compared the overnight spreadsheet against the daily export. I am describing the same Dispatch Loom here, not a second project. The supervisors wanted understandable exceptions, not a dashboard with unexplained colors.
+
+Conversation note 58
+People used different names in conversations: Loom, dispatch reconciliation tool, or the checking script. Those names all meant Dispatch Loom. The source file could arrive late and the operators preferred a visible warning. Please distinguish operational use from a product sold to external customers.
+
+Conversation note 59
+I remember a meeting where we debated whether to hide empty rows. We kept them visible because a blank reference might need a phone call. The handbook described where a coworker should look before raising an exception. There was no machine-learning classifier involved in these rules.
+
+Conversation note 60
+To explain the workflow I would sit beside a supervisor and work through an example. The supervisor made the final dispatch decision. I was responsible for the parser and checks; I did not own the warehouse staffing budget, procurement, or the scheduling system.
+
+Conversation note 61
+The first draft was unpolished. We talked about naming columns and what counted as an exception. I do not want that discussion inflated into a separate project. It was ordinary refinement of Dispatch Loom. The purpose remained reducing repetitive reconciliation at the dispatch desk.
+
+Conversation note 62
+An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only. I cannot attribute all improvement to myself because coworkers also changed their checking habits.
+
+Conversation note 63
+Sometimes the story starts with training and sometimes it starts with the database. These are different perspectives on one piece of work. The SQL checks and Python parser were useful together. Git held the changes, and PostgreSQL stored the production data; those were not separate products.
+
+Conversation note 64
+I tend to tell this story out of order. College happened before Harbor Tools. Workshops happened after coworkers could use the tool. I cannot supply exact workshop dates, so please keep them unknown. The certificate was a course completion, not a professional license.
+
+Conversation note 65
+The dispatch desk dealt with mismatched references rather than delivery route optimization. Operators compared the overnight spreadsheet against the daily export. I am describing the same Dispatch Loom here, not a second project. The supervisors wanted understandable exceptions, not a dashboard with unexplained colors.
+
+Conversation note 66
+People used different names in conversations: Loom, dispatch reconciliation tool, or the checking script. Those names all meant Dispatch Loom. The source file could arrive late and the operators preferred a visible warning. Please distinguish operational use from a product sold to external customers.
+
+Conversation note 67
+I remember a meeting where we debated whether to hide empty rows. We kept them visible because a blank reference might need a phone call. The handbook described where a coworker should look before raising an exception. There was no machine-learning classifier involved in these rules.
+
+Conversation note 68
+To explain the workflow I would sit beside a supervisor and work through an example. The supervisor made the final dispatch decision. I was responsible for the parser and checks; I did not own the warehouse staffing budget, procurement, or the scheduling system.
+
+Conversation note 69
+The first draft was unpolished. We talked about naming columns and what counted as an exception. I do not want that discussion inflated into a separate project. It was ordinary refinement of Dispatch Loom. The purpose remained reducing repetitive reconciliation at the dispatch desk.
+
+Conversation note 70
+An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only. I cannot attribute all improvement to myself because coworkers also changed their checking habits.
+
+Conversation note 71
+Sometimes the story starts with training and sometimes it starts with the database. These are different perspectives on one piece of work. The SQL checks and Python parser were useful together. Git held the changes, and PostgreSQL stored the production data; those were not separate products.
+
+Conversation note 72
+I tend to tell this story out of order. College happened before Harbor Tools. Workshops happened after coworkers could use the tool. I cannot supply exact workshop dates, so please keep them unknown. The certificate was a course completion, not a professional license.
+
+To be clear: the Loom script and Dispatch Loom are one project. The SQL reconciliation checks are part of it. The weekly time reduction and the two workshops are separate achievements.

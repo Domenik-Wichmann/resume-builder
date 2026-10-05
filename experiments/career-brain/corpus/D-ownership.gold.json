@@ -1,0 +1,103 @@
+{
+  "id": "D-ownership",
+  "purpose": "Personal, team and brother contributions",
+  "gold": [
+    {
+      "kind": "profile",
+      "key": "profile",
+      "title": "Ada Rowan",
+      "subtitle": "Operations analyst",
+      "summary": "Operations analyst building practical internal tools.",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "My name is Ada Rowan. I am an operations analyst who builds practical internal tools.",
+      "uncertainties": [],
+      "aliases": ["Ada Rowan"],
+      "essential": ["Ada Rowan", "operations"],
+      "importance": "critical"
+    },
+    {
+      "kind": "experience",
+      "key": "harbor-operations",
+      "title": "Operations Analyst",
+      "subtitle": "",
+      "summary": "Designed Dispatch Loom and trained dispatch coworkers.",
+      "organization": "Harbor Tools",
+      "start_date": "2021-02-01",
+      "end_date": "2024-05-31",
+      "skill_keys": ["python", "sql", "postgresql", "git", "coworker-training"],
+      "achievement_keys": ["loom-time", "loom-training"],
+      "category_key": null,
+      "source_quote": "I worked as Operations Analyst at Harbor Tools from 2021-02-01 to 2024-05-31.",
+      "uncertainties": [],
+      "aliases": ["Operations Analyst"],
+      "essential": ["Harbor Tools", "Operations Analyst"],
+      "importance": "critical"
+    },
+    {
+      "kind": "project",
+      "key": "dispatch-loom",
+      "title": "Dispatch Loom",
+      "subtitle": "",
+      "summary": "Personally built a Python parser and SQL checks for dispatch reconciliation; gathered warehouse supervisor requirements.",
+      "organization": "Harbor Tools",
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": ["python", "sql", "postgresql", "git", "coworker-training"],
+      "achievement_keys": ["loom-time", "loom-training"],
+      "category_key": null,
+      "source_quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself.",
+      "uncertainties": [],
+      "aliases": ["Dispatch Loom", "Loom", "dispatch reconciliation tool"],
+      "essential": ["parser", "SQL", "reconciliation", "supervisor"],
+      "importance": "critical"
+    },
+    {
+      "kind": "project",
+      "key": "beacon",
+      "title": "Beacon",
+      "subtitle": "",
+      "summary": "Personally wrote the user guide; brother built the model integration and the team deployed it.",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "I personally only wrote Beacon's user guide. I did not build its model or deployment.",
+      "uncertainties": ["Testing and user count are uncertain."],
+      "aliases": ["Beacon"],
+      "essential": ["guide"],
+      "importance": "important"
+    }
+  ],
+  "forbidden": ["personally.*(?:built|deployed).*Beacon", "AWS", "200 users"],
+  "sourceCharacters": 1877,
+  "sourceHash": "4b647de3cfe316ce7283a9f1ec4b6bd4ced4e932cb33d7a35449bbb0a9771716",
+  "provenance": [
+    {
+      "key": "profile:profile",
+      "start": 31,
+      "quote": "My name is Ada Rowan. I am an operations analyst who builds practical internal tools."
+    },
+    {
+      "key": "experience:harbor-operations",
+      "start": 118,
+      "quote": "I worked as Operations Analyst at Harbor Tools from 2021-02-01 to 2024-05-31."
+    },
+    {
+      "key": "project:dispatch-loom",
+      "start": 197,
+      "quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself."
+    },
+    {
+      "key": "project:beacon",
+      "start": 463,
+      "quote": "I personally only wrote Beacon's user guide. I did not build its model or deployment."
+    }
+  ]
+}

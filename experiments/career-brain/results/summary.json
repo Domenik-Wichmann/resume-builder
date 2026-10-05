@@ -1,0 +1,1865 @@
+{
+  "variants": [
+    {
+      "variant": "A",
+      "runs": 14,
+      "records": 231,
+      "exactQuotes": 173,
+      "criticalRecall": 0.9615384615384612,
+      "review": 117,
+      "missingFacts": 10,
+      "relationshipMisses": 40
+    },
+    {
+      "variant": "B",
+      "runs": 1,
+      "records": 15,
+      "exactQuotes": 15,
+      "criticalRecall": 0.9166666666666666,
+      "review": 1,
+      "missingFacts": 1,
+      "relationshipMisses": 0
+    },
+    {
+      "variant": "C",
+      "runs": 1,
+      "records": 17,
+      "exactQuotes": 17,
+      "criticalRecall": 0.9166666666666666,
+      "review": 2,
+      "missingFacts": 1,
+      "relationshipMisses": 1
+    },
+    {
+      "variant": "D",
+      "runs": 1,
+      "records": 15,
+      "exactQuotes": 15,
+      "criticalRecall": 1,
+      "review": 3,
+      "missingFacts": 0,
+      "relationshipMisses": 1
+    },
+    {
+      "variant": "E",
+      "runs": 14,
+      "records": 131,
+      "exactQuotes": 131,
+      "criticalRecall": 0.5352564102564104,
+      "review": 9,
+      "missingFacts": 221,
+      "relationshipMisses": 168
+    }
+  ],
+  "repeatability": [
+    {
+      "variant": "A",
+      "runs": 5,
+      "counts": [15, 15, 15, 15, 15],
+      "variance": 0,
+      "keyIntersection": 10,
+      "keyUnion": 21,
+      "keyConsistency": 0.47619047619047616,
+      "keys": [
+        "profile:profile",
+        "experience:harbor-tools-operations-analyst",
+        "project:dispatch-loom",
+        "achievement:dispatch-loom-reconciliation-time-reduction",
+        "achievement:dispatch-loom-coworker-training",
+        "category:data-tools",
+        "category:collaboration",
+        "skill:python",
+        "skill:sql",
+        "skill:postgresql",
+        "skill:git",
+        "skill:coworker-training",
+        "education:cedar-college-bsc-information-systems",
+        "certification:cedar-sql-foundations-certificate",
+        "language:english",
+        "certification:cedar-sql-foundations",
+        "achievement:dispatch-loom-training-and-handbook",
+        "experience:operations-analyst-harbor-tools",
+        "achievement:dispatch-reconciliation-time-reduction",
+        "achievement:dispatch-coworker-training",
+        "education:bsc-information-systems-cedar-college"
+      ],
+      "changedOnIdenticalInput": [
+        {
+          "UPDATED": 2,
+          "REVIEW": 4,
+          "UNCHANGED": 9,
+          "REMOVED": 1
+        },
+        {
+          "UNCHANGED": 9,
+          "REVIEW": 5,
+          "UPDATED": 1,
+          "REMOVED": 2
+        },
+        {
+          "UPDATED": 9,
+          "REVIEW": 6,
+          "REMOVED": 5
+        },
+        {
+          "UNCHANGED": 10,
+          "REVIEW": 5,
+          "REMOVED": 1
+        }
+      ]
+    },
+    {
+      "variant": "E",
+      "runs": 5,
+      "counts": [0, 15, 15, 15, 0],
+      "variance": 54,
+      "keyIntersection": 0,
+      "keyUnion": 18,
+      "keyConsistency": 0,
+      "keys": [
+        "profile:profile",
+        "experience:harbor-tools-operations-analyst",
+        "project:dispatch-loom",
+        "achievement:dispatch-loom-reconciliation-time-reduction",
+        "achievement:dispatch-loom-coworker-training",
+        "education:cedar-college-information-systems",
+        "certification:cedar-sql-foundations",
+        "language:english",
+        "category:data-tools",
+        "category:collaboration",
+        "skill:python",
+        "skill:sql",
+        "skill:postgresql",
+        "skill:git",
+        "skill:coworker-training",
+        "achievement:dispatch-loom-coworker-training-handbook",
+        "education:cedar-college-bsc-information-systems",
+        "achievement:dispatch-loom-training-handbook"
+      ],
+      "changedOnIdenticalInput": [
+        {
+          "ADDED": 14,
+          "REVIEW": 1
+        },
+        {
+          "ADDED": 15
+        },
+        {
+          "ADDED": 13,
+          "REVIEW": 2
+        },
+        {}
+      ]
+    }
+  ],
+  "versions": [
+    {
+      "variant": "A",
+      "v2": {
+        "accuracy": 0.125,
+        "scored": [
+          {
+            "key": "profile:profile",
+            "expected": "UNCHANGED",
+            "actual": "UNCHANGED",
+            "correct": true
+          },
+          {
+            "key": "experience:harbor-operations",
+            "expected": "UPDATED",
+            "actual": "REVIEW",
+            "correct": false
+          },
+          {
+            "key": "project:dispatch-loom",
+            "expected": "UNCHANGED",
+            "actual": "REVIEW",
+            "correct": false
+          },
+          {
+            "key": "achievement:loom-time",
+            "expected": "UNCHANGED",
+            "actual": "REVIEW",
+            "correct": false
+          },
+          {
+            "key": "achievement:loom-training",
+            "expected": "UPDATED",
+            "actual": "REVIEW",
+            "correct": false
+          },
+          {
+            "key": "skill:python",
+            "expected": "UNCHANGED",
+            "actual": "REVIEW",
+            "correct": false
+          },
+          {
+            "key": "skill:sql",
+            "expected": "UNCHANGED",
+            "actual": "REVIEW",
+            "correct": false
+          },
+          {
+            "key": "skill:postgresql",
+            "expected": "UNCHANGED",
+            "actual": "REVIEW",
+            "correct": false
+          },
+          {
+            "key": "skill:git",
+            "expected": "UNCHANGED",
+            "actual": "REVIEW",
+            "correct": false
+          },
+          {
+            "key": "skill:coworker-training",
+            "expected": "UNCHANGED",
+            "actual": "REVIEW",
+            "correct": false
+          },
+          {
+            "key": "category:data-tools",
+            "expected": "UNCHANGED",
+            "actual": "UPDATED",
+            "correct": false
+          },
+          {
+            "key": "category:collaboration",
+            "expected": "UNCHANGED",
+            "actual": "UPDATED",
+            "correct": false
+          },
+          {
+            "key": "education:cedar-bsc",
+            "expected": "UNCHANGED",
+            "actual": "REVIEW",
+            "correct": false
+          },
+          {
+            "key": "language:english",
+            "expected": "UNCHANGED",
+            "actual": "UNCHANGED",
+            "correct": true
+          },
+          {
+            "key": "project:roster-note",
+            "expected": "ADDED",
+            "actual": "REVIEW",
+            "correct": false
+          },
+          {
+            "key": "certification:cedar-sql",
+            "expected": "REMOVED",
+            "actual": "MISSING",
+            "correct": false
+          }
+        ],
+        "changes": [
+          {
+            "identity": "profile:profile",
+            "status": "UNCHANGED",
+            "before": {
+              "kind": "profile",
+              "key": "profile",
+              "title": "Ada Rowan",
+              "subtitle": "Operations analyst who builds practical internal tools",
+              "summary": "I am an operations analyst who builds practical internal tools.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "My name is Ada Rowan. I am an operations analyst who builds practical internal tools.",
+              "uncertainties": [],
+              "id": "00000000-0000-4000-8000-000000000001",
+              "hash": "a3fed9100d004d811ccfd8e502411fb65c51d0ae029f2def4b60d0638b002178",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": {
+              "kind": "profile",
+              "key": "profile",
+              "title": "Ada Rowan",
+              "subtitle": "Operations analyst who builds practical internal tools",
+              "summary": "I am an operations analyst who builds practical internal tools.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "My name is Ada Rowan. I am an operations analyst who builds practical internal tools.",
+              "uncertainties": []
+            },
+            "reason": ""
+          },
+          {
+            "identity": "experience:harbor-operations",
+            "status": "REVIEW",
+            "before": null,
+            "after": {
+              "kind": "experience",
+              "key": "harbor-operations",
+              "title": "Operations Analyst",
+              "subtitle": "Harbor Tools",
+              "summary": "Gathered requirements from warehouse supervisors and explained validation failures to them. Built Dispatch Loom and Roster Note while at Harbor Tools.",
+              "organization": "Harbor Tools",
+              "start_date": "2021-02-01",
+              "end_date": "2024-06-30",
+              "skill_keys": [
+                "python",
+                "sql",
+                "postgresql",
+                "git",
+                "coworker-training"
+              ],
+              "achievement_keys": ["loom-time", "loom-training"],
+              "category_key": null,
+              "source_quote": "I worked as Operations Analyst at Harbor Tools from 2021-02-01 to 2024-06-30. I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them. I used Git for version control and PostgreSQL for the production database. I personally built Roster Note at Harbor Tools, a separate SQL handover checklist.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ]
+            },
+            "reason": "Similar existing title has another key. Confirm identity."
+          },
+          {
+            "identity": "project:dispatch-loom",
+            "status": "REVIEW",
+            "before": {
+              "kind": "project",
+              "key": "dispatch-loom",
+              "title": "Dispatch Loom",
+              "subtitle": "Dispatch reconciliation tool",
+              "summary": "Designed and built an operational dispatch reconciliation tool. It checked mismatched references by comparing the overnight spreadsheet with the daily export. Gathered requirements from warehouse supervisors and explained validation failures; kept blank rows visible because a blank reference might need a phone call. The Python parser and SQL checks were the person's contribution. Git was used for version control and PostgreSQL for the production database.",
+              "organization": "Harbor Tools",
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [
+                "python",
+                "sql",
+                "postgresql",
+                "git",
+                "coworker-training"
+              ],
+              "achievement_keys": [
+                "dispatch-loom-reconciliation-time",
+                "dispatch-loom-training-handbook"
+              ],
+              "category_key": null,
+              "source_quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself. The dispatch desk dealt with mismatched references rather than delivery route optimization. Operators compared the overnight spreadsheet against the daily export. I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them. I used Git for version control and PostgreSQL for the production database. We kept them visible because a blank reference might need a phone call.",
+              "uncertainties": [
+                "No project start or end dates were provided.",
+                "The source does not give exact dates for the workshops.",
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ],
+              "id": "00000000-0000-4000-8000-000000000003",
+              "hash": "2a2ee410e2d254609b18187b58d8299aa99b82e7b7d9a14de0fde4b43efa991f",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": {
+              "kind": "project",
+              "key": "dispatch-loom",
+              "title": "Dispatch Loom",
+              "subtitle": "Dispatch reconciliation tool",
+              "summary": "Designed and built an internal tool for reconciling dispatch records. It helped operators compare an overnight spreadsheet against a daily export and surface understandable exceptions, including warnings when the source file arrived late. The user personally wrote the Python parser and SQL checks; PostgreSQL stored production data and Git held changes. Supervisors made final dispatch decisions.",
+              "organization": "Harbor Tools",
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [
+                "python",
+                "sql",
+                "postgresql",
+                "git",
+                "coworker-training"
+              ],
+              "achievement_keys": ["loom-time", "loom-training"],
+              "category_key": null,
+              "source_quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself. The tool's purpose was reconciling dispatch records, stated another way. The operators compared the overnight spreadsheet against the daily export. The source file could arrive late and the operators preferred a visible warning. The supervisors wanted understandable exceptions, not a dashboard with unexplained colors. We kept them visible because a blank reference might need a phone call. The supervisor made the final dispatch decision. Git held the changes, and PostgreSQL stored the production data.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ]
+            },
+            "reason": "Source quotation could not be verified. Edit or reject this proposal."
+          },
+          {
+            "identity": "achievement:loom-time",
+            "status": "REVIEW",
+            "before": null,
+            "after": {
+              "kind": "achievement",
+              "key": "loom-time",
+              "title": "Reduced weekly reconciliation time",
+              "subtitle": "Dispatch Loom",
+              "summary": "Reconciliation time fell from 5 hours to 2 hours per week, a 3-hour weekly reduction, measured over six weekly runs. This was a team result; the user's contribution was the parser and checks.",
+              "organization": "Harbor Tools",
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks. The six-run result remained 5 hours to 2 hours weekly; that is 3 hours saved.",
+              "uncertainties": [
+                "The result was achieved by the team; the user's individual contribution to the measured improvement is not quantified.",
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ]
+            },
+            "reason": "The result was achieved by the team; the user's individual contribution to the measured improvement is not quantified. Source quotation could not be verified. Edit or reject this proposal."
+          },
+          {
+            "identity": "achievement:loom-training",
+            "status": "REVIEW",
+            "before": null,
+            "after": {
+              "kind": "achievement",
+              "key": "loom-training",
+              "title": "Trained dispatch coworkers and created a handbook",
+              "subtitle": "Dispatch Loom",
+              "summary": "Personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook containing five worked examples.",
+              "organization": "Harbor Tools",
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook. For Dispatch Loom the handbook also included five worked examples.",
+              "uncertainties": [
+                "Exact workshop dates were not provided.",
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ]
+            },
+            "reason": "Exact workshop dates were not provided. Source quotation could not be verified. Edit or reject this proposal."
+          },
+          {
+            "identity": "project:roster-note",
+            "status": "REVIEW",
+            "before": null,
+            "after": {
+              "kind": "project",
+              "key": "roster-note",
+              "title": "Roster Note",
+              "subtitle": "SQL handover checklist",
+              "summary": "Built a separate SQL handover checklist at Harbor Tools. No user count or outcome was recorded.",
+              "organization": "Harbor Tools",
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": ["sql"],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "I personally built Roster Note at Harbor Tools, a separate SQL handover checklist. No user count or outcome is recorded.",
+              "uncertainties": [
+                "No project dates, user count, or outcome were provided."
+              ]
+            },
+            "reason": "No project dates, user count, or outcome were provided."
+          },
+          {
+            "identity": "skill:python",
+            "status": "REVIEW",
+            "before": {
+              "kind": "skill",
+              "key": "python",
+              "title": "Python",
+              "subtitle": "",
+              "summary": "",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": "data-tools",
+              "source_quote": "My skill category is Data tools: Python, SQL and PostgreSQL. I wrote the Python parser and SQL checks myself.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ],
+              "id": "00000000-0000-4000-8000-000000000007",
+              "hash": "bf8f15efecd95781c9aaa22325d716a841dcdd9206e93b3db12bd2e648236466",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": {
+              "kind": "skill",
+              "key": "python",
+              "title": "Python",
+              "subtitle": "",
+              "summary": "Used to build the Dispatch Loom parser.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": "data-tools",
+              "source_quote": "I wrote the Python parser and SQL checks myself. My skill category is Data tools: Python, SQL and PostgreSQL.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ]
+            },
+            "reason": "Source quotation could not be verified. Edit or reject this proposal."
+          },
+          {
+            "identity": "skill:sql",
+            "status": "REVIEW",
+            "before": {
+              "kind": "skill",
+              "key": "sql",
+              "title": "SQL",
+              "subtitle": "",
+              "summary": "",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": "data-tools",
+              "source_quote": "My skill category is Data tools: Python, SQL and PostgreSQL. I wrote the Python parser and SQL checks myself.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ],
+              "id": "00000000-0000-4000-8000-000000000008",
+              "hash": "692b5befd5aedbb3c91972f8dcd5445879f426f2039770a93b7c082f9f6d937d",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": {
+              "kind": "skill",
+              "key": "sql",
+              "title": "SQL",
+              "subtitle": "",
+              "summary": "Used for Dispatch Loom checks and a separate handover checklist.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": "data-tools",
+              "source_quote": "I wrote the Python parser and SQL checks myself. My skill category is Data tools: Python, SQL and PostgreSQL. I personally built Roster Note at Harbor Tools, a separate SQL handover checklist.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ]
+            },
+            "reason": "Source quotation could not be verified. Edit or reject this proposal."
+          },
+          {
+            "identity": "skill:postgresql",
+            "status": "REVIEW",
+            "before": {
+              "kind": "skill",
+              "key": "postgresql",
+              "title": "PostgreSQL",
+              "subtitle": "",
+              "summary": "",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": "data-tools",
+              "source_quote": "My skill category is Data tools: Python, SQL and PostgreSQL. I used Git for version control and PostgreSQL for the production database.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ],
+              "id": "00000000-0000-4000-8000-000000000009",
+              "hash": "bbd7dc905d45482bf29637025d0878b7a41554de46e2d36fa7ed3ed87b662571",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": {
+              "kind": "skill",
+              "key": "postgresql",
+              "title": "PostgreSQL",
+              "subtitle": "",
+              "summary": "Used as the production database for Dispatch Loom.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": "data-tools",
+              "source_quote": "My skill category is Data tools: Python, SQL and PostgreSQL. I used Git for version control and PostgreSQL for the production database.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ]
+            },
+            "reason": "Source quotation could not be verified. Edit or reject this proposal."
+          },
+          {
+            "identity": "skill:git",
+            "status": "REVIEW",
+            "before": {
+              "kind": "skill",
+              "key": "git",
+              "title": "Git",
+              "subtitle": "",
+              "summary": "",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": "collaboration",
+              "source_quote": "My separate skill category is Collaboration: Git and coworker training. I used Git for version control.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ],
+              "id": "00000000-0000-4000-8000-000000000011",
+              "hash": "67e8a00fb6054ec29e34993ea6f248de22c472556e411cbaa24292d608201277",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": {
+              "kind": "skill",
+              "key": "git",
+              "title": "Git",
+              "subtitle": "",
+              "summary": "Used for version control on Dispatch Loom.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": "collaboration",
+              "source_quote": "My separate skill category is Collaboration: Git and coworker training. I used Git for version control.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ]
+            },
+            "reason": "Source quotation could not be verified. Edit or reject this proposal."
+          },
+          {
+            "identity": "skill:coworker-training",
+            "status": "REVIEW",
+            "before": {
+              "kind": "skill",
+              "key": "coworker-training",
+              "title": "Coworker training",
+              "subtitle": "",
+              "summary": "",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": "collaboration",
+              "source_quote": "My separate skill category is Collaboration: Git and coworker training. For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+              "uncertainties": [
+                "Exact workshop dates were not provided.",
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ],
+              "id": "00000000-0000-4000-8000-000000000012",
+              "hash": "0e66f1f9e070fd431911a20eb2507bd6629fc00a72855d12455eb189b6c6d72e",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": {
+              "kind": "skill",
+              "key": "coworker-training",
+              "title": "Coworker training",
+              "subtitle": "",
+              "summary": "Trained dispatch coworkers in workshops and created a plain-language handbook.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": "collaboration",
+              "source_quote": "My separate skill category is Collaboration: Git and coworker training. For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ]
+            },
+            "reason": "Source quotation could not be verified. Edit or reject this proposal."
+          },
+          {
+            "identity": "category:data-tools",
+            "status": "UPDATED",
+            "before": {
+              "kind": "category",
+              "key": "data-tools",
+              "title": "Data tools",
+              "subtitle": "",
+              "summary": "Python, SQL and PostgreSQL.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "My skill category is Data tools: Python, SQL and PostgreSQL.",
+              "uncertainties": [],
+              "id": "00000000-0000-4000-8000-000000000006",
+              "hash": "dc32bb26e386fbbfffd4ec1627edd9f3a1d7d8e0afd021f5931dfec14c0eb8ef",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": {
+              "kind": "category",
+              "key": "data-tools",
+              "title": "Data tools",
+              "subtitle": "",
+              "summary": "Skill category stated by the user.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "My skill category is Data tools: Python, SQL and PostgreSQL.",
+              "uncertainties": []
+            },
+            "reason": ""
+          },
+          {
+            "identity": "category:collaboration",
+            "status": "UPDATED",
+            "before": {
+              "kind": "category",
+              "key": "collaboration",
+              "title": "Collaboration",
+              "subtitle": "",
+              "summary": "Git and coworker training.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "My separate skill category is Collaboration: Git and coworker training.",
+              "uncertainties": [],
+              "id": "00000000-0000-4000-8000-000000000010",
+              "hash": "d1db7e186e7f84ae9ec84d7df48a80d9199f556ee12f1856d288295e31528600",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": {
+              "kind": "category",
+              "key": "collaboration",
+              "title": "Collaboration",
+              "subtitle": "",
+              "summary": "Skill category stated by the user.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "My separate skill category is Collaboration: Git and coworker training.",
+              "uncertainties": []
+            },
+            "reason": ""
+          },
+          {
+            "identity": "education:cedar-bsc",
+            "status": "REVIEW",
+            "before": null,
+            "after": {
+              "kind": "education",
+              "key": "cedar-bsc",
+              "title": "BSc in Information Systems",
+              "subtitle": "Cedar College",
+              "summary": "Earned a BSc in Information Systems at Cedar College.",
+              "organization": "Cedar College",
+              "start_date": "2017-09-01",
+              "end_date": "2020-06-30",
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "I earned a BSc in Information Systems at Cedar College from 2017-09-01 to 2020-06-30.",
+              "uncertainties": []
+            },
+            "reason": "Similar existing title has another key. Confirm identity."
+          },
+          {
+            "identity": "language:english",
+            "status": "UNCHANGED",
+            "before": {
+              "kind": "language",
+              "key": "english",
+              "title": "English",
+              "subtitle": "",
+              "summary": "Fluent.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "I speak English fluently.",
+              "uncertainties": [],
+              "id": "00000000-0000-4000-8000-000000000015",
+              "hash": "5aab4a6010309e9a3c75c1f1570dbcaf2a0531d4492164783f3e5b88e6d19bde",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": {
+              "kind": "language",
+              "key": "english",
+              "title": "English",
+              "subtitle": "",
+              "summary": "Fluent.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "I speak English fluently.",
+              "uncertainties": []
+            },
+            "reason": ""
+          },
+          {
+            "identity": "experience:harbor-tools-operations-analyst",
+            "status": "REMOVED",
+            "before": {
+              "kind": "experience",
+              "key": "harbor-tools-operations-analyst",
+              "title": "Operations Analyst",
+              "subtitle": "",
+              "summary": "Worked as an Operations Analyst at Harbor Tools.",
+              "organization": "Harbor Tools",
+              "start_date": "2021-02-01",
+              "end_date": "2024-05-31",
+              "skill_keys": [
+                "python",
+                "sql",
+                "postgresql",
+                "git",
+                "coworker-training"
+              ],
+              "achievement_keys": [
+                "dispatch-loom-reconciliation-time",
+                "dispatch-loom-training-handbook"
+              ],
+              "category_key": null,
+              "source_quote": "I worked as Operations Analyst at Harbor Tools from 2021-02-01 to 2024-05-31.",
+              "uncertainties": [],
+              "id": "00000000-0000-4000-8000-000000000002",
+              "hash": "fde125ae19220e0a3bfb1fa882598d9f971523a90bfcd59b3c98bfc58399e435",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": null,
+            "reason": "Missing from the full document. Archive only after review."
+          },
+          {
+            "identity": "achievement:dispatch-loom-reconciliation-time",
+            "status": "REMOVED",
+            "before": {
+              "kind": "achievement",
+              "key": "dispatch-loom-reconciliation-time",
+              "title": "Reduced reconciliation time",
+              "subtitle": "",
+              "summary": "Reconciliation time fell from 5 hours to 2 hours per week over six weekly runs. This was a team result; the person's contribution was the parser and checks. Delivery speed was not measured.",
+              "organization": "Harbor Tools",
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks. An earlier conversation mixed up delivery time and reconciliation time. Delivery speed was not measured. The six-run measurement describes reconciliation work only. I cannot attribute all improvement to myself because coworkers also changed their checking habits.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ],
+              "id": "00000000-0000-4000-8000-000000000004",
+              "hash": "1f967f46f775f14139d78e7ae946da04da5a44f8c677e40aa2f4e6bc3d25cf64",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": null,
+            "reason": "Missing from the full document. Archive only after review."
+          },
+          {
+            "identity": "achievement:dispatch-loom-training-handbook",
+            "status": "REMOVED",
+            "before": {
+              "kind": "achievement",
+              "key": "dispatch-loom-training-handbook",
+              "title": "Trained dispatch coworkers and wrote a handbook",
+              "subtitle": "",
+              "summary": "Personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+              "organization": "Harbor Tools",
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook. Workshops happened after coworkers could use the tool. I cannot supply exact workshop dates, so please keep them unknown.",
+              "uncertainties": [
+                "Exact workshop dates were not provided.",
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ],
+              "id": "00000000-0000-4000-8000-000000000005",
+              "hash": "1400a36d2e9b886e99357e65db37c49d49ac2a410888fb5e1a2243d8dc79e244",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": null,
+            "reason": "Missing from the full document. Archive only after review."
+          },
+          {
+            "identity": "education:cedar-college-bsc-information-systems",
+            "status": "REMOVED",
+            "before": {
+              "kind": "education",
+              "key": "cedar-college-bsc-information-systems",
+              "title": "BSc in Information Systems",
+              "subtitle": "",
+              "summary": "",
+              "organization": "Cedar College",
+              "start_date": "2017-09-01",
+              "end_date": "2020-06-30",
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "I earned a BSc in Information Systems at Cedar College from 2017-09-01 to 2020-06-30.",
+              "uncertainties": [],
+              "id": "00000000-0000-4000-8000-000000000013",
+              "hash": "91cf63b61497c2dbbcc91d1409ea1465ef565400e28788913cacacc763e1a362",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": null,
+            "reason": "Missing from the full document. Archive only after review."
+          },
+          {
+            "identity": "certification:cedar-sql-foundations",
+            "status": "REMOVED",
+            "before": {
+              "kind": "certification",
+              "key": "cedar-sql-foundations",
+              "title": "Cedar SQL Foundations certificate",
+              "subtitle": "",
+              "summary": "Course completion, not a professional license.",
+              "organization": null,
+              "start_date": "2020-08-15",
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "I received the fictional Cedar SQL Foundations certificate on 2020-08-15. The certificate was a course completion, not a professional license.",
+              "uncertainties": [
+                "The certificate issuer was not specified.",
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ],
+              "id": "00000000-0000-4000-8000-000000000014",
+              "hash": "8a54754f52297e201568df9522837bced93282ed880a6c9fc715cb385f87e726",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": null,
+            "reason": "Missing from the full document. Archive only after review."
+          }
+        ]
+      },
+      "v3": {
+        "accuracy": 0.17647058823529413,
+        "scored": [
+          {
+            "key": "profile:profile",
+            "expected": "UNCHANGED",
+            "actual": "UNCHANGED",
+            "correct": true
+          },
+          {
+            "key": "experience:harbor-operations",
+            "expected": "UNCHANGED",
+            "actual": "REVIEW",
+            "correct": false
+          },
+          {
+            "key": "project:dispatch-loom",
+            "expected": "UNCHANGED",
+            "actual": "REVIEW",
+            "correct": false
+          },
+          {
+            "key": "achievement:loom-time",
+            "expected": "UNCHANGED",
+            "actual": "REVIEW",
+            "correct": false
+          },
+          {
+            "key": "achievement:loom-training",
+            "expected": "REVIEW",
+            "actual": "REVIEW",
+            "correct": true
+          },
+          {
+            "key": "skill:python",
+            "expected": "UNCHANGED",
+            "actual": "REVIEW",
+            "correct": false
+          },
+          {
+            "key": "skill:sql",
+            "expected": "UPDATED",
+            "actual": "REVIEW",
+            "correct": false
+          },
+          {
+            "key": "skill:postgresql",
+            "expected": "UNCHANGED",
+            "actual": "REVIEW",
+            "correct": false
+          },
+          {
+            "key": "skill:git",
+            "expected": "UNCHANGED",
+            "actual": "REVIEW",
+            "correct": false
+          },
+          {
+            "key": "skill:coworker-training",
+            "expected": "UNCHANGED",
+            "actual": "REVIEW",
+            "correct": false
+          },
+          {
+            "key": "category:data-tools",
+            "expected": "UNCHANGED",
+            "actual": "UPDATED",
+            "correct": false
+          },
+          {
+            "key": "category:collaboration",
+            "expected": "UNCHANGED",
+            "actual": "UPDATED",
+            "correct": false
+          },
+          {
+            "key": "education:cedar-bsc",
+            "expected": "UNCHANGED",
+            "actual": "UPDATED",
+            "correct": false
+          },
+          {
+            "key": "language:english",
+            "expected": "UNCHANGED",
+            "actual": "UNCHANGED",
+            "correct": true
+          },
+          {
+            "key": "project:roster-note",
+            "expected": "UNCHANGED",
+            "actual": "REVIEW",
+            "correct": false
+          },
+          {
+            "key": "certification:cedar-sql",
+            "expected": "UPDATED",
+            "actual": "REVIEW",
+            "correct": false
+          },
+          {
+            "key": "achievement:roster-handover",
+            "expected": "ADDED",
+            "actual": "MISSING",
+            "correct": false
+          }
+        ],
+        "changes": [
+          {
+            "identity": "profile:profile",
+            "status": "UNCHANGED",
+            "before": {
+              "kind": "profile",
+              "key": "profile",
+              "title": "Ada Rowan",
+              "subtitle": "Operations analyst who builds practical internal tools",
+              "summary": "I am an operations analyst who builds practical internal tools.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "My name is Ada Rowan. I am an operations analyst who builds practical internal tools.",
+              "uncertainties": [],
+              "id": "00000000-0000-4000-8000-000000000001",
+              "hash": "a3fed9100d004d811ccfd8e502411fb65c51d0ae029f2def4b60d0638b002178",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": {
+              "kind": "profile",
+              "key": "profile",
+              "title": "Ada Rowan",
+              "subtitle": "Operations analyst who builds practical internal tools",
+              "summary": "I am an operations analyst who builds practical internal tools.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "My name is Ada Rowan. I am an operations analyst who builds practical internal tools.",
+              "uncertainties": []
+            },
+            "reason": ""
+          },
+          {
+            "identity": "experience:harbor-operations",
+            "status": "REVIEW",
+            "before": {
+              "kind": "experience",
+              "key": "harbor-operations",
+              "title": "Operations Analyst",
+              "subtitle": "Harbor Tools",
+              "summary": "Gathered requirements from warehouse supervisors and explained validation failures to them. Built Dispatch Loom and Roster Note while at Harbor Tools.",
+              "organization": "Harbor Tools",
+              "start_date": "2021-02-01",
+              "end_date": "2024-06-30",
+              "skill_keys": [
+                "python",
+                "sql",
+                "postgresql",
+                "git",
+                "coworker-training"
+              ],
+              "achievement_keys": ["loom-time", "loom-training"],
+              "category_key": null,
+              "source_quote": "I worked as Operations Analyst at Harbor Tools from 2021-02-01 to 2024-06-30. I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them. I used Git for version control and PostgreSQL for the production database. I personally built Roster Note at Harbor Tools, a separate SQL handover checklist.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ],
+              "id": "00000000-0000-4000-8000-000000000002",
+              "hash": "76d667dd423b06a562a6d701d83ef5e5e1992a10f275e867747f8a9700bced44",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": {
+              "kind": "experience",
+              "key": "harbor-operations",
+              "title": "Operations Analyst",
+              "subtitle": "",
+              "summary": "Worked at Harbor Tools. The role included designing and building internal tools, gathering requirements from warehouse supervisors, and explaining validation failures to them.",
+              "organization": "Harbor Tools",
+              "start_date": "2021-02-01",
+              "end_date": "2024-06-30",
+              "skill_keys": [
+                "python",
+                "sql",
+                "postgresql",
+                "git",
+                "coworker-training"
+              ],
+              "achievement_keys": ["loom-time", "loom-training"],
+              "category_key": null,
+              "source_quote": "I worked as Operations Analyst at Harbor Tools from 2021-02-01 to 2024-06-30. At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I gathered Dispatch Loom requirements from warehouse supervisors and explained validation failures to them. I used Git for version control and PostgreSQL for the production database.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ]
+            },
+            "reason": "Source quotation could not be verified. Edit or reject this proposal."
+          },
+          {
+            "identity": "project:dispatch-loom",
+            "status": "REVIEW",
+            "before": {
+              "kind": "project",
+              "key": "dispatch-loom",
+              "title": "Dispatch Loom",
+              "subtitle": "Dispatch reconciliation tool",
+              "summary": "Designed and built an internal tool for reconciling dispatch records. It helped operators compare an overnight spreadsheet against a daily export and surface understandable exceptions, including warnings when the source file arrived late. The user personally wrote the Python parser and SQL checks; PostgreSQL stored production data and Git held changes. Supervisors made final dispatch decisions.",
+              "organization": "Harbor Tools",
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [
+                "python",
+                "sql",
+                "postgresql",
+                "git",
+                "coworker-training"
+              ],
+              "achievement_keys": ["loom-time", "loom-training"],
+              "category_key": null,
+              "source_quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself. The tool's purpose was reconciling dispatch records, stated another way. The operators compared the overnight spreadsheet against the daily export. The source file could arrive late and the operators preferred a visible warning. The supervisors wanted understandable exceptions, not a dashboard with unexplained colors. We kept them visible because a blank reference might need a phone call. The supervisor made the final dispatch decision. Git held the changes, and PostgreSQL stored the production data.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ],
+              "id": "00000000-0000-4000-8000-000000000003",
+              "hash": "d2c949fd2a46be7d0a1683cd4695dbc8b4c49478687f8c59079ddab83b295bdd",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": {
+              "kind": "project",
+              "key": "dispatch-loom",
+              "title": "Dispatch Loom",
+              "subtitle": "Dispatch reconciliation tool",
+              "summary": "Built an internal dispatch reconciliation tool. It reconciled overnight spreadsheet records against the daily export, with visible warnings for late source files and understandable exceptions. Ada personally wrote the Python parser and SQL checks. The supervisors made the final dispatch decision. The same tool is also called Loom, the dispatch reconciliation tool, or the checking script.",
+              "organization": "Harbor Tools",
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [
+                "python",
+                "sql",
+                "postgresql",
+                "git",
+                "coworker-training"
+              ],
+              "achievement_keys": ["loom-time", "loom-training"],
+              "category_key": null,
+              "source_quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself. The operators compared the overnight spreadsheet against the daily export. The source file could arrive late and the operators preferred a visible warning. The supervisors wanted understandable exceptions, not a dashboard with unexplained colors. The supervisor made the final dispatch decision. I was responsible for the parser and checks; I did not own the warehouse staffing budget, procurement, or the scheduling system. People used different names in conversations: Loom, dispatch reconciliation tool, or the checking script. Those names all meant Dispatch Loom.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ]
+            },
+            "reason": "Source quotation could not be verified. Edit or reject this proposal."
+          },
+          {
+            "identity": "achievement:loom-time",
+            "status": "REVIEW",
+            "before": {
+              "kind": "achievement",
+              "key": "loom-time",
+              "title": "Reduced weekly reconciliation time",
+              "subtitle": "Dispatch Loom",
+              "summary": "Reconciliation time fell from 5 hours to 2 hours per week, a 3-hour weekly reduction, measured over six weekly runs. This was a team result; the user's contribution was the parser and checks.",
+              "organization": "Harbor Tools",
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks. The six-run result remained 5 hours to 2 hours weekly; that is 3 hours saved.",
+              "uncertainties": [
+                "The result was achieved by the team; the user's individual contribution to the measured improvement is not quantified.",
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ],
+              "id": "00000000-0000-4000-8000-000000000004",
+              "hash": "d5beab0139b03a91951125cf4b90197033d5df9e41631c25cc2bea1d8c552e92",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": {
+              "kind": "achievement",
+              "key": "loom-time",
+              "title": "Reduced Dispatch Loom reconciliation time",
+              "subtitle": "",
+              "summary": "Reconciliation time fell from 5 hours to 2 hours per week, a 3-hour weekly reduction, measured over six weekly runs. This was a team result; Ada's contribution was the parser and checks. Delivery speed was not measured.",
+              "organization": "Harbor Tools",
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": ["python", "sql"],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "Dispatch Loom reduced reconciliation time from 5 hours to 2 hours per week, measured over six weekly runs. This was a team result; my contribution was the parser and checks. The six-run result remained 5 hours to 2 hours weekly; that is 3 hours saved. Delivery speed was not measured.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ]
+            },
+            "reason": "Source quotation could not be verified. Edit or reject this proposal."
+          },
+          {
+            "identity": "achievement:loom-training",
+            "status": "REVIEW",
+            "before": {
+              "kind": "achievement",
+              "key": "loom-training",
+              "title": "Trained dispatch coworkers and created a handbook",
+              "subtitle": "Dispatch Loom",
+              "summary": "Personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook containing five worked examples.",
+              "organization": "Harbor Tools",
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook. For Dispatch Loom the handbook also included five worked examples.",
+              "uncertainties": [
+                "Exact workshop dates were not provided.",
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ],
+              "id": "00000000-0000-4000-8000-000000000005",
+              "hash": "5f3ae7cbdfb6c04b6920317130877e77957a7d0bba4db340a1dfb89b12277544",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": {
+              "kind": "achievement",
+              "key": "loom-training",
+              "title": "Trained dispatch coworkers and documented Dispatch Loom",
+              "subtitle": "",
+              "summary": "Personally trained dispatch coworkers in two workshops and wrote a plain-language handbook with five worked examples. The number of coworkers is unresolved: one account says 12, while a later attendance sheet says 14.",
+              "organization": "Harbor Tools",
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": ["coworker-training"],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook. For Dispatch Loom the handbook also included five worked examples. I remember 12 coworkers at the workshops, but a later attendance sheet says 14; I cannot resolve this.",
+              "uncertainties": [
+                "The workshop attendance count is unclear: one statement gives 12 coworkers and a later attendance sheet gives 14. Workshop dates are not provided.",
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ]
+            },
+            "reason": "The workshop attendance count is unclear: one statement gives 12 coworkers and a later attendance sheet gives 14. Workshop dates are not provided. Source quotation could not be verified. Edit or reject this proposal."
+          },
+          {
+            "identity": "project:roster-note",
+            "status": "REVIEW",
+            "before": {
+              "kind": "project",
+              "key": "roster-note",
+              "title": "Roster Note",
+              "subtitle": "SQL handover checklist",
+              "summary": "Built a separate SQL handover checklist at Harbor Tools. No user count or outcome was recorded.",
+              "organization": "Harbor Tools",
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": ["sql"],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "I personally built Roster Note at Harbor Tools, a separate SQL handover checklist. No user count or outcome is recorded.",
+              "uncertainties": [
+                "No project dates, user count, or outcome were provided."
+              ],
+              "id": "00000000-0000-4000-8000-000000000006",
+              "hash": "20493d30e2dbd1633428804c894b054f406ba4b6d773f6c55f6b832f236ffc05",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": {
+              "kind": "project",
+              "key": "roster-note",
+              "title": "Roster Note",
+              "subtitle": "SQL handover checklist",
+              "summary": "Personally built a separate SQL handover checklist at Harbor Tools and documented it for the night shift. No measured impact or user count is recorded.",
+              "organization": "Harbor Tools",
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": ["sql"],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "I personally built Roster Note at Harbor Tools, a separate SQL handover checklist. No user count or outcome is recorded. I personally documented the Roster Note handover for the night shift; no measured impact is claimed.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ]
+            },
+            "reason": "Source quotation could not be verified. Edit or reject this proposal."
+          },
+          {
+            "identity": "skill:python",
+            "status": "REVIEW",
+            "before": {
+              "kind": "skill",
+              "key": "python",
+              "title": "Python",
+              "subtitle": "",
+              "summary": "Used to build the Dispatch Loom parser.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": "data-tools",
+              "source_quote": "I wrote the Python parser and SQL checks myself. My skill category is Data tools: Python, SQL and PostgreSQL.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ],
+              "id": "00000000-0000-4000-8000-000000000007",
+              "hash": "855f3bf5db58d6ddbfd82bc773844b4dc999ac4c135b24734aa144f6b517613d",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": {
+              "kind": "skill",
+              "key": "python",
+              "title": "Python",
+              "subtitle": "",
+              "summary": "Used Python to build Dispatch Loom and wrote its parser.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": "data-tools",
+              "source_quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself. My skill category is Data tools: Python, SQL and PostgreSQL.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ]
+            },
+            "reason": "Source quotation could not be verified. Edit or reject this proposal."
+          },
+          {
+            "identity": "skill:sql",
+            "status": "REVIEW",
+            "before": {
+              "kind": "skill",
+              "key": "sql",
+              "title": "SQL",
+              "subtitle": "",
+              "summary": "Used for Dispatch Loom checks and a separate handover checklist.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": "data-tools",
+              "source_quote": "I wrote the Python parser and SQL checks myself. My skill category is Data tools: Python, SQL and PostgreSQL. I personally built Roster Note at Harbor Tools, a separate SQL handover checklist.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ],
+              "id": "00000000-0000-4000-8000-000000000008",
+              "hash": "373cdd98b351af6c537f8d821468fd1ff7cb13481cbafc40b86d9e699b45d048",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": {
+              "kind": "skill",
+              "key": "sql",
+              "title": "SQL",
+              "subtitle": "",
+              "summary": "Used SQL to build Dispatch Loom and write its checks; also built the Roster Note handover checklist.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": "data-tools",
+              "source_quote": "At Harbor Tools I personally designed and built Dispatch Loom, a dispatch reconciliation tool, using Python and SQL. I wrote the Python parser and SQL checks myself. My skill category is Data tools: Python, SQL and PostgreSQL. I personally built Roster Note at Harbor Tools, a separate SQL handover checklist.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ]
+            },
+            "reason": "Source quotation could not be verified. Edit or reject this proposal."
+          },
+          {
+            "identity": "skill:postgresql",
+            "status": "REVIEW",
+            "before": {
+              "kind": "skill",
+              "key": "postgresql",
+              "title": "PostgreSQL",
+              "subtitle": "",
+              "summary": "Used as the production database for Dispatch Loom.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": "data-tools",
+              "source_quote": "My skill category is Data tools: Python, SQL and PostgreSQL. I used Git for version control and PostgreSQL for the production database.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ],
+              "id": "00000000-0000-4000-8000-000000000009",
+              "hash": "2f42e83e75fd61dbe87bc82c063775bc4411c9f0872a9e282da7bdfc456a6b5b",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": {
+              "kind": "skill",
+              "key": "postgresql",
+              "title": "PostgreSQL",
+              "subtitle": "",
+              "summary": "Used PostgreSQL for the production database.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": "data-tools",
+              "source_quote": "I used Git for version control and PostgreSQL for the production database. My skill category is Data tools: Python, SQL and PostgreSQL.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ]
+            },
+            "reason": "Source quotation could not be verified. Edit or reject this proposal."
+          },
+          {
+            "identity": "skill:git",
+            "status": "REVIEW",
+            "before": {
+              "kind": "skill",
+              "key": "git",
+              "title": "Git",
+              "subtitle": "",
+              "summary": "Used for version control on Dispatch Loom.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": "collaboration",
+              "source_quote": "My separate skill category is Collaboration: Git and coworker training. I used Git for version control.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ],
+              "id": "00000000-0000-4000-8000-000000000010",
+              "hash": "451071ae2c894dd9b32b9a20dc3944bbce869db3e4e1a8ecdc173811327278e1",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": {
+              "kind": "skill",
+              "key": "git",
+              "title": "Git",
+              "subtitle": "",
+              "summary": "Used Git for version control.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": "collaboration",
+              "source_quote": "I used Git for version control. My separate skill category is Collaboration: Git and coworker training.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ]
+            },
+            "reason": "Source quotation could not be verified. Edit or reject this proposal."
+          },
+          {
+            "identity": "skill:coworker-training",
+            "status": "REVIEW",
+            "before": {
+              "kind": "skill",
+              "key": "coworker-training",
+              "title": "Coworker training",
+              "subtitle": "",
+              "summary": "Trained dispatch coworkers in workshops and created a plain-language handbook.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": "collaboration",
+              "source_quote": "My separate skill category is Collaboration: Git and coworker training. For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops and wrote a plain-language handbook.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ],
+              "id": "00000000-0000-4000-8000-000000000011",
+              "hash": "9dfb37e4d111984e489d556c5d513279b2743354b532e60377ec60167476002e",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": {
+              "kind": "skill",
+              "key": "coworker-training",
+              "title": "Coworker training",
+              "subtitle": "",
+              "summary": "Personally trained dispatch coworkers in two workshops.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": "collaboration",
+              "source_quote": "For Dispatch Loom I personally trained 12 dispatch coworkers in two workshops. My separate skill category is Collaboration: Git and coworker training.",
+              "uncertainties": [
+                "The workshop attendance count is unclear: one statement gives 12 coworkers and a later attendance sheet gives 14.",
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ]
+            },
+            "reason": "The workshop attendance count is unclear: one statement gives 12 coworkers and a later attendance sheet gives 14. Source quotation could not be verified. Edit or reject this proposal."
+          },
+          {
+            "identity": "category:data-tools",
+            "status": "UPDATED",
+            "before": {
+              "kind": "category",
+              "key": "data-tools",
+              "title": "Data tools",
+              "subtitle": "",
+              "summary": "Skill category stated by the user.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "My skill category is Data tools: Python, SQL and PostgreSQL.",
+              "uncertainties": [],
+              "id": "00000000-0000-4000-8000-000000000012",
+              "hash": "985a40b297adaec5ab8f92abed1b53029dd8e4cb06271c07d07f02f7e8750051",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": {
+              "kind": "category",
+              "key": "data-tools",
+              "title": "Data tools",
+              "subtitle": "",
+              "summary": "",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "My skill category is Data tools: Python, SQL and PostgreSQL.",
+              "uncertainties": []
+            },
+            "reason": ""
+          },
+          {
+            "identity": "category:collaboration",
+            "status": "UPDATED",
+            "before": {
+              "kind": "category",
+              "key": "collaboration",
+              "title": "Collaboration",
+              "subtitle": "",
+              "summary": "Skill category stated by the user.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "My separate skill category is Collaboration: Git and coworker training.",
+              "uncertainties": [],
+              "id": "00000000-0000-4000-8000-000000000013",
+              "hash": "a2f8d9fb389120d5d4596a25f9604b4a81917fe994106f756167c6d41989f668",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": {
+              "kind": "category",
+              "key": "collaboration",
+              "title": "Collaboration",
+              "subtitle": "",
+              "summary": "",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "My separate skill category is Collaboration: Git and coworker training.",
+              "uncertainties": []
+            },
+            "reason": ""
+          },
+          {
+            "identity": "education:cedar-bsc",
+            "status": "UPDATED",
+            "before": {
+              "kind": "education",
+              "key": "cedar-bsc",
+              "title": "BSc in Information Systems",
+              "subtitle": "Cedar College",
+              "summary": "Earned a BSc in Information Systems at Cedar College.",
+              "organization": "Cedar College",
+              "start_date": "2017-09-01",
+              "end_date": "2020-06-30",
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "I earned a BSc in Information Systems at Cedar College from 2017-09-01 to 2020-06-30.",
+              "uncertainties": [],
+              "id": "00000000-0000-4000-8000-000000000014",
+              "hash": "def4008c31ce2527a4708150e4d5cbfee1267c7dd38a022b46bee3b9842dd6df",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": {
+              "kind": "education",
+              "key": "cedar-bsc",
+              "title": "BSc in Information Systems",
+              "subtitle": "",
+              "summary": "Earned at Cedar College.",
+              "organization": "Cedar College",
+              "start_date": "2017-09-01",
+              "end_date": "2020-06-30",
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "I earned a BSc in Information Systems at Cedar College from 2017-09-01 to 2020-06-30.",
+              "uncertainties": []
+            },
+            "reason": ""
+          },
+          {
+            "identity": "certification:cedar-sql",
+            "status": "REVIEW",
+            "before": null,
+            "after": {
+              "kind": "certification",
+              "key": "cedar-sql",
+              "title": "Cedar SQL Foundations certificate",
+              "subtitle": "",
+              "summary": "Course completion certificate.",
+              "organization": "Cedar",
+              "start_date": "2020-08-15",
+              "end_date": "2020-08-15",
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "I received the fictional Cedar SQL Foundations certificate on 2020-08-15. The certificate was a course completion, not a professional license.",
+              "uncertainties": [
+                "Source quotation could not be verified. Edit or reject this proposal."
+              ]
+            },
+            "reason": "Similar existing title has another key. Confirm identity."
+          },
+          {
+            "identity": "language:english",
+            "status": "UNCHANGED",
+            "before": {
+              "kind": "language",
+              "key": "english",
+              "title": "English",
+              "subtitle": "",
+              "summary": "Fluent.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "I speak English fluently.",
+              "uncertainties": [],
+              "id": "00000000-0000-4000-8000-000000000015",
+              "hash": "5aab4a6010309e9a3c75c1f1570dbcaf2a0531d4492164783f3e5b88e6d19bde",
+              "updated_at": "2026-10-05T00:00:00Z",
+              "published": true,
+              "archived": false
+            },
+            "after": {
+              "kind": "language",
+              "key": "english",
+              "title": "English",
+              "subtitle": "",
+              "summary": "Fluent.",
+              "organization": null,
+              "start_date": null,
+              "end_date": null,
+              "skill_keys": [],
+              "achievement_keys": [],
+              "category_key": null,
+              "source_quote": "I speak English fluently.",
+              "uncertainties": []
+            },
+            "reason": ""
+          }
+        ]
+      }
+    },
+    {
+      "variant": "E",
+      "unavailable": "Cannot score a sequential import after failed extraction. Failed outputs do not imply removals."
+    }
+  ],
+  "usage": [
+    {
+      "model": "OPENROUTER:openai/gpt-6-luna-pro",
+      "calls": 33,
+      "inputTokens": 531741,
+      "outputTokens": 225823,
+      "reportedUsd": 0.155782,
+      "unknownCostCalls": 0,
+      "failed": 0
+    },
+    {
+      "model": "COHERE:embed-v4.0",
+      "calls": 13,
+      "inputTokens": 2717,
+      "outputTokens": 0,
+      "reportedUsd": 0,
+      "unknownCostCalls": 13,
+      "failed": 0
+    },
+    {
+      "model": "OPENROUTER:openai/gpt-6-luna",
+      "calls": 2,
+      "inputTokens": 1416,
+      "outputTokens": 450,
+      "reportedUsd": 0.000368,
+      "unknownCostCalls": 0,
+      "failed": 0
+    }
+  ],
+  "latency": {
+    "p50Ms": 34085,
+    "p95Ms": 55016
+  },
+  "reservedUsd": 4.6499999999999995,
+  "calls": 53,
+  "callsByProvider": {
+    "OPENROUTER": 40,
+    "COHERE": 13
+  },
+  "missingUsageEvents": 5,
+  "unknownCostCalls": 18,
+  "providerLatency": {
+    "OPENROUTER": {
+      "p50Ms": 40258,
+      "p95Ms": 55016
+    },
+    "COHERE": {
+      "p50Ms": 472,
+      "p95Ms": 1783
+    }
+  },
+  "cleanup": [
+    {
+      "stage": "baseline",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryRecordsBefore": 0,
+      "primaryRecordsAfter": 0
+    },
+    {
+      "stage": "retrieval",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryRecordsBefore": 0,
+      "primaryRecordsAfter": 0
+    },
+    {
+      "stage": "candidates",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryRecordsBefore": 0,
+      "primaryRecordsAfter": 0
+    },
+    {
+      "stage": "confirm-E",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryRecordsBefore": 0,
+      "primaryRecordsAfter": 0
+    },
+    {
+      "stage": "end-to-end",
+      "accountRemoved": true,
+      "authRemoved": true,
+      "primaryRecordsBefore": 0,
+      "primaryRecordsAfter": 0
+    }
+  ]
+}

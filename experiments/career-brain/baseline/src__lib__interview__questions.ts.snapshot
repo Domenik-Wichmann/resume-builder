@@ -22,7 +22,7 @@ const probes = [
     id: "outcome",
     question:
       "What changed afterward? If you know the scale or time saved, what supports that estimate?",
-    terms: /\b(saved|reduced|increased|improved|result|outcome)\b/i,
+    terms: /\b(saved|reduced|increased|improved|result|outcome)\b|\d/i,
   },
   {
     id: "purpose",
@@ -59,14 +59,7 @@ export function interviewQuestions(
   );
   const candidates: InterviewQuestion[] = selected.flatMap((row) =>
     probes
-      .filter((probe) => {
-        // A department number or an explicitly unmeasured result is not outcome evidence.
-        const evidence = row.summary.replace(
-          /\b(?:no|without)\s+(?:\w+\s+){0,3}(?:results?|outcomes?|improvements?)\b/gi,
-          "",
-        );
-        return !probe.terms.test(evidence);
-      })
+      .filter((probe) => !probe.terms.test(row.summary))
       .map((probe) => {
         const relevance =
           mode === "job"

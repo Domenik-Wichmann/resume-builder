@@ -1,0 +1,109 @@
+{
+  "id": "E-sparse",
+  "purpose": "Sustained SQL versus one Docker exercise and adjacent cloud",
+  "gold": [
+    {
+      "kind": "profile",
+      "key": "profile",
+      "title": "Ada Rowan",
+      "subtitle": "",
+      "summary": "",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "My name is Ada Rowan.",
+      "uncertainties": [],
+      "aliases": ["Ada Rowan"],
+      "essential": ["Ada Rowan"],
+      "importance": "important"
+    },
+    {
+      "kind": "skill",
+      "key": "sql",
+      "title": "SQL",
+      "subtitle": "",
+      "summary": "Used SQL in production weekly for three years.",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "I wrote SQL reconciliation checks in production every week for three years at Harbor Tools.",
+      "uncertainties": [],
+      "aliases": ["SQL"],
+      "essential": ["SQL", "production", "three|3"],
+      "importance": "important"
+    },
+    {
+      "kind": "skill",
+      "key": "docker",
+      "title": "Docker",
+      "subtitle": "",
+      "summary": "Tried Docker once in a guided local exercise; no container deployment.",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": [],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "I tried Docker once in a guided local exercise and have never deployed containers.",
+      "uncertainties": [],
+      "aliases": ["Docker"],
+      "essential": ["once|one|single", "exercise|guided|local"],
+      "importance": "important"
+    },
+    {
+      "kind": "project",
+      "key": "sql-checking",
+      "title": "SQL Checking",
+      "subtitle": "",
+      "summary": "Built a local SQL checker for dispatch references.",
+      "organization": null,
+      "start_date": null,
+      "end_date": null,
+      "skill_keys": ["sql"],
+      "achievement_keys": [],
+      "category_key": null,
+      "source_quote": "I personally built a local SQL Checking project for reconciling dispatch references.",
+      "uncertainties": [],
+      "aliases": ["SQL Checking"],
+      "essential": ["SQL", "dispatch"],
+      "importance": "important"
+    }
+  ],
+  "forbidden": [
+    "AWS",
+    "Kubernetes",
+    "Python",
+    "experienced.*container",
+    "deployed containers"
+  ],
+  "sourceCharacters": 2167,
+  "sourceHash": "fd21f65bfa215a94178551f82779f1cdb3723204a9839ac30d4b7e6a75fa5a0c",
+  "provenance": [
+    {
+      "key": "profile:profile",
+      "start": 31,
+      "quote": "My name is Ada Rowan."
+    },
+    {
+      "key": "skill:sql",
+      "start": 53,
+      "quote": "I wrote SQL reconciliation checks in production every week for three years at Harbor Tools."
+    },
+    {
+      "key": "skill:docker",
+      "start": 145,
+      "quote": "I tried Docker once in a guided local exercise and have never deployed containers."
+    },
+    {
+      "key": "project:sql-checking",
+      "start": 336,
+      "quote": "I personally built a local SQL Checking project for reconciling dispatch references."
+    }
+  ]
+}
