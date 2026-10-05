@@ -3,6 +3,11 @@ import { z } from "zod";
 import { requireAccount } from "@/lib/accounts";
 import { readJson, errorResponse, HttpError, reserveAIQuota } from "@/lib/http";
 import { candidateSchema, tableFor, type Change } from "@/lib/ingestion/model";
+import {
+  explorerData,
+  manageRecords,
+} from "@/lib/career-brain/record-management";
+import { selectionFor } from "@/lib/career-brain/record-view";
 import { identity, semanticHash } from "@/lib/ingestion/diff";
 import {
   loadBrain,
@@ -67,8 +72,8 @@ const inputSchema = z.discriminatedUnion("action", [
 export async function GET() {
   try {
     const { db, accountId } = await requireAccount();
-    const [records, imports] = await Promise.all([
-      loadBrain(db, accountId),
+    const [data, imports] = await Promise.all([
+      explorerData(db, accountId),
       db
         .from("career_imports")
         .select("id,status,model,created_at,candidates")
@@ -78,7 +83,7 @@ export async function GET() {
     ]);
     if (imports.error) throw new Error("Cannot load imports.");
     return Response.json(
-      { records, imports: imports.data },
+      { ...data, imports: imports.data },
       { headers: { "Cache-Control": "no-store" } },
     );
   } catch (error) {
@@ -121,12 +126,15 @@ export async function POST(request: NextRequest) {
       );
       if (!row || row.archived)
         throw new HttpError(404, "Active career record not found.");
-      const result = await db
-        .from(tableFor[input.kind])
-        .update({ is_public: input.published })
-        .eq("id", row.id)
-        .eq("account_id", accountId);
-      if (result.error) throw new Error("Cannot change publication.");
+      await manageRecords(
+        db,
+        accountId,
+        {
+          action: input.published ? "publish" : "unpublish",
+          records: [selectionFor(row)],
+        },
+        current,
+      );
       let indexing;
       try {
         indexing = await reindexCareer(accountId);

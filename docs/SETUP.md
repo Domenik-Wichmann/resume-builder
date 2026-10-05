@@ -290,3 +290,19 @@ configured `TRIAL_CREDIT_MICRO` and `TRIAL_CREDIT_DAYS`; expiry is readiness met
 Actual credit charging and secure tenant BYOK persistence remain future work.
 Provider accounting records only quantities/model/available cost, never prompts.
 No new infrastructure project, public demo tenant or payment provider is needed.
+
+## Private canonical record management
+
+Apply `202610050011_record_management.sql` before using `/admin/explore`. The
+explorer and the canonical publication section share the same records and editor.
+Filters, connected-record details and exact claim evidence are private to the
+verified account. Bulk publication requires confirmed supporting evidence and
+checks canonical and evidence versions in one transaction.
+
+Manual corrections preserve canonical UUIDs and historical source spans. They
+create an owner-reviewed manual source and audit import in the same transaction
+as the canonical update. Edited records return to private review. Move to Trash
+archives and unpublishes; restore returns the record privately with history and
+connections retained. Publication and edits retry indexing, while public reads
+continue to reject unavailable or stale canonical evidence. Saved application
+snapshots and previously exported documents remain historical.

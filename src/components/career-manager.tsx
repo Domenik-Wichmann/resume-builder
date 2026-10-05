@@ -1,6 +1,9 @@
 ﻿"use client";
 import { useState, type FormEvent } from "react";
-import type { Candidate, Canonical, Change } from "@/lib/ingestion/model";
+import type { Candidate, Change } from "@/lib/ingestion/model";
+import type { BrainRecord } from "@/lib/career-brain/repository";
+import type { SourceSummary } from "@/lib/career-brain/record-view";
+import { CareerRecordExplorer } from "./career-record-explorer";
 import type { InterviewQuestion } from "@/lib/interview/questions";
 import type { StateClaim } from "@/lib/career-brain/state";
 import { careerSourceLimit } from "@/lib/career-brain/source";
@@ -34,12 +37,14 @@ function ClaimEvidence({ record }: { record: Candidate }) {
 export type ImportDraft = { id: string; status: string; candidates: Change[] };
 export function CareerManager({
   initialRecords,
+  initialSources,
   initialImports,
 }: {
-  initialRecords: Canonical[];
+  initialRecords: BrainRecord[];
+  initialSources: SourceSummary[];
   initialImports: ImportDraft[];
 }) {
-  const [records, setRecords] = useState<Canonical[]>(initialRecords),
+  const [records, setRecords] = useState<BrainRecord[]>(initialRecords),
     [draft, setDraft] = useState<ImportDraft | null>(null),
     [imports, setImports] = useState<ImportDraft[]>(initialImports),
     [text, setText] = useState(""),
@@ -47,6 +52,7 @@ export function CareerManager({
     [busy, setBusy] = useState(false),
     [accepted, setAccepted] = useState<number[]>([]),
     [edits, setEdits] = useState<Record<number, string>>({});
+  const [sources, setSources] = useState(initialSources);
   const [mode, setMode] = useState("general"),
     [job, setJob] = useState(""),
     [key, setKey] = useState(""),
@@ -59,6 +65,7 @@ export function CareerManager({
     const data = await r.json();
     if (!r.ok) throw new Error(data.error);
     setRecords(data.records);
+    setSources(data.sources);
     setImports(data.imports);
   }
   async function action(body: object) {
@@ -473,36 +480,13 @@ export function CareerManager({
         >
           Retry indexing
         </button>
-        {records.length === 0 && (
-          <p>No career records have been accepted yet.</p>
-        )}
-        {records.map((row) => (
-          <article className="project-card" key={row.id}>
-            <h3>{row.title}</h3>
-            <p>
-              {row.kind} · {row.key} ·{" "}
-              {row.archived
-                ? "Archived"
-                : row.published
-                  ? "Published"
-                  : "Private"}
-            </p>
-            <p>{row.summary}</p>
-            <button
-              disabled={busy || row.archived}
-              onClick={() =>
-                void action({
-                  action: "publish",
-                  kind: row.kind,
-                  key: row.key,
-                  published: !row.published,
-                })
-              }
-            >
-              {row.published ? "Unpublish" : "Publish approved record"}
-            </button>
-          </article>
-        ))}
+        <CareerRecordExplorer
+          data={{ records, sources }}
+          onChange={(next) => {
+            setRecords(next.records);
+            setSources(next.sources);
+          }}
+        />
       </section>
       {message && (
         <p className="result" role="status">
