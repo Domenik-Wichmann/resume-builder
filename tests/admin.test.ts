@@ -16,6 +16,7 @@ vi.mock("next/headers", () => ({
 import { isOwner } from "../src/lib/admin";
 import { POST as login } from "../src/app/api/admin/login/route";
 import { POST as createLink } from "../src/app/api/admin/tracking/route";
+import { POST as savePresentation } from "../src/app/api/admin/presentations/route";
 const owner = "77777777-7777-4777-8777-777777777777";
 beforeEach(() => {
   vi.stubEnv("APP_MODE", "live");
@@ -33,6 +34,24 @@ beforeEach(() => {
 });
 afterEach(() => vi.unstubAllEnvs());
 describe("owner authorization", () => {
+  it("denies contact management to anonymous visitors and non-owner users", async () => {
+    const request = () =>
+      new Request("http://localhost:3000/api/admin/presentations", {
+        method: "POST",
+        headers: {
+          origin: "http://localhost:3000",
+          "Content-Type": "application/json",
+        },
+        body: "{}",
+      });
+    expect((await savePresentation(request())).status).toBe(403);
+    mocks.cookie.mockReturnValue({ value: "other-user-jwt" });
+    mocks.getUser.mockResolvedValue({
+      data: { user: { id: "88888888-8888-4888-8888-888888888888" } },
+      error: null,
+    });
+    expect((await savePresentation(request())).status).toBe(403);
+  });
   it("checks Supabase user authority and exact owner ID, never trusting a browser token alone", async () => {
     mocks.cookie.mockReturnValue({ value: "untrusted-jwt" });
     mocks.getUser.mockResolvedValue({

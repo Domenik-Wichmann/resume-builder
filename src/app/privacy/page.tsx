@@ -47,8 +47,9 @@ export default function Privacy() {
         them from the workspace list. Demo workspaces are stored only in this
         browser’s local storage. Workspaces expire after 90 days of inactivity
         when cleanup runs; the owner can also invoke cleanup. Functional
-        US/Bulgaria presentation preferences do not request GPS or retain
-        location history.
+        US/Bulgaria contact presentation uses a verified tracking link or coarse
+        country signal. Visitors cannot select it. This does not request GPS or
+        retain location history.
       </p>
       <p>
         Questions and job descriptions in live mode are sent to Cohere for

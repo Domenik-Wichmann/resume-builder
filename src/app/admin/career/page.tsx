@@ -1,7 +1,7 @@
 ﻿import Link from "next/link";
 import { requireAccount } from "@/lib/accounts";
 import { CareerManager, type ImportDraft } from "@/components/career-manager";
-import { loadCanonical } from "@/lib/ingestion/repository";
+import { explorerData } from "@/lib/career-brain/record-management";
 import { HttpError } from "@/lib/http";
 export const dynamic = "force-dynamic";
 export const metadata = {
@@ -25,8 +25,8 @@ export default async function CareerPage() {
       </main>
     );
   }
-  const [records, imports] = await Promise.all([
-    loadCanonical(account.db, account.accountId),
+  const [data, imports] = await Promise.all([
+    explorerData(account.db, account.accountId),
     account.db
       .from("career_imports")
       .select("id,status,candidates")
@@ -40,7 +40,8 @@ export default async function CareerPage() {
       <p className="eyebrow">Private career workspace</p>
       <h1>Career Master & Interview.</h1>
       <CareerManager
-        initialRecords={records}
+        initialRecords={data.records}
+        initialSources={data.sources}
         initialImports={(imports.data || []) as ImportDraft[]}
       />
     </main>

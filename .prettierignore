@@ -2,3 +2,5 @@ node_modules
 .next
 package-lock.json
 next-env.d.ts
+local-career-ingest
+docs/from_human

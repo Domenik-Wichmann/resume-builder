@@ -20,6 +20,11 @@ export default async function Account() {
       <h1>Your career account</h1>
       <OwnerLogout endpoint="/api/auth/login" />
       <p>Your private career records are isolated by account membership.</p>
+      <p>
+        <Link className="button" href="/admin/explore">
+          Explore and edit career records
+        </Link>
+      </p>
       <Link className="button" href="/admin/career">
         Open Career Master & Interview
       </Link>

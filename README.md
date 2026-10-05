@@ -22,7 +22,7 @@ career information is an explicit publishing step.
   and conservative evidence expansion.
 - Typed Resume IR, an adaptable résumé template, and separate print/PDF or text
   workspace export. Compilation selects canonical facts using explored relevance.
-- US/Bulgaria presentations with tracking-market priority and manual selection.
+- US/Bulgaria contact presentations managed at `/admin/presentation`, selected by a verified tracking link or coarse country (BG selects Bulgaria; other/unknown countries use US). Recruiters cannot override the presentation.
 - Supabase Auth protected owner overview, question/topic inspection, and
   tracking-link generation with actual retained metrics.
 - Private short-link mappings, 48-bit random codes, anonymous landing events,

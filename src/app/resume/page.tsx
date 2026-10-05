@@ -19,6 +19,7 @@ export default async function Resume() {
         <p className="muted">
           {[
             presentation.location,
+            presentation.address,
             presentation.contact_email,
             presentation.phone,
           ]

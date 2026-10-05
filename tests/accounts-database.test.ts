@@ -29,6 +29,62 @@ beforeAll(async () => {
 afterAll(async () => {
   await db?.close();
 });
+it("saves contact variants atomically with membership isolation and optimistic versions", async () => {
+  const profile = (
+    await db.query<{ id: string }>(
+      "insert into profile(account_id,name,title,introduction) values($1,'Fixture Owner','Fixture title','Fictional test profile') returning id",
+      [primaryAccountId],
+    )
+  ).rows[0].id;
+  const settings = {
+    market: "US",
+    location: "Fixture city",
+    address: "Fictional address",
+    contact_email: "",
+    phone: "",
+    work_authorization: "",
+    photo_url: "",
+    is_public: false,
+    version: 0,
+  };
+  const save = (account: string, value = settings) =>
+    db.query<{ version: number }>(
+      "select save_profile_presentation($1,$2,$3::jsonb) as version",
+      [account, profile, JSON.stringify(value)],
+    );
+  await asUser(userA, async () => {
+    expect((await save(primaryAccountId)).rows[0].version).toBe(1);
+    await expect(save(primaryAccountId)).rejects.toThrow("STALE_PRESENTATION");
+    expect(
+      (
+        await save(primaryAccountId, {
+          ...settings,
+          version: 1,
+          is_public: true,
+        })
+      ).rows[0].version,
+    ).toBe(2);
+  });
+  await asUser(userB, async () => {
+    await expect(save(primaryAccountId)).rejects.toThrow("ACCOUNT_REQUIRED");
+    await expect(save(accountB)).rejects.toThrow("PROFILE_REQUIRED");
+    expect(
+      (
+        await db.query(
+          "select * from profile_presentations where profile_id=$1",
+          [profile],
+        )
+      ).rows,
+    ).toHaveLength(0);
+  });
+  const stored = (
+    await db.query<{ version: number; is_public: boolean }>(
+      "select version,is_public from profile_presentations where profile_id=$1",
+      [profile],
+    )
+  ).rows;
+  expect(stored).toEqual([{ version: 2, is_public: true }]);
+});
 async function asUser<T>(id: string, run: () => Promise<T>) {
   await db.query("select set_config('request.jwt.claim.sub',$1,false)", [id]);
   await db.exec("set role authenticated");

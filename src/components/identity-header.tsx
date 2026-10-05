@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Career } from "@/lib/career/model";
 import type { Presentation } from "@/lib/markets";
-import { MarketSwitch } from "./market-switch";
+
 export function IdentityHeader({
   career,
   presentation,
@@ -25,6 +25,7 @@ export function IdentityHeader({
             <small>
               {[
                 presentation.location,
+                presentation.address,
                 presentation.contact_email,
                 presentation.phone,
               ]
@@ -34,9 +35,8 @@ export function IdentityHeader({
           </span>
         </Link>
         <div className="identity-nav">
-          <Link href="/#work">Work</Link>
+          <Link href="/explore">Explore</Link>
           <Link href="/workspace">Workspaces</Link>
-          <MarketSwitch market={presentation.market} />
         </div>
       </div>
     </header>

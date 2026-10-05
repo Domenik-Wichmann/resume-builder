@@ -7,7 +7,12 @@ export function ResumeRenderer({ ir }: { ir: ResumeIR }) {
       <h1>{ir.profile.name}</h1>
       <p className="resume-title">{ir.headline}</p>
       <p className="muted">
-        {[contact.location, contact.contact_email, contact.phone]
+        {[
+          contact.location,
+          contact.address,
+          contact.contact_email,
+          contact.phone,
+        ]
           .filter(Boolean)
           .join(" · ")}
       </p>

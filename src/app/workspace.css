@@ -20,7 +20,7 @@
 .avatar {
   width: 50px;
   height: 50px;
-  background: #dce5d6;
+  background: #283b4966;
   color: var(--accent);
   display: flex;
   align-items: center;
@@ -61,7 +61,7 @@ input {
   font: inherit;
   padding: 9px;
   border: 1px solid var(--line);
-  border-radius: 4px;
+  border-radius: 10px;
   background: var(--card);
   color: var(--ink);
   max-width: 100%;
@@ -78,7 +78,7 @@ select {
   border: 1px solid var(--line);
 }
 .secondary-button:hover {
-  background: #e0e8dc;
+  background: #8870d322;
   color: var(--ink);
 }
 .workspace-return {
