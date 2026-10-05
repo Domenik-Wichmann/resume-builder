@@ -129,6 +129,8 @@
   ],
   "qa": {
     "originalTargetedQuestions": 4,
+    "directlySupportedRequestedPropositions": 1,
+    "directSupportedQuestionFalseAbstentions": 0,
     "unsupportedQualificationAffirmations": 0,
     "staleQuantityOrOwnershipAffirmations": 0,
     "supportedUnderlyingFactFalseAbstentions": 0,

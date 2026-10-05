@@ -137,8 +137,10 @@ the regenerated shape as changed career truth.
 
 Four questions cover unresolved attendance, an old accepted quantity after a new
 conflict, a superseded count, and team/personal ownership uncertainty. **0/4** stale
-or unsupported qualification affirmations, **0/4** false abstentions of the safe
-underlying facts, and **4/4** citation audits passed.
+or unsupported qualification affirmations and **4/4** citation audits passed.
+The corrected eight-report question is directly supported: **0/1** complete false
+abstentions. Safe underlying facts were retained in all four answers; unresolved
+requested quantities/ownership are not counted as supported affirmative questions.
 
 Human review caught one audience assumption that the model audit missed: “you
 trained” addressed a recruiter as the candidate. The unchanged question and

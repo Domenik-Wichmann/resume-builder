@@ -33,15 +33,22 @@ never evidence text or ownership strength. Rich factual compatibility is measure
 separately from compact old gold. Enrichment, representation-only changes, reviews,
 and false material updates must be reported separately.
 
-Native stages (run sequentially with `.env.local` in live mode):
+The commands below document the completed native stages. They already have
+ledger outcomes and refuse reruns in this namespace. The initial `sequence` failed
+closed; `sequence-repair-1` preserves the repaired native run, and
+`persistence-repair` is its zero-provider reviewed-state replay. Future native
+reproduction requires a separate namespace and a budget frozen before calls.
 
 ```powershell
 node --conditions=react-server --import tsx experiments/career-brain/v2/claim-repair/run.ts --stage=freeze
 node --conditions=react-server --import tsx --env-file=.env.local experiments/career-brain/v2/claim-repair/run.ts --stage=resume --live
 node --conditions=react-server --import tsx --env-file=.env.local experiments/career-brain/v2/claim-repair/run.ts --stage=repeat --live
-node --conditions=react-server --import tsx --env-file=.env.local experiments/career-brain/v2/claim-repair/run.ts --stage=sequence --live
+node --conditions=react-server --import tsx --env-file=.env.local experiments/career-brain/v2/claim-repair/run.ts --stage=sequence-repair-1 --live
+node --conditions=react-server --import tsx --env-file=.env.local experiments/career-brain/v2/claim-repair/run.ts --stage=historical-compact --live
+node --conditions=react-server --import tsx --env-file=.env.local experiments/career-brain/v2/claim-repair/run.ts --stage=persistence-repair --live
 node --conditions=react-server --import tsx --env-file=.env.local experiments/career-brain/v2/claim-repair/run.ts --stage=qa --live
 node --conditions=react-server --import tsx --env-file=.env.local experiments/career-brain/v2/claim-repair/run.ts --stage=fallback-canaries --live
+node --conditions=react-server --import tsx --env-file=.env.local experiments/career-brain/v2/claim-repair/run.ts --stage=qa-audience-repair --live
 ```
 
 Offline preservation check and regressions:
