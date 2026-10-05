@@ -7,15 +7,20 @@ import {
   type UsageContext,
 } from "../usage/service";
 export class ProviderError extends Error {}
+export type CompletionPart =
+  | { type: "text"; text: string }
+  | { type: "image_url"; image_url: { url: string } }
+  | { type: "file"; file: { filename: string; file_data: string } };
 export async function complete<T>(
   system: string,
-  input: string,
+  input: string | CompletionPart[],
   schema: z.ZodType<T>,
   options: {
     model?: string;
     maxTokens?: number;
     timeoutMs?: number;
     usage?: UsageContext;
+    pdf?: boolean;
   } = {},
 ): Promise<T> {
   const env = validateEnv(process.env);
@@ -34,6 +39,9 @@ export async function complete<T>(
         model: options.model || env.model,
         temperature: 0,
         max_tokens: options.maxTokens || 1800,
+        ...(options.pdf
+          ? { plugins: [{ id: "file-parser", pdf: { engine: "mistral-ocr" } }] }
+          : {}),
         messages: [
           { role: "system", content: system },
           { role: "user", content: input },

@@ -306,3 +306,38 @@ archives and unpublishes; restore returns the record privately with history and
 connections retained. Publication and edits retry indexing, while public reads
 continue to reject unavailable or stale canonical evidence. Saved application
 snapshots and previously exported documents remain historical.
+
+## Owner profile, portraits and resume design
+
+Apply `202610060001_profile_presentation_settings.sql` and
+`202610060002_owner_design_assets.sql` before deploying these owner controls.
+Personal information and portraits are at `/admin/presentation`; reusable designs
+are at `/admin/templates`. Both are linked from Manage and the owner overview.
+Name, headline and introduction edit the existing canonical profile. Market
+contact fields remain separate and versioned. Portraits start private; public
+image delivery requires both a published contact presentation that selects the
+photo and a published, active canonical profile. Reference files stay private.
+
+The private `owner-assets` bucket accepts image files or PDF references up to
+4 MB. Limits are 40 files and 30 saved designs per account. Unused files can be
+deleted; active portraits and saved template revision references are protected.
+Design revisions and original reference files are retained for review.
+
+AI reads only the explicitly selected reference and design notes. It returns a
+bounded layout specification, never executable code or career facts. The fixed
+React/CSS renderer applies that saved specification to the canonical resume and
+tailored resume previews; ordinary rendering does not call AI. The supported
+families are classic and sidebar with bounded typography, safe colors, spacing,
+A4/Letter paper and optional portraits. Arbitrary uploaded designs are approximated
+within these controls, with interpretation limitations displayed before saving.
+The template studio preview uses explicit fictional content.
+
+`OPENROUTER_TEMPLATE_MODEL` optionally overrides the ingest model for visual
+reference interpretation. The default is `OPENROUTER_INGEST_MODEL` or
+`openai/gpt-6-luna-pro`. Image inputs use `image_url`; PDF references use private
+base64 file input and OpenRouter's `mistral-ocr` parser. Inference reserves the
+existing shared quota and records provider usage, including failed calls.
+See [OpenRouter PDF input documentation](https://openrouter.ai/docs/guides/overview/multimodal/pdfs).
+If quota is unavailable, the draft is not saved or activated and manual controls
+remain usable. Browser printing is the existing PDF export mechanism; saved
+career/application snapshots remain historical.

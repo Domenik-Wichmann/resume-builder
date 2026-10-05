@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { AIPanel } from "@/components/ai-panel";
 import { getCareer } from "@/lib/career/repository";
 import { currentMarket, getPresentation } from "@/lib/market-server";
@@ -61,24 +62,36 @@ export default async function Home() {
             </div>
           </div>
           <aside className="profile-card">
-            <div
-              className="portrait"
-              aria-label="Professional photo placeholder"
-            >
-              <span>
-                {career.profile.name
-                  .split(" ")
-                  .map((part) => part[0])
-                  .join("")}
-              </span>
-              <small>PHOTO PLACEHOLDER</small>
-            </div>
+            {presentation.photo_url ? (
+              <Image
+                className="public-profile-portrait"
+                src={presentation.photo_url}
+                width={520}
+                height={600}
+                unoptimized
+                alt={`Portrait of ${career.profile.name}`}
+              />
+            ) : (
+              <div
+                className="portrait"
+                aria-label="Professional photo placeholder"
+              >
+                <span>
+                  {career.profile.name
+                    .split(" ")
+                    .map((part) => part[0])
+                    .join("")}
+                </span>
+                <small>PHOTO PLACEHOLDER</small>
+              </div>
+            )}
             <div className="profile-caption">
               <h2>{career.profile.name || "Profile not published"}</h2>
               <p>{career.profile.title}</p>
               <p>
                 {[
                   presentation.location,
+                  presentation.address,
                   presentation.contact_email,
                   presentation.phone,
                 ]

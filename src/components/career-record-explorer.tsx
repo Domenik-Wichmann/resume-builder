@@ -294,7 +294,9 @@ export function CareerRecordExplorer({
     if (!activeId) return;
     const frame = requestAnimationFrame(() => {
       const toggle = document.getElementById(`record-toggle-${activeId}`);
-      toggle?.scrollIntoView({ block: "nearest" });
+      toggle
+        ?.closest("article")
+        ?.scrollIntoView({ block: "start", behavior: "instant" });
       toggle?.focus({ preventScroll: true });
     });
     return () => cancelAnimationFrame(frame);

@@ -8,6 +8,7 @@ import {
 } from "@/lib/workspaces/browser";
 import type { Workspace } from "@/lib/workspaces/model";
 import type { ResumeIR } from "@/lib/resume-ir";
+import type { ResumeDesign } from "@/lib/resume-design/model";
 import { ResumeRenderer } from "./resume-renderer";
 import { exportWorkspaceText } from "@/lib/workspaces/export";
 import type { Market } from "@/lib/markets";
@@ -17,10 +18,12 @@ export function WorkspaceView({
   id,
   market,
   exportView = false,
+  design,
 }: {
   id: string;
   market: Market;
   exportView?: boolean;
+  design?: ResumeDesign;
 }) {
   const router = useRouter();
   const [workspace, setWorkspace] = useState<Workspace | null>(null),
@@ -217,7 +220,7 @@ export function WorkspaceView({
               Print / save résumé PDF ↗
             </button>
           </div>
-          <ResumeRenderer ir={ir} />
+          <ResumeRenderer ir={ir} design={design} />
         </section>
       )}
       <div className="workspace-grid">
