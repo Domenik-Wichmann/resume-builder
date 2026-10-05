@@ -11,7 +11,43 @@ import {
 } from "../resume-ir";
 import { retrieve } from "../career/retrieval";
 import { deduplicate } from "../career/utils";
+import {
+  assignWorkspaceSlots,
+  type WorkspaceSlot,
+  type WorkspaceSlots,
+} from "./slots";
 const storageKey = "resume-builder-demo-workspaces-v1";
+const slotsKey = "resume-builder-workspace-slots-v1";
+function storedSlots(): WorkspaceSlots {
+  try {
+    const parsed = workspaceSchema.shape.id
+      .nullable()
+      .array()
+      .length(2)
+      .parse(JSON.parse(localStorage.getItem(slotsKey) || "[]"));
+    return [parsed[0], parsed[1]];
+  } catch {
+    return [null, null];
+  }
+}
+export async function browserWorkspaceSlots(): Promise<WorkspaceSlots> {
+  const workspaces = await browserListWorkspaces();
+  const slots = assignWorkspaceSlots(
+    workspaces.map((value) => value.id),
+    storedSlots(),
+  );
+  localStorage.setItem(slotsKey, JSON.stringify(slots));
+  return slots;
+}
+export function browserRememberWorkspaceSlot(id: string, slot: WorkspaceSlot) {
+  const previous = storedSlots();
+  const slots: WorkspaceSlots = [
+    previous[0] === id ? null : previous[0],
+    previous[1] === id ? null : previous[1],
+  ];
+  slots[slot] = id;
+  localStorage.setItem(slotsKey, JSON.stringify(slots));
+}
 function demoWorkspaces(): Workspace[] {
   try {
     return workspaceSchema

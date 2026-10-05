@@ -1,5 +1,6 @@
 .owner-header {
-  background: #fff;
+  background: #0e202bdb;
+  backdrop-filter: blur(18px);
   border-bottom: 1px solid var(--line);
   position: relative;
   z-index: 30;
@@ -31,7 +32,7 @@
   display: grid;
   place-items: center;
   background: var(--accent);
-  color: #fff;
+  color: #231b1b;
   width: 38px;
   height: 38px;
   border-radius: 12px;
@@ -50,13 +51,13 @@
   cursor: pointer;
 }
 .owner-nav-links > a[aria-current="page"] {
-  background: #e9f1eb;
-  color: var(--accent);
+  background: var(--surface-hover);
+  color: var(--purple);
   font-weight: 700;
 }
 .owner-nav-links > a:hover,
 .owner-menu > summary:hover {
-  background: #f0f3ee;
+  background: var(--surface-hover);
 }
 .owner-menu {
   position: relative;
@@ -75,7 +76,7 @@
   top: calc(100% + 10px);
   right: 0;
   width: 286px;
-  background: #fff;
+  background: var(--panel);
   border: 1px solid var(--line);
   padding: 12px;
   border-radius: 14px;
@@ -89,8 +90,8 @@
 }
 .owner-menu-panel a:hover,
 .owner-menu-panel a[aria-current="page"] {
-  background: #e9f1eb;
-  color: var(--accent);
+  background: var(--surface-hover);
+  color: var(--purple);
 }
 .owner-menu-label {
   color: var(--muted);
@@ -110,7 +111,7 @@
   margin: 10px 0 16px;
 }
 .canonical-explorer {
-  --record-muted: #64716a;
+  --record-muted: var(--muted);
 }
 .record-toolbar {
   display: flex;
@@ -123,12 +124,12 @@
   align-items: center;
   gap: 12px;
   border: 1px solid var(--line);
-  background: #fff;
+  background: var(--card);
   border-radius: 12px;
   padding: 0 16px;
 }
 .record-search > span {
-  color: var(--accent);
+  color: var(--purple);
   font-size: 1.6rem;
 }
 .record-search input {
@@ -155,31 +156,31 @@
   min-height: 42px;
 }
 .record-button.secondary {
-  background: #fff;
+  background: var(--card);
   color: var(--ink);
   border: 1px solid var(--line);
 }
 .record-button.secondary:hover {
-  background: #e9f1eb;
-  border-color: #a6b9ad;
+  background: var(--surface-hover);
+  border-color: #ad98ee60;
 }
 .record-button.danger {
-  background: #fff0ed;
-  color: #963f31;
-  border: 1px solid #e7b9b0;
+  background: #c982731a;
+  color: #e6a092;
+  border: 1px solid #c9827345;
 }
 .record-button.danger:hover {
-  background: #f9ddd6;
+  background: #c9827333;
 }
 .record-text-button {
   background: none;
-  color: var(--accent);
+  color: var(--purple);
   font-size: 0.8rem;
   padding: 5px 8px;
   font-weight: 600;
 }
 .record-text-button:hover {
-  background: #e9f1eb;
+  background: var(--surface-hover);
 }
 .record-type-tabs {
   display: flex;
@@ -190,7 +191,7 @@
 .record-type-tabs button {
   background: transparent;
   color: var(--muted);
-  border: 1px solid #d7ddd3;
+  border: 1px solid var(--line);
   font-weight: 500;
   border-radius: 30px;
   font-size: 0.77rem;
@@ -199,19 +200,19 @@
 }
 .record-type-tabs button span {
   font-size: 0.68rem;
-  background: #e7ece3;
+  background: #8870d322;
   padding: 0 6px;
   border-radius: 12px;
 }
 .record-type-tabs button:hover,
 .record-type-tabs button.active {
-  color: #fff;
-  background: var(--accent);
-  border-color: var(--accent);
+  color: var(--ink);
+  background: #8870d34a;
+  border-color: var(--purple);
 }
 .record-type-tabs button.active span {
-  color: var(--accent);
-  background: #fff;
+  color: var(--purple);
+  background: var(--card);
 }
 .record-filters {
   display: grid;
@@ -234,7 +235,7 @@
   font: inherit;
   font-size: 0.85rem;
   color: var(--ink);
-  background: #fff;
+  background: var(--card);
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 10px 12px;
@@ -264,8 +265,8 @@
   align-items: center;
   gap: 12px;
   justify-content: space-between;
-  background: #e5efe7;
-  border: 1px solid #b9cebf;
+  background: #8870d322;
+  border: 1px solid #ad98ee45;
   border-radius: 12px;
   padding: 16px;
   margin-bottom: 18px;
@@ -296,7 +297,7 @@
   gap: 16px;
 }
 .canonical-card {
-  background: #fff;
+  background: var(--card);
   border: 1px solid var(--line);
   border-radius: 14px;
   overflow: hidden;
@@ -308,11 +309,11 @@
   min-width: 0;
 }
 .canonical-card:hover {
-  border-color: #96b6a1;
+  border-color: #ad98ee80;
   box-shadow: 0 8px 20px #1830250a;
 }
 .canonical-card.selected {
-  border-color: var(--accent);
+  border-color: var(--purple);
   box-shadow: 0 0 0 1px var(--accent);
 }
 .canonical-card-top {
@@ -355,7 +356,7 @@
 .record-select input,
 .record-check input,
 .record-link-picker input {
-  accent-color: var(--accent);
+  accent-color: var(--purple);
   width: 17px;
   height: 17px;
   flex-shrink: 0;
@@ -408,17 +409,17 @@
   color: var(--muted);
 }
 .canonical-card-evidence {
-  border-top: 1px solid #eef0eb;
+  border-top: 1px solid var(--line);
   padding: 11px 20px;
   display: flex;
   justify-content: space-between;
   gap: 8px;
   font-size: 0.65rem;
   color: var(--muted);
-  background: #fafbf8;
+  background: #10212c88;
 }
 .record-review-indicator {
-  color: #986625;
+  color: #ddb891;
 }
 .record-badge {
   font-size: 0.65rem;
@@ -426,33 +427,33 @@
   border-radius: 30px;
   padding: 4px 9px;
   color: var(--muted);
-  background: #edf0eb;
+  background: #283b4966;
   white-space: nowrap;
   display: inline-block;
   line-height: 1.5;
 }
 .record-badge.published,
 .record-badge.ready {
-  background: #e4f1e8;
-  color: #286142;
+  background: #3e9b8120;
+  color: #94d5c2;
 }
 .record-badge.review,
 .record-badge.trash {
-  background: #f9edd9;
-  color: #93621d;
+  background: #c982731f;
+  color: #ddb891;
 }
 .record-notice {
-  border: 1px solid #c2d9c9;
-  background: #ecf5ee;
+  border: 1px solid #3e9b8140;
+  background: #3e9b811a;
   border-radius: 10px;
   padding: 14px 18px;
   font-size: 0.85rem;
 }
 .record-notice.error,
 .record-review-note {
-  border-color: #e4bdb0;
-  background: #fff0e9;
-  color: #923e2b;
+  border-color: #c9827345;
+  background: #c982731f;
+  color: #e6a092;
 }
 .record-empty {
   padding: 64px 24px;
@@ -462,7 +463,7 @@
 }
 .record-empty > span {
   font-size: 2.5rem;
-  color: var(--accent);
+  color: var(--purple);
 }
 .record-empty h3 {
   margin: 12px 0;
@@ -482,7 +483,7 @@
   border-radius: 16px;
   padding: 0;
   color: var(--ink);
-  background: #fff;
+  background: var(--panel);
   box-shadow: 0 24px 100px #172c254d;
 }
 .record-dialog::backdrop {
@@ -508,7 +509,7 @@
   overflow-wrap: anywhere;
 }
 .record-icon-button {
-  background: #edf0eb;
+  background: #283b4966;
   color: var(--ink);
   border-radius: 50%;
   width: 34px;
@@ -566,8 +567,8 @@
   font-weight: 400;
 }
 .record-connections {
-  background: #f5f7f2;
-  border: 1px solid #e4e9de;
+  background: #10212c88;
+  border: 1px solid var(--line);
   padding: 18px;
   border-radius: 12px;
   align-self: start;
@@ -586,11 +587,11 @@
   border-radius: 8px;
   border: 1px solid var(--line);
   margin-top: 8px;
-  background: #fff;
+  background: var(--card);
   color: var(--ink);
 }
 .record-connection:hover {
-  background: #e9f1eb;
+  background: var(--surface-hover);
 }
 .record-connection small {
   display: block;
@@ -630,7 +631,7 @@
 .record-evidence > summary::before,
 .record-claim-edit > summary::before {
   content: "+";
-  color: var(--accent);
+  color: var(--purple);
   flex-shrink: 0;
 }
 .record-evidence[open] > summary::before,
@@ -648,8 +649,8 @@
   margin: 12px 0;
 }
 .record-evidence blockquote {
-  border-left: 3px solid #a4bba8;
-  background: #f7f9f4;
+  border-left: 3px solid #ad98ee60;
+  background: #10212c88;
   margin: 0;
   padding: 12px 16px;
   font-size: 0.8rem;
@@ -705,7 +706,7 @@
   font-size: 0.8rem;
 }
 .record-save-note {
-  background: #eef3e9;
+  background: #283b4966;
   padding: 14px 16px;
   border-radius: 8px;
 }
@@ -721,7 +722,7 @@
   border: 1px solid var(--line);
   border-radius: 8px;
   margin-top: 8px;
-  background: #fafbf8;
+  background: #10212c88;
 }
 .record-link-picker label {
   display: flex !important;
@@ -933,16 +934,16 @@
   font-size: 1.2rem;
   width: 26px;
   height: 26px;
-  background: #edf0eb;
+  background: #283b4966;
   border-radius: 50%;
-  color: var(--accent);
+  color: var(--purple);
 }
 .record-inline-details {
   border-top: 1px solid var(--line);
   padding: 20px 26px 28px;
 }
 .canonical-card:has(.record-inline-details) {
-  border-color: #96b6a1;
+  border-color: #ad98ee80;
 }
 @media (max-width: 640px) {
   .canonical-card-open {
