@@ -3,12 +3,56 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { database } from "../db";
 import { primaryAccountId } from "../account-id";
 import { validateEnv } from "../env";
+import { HttpError } from "../http";
+import { clearSignalContent, fixedContentSchema } from "./fixed-content";
 import {
   defaultDesign,
   designSchema,
   templateSchema,
   type OwnerAsset,
+  clearSignalDesign,
 } from "./model";
+export async function applicationTemplate(
+  db: SupabaseClient,
+  accountId: string,
+) {
+  const [content, template] = await Promise.all([
+    db
+      .from("resume_fixed_content")
+      .select("spec,version")
+      .eq("account_id", accountId)
+      .maybeSingle(),
+    db
+      .from("resume_templates")
+      .select("spec,version")
+      .eq("account_id", accountId)
+      .eq("is_default", true)
+      .maybeSingle(),
+  ]);
+  if (content.error && ["PGRST205", "42P01"].includes(content.error.code))
+    throw new HttpError(
+      503,
+      "Apply 202610060005_resume_generation.sql to enable v4 application generation and fixed-content settings.",
+    );
+  if (content.error || template.error)
+    throw new Error(
+      "Cannot load application template. Apply the résumé migrations first.",
+    );
+  return {
+    fixed: content.data
+      ? fixedContentSchema.parse({
+          ...content.data.spec,
+          version: content.data.version,
+        })
+      : accountId === primaryAccountId
+        ? clearSignalContent
+        : null,
+    design: template.data
+      ? designSchema.parse(template.data.spec)
+      : clearSignalDesign,
+    design_version: template.data?.version || 0,
+  };
+}
 export async function loadDesignStudio(db: SupabaseClient, accountId: string) {
   const [assets, templates] = await Promise.all([
     db

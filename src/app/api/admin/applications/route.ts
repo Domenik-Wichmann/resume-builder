@@ -1,24 +1,18 @@
-import { randomUUID } from "node:crypto";
 import { z } from "zod";
 import { requireAccount } from "@/lib/accounts";
-import { readJson, errorResponse, HttpError, reserveAIQuota } from "@/lib/http";
+import { readJson, errorResponse, HttpError } from "@/lib/http";
+import { applicationInput, families, outcomes } from "@/lib/applications/model";
 import {
-  applicationInput,
-  families,
-  outcomes,
-  strategies,
-} from "@/lib/applications/model";
-import { getCareer } from "@/lib/career/repository";
-import { retrieveCareerEvidence } from "@/lib/embeddings/retrieval";
-import { jobQueries } from "@/lib/embeddings/content";
-import { compileResumeIR } from "@/lib/resume-ir";
-import { compileGroundedResume } from "@/lib/career-brain/serving";
-import { newWorkspace } from "@/lib/workspaces/model";
-import { getPresentation } from "@/lib/market-server";
+  startGeneration,
+  advanceGeneration,
+  generationStatus,
+} from "@/lib/applications/generation";
+import { requireOwner } from "@/lib/admin";
 import { createTrackingCode } from "@/lib/tracking/codes";
 export const maxDuration = 300;
 export async function POST(request: Request) {
   try {
+    await requireOwner();
     const a = await requireAccount();
     const action = await readJson(
       request,
@@ -28,6 +22,16 @@ export async function POST(request: Request) {
             action: z.literal("prepare"),
             application: applicationInput,
           })
+          .strict(),
+        z
+          .object({
+            action: z.literal("generate"),
+            preview_id: z.uuid(),
+            stage: z.number().int().min(0).max(3),
+          })
+          .strict(),
+        z
+          .object({ action: z.literal("status"), preview_id: z.uuid() })
           .strict(),
         z.object({ action: z.literal("save"), preview_id: z.uuid() }).strict(),
         z
@@ -54,92 +58,26 @@ export async function POST(request: Request) {
           .strict(),
       ]),
     );
-    if (action.action === "prepare") {
-      const p = action.application;
-      await reserveAIQuota();
-      const career = await getCareer(a.accountId);
-      const evidence = await retrieveCareerEvidence(
-        jobQueries(p.job_description),
-        career,
-        { accountId: a.accountId, operation: "application_preview" },
+    if (action.action === "prepare")
+      return Response.json(await startGeneration(a, action.application), {
+        headers: { "Cache-Control": "no-store" },
+      });
+    if (action.action === "status")
+      return Response.json(await generationStatus(a, action.preview_id), {
+        headers: { "Cache-Control": "no-store" },
+      });
+    if (action.action === "generate")
+      return Response.json(
+        await advanceGeneration(a, action.preview_id, action.stage),
+        { headers: { "Cache-Control": "no-store" } },
       );
-      if (!evidence.length || !career.profile.name)
+    if (action.action === "save") {
+      const state = await generationStatus(a, action.preview_id);
+      if (state.stage !== 4)
         throw new HttpError(
           409,
-          "Publish a career profile and relevant supporting evidence before preparing an application.",
+          "Finish generation before saving this application.",
         );
-      const presentation = await getPresentation(
-        p.metadata.market,
-        a.accountId,
-      );
-      const workspace = {
-        ...newWorkspace(randomUUID(), p.metadata.market, career.demo),
-        job_description: p.job_description,
-        requirements: p.job_description
-          .split(/\n/)
-          .filter(Boolean)
-          .slice(0, 30),
-      };
-      const verified = await compileGroundedResume(
-        career,
-        { ...workspace, evidence: evidence.slice(0, 8) },
-        presentation,
-        "TRADITIONAL",
-        { accountId: a.accountId, operation: "application_preview" },
-      );
-      const options = Object.fromEntries(
-        strategies.map((strategy) => {
-          const ranked = [...evidence]
-            .sort((x, y) => {
-              const boost = (id: string) =>
-                strategy === "PROJECT_FORWARD" &&
-                career.projects.some((r) => r.id === id)
-                  ? 10
-                  : strategy === "OUTCOME_FORWARD" &&
-                      career.achievements.some((r) => r.id === id)
-                    ? 10
-                    : strategy === "TRADITIONAL" &&
-                        career.experiences.some((r) => r.id === id)
-                      ? 10
-                      : 0;
-              return boost(y.id) - boost(x.id);
-            })
-            .slice(0, 12);
-          return [
-            strategy,
-            career.demo
-              ? compileResumeIR(
-                  career,
-                  { ...workspace, evidence: ranked },
-                  presentation,
-                  strategy,
-                )
-              : {
-                  ...verified,
-                  section_order: compileResumeIR(
-                    career,
-                    { ...workspace, evidence: [] },
-                    presentation,
-                    strategy,
-                  ).section_order,
-                },
-          ];
-        }),
-      );
-      await a.db
-        .from("application_previews")
-        .delete()
-        .eq("account_id", a.accountId)
-        .lt("expires_at", new Date().toISOString());
-      const saved = await a.db
-        .from("application_previews")
-        .insert({ account_id: a.accountId, ...p, resume_options: options })
-        .select("id")
-        .single();
-      if (saved.error) throw new Error("Cannot save private preview.");
-      return Response.json({ preview_id: saved.data.id, options });
-    }
-    if (action.action === "save") {
       for (let attempt = 0; attempt < 3; attempt++) {
         const saved = await a.db.rpc("finalize_application", {
           p_account: a.accountId,

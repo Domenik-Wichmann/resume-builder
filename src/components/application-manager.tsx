@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { z } from "zod";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
@@ -12,9 +13,20 @@ import {
   type JobMetadata,
 } from "@/lib/applications/model";
 import type { applicationDashboard } from "@/lib/applications/repository";
-import type { ResumeIR } from "@/lib/resume-ir";
+import { resumeIRSchema, type ResumeIR } from "@/lib/resume-ir";
 import { ResumeRenderer } from "./resume-renderer";
+import { ResumeLengthNotice } from "./resume-length-notice";
+import { clearSignalDesign } from "@/lib/resume-design/model";
 type Dashboard = Awaited<ReturnType<typeof applicationDashboard>>;
+const responseSchema = z.object({
+  id: z.string().optional(),
+  preview_id: z.string().optional(),
+  stage: z.number().optional(),
+  label: z.string().optional(),
+  options: z.record(z.string(), resumeIRSchema).optional(),
+  review: z.array(z.string()).optional(),
+  error: z.string().optional(),
+});
 export function ApplicationManager({ data }: { data: Dashboard }) {
   const router = useRouter();
   const [organization, setOrganization] = useState(""),
@@ -33,15 +45,43 @@ export function ApplicationManager({ data }: { data: Dashboard }) {
     [name, setName] = useState(""),
     [family, setFamily] = useState(""),
     [market, setMarket] = useState("");
+  const [learning, setLearning] = useState("");
+  const [draftId, setDraftId] = useState<string | null>(null);
+  const [review, setReview] = useState<string[]>([]);
+  useEffect(() => {
+    const frame = requestAnimationFrame(() =>
+      setDraftId(localStorage.getItem("resume-application-draft")),
+    );
+    return () => cancelAnimationFrame(frame);
+  }, []);
   async function action(payload: unknown) {
     const r = await fetch("/api/admin/applications", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
-    const d = await r.json();
+    const d = responseSchema.parse(await r.json());
     if (!r.ok) throw new Error(d.error);
     return d;
+  }
+  async function continueDraft(id: string) {
+    setPreview(null);
+    let state = await action({ action: "status", preview_id: id });
+    while (state.stage !== undefined && state.stage < 4) {
+      setMessage(state.label || "Preparing your draft");
+      state = await action({
+        action: "generate",
+        preview_id: id,
+        stage: state.stage,
+      });
+    }
+    if (!state.options || state.stage !== 4)
+      throw new Error("Draft status is unavailable.");
+    setPreview({ id, options: state.options });
+    setReview(state.review || []);
+    setMessage(
+      "Private preview ready. Review the facts and gaps, then save to obtain the real tracking link before exporting.",
+    );
   }
   async function run(task: () => Promise<void>) {
     setBusy(true);
@@ -75,12 +115,13 @@ export function ApplicationManager({ data }: { data: Dashboard }) {
                   role,
                   job_description: jd,
                   metadata,
+                  learning_demo: learning || null,
                 },
               });
-              setPreview({ id: d.preview_id, options: d.options });
-              setMessage(
-                "Private preview ready. Review the generated facts before saving the immutable snapshot.",
-              );
+              if (!d.preview_id) throw new Error("Cannot start generation.");
+              setDraftId(d.preview_id);
+              localStorage.setItem("resume-application-draft", d.preview_id);
+              await continueDraft(d.preview_id);
             });
           }}
         >
@@ -123,6 +164,19 @@ export function ApplicationManager({ data }: { data: Dashboard }) {
               }}
             />
           </label>
+          <label>
+            Application-specific SystemWright learning demo (optional)
+            <input
+              type="url"
+              maxLength={2000}
+              value={learning}
+              onChange={(e) => {
+                setLearning(e.target.value);
+                setPreview(null);
+              }}
+              placeholder="https://… learning page"
+            />
+          </label>
           <button
             type="button"
             onClick={() => {
@@ -150,8 +204,16 @@ export function ApplicationManager({ data }: { data: Dashboard }) {
               </label>
             ))}
           </div>
-          <button disabled={busy}>Retrieve evidence & prepare previews</button>
+          <button disabled={busy}>Generate résumé for this job</button>
         </form>
+        {draftId && !preview && (
+          <button
+            disabled={busy}
+            onClick={() => run(() => continueDraft(draftId))}
+          >
+            Resume saved generation
+          </button>
+        )}
         <p role="status">{message}</p>
       </section>
       {preview && (
@@ -172,6 +234,21 @@ export function ApplicationManager({ data }: { data: Dashboard }) {
               The same visual template and canonical facts are used throughout.
               Preview choice does not bias experiment assignment.
             </p>
+            <p>
+              Tracking link pending: saving finalizes this application and
+              replaces every portfolio occurrence with its persisted tracking
+              URL.
+            </p>
+            {review.length > 0 && (
+              <details open>
+                <summary>Private coverage and factual review</summary>
+                <ul>
+                  {review.map((note, i) => (
+                    <li key={i}>{note}</li>
+                  ))}
+                </ul>
+              </details>
+            )}
             <button
               disabled={busy}
               onClick={() =>
@@ -181,6 +258,8 @@ export function ApplicationManager({ data }: { data: Dashboard }) {
                     preview_id: preview.id,
                   });
                   setPreview(null);
+                  setDraftId(null);
+                  localStorage.removeItem("resume-application-draft");
                   router.refresh();
                   router.push(`/admin/applications/${d.id}`);
                 })
@@ -189,6 +268,9 @@ export function ApplicationManager({ data }: { data: Dashboard }) {
               Approve previews & save snapshot / tracking link
             </button>
           </div>
+          <ResumeLengthNotice
+            design={preview.options[strategy].design || clearSignalDesign}
+          />
           <ResumeRenderer ir={preview.options[strategy]} />
         </section>
       )}

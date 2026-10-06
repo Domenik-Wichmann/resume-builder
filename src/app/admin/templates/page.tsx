@@ -2,7 +2,11 @@ import Link from "next/link";
 import { requireOwner } from "@/lib/admin";
 import { requireAccount } from "@/lib/accounts";
 import { HttpError } from "@/lib/http";
-import { loadDesignStudio } from "@/lib/resume-design/server";
+import {
+  loadDesignStudio,
+  applicationTemplate,
+} from "@/lib/resume-design/server";
+import { ResumeContentEditor } from "@/components/resume-content-editor";
 import { designPreview } from "@/lib/resume-design/preview";
 import { ResumeTemplateStudio } from "@/components/resume-template-studio";
 export const dynamic = "force-dynamic";
@@ -12,10 +16,18 @@ export const metadata = {
 };
 export default async function TemplatesPage() {
   let data;
+  let fixed = null;
+  let migrationMessage = "";
   try {
     await requireOwner();
     const a = await requireAccount();
     data = await loadDesignStudio(a.db, a.accountId);
+    try {
+      fixed = (await applicationTemplate(a.db, a.accountId)).fixed;
+    } catch (e) {
+      if (!(e instanceof HttpError) || e.status !== 503) throw e;
+      migrationMessage = e.message;
+    }
   } catch (e) {
     if (!(e instanceof HttpError) || e.status !== 403) throw e;
     return (
@@ -40,6 +52,11 @@ export default async function TemplatesPage() {
         initialTemplates={data.templates}
         preview={designPreview}
       />
+      {migrationMessage ? (
+        <p role="status">{migrationMessage}</p>
+      ) : (
+        <ResumeContentEditor initial={fixed} />
+      )}
     </main>
   );
 }

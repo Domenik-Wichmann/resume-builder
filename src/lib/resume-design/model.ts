@@ -6,6 +6,10 @@ export const designSchema = z
     font: z.enum(["SANS", "SERIF", "MONO"]),
     accent: z.string().regex(/^#[0-9a-fA-F]{6}$/),
     text: z.string().regex(/^#[0-9a-fA-F]{6}$/),
+    background: z
+      .string()
+      .regex(/^#[0-9a-fA-F]{6}$/)
+      .optional(),
     margin_mm: z.number().int().min(10).max(30),
     font_pt: z.number().int().min(9).max(13),
     spacing: z.enum(["COMPACT", "COMFORTABLE", "AIRY"]),
@@ -27,6 +31,13 @@ export const defaultDesign: ResumeDesign = {
   headings: "RULE",
   header: "LEFT",
   photo: "NONE",
+};
+export const clearSignalDesign: ResumeDesign = {
+  ...defaultDesign,
+  accent: "#21656B",
+  text: "#202D38",
+  background: "#F9F7F2",
+  spacing: "COMPACT",
 };
 export const templateSchema = z
   .object({

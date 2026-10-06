@@ -3,12 +3,36 @@ import { defaultDesign, type ResumeDesign } from "@/lib/resume-design/model";
 import { ResumeDesignFrame, ResumePortrait } from "./resume-design-frame";
 export function ResumeRenderer({
   ir,
-  design = defaultDesign,
+  design,
 }: {
   ir: ResumeIR;
   design?: ResumeDesign;
 }) {
   const contact = ir.profile.contact;
+  design = design || ir.design || defaultDesign;
+  const readable = (url: string) =>
+    url.replace(/^https:\/\//, "").replace(/\/$/, "");
+  const skills = (
+    <aside className="resume-designed-skills">
+      {design.layout === "CLASSIC"
+        ? ir.skill_groups.length > 0 && (
+            <section>
+              <h2>Technical skills</h2>
+              {ir.skill_groups.map((group) => (
+                <p key={group.label}>
+                  <strong>{group.label}:</strong> {group.skills.join(" · ")}
+                </p>
+              ))}
+            </section>
+          )
+        : ir.skill_groups.map((group) => (
+            <section key={group.label}>
+              <h2>{group.label}</h2>
+              <p>{group.skills.join(" · ")}</p>
+            </section>
+          ))}
+    </aside>
+  );
   return (
     <ResumeDesignFrame spec={design}>
       <article className="resume-sheet">
@@ -33,8 +57,28 @@ export function ResumeRenderer({
               .join(" · ")}
           </p>
           {contact.work_authorization && <p>{contact.work_authorization}</p>}
+          {ir.portfolio_url && (
+            <p className="resume-links">
+              Portfolio &amp; AI demo:{" "}
+              <a href={ir.portfolio_url}>{readable(ir.portfolio_url)}</a>
+              {ir.github_url && (
+                <>
+                  {" "}
+                  | GitHub:{" "}
+                  <a href={ir.github_url}>{readable(ir.github_url)}</a>
+                </>
+              )}
+            </p>
+          )}
+          {ir.invitation && <p className="muted">{ir.invitation}</p>}
         </header>
-        <p>{ir.summary}</p>
+        {ir.summary && (
+          <section className="resume-summary">
+            <h2>Professional summary</h2>
+            <p>{ir.summary}</p>
+          </section>
+        )}
+        {design.layout === "CLASSIC" && skills}
         <div className="resume-designed-body">
           <div className="resume-designed-main">
             {(
@@ -63,19 +107,33 @@ export function ResumeRenderer({
                           key={`${record.title}-${index}`}
                         >
                           <h3>{record.title}</h3>
-                          {record.organization && <p>{record.organization}</p>}
+                          <p className="muted">
+                            {[record.organization, record.context]
+                              .filter(Boolean)
+                              .join(" | ")}
+                          </p>
                           {record.dates.start && (
                             <p className="muted">
                               {record.dates.start} –{" "}
                               {record.dates.end || "End date not recorded"}
                             </p>
                           )}
-                          <p className="muted">{record.context}</p>
                           <ul>
                             {record.bullets.map((bullet) => (
                               <li key={bullet}>{bullet}</li>
                             ))}
                           </ul>
+                          {record.links?.length ? (
+                            <p className="resume-links">
+                              {record.links.map((link, index) => (
+                                <span key={link.label}>
+                                  {index > 0 && " | "}
+                                  {link.label}:{" "}
+                                  <a href={link.url}>{readable(link.url)}</a>
+                                </span>
+                              ))}
+                            </p>
+                          ) : null}
                         </div>
                       ))}
                     </section>
@@ -85,9 +143,10 @@ export function ResumeRenderer({
               <section>
                 <h2>Languages</h2>
                 {ir.languages?.map((record, i) => (
-                  <div className="resume-record" key={i}>
-                    <h3>{record.title}</h3>
-                    <p>{record.context}</p>
+                  <div className="resume-language" key={i}>
+                    <p>
+                      <strong>{record.title}:</strong> {record.context}
+                    </p>
                     {record.bullets.map((text, j) => (
                       <p key={j}>{text}</p>
                     ))}
@@ -96,15 +155,20 @@ export function ResumeRenderer({
               </section>
             )}
           </div>
-          <aside className="resume-designed-skills">
-            {ir.skill_groups.map((group) => (
-              <section key={group.label}>
-                <h2>{group.label}</h2>
-                <p>{group.skills.join(" · ")}</p>
-              </section>
-            ))}
-          </aside>
+          {design.layout === "SIDEBAR" && skills}
         </div>
+        {ir.closing && ir.portfolio_url && (
+          <p className="resume-closing">
+            {ir.closing}:{" "}
+            <a href={ir.portfolio_url}>{readable(ir.portfolio_url)}</a>
+            {ir.github_url && (
+              <>
+                {" "}
+                | GitHub: <a href={ir.github_url}>{readable(ir.github_url)}</a>
+              </>
+            )}
+          </p>
+        )}
       </article>
     </ResumeDesignFrame>
   );

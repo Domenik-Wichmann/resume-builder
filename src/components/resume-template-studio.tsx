@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   defaultDesign,
+  clearSignalDesign,
   type OwnerAsset,
   type ResumeTemplate,
   type ResumeDesign,
@@ -120,6 +121,19 @@ export function ResumeTemplateStudio({
       <div className="studio-controls">
         <section className="studio-section">
           <h2>Your template library</h2>
+          <button
+            disabled={busy}
+            onClick={() =>
+              setDraft({
+                ...fresh(),
+                name: "Clear Signal v4",
+                spec: clearSignalDesign,
+                is_default: true,
+              })
+            }
+          >
+            Use Clear Signal v4 base
+          </button>
           <div className="studio-library">
             {templates.map((t) => (
               <button

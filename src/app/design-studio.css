@@ -148,7 +148,7 @@
 }
 .resume-design .resume-sheet {
   /* Keep the owner's document colors readable inside the dark editing shell. */
-  background: white;
+  background: var(--resume-background, white);
   padding: var(--resume-margin);
   font-family: var(--resume-font);
   font-size: var(--resume-font-size);
@@ -163,12 +163,20 @@
   font-size: 2.4em;
   line-height: 1.15;
   margin-top: 0;
+  font-weight: 700;
+  letter-spacing: normal;
+  margin-bottom: 6pt;
 }
 .resume-design .resume-sheet h2 {
-  font-size: 1.15em;
+  font-size: 0.96em;
+  text-transform: uppercase;
   color: var(--resume-accent);
   margin-top: var(--resume-gap);
   border-color: var(--resume-accent);
+  font-weight: 700;
+  letter-spacing: normal;
+  padding-bottom: 3pt;
+  margin-bottom: 4pt;
 }
 .resume-design .resume-sheet h3 {
   font-size: 1em;
@@ -182,9 +190,37 @@
 }
 .resume-design .resume-record {
   margin: var(--resume-gap) 0;
+  break-inside: avoid;
 }
 .resume-design .resume-sheet ul {
   padding-left: 1.3em;
+  margin: 4pt 0 6pt;
+}
+.resume-design .resume-sheet a {
+  color: var(--resume-accent);
+  text-decoration: underline;
+  overflow-wrap: anywhere;
+}
+.resume-design .resume-sheet p {
+  margin: 3pt 0;
+}
+.resume-design .resume-sheet li {
+  margin-bottom: 3pt;
+}
+.resume-design .resume-record h3 {
+  margin: 3pt 0;
+}
+.resume-design .resume-sheet .resume-closing {
+  font-size: 9.5pt;
+  margin-top: 6pt;
+}
+.resume-design .resume-sheet .resume-links,
+.resume-design .resume-record .muted {
+  font-size: 9.5pt;
+}
+.resume-design {
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
 }
 .resume-designed-header {
   position: relative;
@@ -268,6 +304,18 @@
   }
 }
 @media print {
+  .portfolio-main:has(.resume-design) {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+  .resume-overflow-note {
+    display: none !important;
+  }
+  .snapshot-note {
+    display: none !important;
+  }
   .owner-header,
   .owner-nav,
   .studio-controls,

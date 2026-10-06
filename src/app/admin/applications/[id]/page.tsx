@@ -4,6 +4,10 @@ import { requireAccount } from "@/lib/accounts";
 import { resumeIRSchema } from "@/lib/resume-ir";
 import { ResumeRenderer } from "@/components/resume-renderer";
 import { PrintButton } from "@/components/print-button";
+import { withTrackingUrl } from "@/lib/resume-design/fixed-content";
+import { requireOwner } from "@/lib/admin";
+import { ResumeLengthNotice } from "@/components/resume-length-notice";
+import { defaultDesign } from "@/lib/resume-design/model";
 export const dynamic = "force-dynamic";
 export const metadata = { robots: { index: false, follow: false } };
 export default async function Application({
@@ -11,6 +15,7 @@ export default async function Application({
 }: {
   params: Promise<{ id: string }>;
 }) {
+  await requireOwner();
   const a = await requireAccount(),
     { id } = await params;
   const [app, snapshot] = await Promise.all([
@@ -32,7 +37,14 @@ export default async function Application({
     <main className="wrap portfolio-main">
       <div className="resume-toolbar">
         <Link href="/admin/applications">← Applications</Link>
-        <PrintButton />
+        {snapshot.data && (
+          <PrintButton
+            filename={`${app.data.organization}-${app.data.role}-${snapshot.data.tracking_code}-${snapshot.data.generated_at}`.replace(
+              /[^a-zA-Z0-9_-]/g,
+              "-",
+            )}
+          />
+        )}
       </div>
       <div className="snapshot-note">
         <h1>
@@ -52,9 +64,34 @@ export default async function Application({
             </a>
           </p>
         )}
+        {snapshot.data?.generation_record?.review?.length > 0 && (
+          <details>
+            <summary>Private draft review</summary>
+            <ul>
+              {(snapshot.data.generation_record.review as string[]).map(
+                (note, i) => (
+                  <li key={i}>{note}</li>
+                ),
+              )}
+            </ul>
+          </details>
+        )}
       </div>
+      {snapshot.data && (
+        <ResumeLengthNotice
+          design={
+            resumeIRSchema.parse(snapshot.data.resume_ir).design ||
+            defaultDesign
+          }
+        />
+      )}
       {snapshot.data ? (
-        <ResumeRenderer ir={resumeIRSchema.parse(snapshot.data.resume_ir)} />
+        <ResumeRenderer
+          ir={withTrackingUrl(
+            resumeIRSchema.parse(snapshot.data.resume_ir),
+            snapshot.data.tracking_code,
+          )}
+        />
       ) : (
         <p>No immutable résumé snapshot exists for this legacy application.</p>
       )}

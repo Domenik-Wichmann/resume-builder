@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { resumeUrl } from "../resume-design/fixed-content";
 export const strategies = [
   "TRADITIONAL",
   "PROJECT_FORWARD",
@@ -53,6 +54,7 @@ export const applicationInput = z
     role: z.string().trim().min(1).max(200),
     job_description: z.string().trim().min(3).max(12000),
     metadata: metadataSchema,
+    learning_demo: resumeUrl.nullable().optional(),
   })
   .strict();
 export function suggestedMetadata(

@@ -16,17 +16,18 @@ export function designStyle(input: ResumeDesign): CSSProperties {
           : "Arial, Helvetica, sans-serif",
     "--resume-accent": spec.accent,
     "--resume-text": spec.text,
+    "--resume-background": spec.background || "#FFFFFF",
     "--resume-font-size": `${spec.font_pt}pt`,
     "--resume-margin": `${spec.margin_mm}mm`,
     "--resume-gap":
       spec.spacing === "COMPACT"
-        ? "12px"
+        ? "9pt"
         : spec.spacing === "AIRY"
           ? "28px"
           : "20px",
     "--resume-leading":
       spec.spacing === "COMPACT"
-        ? "1.35"
+        ? "1.22"
         : spec.spacing === "AIRY"
           ? "1.65"
           : "1.5",
@@ -45,7 +46,7 @@ export function ResumeDesignFrame({
       className={`resume-design design-${spec.layout.toLowerCase()} headings-${spec.headings.toLowerCase()} header-${spec.header.toLowerCase()}`}
       style={designStyle(spec)}
     >
-      <style>{`@media print { @page { size: ${spec.page === "LETTER" ? "Letter" : "A4"}; margin: ${spec.margin_mm}mm; } }`}</style>
+      <style>{`@media print { body:has(.resume-design) { background: ${spec.background || "#FFFFFF"}; } @page { size: ${spec.page === "LETTER" ? "Letter" : "A4"}; margin: ${spec.margin_mm}mm; background: ${spec.background || "#FFFFFF"}; @bottom-center { content: counter(page); color: ${spec.text}; font: 9pt Arial; } } }`}</style>
       {children}
     </div>
   );
