@@ -281,11 +281,26 @@ it("passes uncertainty and exact evidence to Luna without treating follow-up que
     },
     {},
     gate,
-    ["Does he speak Mandarin?"],
+    {
+      turns: [
+        {
+          question: "Does he speak Mandarin?",
+          answer: "Untrusted earlier answer",
+          answer_truncated: false,
+          evidence_ids: ["history-only"],
+        },
+      ],
+      job_description: null,
+      requirements: [],
+      topics: [],
+    },
   );
   const sent = JSON.parse(String(vi.mocked(complete).mock.calls[0][1]));
   expect(sent.evidence).toEqual([packet]);
-  expect(sent.recent_questions).toEqual(["Does he speak Mandarin?"]);
+  expect(sent.workspace_conversation.turns[0].answer).toBe(
+    "Untrusted earlier answer",
+  );
+  expect(sent.allowed_evidence_ids).not.toContain("history-only");
   expect(complete).toHaveBeenCalledTimes(1);
 });
 it.each(["PENDING_REVIEW", "DISPUTED", "SUPERSEDED", "REMOVED"] as const)(

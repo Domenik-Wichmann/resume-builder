@@ -9,6 +9,11 @@ import { publishedPackets, answerPackets } from "../career-brain/serving";
 import type { Career } from "../career/model";
 import { measure } from "../performance";
 import { answerEvidence, answerEvidenceLimit } from "./answer-evidence";
+import {
+  workspaceConversation,
+  conversationQuery,
+  conversationEvidence,
+} from "../workspaces/conversation";
 export async function analyze(
   task: "ask" | "match",
   input: string,
@@ -17,36 +22,16 @@ export async function analyze(
   currentCareer?: Career,
 ) {
   const career = currentCareer || (await measure("career", () => getCareer()));
-  const context = workspace
-    ? {
-        job: workspace.job_description?.slice(0, 2000),
-        recent_questions: workspace.questions
-          .slice(-3)
-          .map((question) => question.question),
-        topics: [
-          ...new Set([
-            ...(workspace.interests || []),
-            ...workspace.questions.flatMap((question) =>
-              question.topics.map((topic) => topic.topic),
-            ),
-          ]),
-        ].slice(0, 8),
-      }
-    : undefined;
+  const context = workspaceConversation(workspace);
+  const referenceContext = conversationQuery(context, career);
   const queries =
     task === "match"
       ? jobQueries(input)
       : [
           input,
-          ...(context &&
-          /\b(it|that|those|them|more|same|else|though|specifically|examples|details)\b/i.test(
-            input,
-          )
+          ...(referenceContext
             ? [
-                `${input}\nExplored topics: ${context.topics.join(", ")}\nRecent questions: ${context.recent_questions.join(" ")}`.slice(
-                  0,
-                  2000,
-                ),
+                `${input}\nWorkspace context (references only):\n${referenceContext}`,
               ]
             : []),
         ];
@@ -56,7 +41,12 @@ export async function analyze(
   });
   const evidence =
     task === "ask"
-      ? answerEvidence(career, retrieved, input, queries[1])
+      ? answerEvidence(
+          career,
+          [...retrieved, ...conversationEvidence(context, career)],
+          input,
+          referenceContext,
+        )
       : retrieved.slice(0, 8);
   const ids = evidence.map((record) => record.id);
   if (task === "ask") {
@@ -73,7 +63,7 @@ export async function analyze(
             await publishedPackets(ids, usage.accountId, answerEvidenceLimit),
             usage,
             undefined,
-            queries.length > 1 ? context?.recent_questions : undefined,
+            context,
           );
     validateEvidence(result.evidence_ids, ids);
     return { mode: career.demo ? "demo" : "live", result, evidence };
@@ -93,8 +83,10 @@ export async function analyze(
       : await (async () => {
           const answer = await answerPackets(
             `Which requirements in this job are directly supported, partly supported, or not established by the candidate's evidence? Explain the limits: ${input}`,
-            await publishedPackets(ids),
+            await publishedPackets(ids, usage.accountId),
             usage,
+            undefined,
+            context,
           );
           return {
             overall_summary: answer.answer,

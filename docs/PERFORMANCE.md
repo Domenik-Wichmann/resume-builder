@@ -304,3 +304,12 @@ Raw timing-only records:
 The approved provider-stage timings are in [live AI readings](performance/live-ai-readings.jsonl).
 Deployed timings are in [initial production HTTP readings](performance/production-http-readings.jsonl)
 and [follow-up production HTTP readings](performance/production-http-repeat-readings.jsonl).
+
+Workspace follow-ups use up to eight recent question/answer exchanges, bounded
+by 12,000 text characters including role and topic context. Full private history
+remains stored; the request window is rebuilt from the server-owned workspace.
+Prior answers go only to OpenRouter as untrusted reference context. Retrieval
+uses prior questions and fresh public record labels, never prior answer prose.
+Old citations are resolved against current public career records and rechecked
+through published source packets. This adds no model pass or database read;
+answer generation remains one `openai/gpt-6-luna` call.

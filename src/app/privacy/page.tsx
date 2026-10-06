@@ -52,10 +52,14 @@ export default function Privacy() {
       </p>
       <p>
         Questions and job descriptions in live mode are sent to Cohere for
-        retrieval and OpenRouter for answer generation. These services have
-        their own data policies. Avoid submitting confidential or personal
-        information. Demo mode uses local fixtures and makes no AI provider
-        calls.
+        retrieval and OpenRouter for answer generation. To understand
+        follow-ups, OpenRouter also receives a bounded window of earlier
+        questions and answers from the same workspace, along with its job
+        description and topics. Cohere may receive earlier questions and context
+        labels, but not earlier answer text. Conversation history provides
+        context, not career proof. These services have their own data policies.
+        Avoid submitting confidential or personal information. Demo mode uses
+        local fixtures and makes no AI provider calls.
       </p>
       <p>
         Tracking events are retained for up to 90 days; cleanup runs when new

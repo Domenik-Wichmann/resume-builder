@@ -225,5 +225,64 @@ it("resolves a follow-up from questions without treating previous answer prose a
   expect(JSON.stringify(mocks.retrieve.mock.calls)).not.toContain(
     "Invented previous model prose",
   );
-  expect(mocks.answer.mock.calls[0][4]).toEqual(["Has he worked with SQL?"]);
+  expect(mocks.answer.mock.calls[0][4].turns[0]).toMatchObject({
+    question: "Has he worked with SQL?",
+    answer: "Invented previous model prose must never become proof.",
+  });
+});
+
+it("recovers fresh citations for ordinal follow-ups without a keyword gate", async () => {
+  const sql = record("sql", "Fictional second project", {
+    summary: "Fresh public evidence.",
+  });
+  mocks.retrieve.mockResolvedValue([]);
+  const workspace = newWorkspace("test", "US", false);
+  workspace.questions.push({
+    question: "List two projects",
+    answer: "1. First. 2. Second.",
+    evidence_ids: ["removed", "sql"],
+    topics: [],
+    created_at: "2026-10-06",
+  });
+  const result = await analyze(
+    "ask",
+    "And the second one?",
+    workspace,
+    {},
+    career({ projects: [sql] }),
+  );
+  expect(result.evidence).toEqual([sql]);
+  expect(mocks.packets).toHaveBeenCalledWith(
+    ["sql"],
+    undefined,
+    answerEvidenceLimit,
+  );
+  expect(mocks.answer.mock.calls[0][4].turns[0].answer).toBe(
+    "1. First. 2. Second.",
+  );
+  expect(mocks.retrieve.mock.calls[0][0]).toHaveLength(2);
+});
+it("keeps provider conversation isolated between workspaces", async () => {
+  const sql = record("sql", "SQL");
+  mocks.retrieve.mockResolvedValue([sql]);
+  const first = newWorkspace("first", "US", false);
+  first.questions.push({
+    question: "Private first question",
+    answer: "Private first answer",
+    evidence_ids: ["sql"],
+    topics: [],
+    created_at: "2026-10-06",
+  });
+  await analyze("ask", "SQL", first, {}, career({ skill_records: [sql] }));
+  await analyze(
+    "ask",
+    "SQL",
+    newWorkspace("second", "US", false),
+    {},
+    career({ skill_records: [sql] }),
+  );
+  expect(mocks.answer.mock.calls[1][4].turns).toEqual([]);
+  expect(JSON.stringify(mocks.answer.mock.calls[1])).not.toContain(
+    "Private first",
+  );
 });
