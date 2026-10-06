@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
   resolveTrackingLink,
-  recordLanding,
   createSession,
   trackingDisabled,
 } from "@/lib/tracking/service";
@@ -38,7 +37,6 @@ export async function GET(
   });
   if (!trackingDisabled(request.headers)) {
     const session = createSession(code);
-    await recordLanding(link.id, session.sessionId);
     response.cookies.set("rb_visit", session.cookie, {
       httpOnly: true,
       secure: request.nextUrl.protocol === "https:",

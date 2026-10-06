@@ -1,3 +1,4 @@
+import { PageTracker } from "@/components/page-tracker";
 import type { Metadata } from "next";
 import "./globals.css";
 import "./workspace.css";
@@ -19,6 +20,7 @@ export default function RootLayout({
           Skip to content
         </a>
         {children}
+        <PageTracker />
       </body>
     </html>
   );

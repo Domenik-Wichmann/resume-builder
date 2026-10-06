@@ -28,17 +28,19 @@ export default function Privacy() {
         days when the visitor next uses AI.
       </p>
       <p>
-        Ordinary portfolio visits do not create an analytics session. An
-        application-specific short link can set an HttpOnly, same-site cookie
-        lasting 24 hours and record a landing event tied to that application.
+        Public portfolio pages record optional page views using an HttpOnly,
+        same-site cookie lasting 24 hours. Application-specific short links
+        associate subsequent page views with that application. Demo mode and
+        signed-in owner visits are excluded.
       </p>
       <p>
         Events contain a random session identifier, event type, timestamp, and
-        link reference. The application does not store IP addresses, recruiter
-        identity, browser fingerprints, or keystrokes. Questions and topic
-        signals are saved privately when you use a live workspace, and the owner
-        can review them. Do Not Track and Global Privacy Control disable
-        tracking.
+        coarse page category, with a link reference when applicable. Query
+        strings, project identifiers and referrer URLs are not stored. The
+        application does not store IP addresses, recruiter identity, browser
+        fingerprints, or keystrokes. Questions and topic signals are saved
+        privately when you use a live workspace, and the owner can review them.
+        Do Not Track and Global Privacy Control disable tracking.
       </p>
       <p>
         Up to two workspaces are saved for an opaque browser identifier in an

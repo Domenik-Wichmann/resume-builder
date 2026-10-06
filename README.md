@@ -148,7 +148,9 @@ Redis, or custom hosting scripts are required. The canonical production domain i
   Demo workspaces remain in local storage. Inactive live workspaces are pruned
   after 90 days when cleanup runs. Live inputs use Cohere and OpenRouter, whose retention policies
   must be reviewed before publishing confidential career material.
-- Link analytics record only a random session, link, event type, and timestamp.
+- Optional public-page analytics record a random 24-hour session, coarse page
+  category, event type, timestamp, and application link when available. The private
+  `/admin/analytics` page shows visit trends, question frequency and topic signals.
   No stored IP addresses, fingerprints, identities, or keystrokes. DNT/GPC disables
   tracking. Retention cleanup deletes events older than 90 days on new writes;
   invoke the cleanup RPC for inactive portfolios that need immediate expiry.

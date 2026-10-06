@@ -32,21 +32,6 @@ export async function resolveTrackingLink(
 export async function resolveLink(code: string) {
   return (await resolveTrackingLink(code))?.id || null;
 }
-export async function recordLanding(linkId: string, sessionId: string) {
-  if (validateEnv(process.env).mode === "demo") return;
-  // Analytics are best effort; a database outage must not interrupt the portfolio visit.
-  try {
-    const db = database();
-    await db.rpc("prune_tracking_events");
-    await db.from("tracking_events").insert({
-      link_id: linkId,
-      session_id: sessionId,
-      event_type: "page_view",
-    });
-  } catch {
-    // Transport failures also preserve the redirect; no visitor data is logged.
-  }
-}
 function signature(payload: string) {
   return createHmac(
     "sha256",

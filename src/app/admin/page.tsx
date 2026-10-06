@@ -1,3 +1,4 @@
+import { loadAnalytics } from "@/lib/analytics/server";
 import Link from "next/link";
 import { isOwner } from "@/lib/admin";
 import { requireAccount } from "@/lib/accounts";
@@ -20,7 +21,7 @@ export default async function Admin() {
       </main>
     );
   const { db } = await requireAccount();
-  const [landing, workspaces, questions, events, links, topics, career] =
+  const [landing, workspaces, questions, events, links, career] =
     await Promise.all([
       db
         .from("tracking_events")
@@ -33,12 +34,11 @@ export default async function Admin() {
         .limit(20),
       db
         .from("workspace_questions")
-        .select("question,answer,created_at", { count: "exact" })
-        .order("created_at", { ascending: false })
-        .limit(20),
+        .select("id", { count: "exact", head: true }),
       db
         .from("workspace_events")
         .select("event_type")
+        .order("created_at", { ascending: false })
         .in("event_type", ["resume_preview", "workspace_export"])
         .limit(10000),
       db
@@ -46,35 +46,15 @@ export default async function Admin() {
         .select("code,label,market,active")
         .order("created_at", { ascending: false })
         .limit(20),
-      db
-        .from("question_topics")
-        .select("topic,evidence_strength,question_id")
-        .limit(10000),
       db.from("projects").select("title,is_public").limit(20),
     ]);
   if (
-    [landing, workspaces, questions, events, links, topics, career].some(
+    [landing, workspaces, questions, events, links, career].some(
       (result) => result.error,
     )
   )
     throw new Error("Cannot load owner overview.");
-  const topicCounts = new Map<
-    string,
-    { asked: number; none: number; partial: number; strong: number }
-  >();
-  for (const row of topics.data || []) {
-    const value = topicCounts.get(row.topic) || {
-      asked: 0,
-      none: 0,
-      partial: 0,
-      strong: 0,
-    };
-    value.asked++;
-    if (row.evidence_strength === "NONE") value.none++;
-    if (row.evidence_strength === "PARTIAL") value.partial++;
-    if (row.evidence_strength === "STRONG") value.strong++;
-    topicCounts.set(row.topic, value);
-  }
+  const analytics = await loadAnalytics(30, false);
   return (
     <main id="main" className="wrap admin-main">
       <div className="workspace-top">
@@ -107,7 +87,7 @@ export default async function Admin() {
       </section>
       <section id="overview" className="admin-metrics">
         {[
-          ["Tracked landing events", landing.count || 0],
+          ["Tracked page views", landing.count || 0],
           ["Saved workspaces", workspaces.count || 0],
           ["Questions saved", questions.count || 0],
           [
@@ -130,9 +110,11 @@ export default async function Admin() {
         ))}
       </section>
       <p className="muted">
-        Ordinary site visits and completed browser PDF saves are not measured.
-        Export opens do not prove a file was downloaded. Counts reflect retained
-        records.
+        Public page views are tracked from the analytics update onward, except
+        when privacy signals or signed-in owner access disable tracking.
+        Historical visits reflect short-link landings only. Completed browser
+        PDF saves are not measured. Export opens do not prove a file was
+        downloaded. Counts reflect retained records.
       </p>
       <section id="applications" className="section admin-grid">
         <TrackingLinkForm />
@@ -158,43 +140,49 @@ export default async function Admin() {
         ))}
       </section>
       <section id="questions" className="section">
-        <h2>Questions & topic signals</h2>
-        <div className="table-scroll">
-          <table>
-            <thead>
-              <tr>
-                <th>Topic</th>
-                <th>Asked</th>
-                <th>Strong</th>
-                <th>Partial</th>
-                <th>No evidence</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[...topicCounts]
-                .sort((a, b) => b[1].asked - a[1].asked)
-                .map(([topic, count]) => (
-                  <tr key={topic}>
-                    <td>{topic}</td>
-                    <td>{count.asked}</td>
-                    <td>{count.strong}</td>
-                    <td>{count.partial}</td>
-                    <td>{count.none}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
+        <div className="workspace-top">
+          <div>
+            <h2>Questions & topic signals</h2>
+            <p className="muted">A quick look at the last 30 days.</p>
+          </div>
+          <Link className="text-link" href="/admin/analytics">
+            View all analytics ?
+          </Link>
         </div>
-        <p className="muted">
-          These are evidence signals in up to 10,000 retained topic rows, not
-          proof of skill gaps.
-        </p>
-        {questions.data?.map((question, index) => (
-          <article className="question-answer" key={index}>
-            <h3>{question.question}</h3>
-            <p>{question.answer}</p>
+        <div className="admin-grid">
+          <article className="project-card">
+            <h3>Most asked questions</h3>
+            {analytics.summary.questions.length ? (
+              <ol>
+                {analytics.summary.questions.slice(0, 3).map((q) => (
+                  <li key={q.label}>
+                    {q.label} <span className="muted">? {q.count} asked</span>
+                  </li>
+                ))}
+              </ol>
+            ) : (
+              <p className="muted">No questions saved yet.</p>
+            )}
           </article>
-        ))}
+          <article className="project-card">
+            <h3>Top topics</h3>
+            {analytics.summary.topics.length ? (
+              <ol>
+                {analytics.summary.topics.slice(0, 3).map((t) => (
+                  <li key={t.label}>
+                    {t.label}{" "}
+                    <span className="muted">? {t.count} questions</span>
+                  </li>
+                ))}
+              </ol>
+            ) : (
+              <p className="muted">No topic signals yet.</p>
+            )}
+          </article>
+        </div>
+        {analytics.truncated && (
+          <p className="muted">Highlights use up to 10,000 rows per source.</p>
+        )}
       </section>
       <section id="career" className="section">
         <h2>Career data foundation</h2>

@@ -585,3 +585,102 @@ it("isolates every new table and rejects cross-account workflow/usage references
     ),
   ).rejects.toThrow("CROSS_ACCOUNT_REFERENCE");
 });
+
+it("records direct visits atomically, bounds duplicates, and keeps analytics private", async () => {
+  const session = randomUUID();
+  await db.exec("set role service_role");
+  try {
+    const results = await Promise.all([
+      db.query<{ recorded: boolean }>(
+        "select record_portfolio_page_view($1,'/',null) recorded",
+        [session],
+      ),
+      db.query<{ recorded: boolean }>(
+        "select record_portfolio_page_view($1,'/',null) recorded",
+        [session],
+      ),
+    ]);
+    expect(results.map((r) => r.rows[0].recorded).sort()).toEqual([
+      false,
+      true,
+    ]);
+    await expect(
+      db.query("select record_portfolio_page_view($1,'/admin',null)", [
+        session,
+      ]),
+    ).rejects.toThrow("INVALID_PAGE_VIEW");
+    await expect(
+      db.query("select record_portfolio_page_view($1,'/',$2)", [
+        session,
+        randomUUID(),
+      ]),
+    ).rejects.toThrow("INVALID_TRACKING_LINK");
+  } finally {
+    await db.exec("reset role");
+  }
+  await asUser(userB, async () => {
+    expect(
+      (
+        await db.query("select id from tracking_events where session_id=$1", [
+          session,
+        ])
+      ).rows,
+    ).toHaveLength(0);
+    await expect(
+      db.query("select record_portfolio_page_view($1,'/',null)", [session]),
+    ).rejects.toThrow("permission denied");
+  });
+  await asUser(userA, async () => {
+    expect(
+      (
+        await db.query("select id from tracking_events where session_id=$1", [
+          session,
+        ])
+      ).rows,
+    ).toHaveLength(1);
+  });
+  await db.exec("set role anon");
+  try {
+    await expect(db.query("select * from tracking_events")).rejects.toThrow(
+      "permission denied",
+    );
+  } finally {
+    await db.exec("reset role");
+  }
+});
+
+it("caps public views per session and prunes expired analytics on successful writes", async () => {
+  const session = randomUUID(),
+    expired = randomUUID();
+  await db.query(
+    "insert into tracking_events(account_id,session_id,event_type,page_path,created_at) select $1,$2,'page_view','/',now()-interval '10 seconds' from generate_series(1,500)",
+    [a, session],
+  );
+  await db.query(
+    "insert into tracking_events(account_id,session_id,event_type,page_path,created_at) values($1,$2,'page_view','/',now()-interval '91 days')",
+    [a, expired],
+  );
+  await db.exec("set role service_role");
+  try {
+    expect(
+      (
+        await db.query<{ recorded: boolean }>(
+          "select record_portfolio_page_view($1,'/resume',null) recorded",
+          [session],
+        )
+      ).rows[0].recorded,
+    ).toBe(false);
+    await db.query("select record_portfolio_page_view($1,'/explore',null)", [
+      randomUUID(),
+    ]);
+  } finally {
+    await db.exec("reset role");
+  }
+  expect(
+    (
+      await db.query("select id from tracking_events where session_id=$1", [
+        expired,
+      ])
+    ).rows,
+  ).toHaveLength(0);
+});

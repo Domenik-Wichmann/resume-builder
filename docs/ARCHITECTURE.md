@@ -108,8 +108,17 @@ foundations. `readSession()` validates signatures and expiry. Browser privacy
 signals suppress optional tracking. A shared
 forwarded link identifies link engagement, not a particular person.
 
+`/api/tracking` accepts only bounded, same-origin public page categories. It
+uses signed HttpOnly 24-hour cookies, resolves active links in the primary
+account, and excludes verified owner traffic and DNT/GPC. The service-only
+`record_portfolio_page_view` RPC suppresses repeated same-page writes within
+five seconds and caps a session at 500 views per rolling day. Direct visits
+have a null link; no query strings, project slugs or referrers are stored.
+The private Analytics page verifies the configured owner and reads through
+their Supabase JWT and membership RLS.
+
 `prune_tracking_events()` deletes records older than 90 days and is called on
-new tracked landings. For a silent portfolio the owner should invoke it manually
+new page-view writes. For a silent portfolio the owner should invoke it manually
 or enable a Supabase scheduled task if strict continuous expiry is required.
 
 ## Verification and hosting

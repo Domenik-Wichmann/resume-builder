@@ -35,6 +35,7 @@ export function AdminNav() {
       </Link>
       <div className="owner-nav-links">
         {link("/admin", "Overview")}
+        {link("/admin/analytics", "Analytics")}
         {link("/admin/explore", "Explorer")}
         <details
           ref={menu}
@@ -62,7 +63,7 @@ export function AdminNav() {
             <span className="owner-menu-label">Overview sections</span>
             {link("/admin#applications", "Tracking links")}
             {link("/admin#workspaces", "Workspaces")}
-            {link("/admin#questions", "Questions & signals")}
+            {link("/admin/analytics#questions", "Questions & signals")}
             <span className="owner-menu-label">Public site</span>
             {link("/", "View portfolio ↗")}
           </div>

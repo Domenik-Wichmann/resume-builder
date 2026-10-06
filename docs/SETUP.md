@@ -134,9 +134,18 @@ Supabase's built-in email service only delivers to project team members; configu
 custom SMTP before enabling recovery for other existing accounts. Auth email
 rate limits remain enforced by Supabase.
 
-The owner area shows measured retained counts, recent questions/workspaces,
-topic signals, and tracking-link creation. Completed PDF saves and ordinary
-untracked visits are not claimed as measured metrics.
+The owner overview shows retained counts, recent workspaces, tracking links,
+and three leading questions/topics. `/admin/analytics` provides 7/30/90-day UTC
+charts for page views and questions, browser sessions, source attribution,
+page categories, topic evidence strength and recent Q&A. Apply
+`202610060004_portfolio_analytics.sql` before deploying this update. It allows
+unattributed visits and adds a service-only page-view RPC. Public-page views
+are recorded through `/api/tracking` after a page opens, including direct visits;
+short-link redirects set attribution but no longer count an additional view.
+Demo mode, signed-in owners and DNT/GPC traffic are excluded. Historical traffic
+contains only short-link landing events. Completed PDF saves are not measured.
+Chart detail is bounded to 10,000 rows per source, with an explicit notice when
+truncated; page-view and question totals remain exact for the selected period.
 
 Create a private `job_applications` record, then run:
 
