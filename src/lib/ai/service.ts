@@ -8,6 +8,7 @@ import type { UsageContext } from "../usage/service";
 import { publishedPackets, answerPackets } from "../career-brain/serving";
 import type { Career } from "../career/model";
 import { measure } from "../performance";
+import { answerEvidence, answerEvidenceLimit } from "./answer-evidence";
 export async function analyze(
   task: "ask" | "match",
   input: string,
@@ -37,7 +38,10 @@ export async function analyze(
       ? jobQueries(input)
       : [
           input,
-          ...(context && /\b(it|that|those|them|more|same)\b/i.test(input)
+          ...(context &&
+          /\b(it|that|those|them|more|same|else|though|specifically|examples|details)\b/i.test(
+            input,
+          )
             ? [
                 `${input}\nExplored topics: ${context.topics.join(", ")}\nRecent questions: ${context.recent_questions.join(" ")}`.slice(
                   0,
@@ -50,7 +54,10 @@ export async function analyze(
     ...usage,
     operation: usage.operation || task,
   });
-  const evidence = retrieved.slice(0, 8);
+  const evidence =
+    task === "ask"
+      ? answerEvidence(career, retrieved, input, queries[1])
+      : retrieved.slice(0, 8);
   const ids = evidence.map((record) => record.id);
   if (task === "ask") {
     const result =
@@ -61,7 +68,13 @@ export async function analyze(
               : "No relevant evidence is currently stored.",
             evidence_ids: ids,
           }
-        : await answerPackets(input, await publishedPackets(ids), usage);
+        : await answerPackets(
+            input,
+            await publishedPackets(ids, usage.accountId, answerEvidenceLimit),
+            usage,
+            undefined,
+            queries.length > 1 ? context?.recent_questions : undefined,
+          );
     validateEvidence(result.evidence_ids, ids);
     return { mode: career.demo ? "demo" : "live", result, evidence };
   }

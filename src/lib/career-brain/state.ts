@@ -198,7 +198,7 @@ export async function selectClaims(
       ),
       selectionSchema,
       {
-        model: "openai/gpt-6-luna-pro",
+        model: "openai/gpt-6-luna",
         maxTokens: 12000,
         timeoutMs: 180000,
         usage: { ...usage, accountId, operation: "career_resume_admission" },

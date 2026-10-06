@@ -1,8 +1,9 @@
 import { z } from "zod";
+export const answerEvidenceLimit = 12;
 export const answerSchema = z
   .object({
     answer: z.string().max(5000),
-    evidence_ids: z.array(z.string()).max(8),
+    evidence_ids: z.array(z.string()).max(answerEvidenceLimit),
   })
   .strict();
 export const matchSchema = z

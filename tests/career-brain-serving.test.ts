@@ -1,6 +1,8 @@
 import { readFile } from "node:fs/promises";
 import { beforeEach, it, expect, vi } from "vitest";
 import { complete } from "../src/lib/ai/openrouter";
+import { z } from "zod";
+import { answerSchema } from "../src/lib/ai/contracts";
 import {
   compilePacketResume,
   answerPackets,
@@ -37,16 +39,11 @@ async function input() {
   };
 }
 beforeEach(() => vi.mocked(complete).mockReset());
-it("audits original citations before cleaning public prose and preserves structured evidence IDs", async () => {
+it("answers with exactly one Luna call and preserves structured evidence IDs when cleaning public prose", async () => {
   const q = await input();
   const id = "057c18d5-d70a-4fff-9ccc-d1ca94e02e99";
   const answer = { answer: `Used SQL [${id}].`, evidence_ids: [id] };
-  vi.mocked(complete)
-    .mockResolvedValueOnce({
-      decisions: [{ id, support: "SUPPORTS", reason: "Synthetic fixture" }],
-    })
-    .mockResolvedValueOnce(answer)
-    .mockResolvedValueOnce({ verdict: "PASS", reason: "Synthetic fixture" });
+  vi.mocked(complete).mockResolvedValueOnce(answer);
   const result = await answerPackets(
     "SQL?",
     {
@@ -60,10 +57,58 @@ it("audits original citations before cleaning public prose and preserves structu
     {},
     gate,
   );
+  expect(complete).toHaveBeenCalledTimes(1);
+  for (const call of vi.mocked(complete).mock.calls)
+    expect(call[3]?.model).toBe("openai/gpt-6-luna");
+  const schema = vi.mocked(complete).mock.calls[0][2];
+  expect(schema.safeParse(answer).success).toBe(true);
   expect(
-    JSON.parse(String(vi.mocked(complete).mock.calls[2][1])).answer,
-  ).toEqual(answer);
+    schema.safeParse({ ...answer, evidence_ids: ["not-in-context"] }).success,
+  ).toBe(false);
   expect(result).toEqual({ answer: "Used SQL.", evidence_ids: [id] });
+});
+it("allows a complete twelve-record career overview and constrains the provider schema to its verified IDs", async () => {
+  const q = await input();
+  const packets = Array.from({ length: 12 }, (_, index) => ({
+    ...q.packet,
+    id: `fictional-role-${index}`,
+  }));
+  const ids = packets.map((packet) => packet.id);
+  const answer = { answer: "Fictional career overview.", evidence_ids: ids };
+  vi.mocked(complete).mockResolvedValueOnce(answer);
+  const result = await answerPackets(
+    "What jobs has he done?",
+    {
+      actor: {
+        name: "Fictional candidate",
+        aliases: [],
+        firstPersonOwner: true,
+      },
+      packets,
+    },
+    {},
+    gate,
+  );
+  const call = vi.mocked(complete).mock.calls[0];
+  const schema = call[2];
+  expect(schema.safeParse(answer).success).toBe(true);
+  expect(answerSchema.safeParse(result).success).toBe(true);
+  expect(
+    answerSchema.safeParse({ ...answer, evidence_ids: [...ids, "extra"] })
+      .success,
+  ).toBe(false);
+  expect(
+    schema.safeParse({ ...answer, evidence_ids: ["fictional-source-id"] })
+      .success,
+  ).toBe(false);
+  const jsonSchema = z.toJSONSchema(schema);
+  expect(jsonSchema.properties?.evidence_ids).toMatchObject({
+    maxItems: 12,
+    items: { enum: ids },
+  });
+  expect(JSON.parse(String(call[1])).allowed_evidence_ids).toEqual(ids);
+  expect(call[0]).toContain("source_id and relatedIds are not citation IDs");
+  expect(call[0]).toContain("concrete example or location");
 });
 it("MANUAL silence cannot archive unrelated approved career records", async () => {
   const data = JSON.parse(
@@ -151,6 +196,9 @@ it("renders only independently verified admitted claims; summaries, sibling warn
   expect(ir.headline).toBe("");
   expect(ir.summary).toBe("");
   expect(JSON.stringify(ir)).not.toContain("Invented warning");
+  expect(complete).toHaveBeenCalledTimes(3);
+  for (const call of vi.mocked(complete).mock.calls)
+    expect(call[3]?.model).toBe("openai/gpt-6-luna");
 });
 it("withholds all bullets when the verifier is unavailable, including the single-claim fallback", async () => {
   const q = await input();
@@ -192,37 +240,86 @@ it("withholds all bullets when the verifier is unavailable, including the single
   );
   expect(ir.projects).toEqual([]);
 });
-it("fails closed on unsupported Q&A even when a broad related packet was retrieved", async () => {
+it("rejects answer citations outside the freshly verified context without a model audit", async () => {
   const q = await input();
   vi.mocked(complete).mockResolvedValueOnce({
-    decisions: [
+    answer: "Fictional answer with an unauthorized citation.",
+    evidence_ids: ["not-in-context"],
+  });
+  await expect(
+    answerPackets(
+      "Was a warning implemented?",
       {
-        id: q.packet.id,
-        support: "RELATED_ONLY",
-        reason: "preference is not implementation",
+        actor: { name: "Ada", aliases: [], firstPersonOwner: true },
+        packets: [q.packet],
       },
-    ],
-  });
-  vi.mocked(complete).mockResolvedValueOnce({
-    answer: "Implemented a warning",
-    evidence_ids: [q.packet.id],
-  });
-  vi.mocked(complete).mockResolvedValueOnce({
-    verdict: "FAIL",
-    reason: "Unsupported implementation",
-  });
-  const result = await answerPackets(
-    "Was a warning implemented?",
-    {
-      actor: { name: "Ada", aliases: [], firstPersonOwner: true },
-      packets: [q.packet],
-    },
-    { accountId: "test" },
-    gate,
-  );
-  expect(result.evidence_ids).toEqual([]);
-  expect(result.answer).not.toContain("Implemented");
+      { accountId: "test" },
+      gate,
+    ),
+  ).rejects.toThrow("AI cited evidence outside the supplied context.");
+  expect(complete).toHaveBeenCalledTimes(1);
 });
+it("passes uncertainty and exact evidence to Luna without treating follow-up questions as proof", async () => {
+  const q = await input();
+  const packet = {
+    ...q.packet,
+    uncertainties: ["Fictional proficiency is not established."],
+  };
+  vi.mocked(complete).mockResolvedValueOnce({
+    answer: "Fictional proficiency is not established.",
+    evidence_ids: [packet.id],
+  });
+  await answerPackets(
+    "How did he learn it?",
+    {
+      actor: {
+        name: "Fictional candidate",
+        aliases: [],
+        firstPersonOwner: true,
+      },
+      packets: [packet],
+    },
+    {},
+    gate,
+    ["Does he speak Mandarin?"],
+  );
+  const sent = JSON.parse(String(vi.mocked(complete).mock.calls[0][1]));
+  expect(sent.evidence).toEqual([packet]);
+  expect(sent.recent_questions).toEqual(["Does he speak Mandarin?"]);
+  expect(complete).toHaveBeenCalledTimes(1);
+});
+it.each(["PENDING_REVIEW", "DISPUTED", "SUPERSEDED", "REMOVED"] as const)(
+  "does not call providers when all claim evidence is %s",
+  async (availability) => {
+    const q = await input();
+    const result = await answerPackets(
+      "What was implemented?",
+      {
+        actor: {
+          name: "Fictional candidate",
+          aliases: [],
+          firstPersonOwner: true,
+        },
+        packets: [
+          {
+            ...q.packet,
+            claims: q.packet.claims.map((claim) => ({
+              ...claim,
+              availability,
+            })),
+          },
+        ],
+      },
+      {},
+      gate,
+    );
+    expect(result).toEqual({
+      answer: "No relevant evidence is currently stored.",
+      evidence_ids: [],
+    });
+    expect(complete).not.toHaveBeenCalled();
+  },
+);
 it("never calls providers for legacy records with no claim-level proof", async () => {
   const q = await input();
   const result = await answerPackets(

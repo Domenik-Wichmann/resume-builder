@@ -27,9 +27,10 @@ export type EvidencePacket = {
 export function packets(
   records: RichCanonical[],
   ids: string[],
+  limit = 8,
 ): EvidencePacket[] {
   const publicRecords = records.filter((r) => r.published && !r.archived);
-  return ids.slice(0, 8).flatMap((id) => {
+  return ids.slice(0, Math.max(0, Math.min(limit, 12))).flatMap((id) => {
     const r = publicRecords.find((r) => r.id === id);
     if (!r) return [];
     const related = publicRecords

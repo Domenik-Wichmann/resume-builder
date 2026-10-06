@@ -5,6 +5,52 @@ Public career loading now uses one database HTTP request instead of nineteen.
 The 300 ms target is **not an unconditional end-to-end guarantee**: cold starts,
 network outliers, and uncached provider calls remain.
 
+## Single-call Luna update — 6 October 2026
+
+Q&A and job matching now use **one `openai/gpt-6-luna` call** to answer from
+freshly verified source packets. The separate support-classification call and
+independent answer audit were removed at the user's request. Source hashes,
+publication, exact quote offsets, availability, shared quota, and allowed
+citation IDs are still checked in application code. Final prose no longer has
+an independent model audit. Public resume generation also uses Luna for claim
+selection and bullet verification, while keeping its claim-level checks.
+
+The same approved software-engineering benchmark question succeeded in all
+three measured versions:
+
+| Answer pipeline         | Full operation ms | Inference stages                 |
+| ----------------------- | ----------------: | -------------------------------- |
+| Historical Pro/Luna/Pro |          37,914.8 | 17,214.2 + 5,598.8 + 12,824.6 ms |
+| Two Luna calls          |          26,948.5 | 12,022.8 + 12,790.8 ms           |
+| Final single Luna call  |          13,563.7 | 11,244.2 ms                      |
+
+The final sample took **64% less time** than the historical three-call sample.
+These are individual live-provider observations from the development machine,
+not medians or a controlled model-quality comparison. The current context and
+answer prompts also provide broader career coverage than the historical run;
+provider latency and output length vary. No provider responses or evidence text
+are retained in the timing artifacts.
+
+| Final single-call stage                      | Measured ms |
+| -------------------------------------------- | ----------: |
+| Initial career load                          |       328.8 |
+| Cohere request                               |       338.1 |
+| Embedding including usage accounting         |       445.0 |
+| Fresh vector search                          |       101.0 |
+| Retrieval including embedding and search     |       553.9 |
+| Fresh evidence recheck                       |       217.6 |
+| Shared quota reservations, combined          |     1,202.5 |
+| Usage writes, combined                       |       223.9 |
+| LLM fetch and body time                      |    11,112.2 |
+| Answer generation including usage accounting |    11,244.2 |
+| Complete answer operation                    |    13,563.7 |
+
+Spans overlap and must not be added. This benchmark still excludes saved
+workspace loading/persistence, browser paint, and deployed HTTP transport.
+The 300 ms target remains exceeded by uncached embedding and some cold or
+contended operations. New raw records: [two-call Luna](performance/live-luna-two-call-readings.jsonl)
+and [single-call Luna](performance/live-luna-single-call-readings.jsonl).
+
 ## Deployed production verification
 
 The release is pushed to `main` as `e616cfc60096cd81e949658c838396a9873fa117`.
@@ -132,7 +178,7 @@ calls, produced these warm HTTP medians:
 These demo results must not be presented as live AI latency. The first demo
 homepage response still took 356.6 ms.
 
-## Approved live AI benchmark
+## Historical approved three-call AI benchmark
 
 The subsequently approved live answer benchmark completed successfully in
 **37,914.8 ms** from the development machine. It reserved the existing shared
@@ -190,7 +236,9 @@ responses are not included. Repeated labels aggregate time within the request.
 | `total`                                            | Complete handler through cleanup                                      | 37,914.8 ms answer; saved-workspace persistence excluded           |
 
 Nested spans overlap: do not add every header to calculate elapsed time.
-The answer pipeline contains three sequential LLM calls. Résumé compilation has
+The historical benchmark used three sequential LLM calls; current Q&A uses one
+Luna call and no longer emits `support_adjudication` or `answer_faithfulness`.
+Résumé compilation has
 additional claim selection, composition, verification, and possible fallback
 verification. The answer stages were measured; live resume compilation was not benchmarked.
 
