@@ -5,12 +5,58 @@ Public career loading now uses one database HTTP request instead of nineteen.
 The 300 ms target is **not an unconditional end-to-end guarantee**: cold starts,
 network outliers, and uncached provider calls remain.
 
+## Deployed production verification
+
+The release is pushed to `main` as `e616cfc60096cd81e949658c838396a9873fa117`.
+GitHub [release CI](https://github.com/Domenik-Wichmann/resume-builder/actions/runs/37396781124)
+passed. Vercel deployment `dpl_pszzLDRYhuo19T4mxcFESDsNNdaQ` is ready and
+serves [the production site](https://resume-builder-amber-sigma.vercel.app).
+Inspection confirms **all deployed server functions use Dublin (`dub1`)**,
+beside the linked Ireland Supabase project. The build machine remains in
+Washington; that is separate from where requests execute.
+
+Both production sample sets contain six GETs per route, all HTTP 200. They
+measure complete responses from the development machine, including network
+transfer. Initial medians and follow-up medians each exclude their first sample.
+The initial set immediately followed deployment; the follow-up investigated its
+remaining outliers. Both are retained, with the combined warm range below.
+
+| Route                           | Initial first ms | Initial warm median ms | Follow-up warm median ms | Combined warm range ms |
+| ------------------------------- | ---------------: | ---------------------: | -----------------------: | ---------------------: |
+| Homepage `/`                    |          1,659.6 |                  369.8 |                    245.8 |            225.5–476.0 |
+| Explorer `/explore`             |            298.0 |                  284.8 |                    222.2 |            216.6–407.4 |
+| Resume `/resume`                |            279.6 |                  240.6 |                    233.2 |            217.3–270.0 |
+| Workspaces `/workspace`         |            216.3 |                  216.3 |                    197.3 |            187.5–236.2 |
+| Projects `/projects`            |            200.3 |                  209.3 |                    166.0 |            147.4–404.2 |
+| Reviewed answers `/answers`     |            128.7 |                  123.0 |                    117.8 |            114.0–157.8 |
+| Catalog API                     |          1,087.4 |                  233.0 |                    205.3 |            183.7–256.8 |
+| Workspace list, anonymous/empty |            106.7 |                   92.0 |                    100.6 |             91.6–131.8 |
+
+The follow-up catalog API's server-side timing isolates the work from network
+transfer and platform startup:
+
+| Server stage                     | Warm median ms | Warm range ms |
+| -------------------------------- | -------------: | ------------: |
+| Fresh public career snapshot RPC |           85.7 |     77.1–93.2 |
+| Canonical hash/source grounding  |            3.5 |       2.7–4.5 |
+| Complete catalog                 |          100.6 |    84.3–105.5 |
+| Complete API handler             |          101.2 |    84.8–121.0 |
+
+These spans overlap. The initial catalog response took 1,087.4 ms overall while
+its handler measured 300.4 ms, demonstrating startup/transport cost outside the
+handler. All follow-up warm route medians are below 300 ms, but some individual
+responses and cold starts are not. Browser paint/hydration, signed-in owner
+routes, populated recruiter workspace actions, and live resume compilation were
+not measured. The approved live AI benchmark below was run from the development
+machine, not through the deployed HTTP endpoint.
+
 ## Measurement conditions
 
 Measurements ran from the development machine against the configured live
 Supabase database. HTTP measurements used the optimized `next start` build on
 localhost, with live public data. They include the full response body, but do
-not measure browser paint, hydration, image downloads, or the deployed host.
+not measure browser paint, hydration, or image downloads. Deployed-host
+measurements are reported separately above.
 No signed-in owner or saved recruiter workspace was used.
 
 Each database operation has ten samples; each HTTP route has six. The first
@@ -117,8 +163,8 @@ Production inspection found Vercel functions in Washington (`iad1`) while the
 linked Supabase database runs in Ireland (`eu-west-1`). `vercel.json` now selects
 Dublin (`dub1`) for the next deployment to avoid crossing the Atlantic on each
 database request. See Vercel's [region configuration](https://vercel.com/docs/functions/configuring-functions/region)
-and [region mapping](https://vercel.com/docs/regions). Deployment verification and
-production timings will be appended after publication.
+and [region mapping](https://vercel.com/docs/regions). The deployment's Dublin
+region and production timings are verified above.
 
 ## Full AI request instrumentation
 
@@ -176,8 +222,9 @@ the successful measurements above replace that earlier limitation.
   `npm run build`, with `APP_MODE=demo` explicitly set in `.env.local` during
   verification. All five offline CI qualification suites passed. Its original live mode was restored. Benchmark servers stopped.
 
-The Supabase migration is applied. The user has authorized pushing and deploying
-the application; production verification is in progress.
+The Supabase migration is applied. The application is pushed and live, and the
+release passed GitHub CI. Production GETs all succeeded; timings are reported
+above.
 
 ## Reproducing measurements
 
@@ -207,3 +254,5 @@ Raw timing-only records:
 [demo HTTP](performance/demo-http-readings.jsonl), and
 [concurrent-check outliers](performance/contended-readings.jsonl).
 The approved provider-stage timings are in [live AI readings](performance/live-ai-readings.jsonl).
+Deployed timings are in [initial production HTTP readings](performance/production-http-readings.jsonl)
+and [follow-up production HTTP readings](performance/production-http-repeat-readings.jsonl).

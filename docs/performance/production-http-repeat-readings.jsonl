@@ -1,0 +1,48 @@
+{"path":"/","run":1,"status":200,"ms":821.8,"bytes":15834,"timing":null}
+{"path":"/","run":2,"status":200,"ms":249,"bytes":15834,"timing":null}
+{"path":"/","run":3,"status":200,"ms":307.5,"bytes":15834,"timing":null}
+{"path":"/","run":4,"status":200,"ms":241,"bytes":15834,"timing":null}
+{"path":"/","run":5,"status":200,"ms":225.5,"bytes":15834,"timing":null}
+{"path":"/","run":6,"status":200,"ms":245.8,"bytes":15834,"timing":null}
+{"path":"/explore","run":1,"status":200,"ms":298.1,"bytes":83092,"timing":null}
+{"path":"/explore","run":2,"status":200,"ms":216.6,"bytes":83092,"timing":null}
+{"path":"/explore","run":3,"status":200,"ms":312.8,"bytes":83092,"timing":null}
+{"path":"/explore","run":4,"status":200,"ms":218,"bytes":83092,"timing":null}
+{"path":"/explore","run":5,"status":200,"ms":222.2,"bytes":83092,"timing":null}
+{"path":"/explore","run":6,"status":200,"ms":248.4,"bytes":83092,"timing":null}
+{"path":"/resume","run":1,"status":200,"ms":281.5,"bytes":75354,"timing":null}
+{"path":"/resume","run":2,"status":200,"ms":217.3,"bytes":75354,"timing":null}
+{"path":"/resume","run":3,"status":200,"ms":267.6,"bytes":75354,"timing":null}
+{"path":"/resume","run":4,"status":200,"ms":245.1,"bytes":75354,"timing":null}
+{"path":"/resume","run":5,"status":200,"ms":233.2,"bytes":75354,"timing":null}
+{"path":"/resume","run":6,"status":200,"ms":221.2,"bytes":75354,"timing":null}
+{"path":"/workspace","run":1,"status":200,"ms":226,"bytes":10349,"timing":null}
+{"path":"/workspace","run":2,"status":200,"ms":202.2,"bytes":10349,"timing":null}
+{"path":"/workspace","run":3,"status":200,"ms":197.4,"bytes":10349,"timing":null}
+{"path":"/workspace","run":4,"status":200,"ms":187.5,"bytes":10349,"timing":null}
+{"path":"/workspace","run":5,"status":200,"ms":197.3,"bytes":10349,"timing":null}
+{"path":"/workspace","run":6,"status":200,"ms":191.9,"bytes":10349,"timing":null}
+{"path":"/projects","run":1,"status":200,"ms":179.7,"bytes":28795,"timing":null}
+{"path":"/projects","run":2,"status":200,"ms":183.2,"bytes":28795,"timing":null}
+{"path":"/projects","run":3,"status":200,"ms":157.2,"bytes":28795,"timing":null}
+{"path":"/projects","run":4,"status":200,"ms":147.4,"bytes":28795,"timing":null}
+{"path":"/projects","run":5,"status":200,"ms":166,"bytes":28795,"timing":null}
+{"path":"/projects","run":6,"status":200,"ms":171.6,"bytes":28795,"timing":null}
+{"path":"/answers","run":1,"status":200,"ms":156.3,"bytes":8684,"timing":null}
+{"path":"/answers","run":2,"status":200,"ms":142.2,"bytes":8684,"timing":null}
+{"path":"/answers","run":3,"status":200,"ms":117.8,"bytes":8684,"timing":null}
+{"path":"/answers","run":4,"status":200,"ms":157.8,"bytes":8684,"timing":null}
+{"path":"/answers","run":5,"status":200,"ms":117.7,"bytes":8684,"timing":null}
+{"path":"/answers","run":6,"status":200,"ms":114,"bytes":8684,"timing":null}
+{"path":"/api/career-catalog","run":1,"status":200,"ms":248.5,"bytes":52526,"timing":"public_snapshot;dur=118.5, grounding;dur=4.3, catalog;dur=139.2, total;dur=139.8"}
+{"path":"/api/career-catalog","run":2,"status":200,"ms":235.8,"bytes":52526,"timing":"public_snapshot;dur=93.2, grounding;dur=3.5, catalog;dur=105.5, total;dur=121.0"}
+{"path":"/api/career-catalog","run":3,"status":200,"ms":205.3,"bytes":52526,"timing":"public_snapshot;dur=83.7, grounding;dur=2.7, catalog;dur=100.6, total;dur=101.2"}
+{"path":"/api/career-catalog","run":4,"status":200,"ms":231.4,"bytes":52526,"timing":"public_snapshot;dur=93.1, grounding;dur=3.5, catalog;dur=101.8, total;dur=102.4"}
+{"path":"/api/career-catalog","run":5,"status":200,"ms":187,"bytes":52526,"timing":"public_snapshot;dur=85.7, grounding;dur=4.5, catalog;dur=94.9, total;dur=95.4"}
+{"path":"/api/career-catalog","run":6,"status":200,"ms":183.7,"bytes":52526,"timing":"public_snapshot;dur=77.1, grounding;dur=2.7, catalog;dur=84.3, total;dur=84.8"}
+{"path":"/api/workspaces","run":1,"status":200,"ms":101.1,"bytes":31,"timing":null}
+{"path":"/api/workspaces","run":2,"status":200,"ms":131.8,"bytes":31,"timing":null}
+{"path":"/api/workspaces","run":3,"status":200,"ms":124.3,"bytes":31,"timing":null}
+{"path":"/api/workspaces","run":4,"status":200,"ms":97.1,"bytes":31,"timing":null}
+{"path":"/api/workspaces","run":5,"status":200,"ms":100.6,"bytes":31,"timing":null}
+{"path":"/api/workspaces","run":6,"status":200,"ms":91.6,"bytes":31,"timing":null}
