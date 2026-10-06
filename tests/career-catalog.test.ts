@@ -42,6 +42,36 @@ beforeEach(() => {
   vi.clearAllMocks();
   mocks.answers.mockResolvedValue([]);
 });
+it("keeps a confirmed public certificate visible without inventing dates or hiding it in skill groups", async () => {
+  const certificate = {
+    ...record,
+    kind: "certification",
+    id: "confirmed-certificate",
+    title: "Fictional test certificate",
+    claims: [{ ...claim, value: "Holds the fictional test certificate." }],
+  };
+  mocks.load.mockResolvedValue([
+    certificate,
+    { ...certificate, id: "private-certificate", published: false },
+    { ...certificate, id: "archived-certificate", archived: true },
+    {
+      ...certificate,
+      id: "pending-certificate",
+      claims: [{ ...claim, availability: "PENDING_REVIEW" }],
+    },
+  ]);
+  const catalog = catalogSchema.parse(await (await GET()).json());
+  const certificates = catalogRecords(catalog, "certifications");
+  expect(certificates).toHaveLength(1);
+  expect(certificates[0]).toMatchObject({
+    id: "confirmed-certificate",
+    title: "Fictional test certificate",
+    summary: "Holds the fictional test certificate.",
+    start_date: null,
+    end_date: null,
+  });
+  expect(catalogGroups(catalog, "certifications")).toEqual([]);
+});
 it("requests primary-account public evidence and excludes private, archived and unsupported records", async () => {
   mocks.load.mockResolvedValue([
     record,

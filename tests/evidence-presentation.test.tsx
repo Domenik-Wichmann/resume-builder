@@ -2,6 +2,7 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { expect, it } from "vitest";
 import { answerDisplay } from "../src/lib/answer-display";
+import { traversalRecords } from "../src/lib/career/evidence-traversal";
 import { evidenceEdges } from "../src/lib/career/evidence-graph";
 import { containPoint, mapPoint } from "../src/lib/career/evidence-layout";
 import type { CareerRecord } from "../src/lib/career/model";
@@ -120,8 +121,8 @@ it("matches normalized shared skills without inferring connections from prose, e
   ).toEqual([{ source: "a", target: "b", label: "Shared skills: SQL" }]);
 });
 
-it("renders links and nodes beyond the old eight-record cutoff without the explanatory headings", () => {
-  const records = Array.from({ length: 10 }, (_, i) =>
+it("renders every node together without pagination without the explanatory headings", () => {
+  const records = Array.from({ length: 60 }, (_, i) =>
     record(String(i), i === 0 ? { related_ids: ["9"] } : {}),
   );
   const html = renderToStaticMarkup(
@@ -134,6 +135,56 @@ it("renders links and nodes beyond the old eight-record cutoff without the expla
   );
   expect(html).toContain('aria-label="Fictional 9"');
   expect(html).toContain("<line");
+  expect(html).toContain('aria-label="Fictional 59"');
+  expect(html.match(/class="evidence-node/g)).toHaveLength(60);
+  expect(html).not.toContain("Evidence map pages");
   expect(html).not.toContain("The connections behind");
   expect(html).not.toContain("Published records used");
+});
+
+it("changes traversal samples while preserving original labels, records and relationships", () => {
+  const pool = Array.from({ length: 30 }, (_, i) => record(String(i)));
+  const first = traversalRecords(pool, 12, 0);
+  const second = traversalRecords(pool, 12, 1);
+  expect(first).toHaveLength(12);
+  expect(new Set(first.map((record) => record.id)).size).toBe(12);
+  expect(first).not.toEqual(second);
+  expect(first).toEqual(traversalRecords(pool, 12, 0));
+  for (const item of [...first, ...second]) expect(pool).toContain(item);
+  expect(pool.map((record) => record.id)).toEqual(
+    Array.from({ length: 30 }, (_, i) => String(i)),
+  );
+});
+
+it("attaches explicit stored skills to verified public skill nodes, never to a similarly titled role", () => {
+  const records = [
+    record("role", { skills: [" SQL "] }),
+    record("skill", { title: "SQL" }),
+    record("unrelated-role", { title: "SQL" }),
+  ];
+  expect(evidenceEdges(records, new Set(["skill"]))).toEqual([
+    { source: "role", target: "skill", label: "Stored skill: SQL" },
+  ]);
+});
+it("keeps all retrieved nodes and every connection on one graph during loading", () => {
+  const records = Array.from({ length: 60 }, (_, i) =>
+    record(String(i), { related_ids: i < 59 ? [String(i + 1)] : [] }),
+  );
+  const html = renderToStaticMarkup(
+    <EvidenceMap
+      records={records}
+      busy
+      collapsed={false}
+      onToggle={() => {}}
+    />,
+  );
+  expect(html.match(/class="evidence-node/g)).toHaveLength(60);
+  expect(html.match(/<line /g)).toHaveLength(59);
+  expect(html).not.toContain("Evidence map pages");
+  expect(html).not.toContain("processing-cloud");
+  for (const item of records)
+    expect(html).toContain(`aria-label="${item.title}"`);
+  expect(
+    mapPoint(1, 3, { width: 280, height: 600 }, 8000, true, { x: 30, y: 20 }),
+  ).toEqual({ x: 30, y: 20 });
 });

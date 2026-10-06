@@ -81,6 +81,7 @@ export function CareerChat({
   const [slotsAttempt, setSlotsAttempt] = useState(0);
   const [explorerCollapsed, setExplorerCollapsed] = useState(false);
   const [evidenceCollapsed, setEvidenceCollapsed] = useState(false);
+  const [evidenceExpanded, setEvidenceExpanded] = useState(false);
   const messageField = useRef<HTMLTextAreaElement>(null);
   const results = useRef<HTMLDivElement>(null);
   const pendingMessage = useRef<HTMLElement>(null);
@@ -267,7 +268,7 @@ export function CareerChat({
   }
   return (
     <div
-      className={`career-studio${explorerCollapsed ? " explorer-collapsed" : ""}${evidenceCollapsed ? " evidence-collapsed" : ""}`}
+      className={`career-studio${explorerCollapsed ? " explorer-collapsed" : ""}${evidenceCollapsed ? " evidence-collapsed" : ""}${evidenceExpanded ? " evidence-expanded" : ""}`}
     >
       <aside
         className={`explorer-rail${explorerCollapsed ? " is-collapsed" : ""}`}
@@ -496,13 +497,14 @@ export function CareerChat({
                 <p className="eyebrow">Role fit</p>
                 <h3>Where the experience connects</h3>
                 <SafeMarkdown
+                  bulletLists
                   text={answerDisplay(workspace.match.overall_summary)}
                 />
                 <h4>Supported matches</h4>
                 <ul>
                   {workspace.match.strong_matches.map((item, i) => (
                     <li key={i}>
-                      <SafeMarkdown text={answerDisplay(item)} />
+                      <SafeMarkdown bulletLists text={answerDisplay(item)} />
                     </li>
                   ))}
                 </ul>
@@ -540,7 +542,10 @@ export function CareerChat({
                   </div>
                 ) : (
                   <div className="answer-content">
-                    <SafeMarkdown text={answerDisplay(question.answer)} />
+                    <SafeMarkdown
+                      bulletLists
+                      text={answerDisplay(question.answer)}
+                    />
                   </div>
                 )}
               </article>
@@ -572,7 +577,12 @@ export function CareerChat({
         records={workspace?.evidence || []}
         busy={busy}
         collapsed={evidenceCollapsed}
-        onToggle={() => setEvidenceCollapsed(!evidenceCollapsed)}
+        expanded={evidenceExpanded}
+        onExpand={() => setEvidenceExpanded(!evidenceExpanded)}
+        onToggle={() => {
+          setEvidenceExpanded(false);
+          setEvidenceCollapsed(!evidenceCollapsed);
+        }}
       />
     </div>
   );

@@ -13,7 +13,13 @@ function inline(text: string): ReactNode[] {
       ),
     );
 }
-export function SafeMarkdown({ text }: { text: string }) {
+export function SafeMarkdown({
+  text,
+  bulletLists = false,
+}: {
+  text: string;
+  bulletLists?: boolean;
+}) {
   const lines = text.replace(/\r\n/g, "\n").split("\n");
   const blocks: ReactNode[] = [];
   for (let index = 0; index < lines.length;) {
@@ -46,7 +52,11 @@ export function SafeMarkdown({ text }: { text: string }) {
         index++;
       }
       blocks.push(
-        ordered ? <ol key={start}>{items}</ol> : <ul key={start}>{items}</ul>,
+        ordered && !bulletLists ? (
+          <ol key={start}>{items}</ol>
+        ) : (
+          <ul key={start}>{items}</ul>
+        ),
       );
       continue;
     }

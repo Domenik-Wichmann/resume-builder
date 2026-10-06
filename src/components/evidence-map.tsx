@@ -1,7 +1,25 @@
 ﻿"use client";
-import { useEffect, useMemo, useRef, useState, type PointerEvent } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type PointerEvent,
+  type CSSProperties,
+} from "react";
 import type { CareerRecord } from "@/lib/career/model";
+import {
+  graphPointer,
+  initialGraphView,
+  zoomGraph,
+  type GraphView,
+} from "@/lib/career/evidence-viewport";
 import { evidenceEdges } from "@/lib/career/evidence-graph";
+import {
+  catalogSchema,
+  catalogCategories,
+  catalogRecords,
+} from "@/lib/career/catalog";
 import {
   containPoint,
   mapPoint,
@@ -13,12 +31,23 @@ export function EvidenceMap({
   busy,
   collapsed,
   onToggle,
+  expanded = false,
+  onExpand,
 }: {
   records: CareerRecord[];
   busy: boolean;
   collapsed: boolean;
   onToggle: () => void;
+  expanded?: boolean;
+  onExpand?: () => void;
 }) {
+  const [view, setView] = useState<GraphView>(initialGraphView);
+  const camera = useRef(initialGraphView);
+  const pan = useRef<{ x: number; y: number; view: GraphView } | null>(null);
+  function changeView(next: GraphView) {
+    camera.current = next;
+    setView(next);
+  }
   const [positions, setPositions] = useState<
     Record<string, { x: number; y: number }>
   >({});
@@ -27,23 +56,45 @@ export function EvidenceMap({
   const [dragging, setDragging] = useState<string | null>(null);
   const [time, setTime] = useState(0);
   const [size, setSize] = useState<MapSize>({ width: 280, height: 600 });
-  const [page, setPage] = useState(0);
+  const [skillIds, setSkillIds] = useState<ReadonlySet<string>>(new Set());
+  const grab = useRef<{
+    x: number;
+    y: number;
+    startX: number;
+    startY: number;
+    moved: boolean;
+  } | null>(null);
+  const [connectionRecords, setConnectionRecords] = useState<CareerRecord[]>(
+    [],
+  );
   const canvas = useRef<HTMLDivElement>(null);
-  const edges = useMemo(() => evidenceEdges(records), [records]);
-  const active = hovered || selected;
-  const capacity = Math.max(
-    2,
-    Math.min(
-      12,
-      Math.floor((size.height - 100) / 75) * (size.width < 220 ? 1 : 2),
-    ),
-  );
-  const pages = Math.max(1, Math.ceil(records.length / capacity));
-  const currentPage = Math.min(page, pages - 1);
-  const visible = records.slice(
-    currentPage * capacity,
-    (currentPage + 1) * capacity,
-  );
+  // Every retrieved record stays on the graph, including while an answer loads.
+  const pool = records;
+  const visible = records;
+  const edges = useMemo(() => {
+    const metadata = new Map(
+      connectionRecords.map((record) => [record.id, record]),
+    );
+    const linked = records.map((record) => {
+      const current = metadata.get(record.id);
+      return {
+        ...record,
+        skills: [...new Set([...record.skills, ...(current?.skills || [])])],
+        related_ids: [
+          ...new Set([
+            ...(record.related_ids || []),
+            ...(current?.related_ids || []),
+          ]),
+        ],
+      };
+    });
+    return evidenceEdges(linked, skillIds);
+  }, [records, connectionRecords, skillIds]);
+  const active = dragging || selected || hovered;
+  const compact = visible.length > 12;
+  const layoutSize = expanded
+    ? { width: size.width / 1.5, height: size.height / 1.5 }
+    : size;
   const points = visible.map((record, i) => {
     const floating = active !== record.id && dragging !== record.id;
     return {
@@ -51,7 +102,7 @@ export function EvidenceMap({
       ...mapPoint(
         i,
         visible.length,
-        size,
+        layoutSize,
         floating ? time : 0,
         busy && floating,
         positions[record.id],
@@ -65,7 +116,7 @@ export function EvidenceMap({
   const visibleEdges = edges.filter(
     (edge) => byId.has(edge.source) && byId.has(edge.target),
   );
-  const detail = records.find((record) => record.id === selected);
+  const detail = pool.find((record) => record.id === selected);
   const connected = new Set(
     edges.flatMap((edge) =>
       edge.source === active
@@ -77,6 +128,33 @@ export function EvidenceMap({
   );
 
   useEffect(() => {
+    if (collapsed) return;
+    const controller = new AbortController();
+    // Published metadata only restores connections between existing workspace
+    // nodes. Catalog records never become additional displayed evidence.
+    fetch("/api/career-catalog", {
+      signal: controller.signal,
+      cache: "no-store",
+    })
+      .then(async (response) => {
+        if (!response.ok) return;
+        const data = catalogSchema.parse(await response.json());
+        if (!controller.signal.aborted) {
+          setSkillIds(
+            new Set(data.career.skill_records.map((record) => record.id)),
+          );
+          setConnectionRecords(
+            catalogCategories.flatMap(([key]) => catalogRecords(data, key)),
+          );
+        }
+      })
+      .catch(() => {
+        /* Keep the workspace evidence if browsing is unavailable. */
+      });
+    return () => controller.abort();
+  }, [busy, collapsed]);
+
+  useEffect(() => {
     const element = canvas.current;
     if (!element || collapsed) return;
     const observer = new ResizeObserver(([entry]) => {
@@ -86,6 +164,44 @@ export function EvidenceMap({
     observer.observe(element);
     return () => observer.disconnect();
   }, [collapsed]);
+
+  useEffect(() => {
+    const element = canvas.current;
+    if (!element || collapsed) return;
+    const zoom = (event: WheelEvent) => {
+      event.preventDefault();
+      const bounds = element.getBoundingClientRect();
+      const delta =
+        event.deltaY *
+        (event.deltaMode === 1
+          ? 16
+          : event.deltaMode === 2
+            ? bounds.height
+            : 1);
+      changeView(
+        zoomGraph(
+          camera.current,
+          delta,
+          event.clientX - bounds.left,
+          event.clientY - bounds.top,
+        ),
+      );
+    };
+    element.addEventListener("wheel", zoom, { passive: false });
+    return () => element.removeEventListener("wheel", zoom);
+  }, [collapsed]);
+
+  useEffect(() => {
+    if (!expanded || !onExpand) return;
+    const close = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        changeView(initialGraphView);
+        onExpand();
+      }
+    };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, [expanded, onExpand]);
 
   useEffect(() => {
     if (collapsed || (!records.length && !busy)) return;
@@ -112,31 +228,42 @@ export function EvidenceMap({
   }, [collapsed, records.length, busy]);
 
   function selectRecord(id: string) {
-    const index = records.findIndex((record) => record.id === id);
-    if (index < 0) return;
-    setPage(Math.floor(index / capacity));
+    if (!pool.some((record) => record.id === id)) return;
     setSelected(id);
     setHovered(null);
   }
 
   function drag(event: PointerEvent<HTMLButtonElement>, id: string) {
     if (!event.currentTarget.hasPointerCapture(event.pointerId)) return;
-    const bounds = event.currentTarget.parentElement!.getBoundingClientRect();
+    const bounds = canvas.current!.getBoundingClientRect();
+    const offset = grab.current;
+    if (!offset) return;
+    const pointer = graphPointer(
+      camera.current,
+      event.clientX - bounds.left,
+      event.clientY - bounds.top,
+    );
+    if (
+      Math.hypot(event.clientX - offset.startX, event.clientY - offset.startY) >
+      3
+    )
+      offset.moved = true;
     setPositions((previous) => ({
       ...previous,
       [id]: containPoint(
         {
-          x: ((event.clientX - bounds.left) / bounds.width) * 100,
-          y: ((event.clientY - bounds.top) / bounds.height) * 100,
+          x: (pointer.x / bounds.width) * 100 - offset.x,
+          y: (pointer.y / bounds.height) * 100 - offset.y,
         },
-        size,
+        layoutSize,
+        compact,
       ),
     }));
   }
 
   return (
     <aside
-      className={`evidence-rail${collapsed ? " is-collapsed" : ""}${busy ? " is-working" : ""}`}
+      className={`evidence-rail${collapsed ? " is-collapsed" : ""}${expanded ? " is-expanded" : ""}${busy ? " is-working" : ""}`}
       aria-label="Connected evidence"
     >
       <div className="rail-heading evidence-heading">
@@ -159,6 +286,31 @@ export function EvidenceMap({
         >
           {collapsed ? "‹" : "›"}
         </button>
+        {!collapsed && onExpand && (
+          <button
+            type="button"
+            className="rail-toggle graph-expand"
+            aria-label={expanded ? "Restore graph size" : "Expand graph"}
+            title={expanded ? "Restore graph size" : "Expand graph"}
+            aria-pressed={expanded}
+            onClick={() => {
+              changeView(initialGraphView);
+              onExpand();
+            }}
+          >
+            {"‹›"}
+          </button>
+        )}
+        {view.scale !== 1 && !collapsed && (
+          <button
+            type="button"
+            className="graph-reset"
+            aria-label="Reset graph zoom"
+            onClick={() => changeView(initialGraphView)}
+          >
+            {Math.round(view.scale * 100)}%
+          </button>
+        )}
         {busy && (
           <span
             className="map-indicator working"
@@ -168,132 +320,188 @@ export function EvidenceMap({
         )}
       </div>
       <div id="evidence-panel-content" hidden={collapsed}>
-        <div ref={canvas} className="evidence-canvas" aria-busy={busy}>
-          <svg
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-            aria-hidden="true"
+        <div
+          ref={canvas}
+          className={`evidence-canvas${compact ? " is-compact" : ""}`}
+          aria-busy={busy}
+          onDragStart={(event) => event.preventDefault()}
+          onPointerDown={(event) => {
+            if (
+              event.button !== 0 ||
+              (event.target as Element).closest("button")
+            )
+              return;
+            event.preventDefault();
+            window.getSelection()?.removeAllRanges();
+            pan.current = {
+              x: event.clientX,
+              y: event.clientY,
+              view: camera.current,
+            };
+            event.currentTarget.setPointerCapture(event.pointerId);
+          }}
+          onPointerMove={(event) => {
+            if (
+              !pan.current ||
+              !event.currentTarget.hasPointerCapture(event.pointerId)
+            )
+              return;
+            changeView({
+              ...pan.current.view,
+              x: pan.current.view.x + event.clientX - pan.current.x,
+              y: pan.current.view.y + event.clientY - pan.current.y,
+            });
+          }}
+          onPointerUp={(event) => {
+            if (event.currentTarget.hasPointerCapture(event.pointerId))
+              event.currentTarget.releasePointerCapture(event.pointerId);
+          }}
+          onLostPointerCapture={() => {
+            pan.current = null;
+          }}
+        >
+          <div
+            className="evidence-viewport"
+            style={{
+              transform: `translate(${view.x}px, ${view.y}px) scale(${view.scale})`,
+            }}
           >
-            {visibleEdges.map((edge, index) => {
-              const source = byId.get(edge.source)!;
-              const target = byId.get(edge.target)!;
-              const highlighted =
-                edge.source === active || edge.target === active;
-              return (
-                <line
-                  key={`${edge.source}-${edge.target}`}
-                  x1={source.x}
-                  y1={source.y}
-                  x2={target.x}
-                  y2={target.y}
-                  className={
-                    highlighted ? "is-active" : active ? "is-dimmed" : undefined
-                  }
-                  vectorEffect="non-scaling-stroke"
-                  style={{ animationDelay: `${index * -0.2}s` }}
-                />
-              );
-            })}
-          </svg>
-          {busy && (
-            <div className="processing-cloud" aria-hidden="true">
-              <svg viewBox="0 0 100 100" preserveAspectRatio="none">
-                {searching.map((point, i) => {
-                  const next = searching[(i + 3) % searching.length];
-                  return (
-                    <line
-                      key={i}
-                      x1={point.x}
-                      y1={point.y}
-                      x2={next.x}
-                      y2={next.y}
-                      vectorEffect="non-scaling-stroke"
-                      style={{ animationDelay: `${i * -0.3}s` }}
-                    />
+            <svg
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              {visibleEdges.map((edge, index) => {
+                const source = byId.get(edge.source)!;
+                const target = byId.get(edge.target)!;
+                const highlighted =
+                  edge.source === active || edge.target === active;
+                return (
+                  <line
+                    data-source={edge.source}
+                    data-target={edge.target}
+                    key={`${edge.source}-${edge.target}`}
+                    x1={source.x}
+                    y1={source.y}
+                    x2={target.x}
+                    y2={target.y}
+                    className={
+                      highlighted
+                        ? "is-active"
+                        : active
+                          ? "is-dimmed"
+                          : undefined
+                    }
+                    vectorEffect="non-scaling-stroke"
+                    style={{ animationDelay: `${index * -0.2}s` }}
+                  />
+                );
+              })}
+            </svg>
+            {busy && !points.length && (
+              <div className="processing-cloud" aria-hidden="true">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                  {searching.map((point, i) => {
+                    const next = searching[(i + 3) % searching.length];
+                    return (
+                      <line
+                        key={i}
+                        x1={point.x}
+                        y1={point.y}
+                        x2={next.x}
+                        y2={next.y}
+                        vectorEffect="non-scaling-stroke"
+                        style={{ animationDelay: `${i * -0.3}s` }}
+                      />
+                    );
+                  })}
+                </svg>
+                {searching.map((point, i) => (
+                  <span
+                    key={i}
+                    className="processing-dot"
+                    style={{
+                      left: `${point.x}%`,
+                      top: `${point.y}%`,
+                      animationDelay: `${i * -0.4}s`,
+                    }}
+                  />
+                ))}
+              </div>
+            )}
+            {points.map(({ record, x, y }) => (
+              <button
+                type="button"
+                className={`evidence-node${active === record.id ? " is-active" : ""}${connected.has(record.id) ? " is-connected" : ""}`}
+                key={record.id}
+                style={
+                  {
+                    left: `${x}%`,
+                    top: `${y}%`,
+                    "--label-space": `${(1 - y / 100) * size.height}px`,
+                  } as CSSProperties
+                }
+                data-record-id={record.id}
+                aria-label={record.title}
+                aria-pressed={selected === record.id}
+                title={`${record.title} · Drag to arrange, select to read`}
+                onClick={(event) => {
+                  if (event.detail === 0 || !grab.current?.moved)
+                    selectRecord(record.id);
+                }}
+                onPointerEnter={() => setHovered(record.id)}
+                onPointerLeave={() => setHovered(null)}
+                onFocus={() => setHovered(record.id)}
+                onBlur={() => setHovered(null)}
+                onPointerDown={(event) => {
+                  if (event.button !== 0) return;
+                  // Native text dragging competes with pointer capture and can
+                  // interrupt a node drag when it starts on the full label.
+                  event.preventDefault();
+                  event.stopPropagation();
+                  window.getSelection()?.removeAllRanges();
+                  event.currentTarget.focus({ preventScroll: true });
+                  const bounds = canvas.current!.getBoundingClientRect();
+                  const pointer = graphPointer(
+                    camera.current,
+                    event.clientX - bounds.left,
+                    event.clientY - bounds.top,
                   );
-                })}
-              </svg>
-              {searching.map((point, i) => (
-                <span
-                  key={i}
-                  className="processing-dot"
-                  style={{
-                    left: `${point.x}%`,
-                    top: `${point.y}%`,
-                    animationDelay: `${i * -0.4}s`,
-                  }}
-                />
-              ))}
-            </div>
-          )}
-          {points.map(({ record, x, y }) => (
-            <button
-              type="button"
-              className={`evidence-node${active && active !== record.id && !connected.has(record.id) ? " is-dimmed" : ""}${connected.has(record.id) ? " is-connected" : ""}`}
-              key={record.id}
-              style={{ left: `${x}%`, top: `${y}%` }}
-              aria-label={record.title}
-              aria-pressed={selected === record.id}
-              title={`${record.title} · Drag to arrange, select to read`}
-              onClick={() => selectRecord(record.id)}
-              onPointerEnter={() => setHovered(record.id)}
-              onPointerLeave={() => setHovered(null)}
-              onFocus={() => setHovered(record.id)}
-              onBlur={() => setHovered(null)}
-              onPointerDown={(event) => {
-                setDragging(record.id);
-                event.currentTarget.setPointerCapture(event.pointerId);
-              }}
-              onPointerMove={(event) => drag(event, record.id)}
-              onPointerUp={(event) =>
-                event.currentTarget.releasePointerCapture(event.pointerId)
-              }
-              onLostPointerCapture={() => setDragging(null)}
-            >
-              <span className="node-orb" aria-hidden="true" />
-              <span className="node-label">{record.title}</span>
-            </button>
-          ))}
-          {!points.length && !busy && (
-            <div className="map-empty">
-              <span aria-hidden="true">✧</span>
-              <p>Your first question starts the map.</p>
-            </div>
-          )}
+                  grab.current = {
+                    x: (pointer.x / bounds.width) * 100 - x,
+                    y: (pointer.y / bounds.height) * 100 - y,
+                    startX: event.clientX,
+                    startY: event.clientY,
+                    moved: false,
+                  };
+                  setPositions((previous) => ({
+                    ...previous,
+                    [record.id]: { x, y },
+                  }));
+                  setDragging(record.id);
+                  event.currentTarget.setPointerCapture(event.pointerId);
+                }}
+                onPointerMove={(event) => drag(event, record.id)}
+                onPointerUp={(event) => {
+                  if (event.currentTarget.hasPointerCapture(event.pointerId))
+                    event.currentTarget.releasePointerCapture(event.pointerId);
+                }}
+                onLostPointerCapture={() => {
+                  setDragging(null);
+                }}
+              >
+                <span className="node-orb" aria-hidden="true" />
+                <span className="node-label">{record.title}</span>
+              </button>
+            ))}
+            {!points.length && !busy && (
+              <div className="map-empty">
+                <span aria-hidden="true">✧</span>
+                <p>Your first question starts the map.</p>
+              </div>
+            )}
+          </div>
         </div>
-        {pages > 1 && (
-          <nav className="map-pagination" aria-label="Evidence map pages">
-            <button
-              type="button"
-              aria-label="Previous evidence records"
-              disabled={currentPage === 0}
-              onClick={() => {
-                setPage(currentPage - 1);
-                setHovered(null);
-                setSelected(null);
-              }}
-            >
-              ‹
-            </button>
-            <span>
-              {currentPage * capacity + 1}–
-              {Math.min((currentPage + 1) * capacity, records.length)} /{" "}
-              {records.length}
-            </span>
-            <button
-              type="button"
-              aria-label="Next evidence records"
-              disabled={currentPage === pages - 1}
-              onClick={() => {
-                setPage(currentPage + 1);
-                setHovered(null);
-                setSelected(null);
-              }}
-            >
-              ›
-            </button>
-          </nav>
-        )}
         {detail && (
           <article className="node-detail" aria-label={detail.title}>
             <button
@@ -320,7 +528,7 @@ export function EvidenceMap({
                       ? edge.source
                       : null;
                 const other = id
-                  ? records.find((record) => record.id === id)
+                  ? pool.find((record) => record.id === id)
                   : null;
                 return other ? (
                   <button

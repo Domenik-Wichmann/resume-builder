@@ -22,6 +22,7 @@ import {
   packets,
   resumeAdmission,
 } from "../experiments/career-brain/v2/packets";
+import { packets as publicPackets } from "../src/lib/career-brain/packets";
 const quote = "I wrote the Python parser and SQL checks myself.";
 const team =
   "The team reduced checking from 5 hours to 2 hours; my contribution was the parser.";
@@ -278,6 +279,36 @@ describe("experimental Career Brain repair boundaries", () => {
         c.evidence.every((e) => e.quote.length === 2000),
       ),
     ).toBe(true);
+  });
+  it("bounds expanded public Q&A packets without changing legacy admission or including private records", () => {
+    const records = Array.from({ length: 20 }, (_, i) =>
+      stored({ id: `fictional-${i}` }),
+    );
+    const privateRecord = stored({ id: "fictional-private", published: false });
+    const archivedRecord = stored({ id: "fictional-archived", archived: true });
+    const all = [privateRecord, archivedRecord, ...records];
+    const ids = all.map((record) => record.id);
+    expect(
+      publicPackets(
+        records,
+        records.map((record) => record.id),
+      ),
+    ).toHaveLength(8);
+    const selected = publicPackets(all, ids, 12);
+    expect(selected).toHaveLength(10);
+    expect(
+      selected.every(
+        (packet) => ![privateRecord.id, archivedRecord.id].includes(packet.id),
+      ),
+    ).toBe(true);
+    expect(
+      publicPackets(
+        records,
+        records.map((record) => record.id),
+        100,
+      ),
+    ).toHaveLength(12);
+    expect(publicPackets(records, ids, -1)).toEqual([]);
   });
   it("ignores generated keys and preserves canonical UUID through aliases and exact evidence context", () => {
     const r = reconcile(
