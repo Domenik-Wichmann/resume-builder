@@ -1,3 +1,5 @@
+import type { KeyboardEvent } from "react";
+
 /** A conservative first-message hint; the visitor can correct it before sending. */
 export function initialInputKind(text: string): "ask" | "match" {
   const value = text.trim();
@@ -13,4 +15,18 @@ export function initialInputKind(text: string): "ask" | "match" {
   return signals.filter((pattern) => pattern.test(value)).length >= 2
     ? "match"
     : "ask";
+}
+export function submitComposerOnEnter(
+  event: KeyboardEvent<HTMLTextAreaElement>,
+  enabled: boolean,
+) {
+  if (
+    event.key !== "Enter" ||
+    event.shiftKey ||
+    event.nativeEvent.isComposing ||
+    event.keyCode === 229
+  )
+    return;
+  event.preventDefault();
+  if (!event.repeat && enabled) event.currentTarget.form?.requestSubmit();
 }

@@ -1,5 +1,6 @@
 import "server-only";
 import { z } from "zod";
+import { answerDisplay } from "../answer-display";
 import { database } from "../db";
 import { primaryAccountId } from "../account-id";
 import { complete } from "../ai/openrouter";
@@ -20,12 +21,15 @@ import type { Career, CareerRecord } from "../career/model";
 import type { Workspace } from "../workspaces/model";
 import type { Presentation } from "../markets";
 import type { UsageContext } from "../usage/service";
+import { measure } from "../performance";
 
 export async function publishedPackets(
   ids: string[],
   accountId = primaryAccountId,
 ): Promise<{ actor: ActorContext; packets: StatePacket[] }> {
-  const records = await loadBrain(database(), accountId, true);
+  const records = await measure("evidence_recheck", () =>
+    loadBrain(database(), accountId, true),
+  );
   const selected = packets(records, ids) as StatePacket[];
   // Display summaries/relationship labels are not factual shortcuts to generation.
   return {
@@ -135,7 +139,7 @@ export async function answerPackets(
         "The available evidence needs review before this question can be answered reliably.",
       evidence_ids: [],
     };
-  return answer;
+  return { ...answer, answer: answerDisplay(answer.answer) };
 }
 export async function compileGroundedResume(
   career: Career,

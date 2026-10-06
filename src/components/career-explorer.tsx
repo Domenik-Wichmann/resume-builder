@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import type { deriveExplorer } from "@/lib/portfolio/explorer";
 import { rememberWorkspace, sendExploreSignal } from "./explore-signal";
+import { languagesGroupId } from "@/lib/career/grouping";
 export function CareerExplorer({
   data,
 }: {
@@ -13,6 +14,8 @@ export function CareerExplorer({
     [workspace, setWorkspace] = useState(""),
     [notice, setNotice] = useState("");
   const skill = data.skills.find((s) => s.id === selected);
+  const [view, setView] = useState("all");
+  const uncategorized = data.skills.filter((row) => row.category_id === null);
   if (!data.skills.length)
     return (
       <div className="empty-state">
@@ -62,8 +65,35 @@ export function CareerExplorer({
         </p>
         <p role="status">{notice}</p>
       </div>
+      <div
+        className="explorer-skill-views"
+        role="group"
+        aria-label="Skill views"
+      >
+        <button
+          aria-pressed={view === "all"}
+          onClick={() => {
+            setView("all");
+            if (!selected) setSelected(data.skills[0]?.id || "");
+          }}
+        >
+          Show all skills ({data.skills.length})
+        </button>
+        <button
+          aria-pressed={view === "uncategorized"}
+          onClick={() => {
+            setView("uncategorized");
+            setSelected(uncategorized[0]?.id || "");
+          }}
+        >
+          Uncategorized ({uncategorized.length})
+        </button>
+      </div>
       <div className="explorer-layout">
         <div className="skill-map" aria-label="Career skill navigation">
+          {view === "uncategorized" && !uncategorized.length && (
+            <p>No uncategorized skills.</p>
+          )}
           {[
             ...data.categories,
             {
@@ -72,6 +102,7 @@ export function CareerExplorer({
               summary: "",
             },
           ].map((c) => {
+            if (view === "uncategorized" && c.id) return null;
             const skills = data.skills.filter(
               (s) => (s.category_id || "") === c.id,
             );
@@ -82,7 +113,7 @@ export function CareerExplorer({
                   className="category-node"
                   onClick={() => {
                     setNotice(c.summary || c.title);
-                    if (c.id)
+                    if (c.id && c.id !== languagesGroupId)
                       void sendExploreSignal(
                         "category",
                         c.id,
@@ -100,11 +131,12 @@ export function CareerExplorer({
                       aria-pressed={s.id === selected}
                       onClick={() => {
                         setSelected(s.id);
-                        void sendExploreSignal(
-                          "skill",
-                          s.id,
-                          workspace || undefined,
-                        );
+                        if (s.kind === "skill")
+                          void sendExploreSignal(
+                            "skill",
+                            s.id,
+                            workspace || undefined,
+                          );
                       }}
                     >
                       {s.name}
@@ -118,7 +150,11 @@ export function CareerExplorer({
         </div>
         {skill && (
           <aside className="surface skill-detail">
-            <p className="eyebrow">Evidence explorer</p>
+            <p className="eyebrow">
+              {skill.kind === "language"
+                ? "Language evidence"
+                : "Evidence explorer"}
+            </p>
             <h2>{skill.name}</h2>
             <p>{skill.description || "No description published."}</p>
             <p>{skill.evidence_count} supporting career records</p>

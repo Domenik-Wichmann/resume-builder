@@ -17,11 +17,15 @@ import {
   browserRememberWorkspaceSlot,
 } from "@/lib/workspaces/browser";
 import type { WorkspaceSlot, WorkspaceSlots } from "@/lib/workspaces/slots";
-import { initialInputKind } from "@/lib/workspaces/input";
+import {
+  initialInputKind,
+  submitComposerOnEnter,
+} from "@/lib/workspaces/input";
 import { rememberWorkspace } from "./explore-signal";
 import { SafeMarkdown } from "./safe-markdown";
 import { HumanVerification } from "./human-verification";
 import { EvidenceMap } from "./evidence-map";
+import { answerDisplay } from "@/lib/answer-display";
 import { ResumeDocument } from "./resume-document";
 import { ResumeRenderer } from "./resume-renderer";
 import type { ResumeDesign } from "@/lib/resume-design/model";
@@ -65,14 +69,21 @@ export function CareerChat({
   const [input, setInput] = useState(initialInput);
   const [mode, setMode] = useState<"auto" | "ask" | "match">("auto");
   const [busy, setBusy] = useState(false);
+  const [pending, setPending] = useState<{
+    input: string;
+    kind: "ask" | "match";
+  } | null>(null);
   const [status, setStatus] = useState("");
   const [error, setError] = useState("");
   const [slots, setSlots] = useState<WorkspaceSlots>([null, null]);
   const [slot, setSlot] = useState<WorkspaceSlot>(0);
   const [slotsReady, setSlotsReady] = useState(false);
+  const [slotsAttempt, setSlotsAttempt] = useState(0);
   const [explorerCollapsed, setExplorerCollapsed] = useState(false);
   const [evidenceCollapsed, setEvidenceCollapsed] = useState(false);
   const messageField = useRef<HTMLTextAreaElement>(null);
+  const results = useRef<HTMLDivElement>(null);
+  const pendingMessage = useRef<HTMLElement>(null);
   const lock = useRef(false);
   useEffect(() => {
     let cancelled = false;
@@ -109,7 +120,7 @@ export function CareerChat({
     return () => {
       cancelled = true;
     };
-  }, [initialWorkspace]);
+  }, [initialWorkspace, slotsAttempt]);
   useLayoutEffect(() => {
     const field = messageField.current;
     if (!field) return;
@@ -130,11 +141,32 @@ export function CareerChat({
     observer.observe(field);
     return () => observer.disconnect();
   }, [input]);
+  useLayoutEffect(() => {
+    const container = results.current;
+    const message = pendingMessage.current;
+    if (!pending || !container || !message || panel !== "chat") return;
+    // Scroll only this conversation, without moving the page or its side panels.
+    container.scrollTo({
+      top:
+        container.scrollTop +
+        message.getBoundingClientRect().top -
+        container.getBoundingClientRect().top,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "instant"
+        : "smooth",
+    });
+  }, [pending, panel]);
   const started = Boolean(
     workspace?.questions.length || workspace?.job_description,
   );
   const kind =
     mode === "auto" ? (started ? "ask" : initialInputKind(input)) : mode;
+  const canSubmit =
+    !busy &&
+    slotsReady &&
+    input.trim().length >= 3 &&
+    (kind !== "ask" ||
+      (input.length <= 1000 && (workspace?.questions.length || 0) < 50));
   async function switchWorkspace(next: WorkspaceSlot) {
     if (lock.current || next === slot) return;
     lock.current = true;
@@ -169,14 +201,18 @@ export function CareerChat({
   }
   async function submit(event: FormEvent) {
     event.preventDefault();
-    if (lock.current || !slotsReady) return;
+    if (lock.current || !canSubmit) return;
     lock.current = true;
     setBusy(true);
     setError("");
+    const submitted = { input, kind };
+    const submittedMode = mode;
+    let committed = false;
+    setPending(submitted);
+    setInput("");
+    messageField.current?.focus();
     try {
-      setStatus("Opening your workspace…");
-      const available = await browserWorkspaceSlots();
-      const existing = available[slot];
+      const existing = slots[slot];
       const current =
         workspace && workspace.id === existing
           ? workspace
@@ -185,22 +221,30 @@ export function CareerChat({
             : await browserCreateWorkspace();
       setWorkspace(current);
       browserRememberWorkspaceSlot(current.id, slot);
-      setSlots(await browserWorkspaceSlots());
-      rememberWorkspace(current.id);
-      setStatus(
-        kind === "match"
-          ? "Matching the role to published evidence…"
-          : "Finding evidence for your question…",
+      setSlots((previous) =>
+        slot === 0 ? [current.id, previous[1]] : [previous[0], current.id],
       );
-      const result = await browserWorkspaceAction(current, kind, input);
+      rememberWorkspace(current.id);
+      const result = await browserWorkspaceAction(
+        current,
+        submitted.kind,
+        submitted.input,
+      );
+      committed = true;
       setWorkspace(result.workspace);
-      setInput("");
+      setPending(null);
       setIR(null);
       setMode("auto");
-      if (kind === "match") await compile(result.workspace);
+      if (submitted.kind === "match") await compile(result.workspace);
     } catch (err) {
+      // A failed preview must not turn a persisted role match into a second send.
+      if (!committed) {
+        setInput(submitted.input);
+        setMode(submittedMode);
+      }
       setError(err instanceof Error ? err.message : "Please try again.");
     } finally {
+      setPending(null);
       lock.current = false;
       setBusy(false);
       setStatus("");
@@ -312,6 +356,7 @@ export function CareerChat({
                 id="career-message"
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
+                onKeyDown={(event) => submitComposerOnEnter(event, canSubmit)}
                 placeholder={
                   started
                     ? "Ask a follow-up question…"
@@ -321,19 +366,14 @@ export function CareerChat({
                 maxLength={12000}
                 required
                 rows={1}
-                disabled={busy || !slotsReady}
+                readOnly={busy}
+                disabled={!slotsReady}
               />
               <button
                 className="composer-send"
                 type="submit"
-                disabled={
-                  busy ||
-                  !slotsReady ||
-                  input.trim().length < 3 ||
-                  (kind === "ask" &&
-                    (input.length > 1000 ||
-                      (workspace?.questions.length || 0) >= 50))
-                }
+                disabled={!canSubmit}
+                aria-busy={busy}
                 aria-label={
                   kind === "match" ? "Build tailored résumé" : "Send question"
                 }
@@ -422,10 +462,23 @@ export function CareerChat({
           )}
           {error && (
             <p role="alert" className="error">
-              {error} <Link href="/workspace">Manage workspaces</Link>
+              {error}{" "}
+              {!slotsReady && (
+                <button
+                  type="button"
+                  className="workspace-load-retry"
+                  onClick={() => {
+                    setError("");
+                    setSlotsAttempt((attempt) => attempt + 1);
+                  }}
+                >
+                  Retry
+                </button>
+              )}{" "}
+              <Link href="/workspace">Manage workspaces</Link>
             </p>
           )}
-          <div className="chat-results">
+          <div className="chat-results" ref={results}>
             {ir &&
               (design ? (
                 <ResumeRenderer ir={ir} design={design} />
@@ -434,14 +487,22 @@ export function CareerChat({
               ))}
             {workspace?.match && (
               <article className="chat-answer">
+                {workspace.job_description && (
+                  <p className="question-bubble">
+                    <span className="sr-only">You: </span>
+                    {workspace.job_description}
+                  </p>
+                )}
                 <p className="eyebrow">Role fit</p>
                 <h3>Where the experience connects</h3>
-                <SafeMarkdown text={workspace.match.overall_summary} />
+                <SafeMarkdown
+                  text={answerDisplay(workspace.match.overall_summary)}
+                />
                 <h4>Supported matches</h4>
                 <ul>
                   {workspace.match.strong_matches.map((item, i) => (
                     <li key={i}>
-                      <SafeMarkdown text={item} />
+                      <SafeMarkdown text={answerDisplay(item)} />
                     </li>
                   ))}
                 </ul>
@@ -457,13 +518,31 @@ export function CareerChat({
                 )}
               </article>
             )}
-            {workspace?.questions.map((question, index) => (
-              <article className="chat-answer" key={index}>
+            {[
+              ...(workspace?.questions || []),
+              ...(pending ? [{ question: pending.input, answer: null }] : []),
+            ].map((question, index) => (
+              <article
+                className={`chat-answer${question.answer === null ? " pending-answer" : ""}`}
+                key={index}
+                ref={question.answer === null ? pendingMessage : undefined}
+              >
                 <p className="question-bubble">
                   <span className="sr-only">You: </span>
                   {question.question}
                 </p>
-                <SafeMarkdown text={question.answer} />
+                {question.answer === null ? (
+                  <div className="answer-waiting" role="status">
+                    <span className="sr-only">Waiting for an answer</span>
+                    <span aria-hidden="true" />
+                    <span aria-hidden="true" />
+                    <span aria-hidden="true" />
+                  </div>
+                ) : (
+                  <div className="answer-content">
+                    <SafeMarkdown text={answerDisplay(question.answer)} />
+                  </div>
+                )}
               </article>
             ))}
           </div>

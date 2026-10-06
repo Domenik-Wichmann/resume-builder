@@ -1,4 +1,5 @@
 "use client";
+import { z } from "zod";
 import { workspaceSchema, type Workspace } from "./model";
 import { answerSchema, matchSchema } from "../ai/contracts";
 import { applyQuestion, applyMatch, deriveTopics } from "./context";
@@ -68,15 +69,34 @@ function saveDemo(workspace: Workspace) {
     );
   localStorage.setItem(storageKey, JSON.stringify([...others, workspace]));
 }
-async function json(response: Response) {
-  const body = await response.json();
-  if (!response.ok) throw new Error(body.error || "Request failed.");
-  return body;
+async function requestJson(
+  path: string,
+  options: RequestInit = {},
+  timeoutMs = 30000,
+) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const response = await fetch(path, {
+      ...options,
+      signal: controller.signal,
+    });
+    const body = z
+      .object({ error: z.string().optional() })
+      .passthrough()
+      .parse(await response.json());
+    if (!response.ok) throw new Error(body.error || "Request failed.");
+    return body;
+  } catch (error) {
+    if (controller.signal.aborted)
+      throw new Error("The request timed out. Please try again.");
+    throw error;
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 export async function browserListWorkspaces() {
-  const response = await json(
-    await fetch("/api/workspaces", { cache: "no-store" }),
-  );
+  const response = await requestJson("/api/workspaces", { cache: "no-store" });
   return response.mode === "demo"
     ? demoWorkspaces()
     : (response.workspaces as Pick<
@@ -86,13 +106,11 @@ export async function browserListWorkspaces() {
 }
 export async function browserCreateWorkspace() {
   const local = demoWorkspaces();
-  const response = await json(
-    await fetch("/api/workspaces", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: "{}",
-    }),
-  );
+  const response = await requestJson("/api/workspaces", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: "{}",
+  });
   const workspace = workspaceSchema.parse(response.workspace);
   if (workspace.demo) {
     if (local.length >= 2)
@@ -107,7 +125,7 @@ export async function browserLoadWorkspace(id: string) {
   const local = demoWorkspaces().find((workspace) => workspace.id === id);
   if (local) return local;
   return workspaceSchema.parse(
-    (await json(await fetch(`/api/workspaces/${id}`, { cache: "no-store" })))
+    (await requestJson(`/api/workspaces/${id}`, { cache: "no-store" }))
       .workspace,
   );
 }
@@ -121,7 +139,7 @@ export async function browserDeleteWorkspace(id: string) {
     );
     return;
   }
-  await json(await fetch(`/api/workspaces/${id}`, { method: "DELETE" }));
+  await requestJson(`/api/workspaces/${id}`, { method: "DELETE" });
 }
 export async function browserWorkspaceAction(
   workspace: Workspace,
@@ -129,13 +147,15 @@ export async function browserWorkspaceAction(
   input?: string,
 ): Promise<{ workspace: Workspace; ir?: ResumeIR }> {
   if (!workspace.demo) {
-    const body = await json(
-      await fetch(`/api/workspaces/${workspace.id}`, {
+    const body = await requestJson(
+      `/api/workspaces/${workspace.id}`,
+      {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ action, ...(input ? { input } : {}) }),
-        signal: AbortSignal.timeout(65000),
-      }),
+      },
+      // Allow the server's 300-second action limit to finish before aborting.
+      305000,
     );
     return {
       workspace: workspaceSchema.parse(body.workspace),
@@ -169,13 +189,14 @@ export async function browserWorkspaceAction(
       }),
     };
   }
-  const body = await json(
-    await fetch(`/api/${action}`, {
+  const body = await requestJson(
+    `/api/${action}`,
+    {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ input }),
-      signal: AbortSignal.timeout(65000),
-    }),
+    },
+    305000,
   );
   const evidence = workspaceSchema.shape.evidence.parse(body.evidence);
   const updated =

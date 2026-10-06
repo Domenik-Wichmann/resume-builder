@@ -6,6 +6,7 @@ import { readSession, resolveLink } from "../tracking/service";
 import { validateEnv } from "../env";
 import { HttpError, reserveAIQuota } from "../http";
 import { accessConfig, requiresVerification } from "./config";
+import { isOwner } from "../admin";
 function cookieValue(request: Request, name: string) {
   return request.headers
     .get("cookie")
@@ -15,8 +16,13 @@ function cookieValue(request: Request, name: string) {
     ?.slice(name.length + 1);
 }
 export async function verificationStatus(request: Request) {
+  return verificationFor(request, await isOwner(request));
+}
+async function verificationFor(request: Request, owner: boolean) {
   const config = accessConfig(process.env),
     visitor = readVisitor(cookieValue(request, visitorCookie));
+  if (owner)
+    return { visitor, required: false, siteKey: config.siteKey, mode: "OWNER" };
   const tracked = readSession(cookieValue(request, "rb_ai_access") || "");
   const link = tracked ? await resolveLink(tracked.code) : null;
   let verifiedUntil: string | null = null;
@@ -47,7 +53,10 @@ export async function reservePublicAction(
   workspaceId?: string,
 ) {
   if (validateEnv(process.env).mode === "demo") return async () => {};
-  const state = await verificationStatus(request);
+  // This only exempts the configured, Auth-verified owner from spending limits.
+  // Workspace ownership and transactional action leases are checked separately.
+  if (await isOwner(request)) return async () => {};
+  const state = await verificationFor(request, false);
   if (!state.visitor)
     throw new HttpError(
       428,

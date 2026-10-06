@@ -1,6 +1,7 @@
 import "server-only";
 import { z } from "zod";
 import { validateEnv } from "../env";
+import { measure } from "../performance";
 import { recordUsage, cohereUsage, type UsageContext } from "../usage/service";
 export class EmbeddingError extends Error {}
 export async function embed(
@@ -15,22 +16,24 @@ export async function embed(
     );
   if (!texts.length || texts.length > 32)
     throw new EmbeddingError("Embedding batches must contain 1–32 texts.");
-  const response = await fetch("https://api.cohere.com/v2/embed", {
-    method: "POST",
-    signal: AbortSignal.timeout(20000),
-    headers: {
-      Authorization: `Bearer ${env.cohereKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      model: env.embeddingModel,
-      texts,
-      input_type: inputType,
-      output_dimension: env.dimension,
-      embedding_types: ["float"],
-      truncate: "END",
+  const response = await measure("cohere", () =>
+    fetch("https://api.cohere.com/v2/embed", {
+      method: "POST",
+      signal: AbortSignal.timeout(20000),
+      headers: {
+        Authorization: `Bearer ${env.cohereKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: env.embeddingModel,
+        texts,
+        input_type: inputType,
+        output_dimension: env.dimension,
+        embedding_types: ["float"],
+        truncate: "END",
+      }),
     }),
-  }).catch(async () => {
+  ).catch(async () => {
     await recordUsage(
       "COHERE",
       env.embeddingModel,

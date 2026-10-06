@@ -14,12 +14,10 @@ export default async function ProjectPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const p = (await publicProjects()).find((p) => p.slug === slug);
+  const [projects, career] = await Promise.all([publicProjects(), getCareer()]);
+  const p = projects.find((p) => p.slug === slug);
   if (!p) notFound();
-  const [media, career] = await Promise.all([
-    projectMedia(database(), primaryAccountId, p.id),
-    getCareer(),
-  ]);
+  const media = await projectMedia(database(), primaryAccountId, p.id);
   const record = career.projects.find((r) => r.id === p.id);
   return (
     <>

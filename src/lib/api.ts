@@ -3,7 +3,11 @@ import { z } from "zod";
 import { analyze } from "./ai/service";
 import { readJson, errorResponse } from "./http";
 import { reservePublicAction } from "./access/service";
+import { measure, timedResponse } from "./performance";
 export async function handleAI(request: Request, task: "ask" | "match") {
+  return timedResponse(() => handle(request, task));
+}
+async function handle(request: Request, task: "ask" | "match") {
   let release: (() => Promise<void>) | undefined;
   try {
     const { input } = await readJson(
@@ -18,7 +22,7 @@ export async function handleAI(request: Request, task: "ask" | "match") {
         })
         .strict(),
     );
-    release = await reservePublicAction(request, task);
+    release = await measure("access", () => reservePublicAction(request, task));
     return Response.json(
       await analyze(task, input, undefined, { operation: task }),
       { headers: { "Cache-Control": "no-store" } },
@@ -26,6 +30,6 @@ export async function handleAI(request: Request, task: "ask" | "match") {
   } catch (e) {
     return errorResponse(e);
   } finally {
-    await release?.();
+    if (release) await measure("release", release);
   }
 }

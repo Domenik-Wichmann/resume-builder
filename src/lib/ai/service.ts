@@ -6,13 +6,16 @@ import { validateEvidence } from "./contracts";
 import type { Workspace } from "../workspaces/model";
 import type { UsageContext } from "../usage/service";
 import { publishedPackets, answerPackets } from "../career-brain/serving";
+import type { Career } from "../career/model";
+import { measure } from "../performance";
 export async function analyze(
   task: "ask" | "match",
   input: string,
   workspace?: Workspace,
   usage: UsageContext = {},
+  currentCareer?: Career,
 ) {
-  const career = await getCareer();
+  const career = currentCareer || (await measure("career", () => getCareer()));
   const context = workspace
     ? {
         job: workspace.job_description?.slice(0, 2000),

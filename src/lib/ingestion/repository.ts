@@ -6,7 +6,7 @@ export async function loadCanonical(
   accountId: string,
   publicOnly = false,
 ): Promise<Canonical[]> {
-  const results = await Promise.all(
+  const resultsPromise = Promise.all(
     kinds.map((kind) => {
       let query = db
         .from(tableFor[kind])
@@ -17,10 +17,20 @@ export async function loadCanonical(
       return query;
     }),
   );
-  if (results.some((result) => result.error))
-    throw new Error("Cannot load canonical career records.");
-  const skillRows = results[kinds.indexOf("skill")].data || [];
-  const links = await Promise.all(
+  // Hashes describe the full canonical relationships, regardless of whether a
+  // linked record is published. Read only account-scoped identity keys here;
+  // public mappers still resolve labels from published, verified records only.
+  const referenceKinds = ["skill", "achievement", "category"] as const;
+  const referencesPromise = publicOnly
+    ? Promise.all(
+        referenceKinds.map((kind) =>
+          db.from(tableFor[kind]).select("id,slug").eq("account_id", accountId),
+        ),
+      )
+    : resultsPromise.then((results) =>
+        referenceKinds.map((kind) => results[kinds.indexOf(kind)]),
+      );
+  const linksPromise = Promise.all(
     [
       "experience_skills",
       "project_skills",
@@ -28,6 +38,18 @@ export async function loadCanonical(
       "experience_achievements",
       "project_achievements",
     ].map((table) => db.from(table).select("*").eq("account_id", accountId)),
+  );
+  const [results, references, links] = await Promise.all([
+    resultsPromise,
+    referencesPromise,
+    linksPromise,
+  ]);
+  if (results.some((result) => result.error))
+    throw new Error("Cannot load canonical career records.");
+  if (references.some((result) => result.error))
+    throw new Error("Cannot verify canonical relationship identities.");
+  const [skillRows, achievementRows, categoryRows] = references.map(
+    (result) => result.data || [],
   );
   if (links.some((result) => result.error))
     throw new Error("Cannot load canonical relationships.");
@@ -69,7 +91,7 @@ export async function loadCanonical(
           ? (links[kind === "experience" ? 3 : 4].data || [])
               .filter((link) => link[kind + "_id"] === row.id)
               .flatMap((link) =>
-                (results[kinds.indexOf("achievement")].data || [])
+                achievementRows
                   .filter(
                     (achievement) => achievement.id === link.achievement_id,
                   )
@@ -78,9 +100,8 @@ export async function loadCanonical(
           : [],
         category_key:
           kind === "skill"
-            ? (results[kinds.indexOf("category")].data || []).find(
-                (category) => category.id === row.category_id,
-              )?.slug || null
+            ? categoryRows.find((category) => category.id === row.category_id)
+                ?.slug || null
             : null,
         uncertainties: [],
         hash: row.semantic_hash,

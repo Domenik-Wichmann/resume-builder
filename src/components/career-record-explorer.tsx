@@ -14,6 +14,8 @@ import {
   filterRecords,
   kindLabels,
   publishable,
+  recordGroups,
+  recordsForKind,
   selectionFor,
   type ExplorerData,
   type RecordAction,
@@ -236,6 +238,7 @@ export function CareerRecordExplorer({
 }) {
   const { records, sources } = data;
   const [filters, setFilters] = useState(initialFilters);
+  const [subcategory, setSubcategory] = useState("all");
   const deferredQuery = useDeferredValue(filters.query);
   const [limit, setLimit] = useState(24);
   const [selected, setSelected] = useState<string[]>([]);
@@ -252,7 +255,23 @@ export function CareerRecordExplorer({
   const locked = useRef(false);
   const channel = useRef<BroadcastChannel | null>(null);
   const active = records.find((row) => row.id === activeId);
-  const filtered = filterRecords(records, { ...filters, query: deferredQuery });
+  const scoped = filterRecords(records, { ...filters, kind: "all", query: "" });
+  const matching = filterRecords(
+    recordsForKind(scoped, filters.kind, records),
+    { ...filters, kind: "all", query: deferredQuery },
+    records,
+  );
+  const groups = recordGroups(scoped, filters.kind, records);
+  const groupedIds = new Set(groups.flatMap((group) => group.recordIds));
+  const selectedGroup = groups.find((group) => group.id === subcategory);
+  const filtered = matching.filter((row) =>
+    subcategory === "uncategorized"
+      ? !groupedIds.has(row.id)
+      : subcategory === "all"
+        ? true
+        : selectedGroup?.recordIds.includes(row.id),
+  );
+  const showSubcategories = filters.kind === "skill" || groups.length > 0;
   const facets = filterRecords(records, {
     ...filters,
     query: deferredQuery,
@@ -278,12 +297,19 @@ export function CareerRecordExplorer({
       return;
     }
     setFilters((old) => ({ ...old, ...patch }));
+    if (patch.kind !== undefined) setSubcategory("all");
+    setLimit(24);
+  }
+  function selectSubcategory(id: string) {
+    if (editing || busy) return;
+    setSubcategory(id);
     setLimit(24);
   }
   function open(id: string, reveal = false) {
     if (editing || busy) return;
     if (reveal) {
       setFilters(initialFilters);
+      setSubcategory("all");
       setLimit(Math.max(24, records.length));
     }
     setActiveId(id);
@@ -457,10 +483,82 @@ export function CareerRecordExplorer({
             onClick={() => updateFilters({ kind })}
           >
             {kindLabels[kind]}{" "}
-            <span>{facets.filter((r) => r.kind === kind).length}</span>
+            <span>
+              {
+                filterRecords(
+                  recordsForKind(scoped, kind, records),
+                  { ...filters, kind: "all", query: deferredQuery },
+                  records,
+                ).length
+              }
+            </span>
           </button>
         ))}
       </div>
+      {showSubcategories && (
+        <section
+          className="record-subcategories"
+          aria-label="Record subcategories"
+        >
+          <p>
+            {filters.kind === "skill"
+              ? "Skill categories"
+              : filters.kind === "experience"
+                ? "Employers"
+                : filters.kind === "education"
+                  ? "Schools & institutions"
+                  : filters.kind === "certification"
+                    ? "Issuers"
+                    : "Organizations"}
+          </p>
+          <div
+            className="record-type-tabs"
+            role="group"
+            aria-label="Subcategory filters"
+          >
+            <button
+              className={subcategory === "all" ? "active" : ""}
+              aria-pressed={subcategory === "all"}
+              disabled={editing || busy}
+              onClick={() => selectSubcategory("all")}
+            >
+              Show all{" "}
+              {kindLabels[
+                filters.kind as keyof typeof kindLabels
+              ]?.toLowerCase()}{" "}
+              <span>{matching.length}</span>
+            </button>
+            <button
+              className={subcategory === "uncategorized" ? "active" : ""}
+              aria-pressed={subcategory === "uncategorized"}
+              disabled={editing || busy}
+              onClick={() => selectSubcategory("uncategorized")}
+            >
+              Uncategorized{" "}
+              <span>
+                {matching.filter((row) => !groupedIds.has(row.id)).length}
+              </span>
+            </button>
+            {groups.map((group) => {
+              const count = matching.filter((row) =>
+                group.recordIds.includes(row.id),
+              ).length;
+              if (!count && subcategory !== group.id) return null;
+              return (
+                <button
+                  key={group.id}
+                  className={subcategory === group.id ? "active" : ""}
+                  aria-pressed={subcategory === group.id}
+                  disabled={editing || busy}
+                  onClick={() => selectSubcategory(group.id)}
+                >
+                  {group.title} <span>{count}</span>
+                </button>
+              );
+            })}
+          </div>
+        </section>
+      )}
       <div className="record-filters">
         <label>
           Status
@@ -628,6 +726,7 @@ export function CareerRecordExplorer({
               className="record-button secondary"
               onClick={() => {
                 setFilters(initialFilters);
+                setSubcategory("all");
                 setLimit(24);
               }}
             >

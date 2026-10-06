@@ -1,0 +1,17 @@
+.git/
+.vercel/
+.next/
+node_modules/
+.env*
+.aws/
+.agents/
+.codex/
+.supabase/
+supabase/.temp/
+local-career-ingest/
+docs/
+experiments/
+tests/
+scripts/
+AGENTS.md
+release-*

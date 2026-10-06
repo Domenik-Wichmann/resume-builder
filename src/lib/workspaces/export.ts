@@ -1,4 +1,5 @@
 import type { Workspace } from "./model";
+import { answerDisplay } from "../answer-display";
 /** An explicit allowlist excludes source IDs, vectors, prompts, and attribution metadata. */
 export function exportWorkspaceText(workspace: Workspace) {
   const lines = [
@@ -13,9 +14,11 @@ export function exportWorkspaceText(workspace: Workspace) {
   if (workspace.match)
     lines.push(
       "\nMATCH FINDINGS",
-      workspace.match.overall_summary,
+      answerDisplay(workspace.match.overall_summary),
       "Supported matches:",
-      ...workspace.match.strong_matches.map((item) => `- ${item}`),
+      ...workspace.match.strong_matches.map(
+        (item) => `- ${answerDisplay(item)}`,
+      ),
       "Evidence gaps:",
       ...workspace.match.gaps.map((item) => `- ${item}`),
     );
@@ -33,7 +36,7 @@ export function exportWorkspaceText(workspace: Workspace) {
     "\nQUESTIONS & ANSWERS",
     ...workspace.questions.flatMap((question) => [
       `Q: ${question.question}`,
-      `A: ${question.answer}`,
+      `A: ${answerDisplay(question.answer)}`,
       "",
     ]),
   );

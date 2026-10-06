@@ -284,6 +284,13 @@ remain active. Configure `AI_VISITOR_SPACING_SECONDS` (5),
 API callers must first POST `{}` to `/api/visitor`, retain its security cookie,
 and complete verification when required. Tracked links skip only verification.
 
+The configured site owner is exempt from visitor verification, visitor AI limits,
+and the shared AI allowance while signed in through `/admin` or `/auth/login`.
+The server verifies the Supabase session and exact `OWNER_USER_ID` before applying
+the exception, including nested provider calls. Other accounts remain subject to
+public limits. Workspace ownership, action leases, input bounds, grounding and
+provider usage accounting still apply.
+
 Leave `TRIAL_CREDIT_ENABLED=false`. There is no public trial grant, purchase,
 redemption or credit-expiry engine. The service-only eligibility function requires
 configured `TRIAL_CREDIT_MICRO` and `TRIAL_CREDIT_DAYS`; expiry is readiness metadata.

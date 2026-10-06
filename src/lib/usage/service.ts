@@ -3,6 +3,7 @@ import { z } from "zod";
 import { database } from "../db";
 import { primaryAccountId } from "../account-id";
 import { validateEnv } from "../env";
+import { measure } from "../performance";
 export type UsageContext = {
   accountId?: string;
   workspaceId?: string;
@@ -34,23 +35,27 @@ export async function recordUsage(
   status: "SUCCESS" | "FAILED",
 ) {
   if (validateEnv(process.env).mode === "demo") return;
-  const saved = await database()
-    .from("provider_usage_events")
-    .insert({
-      account_id: context.accountId || primaryAccountId,
-      provider,
-      model,
-      operation_type: context.operation || "provider_call",
-      input_tokens: usage.input ?? null,
-      output_tokens: usage.output ?? null,
-      units: usage.units ?? null,
-      provider_cost_micro:
-        usage.cost === undefined ? null : dollarsToMicro(usage.cost),
-      platform_charge_micro: null,
-      workspace_id: context.workspaceId || null,
-      application_id: context.applicationId || null,
-      status,
-    });
+  const saved = await measure("usage_write", () =>
+    Promise.resolve(
+      database()
+        .from("provider_usage_events")
+        .insert({
+          account_id: context.accountId || primaryAccountId,
+          provider,
+          model,
+          operation_type: context.operation || "provider_call",
+          input_tokens: usage.input ?? null,
+          output_tokens: usage.output ?? null,
+          units: usage.units ?? null,
+          provider_cost_micro:
+            usage.cost === undefined ? null : dollarsToMicro(usage.cost),
+          platform_charge_micro: null,
+          workspace_id: context.workspaceId || null,
+          application_id: context.applicationId || null,
+          status,
+        }),
+    ),
+  );
   if (saved.error) throw new Error("Provider usage could not be recorded.");
 }
 // No signup/UI invokes this. Eligibility is a trusted service decision; configuration alone never enables grants.

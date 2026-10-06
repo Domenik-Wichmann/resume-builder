@@ -1,5 +1,11 @@
 import type { BrainRecord } from "./repository";
 import type { Candidate } from "../ingestion/model";
+import {
+  groupingKey,
+  isLanguageCategory,
+  languagesGroupId,
+  sharedLanguages,
+} from "../career/grouping";
 export const kindLabels: Record<Candidate["kind"], string> = {
   profile: "Profile",
   experience: "Experiences",
@@ -71,10 +77,28 @@ export function publishable(row: BrainRecord) {
   );
 }
 export function connectedRecords(row: BrainRecord, records: BrainRecord[]) {
+  const languageSkillKeys =
+    row.kind === "language"
+      ? new Set(
+          records
+            .filter(
+              (other) =>
+                other.kind === "skill" &&
+                groupingKey(other.title) === groupingKey(row.title),
+            )
+            .map((other) => other.key),
+        )
+      : new Set<string>();
   return records.filter(
     (other) =>
       other.id !== row.id &&
-      ((other.kind === "skill" && row.skill_keys.includes(other.key)) ||
+      ((other.kind === "skill" &&
+        (row.skill_keys.includes(other.key) ||
+          languageSkillKeys.has(other.key))) ||
+        other.skill_keys.some((key) => languageSkillKeys.has(key)) ||
+        (row.kind === "skill" &&
+          other.kind === "language" &&
+          groupingKey(row.title) === groupingKey(other.title)) ||
         (other.kind === "achievement" &&
           row.achievement_keys.includes(other.key)) ||
         (other.kind === "category" && row.category_key === other.key) ||
@@ -92,11 +116,94 @@ export type RecordFilters = {
   connections: string;
   sort: string;
 };
-export function filterRecords(records: BrainRecord[], filters: RecordFilters) {
+export type RecordGroup = { id: string; title: string; recordIds: string[] };
+export function recordsForKind(
+  rows: BrainRecord[],
+  kind: string,
+  allRecords = rows,
+): BrainRecord[] {
+  if (kind === "all") return rows;
+  if (kind !== "skill" && kind !== "language")
+    return rows.filter((row) => row.kind === kind);
+  const categoryKeys = new Set(
+    allRecords
+      .filter((row) => row.kind === "category" && isLanguageCategory(row.title))
+      .map((row) => row.key),
+  );
+  const skills = rows.filter((row) => row.kind === "skill");
+  const languageRows = rows.filter((row) => row.kind === "language");
+  const names = new Set(languageRows.map((row) => groupingKey(row.title)));
+  const languageSkills = skills.filter(
+    (row) =>
+      names.has(groupingKey(row.title)) ||
+      (row.category_key !== null && categoryKeys.has(row.category_key)),
+  );
+  const languages = sharedLanguages(languageRows, languageSkills);
+  return kind === "language"
+    ? languages
+    : [...skills.filter((row) => !languageSkills.includes(row)), ...languages];
+}
+export function recordGroups(
+  records: BrainRecord[],
+  kind: string,
+  allRecords = records,
+): RecordGroup[] {
+  if (
+    ![
+      "skill",
+      "experience",
+      "project",
+      "achievement",
+      "education",
+      "certification",
+    ].includes(kind)
+  )
+    return [];
+  const groups = new Map<string, RecordGroup>();
+  const languages =
+    kind === "skill" ? recordsForKind(records, "language", allRecords) : [];
+  if (languages.length)
+    groups.set(languagesGroupId, {
+      id: languagesGroupId,
+      title: "Languages",
+      recordIds: languages.map((record) => record.id),
+    });
+  const languageIds = new Set(languages.map((record) => record.id));
+  for (const row of recordsForKind(records, kind, allRecords).filter(
+    (row) => !languageIds.has(row.id),
+  )) {
+    const category =
+      kind === "skill"
+        ? allRecords.find(
+            (record) =>
+              record.kind === "category" && record.key === row.category_key,
+          )
+        : undefined;
+    const title = kind === "skill" ? category?.title : row.organization?.trim();
+    if (!title) continue;
+    // Owner views retain archived category connections so they can be repaired.
+    const id = category
+      ? `category:${category.id}`
+      : `organization:${groupingKey(title)}`;
+    const group = groups.get(id) || {
+      id,
+      title: category?.archived ? `${title} (in Trash)` : title,
+      recordIds: [],
+    };
+    group.recordIds.push(row.id);
+    groups.set(id, group);
+  }
+  return [...groups.values()].sort((a, b) => a.title.localeCompare(b.title));
+}
+export function filterRecords(
+  records: BrainRecord[],
+  filters: RecordFilters,
+  relationshipRecords = records,
+) {
   const query = filters.query.trim().toLocaleLowerCase();
   return records
     .filter((row) => {
-      const connections = connectedRecords(row, records).length;
+      const connections = connectedRecords(row, relationshipRecords).length;
       return (
         (filters.kind === "all" || row.kind === filters.kind) &&
         (filters.status === "trash"
@@ -134,8 +241,8 @@ export function filterRecords(records: BrainRecord[], filters: RecordFilters) {
       filters.sort === "recent"
         ? b.updated_at.localeCompare(a.updated_at)
         : filters.sort === "connections"
-          ? connectedRecords(b, records).length -
-              connectedRecords(a, records).length ||
+          ? connectedRecords(b, relationshipRecords).length -
+              connectedRecords(a, relationshipRecords).length ||
             a.title.localeCompare(b.title)
           : a.title.localeCompare(b.title),
     );

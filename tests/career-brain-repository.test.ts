@@ -10,6 +10,7 @@ import { stateDiff } from "../src/lib/career-brain/equivalence";
 import { readFile } from "node:fs/promises";
 import { semanticHash } from "../src/lib/ingestion/diff";
 import type { BrainRecord } from "../src/lib/career-brain/repository";
+import { candidateSchema } from "../src/lib/ingestion/model";
 vi.mock("../src/lib/ingestion/repository", () => ({ loadCanonical: vi.fn() }));
 async function sample(): Promise<BrainRecord> {
   const data = JSON.parse(
@@ -20,8 +21,61 @@ async function sample(): Promise<BrainRecord> {
   );
   return { ...data.current[0], evidence_version: null };
 }
+it("verifies canonical hashes and exact source offsets on the consolidated public path", async () => {
+  const r = await sample();
+  const canonical = {
+    ...candidateSchema.strip().parse(r),
+    id: r.id,
+    hash: r.hash,
+    published: true,
+    archived: false,
+    updated_at: r.updated_at,
+  };
+  const quote = r.claims[0].evidence[0].quote;
+  const sourceId = "11111111-1111-4111-8111-111111111111";
+  const snapshot = {
+    canonical: [canonical],
+    evidence: [
+      {
+        kind: r.kind,
+        entity_id: r.id,
+        canonical_hash: r.hash,
+        aliases: [],
+        updated_at: r.updated_at,
+        claims: [
+          {
+            ...r.claims[0],
+            availability: "CONFIRMED",
+            evidence: [
+              { quote, start: 0, end: quote.length, source_id: sourceId },
+            ],
+          },
+        ],
+      },
+    ],
+    sources: [{ id: sourceId, evidence_text: quote }],
+  };
+  const rpc = vi
+    .fn()
+    .mockImplementation(async () => ({ data: snapshot, error: null }));
+  const db = { rpc } as unknown as SupabaseClient;
+  expect((await loadBrain(db, "tenant", true))[0].claims[0].availability).toBe(
+    "CONFIRMED",
+  );
+  snapshot.sources[0].evidence_text = "Wrong offset " + quote;
+  expect((await loadBrain(db, "tenant", true))[0].claims[0].availability).toBe(
+    "PENDING_REVIEW",
+  );
+  canonical.summary = "Changed facts with an old hash";
+  expect((await loadBrain(db, "tenant", true))[0].claims).toEqual([]);
+  rpc.mockResolvedValueOnce({ data: null, error: { code: "42501" } });
+  await expect(loadBrain(db, "tenant", true)).rejects.toThrow(
+    "Cannot load public career snapshot",
+  );
+});
 function database(tables: Record<string, unknown[]>) {
   return {
+    rpc: async () => ({ data: null, error: { code: "PGRST202" } }),
     from: (table: string) => {
       const query = {
         data: tables[table] || [],

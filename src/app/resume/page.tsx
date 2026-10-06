@@ -7,11 +7,11 @@ import { generalResumeIR } from "@/lib/resume-design/from-career";
 import { ResumeRenderer } from "@/components/resume-renderer";
 export const dynamic = "force-dynamic";
 export default async function Resume() {
-  const [career, design] = await Promise.all([
+  const [career, design, presentation] = await Promise.all([
     getResume(),
     publicResumeDesign(),
+    currentMarket().then(getPresentation),
   ]);
-  const presentation = await getPresentation(await currentMarket());
   return (
     <main id="main" className="resume-page">
       <div className="resume-toolbar">

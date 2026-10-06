@@ -2,6 +2,10 @@ import { afterEach, expect, it, vi } from "vitest";
 
 vi.mock("../src/lib/db", () => ({
   database: () => ({
+    rpc: () => ({
+      data: { canonical: [], evidence: [], sources: [] },
+      error: null,
+    }),
     from: () => {
       const query = {
         data: [],

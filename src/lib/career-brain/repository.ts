@@ -11,6 +11,8 @@ import {
   type RichCandidate,
 } from "./model";
 import { availability, type StateRecord } from "./state";
+import { measure } from "../performance";
+import { publicSnapshot, type EvidenceRow } from "./public-snapshot";
 
 const storedClaim = claimSchema.safeExtend({
   availability,
@@ -38,22 +40,42 @@ export async function loadBrain(
   accountId: string,
   publicOnly = false,
 ): Promise<BrainRecord[]> {
-  const current = await loadCanonical(db, accountId, publicOnly);
-  const evidence = await db
-    .from("career_record_evidence")
-    .select(
-      "kind,entity_id,canonical_version,canonical_hash,aliases,claims,updated_at",
-    )
-    .eq("account_id", accountId);
+  if (publicOnly) {
+    const snapshot = await measure("public_snapshot", () =>
+      Promise.resolve(
+        db.rpc("read_public_career_snapshot", { p_account: accountId }),
+      ),
+    );
+    if (!snapshot.error) {
+      const data = publicSnapshot.parse(snapshot.data);
+      return verifyRecords(
+        selectEvidence(data.canonical, data.evidence),
+        data.sources,
+      );
+    }
+    // Rolling deployments may serve code before the additive RPC migration.
+    // Only a missing function falls back; authorization/database failures close.
+    if (snapshot.error.code !== "PGRST202")
+      throw new Error("Cannot load public career snapshot");
+  }
+  const [current, evidence] = await Promise.all([
+    measure("canonical", () => loadCanonical(db, accountId, publicOnly)),
+    measure("claims", () =>
+      Promise.resolve(
+        db
+          .from("career_record_evidence")
+          .select(
+            "kind,entity_id,canonical_version,canonical_hash,aliases,claims,updated_at",
+          )
+          .eq("account_id", accountId),
+      ),
+    ),
+  ]);
   if (evidence.error) throw new Error("Cannot load approved claim evidence");
-  const selected = current.map((r) => ({
-    r,
-    e: evidence.data.find((e) => e.kind === r.kind && e.entity_id === r.id),
-  }));
+  const selected = selectEvidence(current, evidence.data);
   const sourceIds = [
     ...new Set(
-      selected.flatMap(({ e }) => {
-        const parsed = z.array(storedClaim).max(100).safeParse(e?.claims);
+      selected.flatMap(({ claims: parsed }) => {
         return parsed.success
           ? parsed.data.flatMap((c) => c.evidence.map((s) => s.source_id))
           : [];
@@ -61,42 +83,62 @@ export async function loadBrain(
     ),
   ];
   const sources = sourceIds.length
-    ? await db
-        .from("career_sources")
-        .select("id,evidence_text")
-        .eq("account_id", accountId)
-        .in("id", sourceIds)
+    ? await measure("sources", () =>
+        Promise.resolve(
+          db
+            .from("career_sources")
+            .select("id,evidence_text")
+            .eq("account_id", accountId)
+            .in("id", sourceIds),
+        ),
+      )
     : { data: [], error: null };
   if (sources.error)
     throw new Error("Cannot verify approved source provenance");
-  return selected.map(({ r, e }) => {
-    const claims = z.array(storedClaim).max(100).safeParse(e?.claims);
-    const valid =
-      claims.success &&
-      e?.canonical_hash === r.hash &&
-      // Publication changes updated_at without changing approved facts. Recompute
-      // the actual canonical fields so a stale/forged stored hash cannot license edits.
-      semanticHash(r) === r.hash;
-    return {
-      ...r,
-      aliases:
-        z.array(z.string().max(200)).max(12).safeParse(e?.aliases).data || [],
-      claims: valid
-        ? claims.data.map((c) => ({
-            ...c,
-            availability: c.evidence.every(
-              (s) =>
-                sources.data
-                  ?.find((x) => x.id === s.source_id)
-                  ?.evidence_text.slice(s.start!, s.end!) === s.quote,
-            )
-              ? c.availability
-              : ("PENDING_REVIEW" as const),
-          }))
-        : [],
-      evidence_version: e?.updated_at || null,
-    };
+  return verifyRecords(selected, sources.data);
+}
+function selectEvidence(current: Canonical[], evidence: EvidenceRow[]) {
+  const evidenceById = new Map(
+    evidence.map((e) => [`${e.kind}:${e.entity_id}`, e]),
+  );
+  return current.map((r) => {
+    const e = evidenceById.get(`${r.kind}:${r.id}`);
+    return { r, e, claims: z.array(storedClaim).max(100).safeParse(e?.claims) };
   });
+}
+function verifyRecords(
+  selected: ReturnType<typeof selectEvidence>,
+  sources: { id: string; evidence_text: string }[],
+): Promise<BrainRecord[]> {
+  const sourceById = new Map(sources.map((s) => [s.id, s.evidence_text]));
+  return measure("grounding", async () =>
+    selected.map(({ r, e, claims }) => {
+      const valid =
+        claims.success &&
+        e?.canonical_hash === r.hash &&
+        // Publication changes updated_at without changing approved facts. Recompute
+        // the actual canonical fields so a stale/forged stored hash cannot license edits.
+        semanticHash(r) === r.hash;
+      return {
+        ...r,
+        aliases:
+          z.array(z.string().max(200)).max(12).safeParse(e?.aliases).data || [],
+        claims: valid
+          ? claims.data.map((c) => ({
+              ...c,
+              availability: c.evidence.every(
+                (s) =>
+                  sourceById.get(s.source_id)?.slice(s.start!, s.end!) ===
+                  s.quote,
+              )
+                ? c.availability
+                : ("PENDING_REVIEW" as const),
+            }))
+          : [],
+        evidence_version: e?.updated_at || null,
+      };
+    }),
+  );
 }
 export async function sourceRevision(
   db: SupabaseClient,

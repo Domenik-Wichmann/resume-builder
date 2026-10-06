@@ -1,0 +1,60 @@
+{"path":"/","run":1,"status":200,"ms":356.6,"bytes":14954,"timing":null}
+{"path":"/","run":2,"status":200,"ms":27.6,"bytes":14954,"timing":null}
+{"path":"/","run":3,"status":200,"ms":22,"bytes":14954,"timing":null}
+{"path":"/","run":4,"status":200,"ms":25.9,"bytes":14954,"timing":null}
+{"path":"/","run":5,"status":200,"ms":21.9,"bytes":14954,"timing":null}
+{"path":"/","run":6,"status":200,"ms":23.4,"bytes":14954,"timing":null}
+{"path":"/explore","run":1,"status":200,"ms":43.3,"bytes":13555,"timing":null}
+{"path":"/explore","run":2,"status":200,"ms":19.8,"bytes":13555,"timing":null}
+{"path":"/explore","run":3,"status":200,"ms":17.4,"bytes":13555,"timing":null}
+{"path":"/explore","run":4,"status":200,"ms":14.9,"bytes":13555,"timing":null}
+{"path":"/explore","run":5,"status":200,"ms":13,"bytes":13555,"timing":null}
+{"path":"/explore","run":6,"status":200,"ms":14,"bytes":13555,"timing":null}
+{"path":"/resume","run":1,"status":200,"ms":31.1,"bytes":12000,"timing":null}
+{"path":"/resume","run":2,"status":200,"ms":14.1,"bytes":12000,"timing":null}
+{"path":"/resume","run":3,"status":200,"ms":16.5,"bytes":12000,"timing":null}
+{"path":"/resume","run":4,"status":200,"ms":11.1,"bytes":12000,"timing":null}
+{"path":"/resume","run":5,"status":200,"ms":12.7,"bytes":12000,"timing":null}
+{"path":"/resume","run":6,"status":200,"ms":12.8,"bytes":12000,"timing":null}
+{"path":"/workspace","run":1,"status":200,"ms":30.6,"bytes":9332,"timing":null}
+{"path":"/workspace","run":2,"status":200,"ms":9.8,"bytes":9332,"timing":null}
+{"path":"/workspace","run":3,"status":200,"ms":10.2,"bytes":9332,"timing":null}
+{"path":"/workspace","run":4,"status":200,"ms":8.9,"bytes":9332,"timing":null}
+{"path":"/workspace","run":5,"status":200,"ms":9.8,"bytes":9332,"timing":null}
+{"path":"/workspace","run":6,"status":200,"ms":10.8,"bytes":9332,"timing":null}
+{"path":"/projects","run":1,"status":200,"ms":18,"bytes":8495,"timing":null}
+{"path":"/projects","run":2,"status":200,"ms":8,"bytes":8495,"timing":null}
+{"path":"/projects","run":3,"status":200,"ms":9.9,"bytes":8495,"timing":null}
+{"path":"/projects","run":4,"status":200,"ms":10.1,"bytes":8495,"timing":null}
+{"path":"/projects","run":5,"status":200,"ms":10.3,"bytes":8495,"timing":null}
+{"path":"/projects","run":6,"status":200,"ms":11.4,"bytes":8495,"timing":null}
+{"path":"/answers","run":1,"status":200,"ms":15.4,"bytes":8414,"timing":null}
+{"path":"/answers","run":2,"status":200,"ms":9.4,"bytes":8414,"timing":null}
+{"path":"/answers","run":3,"status":200,"ms":11.5,"bytes":8414,"timing":null}
+{"path":"/answers","run":4,"status":200,"ms":11.3,"bytes":8414,"timing":null}
+{"path":"/answers","run":5,"status":200,"ms":8.9,"bytes":8414,"timing":null}
+{"path":"/answers","run":6,"status":200,"ms":11.6,"bytes":8414,"timing":null}
+{"path":"/api/career-catalog","run":1,"status":200,"ms":21.2,"bytes":2098,"timing":"catalog;dur=8.2, total;dur=8.8"}
+{"path":"/api/career-catalog","run":2,"status":200,"ms":7.7,"bytes":2098,"timing":"catalog;dur=2.2, total;dur=2.6"}
+{"path":"/api/career-catalog","run":3,"status":200,"ms":6.1,"bytes":2098,"timing":"catalog;dur=1.1, total;dur=1.4"}
+{"path":"/api/career-catalog","run":4,"status":200,"ms":6.3,"bytes":2098,"timing":"catalog;dur=1.1, total;dur=1.4"}
+{"path":"/api/career-catalog","run":5,"status":200,"ms":6,"bytes":2098,"timing":"catalog;dur=1.1, total;dur=1.5"}
+{"path":"/api/career-catalog","run":6,"status":200,"ms":6,"bytes":2098,"timing":"catalog;dur=1.1, total;dur=1.5"}
+{"path":"/api/workspaces","run":1,"status":200,"ms":5.8,"bytes":31,"timing":null}
+{"path":"/api/workspaces","run":2,"status":200,"ms":5.5,"bytes":31,"timing":null}
+{"path":"/api/workspaces","run":3,"status":200,"ms":6.8,"bytes":31,"timing":null}
+{"path":"/api/workspaces","run":4,"status":200,"ms":5.7,"bytes":31,"timing":null}
+{"path":"/api/workspaces","run":5,"status":200,"ms":3.9,"bytes":31,"timing":null}
+{"path":"/api/workspaces","run":6,"status":200,"ms":3.2,"bytes":31,"timing":null}
+{"path":"/api/ask","run":1,"status":200,"ms":27.7,"bytes":1176,"timing":"access;dur=0.6, career;dur=2.3, retrieval;dur=1.2, release;dur=0.1, total;dur=9.5"}
+{"path":"/api/ask","run":2,"status":200,"ms":7,"bytes":1176,"timing":"access;dur=0.4, career;dur=0.3, retrieval;dur=0.1, release;dur=0.0, total;dur=2.6"}
+{"path":"/api/ask","run":3,"status":200,"ms":7.1,"bytes":1176,"timing":"access;dur=0.3, career;dur=0.6, retrieval;dur=0.1, release;dur=0.0, total;dur=2.7"}
+{"path":"/api/ask","run":4,"status":200,"ms":7.2,"bytes":1176,"timing":"access;dur=0.4, career;dur=0.2, retrieval;dur=0.1, release;dur=0.0, total;dur=2.6"}
+{"path":"/api/ask","run":5,"status":200,"ms":6.3,"bytes":1176,"timing":"access;dur=0.4, career;dur=0.3, retrieval;dur=0.1, release;dur=0.0, total;dur=2.2"}
+{"path":"/api/ask","run":6,"status":200,"ms":6.5,"bytes":1176,"timing":"access;dur=0.4, career;dur=0.3, retrieval;dur=0.1, release;dur=0.0, total;dur=2.2"}
+{"path":"/api/match","run":1,"status":200,"ms":11.3,"bytes":1541,"timing":"access;dur=0.3, career;dur=0.2, retrieval;dur=0.1, release;dur=0.0, total;dur=2.3"}
+{"path":"/api/match","run":2,"status":200,"ms":7.8,"bytes":1541,"timing":"access;dur=0.3, career;dur=0.2, retrieval;dur=0.1, release;dur=0.0, total;dur=2.0"}
+{"path":"/api/match","run":3,"status":200,"ms":6.5,"bytes":1541,"timing":"access;dur=0.3, career;dur=0.3, retrieval;dur=0.1, release;dur=0.0, total;dur=2.3"}
+{"path":"/api/match","run":4,"status":200,"ms":12.6,"bytes":1541,"timing":"access;dur=0.3, career;dur=0.3, retrieval;dur=0.1, release;dur=0.0, total;dur=2.2"}
+{"path":"/api/match","run":5,"status":200,"ms":7.6,"bytes":1541,"timing":"access;dur=0.3, career;dur=1.4, retrieval;dur=0.1, release;dur=0.0, total;dur=3.4"}
+{"path":"/api/match","run":6,"status":200,"ms":6.2,"bytes":1541,"timing":"access;dur=0.4, career;dur=0.3, retrieval;dur=0.1, release;dur=0.0, total;dur=2.0"}

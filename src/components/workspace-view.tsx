@@ -8,6 +8,7 @@ import type { Workspace } from "@/lib/workspaces/model";
 import type { ResumeDesign } from "@/lib/resume-design/model";
 import { CareerChat } from "./career-chat";
 import { exportWorkspaceText } from "@/lib/workspaces/export";
+import { answerDisplay } from "@/lib/answer-display";
 import type { Market } from "@/lib/markets";
 
 import { rememberWorkspace } from "./explore-signal";
@@ -90,11 +91,11 @@ export function WorkspaceView({
           {workspace.match && (
             <section>
               <h2>Match findings</h2>
-              <p>{workspace.match.overall_summary}</p>
+              <p>{answerDisplay(workspace.match.overall_summary)}</p>
               <h3>Supported matches</h3>
               <ul>
                 {workspace.match.strong_matches.map((item) => (
-                  <li key={item}>{item}</li>
+                  <li key={item}>{answerDisplay(item)}</li>
                 ))}
               </ul>
               <h3>Evidence gaps</h3>
@@ -121,7 +122,7 @@ export function WorkspaceView({
             {workspace.questions.map((question, index) => (
               <div className="resume-record" key={index}>
                 <h3>{question.question}</h3>
-                <p>{question.answer}</p>
+                <p>{answerDisplay(question.answer)}</p>
                 <p className="muted">
                   Supporting evidence:{" "}
                   {question.evidence_ids

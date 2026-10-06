@@ -1,7 +1,6 @@
 import "server-only";
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { kinds } from "../ingestion/model";
-import { loadCanonical } from "../ingestion/repository";
+import { kinds, tableFor, type Canonical } from "../ingestion/model";
 import { database } from "../db";
 import { primaryAccountId } from "../account-id";
 import { validateEnv } from "../env";
@@ -45,13 +44,50 @@ export async function loadCards(
       ),
   }));
 }
-export async function publicAnswers() {
+export async function publicAnswers(
+  current?: Promise<
+    Pick<Canonical, "id" | "kind" | "published" | "archived">[]
+  >,
+) {
   if (validateEnv(process.env).mode === "demo") return [];
   const db = database();
-  const [cards, records] = await Promise.all([
+  const [cards, known] = await Promise.all([
     loadCards(db, primaryAccountId, true),
-    loadCanonical(db, primaryAccountId, true),
+    current,
   ]);
+  if (!cards.length) return [];
+  // Cards need publication identity only, not every canonical field/junction.
+  // A catalog request can reuse its already verified, fresh public snapshot.
+  const records =
+    known ||
+    (
+      await Promise.all(
+        kinds.map(async (kind) => {
+          const ids = [
+            ...new Set(
+              cards.flatMap((c) =>
+                c.sources.filter((s) => s.kind === kind).map((s) => s.id),
+              ),
+            ),
+          ];
+          if (!ids.length) return [];
+          const result = await db
+            .from(tableFor[kind])
+            .select("id")
+            .eq("account_id", primaryAccountId)
+            .eq("is_public", true)
+            .is("archived_at", null)
+            .in("id", ids);
+          if (result.error) throw new Error("Cannot verify answer sources.");
+          return result.data.map((r) => ({
+            id: r.id as string,
+            kind,
+            published: true,
+            archived: false,
+          }));
+        }),
+      )
+    ).flat();
   const published = new Set(
     records
       .filter((r) => r.published && !r.archived)

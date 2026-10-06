@@ -1,8 +1,9 @@
 "use client";
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { HumanVerification } from "./human-verification";
+import { submitComposerOnEnter } from "@/lib/workspaces/input";
 import {
   browserCreateWorkspace,
   browserWorkspaceAction,
@@ -13,8 +14,12 @@ export function AIPanel({ kind }: { kind: "ask" | "match" }) {
     [error, setError] = useState(""),
     [createdId, setCreatedId] = useState<string | null>(null);
   const router = useRouter();
+  const lock = useRef(false);
+  const canSubmit = !busy && !createdId && input.trim().length >= 3;
   async function submit(event: FormEvent) {
     event.preventDefault();
+    if (lock.current || !canSubmit) return;
+    lock.current = true;
     setBusy(true);
     setError("");
     try {
@@ -25,6 +30,8 @@ export function AIPanel({ kind }: { kind: "ask" | "match" }) {
     } catch (err) {
       setError(err instanceof Error ? err.message : "Please try again.");
       setBusy(false);
+    } finally {
+      lock.current = false;
     }
   }
   return (
@@ -41,6 +48,8 @@ export function AIPanel({ kind }: { kind: "ask" | "match" }) {
           rows={kind === "ask" ? 3 : 6}
           value={input}
           onChange={(event) => setInput(event.target.value)}
+          onKeyDown={(event) => submitComposerOnEnter(event, canSubmit)}
+          disabled={busy || Boolean(createdId)}
           maxLength={kind === "ask" ? 1000 : 12000}
           minLength={3}
           required
@@ -55,7 +64,7 @@ export function AIPanel({ kind }: { kind: "ask" | "match" }) {
             Creates a workspace. Questions are saved in live mode for
             exploration and owner topic analytics.
           </span>
-          <button disabled={busy || Boolean(createdId)}>
+          <button disabled={!canSubmit}>
             {busy
               ? "Opening your workspace..."
               : kind === "ask"

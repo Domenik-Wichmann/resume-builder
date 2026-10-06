@@ -11,6 +11,8 @@ import {
   connectedRecords,
   filterRecords,
   publishable,
+  recordGroups,
+  recordsForKind,
   selectionFor,
   type RecordEdit,
 } from "../src/lib/career-brain/record-view";
@@ -115,6 +117,123 @@ it("finds both directions of skill/category/achievement connections and filters 
       connections: "all",
     }),
   ).toHaveLength(1);
+});
+it("keeps private and archived skill-category relationships visible to the owner without losing uncategorized skills", () => {
+  const category = {
+    ...record("category", "Data"),
+    key: "data",
+    archived: true,
+  };
+  const linked = {
+    ...record("skill", "SQL"),
+    key: "sql",
+    category_key: "data",
+  };
+  const unassigned = { ...record("skill", "React"), key: "react" };
+  const missing = {
+    ...record("skill", "TypeScript"),
+    key: "typescript",
+    category_key: "missing",
+  };
+  const groups = recordGroups([category, linked, unassigned, missing], "skill");
+  expect(groups).toEqual([
+    {
+      id: `category:${category.id}`,
+      title: "Data (in Trash)",
+      recordIds: [linked.id],
+    },
+  ]);
+  const grouped = new Set(groups.flatMap((group) => group.recordIds));
+  expect(
+    [linked, unassigned, missing]
+      .filter((row) => !grouped.has(row.id))
+      .map((row) => row.id),
+  ).toEqual([unassigned.id, missing.id]);
+});
+it("uses only stored organizations for owner subcategories and leaves unsupported record types flat", () => {
+  const organization = {
+    ...record("experience"),
+    organization: " Fictional employer ",
+  };
+  const noOrganization = record("experience", "Work for an inferred employer");
+  expect(recordGroups([organization, noOrganization], "experience")).toEqual([
+    {
+      id: "organization:fictional employer",
+      title: "Fictional employer",
+      recordIds: [organization.id],
+    },
+  ]);
+  for (const kind of ["all", "profile", "language", "category"])
+    expect(recordGroups([{ ...organization, kind: "language" }], kind)).toEqual(
+      [],
+    );
+});
+it("owner skill-language views share canonical language records and respect publication and trash filters", () => {
+  const category = { ...record("category", "Languages"), key: "languages" };
+  const skill = { ...record("skill", "German"), category_key: "languages" };
+  const german = {
+    ...record("language", "German"),
+    key: "german",
+    summary: "Below native",
+    published: true,
+  };
+  const dutch = {
+    ...record("language", "Dutch"),
+    key: "dutch",
+    summary: "Learning",
+  };
+  const archived = {
+    ...record("language", "Archived language"),
+    key: "archived-language",
+    archived: true,
+  };
+  const rows = [category, skill, german, dutch, archived];
+  const filters = {
+    query: "",
+    kind: "all",
+    status: "all",
+    evidence: "all",
+    connections: "all",
+    sort: "name",
+  };
+  const active = filterRecords(rows, filters);
+  const languages = recordsForKind(active, "language", rows);
+  expect(languages.map((row) => row.id).sort()).toEqual(
+    [dutch.id, german.id].sort(),
+  );
+  const group = recordGroups(active, "skill", rows).find(
+    (entry) => entry.title === "Languages",
+  )!;
+  expect(
+    recordsForKind(active, "skill", rows).filter((row) =>
+      group.recordIds.includes(row.id),
+    ),
+  ).toEqual(languages);
+  const publicRows = filterRecords(rows, { ...filters, status: "published" });
+  expect(recordsForKind(publicRows, "language", rows)).toEqual([german]);
+  const trash = filterRecords(rows, { ...filters, status: "trash" });
+  expect(recordsForKind(trash, "language", rows)).toEqual([archived]);
+  expect(recordsForKind(active, "all", rows)).toContain(skill);
+});
+it("language profile details retain the original work-skill connections without connecting unrelated work", () => {
+  const language = record("language", "German");
+  const skill = { ...record("skill", "German"), key: "german" };
+  const linked = {
+    ...record("experience", "Fictional language support"),
+    key: "language-support",
+    skill_keys: ["german"],
+  };
+  const unrelated = {
+    ...record("project", "Fictional unrelated project"),
+    key: "unrelated",
+    skill_keys: ["sql"],
+  };
+  const rows = [language, skill, linked, unrelated];
+  expect(connectedRecords(language, rows).map((row) => row.id)).toEqual([
+    skill.id,
+    linked.id,
+  ]);
+  expect(connectedRecords(skill, rows)).toContain(language);
 });
 it("keeps identity and original exact proof when only the name is corrected", () => {
   const row = record();

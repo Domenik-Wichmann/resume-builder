@@ -6,13 +6,18 @@ const mocks = vi.hoisted(() => ({
   update: vi.fn(),
   resolveLink: vi.fn(),
   analyze: vi.fn(),
+  owner: vi.fn(),
 }));
+vi.mock("../src/lib/admin", () => ({ isOwner: mocks.owner }));
 vi.mock("../src/lib/db", () => ({
   database: () => ({
     rpc: mocks.rpc,
     from: () => ({
       select: () => ({
-        eq: () => ({ eq: () => ({ maybeSingle: mocks.maybeSingle }) }),
+        eq: () => ({
+          single: mocks.maybeSingle,
+          eq: () => ({ maybeSingle: mocks.maybeSingle }),
+        }),
       }),
       update: mocks.update,
     }),
@@ -24,10 +29,12 @@ vi.mock("../src/lib/tracking/service", async (importOriginal) => ({
 }));
 vi.mock("../src/lib/ai/service", () => ({ analyze: mocks.analyze }));
 import { handleAI } from "../src/lib/api";
+import { verificationStatus } from "../src/lib/access/service";
 import { createVisitor, visitorCookie } from "../src/lib/workspaces/identity";
 import { createSession } from "../src/lib/tracking/service";
 const site = "https://resume-builder.test";
 beforeEach(() => {
+  mocks.owner.mockReset().mockResolvedValue(false);
   vi.stubEnv("APP_MODE", "live");
   vi.stubEnv("NEXT_PUBLIC_SITE_URL", site);
   vi.stubEnv("NEXT_PUBLIC_SUPABASE_URL", "https://example.supabase.co");
@@ -53,6 +60,20 @@ beforeEach(() => {
   mocks.analyze
     .mockReset()
     .mockResolvedValue({ result: { answer: "No evidence" } });
+});
+it("allows the verified owner through exhausted visitor and shared quotas without reserving public capacity", async () => {
+  mocks.owner.mockResolvedValue(true);
+  mocks.rpc.mockResolvedValue({ data: false, error: null });
+  const response = await handleAI(
+    request("rb_owner=verified-owner-session"),
+    "ask",
+  );
+  expect(response.status).toBe(200);
+  expect(mocks.rpc).not.toHaveBeenCalled();
+  expect(mocks.analyze).toHaveBeenCalledOnce();
+  expect(
+    await verificationStatus(request("rb_owner=verified-owner-session")),
+  ).toMatchObject({ required: false, mode: "OWNER" });
 });
 afterEach(() => vi.unstubAllEnvs());
 function request(cookie = "") {

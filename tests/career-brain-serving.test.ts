@@ -37,6 +37,34 @@ async function input() {
   };
 }
 beforeEach(() => vi.mocked(complete).mockReset());
+it("audits original citations before cleaning public prose and preserves structured evidence IDs", async () => {
+  const q = await input();
+  const id = "057c18d5-d70a-4fff-9ccc-d1ca94e02e99";
+  const answer = { answer: `Used SQL [${id}].`, evidence_ids: [id] };
+  vi.mocked(complete)
+    .mockResolvedValueOnce({
+      decisions: [{ id, support: "SUPPORTS", reason: "Synthetic fixture" }],
+    })
+    .mockResolvedValueOnce(answer)
+    .mockResolvedValueOnce({ verdict: "PASS", reason: "Synthetic fixture" });
+  const result = await answerPackets(
+    "SQL?",
+    {
+      actor: {
+        name: "Fictional candidate",
+        aliases: [],
+        firstPersonOwner: true,
+      },
+      packets: [{ ...q.packet, id }],
+    },
+    {},
+    gate,
+  );
+  expect(
+    JSON.parse(String(vi.mocked(complete).mock.calls[2][1])).answer,
+  ).toEqual(answer);
+  expect(result).toEqual({ answer: "Used SQL.", evidence_ids: [id] });
+});
 it("MANUAL silence cannot archive unrelated approved career records", async () => {
   const data = JSON.parse(
     await readFile(

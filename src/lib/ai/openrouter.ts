@@ -1,6 +1,7 @@
 import "server-only";
 import { z } from "zod";
 import { validateEnv } from "../env";
+import { measure } from "../performance";
 import {
   recordUsage,
   openRouterUsage,
@@ -24,9 +25,8 @@ export async function complete<T>(
   } = {},
 ): Promise<T> {
   const env = validateEnv(process.env);
-  const response = await fetch(
-    "https://openrouter.ai/api/v1/chat/completions",
-    {
+  const response = await measure("llm", () =>
+    fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       signal: AbortSignal.timeout(options.timeoutMs || 25000),
       headers: {
@@ -55,7 +55,7 @@ export async function complete<T>(
           },
         },
       }),
-    },
+    }),
   ).catch(async () => {
     await recordUsage(
       "OPENROUTER",
@@ -78,17 +78,19 @@ export async function complete<T>(
       "AI provider is unavailable. Please try again later.",
     );
   }
-  const raw: unknown = await response.json().catch(async () => {
-    // Fetch can resolve headers before the response body times out or disconnects.
-    await recordUsage(
-      "OPENROUTER",
-      options.model || env.model!,
-      options.usage || {},
-      {},
-      "FAILED",
-    );
-    throw new ProviderError("AI provider response failed or timed out.");
-  });
+  const raw: unknown = await measure("llm_body", () => response.json()).catch(
+    async () => {
+      // Fetch can resolve headers before the response body times out or disconnects.
+      await recordUsage(
+        "OPENROUTER",
+        options.model || env.model!,
+        options.usage || {},
+        {},
+        "FAILED",
+      );
+      throw new ProviderError("AI provider response failed or timed out.");
+    },
+  );
   const reported = openRouterUsage.safeParse(
     (raw as { usage?: unknown })?.usage,
   );

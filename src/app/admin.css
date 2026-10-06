@@ -214,6 +214,21 @@
   color: var(--purple);
   background: var(--card);
 }
+.record-subcategories {
+  padding: 14px 16px;
+  margin: 0 0 22px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+}
+.record-subcategories > p {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.record-subcategories .record-type-tabs {
+  margin: 0;
+}
 .record-filters {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));

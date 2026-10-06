@@ -9,9 +9,11 @@ export default async function WorkspacePage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const career = await getCareer(),
-    presentation = await getPresentation(await currentMarket());
-  const design = await publicResumeDesign();
+  const [career, presentation, design] = await Promise.all([
+    getCareer(),
+    currentMarket().then(getPresentation),
+    publicResumeDesign(),
+  ]);
   return (
     <>
       <IdentityHeader career={career} presentation={presentation} />

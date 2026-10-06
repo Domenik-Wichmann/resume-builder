@@ -224,4 +224,102 @@ describe("offline browser workspace persistence", () => {
     expect(preview.ir?.projects.length).toBeGreaterThan(0);
     expect(preview.ir?.profile.contact.market).toBe("BG");
   });
+  it.each([
+    ["list", () => browserListWorkspaces()],
+    ["create", () => browserCreateWorkspace()],
+    [
+      "load",
+      () => browserLoadWorkspace("00000000-0000-4000-8000-000000000001"),
+    ],
+    [
+      "delete",
+      () => browserDeleteWorkspace("00000000-0000-4000-8000-000000000001"),
+    ],
+  ] as const)(
+    "bounds stalled %s requests and clears their timeout",
+    async (_name, call) => {
+      vi.useFakeTimers();
+      vi.stubGlobal(
+        "fetch",
+        vi.fn(
+          (_url: string, options: RequestInit) =>
+            new Promise<Response>((_resolve, reject) => {
+              options.signal!.addEventListener("abort", () =>
+                reject(options.signal!.reason),
+              );
+            }),
+        ),
+      );
+      try {
+        const failed = expect(call()).rejects.toThrow(
+          "The request timed out. Please try again.",
+        );
+        await vi.advanceTimersByTimeAsync(30000);
+        await failed;
+        expect(vi.getTimerCount()).toBe(0);
+      } finally {
+        vi.useRealTimers();
+      }
+    },
+  );
+  it("also bounds a stalled JSON body after the response headers arrive", async () => {
+    vi.useFakeTimers();
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(
+        async (_url: string, options: RequestInit) =>
+          new Response(
+            new ReadableStream({
+              start(controller) {
+                options.signal!.addEventListener("abort", () =>
+                  controller.error(options.signal!.reason),
+                );
+              },
+            }),
+          ),
+      ),
+    );
+    try {
+      const failed = expect(browserListWorkspaces()).rejects.toThrow(
+        "The request timed out.",
+      );
+      await vi.advanceTimersByTimeAsync(30000);
+      await failed;
+      expect(vi.getTimerCount()).toBe(0);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+  it("allows verified actions to run past the old client cutoff while still bounding them", async () => {
+    vi.useFakeTimers();
+    let signal: AbortSignal | null | undefined;
+    vi.stubGlobal(
+      "fetch",
+      vi.fn((_url: string, options: RequestInit) => {
+        signal = options.signal;
+        return new Promise<Response>((_resolve, reject) => {
+          options.signal!.addEventListener("abort", () =>
+            reject(options.signal!.reason),
+          );
+        });
+      }),
+    );
+    try {
+      const failed = expect(
+        browserWorkspaceAction(
+          newWorkspace(randomUUID(), "US", false),
+          "ask",
+          "What SQL experience?",
+        ),
+      ).rejects.toThrow("The request timed out.");
+      await vi.advanceTimersByTimeAsync(65000);
+      expect(signal?.aborted).toBe(false);
+      await vi.advanceTimersByTimeAsync(240000);
+      await failed;
+      expect(signal?.aborted).toBe(true);
+      expect(vi.getTimerCount()).toBe(0);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
 });

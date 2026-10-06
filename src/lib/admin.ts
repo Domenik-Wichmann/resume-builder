@@ -19,12 +19,23 @@ export function ownerAuthClient() {
     { auth: { persistSession: false, autoRefreshToken: false } },
   );
 }
-export async function isOwner() {
-  const token = (await cookies()).get(ownerCookie)?.value;
-  if (!token) return false;
+export async function isOwner(request?: Request) {
   try {
-    const { data, error } = await ownerAuthClient().auth.getUser(token);
-    return !error && data.user?.id === process.env.OWNER_USER_ID;
+    const jar = request ? null : await cookies();
+    for (const name of [ownerCookie, "rb_account"]) {
+      const token = request
+        ? request.headers
+            .get("cookie")
+            ?.split(";")
+            .map((value) => value.trim())
+            .find((value) => value.startsWith(`${name}=`))
+            ?.slice(name.length + 1)
+        : jar?.get(name)?.value;
+      if (!token) continue;
+      const { data, error } = await ownerAuthClient().auth.getUser(token);
+      if (!error && data.user?.id === process.env.OWNER_USER_ID) return true;
+    }
+    return false;
   } catch {
     return false;
   }

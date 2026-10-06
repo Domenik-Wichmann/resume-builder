@@ -33,6 +33,40 @@ beforeEach(() => {
 });
 afterEach(() => vi.unstubAllEnvs());
 describe("owner authorization", () => {
+  it.each(["rb_owner", "rb_account"])(
+    "recognizes a verified owner in the %s session",
+    async (name) => {
+      mocks.getUser.mockResolvedValue({
+        data: { user: { id: owner } },
+        error: null,
+      });
+      expect(
+        await isOwner(
+          new Request("https://resume-builder.test", {
+            headers: { cookie: `${name}=test-owner-session` },
+          }),
+        ),
+      ).toBe(true);
+      expect(mocks.getUser).toHaveBeenCalledWith("test-owner-session");
+    },
+  );
+  it("rejects forged, expired and other-account sessions before granting an owner exemption", async () => {
+    const request = new Request("https://resume-builder.test", {
+      headers: { cookie: "rb_owner=forged; rb_account=other-user" },
+    });
+    mocks.getUser.mockResolvedValue({
+      data: { user: { id: "88888888-8888-4888-8888-888888888888" } },
+      error: null,
+    });
+    expect(await isOwner(request)).toBe(false);
+    mocks.getUser.mockResolvedValue({
+      data: { user: null },
+      error: { message: "expired" },
+    });
+    expect(await isOwner(request)).toBe(false);
+    mocks.getUser.mockRejectedValue(new Error("Auth unavailable"));
+    expect(await isOwner(request)).toBe(false);
+  });
   it("checks Supabase user authority and exact owner ID, never trusting a browser token alone", async () => {
     mocks.cookie.mockReturnValue({ value: "untrusted-jwt" });
     mocks.getUser.mockResolvedValue({

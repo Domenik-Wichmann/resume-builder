@@ -1,23 +1,16 @@
 "use client";
 import { useEffect, useState } from "react";
-import { z } from "zod";
-import { careerSchema, type CareerRecord } from "@/lib/career/model";
+import type { CareerRecord } from "@/lib/career/model";
+import {
+  catalogSchema,
+  catalogCategories as categories,
+  catalogGroups,
+  catalogRecords,
+  type Catalog,
+  type CatalogCategory,
+} from "@/lib/career/catalog";
 import { SafeMarkdown } from "./safe-markdown";
 
-const catalogSchema = z.object({
-  career: careerSchema.omit({ profile: true, skills: true }),
-  answers: z.array(z.object({ question: z.string(), answer: z.string() })),
-});
-const categories = [
-  ["skill_records", "Skills", "Tools and capabilities connected to work"],
-  ["experiences", "Experience", "Roles and professional background"],
-  ["projects", "Projects", "Work built and delivered"],
-  ["achievements", "Achievements", "Supported outcomes and contributions"],
-  ["education", "Education", "Learning and academic background"],
-  ["certifications", "Certifications", "Published credentials"],
-  ["languages", "Languages", "Languages and proficiency"],
-] as const;
-type Category = (typeof categories)[number][0];
 export type StudioPanel = "chat" | "explorer" | "projects" | "answers";
 
 export function RecruiterExplorer({
@@ -25,9 +18,10 @@ export function RecruiterExplorer({
 }: {
   panel: Exclude<StudioPanel, "chat">;
 }) {
-  const [data, setData] = useState<z.infer<typeof catalogSchema> | null>(null);
+  const [data, setData] = useState<Catalog | null>(null);
   const [error, setError] = useState("");
-  const [category, setCategory] = useState<Category | null>(null);
+  const [category, setCategory] = useState<CatalogCategory | null>(null);
+  const [subcategory, setSubcategory] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<CareerRecord | null>(null);
   useEffect(() => {
@@ -54,24 +48,55 @@ export function RecruiterExplorer({
   if (error) return <p role="alert">{error}</p>;
   if (!data) return <p role="status">Loading career content…</p>;
   const active = panel === "projects" ? "projects" : category;
-  const records = active
-    ? (data.career[active] || []).filter((record) =>
-        [record.title, record.summary, ...record.skills]
-          .join(" ")
-          .toLowerCase()
-          .includes(query.toLowerCase()),
-      )
-    : [];
+  const allRecords = active ? catalogRecords(data, active) : [];
+  const groups = active ? catalogGroups(data, active) : [];
+  const groupedIds = new Set(groups.flatMap((group) => group.recordIds));
+  const uncategorized = allRecords.filter(
+    (record) => !groupedIds.has(record.id),
+  );
+  const hasSubcategories = active === "skill_records" || groups.length > 0;
+  const group = groups.find((entry) => entry.id === subcategory);
+  const label = categories.find(([key]) => key === active)?.[1] || "Records";
+  const browsingGroups =
+    hasSubcategories && subcategory === null && !query.trim();
+  const records = allRecords.filter(
+    (record) =>
+      (subcategory === "uncategorized"
+        ? !groupedIds.has(record.id)
+        : group
+          ? group.recordIds.includes(record.id)
+          : true) &&
+      [
+        record.title,
+        record.subtitle,
+        record.summary,
+        record.organization,
+        ...record.skills,
+      ]
+        .join(" ")
+        .toLowerCase()
+        .includes(query.trim().toLowerCase()),
+  );
+  function selectSubcategory(id: string | null) {
+    setSubcategory(id);
+    setQuery("");
+  }
   const connections = selected
-    ? categories
-        .flatMap(([key]) => data.career[key] || [])
-        .filter(
-          (record) =>
-            record.id !== selected.id &&
-            (selected.skills.includes(record.title) ||
-              record.skills.includes(selected.title) ||
-              record.skills.some((skill) => selected.skills.includes(skill))),
-        )
+    ? [
+        ...new Map(
+          categories
+            .flatMap(([key]) => catalogRecords(data, key))
+            .map((record) => [record.id, record]),
+        ).values(),
+      ].filter(
+        (record) =>
+          record.id !== selected.id &&
+          (selected.related_ids?.includes(record.id) ||
+            record.related_ids?.includes(selected.id) ||
+            selected.skills.includes(record.title) ||
+            record.skills.includes(selected.title) ||
+            record.skills.some((skill) => selected.skills.includes(skill))),
+      )
     : [];
   const recordCard = (record: CareerRecord) => (
     <button
@@ -98,7 +123,10 @@ export function RecruiterExplorer({
           {selected
             ? selected.title
             : active
-              ? categories.find(([key]) => key === active)?.[1]
+              ? group?.title ||
+                (subcategory === "uncategorized"
+                  ? `Uncategorized ${label.toLowerCase()}`
+                  : label)
               : panel === "answers"
                 ? "A few useful answers."
                 : "Where would you like to explore?"}
@@ -165,22 +193,109 @@ export function RecruiterExplorer({
               className="catalog-back"
               onClick={() => {
                 setCategory(null);
+                setSubcategory(null);
                 setQuery("");
               }}
             >
               ← All categories
             </button>
           )}
+          {hasSubcategories && (
+            <>
+              {subcategory !== null && (
+                <button
+                  className="catalog-back"
+                  onClick={() => selectSubcategory(null)}
+                >
+                  ← Browse {label.toLowerCase()} subcategories
+                </button>
+              )}
+              <div
+                className="catalog-subcategory-actions"
+                role="group"
+                aria-label={`${label} views`}
+              >
+                <button
+                  aria-pressed={subcategory === "all"}
+                  onClick={() => selectSubcategory("all")}
+                >
+                  Show all {label.toLowerCase()}{" "}
+                  <span>({allRecords.length})</span>
+                </button>
+                <button
+                  aria-pressed={subcategory === "uncategorized"}
+                  onClick={() => selectSubcategory("uncategorized")}
+                >
+                  Uncategorized <span>({uncategorized.length})</span>
+                </button>
+              </div>
+            </>
+          )}
           <label className="catalog-search">
             <span className="sr-only">Search records</span>
             <input
-              placeholder="Filter by name, skill or keyword…"
+              placeholder={
+                browsingGroups
+                  ? `Search all ${label.toLowerCase()}…`
+                  : "Filter by name, skill or keyword…"
+              }
               value={query}
               onChange={(event) => setQuery(event.target.value)}
             />
           </label>
-          <div className="catalog-grid">{records.map(recordCard)}</div>
-          {!records.length && <p>No relevant evidence is currently stored.</p>}
+          {browsingGroups ? (
+            <>
+              <p className="catalog-group-label">
+                {active === "skill_records"
+                  ? "Browse by skill category"
+                  : active === "education"
+                    ? "Browse by school or institution"
+                    : active === "certifications"
+                      ? "Browse by issuer"
+                      : active === "experiences"
+                        ? "Browse by employer"
+                        : "Browse by organization"}
+              </p>
+              <div className="catalog-grid">
+                {groups.map((entry) => (
+                  <button
+                    className="catalog-card category-card"
+                    key={entry.id}
+                    onClick={() => selectSubcategory(entry.id)}
+                  >
+                    <h3>{entry.title}</h3>
+                    <span>
+                      {entry.recordIds.length}{" "}
+                      {entry.recordIds.length === 1 ? "record" : "records"} ↗
+                    </span>
+                  </button>
+                ))}
+              </div>
+              {!groups.length && (
+                <p>
+                  No subcategories assigned yet. Choose Show all{" "}
+                  {label.toLowerCase()} or Uncategorized to browse records.
+                </p>
+              )}
+            </>
+          ) : (
+            <>
+              <p className="catalog-group-label" role="status">
+                {records.length} {records.length === 1 ? "record" : "records"}
+                {query.trim() ? " matching your search" : ""}
+              </p>
+              <div className="catalog-grid">{records.map(recordCard)}</div>
+              {!records.length && (
+                <p>
+                  {query.trim()
+                    ? "No records match your search."
+                    : subcategory === "uncategorized"
+                      ? "No uncategorized records."
+                      : "No relevant evidence is currently stored."}
+                </p>
+              )}
+            </>
+          )}
         </>
       ) : (
         <div className="catalog-grid">
@@ -190,12 +305,15 @@ export function RecruiterExplorer({
               key={key}
               onClick={() => {
                 setCategory(key);
+                setSubcategory(null);
                 setQuery("");
               }}
             >
               <h3>{label}</h3>
               <p>{description}</p>
-              <span>{data.career[key]?.length || 0} published records ↗</span>
+              <span>
+                {catalogRecords(data, key).length} published records ↗
+              </span>
             </button>
           ))}
         </div>

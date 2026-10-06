@@ -10,6 +10,11 @@ vi.mock("../src/lib/portfolio/answers-server", () => ({
 vi.mock("../src/lib/db", () => ({ database: () => mocks.db }));
 vi.mock("../src/lib/env", () => ({ validateEnv: () => ({ mode: "live" }) }));
 import { GET } from "../src/app/api/career-catalog/route";
+import {
+  catalogSchema,
+  catalogGroups,
+  catalogRecords,
+} from "../src/lib/career/catalog";
 const claim = {
   value: "Approved fact",
   availability: "CONFIRMED",
@@ -78,4 +83,165 @@ it("only exposes reviewed answer text without owner or source metadata", async (
   expect(body.answers).toEqual([
     { question: "Question", answer: "Reviewed answer" },
   ]);
+});
+
+it("groups only verified public categories and skills without leaking hidden relationships", async () => {
+  const category = {
+    ...record,
+    kind: "category",
+    id: "development",
+    key: "development",
+    title: "Development",
+  };
+  const skill = {
+    ...record,
+    kind: "skill",
+    id: "typescript",
+    key: "typescript",
+    title: "TypeScript",
+    category_key: "development",
+  };
+  mocks.load.mockResolvedValue([
+    category,
+    skill,
+    { ...skill, id: "private-skill", published: false },
+    { ...skill, id: "archived-skill", archived: true },
+    { ...skill, id: "unsupported-skill", claims: [] },
+    {
+      ...category,
+      id: "hidden-category",
+      key: "secret-category",
+      title: "Secret label",
+      published: false,
+    },
+    {
+      ...category,
+      id: "archived-category",
+      key: "archived-category",
+      title: "Archived label",
+      archived: true,
+    },
+    {
+      ...category,
+      id: "unsupported-category",
+      key: "unsupported-category",
+      title: "Unsupported label",
+      claims: [],
+    },
+    {
+      ...category,
+      id: "empty-category",
+      key: "empty-category",
+      title: "Empty label",
+    },
+    { ...skill, id: "unassigned", category_key: null },
+    { ...skill, id: "hidden-parent", category_key: "secret-category" },
+    { ...skill, id: "archived-parent", category_key: "archived-category" },
+    {
+      ...skill,
+      id: "unsupported-parent",
+      category_key: "unsupported-category",
+    },
+  ]);
+  const body = await (await GET()).json();
+  const catalog = catalogSchema.parse(body);
+  expect(catalog.skill_categories).toEqual([
+    { id: "development", title: "Development", skill_ids: ["typescript"] },
+  ]);
+  const grouped = catalogGroups(catalog, "skill_records").flatMap(
+    (group) => group.recordIds,
+  );
+  expect(
+    catalog.career.skill_records
+      .filter((row) => !grouped.includes(row.id))
+      .map((row) => row.id),
+  ).toEqual([
+    "unassigned",
+    "hidden-parent",
+    "archived-parent",
+    "unsupported-parent",
+  ]);
+  for (const secret of [
+    "Secret label",
+    "Archived label",
+    "Unsupported label",
+    "secret-category",
+    "private-skill",
+    "private-source",
+    "private-hash",
+  ])
+    expect(JSON.stringify(body)).not.toContain(secret);
+});
+it("language browsing never reveals private or unsupported proficiency and preserves public work-only evidence", async () => {
+  const category = {
+    ...record,
+    kind: "category",
+    id: "language-category",
+    key: "languages",
+    title: "Languages",
+  };
+  const skill = {
+    ...record,
+    kind: "skill",
+    id: "german-skill",
+    key: "german-skill",
+    category_key: "languages",
+    title: "German",
+  };
+  const language = {
+    ...record,
+    kind: "language",
+    id: "german-language",
+    key: "german-language",
+    title: "German",
+    claims: [{ ...claim, value: "Below native" }],
+  };
+  mocks.load.mockResolvedValue([
+    category,
+    skill,
+    language,
+    {
+      ...language,
+      id: "private-language",
+      title: "Secret language",
+      published: false,
+    },
+    {
+      ...language,
+      id: "unsupported-language",
+      title: "Unsupported language",
+      claims: [],
+    },
+    {
+      ...language,
+      id: "archived-language",
+      title: "Archived language",
+      archived: true,
+    },
+  ]);
+  const body = await (await GET()).json();
+  const catalog = catalogSchema.parse(body);
+  const languages = catalogRecords(catalog, "languages");
+  expect(languages.map((row) => row.id)).toEqual([language.id]);
+  expect(catalogRecords(catalog, "skill_records")).toEqual(languages);
+  expect(languages[0].summary).toBe("Below native");
+  for (const secret of [
+    "Secret language",
+    "Unsupported language",
+    "Archived language",
+    "private-source",
+  ])
+    expect(JSON.stringify(body)).not.toContain(secret);
+  mocks.load.mockResolvedValue([
+    category,
+    skill,
+    { ...language, published: false },
+  ]);
+  const privateCatalog = catalogSchema.parse(await (await GET()).json());
+  expect(
+    catalogRecords(privateCatalog, "languages").map((row) => row.id),
+  ).toEqual([skill.id]);
+  expect(catalogRecords(privateCatalog, "languages")[0].summary).toBe(
+    "Approved fact",
+  );
 });

@@ -10,7 +10,9 @@ import { usable } from "../career-brain/state";
 export async function getCareer(accountId = primaryAccountId) {
   if (validateEnv(process.env).mode === "demo") return fixture;
   const records = await loadBrain(database(), accountId, true);
-  const available = records.filter((r) => r.claims.some(usable));
+  const available = records.filter(
+    (r) => r.published && !r.archived && r.claims.some(usable),
+  );
   const profile = available.find((r) => r.kind === "profile");
   const identity = records.find((r) => r.kind === "profile");
   const summary = (r: (typeof records)[number]) =>
@@ -33,6 +35,15 @@ export async function getCareer(accountId = primaryAccountId) {
         skills: available
           .filter((s) => s.kind === "skill" && r.skill_keys.includes(s.key))
           .map((s) => s.title),
+        // Only current, published, usable endpoints may reach the public map.
+        related_ids: available
+          .filter(
+            (other) =>
+              (other.kind === "skill" && r.skill_keys.includes(other.key)) ||
+              (other.kind === "achievement" &&
+                r.achievement_keys.includes(other.key)),
+          )
+          .map((other) => other.id),
       }));
   return careerSchema.parse({
     profile: {

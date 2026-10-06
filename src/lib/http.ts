@@ -5,6 +5,7 @@ export class HttpError extends Error {
   constructor(
     public status: number,
     message: string,
+    public retryAfter?: number,
   ) {
     super(message);
   }
@@ -54,15 +55,53 @@ export function errorResponse(error: unknown) {
     },
     {
       status: error instanceof HttpError ? error.status : 503,
-      headers: { "Cache-Control": "no-store" },
+      headers: {
+        "Cache-Control": "no-store",
+        ...(error instanceof HttpError && error.retryAfter
+          ? { "Retry-After": String(error.retryAfter) }
+          : {}),
+      },
     },
   );
 }
 export async function reserveAIQuota() {
   if (validateEnv(process.env).mode === "demo") return;
+  // Next's request cookies carry owner authority through nested provider calls.
+  // Scripts without a request context and unverified sessions remain quota-bound.
+  const { isOwner } = await import("./admin");
+  if (await isOwner()) return;
   const { database } = await import("./db");
   const { data, error } = await database().rpc("consume_ai_quota");
   if (error) throw new HttpError(503, "AI quota service unavailable.");
-  if (!data)
-    throw new HttpError(429, "AI request limit reached. Please try later.");
+  if (!data) {
+    const quota = await database()
+      .from("ai_quota")
+      .select("day,daily_count")
+      .eq("id", 1)
+      .single();
+    const now = new Date();
+    const daily =
+      !quota.error &&
+      quota.data?.day === now.toISOString().slice(0, 10) &&
+      quota.data.daily_count >= 100;
+    if (daily) {
+      const reset = Date.UTC(
+        now.getUTCFullYear(),
+        now.getUTCMonth(),
+        now.getUTCDate() + 1,
+      );
+      throw new HttpError(
+        429,
+        "The site's daily AI allowance is used up. It resets at 00:00 UTC. Published career content is still available to browse. The signed-in site owner is exempt from this limit.",
+        Math.max(1, Math.ceil((reset - now.getTime()) / 1000)),
+      );
+    }
+    throw new HttpError(
+      429,
+      quota.error
+        ? "The site's shared AI allowance is temporarily exhausted. Please try again later."
+        : "The site's AI requests are arriving too quickly. Please try again in one minute.",
+      quota.error ? undefined : 60,
+    );
+  }
 }

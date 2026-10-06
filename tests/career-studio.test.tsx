@@ -1,7 +1,11 @@
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { beforeEach, afterEach, expect, it, vi } from "vitest";
-import { initialInputKind } from "../src/lib/workspaces/input";
+import {
+  initialInputKind,
+  submitComposerOnEnter,
+} from "../src/lib/workspaces/input";
+import type { KeyboardEvent } from "react";
 import { presentationSettingsSchema, resolveMarket } from "../src/lib/markets";
 import { SafeMarkdown } from "../src/components/safe-markdown";
 const request = vi.hoisted(() => ({
@@ -25,6 +29,38 @@ beforeEach(() => {
   request.country = null;
 });
 afterEach(() => vi.unstubAllEnvs());
+it("sends on Enter, keeps Shift+Enter and composition as text input, and prevents repeated or disabled submissions", () => {
+  const submit = vi.fn(),
+    preventDefault = vi.fn();
+  const event = (overrides: Record<string, unknown> = {}) =>
+    ({
+      key: "Enter",
+      shiftKey: false,
+      keyCode: 13,
+      repeat: false,
+      nativeEvent: { isComposing: false },
+      preventDefault,
+      currentTarget: { form: { requestSubmit: submit } },
+      ...overrides,
+    }) as unknown as KeyboardEvent<HTMLTextAreaElement>;
+  submitComposerOnEnter(event(), true);
+  expect(submit).toHaveBeenCalledOnce();
+  expect(preventDefault).toHaveBeenCalledOnce();
+  vi.clearAllMocks();
+  for (const overrides of [
+    { shiftKey: true },
+    { nativeEvent: { isComposing: true } },
+    { keyCode: 229 },
+    { key: "a" },
+  ])
+    submitComposerOnEnter(event(overrides), true);
+  expect(submit).not.toHaveBeenCalled();
+  expect(preventDefault).not.toHaveBeenCalled();
+  submitComposerOnEnter(event({ repeat: true }), true);
+  submitComposerOnEnter(event(), false);
+  expect(submit).not.toHaveBeenCalled();
+  expect(preventDefault).toHaveBeenCalledTimes(2);
+});
 
 it("distinguishes a role brief conservatively without sending text to a provider", () => {
   expect(

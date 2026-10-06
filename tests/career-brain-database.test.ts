@@ -4,11 +4,52 @@ import { readFile, readdir } from "node:fs/promises";
 import { randomUUID } from "node:crypto";
 import { beforeAll, afterAll, it, expect } from "vitest";
 import { contentHash } from "../src/lib/embeddings/content";
+import { publicSnapshot } from "../src/lib/career-brain/public-snapshot";
 let db: PGlite;
 const user = randomUUID(),
   otherUser = randomUUID();
 let account: string, otherAccount: string;
 let preservedSource: string;
+it("serves one fresh service-only snapshot scoped to published, active account records and their sources", async () => {
+  const visible = await createRecord();
+  const hidden = await createRecord();
+  await db.exec("reset role");
+  await db.query("update projects set is_public=true where id=$1", [
+    visible.row.id,
+  ]);
+  const read = async (tenant = account) =>
+    publicSnapshot.parse(
+      (
+        await db.query<{ snapshot: unknown }>(
+          "select read_public_career_snapshot($1) snapshot",
+          [tenant],
+        )
+      ).rows[0].snapshot,
+    );
+  await db.exec("set role service_role");
+  const snapshot = await read();
+  expect(snapshot.canonical.some((r) => r.id === visible.row.id)).toBe(true);
+  expect(snapshot.canonical.some((r) => r.id === hidden.row.id)).toBe(false);
+  expect(snapshot.evidence.some((r) => r.entity_id === hidden.row.id)).toBe(
+    false,
+  );
+  expect(snapshot.sources.some((s) => s.id === visible.source)).toBe(true);
+  expect(snapshot.sources.some((s) => s.id === hidden.source)).toBe(false);
+  expect(
+    (await read(otherAccount)).canonical.some((r) => r.id === visible.row.id),
+  ).toBe(false);
+  await db.query("update projects set archived_at=now() where id=$1", [
+    visible.row.id,
+  ]);
+  const archived = await read();
+  expect(archived.canonical.some((r) => r.id === visible.row.id)).toBe(false);
+  expect(archived.sources.some((s) => s.id === visible.source)).toBe(false);
+  for (const role of ["anon", "authenticated"]) {
+    await db.exec(`reset role; set role ${role}`);
+    await expect(read()).rejects.toThrow("permission denied");
+  }
+  await db.exec("reset role");
+});
 beforeAll(async () => {
   db = new PGlite({ extensions: { vector } });
   await db.exec(

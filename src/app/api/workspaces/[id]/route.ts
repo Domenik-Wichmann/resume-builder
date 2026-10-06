@@ -11,6 +11,7 @@ import {
 import { analyze } from "@/lib/ai/service";
 import { answerSchema, matchSchema } from "@/lib/ai/contracts";
 import { database } from "@/lib/db";
+import { primaryAccountId } from "@/lib/account-id";
 import { getCareer } from "@/lib/career/repository";
 import { expansionQueries } from "@/lib/resume-ir";
 import { compileGroundedResume } from "@/lib/career-brain/serving";
@@ -18,6 +19,7 @@ import { retrieveCareerEvidence } from "@/lib/embeddings/retrieval";
 import { deduplicate } from "@/lib/embeddings/content";
 import { getPresentation, currentMarket } from "@/lib/market-server";
 import { reservePublicAction } from "@/lib/access/service";
+import { measure, timedResponse } from "@/lib/performance";
 export const maxDuration = 300;
 type Context = { params: Promise<{ id: string }> };
 function visitor(request: NextRequest) {
@@ -31,6 +33,9 @@ async function workspaceId(context: Context) {
   return result.data;
 }
 export async function GET(request: NextRequest, context: Context) {
+  return timedResponse(() => getWorkspace(request, context));
+}
+async function getWorkspace(request: NextRequest, context: Context) {
   try {
     return Response.json(
       {
@@ -63,6 +68,9 @@ export async function DELETE(request: NextRequest, context: Context) {
   }
 }
 export async function POST(request: NextRequest, context: Context) {
+  return timedResponse(() => workspaceAction(request, context));
+}
+async function workspaceAction(request: NextRequest, context: Context) {
   let lockedId: string | null = null;
   let release: (() => Promise<void>) | undefined;
   try {
@@ -87,12 +95,29 @@ export async function POST(request: NextRequest, context: Context) {
     );
     const id = await workspaceId(context),
       visitorId = visitor(request);
-    let workspace = await loadWorkspace(id, visitorId);
     const db = database();
-    const lease = await db.rpc("begin_workspace_action", {
-      p_workspace_id: id,
-      p_visitor_id: visitorId,
-    });
+    // Verify ownership without loading the complete workspace before its lease.
+    const owned = await measure("ownership", () =>
+      Promise.resolve(
+        db
+          .from("workspaces")
+          .select("id")
+          .eq("id", id)
+          .eq("visitor_id", visitorId)
+          .eq("account_id", primaryAccountId)
+          .maybeSingle(),
+      ),
+    );
+    if (owned.error) throw new Error("Cannot load workspace.");
+    if (!owned.data) throw new HttpError(404, "Workspace not found.");
+    const lease = await measure("lease", () =>
+      Promise.resolve(
+        db.rpc("begin_workspace_action", {
+          p_workspace_id: id,
+          p_visitor_id: visitorId,
+        }),
+      ),
+    );
     if (lease.error) throw new Error("Cannot lock workspace.");
     if (!lease.data)
       throw new HttpError(
@@ -101,7 +126,11 @@ export async function POST(request: NextRequest, context: Context) {
       );
     lockedId = id;
     // Read after the lease to avoid applying an action to an obsolete concurrent snapshot.
-    workspace = await loadWorkspace(id, visitorId);
+    const careerPromise = measure("career", () => getCareer());
+    let [workspace] = await Promise.all([
+      measure("workspace", () => loadWorkspace(id, visitorId, careerPromise)),
+      careerPromise,
+    ]);
     workspace = { ...workspace, market: await currentMarket() };
     const previousQuestionCount = workspace.questions.length;
     if (action.action === "export") {
@@ -114,8 +143,14 @@ export async function POST(request: NextRequest, context: Context) {
         { headers: { "Cache-Control": "no-store" } },
       );
     }
-    const career = await getCareer();
-    release = await reservePublicAction(request, action.action, id);
+    const career = await careerPromise;
+    release = await measure("access", () =>
+      reservePublicAction(
+        request,
+        action.action as "ask" | "match" | "compile",
+        id,
+      ),
+    );
     if (action.action === "compile") {
       const categories = [career.experiences, career.projects].filter(
         (records) =>
@@ -164,10 +199,16 @@ export async function POST(request: NextRequest, context: Context) {
         "This workspace has reached its 50-question limit.",
       );
     // Prior explored topics influence selection without granting prior model text factual authority.
-    const result = await analyze(action.action, action.input, workspace, {
-      workspaceId: id,
-      operation: action.action,
-    });
+    const result = await analyze(
+      action.action,
+      action.input,
+      workspace,
+      {
+        workspaceId: id,
+        operation: action.action,
+      },
+      career,
+    );
     workspace =
       action.action === "ask"
         ? applyQuestion(
@@ -183,7 +224,9 @@ export async function POST(request: NextRequest, context: Context) {
             matchSchema.parse(result.result),
             result.evidence,
           );
-    await saveWorkspace(workspace, visitorId, previousQuestionCount);
+    await measure("persistence", () =>
+      saveWorkspace(workspace, visitorId, previousQuestionCount),
+    );
     return Response.json(
       { workspace },
       { headers: { "Cache-Control": "no-store" } },
@@ -191,11 +234,19 @@ export async function POST(request: NextRequest, context: Context) {
   } catch (error) {
     return errorResponse(error);
   } finally {
-    await release?.();
-    if (lockedId)
-      await database()
-        .from("workspaces")
-        .update({ lease_until: null })
-        .eq("id", lockedId);
+    // Both leases must be released even if either cleanup fails.
+    await measure("release", async () => {
+      const cleanup = await Promise.allSettled([
+        release?.(),
+        lockedId
+          ? database()
+              .from("workspaces")
+              .update({ lease_until: null })
+              .eq("id", lockedId)
+          : undefined,
+      ]);
+      const failed = cleanup.find((result) => result.status === "rejected");
+      if (failed?.status === "rejected") throw failed.reason;
+    });
   }
 }

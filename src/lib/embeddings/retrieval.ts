@@ -1,6 +1,6 @@
 import "server-only";
 import { z } from "zod";
-import { embed } from "./cohere";
+import { queryVectors } from "./query-cache";
 import {
   semanticEntities,
   expandMatches,
@@ -13,6 +13,7 @@ import type { Career } from "../career/model";
 import { database } from "../db";
 import { validateEnv } from "../env";
 import { primaryAccountId } from "../account-id";
+import { measure } from "../performance";
 const matchesSchema = z.array(
   z.object({
     entity_type: z.enum(entityTypes),
@@ -22,6 +23,11 @@ const matchesSchema = z.array(
   }),
 );
 export async function retrieveCareerEvidence(
+  ...args: Parameters<typeof retrieveEvidence>
+) {
+  return measure("retrieval", () => retrieveEvidence(...args));
+}
+async function retrieveEvidence(
   queries: string[],
   career: Career,
   options: {
@@ -39,25 +45,29 @@ export async function retrieveCareerEvidence(
       !options.entityTypes || options.entityTypes.includes(entity.type),
   );
   if (!entities.length) return [];
-  const vectors = await embed(queries, "search_query", options);
+  const vectors = await measure("embedding", () =>
+    queryVectors([...new Set(queries)], options),
+  );
   const env = validateEnv(process.env);
   const db = database();
-  const resultSets = await Promise.all(
-    vectors.map(async (vector) => {
-      const { data, error } = await db.rpc("match_account_embeddings", {
-        p_account_id: options.accountId || primaryAccountId,
-        query_embedding: JSON.stringify(vector),
-        requested_model: env.embeddingModel,
-        match_count: 8,
-        min_similarity: 0.25,
-        entity_types: options.entityTypes || null,
-      });
-      if (error)
-        throw new Error(
-          "Semantic retrieval is unavailable. Apply migrations and reindex career evidence.",
-        );
-      return matchesSchema.parse(data);
-    }),
+  const resultSets = await measure("vector_search", () =>
+    Promise.all(
+      vectors.map(async (vector) => {
+        const { data, error } = await db.rpc("match_account_embeddings", {
+          p_account_id: options.accountId || primaryAccountId,
+          query_embedding: JSON.stringify(vector),
+          requested_model: env.embeddingModel,
+          match_count: 8,
+          min_similarity: 0.25,
+          entity_types: options.entityTypes || null,
+        });
+        if (error)
+          throw new Error(
+            "Semantic retrieval is unavailable. Apply migrations and reindex career evidence.",
+          );
+        return matchesSchema.parse(data);
+      }),
+    ),
   );
   const semantic = expandMatches(
     resultSets.flat().sort((a, b) => b.similarity - a.similarity),

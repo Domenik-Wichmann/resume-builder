@@ -4,13 +4,16 @@ import { publicProjects, projectMedia } from "@/lib/portfolio/repository";
 import { database } from "@/lib/db";
 import { primaryAccountId } from "@/lib/account-id";
 import { PortfolioHeader } from "@/components/portfolio-shell";
+import { validateEnv } from "@/lib/env";
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Projects · Resume Builder" };
 export default async function Projects() {
-  const projects = await publicProjects();
-  const media = projects.length
-    ? await projectMedia(database(), primaryAccountId)
-    : [];
+  const [projects, media] = await Promise.all([
+    publicProjects(),
+    validateEnv(process.env).mode === "demo"
+      ? Promise.resolve([])
+      : projectMedia(database(), primaryAccountId),
+  ]);
   return (
     <>
       <PortfolioHeader />

@@ -5,10 +5,12 @@ import { semanticEntities, deduplicate } from "../embeddings/content";
 import { workspaceSchema, type Workspace } from "./model";
 import { HttpError } from "../http";
 import { z } from "zod";
+import type { Career } from "../career/model";
 import { primaryAccountId } from "../account-id";
 export async function loadWorkspace(
   id: string,
   visitorId: string,
+  currentCareer?: Promise<Career>,
 ): Promise<Workspace> {
   const db = database();
   const { data: row, error } = await db
@@ -20,26 +22,34 @@ export async function loadWorkspace(
     .maybeSingle();
   if (error) throw new Error("Cannot load workspace.");
   if (!row) throw new HttpError(404, "Workspace not found.");
-  const [evidence, questions, requirements, signals] = await Promise.all([
-    db.from("workspace_evidence").select("*").eq("workspace_id", id),
-    db
-      .from("workspace_questions")
-      .select("*")
-      .eq("workspace_id", id)
-      .order("created_at"),
-    db
-      .from("workspace_requirements")
-      .select("*")
-      .eq("workspace_id", id)
-      .order("position"),
-    db
-      .from("explorer_events")
-      .select("skill_id,project_id,category_id")
-      .eq("account_id", primaryAccountId)
-      .eq("workspace_id", id)
-      .order("created_at", { ascending: false })
-      .limit(100),
-  ]);
+  const [evidence, questions, requirements, signals, career, categories] =
+    await Promise.all([
+      db.from("workspace_evidence").select("*").eq("workspace_id", id),
+      db
+        .from("workspace_questions")
+        .select("*")
+        .eq("workspace_id", id)
+        .order("created_at"),
+      db
+        .from("workspace_requirements")
+        .select("*")
+        .eq("workspace_id", id)
+        .order("position"),
+      db
+        .from("explorer_events")
+        .select("skill_id,project_id,category_id")
+        .eq("account_id", primaryAccountId)
+        .eq("workspace_id", id)
+        .order("created_at", { ascending: false })
+        .limit(100),
+      currentCareer || getCareer(),
+      db
+        .from("skill_categories")
+        .select("id,title")
+        .eq("account_id", primaryAccountId)
+        .eq("is_public", true)
+        .is("archived_at", null),
+    ]);
   if (
     [evidence, questions, requirements, signals].some((result) => result.error)
   )
@@ -56,18 +66,12 @@ export async function loadWorkspace(
       ];
   if (topics.error || citations.error)
     throw new Error("Cannot load question evidence.");
-  const entities = semanticEntities(await getCareer());
+  const entities = semanticEntities(career);
   const selected = entities.filter((e) =>
     (signals.data || []).some(
       (s) => s.skill_id === e.record.id || s.project_id === e.record.id,
     ),
   );
-  const categories = await db
-    .from("skill_categories")
-    .select("id,title")
-    .eq("account_id", primaryAccountId)
-    .eq("is_public", true)
-    .is("archived_at", null);
   if (categories.error) throw new Error("Cannot load published interests.");
   const interests = [
     ...new Set([

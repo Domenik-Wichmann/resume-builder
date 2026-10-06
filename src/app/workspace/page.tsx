@@ -9,8 +9,10 @@ export default async function Workspaces({
   searchParams: Promise<{ question?: string }>;
 }) {
   const suggestedQuestion = (await searchParams).question?.slice(0, 1000) || "";
-  const career = await getCareer(),
-    presentation = await getPresentation(await currentMarket());
+  const [career, presentation] = await Promise.all([
+    getCareer(),
+    currentMarket().then(getPresentation),
+  ]);
   return (
     <>
       <IdentityHeader career={career} presentation={presentation} />

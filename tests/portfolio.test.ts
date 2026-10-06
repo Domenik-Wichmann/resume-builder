@@ -92,6 +92,35 @@ describe("public portfolio projections", () => {
       ),
     ).toEqual({ categories: [], skills: [] });
   });
+  it("standalone Explorer uses language profiles and retains their uncertainty", () => {
+    const skill = {
+      ...fixture.skill_records[0],
+      id: "german-skill",
+      title: "German",
+    };
+    const languages = [
+      { ...skill, id: "german-language", summary: "Below native" },
+      {
+        ...skill,
+        id: "dutch-language",
+        title: "Dutch",
+        summary: "Learning; no confirmed proficiency",
+      },
+    ];
+    const data = deriveExplorer(
+      { ...fixture, skill_records: [skill], languages },
+      [{ id: "language-category", title: "Languages", summary: "" }],
+      [{ id: skill.id, category_id: "language-category" }],
+    );
+    expect(data.skills.map((row) => row.id)).toEqual(
+      languages.map((row) => row.id),
+    );
+    expect(data.skills.map((row) => row.description)).toEqual(
+      languages.map((row) => row.summary),
+    );
+    expect(data.skills.every((row) => row.kind === "language")).toBe(true);
+    expect(data.categories).toHaveLength(1);
+  });
   it("requires fresh cards and every supporting record to be published", () => {
     const card = {
       is_public: true,

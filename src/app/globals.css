@@ -110,6 +110,17 @@ figcaption {
   color: var(--muted);
   padding-top: 8px;
 }
+.explorer-skill-views {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0;
+}
+.explorer-skill-views button[aria-pressed="false"] {
+  background: var(--card);
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
 .project-layout,
 .explorer-layout {
   display: grid;
@@ -366,7 +377,7 @@ button:hover,
 }
 button:disabled {
   opacity: 0.55;
-  cursor: wait;
+  cursor: default;
 }
 :focus-visible {
   outline: 3px solid var(--accent);
