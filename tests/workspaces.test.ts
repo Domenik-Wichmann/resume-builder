@@ -42,7 +42,7 @@ describe("workspace compilation and privacy", () => {
       { topic: "Automation", strength: "NONE" },
     ]);
   });
-  it("uses tracking market before preference or coarse location, with no precise geolocation", () => {
+  it("uses tracking context before coarse location and ignores legacy manual preferences, with no precise geolocation", () => {
     expect(resolveMarket("US", "BG", "BG")).toBe("US");
     expect(resolveMarket(null, "US", "BG")).toBe("BG");
     expect(resolveMarket(null, null, "BG")).toBe("BG");

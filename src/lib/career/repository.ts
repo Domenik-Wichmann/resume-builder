@@ -4,12 +4,16 @@ import { careerSchema } from "./model";
 import { validateEnv } from "../env";
 import { database } from "../db";
 import { primaryAccountId } from "../account-id";
-import { loadBrain } from "../career-brain/repository";
+import { loadBrain, type BrainRecord } from "../career-brain/repository";
 import { usable } from "../career-brain/state";
 
 export async function getCareer(accountId = primaryAccountId) {
   if (validateEnv(process.env).mode === "demo") return fixture;
   const records = await loadBrain(database(), accountId, true);
+  return careerFromBrain(records);
+}
+
+export function careerFromBrain(records: BrainRecord[]) {
   const available = records.filter(
     (r) => r.published && !r.archived && r.claims.some(usable),
   );

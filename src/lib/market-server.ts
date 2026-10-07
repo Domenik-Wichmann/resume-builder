@@ -50,13 +50,15 @@ export async function getPresentation(
   if (result.error) throw new Error("Cannot load profile presentation.");
   return result.data
     ? presentationSchema.parse(result.data)
-    : {
-        market,
-        location: "",
-        contact_email: "",
-        phone: "",
-        work_authorization: "",
-      };
+    : market !== "US"
+      ? { ...(await getPresentation("US", accountId)), market }
+      : {
+          market,
+          location: "",
+          contact_email: "",
+          phone: "",
+          work_authorization: "",
+        };
 }
 export async function currentMarket() {
   const jar = await cookies(),

@@ -13,7 +13,7 @@ export const presentationSchema = z.object({
 export type Presentation = z.infer<typeof presentationSchema>;
 export function resolveMarket(
   tracking: unknown,
-  _preference: unknown,
+  _legacyPreference: unknown,
   country: string | null,
 ): Market {
   const linked = marketSchema.safeParse(tracking);

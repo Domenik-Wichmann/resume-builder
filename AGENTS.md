@@ -50,6 +50,28 @@ Accepted patches use optimistic baseline versions and one database transaction.
 Facts remain private until an explicit publication action. Keep applied migrations
 unchanged; add migrations for new database behavior.
 
+## Public portfolio product rules
+
+The public portfolio must not display a regional selector: no country dropdown,
+US/Bulgaria buttons, or manual region toggle. Resolve presentation automatically
+from the verified tracking/application context, then the existing approximate
+visitor-country mechanism, then the configured default profile. Tracking context
+wins. Region selects configured contact presentation; it never changes the
+owner's physical residence or requests precise GPS. Ignore legacy manual region
+preferences.
+
+On the normal public portfolio entry path, the storytelling hero introduces the
+owner and Resume Builder as a project demonstrating the owner's abilities before
+handing off to conversational exploration. Do not add a prominent skip-to-chat
+control inside the hero. The final story scene and deliberate continued scrolling
+transition into chat. Preserve intentional deep links and application/workspace
+routes. Recruiter-facing copy explains what the owner built, how it works, and
+what the project demonstrates, using published evidence for career claims.
+Use literal headings that name the input, operation or output. Frame the
+walkthrough around the owner's work and abilities, with plain explanations.
+Portfolio demo and layout-preview examples use Domenik Wichmann as the display
+name. Keep fictional sample career facts explicitly labeled as demonstrations.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 # This is NOT the Next.js you know

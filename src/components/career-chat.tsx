@@ -87,6 +87,19 @@ export function CareerChat({
   const pendingMessage = useRef<HTMLElement>(null);
   const lock = useRef(false);
   useEffect(() => {
+    const draft = (event: Event) => {
+      const detail: unknown = (event as CustomEvent<unknown>).detail;
+      if (typeof detail !== "string" || detail.length > 1000 || lock.current)
+        return;
+      setPanel("chat");
+      setInput(detail);
+      setMode("ask");
+      messageField.current?.focus({ preventScroll: true });
+    };
+    window.addEventListener("portfolio-question", draft);
+    return () => window.removeEventListener("portfolio-question", draft);
+  }, []);
+  useEffect(() => {
     let cancelled = false;
     browserWorkspaceSlots()
       .then(async (available) => {

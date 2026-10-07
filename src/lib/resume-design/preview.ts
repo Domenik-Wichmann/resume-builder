@@ -1,11 +1,11 @@
 import type { ResumeIR } from "../resume-ir";
 export const designPreview: ResumeIR = {
   profile: {
-    name: "Alex Example",
+    name: "Domenik Wichmann",
     contact: {
       market: "US",
       location: "Example City",
-      contact_email: "alex@example.invalid",
+      contact_email: "domenik@example.invalid",
       phone: "+1 555 0100",
       work_authorization: "",
     },

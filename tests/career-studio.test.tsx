@@ -90,7 +90,7 @@ it("renders useful Markdown without interpreting executable HTML or links", () =
   expect(html).not.toContain("<img");
   expect(html).not.toContain("<a ");
 });
-it("ignores recruiter preference cookies and unsigned market overrides", async () => {
+it("resolves presentation automatically and ignores manual or unsigned tracking cookies", async () => {
   request.cookies = {
     rb_market: "BG",
     rb_link_market: "BG",
@@ -100,8 +100,18 @@ it("ignores recruiter preference cookies and unsigned market overrides", async (
   request.country = "BG";
   request.cookies.rb_market = "US";
   expect(await currentMarket()).toBe("BG");
+  request.cookies.rb_ai_access = createSession("demoLink").cookie;
+  expect(await currentMarket()).toBe("US");
+  request.country = "US";
+  request.cookies.rb_ai_access = createSession("demoBGbg").cookie;
+  expect(await currentMarket()).toBe("BG");
   expect(resolveMarket(null, "BG", "DE")).toBe("US");
-  expect((await changeMarket()).status).toBe(405);
+});
+it("does not permit public presentation overrides or issue preference cookies", async () => {
+  const response = await changeMarket();
+  expect(response.status).toBe(405);
+  expect(response.headers.get("set-cookie")).toBeNull();
+  expect(response.headers.get("cache-control")).toBe("no-store");
 });
 it("uses only signed sessions for active links and falls back after expiry", async () => {
   request.cookies.rb_ai_access = createSession("demoBGbg").cookie;

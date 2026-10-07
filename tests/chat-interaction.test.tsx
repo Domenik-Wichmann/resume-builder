@@ -207,3 +207,24 @@ it("keeps a committed role match when its automatic resume preview fails", async
   expect(container.querySelectorAll(".question-bubble")).toHaveLength(1);
   expect(sendButton().getAttribute("aria-busy")).toBe("false");
 });
+
+it("drafts hero suggestions in the existing composer without sending or creating a workspace", async () => {
+  await mount();
+  await act(async () => {
+    window.dispatchEvent(
+      new CustomEvent("portfolio-question", {
+        detail: "How have you used SQL?",
+      }),
+    );
+  });
+  expect(field().value).toBe("How have you used SQL?");
+  expect(document.activeElement).toBe(field());
+  expect(browser.browserCreateWorkspace).not.toHaveBeenCalled();
+  expect(browser.browserWorkspaceAction).not.toHaveBeenCalled();
+  await act(async () => {
+    window.dispatchEvent(
+      new CustomEvent("portfolio-question", { detail: { text: "invalid" } }),
+    );
+  });
+  expect(field().value).toBe("How have you used SQL?");
+});

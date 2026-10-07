@@ -1,9 +1,9 @@
 import type { Career } from "./model";
-/** Fictional, intentionally modest evidence. Never substitute this for owner biography. */
+/** Owner-requested display name with fictional demo evidence; never use this as owner biography. */
 export const fixture: Career = {
   demo: true,
   profile: {
-    name: "Alex Morgan",
+    name: "Domenik Wichmann",
     title: "Software engineer · systems & automation",
     introduction:
       "I connect data, build useful tools, and make everyday workflows simpler. Explore the evidence behind the work.",
