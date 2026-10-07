@@ -325,6 +325,12 @@ snapshots and previously exported documents remain historical.
 
 ## Owner profile, portraits and resume design
 
+Career Interviews are documented in [CAREER_INTERVIEWS.md](CAREER_INTERVIEWS.md).
+Apply `202610080001_career_interviews.sql` before deploying the private persistent
+interview workflow at `/admin/interviews`. `CAREER_INTERVIEW_MODEL` optionally
+overrides the default `openai/gpt-6-luna-pro` planner; provider usage is recorded
+through the existing ledger. Interview imports always require normal owner review.
+
 Apply `202610060001_profile_presentation_settings.sql` and
 `202610060002_owner_design_assets.sql` before deploying these owner controls.
 Personal information and portraits are at `/admin/presentation`; reusable designs

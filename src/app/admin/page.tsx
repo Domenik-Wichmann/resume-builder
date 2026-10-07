@@ -68,6 +68,12 @@ export default async function Admin() {
         className="admin-shortcuts"
         aria-label="Manage your career workspace"
       >
+        <Link href="/admin/interviews">
+          <strong>Career Interviews</strong>
+          <span>
+            Discover career evidence through a private, persistent conversation
+          </span>
+        </Link>
         <Link href="/admin/presentation">
           <strong>Personal information & photos</strong>
           <span>Name, introduction, contact details and portrait library</span>
