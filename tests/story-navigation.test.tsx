@@ -16,7 +16,7 @@ it("continues updating chapters after a direct chat anchor and a return to the s
   });
   vi.stubGlobal("cancelAnimationFrame", (id: number) => frames.delete(id));
   vi.stubGlobal("getComputedStyle", () => ({ position: "sticky" }));
-  vi.spyOn(HTMLElement.prototype, "offsetHeight", "get").mockReturnValue(4796);
+  vi.spyOn(HTMLElement.prototype, "offsetHeight", "get").mockReturnValue(5324);
   vi.spyOn(HTMLElement.prototype, "clientHeight", "get").mockReturnValue(960);
   vi.spyOn(HTMLElement.prototype, "getBoundingClientRect").mockImplementation(
     () => ({ top: -window.scrollY }) as DOMRect,
@@ -30,7 +30,7 @@ it("continues updating chapters after a direct chat anchor and a return to the s
       }
     });
   vi.spyOn(HTMLElement.prototype, "scrollIntoView").mockImplementation(() => {
-    window.scrollTo({ top: 4796 });
+    window.scrollTo({ top: 5324 });
   });
   const host = document.createElement("div");
   document.body.append(host);
@@ -59,8 +59,8 @@ it("continues updating chapters after a direct chat anchor and a return to the s
     await act(async () => reactRoot.render(<Story />));
     await flush();
     await flush();
-    expect(scrollTo).toHaveBeenCalledWith({ top: 4796 });
-    expect(host.querySelector("output")?.textContent).toBe("7");
+    expect(scrollTo).toHaveBeenCalledWith({ top: 5324 });
+    expect(host.querySelector("output")?.textContent).toBe("8");
     window.scrollTo({ top: 0 });
     await flush();
     expect(host.querySelector("output")?.textContent).toBe("0");

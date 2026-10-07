@@ -36,7 +36,37 @@ export async function getPortfolioStory() {
     if (!quote) continue;
     // Keep every supporting span of the selected claim together. A single span
     // may support only one part of a claim, so dropping the others misleads.
-    sources.set(record.id, { quote, claims: [claim.value] });
+    const priority = [
+      "action",
+      "metric",
+      "language",
+      "scope",
+      "tool",
+      "context",
+      "ownership",
+      "depth",
+      "credential",
+      "denial",
+      "correction",
+    ];
+    const facts = [...confirmed]
+      .sort(
+        (left, right) =>
+          priority.indexOf(left.attribute) - priority.indexOf(right.attribute),
+      )
+      .slice(0, 12)
+      .map((row) =>
+        row.attribution === "TEAM"
+          ? `Team work: ${row.value}`
+          : row.attribution === "EXPOSURE" && !/exposure/i.test(row.value)
+            ? `Recorded exposure: ${row.value}`
+            : row.value,
+      );
+    sources.set(record.id, {
+      quote,
+      claims: [claim.value],
+      facts: [...new Set(facts)],
+    });
   }
   return portfolioStory(careerFromBrain(records), sources);
 }

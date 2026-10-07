@@ -1,324 +1,129 @@
-import { useState, type ReactNode } from "react";
 import type { PortfolioStory } from "@/lib/portfolio/story";
+import { PortfolioSchemaArt } from "./portfolio-schema-art";
+import { PortfolioDiffArt } from "./portfolio-diff-art";
+import { PortfolioUseArt } from "./portfolio-use-art";
 
-function Flow({ children }: { children: ReactNode }) {
-  return <div className="case-flow">{children}</div>;
-}
-function Stage({ label, children }: { label: string; children: ReactNode }) {
+function ProjectArt({ story }: { story: PortfolioStory }) {
   return (
-    <div className="case-step">
-      <small>{label}</small>
-      <div>{children}</div>
+    <div className="case-panel project-art">
+      <div className="artifact-label">
+        The website you are using / the project being shown
+      </div>
+      <div className="project-recursion">
+        <svg
+          viewBox="0 0 500 320"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path d="M330 50 C500 50 490 220 330 240 M170 240 C10 240 10 50 170 50" />
+        </svg>
+        <div className="project-portfolio">
+          <small>Portfolio / the interface</small>
+          <strong>{story.profile.name}</strong>
+          <span>My experience, projects and skills</span>
+        </div>
+        <div className="project-loop-labels">
+          <span>Shows the project {"\u2191"}</span>
+          <span>Powers the portfolio {"\u2193"}</span>
+        </div>
+        <div className="project-application">
+          <small>Project / the application</small>
+          <strong>Resume Builder</strong>
+          <span>Career knowledge + evidence + application logic</span>
+        </div>
+      </div>
+      <div className="project-capabilities">
+        <span>Store career facts</span>
+        <span>Answer recruiter questions</span>
+        <span>Compose tailored résumés</span>
+      </div>
+      <p>The project powers the very portfolio that explains it.</p>
     </div>
   );
 }
-function SourceText({ text }: { text: string }) {
+function ImportArt() {
   return (
-    <>
-      {text
-        .split(
-          /(PostgreSQL|Supabase|SQL|Next\.js|TypeScript|VBA|regex|pgvector|Cohere|OpenRouter)/gi,
-        )
-        .map((part, index) =>
-          index % 2 ? <mark key={index}>{part}</mark> : part,
-        )}
-    </>
+    <div className="case-panel import-art">
+      <div className="artifact-label">Start with your own words</div>
+      <div className="import-human-inputs">
+        <div className="import-writing">
+          <div className="import-person">
+            <span aria-hidden="true">D</span>
+            <small>Tell it about your work</small>
+          </div>
+          <blockquote>
+            I work with spreadsheets. I built a tool that checks each row
+            against a set of rules, so I don&apos;t have to keep checking
+            everything by hand.
+            <span className="import-writing-cursor" aria-hidden="true" />
+          </blockquote>
+          <small>Example input / written in everyday language</small>
+        </div>
+        <div className="import-upload">
+          <div className="import-document" aria-hidden="true">
+            <span>MY CAREER NOTES</span>
+            <i />
+            <i />
+            <i />
+            <i />
+          </div>
+          <div>
+            <strong>Upload your docs</strong>
+            <small>Text or Markdown notes</small>
+          </div>
+          <span className="import-upload-arrow" aria-hidden="true">
+            {"\u2193"}
+          </span>
+        </div>
+      </div>
+      <div className="import-funnel" aria-hidden="true">
+        <svg viewBox="0 0 500 44" preserveAspectRatio="none">
+          <path d="M140 0 C140 25 250 18 250 40 M390 0 C390 25 250 18 250 40" />
+        </svg>
+        <span>{"\u2193"}</span>
+      </div>
+      <div className="import-organizer">
+        <small>AI reads it and picks out the facts</small>
+        <strong>Your story becomes connected information</strong>
+      </div>
+      <div className="import-proposed-facts">
+        <div>
+          <small>Project</small>
+          <strong>Spreadsheet checking tool</strong>
+        </div>
+        <div>
+          <small>Skill</small>
+          <strong>Spreadsheet automation</strong>
+        </div>
+        <div>
+          <small>Work</small>
+          <strong>Checking data against rules</strong>
+        </div>
+      </div>
+      <div className="import-owner-review">
+        <span aria-hidden="true">{"\u2193"}</span>
+        <strong>I check the facts before adding them.</strong>
+      </div>
+      <div className="case-annotation">
+        Illustrative input and draft / OpenRouter extraction / Zod validation /
+        owner review
+      </div>
+    </div>
   );
 }
-function Arrow() {
+function FeedbackArt() {
   return (
-    <span className="case-arrow" aria-hidden="true">
-      ↓
-    </span>
-  );
-}
-
-export function CaseStudyArt({
-  step,
-  story,
-}: {
-  step: number;
-  story: PortfolioStory;
-}) {
-  const [selected, setSelected] = useState(0);
-  const [selectedResult, setSelectedResult] = useState(0);
-  const result = story.examples[selectedResult];
-  const evidence = step <= 2 ? story.modelEvidence : story.evidence;
-  const passage =
-    evidence?.source?.quote ||
-    evidence?.passage ||
-    "No relevant evidence is currently stored.";
-  const claims = evidence?.source?.claims || [];
-  const sourceLabel = evidence?.source
-    ? "Exact published source excerpts"
-    : "Published career summary";
-  const question = story.retrievalQuestion;
-  if (step === 1)
-    return (
-      <div className="case-panel case-input">
-        <div className="artifact-label">
-          01 / Owner input → proposed changes
-        </div>
-        <div className="case-input-tabs">
-          <span>Text / Markdown</span>
-          <span>Typed career interview</span>
-        </div>
-        <div className="case-source">
-          <small>
-            {sourceLabel} · {evidence?.title}
-          </small>
-          <blockquote>
-            <SourceText text={passage} />
-          </blockquote>
-        </div>
-        <Flow>
-          <Stage label="Interpret">
-            <strong>OpenRouter / Luna Pro</strong>
-            <span>Extract entities, claims and source spans</span>
-          </Stage>
-          <Arrow />
-          <Stage label="Validate">
-            <strong>Typed output / Zod schemas</strong>
-            <span>Check the proposed record shape</span>
-          </Stage>
-          <Arrow />
-          <Stage label="Owner review">
-            <strong>Compare → accept → publish separately</strong>
-            <span>Proposals do not silently become public facts</span>
-          </Stage>
-        </Flow>
-      </div>
-    );
-  if (step === 2)
-    return (
-      <div className="case-panel case-model">
-        <div className="artifact-label">02 / Source → connected records</div>
-        <div className="case-source">
-          <small>{sourceLabel}</small>
-          <blockquote>
-            <SourceText text={passage} />
-          </blockquote>
-        </div>
-        <div className="case-model-network">
-          <svg
-            viewBox="0 0 500 220"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <path d="M250 35 L250 95 M250 125 L110 180 M250 125 L390 180" />
-          </svg>
-          <span className="case-link-caption">source supports</span>
-          <button
-            className="case-entity case-root"
-            aria-pressed={selected === 0}
-            onClick={() => setSelected(0)}
-          >
-            <small>{evidence?.kind || "Record"}</small>
-            <strong>{evidence?.title || "Awaiting published evidence"}</strong>
-          </button>
-          <div className="case-claim">
-            <small>
-              {claims.length
-                ? "Approved claim"
-                : "Published summary / illustrative decomposition"}
-            </small>
-            <span>
-              {claims[0] ||
-                evidence?.passage ||
-                "No relevant evidence is currently stored."}
-            </span>
-          </div>
-          {(evidence?.skills || []).map((skill, index) => (
-            <button
-              key={skill}
-              className={`case-entity case-skill-${index}`}
-              aria-pressed={selected === index + 1}
-              onClick={() => setSelected(index + 1)}
-            >
-              <small>Linked skill</small>
-              <strong>{skill}</strong>
-            </button>
-          ))}
-        </div>
-        <div className="case-inspection" aria-live="polite">
-          <small>
-            {selected === 0
-              ? "Record evidence"
-              : `Linked to ${evidence?.skills[selected - 1]}`}
-          </small>
-          <span>
-            {selected === 0
-              ? "The original passage stays attached to the claim."
-              : "This association comes from the published career model; the passage shows what the work supports."}
-          </span>
-        </div>
-        {evidence?.achievements.length ? (
-          <div className="case-linked-achievement">
-            <small>Linked achievement</small>
-            {evidence.achievements.join(" / ")}
-          </div>
-        ) : null}
-        <div className="case-annotation">
-          PostgreSQL / Supabase · stable identity · reconciliation · provenance
-        </div>
-      </div>
-    );
-  if (step === 3)
-    return (
-      <div className="case-panel case-retrieval">
-        <div className="artifact-label">03 / Question → evidence → answer</div>
-        <div className="case-question">“{question}”</div>
-        <Flow>
-          <Stage label="Find candidates">
-            <strong>Cohere embeddings + pgvector</strong>
-            <span>Meaning search + structured record context</span>
-          </Stage>
-          <Arrow />
-        </Flow>
-        <div className="case-evidence-list">
-          {story.examples.map((row) => (
-            <button
-              key={row.title}
-              aria-pressed={selectedResult === story.examples.indexOf(row)}
-              onClick={() => setSelectedResult(story.examples.indexOf(row))}
-            >
-              <small>
-                {row.kind} / {row.skills.join(" \u00b7 ")}
-              </small>
-              <strong>{row.title}</strong>
-            </button>
-          ))}
-        </div>
-        <div className="case-source">
-          <small>
-            {result?.exact
-              ? "Exact published source excerpts"
-              : "Published career summary"}{" "}
-            / {result?.title}
-          </small>
-          <blockquote>
-            <SourceText
-              text={
-                result?.passage || "No relevant evidence is currently stored."
-              }
-            />
-          </blockquote>
-        </div>
-        <div className="case-answer">
-          <small>Evidence-backed answer preview / curated excerpt</small>
-          <strong>
-            {result?.title || "No relevant evidence is currently stored."}
-          </strong>
-          <span className="case-answer-excerpt">
-            {result?.claims[0] || result?.passage}
-          </span>
-          <span>
-            Publication + source freshness + claim support checked before
-            generation.
-          </span>
-        </div>
-        <div className="case-annotation">
-          Evidence packets → claim support checks → grounded generation
-        </div>
-      </div>
-    );
-  if (step === 4)
-    return (
-      <div className="case-panel case-output">
-        <div className="artifact-label">
-          04 / Illustrative role → supported document
-        </div>
-        <div className="case-job">
-          <small>Illustrative role requirements</small>
-          <strong>Data & AI application work</strong>
-          <span>
-            {evidence?.skills.join(" · ") || "No published skill match"}
-          </span>
-        </div>
-        <Flow>
-          <Stage label="Requirements">
-            <strong>Extract what the role needs</strong>
-          </Stage>
-          <Arrow />
-          <Stage label="Evidence">
-            <strong>
-              {evidence?.title || "No relevant evidence is currently stored."}
-            </strong>
-            <span>Retrieve claims → check whole-bullet support</span>
-          </Stage>
-          <Arrow />
-          <Stage label="Resume IR">
-            <strong>Admitted facts → typed sections</strong>
-            <span>Canonical facts + workspace relevance</span>
-          </Stage>
-          <Arrow />
-        </Flow>
-        <div className="case-document">
-          <small>DETERMINISTIC RENDERING → PRINT / PDF</small>
-          <strong>{story.profile.name}</strong>
-          <span>{evidence?.title}</span>
-          <p>
-            {claims[0] ||
-              evidence?.passage ||
-              "No relevant evidence is currently stored."}
-          </p>
-        </div>
-        <div className="case-annotation">
-          Models propose text. The compiler controls admission and final HTML.
-        </div>
-      </div>
-    );
-  if (step === 5)
-    return (
-      <div className="case-panel case-architecture">
-        <div className="artifact-label">
-          05 / One application, explicit boundaries
-        </div>
-        <div className="case-app">
-          <strong>Next.js / React / TypeScript</strong>
-          <span>Owner tools ← API routes → recruiter interface</span>
-          <small>Vercel deployment / GitHub Actions checks</small>
-        </div>
-        <div className="case-system-grid">
-          <Stage label="Canonical truth">
-            <strong>Supabase / PostgreSQL</strong>
-            <span>Records, claims, relationships and exact evidence</span>
-          </Stage>
-          <Stage label="Find evidence">
-            <strong>Cohere / pgvector</strong>
-            <span>Embeddings select candidates, not career truth</span>
-          </Stage>
-          <Stage label="Interpret & compose">
-            <strong>OpenRouter / Luna Pro</strong>
-            <span>Structured extraction and evidence-backed text</span>
-          </Stage>
-          <Stage label="Enforce">
-            <strong>Deterministic application code</strong>
-            <span>Auth / RLS · review · publication · résumé compiler</span>
-          </Stage>
-        </div>
-        <div className="case-boundary">
-          <span>PRIVATE / owner sources, drafts, applications</span>
-          <strong>Explicit publication boundary</strong>
-          <span>PUBLIC / approved career evidence</span>
-        </div>
-        <div className="case-annotation">
-          Zod contracts · transactional changes · tenant isolation · Vitest
-          checks
-        </div>
-      </div>
-    );
-  return (
-    <div className="case-panel case-feedback">
+    <div className="case-panel feedback-art">
       <div className="artifact-label">
-        06 / Interaction → signals · demo data
+        Interaction {"\u2192"} feedback / illustrative demo data
       </div>
-      <div className="case-events">
-        <span>Application link</span>
-        <span>Visit / question</span>
-        <span>Résumé interaction</span>
+      <div className="feedback-events">
+        <span>Visit</span>
+        <span>Question / topic</span>
+        <span>Résumé preview</span>
+        <span>Recorded outcome</span>
       </div>
-      <div className="case-event-stream" aria-hidden="true">
+      <div className="feedback-event-stream" aria-hidden="true">
         <i />
         <i />
         <i />
@@ -356,14 +161,94 @@ export function CaseStudyArt({
           </div>
         ))}
       </div>
-      <div className="case-feedback-signal">
-        <small>Illustrative signal</small>
-        <strong>Recruiters ask how the project uses AI</strong>
-        <span>Review evidence gaps and recorded application outcomes</span>
+      <div className="feedback-signal">
+        <small>Illustrative feedback</small>
+        <strong>Questions focus on the AI project</strong>
+        <span>
+          Review the career evidence and recorded application outcomes
+        </span>
       </div>
       <div className="case-annotation">
-        Application attribution · event analytics · privacy-aware feedback
+        Application attribution / event analytics / private questions /
+        aggregate signals
       </div>
     </div>
   );
+}
+const stackLayers = [
+  {
+    layer: "Frontend",
+    names: "Next.js / React / TypeScript",
+    purpose: "Owner tools and recruiter interface",
+  },
+  {
+    layer: "Application",
+    names: "API routes / Zod / career-review logic / Resume IR",
+    purpose: "Validate requests, reconcile changes and compile supported facts",
+  },
+  {
+    layer: "Data",
+    names: "Supabase / PostgreSQL / RLS / pgvector",
+    purpose:
+      "Canonical records, exact evidence, tenant boundaries and vector search",
+  },
+  {
+    layer: "AI",
+    names: "OpenRouter / Luna Pro / Cohere embeddings",
+    purpose:
+      "Interpret text, find meaning and compose evidence-backed language",
+  },
+  {
+    layer: "Infrastructure",
+    names: "Vercel / GitHub / CI",
+    purpose: "Deploy the application and run checks",
+  },
+];
+function StackArt() {
+  return (
+    <div className="case-panel stack-art">
+      <div className="artifact-label">
+        One application / connected responsibilities
+      </div>
+      <div className="stack-layers">
+        {stackLayers.map(({ layer, names, purpose }) => (
+          <div className="stack-layer" key={layer}>
+            <small>{layer}</small>
+            <div>
+              <strong>{names}</strong>
+              <span>{purpose}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="stack-flow">
+        Request {"\u2192"} validated logic {"\u2192"} verified evidence{" "}
+        {"\u2192"} rendered output
+      </div>
+      <div className="stack-boundary">
+        <span>PRIVATE / sources, review, applications</span>
+        <strong>Explicit publication boundary</strong>
+        <span>PUBLIC / approved career evidence</span>
+      </div>
+      <div className="case-annotation">
+        Deterministic identity / permissions / evidence / review / publication /
+        résumé admission
+      </div>
+    </div>
+  );
+}
+export function CaseStudyArt({
+  step,
+  story,
+}: {
+  step: number;
+  story: PortfolioStory;
+}) {
+  if (step === 1) return <ProjectArt story={story} />;
+  if (step === 2) return <ImportArt />;
+  if (step === 3) return <PortfolioSchemaArt story={story} />;
+  if (step === 4) return <PortfolioDiffArt story={story} />;
+  if (step === 5) return <PortfolioUseArt story={story} />;
+  if (step === 6) return <FeedbackArt />;
+  return <StackArt />;
 }

@@ -67,8 +67,11 @@ control inside the hero. The final story scene and deliberate continued scrollin
 transition into chat. Preserve intentional deep links and application/workspace
 routes. Recruiter-facing copy explains what the owner built, how it works, and
 what the project demonstrates, using published evidence for career claims.
-Use literal headings that name the input, operation or output. Frame the
-walkthrough around the owner's work and abilities, with plain explanations.
+The hero is an explanatory project walkthrough: introduce the owner first, then
+show the project, input, structure, reconciliation, use, feedback and architecture.
+Use literal headings and plain explanations of the owner's work and abilities.
+Final example questions expand precomputed public answers inline; they never
+navigate, draft or send chat questions, create workspace actions, or call AI.
 Portfolio demo and layout-preview examples use Domenik Wichmann as the display
 name. Keep fictional sample career facts explicitly labeled as demonstrations.
 

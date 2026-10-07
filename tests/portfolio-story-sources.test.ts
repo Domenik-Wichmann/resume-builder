@@ -111,3 +111,28 @@ it.each(["private", "archived", "pending", "uncertain", "invalid span"])(
     );
   },
 );
+
+it("precomputes answers only from usable public claims and preserves attribution scope", async () => {
+  const row = record();
+  row.claims.push({
+    ...row.claims[0],
+    value: "PRIVATE PENDING FACT",
+    availability: "PENDING_REVIEW",
+  });
+  row.claims.push({
+    ...row.claims[0],
+    value: "Contributed to a team workflow",
+    attribution: "TEAM",
+  });
+  loader.mockResolvedValue([row, skill()]);
+  const story = await getPortfolioStory();
+  const examples = JSON.stringify(story.questionExamples);
+  expect(examples).toContain("Team work: Contributed to a team workflow");
+  expect(examples).not.toContain("PRIVATE PENDING FACT");
+  expect(examples).not.toContain("PRIVATE WHOLE DOCUMENT");
+  expect(examples).not.toContain("internal-hash");
+  expect(
+    story.schemaEntities.find((entity) => entity.kind === "Achievement")
+      ?.linked,
+  ).toBe(false);
+});

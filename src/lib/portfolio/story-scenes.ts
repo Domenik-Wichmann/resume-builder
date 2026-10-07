@@ -1,65 +1,72 @@
-// This walkthrough describes implemented product behavior, not additional career claims.
-export const portfolioPremise = "This portfolio is one of my projects.";
-export const portfolioPremiseDescription =
-  "I built this application to present my work, answer recruiter questions and create role-specific r\u00e9sum\u00e9s from supported career facts.";
-export const portfolioPayoff =
-  "This website is both my portfolio and a working example of the system I built.";
+// Plain explanations of implemented behavior. Personal facts come from the public projection.
 export const storyScenes = [
-  { chapter: "Why", title: "", description: "", footnote: "" },
+  { chapter: "Intro", title: "", description: "", footnote: "" },
   {
-    chapter: "Input",
-    title: "Extracting structured data\nfrom text and conversations.",
+    chapter: "The Project",
+    title: "This portfolio website\nis also one of my projects.",
     description:
-      "I can paste career material, upload text or Markdown, or answer a guided career interview. An AI model proposes structured facts; I review the changes before accepting them.",
+      "I built Resume Builder to keep my career history organized and make it easier to explore. This portfolio shows the project, and the project runs the portfolio you are using.",
     footnote:
-      "The public passage shown here illustrates the input. Original documents and interview answers stay private.",
+      "One system stores my career evidence, creates role-specific r\u00e9sum\u00e9s and answers recruiter questions.",
   },
   {
-    chapter: "Model",
-    title: "Connecting career facts\nin a relational database.",
+    chapter: "Import",
+    title: "Turning documents and conversation\ninto structured career facts.",
     description:
-      "I store the reviewed facts in Career Brain, the relational database behind this portfolio. It connects jobs, projects, skills and achievements, with exact source passages attached to the approved claims.",
-    footnote:
-      "Select a record or skill to inspect its connection to the evidence.",
+      "I write about my work in my own words, upload my notes, or answer a few questions. AI picks out the jobs, projects and skills and puts them into an organized draft. I check the draft before accepting the facts.",
+    footnote: "Write naturally. Upload your notes. Review the facts it finds.",
   },
   {
-    chapter: "Search",
-    title: "Retrieving evidence\nfor recruiter questions.",
+    chapter: "Structure",
+    title: "Connecting career records\nand their supporting evidence.",
     description:
-      "A question searches the published career model. Embeddings find potentially useful evidence; the system checks what that evidence actually supports before generating an answer.",
+      "The system separates my history into jobs, projects, skills, languages and achievements. It connects the pieces: which skills a project used, what it achieved, and where each fact came from. The original passage stays attached, so I can check it.",
     footnote:
-      "This is a walkthrough of the retrieval path, not a live AI response.",
+      "Connected facts, with the original evidence kept alongside them.",
   },
   {
-    chapter: "R\u00e9sum\u00e9",
-    title: "Matching job requirements\nto supported career facts.",
+    chapter: "Diff",
+    title: "Comparing new information\nwith the existing career records.",
     description:
-      "The job is broken into requirements. Matching evidence is checked, and supported claims become a structured r\u00e9sum\u00e9. Application code renders the document; the model never generates its final HTML.",
+      "New information is compared with what is already saved. The system shows what is new, what changed, what stayed the same and what needs a decision. I review the changes; nothing is automatically removed or published.",
     footnote:
-      "Illustrative role brief and document preview. No new qualifications are generated in this tour.",
+      "New information updates the existing knowledge, after my review.",
   },
   {
-    chapter: "System",
-    title: "How the application\nis built.",
+    chapter: "Use",
+    title: "Using the same evidence\nfor answers and r\u00e9sum\u00e9s.",
     description:
-      "PostgreSQL stores the approved career records and evidence. Embeddings help find relevant records. Models extract and compose text; application code enforces permissions, review, publication and r\u00e9sum\u00e9 compilation.",
+      "For a question, the application finds relevant facts and follows their connections to understand the context. For a job description, it chooses the experience that fits. Both answers and r\u00e9sum\u00e9s come from the same saved career history.",
     footnote:
-      "A single Next.js application connects the owner tools and recruiter experience.",
+      "One career history. Two uses: answer questions and build tailored r\u00e9sum\u00e9s.",
   },
   {
     chapter: "Feedback",
-    title: "Tracking visits, questions\nand r\u00e9sum\u00e9 interactions.",
+    title: "Seeing which experience\nrecruiters investigate.",
     description:
-      "Application links connect visits, questions and r\u00e9sum\u00e9 interactions to an opportunity. Recorded outcomes and recurring questions help me understand which experience attracts attention and where more evidence is needed.",
+      "I can see which applications bring visitors, what topics they ask about and which r\u00e9sum\u00e9s they open. This helps me understand what interests recruiters and where I need to explain my work better.",
     footnote:
-      "Illustrative demo data. Recruiter questions are stored privately, with disclosure in chat.",
+      "Illustrative activity only. Recruiter questions and applications stay private.",
   },
   {
-    chapter: "Use it",
-    title: "Ask about my projects\nand experience.",
+    chapter: "Stack",
+    title: "The stack behind\nthis portfolio.",
     description:
-      "Ask about the work I have done, the tools I have used, or experience relevant to your role. Answers use the published career records and evidence shown in this walkthrough.",
-    footnote: "Choose a question to draft it in chat. You choose when to send.",
+      "The website, database and AI work together. AI helps read what I write, find useful information and explain it. The application decides who can access it, what gets saved and what is ready to share.",
+    footnote:
+      "AI helps make sense of the information. Reviewed facts stay in the database.",
+  },
+  {
+    chapter: "Ask Me Anything",
+    title: "Ask about my work.",
+    description:
+      "Ask about my work, projects, skills or how my experience might fit your team. Open an example below to see an answer, then continue to the conversation.",
+    footnote:
+      "Open an example to read a saved answer. Start the conversation when you are ready.",
   },
 ] as const;
 export const finalStoryStep = storyScenes.length - 1;
+
+export const portfolioIntroTitle = "Systems, automation & AI";
+export const portfolioIntroDescription =
+  "I build systems that turn messy information into something useful. I use AI to extract knowledge, organize it into connected data and graphs, and automate the work around it.";

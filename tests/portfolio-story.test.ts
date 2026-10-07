@@ -75,7 +75,7 @@ describe("public story projection", () => {
   it("bounds the scroll chapters and requires a pause plus a fresh exit gesture", () => {
     expect(storyStep(-50, 400)).toBe(0);
     expect(storyStep(805, 400)).toBe(2);
-    expect(storyStep(99999, 400)).toBe(7);
+    expect(storyStep(99999, 400)).toBe(8);
     expect(deliberateStoryExit(650, 0, 200)).toBe(false);
     expect(deliberateStoryExit(900, 0, 850)).toBe(false);
     expect(deliberateStoryExit(900, 0, 700)).toBe(true);

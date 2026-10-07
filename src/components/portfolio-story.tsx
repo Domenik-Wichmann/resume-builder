@@ -1,17 +1,17 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { type CSSProperties } from "react";
+import type { CSSProperties } from "react";
 import type { PortfolioStory } from "@/lib/portfolio/story";
 import type { Presentation } from "@/lib/markets";
 import {
   finalStoryStep,
-  portfolioPremise,
-  portfolioPremiseDescription,
-  portfolioPayoff,
   storyScenes,
+  portfolioIntroTitle,
+  portfolioIntroDescription,
 } from "@/lib/portfolio/story-scenes";
 import { CaseStudyArt } from "./portfolio-case-study-art";
+import { PortfolioQuestionExamples } from "./portfolio-question-examples";
 import { useStoryNavigation } from "./story-navigation";
 
 export function PortfolioStoryHero({
@@ -22,12 +22,6 @@ export function PortfolioStoryHero({
   presentation: Presentation;
 }) {
   const { root, step, navigate, chat } = useStoryNavigation();
-  const ask = (question: string) => {
-    chat();
-    window.dispatchEvent(
-      new CustomEvent("portfolio-question", { detail: question }),
-    );
-  };
   return (
     <div
       ref={root}
@@ -43,7 +37,7 @@ export function PortfolioStoryHero({
           <div className="demo-banner">
             DEMO PORTFOLIO{" "}
             <span>
-              Fictional career data. Product visuals are demonstrations.
+              Fictional career facts. The display name is Domenik Wichmann.
             </span>
           </div>
         )}
@@ -52,16 +46,18 @@ export function PortfolioStoryHero({
             career<span> / </span>connected.
           </Link>
           <span className="story-header-context">
-            Resume Builder / project case study
+            {step === 0
+              ? `Portfolio / ${story.profile.name}`
+              : "Resume Builder / project walkthrough"}
           </span>
         </header>
         <section
           className="story-stage wrap"
-          aria-label="The person and the product"
+          aria-label="Domenik and the portfolio project"
         >
           {storyScenes.map((scene, index) => (
             <div
-              className="story-scene"
+              className={`story-scene story-scene-${index}`}
               key={scene.chapter}
               hidden={step !== index}
             >
@@ -75,19 +71,15 @@ export function PortfolioStoryHero({
                 {index === 0 ? (
                   <>
                     <h1>
-                      {story.profile.name || "A story taking shape."}
-                      <span>
-                        {story.profile.title ||
-                          "Career profile pending publication."}
-                      </span>
+                      {story.profile.name ||
+                        "Career profile pending publication."}
+                      <span>{portfolioIntroTitle}</span>
                     </h1>
-                    <p className="story-premise">{portfolioPremise}</p>
-                    <p className="story-description story-product-intro">
-                      {portfolioPremiseDescription}
-                    </p>
-                    <p className="story-recursive-payoff">{portfolioPayoff}</p>
                     <p className="story-description story-profile-intro">
-                      {story.profile.introduction}
+                      {portfolioIntroDescription}
+                    </p>
+                    <p className="story-personal-invitation">
+                      Explore the work and projects behind my skills.
                     </p>
                     <div className="story-highlights">
                       {story.highlights.map((skill) => (
@@ -118,69 +110,50 @@ export function PortfolioStoryHero({
                       )}
                     </div>
                     <div className="story-links">
-                      <button type="button" onClick={() => navigate(1)}>
-                        See how I built it <span aria-hidden="true">→</span>
-                      </button>
-                      <Link href="/resume">View résumé ↗</Link>
+                      <Link href="/resume">View résumé</Link>
                     </div>
                   </>
                 ) : (
                   <>
                     <h2>{scene.title}</h2>
                     <p className="story-description">{scene.description}</p>
-                    {index === finalStoryStep && (
-                      <>
-                        <a
-                          className="button story-cta"
-                          href="#ask"
-                          onClick={(event) => {
-                            event.preventDefault();
-                            chat();
-                          }}
-                        >
-                          Explore my experience ↗
-                        </a>
-                        <p className="story-hint">
-                          Or scroll once more to start exploring.
-                        </p>
-                      </>
-                    )}
                     <p className="story-footnote">{scene.footnote}</p>
                   </>
                 )}
               </div>
               <div className={`story-art story-art-${index}`}>
                 {index === 0 && (
-                  <div className="hero-portrait">
-                    <div className="portrait-orbit" />
-                    <div className="portrait-frame">
-                      {presentation.photo_url ? (
-                        <Image
-                          src={presentation.photo_url}
-                          alt={`Portrait of ${story.profile.name}`}
-                          width={600}
-                          height={720}
-                          unoptimized
-                          preload
-                        />
-                      ) : (
-                        <div className="portrait-initials">
-                          <span>
-                            {story.profile.name
-                              .split(" ")
-                              .map((part) => part[0])
-                              .join("") || "✧"}
-                          </span>
-                          <small>Portrait coming soon</small>
-                        </div>
-                      )}
-                    </div>
-                    <div className="portrait-caption">
-                      <span className="status-dot" />{" "}
-                      {story.demo
-                        ? "Fictional demo profile"
-                        : "Evidence behind the experience"}
-                      <span>↗</span>
+                  <div className="portrait-layout">
+                    <div className="hero-portrait">
+                      <div className="portrait-orbit" />
+                      <div className="portrait-frame">
+                        {presentation.photo_url ? (
+                          <Image
+                            src={presentation.photo_url}
+                            alt={`Portrait of ${story.profile.name}`}
+                            width={600}
+                            height={720}
+                            unoptimized
+                            preload
+                          />
+                        ) : (
+                          <div className="portrait-initials">
+                            <span>
+                              {story.profile.name
+                                .split(" ")
+                                .map((part) => part[0])
+                                .join("") || "DW"}
+                            </span>
+                            <small>Portrait coming soon</small>
+                          </div>
+                        )}
+                      </div>
+                      <div className="portrait-caption">
+                        <span className="status-dot" />{" "}
+                        {story.demo
+                          ? "Illustrative demo profile"
+                          : "The person behind the work"}
+                      </div>
                     </div>
                   </div>
                 )}
@@ -189,74 +162,92 @@ export function PortfolioStoryHero({
                 )}
                 {index === finalStoryStep && (
                   <div className="invitation-art">
-                    <div className="invitation-mark" aria-hidden="true">
-                      ✧
-                    </div>
                     <div className="artifact-label">
-                      A conversation shaped around your team
+                      Example questions / expand to read
                     </div>
-                    <div className="story-questions">
-                      {story.questions.map((question) => (
-                        <button
-                          key={question}
-                          onClick={() => ask(question)}
-                          aria-label={`Draft question: ${question}`}
-                        >
-                          <span>{question}</span>
-                          <span aria-hidden="true">↗</span>
-                        </button>
-                      ))}
-                    </div>
-                    <small>Choose a question to draft it in chat.</small>
+                    <PortfolioQuestionExamples
+                      examples={story.questionExamples}
+                    />
                   </div>
                 )}
               </div>
             </div>
           ))}
         </section>
+        {step === 0 && (
+          <div className="story-handoff story-intro-handoff wrap">
+            <button
+              type="button"
+              className="story-intro-next"
+              onClick={() => navigate(1)}
+            >
+              More about me &amp; this project{" "}
+              <span aria-hidden="true">{"\u2193"}</span>
+            </button>
+          </div>
+        )}
+        {step === finalStoryStep && (
+          <div className="story-handoff wrap">
+            <a
+              className="button story-cta"
+              href="#ask"
+              onClick={(event) => {
+                event.preventDefault();
+                chat();
+              }}
+            >
+              Explore my experience <span aria-hidden="true">{"\u2193"}</span>
+            </a>
+            <p>Or continue scrolling to the conversation.</p>
+          </div>
+        )}
         <div className="story-navigation wrap">
           <span className="story-count" aria-live="polite">
-            0{step + 1} <span>/ 0{storyScenes.length}</span>
+            {String(step + 1).padStart(2, "0")}{" "}
+            <span>/ {String(storyScenes.length).padStart(2, "0")}</span>
           </span>
           <nav aria-label="Story chapters">
             {storyScenes.map((scene, index) => (
               <button
+                type="button"
                 key={scene.chapter}
+                aria-label={`${index + 1}. ${scene.chapter}`}
                 aria-current={step === index ? "step" : undefined}
                 onClick={() => navigate(index)}
               >
                 <span className="chapter-line" />
-                <span>{scene.chapter}</span>
+                <span className="chapter-name">{scene.chapter}</span>
               </button>
             ))}
           </nav>
           <div className="story-arrows">
             <button
+              type="button"
               aria-label="Previous chapter"
               disabled={step === 0}
               onClick={() => navigate(step - 1)}
             >
-              ←
+              {"\u2191"}
             </button>
             <button
+              type="button"
               aria-label={
                 step === finalStoryStep
-                  ? "Explore my experience in chat"
+                  ? "Continue to the conversation"
                   : "Next chapter"
               }
               onClick={() =>
                 step === finalStoryStep ? chat() : navigate(step + 1)
               }
             >
-              →
+              {"\u2193"}
             </button>
           </div>
         </div>
         <noscript>
           <style>{`.story-runway { height: auto; } .story-pin { position: relative; height: auto; min-height: 100svh; }`}</style>
           <p className="wrap">
-            This portfolio is a working Resume Builder application. Enable
-            JavaScript for its interactive project tour.
+            Enable JavaScript for the interactive project walkthrough.
           </p>
         </noscript>
       </div>
