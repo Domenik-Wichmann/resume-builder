@@ -5,11 +5,26 @@ import { loadBrain } from "./career-brain/repository";
 import { database } from "./db";
 import { primaryAccountId } from "./account-id";
 import { validateEnv } from "./env";
+import type { SupabaseClient } from "@supabase/supabase-js";
+import type { BrainRecord } from "./career-brain/repository";
 import type { CareerRecord } from "./career/model";
 /** Public resume prose uses reviewed canonical display text, not the full retrieval claim inventory. */
-export async function getResume() {
+export async function getResume(owner?: {
+  db: SupabaseClient;
+  accountId: string;
+}) {
   if (validateEnv(process.env).mode === "demo") return getCareer();
-  const records = await loadBrain(database(), primaryAccountId, true);
+  const records = owner
+    ? await loadBrain(owner.db, owner.accountId)
+    : await loadBrain(database(), primaryAccountId, true);
+  return resumeFromBrain(records);
+}
+
+export function resumeFromBrain(input: BrainRecord[]) {
+  // The owner preview uses the same publication boundary as public resumes.
+  const records = input.filter(
+    (record) => record.published && !record.archived,
+  );
   const career = careerFromBrain(records);
   const display = (items: CareerRecord[]) =>
     items.map((item) => ({

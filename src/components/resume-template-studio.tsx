@@ -34,7 +34,10 @@ export function ResumeTemplateStudio({
   const [templates, setTemplates] = useState(initialTemplates),
     [assets, setAssets] = useState(initialAssets);
   const [draft, setDraft] = useState<ResumeTemplate>(
-    () => initialTemplates[0] || fresh(),
+    () =>
+      initialTemplates.find((template) => template.is_default) ||
+      initialTemplates[0] ||
+      fresh(),
   );
   const [busy, setBusy] = useState(false),
     [message, setMessage] = useState(""),
@@ -421,8 +424,11 @@ export function ResumeTemplateStudio({
           </Link>
         </div>
         <p className="muted studio-preview-disclosure">
-          This preview uses clearly labeled fictional content to show layout. It
-          does not edit or publish your career.
+          {preview.demo
+            ? "This preview uses clearly labeled fictional demonstration content."
+            : "This preview uses your published career data, saved contact presentation, and approved application content."}{" "}
+          Layout changes appear here immediately. This preview does not publish
+          career changes.
         </p>
         <ResumeRenderer ir={preview} design={draft.spec} />
       </section>
