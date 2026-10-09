@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   fixedContentSchema,
   type FixedContent,
@@ -9,6 +10,7 @@ export function ResumeContentEditor({
 }: {
   initial: FixedContent | null;
 }) {
+  const router = useRouter();
   const [value, setValue] = useState(
     initial ? JSON.stringify(initial, null, 2) : "",
   );
@@ -47,6 +49,7 @@ export function ResumeContentEditor({
             const result = await response.json();
             if (!response.ok) throw new Error(result.error);
             setValue(JSON.stringify(result.content, null, 2));
+            router.refresh();
             setMessage(
               "Saved for future applications. Historical snapshots retain their approved content.",
             );

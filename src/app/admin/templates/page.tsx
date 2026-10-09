@@ -7,7 +7,9 @@ import {
   applicationTemplate,
 } from "@/lib/resume-design/server";
 import { ResumeContentEditor } from "@/components/resume-content-editor";
-import { designPreview } from "@/lib/resume-design/preview";
+import { getResume } from "@/lib/resume";
+import { currentMarket, getPresentation } from "@/lib/market-server";
+import { generalResumeIR } from "@/lib/resume-design/from-career";
 import { ResumeTemplateStudio } from "@/components/resume-template-studio";
 export const dynamic = "force-dynamic";
 export const metadata = {
@@ -17,6 +19,7 @@ export const metadata = {
 export default async function TemplatesPage() {
   let data;
   let fixed = null;
+  let preview;
   let migrationMessage = "";
   try {
     await requireOwner();
@@ -28,6 +31,11 @@ export default async function TemplatesPage() {
       if (!(e instanceof HttpError) || e.status !== 503) throw e;
       migrationMessage = e.message;
     }
+    const [career, presentation] = await Promise.all([
+      getResume(a),
+      currentMarket().then((market) => getPresentation(market, a.accountId)),
+    ]);
+    preview = generalResumeIR(career, presentation, fixed);
   } catch (e) {
     if (!(e instanceof HttpError) || e.status !== 403) throw e;
     return (
@@ -50,7 +58,7 @@ export default async function TemplatesPage() {
       <ResumeTemplateStudio
         initialAssets={data.assets}
         initialTemplates={data.templates}
-        preview={designPreview}
+        preview={preview}
       />
       {migrationMessage ? (
         <p role="status">{migrationMessage}</p>
