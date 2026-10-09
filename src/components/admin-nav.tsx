@@ -54,7 +54,8 @@ export function AdminNav() {
             <span className="owner-menu-label">Career & content</span>
             {link("/admin/presentation", "Personal information & photos")}
             {link("/admin/templates", "Resume design & templates")}
-            {link("/admin/career", "Import & interview")}
+            {link("/admin/career", "Career imports & review")}
+            {link("/admin/interviews", "Career Interviews")}
             {link("/admin/projects", "Project showcase")}
             {link("/admin/answers", "Quick Answers")}
             <span className="owner-menu-label">Workflow</span>

@@ -2,14 +2,14 @@ import Link from "next/link";
 import { getResume } from "@/lib/resume";
 import { PrintButton } from "@/components/print-button";
 import { currentMarket, getPresentation } from "@/lib/market-server";
-import { publicResumeDesign } from "@/lib/resume-design/server";
+import { publicResumeTemplate } from "@/lib/resume-design/server";
 import { generalResumeIR } from "@/lib/resume-design/from-career";
 import { ResumeRenderer } from "@/components/resume-renderer";
 export const dynamic = "force-dynamic";
 export default async function Resume() {
-  const [career, design, presentation] = await Promise.all([
+  const [career, template, presentation] = await Promise.all([
     getResume(),
-    publicResumeDesign(),
+    publicResumeTemplate(),
     currentMarket().then(getPresentation),
   ]);
   return (
@@ -19,8 +19,8 @@ export default async function Resume() {
         <PrintButton />
       </div>
       <ResumeRenderer
-        ir={generalResumeIR(career, presentation)}
-        design={design}
+        ir={generalResumeIR(career, presentation, template.fixed)}
+        design={template.design}
       />
     </main>
   );

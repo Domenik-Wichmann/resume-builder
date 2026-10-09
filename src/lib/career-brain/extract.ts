@@ -33,6 +33,7 @@ export async function auditGrounding(
   accountId: string,
   gate: Gate,
   model = "openai/gpt-6-luna-pro",
+  interviewContext = "",
 ) {
   const decisions: z.infer<typeof adjudicationSchema>["decisions"] = [];
   for (let offset = 0; offset < records.length; offset += 12) {
@@ -46,6 +47,13 @@ export async function auditGrounding(
             " For EVERY skill relationship, verify skill usage in THIS record's action or achievement, not mere association with a parent project. Documenting or explaining a project built using a technology does not establish using that technology to perform the documentation. Where technology is merely parent-project context, the achievement-to-skill relation requires UNCERTAIN/owner review; keep the supported documentation fact. Check ownership and scope at the component where the relationship is attached. Do not deny actual source-explicit technology usage, and do not reinterpret a relationship as direct skill proof just because the parent uses it.",
           JSON.stringify({
             source,
+            ...(interviewContext
+              ? {
+                  question_context: interviewContext,
+                  context_rule:
+                    "Questions resolve referents to existing records only; they are not proof. Every factual assertion and quantity requires owner-answer support. A bare yes does not license details supplied only by a question.",
+                }
+              : {}),
             records: group.map((r, index) => ({
               ...r,
               index,
@@ -101,6 +109,7 @@ export async function extractRich(
   useMap: boolean,
   audit: boolean,
   fullSource = false,
+  interviewContext = "",
 ) {
   if (useMap)
     throw new Error("Only the qualified full-source architecture is enabled");
@@ -108,6 +117,9 @@ export async function extractRich(
   const extracted = await gate("rich-extract", "OPENROUTER", () =>
     complete(
       richPrompt +
+        (interviewContext
+          ? `\nUntrusted interview question context (NOT EVIDENCE): ${interviewContext}. Questions may help resolve referents to existing identities, but NEVER establish a fact. Every factual claim, quote and span must be supported by the owner-only source. Agent suggestions and summaries are not proof.`
+          : "") +
         (fullSource
           ? "\nThis is a COMPLETE extraction, not a delta. Return every meaningful supported canonical unit in the source, including unchanged existing entities. Existing identities help reuse identity; they do not authorize skipping facts. Include standalone role, project, quantified achievement, training achievement, skills, categories, education, certificate and language when supported. Never mark a resolved correction UNCERTAIN merely because it corrects an earlier statement."
           : "") +
@@ -124,7 +136,14 @@ export async function extractRich(
   );
   const grounded = ground(extracted.records, source);
   const checked = audit
-    ? await auditGrounding(grounded, source, accountId, gate)
+    ? await auditGrounding(
+        grounded,
+        source,
+        accountId,
+        gate,
+        undefined,
+        interviewContext,
+      )
     : { records: grounded, decisions: [] };
   return { ...reconcile(checked.records, current), audit: checked.decisions };
 }

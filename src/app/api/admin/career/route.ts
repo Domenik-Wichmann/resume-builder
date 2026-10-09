@@ -161,6 +161,8 @@ export async function POST(request: NextRequest) {
         source,
         current,
         completeSource(input.kind),
+        undefined,
+        input.kind === "INTERVIEW" ? input.context || "" : "",
       );
       const savedSource = await db
         .from("career_sources")

@@ -19,7 +19,11 @@ import {
   stateDiff,
   repairEquivalence,
 } from "../src/lib/career-brain/equivalence";
-import type { RichCandidate } from "../src/lib/career-brain/model";
+import {
+  reconcile,
+  richSchema,
+  type RichCandidate,
+} from "../src/lib/career-brain/model";
 vi.mock("../src/lib/ai/openrouter", () => ({
   complete: vi.fn(),
 }));
@@ -38,6 +42,21 @@ async function current(): Promise<StateRecord[]> {
   return input.current.map((r: StateRecord) => hydrateClaims(r, "CONFIRMED"));
 }
 describe("Production continuity contract", () => {
+  it("keeps long-title identity keys valid at a separator truncation boundary", async () => {
+    const base = (await current())[0];
+    const title = "a".repeat(59) + " boundary project";
+    const first = reconcile(
+      [{ ...base, title, aliases: [], key: "temporary" }],
+      [],
+    ).records[0];
+    expect(first.key).toMatch(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+    expect(richSchema.shape.key.safeParse(first.key).success).toBe(true);
+    const second = reconcile([{ ...first, key: "different-hint" }], [])
+      .records[0];
+    expect(second.key).toBe(first.key);
+    const existing = { ...base, title, aliases: [], key: "approved-identity" };
+    expect(reconcile([first], [existing]).records[0].key).toBe(existing.key);
+  });
   it("does not let a model's EQUIVALENT verdict undo a new availability correction", async () => {
     const old = (await current()).filter(
       (r) => r.kind === "skill" && r.title === "Git",

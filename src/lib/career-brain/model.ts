@@ -208,7 +208,8 @@ export function reconcile(incoming: RichCandidate[], current: RichCanonical[]) {
           .normalize("NFKD")
           .replace(/[^a-z0-9]+/g, "-")
           .replace(/^-|-$/g, "")
-          .slice(0, 60) || r.kind;
+          .slice(0, 60)
+          .replace(/-$/, "") || r.kind;
       const key =
         chosen?.key ||
         (r.kind === "profile"

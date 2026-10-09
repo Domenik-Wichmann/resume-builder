@@ -1,10 +1,12 @@
 import type { Career, CareerRecord } from "../career/model";
 import type { Presentation } from "../markets";
 import { resumeIRSchema, type ResumeIR } from "../resume-ir";
+import { applyFixedContent, type FixedContent } from "./fixed-content";
 /** Render already-public canonical facts; a template never adds or rewrites content. */
 export function generalResumeIR(
   career: Career,
   contact: Presentation,
+  fixed?: FixedContent | null,
 ): ResumeIR {
   const section = (records: CareerRecord[]) =>
     records.map((r) => ({
@@ -17,7 +19,7 @@ export function generalResumeIR(
       evidence_ids: [r.id],
       priority: 0,
     }));
-  return resumeIRSchema.parse({
+  const ir = resumeIRSchema.parse({
     profile: {
       name: career.profile.name || "Career profile pending publication",
       contact,
@@ -35,4 +37,15 @@ export function generalResumeIR(
     languages: section(career.languages || []),
     demo: career.demo,
   });
+  if (!fixed || career.demo) return ir;
+  const configured = applyFixedContent(ir, fixed);
+  // Private template settings cannot restore an unpublished canonical project.
+  return {
+    ...configured,
+    projects: configured.projects.filter((project) =>
+      project.evidence_ids.some((id) =>
+        career.projects.some((record) => record.id === id),
+      ),
+    ),
+  };
 }

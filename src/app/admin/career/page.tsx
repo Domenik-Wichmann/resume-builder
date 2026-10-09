@@ -8,7 +8,12 @@ export const metadata = {
   title: "Career Master · Resume Builder",
   robots: { index: false, follow: false },
 };
-export default async function CareerPage() {
+export default async function CareerPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ import?: string }>;
+}) {
+  const query = await searchParams;
   let account;
   try {
     account = await requireAccount();
@@ -27,19 +32,28 @@ export default async function CareerPage() {
   }
   const [data, imports] = await Promise.all([
     explorerData(account.db, account.accountId),
-    account.db
-      .from("career_imports")
-      .select("id,status,candidates")
-      .order("created_at", { ascending: false })
-      .limit(10),
+    query.import
+      ? account.db
+          .from("career_imports")
+          .select("id,status,candidates")
+          .eq("account_id", account.accountId)
+          .eq("id", query.import)
+          .limit(1)
+      : account.db
+          .from("career_imports")
+          .select("id,status,candidates")
+          .eq("account_id", account.accountId)
+          .order("created_at", { ascending: false })
+          .limit(10),
   ]);
   if (imports.error) throw new Error("Cannot load import drafts.");
   return (
     <main className="wrap admin-main">
       <Link href="/admin">← Overview</Link>
       <p className="eyebrow">Private career workspace</p>
-      <h1>Career Master & Interview.</h1>
+      <h1>Career Master & Review.</h1>
       <CareerManager
+        initialImportId={query.import}
         initialRecords={data.records}
         initialSources={data.sources}
         initialImports={(imports.data || []) as ImportDraft[]}

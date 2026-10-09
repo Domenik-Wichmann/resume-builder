@@ -7,7 +7,28 @@ import { designStyle } from "../src/components/resume-design-frame";
 import { ResumeRenderer } from "../src/components/resume-renderer";
 import { presentationSettingsSchema } from "../src/lib/markets";
 import { readAsset } from "../src/lib/resume-design/uploads";
+import { generalResumeIR } from "../src/lib/resume-design/from-career";
+import { clearSignalContent } from "../src/lib/resume-design/fixed-content";
+import { fixture } from "../src/lib/career/fixture";
 describe("bounded deterministic resume design", () => {
+  it("uses approved v4 blocks in order and excludes unpublished or unbound projects", () => {
+    const career = { ...fixture, demo: false };
+    const fixed = {
+      ...clearSignalContent,
+      projects: [
+        { ...clearSignalContent.projects[0], record_id: career.projects[0].id },
+        { ...clearSignalContent.projects[1], record_id: "private-project" },
+      ] as typeof clearSignalContent.projects,
+    };
+    const ir = generalResumeIR(career, designPreview.profile.contact, fixed);
+    expect(ir.projects.map((p) => p.title)).toEqual([fixed.projects[0].title]);
+    expect(ir.projects[0].bullets).toEqual(fixed.projects[0].bullets);
+    expect(ir.section_order?.[0]).toBe("Projects");
+    expect(ir.portfolio_url).toBe(fixed.portfolio);
+    expect(
+      generalResumeIR(career, designPreview.profile.contact).projects,
+    ).toHaveLength(career.projects.length);
+  });
   it("rejects code, URLs, CSS injection, arbitrary fonts and out-of-bounds geometry", () => {
     for (const value of [
       { ...defaultDesign, accent: "red; background:url(https://bad.invalid)" },

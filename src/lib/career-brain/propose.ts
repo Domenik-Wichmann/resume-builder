@@ -23,6 +23,7 @@ export async function proposeBrain(
   current: BrainRecord[],
   full = true,
   gate: Gate = productionGate,
+  interviewContext = "",
 ) {
   const actor = actorFor(current);
   const conflicts = await detectConflicts(current, source, accountId, gate);
@@ -48,6 +49,7 @@ export async function proposeBrain(
       false,
       true,
       false,
+      interviewContext,
     );
     const matched = masked.filter((r) =>
       extracted.records.some((c) => c.kind === r.kind && c.key === r.key),

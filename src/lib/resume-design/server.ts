@@ -84,3 +84,9 @@ export async function publicResumeDesign() {
   if (result.error) throw new Error("Cannot load resume design.");
   return result.data ? designSchema.parse(result.data.spec) : defaultDesign;
 }
+
+export async function publicResumeTemplate() {
+  if (validateEnv(process.env).mode === "demo")
+    return { fixed: null, design: defaultDesign };
+  return applicationTemplate(database(), primaryAccountId);
+}

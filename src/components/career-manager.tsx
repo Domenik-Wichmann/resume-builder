@@ -4,7 +4,7 @@ import type { Candidate, Change } from "@/lib/ingestion/model";
 import type { BrainRecord } from "@/lib/career-brain/repository";
 import type { SourceSummary } from "@/lib/career-brain/record-view";
 import { CareerRecordExplorer } from "./career-record-explorer";
-import type { InterviewQuestion } from "@/lib/interview/questions";
+import Link from "next/link";
 import type { StateClaim } from "@/lib/career-brain/state";
 import { careerSourceLimit } from "@/lib/career-brain/source";
 function ClaimEvidence({ record }: { record: Candidate }) {
@@ -39,13 +39,17 @@ export function CareerManager({
   initialRecords,
   initialSources,
   initialImports,
+  initialImportId,
 }: {
   initialRecords: BrainRecord[];
   initialSources: SourceSummary[];
   initialImports: ImportDraft[];
+  initialImportId?: string;
 }) {
   const [records, setRecords] = useState<BrainRecord[]>(initialRecords),
-    [draft, setDraft] = useState<ImportDraft | null>(null),
+    [draft, setDraft] = useState<ImportDraft | null>(
+      initialImports.find((row) => row.id === initialImportId) || null,
+    ),
     [imports, setImports] = useState<ImportDraft[]>(initialImports),
     [text, setText] = useState(""),
     [message, setMessage] = useState(""),
@@ -53,12 +57,6 @@ export function CareerManager({
     [accepted, setAccepted] = useState<number[]>([]),
     [edits, setEdits] = useState<Record<number, string>>({});
   const [sources, setSources] = useState(initialSources);
-  const [mode, setMode] = useState("general"),
-    [job, setJob] = useState(""),
-    [key, setKey] = useState(""),
-    [questions, setQuestions] = useState<InterviewQuestion[]>([]),
-    [asked, setAsked] = useState<string[]>([]),
-    [answers, setAnswers] = useState("");
   const [sourceKind, setSourceKind] = useState<"MASTER" | "MANUAL">("MASTER");
   async function refresh() {
     const r = await fetch("/api/admin/career");
@@ -83,13 +81,6 @@ export function CareerManager({
         setDraft(data.import);
         setAccepted([]);
         setEdits({});
-      }
-      if (data.questions) {
-        setQuestions(data.questions);
-        setAsked((old) => [
-          ...old,
-          ...data.questions.map((q: InterviewQuestion) => q.id),
-        ]);
       }
       if (data.applied !== undefined) {
         setDraft(null);
@@ -347,118 +338,14 @@ export function CareerManager({
         </section>
       )}
       <section className="section">
-        <h2>Career interview</h2>
+        <h2>Career Interviews</h2>
         <p>
-          Questions target undocumented ownership, adoption and outcomes. The
-          displayed reason explains their priority. Missing evidence is not
-          proof that you lack experience.
+          Explore your career through a private conversation that remembers
+          earlier answers and searches Career Brain.
         </p>
-        <form
-          className="ai-panel"
-          onSubmit={(event) => {
-            event.preventDefault();
-            void action({
-              action: "interview",
-              mode,
-              job,
-              key: key || null,
-              asked,
-            });
-          }}
-        >
-          <label htmlFor="interview-mode">Interview mode</label>
-          <select
-            id="interview-mode"
-            value={mode}
-            onChange={(event) => {
-              setMode(event.target.value);
-              setAsked([]);
-            }}
-          >
-            <option value="general">Interview me</option>
-            <option value="job">Interview me for this job</option>
-            <option value="record">Flesh out this project / experience</option>
-          </select>
-          {mode === "job" && (
-            <>
-              <label htmlFor="interview-job">Job description</label>
-              <textarea
-                id="interview-job"
-                value={job}
-                maxLength={12000}
-                rows={6}
-                onChange={(event) => setJob(event.target.value)}
-                required
-              />
-            </>
-          )}
-          {mode === "record" && (
-            <>
-              <label htmlFor="interview-record">Career record</label>
-              <select
-                id="interview-record"
-                value={key}
-                onChange={(event) => {
-                  setKey(event.target.value);
-                  setAsked([]);
-                }}
-                required
-              >
-                <option value="">Choose a record</option>
-                {records
-                  .filter(
-                    (row) =>
-                      !row.archived &&
-                      ["project", "experience", "achievement"].includes(
-                        row.kind,
-                      ),
-                  )
-                  .map((row) => (
-                    <option key={row.id} value={`${row.kind}:${row.key}`}>
-                      {row.title}
-                    </option>
-                  ))}
-              </select>
-            </>
-          )}
-          <button disabled={busy}>Suggest focused questions</button>
-        </form>
-        {questions.map((q) => (
-          <article className="question-answer" key={q.id}>
-            <h3>{q.question}</h3>
-            <p className="muted">{q.reason}</p>
-          </article>
-        ))}
-        {questions.length > 0 && (
-          <form
-            className="ai-panel"
-            onSubmit={(event) => {
-              event.preventDefault();
-              void action({
-                action: "extract",
-                text: answers,
-                kind: "INTERVIEW",
-                context: questions.map((q) => q.question).join("\n"),
-              });
-            }}
-          >
-            <label htmlFor="interview-answers">
-              Your conversational answers
-            </label>
-            <textarea
-              id="interview-answers"
-              rows={8}
-              value={answers}
-              maxLength={30000}
-              minLength={10}
-              onChange={(event) => setAnswers(event.target.value)}
-              required
-            />
-            <button disabled={busy}>
-              Extract answers into review proposals
-            </button>
-          </form>
-        )}
+        <Link href="/admin/interviews">
+          Start or continue a Career Interview →
+        </Link>
       </section>
       <section className="section">
         <h2>Canonical records & publication</h2>

@@ -50,6 +50,12 @@ Accepted patches use optimistic baseline versions and one database transaction.
 Facts remain private until an explicit publication action. Keep applied migrations
 unchanged; add migrations for new database behavior.
 
+Career Interview is a persistent, conversational owner tool. It may search private
+Career Brain evidence, adapt questions from prior answers, and prepare INTERVIEW
+imports, but never directly mutates canonical career truth. Questions are context;
+owner answers are evidence; all canonical changes require the normal reviewed
+Career Brain pipeline.
+
 ## Public portfolio product rules
 
 The public portfolio must not display a regional selector: no country dropdown,
