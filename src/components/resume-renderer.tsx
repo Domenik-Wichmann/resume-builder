@@ -1,6 +1,7 @@
 import type { ResumeIR } from "@/lib/resume-ir";
 import { defaultDesign, type ResumeDesign } from "@/lib/resume-design/model";
 import { ResumeDesignFrame, ResumePortrait } from "./resume-design-frame";
+import { exportContact, exportWorkAuthorization } from "@/lib/resume-export";
 export function ResumeRenderer({
   ir,
   design,
@@ -18,17 +19,28 @@ export function ResumeRenderer({
         ? ir.skill_groups.length > 0 && (
             <section>
               <h2>Technical skills</h2>
-              {ir.skill_groups.map((group) => (
-                <p key={group.label}>
-                  <strong>{group.label}:</strong> {group.skills.join(" · ")}
-                </p>
-              ))}
+              <div className="resume-skill-groups">
+                {ir.skill_groups.map((group) => (
+                  <div key={group.label} className="resume-skill-group">
+                    <h3>{group.label}</h3>
+                    <ul>
+                      {group.skills.map((skill) => (
+                        <li key={skill}>{skill}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
             </section>
           )
         : ir.skill_groups.map((group) => (
             <section key={group.label}>
               <h2>{group.label}</h2>
-              <p>{group.skills.join(" · ")}</p>
+              <ul>
+                {group.skills.map((skill) => (
+                  <li key={skill}>{skill}</li>
+                ))}
+              </ul>
             </section>
           ))}
     </aside>
@@ -46,17 +58,14 @@ export function ResumeRenderer({
           {ir.demo && <p className="eyebrow">Demo résumé · fictional data</p>}
           <h1>{ir.profile.name}</h1>
           <p className="resume-title">{ir.headline}</p>
-          <p className="muted">
-            {[
-              contact.location,
-              contact.address,
-              contact.contact_email,
-              contact.phone,
-            ]
-              .filter(Boolean)
-              .join(" · ")}
-          </p>
-          {contact.work_authorization && <p>{contact.work_authorization}</p>}
+          <div className="resume-contact-row">
+            <p className="resume-contact-details">{exportContact(ir)}</p>
+            {exportWorkAuthorization(ir) && (
+              <p className="resume-citizenship">
+                {exportWorkAuthorization(ir)}
+              </p>
+            )}
+          </div>
           {ir.portfolio_url && (
             <p className="resume-links">
               <strong>Portfolio &amp; AI demo:</strong>{" "}
@@ -64,7 +73,7 @@ export function ResumeRenderer({
               {ir.github_url && (
                 <>
                   {" "}
-                  | GitHub:{" "}
+                  | <strong>GitHub:</strong>{" "}
                   <a href={ir.github_url}>{readable(ir.github_url)}</a>
                 </>
               )}
@@ -177,7 +186,8 @@ export function ResumeRenderer({
             {ir.github_url && (
               <>
                 {" "}
-                | GitHub: <a href={ir.github_url}>{readable(ir.github_url)}</a>
+                | <strong>GitHub:</strong>{" "}
+                <a href={ir.github_url}>{readable(ir.github_url)}</a>
               </>
             )}
           </p>

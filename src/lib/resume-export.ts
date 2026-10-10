@@ -33,6 +33,14 @@ export const exportContact = (ir: ResumeIR) =>
   ]
     .filter(Boolean)
     .join(" · ");
+export const exportWorkAuthorization = (ir: ResumeIR) =>
+  ir.profile.contact.work_authorization
+    .split(/\s*(?:\/\/|\||·|;)\s*/)
+    .map((part) =>
+      part.replace(/(?:,\s*)?\bavailable\s+to\s+work\b[.!]?/gi, "").trim(),
+    )
+    .filter(Boolean)
+    .join(" · ");
 const escape = (value: string) =>
   value.replace(
     /[&<>"']/g,
@@ -53,13 +61,21 @@ const link = (label: string, url: string) =>
 export function wordDocument(ir: ResumeIR) {
   const design = ir.design || defaultDesign;
   const paragraph = (text: string) => (text ? `<p>${escape(text)}</p>` : "");
+  const skillGroup = (group: ResumeIR["skill_groups"][number]) =>
+    `<h3>${escape(group.label)}</h3><ul>${group.skills.map((skill) => `<li>${escape(skill)}</li>`).join("")}</ul>`;
+  const pairedSkills =
+    ir.skill_groups.length > 1 ? ir.skill_groups.slice(0, 2) : [];
+  const skills = `${pairedSkills.length ? `<table class="skills"><tr>${pairedSkills.map((group) => `<td>${skillGroup(group)}</td>`).join("")}</tr></table>` : ""}${ir.skill_groups
+    .slice(pairedSkills.length)
+    .map((group) => `<div class="skills">${skillGroup(group)}</div>`)
+    .join("")}`;
   return `<!DOCTYPE html><html><head><meta charset="utf-8"><title>${escape(ir.profile.name)} résumé</title>
-  <style>@page{size:${design.page === "LETTER" ? "8.5in 11in" : "210mm 297mm"};margin:${design.margin_mm}mm}body{font-family:Arial,sans-serif;font-size:${design.font_pt}pt;color:${design.text}}h1{font-size:24pt;margin-bottom:4pt}h2{font-size:11pt;color:${design.accent};margin:12pt 0 4pt}h3{font-size:11pt;margin:6pt 0 2pt}p{margin:3pt 0}li{margin-bottom:3pt}a{color:${design.accent}}.invitation{font-size:8.5pt;color:${design.accent}}.timeline{font-size:9pt}</style></head><body>
-  ${ir.demo ? paragraph("Fictional demonstration résumé") : ""}<h1>${escape(ir.profile.name)}</h1>${paragraph(ir.headline)}${paragraph(exportContact(ir))}${paragraph(ir.profile.contact.work_authorization)}
-  ${ir.portfolio_url ? `<p><strong>Portfolio &amp; AI demo:</strong> ${link(ir.portfolio_url, ir.portfolio_url)}${ir.github_url ? ` | GitHub: ${link(ir.github_url, ir.github_url)}` : ""}</p>` : ""}
+  <style>@page{size:${design.page === "LETTER" ? "8.5in 11in" : "210mm 297mm"};margin:${design.margin_mm}mm}body{font-family:Arial,sans-serif;font-size:${design.font_pt}pt;color:${design.text}}h1{font-size:24pt;margin-bottom:4pt}h2{font-size:11pt;color:${design.accent};margin:12pt 0 4pt}h3{font-size:11pt;margin:6pt 0 2pt}p{margin:3pt 0}li{margin-bottom:3pt}a{color:${design.accent}}.invitation{font-size:8.5pt;color:#000;font-weight:bold;font-style:italic}.timeline{font-size:9pt}.contact{width:100%;border-collapse:collapse;font-size:9pt}.citizenship{text-align:right;white-space:nowrap;padding-left:12pt}.skills{width:100%;table-layout:fixed;border-collapse:collapse}.skills td{width:50%;vertical-align:top;padding-right:12pt}.skills ul{font-size:0.93em;margin:2pt 0 4pt;padding-left:11pt}.skills li{margin-bottom:2pt}</style></head><body>
+  ${ir.demo ? paragraph("Fictional demonstration résumé") : ""}<h1>${escape(ir.profile.name)}</h1>${paragraph(ir.headline)}<table class="contact"><tr><td>${escape(exportContact(ir))}</td><td class="citizenship">${escape(exportWorkAuthorization(ir))}</td></tr></table>
+  ${ir.portfolio_url ? `<p><strong>Portfolio &amp; AI demo:</strong> ${link(ir.portfolio_url, ir.portfolio_url)}${ir.github_url ? ` | <strong>GitHub:</strong> ${link(ir.github_url, ir.github_url)}` : ""}</p>` : ""}
   ${ir.invitation ? `<p class="invitation">${escape(ir.invitation)}</p>` : ""}
   ${ir.summary ? `<h2>Professional summary</h2>${paragraph(ir.summary)}` : ""}
-  ${ir.skill_groups.map((group) => `<p><strong>${escape(group.label)}:</strong> ${escape(group.skills.join(" · "))}</p>`).join("")}
+  ${ir.skill_groups.length ? "<h2>Technical skills</h2>" : ""}${skills}
   ${exportSections(ir)
     .map(
       (section) =>

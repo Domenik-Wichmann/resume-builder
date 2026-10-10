@@ -232,12 +232,6 @@ it.each([
       additions: [
         {
           requirement_index: 0,
-          destination: "skill",
-          record_id: null,
-          statement: proposal,
-        },
-        {
-          requirement_index: 0,
           destination: "entry",
           record_id: id,
           statement: statement(
@@ -246,6 +240,7 @@ it.each([
           ),
         },
       ],
+      skills: [{ label: "Role-specific systems", items: [proposal] }],
       coverage: {
         "0": {
           support: "DIRECT",
@@ -283,7 +278,8 @@ it.each([
       initialAudit,
       "account",
     );
-    expect(result.added).toBe(2);
+    expect(result.added).toBe(1);
+    expect(result.editedSkills).toBe(1);
     expect(result.review).toHaveLength(id === "data" ? 1 : 0);
     expect(result.writing.skills.flatMap((g) => g.items)).toEqual([proposal]);
     expect(result.writing.summary).toEqual([]);
@@ -296,8 +292,8 @@ it.each([
     expect(assembled.experiences.map((e) => e.evidence_ids[0])).toEqual([id]);
     const catalog = JSON.parse(
       vi.mocked(complete).mock.calls[0][1] as string,
-    ) as { catalog: { record: { id: string } }[] };
-    expect(catalog.catalog.map((p) => p.record.id)).toEqual(
+    ) as { catalog: { inputs: { record: { id: string } }[] } };
+    expect(catalog.catalog.inputs.map((p) => p.record.id)).toEqual(
       rows.map((r) => r.id),
     );
     const auditRequest = JSON.parse(
@@ -309,6 +305,76 @@ it.each([
     expect(reserveAIQuota).toHaveBeenCalledTimes(2);
   },
 );
+
+it("rebuilds skills around the job rather than appending to previously accepted weaker capabilities", async () => {
+  const plan = {
+    focus: "AI retrieval",
+    requirements: [
+      {
+        requirement: "Retrieval evaluation",
+        importance: "ESSENTIAL" as const,
+        query: "RAG evaluation",
+        transferable_query: "retrieval testing",
+      },
+    ],
+  };
+  const original = writing("data", "Data operations", "Spreadsheet validation");
+  const evidence = packetInventory(rows);
+  const audit = writingInputs(original, evidence).map((i) => ({
+    text: i.bullet,
+    refs: i.claims.map((c) => c.ref),
+    pass: true,
+    reason: "Previously accepted",
+  }));
+  vi.mocked(complete).mockResolvedValueOnce({
+    additions: [],
+    skills: [
+      {
+        label: "Retrieval systems",
+        items: [{ text: "RAG evaluation", refs: ["c0"] }],
+      },
+    ],
+    coverage: { "0": { support: "DIRECT", refs: ["c0"], note: "Supported" } },
+  });
+  vi.mocked(complete).mockImplementationOnce(async (_system, input) => {
+    const request = JSON.parse(input as string) as {
+      skill_statement_groups: { id: string; label: string }[];
+      inputs: { id: string; bullet: string; claims: { ref: string }[] }[];
+    };
+    expect(request.skill_statement_groups).toEqual([
+      { id: "0", label: "Retrieval systems" },
+    ]);
+    expect(request.inputs).toHaveLength(1);
+    return {
+      decisions: request.inputs.map((i) => ({
+        id: i.id,
+        verdict: "PASS",
+        job_fit: "DIRECT",
+        reason: "Supported",
+        assertions: [
+          {
+            text: i.bullet,
+            verdict: "SUPPORTED",
+            claimRefs: i.claims.map((c) => c.ref),
+            reason: "Exact support",
+          },
+        ],
+      })),
+    };
+  });
+  const result = await recoverApplication(
+    plan,
+    original,
+    evidence,
+    rows,
+    audit,
+    "account",
+  );
+  expect(result.writing.skills).toEqual([
+    { label: "Retrieval systems", items: [statement("RAG evaluation", "ai")] },
+  ]);
+  expect(result.editedSkills).toBe(1);
+});
 
 it("warns about invalid advisory coverage without blocking the verified draft, and rejects irrelevant additions", async () => {
   const plan = {
@@ -330,7 +396,11 @@ it("warns about invalid advisory coverage without blocking the verified draft, a
     pass: true,
     reason: "Supported",
   }));
-  vi.mocked(complete).mockResolvedValueOnce({ additions: [], coverage: {} });
+  vi.mocked(complete).mockResolvedValueOnce({
+    additions: [],
+    skills: [],
+    coverage: {},
+  });
   const partial = await recoverApplication(
     plan,
     original,
@@ -345,12 +415,11 @@ it("warns about invalid advisory coverage without blocking the verified draft, a
   ]);
   expect(partial.writing.skills).toEqual(original.skills);
   vi.mocked(complete).mockResolvedValueOnce({
-    additions: [
+    additions: [],
+    skills: [
       {
-        requirement_index: 0,
-        destination: "skill",
-        record_id: null,
-        statement: statement("Translation", "customer"),
+        label: "Project technologies",
+        items: [statement("Translation", "customer")],
       },
     ],
     coverage: {
@@ -415,22 +484,47 @@ it("uses required requirement IDs instead of copied prose or positional coverage
   };
   const valid = schema.parse({
     additions: [],
+    introduction: { headline: null, summary: [] },
+    skills: [],
     coverage: { "1": assessment, "0": assessment },
   });
   expect(Object.keys(valid.coverage).sort()).toEqual(["0", "1"]);
   expect(
-    schema.safeParse({ additions: [], coverage: { "0": assessment } }).success,
+    schema.safeParse({
+      additions: [],
+      introduction: { headline: null, summary: [] },
+      skills: [],
+      coverage: { "0": assessment },
+    }).success,
   ).toBe(false);
   expect(
     schema.safeParse({
       additions: [],
+      introduction: { headline: null, summary: [] },
+      skills: [],
       coverage: { "0": assessment, "1": assessment, "2": assessment },
     }).success,
   ).toBe(false);
   expect(
     schema.safeParse({
       additions: [],
+      introduction: { headline: null, summary: [] },
+      skills: [],
       coverage: [{ requirement: "Paraphrased", ...assessment }],
+    }).success,
+  ).toBe(false);
+  const constrained = recoverySchemaForPlan(plan, ["c0", "c1"]);
+  expect(
+    constrained.safeParse({
+      additions: [],
+      introduction: { headline: null, summary: [] },
+      skills: [
+        {
+          label: "Project technologies",
+          items: [{ text: "Fictional tool", refs: ["unpublished:0"] }],
+        },
+      ],
+      coverage: { "0": assessment, "1": assessment },
     }).success,
   ).toBe(false);
 });
@@ -462,6 +556,7 @@ it.each([
     }));
     vi.mocked(complete).mockResolvedValueOnce({
       additions: [],
+      skills: [],
       coverage: { "0": assessment },
     });
     const result = await recoverApplication(
@@ -604,6 +699,53 @@ it("uses bounded planning, writing and complete-assertion verification for three
   expect(new Set(outputs.map((o) => o.summary)).size).toBe(3);
   expect(reserveAIQuota).toHaveBeenCalledTimes(9);
 });
+it("checks complete statements with admitted short refs and rejects partial or foreign proof", async () => {
+  const evidence = packetInventory(rows);
+  const draft = writing("ai", "AI retrieval", "Retrieval evaluation");
+  vi.mocked(complete).mockImplementationOnce(
+    async (_system, payload, schema) => {
+      const request = JSON.parse(payload as string) as {
+        inputs: { id: string; bullet: string; claims: { ref: string }[] }[];
+      };
+      expect(
+        request.inputs.every((i) =>
+          i.claims.every((c) => /^v\d+$/.test(c.ref)),
+        ),
+      ).toBe(true);
+      const response = {
+        decisions: request.inputs.map((input) => ({
+          id: input.id,
+          verdict: "PASS",
+          reason: "Exact fictional proof",
+          assertions: [
+            {
+              text: input.bullet,
+              verdict: "SUPPORTED",
+              claimRefs: input.claims.map((claim) => claim.ref),
+              reason: "Every clause checked",
+            },
+          ],
+        })),
+      };
+      expect(schema.safeParse(response).success).toBe(true);
+      const partial = structuredClone(response);
+      partial.decisions[0].assertions[0].text = "AI";
+      expect(schema.safeParse(partial).success).toBe(false);
+      const foreign = structuredClone(response);
+      foreign.decisions[0].assertions[0].claimRefs = ["unpublished:0"];
+      expect(schema.safeParse(foreign).success).toBe(false);
+      const unsupported = structuredClone(response);
+      unsupported.decisions[2].assertions[0].verdict = "UNSUPPORTED";
+      return unsupported;
+    },
+  );
+  const audited = await auditWriting(draft, evidence, "account");
+  expect(audited[0].pass).toBe(true);
+  expect(audited[0].refs).toEqual(draft.headline.refs);
+  expect(audited[2].pass).toBe(false);
+  expect(audited[2].reason).toContain("not supported");
+});
+
 it("deduplicates exact source passages while retaining claim refs, constraints and attribution", () => {
   const packet = packetInventory(rows)[0];
   packet.claims.push({
@@ -804,6 +946,8 @@ it("renders honest experience timelines and a compact invitation with a bold por
     { ...ir.experiences[2], dates: { start: null, end: null } },
   ];
   ir.portfolio_url = "https://example.invalid";
+  ir.github_url = "https://github.com/example";
+  ir.profile.contact.work_authorization = "U.S. citizen // Available to work";
   ir.invitation = "Explore my projects and ask about my experience online.";
   const html = renderToStaticMarkup(createElement(ResumeRenderer, { ir }));
   expect(html).toContain("Reported start: Sep 2022 · end date unconfirmed");
@@ -811,6 +955,9 @@ it("renders honest experience timelines and a compact invitation with a bold por
   expect(html).toContain("Dates not recorded");
   expect(html).not.toContain("Present");
   expect(html).toContain("<strong>Portfolio &amp; AI demo:</strong>");
+  expect(html).toContain("<strong>GitHub:</strong>");
+  expect(html).toContain('<p class="resume-citizenship">U.S. citizen</p>');
+  expect(html).not.toContain("Available to work");
   expect(html).toContain('<p class="resume-invitation">Explore my projects');
 });
 

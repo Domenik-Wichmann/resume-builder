@@ -228,8 +228,45 @@
 .resume-design .resume-sheet .resume-invitation {
   font-size: 8.5pt;
   line-height: 1.25;
-  color: var(--resume-accent);
+  color: #000;
+  font-weight: 700;
+  font-style: italic;
   margin-top: 2pt;
+}
+.resume-contact-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4pt 12pt;
+  flex-wrap: wrap;
+  font-size: 9pt;
+}
+.resume-contact-details {
+  flex: 1 1 auto;
+}
+.resume-citizenship {
+  margin-left: auto !important;
+  text-align: right;
+}
+.resume-skill-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6pt 14pt;
+}
+.resume-skill-group {
+  break-inside: avoid;
+}
+.resume-skill-group:nth-child(n + 3),
+.resume-skill-group:only-child {
+  grid-column: 1 / -1;
+}
+.resume-design .resume-sheet .resume-skill-group ul {
+  margin: 2pt 0 0;
+  padding-left: 11pt;
+  font-size: 0.93em;
+}
+.resume-design .resume-sheet .resume-skill-group li {
+  margin-bottom: 2pt;
 }
 .resume-design .resume-sheet .resume-timeline {
   font-size: 9pt;
