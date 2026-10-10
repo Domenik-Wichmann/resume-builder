@@ -236,6 +236,34 @@
   color: var(--resume-text);
   margin: 2pt 0 4pt;
 }
+.resume-export-controls {
+  margin: 16px 0;
+  font-size: 0.8rem;
+}
+.resume-export-actions {
+  display: flex;
+  align-items: end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.resume-toolbar:has(.resume-export-controls) {
+  align-items: start;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.resume-export-actions label {
+  display: grid;
+  gap: 4px;
+}
+.resume-export-controls > p {
+  margin: 8px 0;
+  font-size: 0.75rem;
+}
+@media print {
+  .resume-export-controls {
+    display: none !important;
+  }
+}
 .resume-portrait {
   float: right;
   object-fit: cover;

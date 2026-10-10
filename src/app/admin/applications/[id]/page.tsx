@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { requireAccount } from "@/lib/accounts";
 import { resumeIRSchema } from "@/lib/resume-ir";
 import { ResumeRenderer } from "@/components/resume-renderer";
-import { PrintButton } from "@/components/print-button";
+import { ResumeExportControls } from "@/components/resume-export-controls";
 import { withTrackingUrl } from "@/lib/resume-design/fixed-content";
 import { requireOwner } from "@/lib/admin";
 import { ResumeLengthNotice } from "@/components/resume-length-notice";
@@ -43,7 +43,11 @@ export default async function Application({
       <div className="resume-toolbar">
         <Link href="/admin/applications">← Applications</Link>
         {snapshot.data && (
-          <PrintButton
+          <ResumeExportControls
+            ir={withTrackingUrl(
+              resumeIRSchema.parse(snapshot.data.resume_ir),
+              snapshot.data.tracking_code,
+            )}
             filename={`${app.data.organization}-${app.data.role}-${snapshot.data.tracking_code}-${snapshot.data.generated_at}`.replace(
               /[^a-zA-Z0-9_-]/g,
               "-",

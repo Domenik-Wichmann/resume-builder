@@ -94,7 +94,22 @@ export function applyFixedContent(
       organization: null,
       role: "",
       dates: { start: null, end: null },
-      bullets: [...p.bullets],
+      bullets: [
+        ...p.bullets,
+        ...ir.projects
+          .filter(
+            (project) =>
+              p.record_id && project.evidence_ids.includes(p.record_id),
+          )
+          .flatMap((project) =>
+            project.job_specific_bullet ? [project.job_specific_bullet] : [],
+          )
+          .filter((bullet) => !p.bullets.includes(bullet))
+          .slice(0, 1),
+      ],
+      job_specific_bullet: ir.projects.find(
+        (project) => p.record_id && project.evidence_ids.includes(p.record_id),
+      )?.job_specific_bullet,
       evidence_ids: p.record_id ? [p.record_id] : [],
       priority: 2 - index,
       locked_id: p.id,

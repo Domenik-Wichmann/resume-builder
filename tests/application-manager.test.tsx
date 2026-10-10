@@ -85,6 +85,11 @@ it("shows the completed résumé immediately before composition controls with pr
     (detail) => detail.textContent?.includes("Fictional review note"),
   );
   expect(review?.open).toBe(false);
+  expect(container.textContent).toContain("Print preview");
+  expect(
+    container.querySelector(".resume-export-controls select")?.textContent,
+  ).toContain("DOC (Word-compatible)");
+  expect(container.textContent).toContain("Download PDF");
 });
 
 it("places saved résumés before creation and exposes a link to their analytics", () => {

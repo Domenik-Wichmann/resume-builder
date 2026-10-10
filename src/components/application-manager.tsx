@@ -16,6 +16,7 @@ import type { applicationDashboard } from "@/lib/applications/repository";
 import { resumeIRSchema, type ResumeIR } from "@/lib/resume-ir";
 import { ResumeRenderer } from "./resume-renderer";
 import { ResumeLengthNotice } from "./resume-length-notice";
+import { ResumeExportControls } from "./resume-export-controls";
 import { clearSignalDesign } from "@/lib/resume-design/model";
 type Dashboard = Awaited<ReturnType<typeof applicationDashboard>>;
 const responseSchema = z.object({
@@ -452,6 +453,7 @@ export function ApplicationManager({ data }: { data: Dashboard }) {
       {preview && (
         <section>
           <ResumeRenderer ir={preview.options[strategy]} />
+          <ResumeExportControls ir={preview.options[strategy]} preview />
           <ResumeLengthNotice
             design={preview.options[strategy].design || clearSignalDesign}
           />

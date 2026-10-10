@@ -522,6 +522,147 @@ it("recovers a rejected headline using only complete audited capability phrases"
   ).toBe("");
 });
 
+it("rejects factual but job-irrelevant skills while accepting them for a matching job", async () => {
+  const translation = record(
+    "translation",
+    "Translation",
+    "Translated German onboarding materials.",
+    "skill",
+  );
+  const evidence = packetInventory([translation]);
+  const draft = writing("data", "Data operations", "German translation");
+  draft.headline.refs =
+    draft.summary[0].refs =
+    draft.skills[0].items[0].refs =
+      ["translation:0"];
+  draft.entries = [];
+  let jobFit = "IRRELEVANT";
+  vi.mocked(complete).mockImplementation(async (_system, payload) => {
+    const data = JSON.parse(payload as string) as {
+      inputs: { id: string; bullet: string; claims: { ref: string }[] }[];
+    };
+    return {
+      decisions: data.inputs.map((input) => ({
+        id: input.id,
+        verdict: "PASS",
+        job_fit: jobFit,
+        assertions: [
+          {
+            text: input.bullet,
+            verdict: "SUPPORTED",
+            claimRefs: input.claims.map((claim) => claim.ref),
+            reason: "Fictional evidence",
+          },
+        ],
+        reason: "Fictional evidence",
+      })),
+    };
+  });
+  const plan = {
+    focus: "Data analyst",
+    requirements: [
+      {
+        requirement: "data validation",
+        query: "data validation",
+        transferable_query: "rules",
+        importance: "ESSENTIAL" as const,
+      },
+    ],
+  };
+  const audit = await auditWriting(draft, evidence, "account", plan);
+  expect(audit.every((result) => !result.pass)).toBe(true);
+  expect(audit[2].reason).toContain("Not relevant");
+  jobFit = "DIRECT";
+  expect(
+    (
+      await auditWriting(draft, evidence, "account", {
+        ...plan,
+        focus: "Translator",
+      })
+    ).every((result) => result.pass),
+  ).toBe(true);
+});
+
+it("keeps explicitly requested confirmed tool records even when broad records dominate relevance scores", () => {
+  const broad = Array.from({ length: 30 }, (_, index) =>
+    record(
+      `broad${index}`,
+      "AI RAG operations data workflows",
+      "AI RAG operations data workflow integration API automation.",
+    ),
+  );
+  const n8n = record(
+    "n8n",
+    "n8n",
+    "Used n8n for integration workflows.",
+    "skill",
+  );
+  const zapier = record(
+    "zapier",
+    "Zapier",
+    "Used Zapier for integration workflows.",
+    "skill",
+  );
+  const translation = record(
+    "translation",
+    "Translation",
+    "Translated onboarding content.",
+    "skill",
+  );
+  const plan = {
+    focus: "Automation",
+    requirements: [
+      {
+        requirement: "AI RAG operations data automation using n8n or Zapier",
+        query: "workflow API integration",
+        transferable_query: "process automation",
+        importance: "ESSENTIAL" as const,
+      },
+    ],
+  };
+  const selected = selectInventory(
+    [...broad, n8n, zapier, translation],
+    plan,
+    broad.map((record) => record.id),
+  );
+  expect(selected.map((record) => record.id)).toContain("n8n");
+  expect(selected.map((record) => record.id)).toContain("zapier");
+  expect(selected.map((record) => record.id)).not.toContain("translation");
+  expect(selected.length).toBeLessThanOrEqual(28);
+});
+
+it("appends only one verified bullet while preserving each approved project block exactly", () => {
+  const draft = writing("ai", "AI work", "RAG retrieval");
+  const evidence = packetInventory(rows);
+  const original = base();
+  original.projects = [original.experiences[0]];
+  original.experiences = [];
+  const audit = writingInputs(draft, evidence).map((input) => ({
+    text: input.bullet,
+    refs: input.claims.map((claim) => claim.ref),
+    pass: true,
+    reason: "Fictional audit",
+  }));
+  const fixed = {
+    ...clearSignalContent,
+    projects: [
+      { ...clearSignalContent.projects[0], record_id: "ai" },
+      clearSignalContent.projects[1],
+    ] as typeof clearSignalContent.projects,
+  };
+  const ir = applyFixedContent(
+    assembleWriting(original, draft, evidence, audit, ["ai"]),
+    fixed,
+  );
+  expect(ir.projects[0].bullets).toEqual([
+    ...fixed.projects[0].bullets,
+    rows[0].claims[0].value,
+  ]);
+  expect(ir.projects[1].bullets).toEqual(fixed.projects[1].bullets);
+  expect(ir.projects[0].title).toBe(fixed.projects[0].title);
+  expect(applyFixedContent(ir, fixed)).toEqual(ir);
+});
+
 it("includes verified additional project work while excluding locked projects and preserving timeline uncertainty", () => {
   const draft = writing("ai", "AI implementation", "RAG");
   const evidence = packetInventory(rows);
