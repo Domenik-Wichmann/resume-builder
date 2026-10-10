@@ -9,6 +9,7 @@ import {
 } from "@/lib/applications/generation";
 import { requireOwner } from "@/lib/admin";
 import { createTrackingCode } from "@/lib/tracking/codes";
+import { ProviderError } from "@/lib/ai/openrouter";
 export const maxDuration = 300;
 export async function POST(request: Request) {
   try {
@@ -126,6 +127,8 @@ export async function POST(request: Request) {
       throw new HttpError(404, "Experiment not found.");
     return Response.json({ saved: true });
   } catch (e) {
+    if (e instanceof ProviderError)
+      return errorResponse(new HttpError(503, e.message));
     return errorResponse(e);
   }
 }

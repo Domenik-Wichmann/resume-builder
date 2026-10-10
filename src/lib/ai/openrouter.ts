@@ -7,7 +7,15 @@ import {
   openRouterUsage,
   type UsageContext,
 } from "../usage/service";
-export class ProviderError extends Error {}
+export class ProviderError extends Error {
+  constructor(
+    message: string,
+    public reason:
+      "UNAVAILABLE" | "TRUNCATED" | "INVALID_RESPONSE" = "UNAVAILABLE",
+  ) {
+    super(message);
+  }
+}
 export type CompletionPart =
   | { type: "text"; text: string }
   | { type: "image_url"; image_url: { url: string } }
@@ -22,6 +30,7 @@ export async function complete<T>(
     timeoutMs?: number;
     usage?: UsageContext;
     pdf?: boolean;
+    reasoningEffort?: "low" | "medium" | "high";
   } = {},
 ): Promise<T> {
   const env = validateEnv(process.env);
@@ -39,6 +48,9 @@ export async function complete<T>(
         model: options.model || env.model,
         temperature: 0,
         max_tokens: options.maxTokens || 1800,
+        ...(options.reasoningEffort
+          ? { reasoning: { effort: options.reasoningEffort, exclude: true } }
+          : {}),
         ...(options.pdf
           ? { plugins: [{ id: "file-parser", pdf: { engine: "mistral-ocr" } }] }
           : {}),
@@ -94,6 +106,48 @@ export async function complete<T>(
   const reported = openRouterUsage.safeParse(
     (raw as { usage?: unknown })?.usage,
   );
+  const envelope = z
+    .object({
+      choices: z
+        .array(
+          z.object({
+            finish_reason: z.string().nullable().optional(),
+            message: z.object({ content: z.string().nullable() }),
+          }),
+        )
+        .min(1),
+    })
+    .safeParse(raw);
+  let parsed: T | undefined;
+  let failure: ProviderError | undefined;
+  if (envelope.success && envelope.data.choices[0].finish_reason === "length") {
+    failure = new ProviderError(
+      "The AI response reached its output limit before completing. Retry the saved generation; no partial draft was accepted.",
+      "TRUNCATED",
+    );
+  } else if (
+    !envelope.success ||
+    (envelope.data.choices[0].finish_reason &&
+      envelope.data.choices[0].finish_reason !== "stop")
+  ) {
+    failure = new ProviderError(
+      "The AI response did not complete. Retry the saved generation.",
+      "INVALID_RESPONSE",
+    );
+  } else {
+    try {
+      parsed = schema.parse(
+        JSON.parse(envelope.data.choices[0].message.content || ""),
+      );
+    } catch {
+      failure = new ProviderError(
+        "The AI response was incomplete or invalid. Retry the saved generation; no partial draft was accepted.",
+        "INVALID_RESPONSE",
+      );
+    }
+  }
+  // Provider billing still counts incomplete answers. Retain quantities, but
+  // mark unusable responses failed rather than claiming a draft succeeded.
   await recordUsage(
     "OPENROUTER",
     options.model || env.model!,
@@ -105,14 +159,8 @@ export async function complete<T>(
           cost: reported.data.cost,
         }
       : {},
-    "SUCCESS",
+    failure ? "FAILED" : "SUCCESS",
   );
-  const envelope = z
-    .object({
-      choices: z
-        .array(z.object({ message: z.object({ content: z.string() }) }))
-        .min(1),
-    })
-    .parse(raw);
-  return schema.parse(JSON.parse(envelope.choices[0].message.content));
+  if (failure) throw failure;
+  return parsed as T;
 }

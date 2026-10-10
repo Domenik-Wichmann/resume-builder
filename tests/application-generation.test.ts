@@ -205,6 +205,18 @@ it("uses bounded planning, writing and complete-assertion verification for three
       "account",
     );
     const result = await writeApplication(job, evidence, "account");
+    const writeCall = vi.mocked(complete).mock.calls.at(-1)!;
+    expect(writeCall[3]).toMatchObject({
+      maxTokens: 16000,
+      reasoningEffort: "low",
+      timeoutMs: 120000,
+    });
+    const payload = JSON.parse(writeCall[1] as string);
+    expect(payload.plan).toEqual(plan);
+    expect(payload.evidence[0]).not.toHaveProperty("requirement");
+    expect(payload.evidence[0].claims[0].evidence).toEqual(
+      admittedInputs(evidence, "")[0].claims[0].evidence,
+    );
     const inputs = writingInputs(result, evidence);
     vi.mocked(complete).mockResolvedValueOnce({
       decisions: inputs.map((i) => ({
@@ -222,6 +234,11 @@ it("uses bounded planning, writing and complete-assertion verification for three
       })),
     });
     const audit = await auditWriting(result, evidence, "account");
+    expect(vi.mocked(complete).mock.calls.at(-1)![3]).toMatchObject({
+      maxTokens: 24000,
+      reasoningEffort: "medium",
+      timeoutMs: 120000,
+    });
     const ir = withTrackingUrl(
       {
         ...applyFixedContent(

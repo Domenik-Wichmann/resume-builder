@@ -6,6 +6,13 @@ records or embeddings change, so a reindex is unnecessary.
 
 The application builder saves a private preview before generation. Four bounded
 requests understand the job, find evidence, write the résumé and verify the draft.
+Writing uses an explicit low reasoning effort and a 16,000-token output budget,
+including reasoning, with a 120-second timeout. The job plan appears once beside
+the exact evidence packets. Output-limit, incomplete JSON and schema-invalid
+responses fail closed and retain billed usage as failed calls. The owner sees a
+specific retry message, and the saved generation stage remains resumable.
+Independent verification uses medium reasoning effort, a 24,000-token budget
+and a 120-second timeout for its assertion-level decisions across up to 40 statements.
 Owner generation reads verified source evidence with the owner's JWT and membership
 RLS, then filters for published, unarchived records. It does not call the service-only
 public snapshot RPC with an authenticated client. Hash and exact-source checks still apply.

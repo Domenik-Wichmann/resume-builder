@@ -64,3 +64,90 @@ it("keeps returned billing quantities on successful structured responses", async
     "SUCCESS",
   );
 });
+it.each([null, '{"answer":"Looks complete"}', '{"answer":'])(
+  "rejects output-limit responses, including parseable JSON, while retaining billing (%s)",
+  async (content) => {
+    vi.stubEnv("APP_MODE", "demo");
+    vi.stubEnv("OPENROUTER_MODEL", "synthetic-reasoning-model");
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          usage: {
+            prompt_tokens: 72625,
+            completion_tokens: 6500,
+            cost: 0.03,
+          },
+          choices: [{ finish_reason: "length", message: { content } }],
+        }),
+      }),
+    );
+    await expect(
+      complete(
+        "System",
+        "Private untrusted input",
+        z.object({ answer: z.string() }),
+      ),
+    ).rejects.toMatchObject({ reason: "TRUNCATED" });
+    expect(recordUsage).toHaveBeenCalledExactlyOnceWith(
+      "OPENROUTER",
+      "synthetic-reasoning-model",
+      {},
+      { input: 72625, output: 6500, cost: 0.03 },
+      "FAILED",
+    );
+  },
+);
+it.each([null, "broken JSON", '{"answer":123}'])(
+  "fails closed on invalid completed responses without exposing content (%s)",
+  async (content) => {
+    vi.stubEnv("APP_MODE", "demo");
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          usage: { completion_tokens: 30 },
+          choices: [{ finish_reason: "stop", message: { content } }],
+        }),
+      }),
+    );
+    await expect(
+      complete(
+        "System",
+        "Private untrusted input",
+        z.object({ answer: z.string() }),
+      ),
+    ).rejects.toMatchObject({ reason: "INVALID_RESPONSE" });
+    expect(recordUsage).toHaveBeenCalledTimes(1);
+    expect(vi.mocked(recordUsage).mock.calls[0][4]).toBe("FAILED");
+  },
+);
+it("passes explicit reasoning settings without changing other callers' defaults", async () => {
+  vi.stubEnv("APP_MODE", "demo");
+  const fetcher = vi.fn().mockResolvedValue({
+    ok: true,
+    json: async () => ({
+      choices: [
+        {
+          finish_reason: "stop",
+          message: { content: '{"answer":"Supported"}' },
+        },
+      ],
+    }),
+  });
+  vi.stubGlobal("fetch", fetcher);
+  await complete("System", "Source", z.object({ answer: z.string() }), {
+    maxTokens: 16000,
+    reasoningEffort: "low",
+  });
+  expect(JSON.parse(fetcher.mock.calls[0][1].body)).toMatchObject({
+    max_tokens: 16000,
+    reasoning: { effort: "low", exclude: true },
+  });
+  await complete("System", "Source", z.object({ answer: z.string() }));
+  expect(JSON.parse(fetcher.mock.calls[1][1].body)).not.toHaveProperty(
+    "reasoning",
+  );
+});
