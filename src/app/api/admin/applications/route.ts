@@ -10,8 +10,12 @@ import {
 import { requireOwner } from "@/lib/admin";
 import { createTrackingCode } from "@/lib/tracking/codes";
 import { ProviderError } from "@/lib/ai/openrouter";
+import { timedResponse } from "@/lib/performance";
 export const maxDuration = 300;
 export async function POST(request: Request) {
+  return timedResponse(() => handleApplication(request));
+}
+async function handleApplication(request: Request) {
   try {
     await requireOwner();
     const a = await requireAccount();

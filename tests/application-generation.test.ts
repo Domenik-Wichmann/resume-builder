@@ -11,6 +11,7 @@ import {
   packetInventory,
   admittedInputs,
   writingInputs,
+  compactApplicationEvidence,
   type Writing,
 } from "../src/lib/applications/generation";
 import { compileResumeIR } from "../src/lib/resume-ir";
@@ -32,7 +33,14 @@ vi.mock("../src/lib/embeddings/retrieval", () => ({
 }));
 vi.mock("../src/lib/http", () => ({
   reserveAIQuota: vi.fn(),
-  HttpError: class extends Error {},
+  HttpError: class extends Error {
+    constructor(
+      public status: number,
+      message: string,
+    ) {
+      super(message);
+    }
+  },
 }));
 import { complete } from "../src/lib/ai/openrouter";
 import { reserveAIQuota } from "../src/lib/http";
@@ -213,9 +221,15 @@ it("uses bounded planning, writing and complete-assertion verification for three
     });
     const payload = JSON.parse(writeCall[1] as string);
     expect(payload.plan).toEqual(plan);
-    expect(payload.evidence[0]).not.toHaveProperty("requirement");
-    expect(payload.evidence[0].claims[0].evidence).toEqual(
-      admittedInputs(evidence, "")[0].claims[0].evidence,
+    expect(payload.evidence.inputs[0].requirement).toBe("");
+    expect(
+      payload.evidence.inputs[0].claims[0].source_refs.map(
+        (index: number) => payload.evidence.source_passages[index],
+      ),
+    ).toEqual(
+      admittedInputs(evidence, "")[0].claims[0].evidence.map(
+        (span) => span.quote,
+      ),
     );
     const inputs = writingInputs(result, evidence);
     vi.mocked(complete).mockResolvedValueOnce({
@@ -269,6 +283,46 @@ it("uses bounded planning, writing and complete-assertion verification for three
   }
   expect(new Set(outputs.map((o) => o.summary)).size).toBe(3);
   expect(reserveAIQuota).toHaveBeenCalledTimes(9);
+});
+it("deduplicates exact source passages while retaining claim refs, constraints and attribution", () => {
+  const packet = packetInventory(rows)[0];
+  packet.claims.push({
+    ...packet.claims[0],
+    availability: "DISPUTED",
+    attribution: "NEGATED",
+  });
+  const inputs = admittedInputs([packet], "Synthetic requirement");
+  const original = JSON.stringify(inputs);
+  const compact = compactApplicationEvidence([...inputs, ...inputs]);
+  expect(compact.source_passages).toEqual([packet.claims[0].evidence[0].quote]);
+  expect(compact.inputs[0].claims[0].source_refs).toEqual([0]);
+  expect(compact.inputs[1].constraints[0]).toMatchObject({
+    availability: "DISPUTED",
+    attribution: "NEGATED",
+    source_refs: [0],
+  });
+  expect(compact.inputs[0].claims[0].ref).toBe(inputs[0].claims[0].ref);
+  expect(JSON.stringify(inputs)).toBe(original);
+});
+it("rejects incomplete and unexpected verifier IDs instead of accepting a partial audit", async () => {
+  const evidence = packetInventory(rows);
+  const draft = writing("data", "Data Operations", "Validation");
+  vi.mocked(complete).mockResolvedValue({ decisions: [] });
+  await expect(auditWriting(draft, evidence, "account")).rejects.toThrow(
+    "did not check every",
+  );
+  const inputs = writingInputs(draft, evidence);
+  vi.mocked(complete).mockResolvedValue({
+    decisions: inputs.map((i, index) => ({
+      id: index ? i.id : "unexpected",
+      verdict: "PASS",
+      assertions: [],
+      reason: "Synthetic response",
+    })),
+  });
+  await expect(auditWriting(draft, evidence, "account")).rejects.toThrow(
+    "unexpected statement ID",
+  );
 });
 it("finds an accomplishment outside the original hits, expands the actual parent and excludes unpublished/archive evidence", () => {
   const achievement = record(
