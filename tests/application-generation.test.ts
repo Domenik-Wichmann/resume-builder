@@ -14,6 +14,8 @@ import {
   compactApplicationEvidence,
   applicationAuditBatchSize,
   applicationRelevance,
+  recoveryInventory,
+  recoverApplication,
   type Writing,
 } from "../src/lib/applications/generation";
 import { compileResumeIR } from "../src/lib/resume-ir";
@@ -165,6 +167,224 @@ function writing(id: string, headline: string, skill: string): Writing {
   };
 }
 beforeEach(() => vi.clearAllMocks());
+it("recovery sees late claims and unselected records without changing original refs or exposing private evidence", () => {
+  const crowded = record("crowded", "Fictional work", "Original claim");
+  crowded.claims = Array.from({ length: 40 }, (_, i) => ({
+    ...crowded.claims[0],
+    value: `Fictional claim ${i}`,
+  }));
+  const initial = packetInventory([crowded]);
+  const hidden = {
+    ...record("private", "Private work", "Private evidence"),
+    published: false,
+  };
+  const archived = {
+    ...record("archived", "Archived work", "Archived evidence"),
+    archived: true,
+  };
+  const recovered = recoveryInventory(
+    [crowded, rows[1], hidden, archived],
+    initial,
+  );
+  expect(recovered.map((p) => p.id)).toEqual(["crowded", "data"]);
+  expect(recovered[0].claims.slice(0, initial[0].claims.length)).toEqual(
+    initial[0].claims,
+  );
+  expect(recovered[0].claims).toHaveLength(40);
+  expect(
+    recovered[0].claims.some((c) => c.value === "Fictional claim 39"),
+  ).toBe(true);
+});
+
+it.each([
+  ["ai", "AI retrieval", "RAG evaluation"],
+  ["data", "Data operations", "Spreadsheet validation"],
+  ["customer", "Customer support", "German customer support"],
+])(
+  "recovers job-specific omitted evidence for %s and re-verifies exact quotes",
+  async (id, focus, capability) => {
+    const plan = {
+      focus,
+      requirements: [
+        {
+          requirement: focus,
+          importance: "ESSENTIAL" as const,
+          query: capability,
+          transferable_query: focus,
+        },
+      ],
+    };
+    const original = writing(
+      "data",
+      "Data operations",
+      "Unsupported compound statement",
+    );
+    const evidence = packetInventory([rows[1]]);
+    const initialAudit = writingInputs(original, evidence).map((i) => ({
+      text: i.bullet,
+      refs: i.claims.map((c) => c.ref),
+      pass: false,
+      reason: "Unsupported clause",
+    }));
+    const proposal = statement(capability, id);
+    vi.mocked(complete).mockResolvedValueOnce({
+      additions: [
+        {
+          requirement_index: 0,
+          destination: "skill",
+          record_id: null,
+          statement: proposal,
+        },
+        {
+          requirement_index: 0,
+          destination: "entry",
+          record_id: id,
+          statement: statement(
+            rows.find((r) => r.id === id)!.claims[0].value,
+            id,
+          ),
+        },
+      ],
+      coverage: [
+        {
+          requirement: focus,
+          support: "DIRECT",
+          refs: proposal.refs,
+          note: "Exact published evidence",
+        },
+      ],
+    });
+    vi.mocked(complete).mockImplementationOnce(async (_system, input) => {
+      const request = JSON.parse(input as string) as {
+        inputs: { id: string; bullet: string; claims: { ref: string }[] }[];
+      };
+      return {
+        decisions: request.inputs.map((i) => ({
+          id: i.id,
+          verdict: "PASS",
+          job_fit: "DIRECT",
+          reason: "Supported",
+          assertions: [
+            {
+              text: i.bullet,
+              verdict: "SUPPORTED",
+              claimRefs: i.claims.map((c) => c.ref),
+              reason: "Exact fictional support",
+            },
+          ],
+        })),
+      };
+    });
+    const result = await recoverApplication(
+      plan,
+      original,
+      evidence,
+      rows,
+      initialAudit,
+      "account",
+    );
+    expect(result.added).toBe(2);
+    expect(result.writing.skills.flatMap((g) => g.items)).toEqual([proposal]);
+    expect(result.writing.summary).toEqual([]);
+    const assembled = assembleWriting(
+      base(),
+      result.writing,
+      result.evidence,
+      result.audit,
+    );
+    expect(assembled.experiences.map((e) => e.evidence_ids[0])).toEqual([id]);
+    const catalog = JSON.parse(
+      vi.mocked(complete).mock.calls[0][1] as string,
+    ) as { catalog: { record: { id: string } }[] };
+    expect(catalog.catalog.map((p) => p.record.id)).toEqual(
+      rows.map((r) => r.id),
+    );
+    const auditRequest = JSON.parse(
+      vi.mocked(complete).mock.calls[1][1] as string,
+    ) as { source_passages: string[] };
+    expect(auditRequest.source_passages).toContain(
+      rows.find((r) => r.id === id)!.claims[0].evidence[0].quote,
+    );
+    expect(reserveAIQuota).toHaveBeenCalledTimes(2);
+  },
+);
+
+it("does not recover unverified or job-irrelevant additions, and requires coverage of every requirement", async () => {
+  const plan = {
+    focus: "Data",
+    requirements: [
+      {
+        requirement: "Data",
+        importance: "ESSENTIAL" as const,
+        query: "Data",
+        transferable_query: "Data",
+      },
+    ],
+  };
+  const original = writing("data", "Data", "Data");
+  const evidence = packetInventory(rows);
+  const initialAudit = writingInputs(original, evidence).map((i) => ({
+    text: i.bullet,
+    refs: i.claims.map((c) => c.ref),
+    pass: true,
+    reason: "Supported",
+  }));
+  vi.mocked(complete).mockResolvedValueOnce({ additions: [], coverage: [] });
+  await expect(
+    recoverApplication(plan, original, evidence, rows, initialAudit, "account"),
+  ).rejects.toThrow("Coverage review was incomplete");
+  vi.mocked(complete).mockResolvedValueOnce({
+    additions: [
+      {
+        requirement_index: 0,
+        destination: "skill",
+        record_id: null,
+        statement: statement("Translation", "customer"),
+      },
+    ],
+    coverage: [
+      {
+        requirement: "Data",
+        support: "DIRECT",
+        refs: ["data:0"],
+        note: "Supported",
+      },
+    ],
+  });
+  vi.mocked(complete).mockImplementationOnce(async (_system, input) => {
+    const request = JSON.parse(input as string) as {
+      inputs: { id: string; bullet: string; claims: { ref: string }[] }[];
+    };
+    return {
+      decisions: request.inputs.map((i) => ({
+        id: i.id,
+        verdict: "PASS",
+        job_fit: "IRRELEVANT",
+        reason: "Unrelated",
+        assertions: [
+          {
+            text: i.bullet,
+            verdict: "SUPPORTED",
+            claimRefs: i.claims.map((c) => c.ref),
+            reason: "True but unrelated",
+          },
+        ],
+      })),
+    };
+  });
+  const result = await recoverApplication(
+    plan,
+    original,
+    evidence,
+    rows,
+    initialAudit,
+    "account",
+  );
+  expect(result.added).toBe(0);
+  expect(
+    result.writing.skills.flatMap((g) => g.items).map((s) => s.text),
+  ).not.toContain("Translation");
+});
 it("does not call Cohere with an empty follow-up batch for preferred-only vacancies", async () => {
   vi.mocked(retrieveCareerEvidence).mockResolvedValue(career.experiences);
   const evidence = await findRequirementEvidence(
