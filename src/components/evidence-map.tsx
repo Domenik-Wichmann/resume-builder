@@ -42,6 +42,15 @@ export function EvidenceMap({
   onExpand?: () => void;
 }) {
   const [view, setView] = useState<GraphView>(initialGraphView);
+  const [mobile, setMobile] = useState(false);
+  const preview = mobile && !expanded;
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 800px)");
+    const update = () => setMobile(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
   const camera = useRef(initialGraphView);
   const pan = useRef<{ x: number; y: number; view: GraphView } | null>(null);
   function changeView(next: GraphView) {
@@ -70,7 +79,7 @@ export function EvidenceMap({
   const canvas = useRef<HTMLDivElement>(null);
   // Every retrieved record stays on the graph, including while an answer loads.
   const pool = records;
-  const visible = records;
+  const visible = preview ? records.slice(0, 6) : records;
   const edges = useMemo(() => {
     const metadata = new Map(
       connectionRecords.map((record) => [record.id, record]),
@@ -167,7 +176,7 @@ export function EvidenceMap({
 
   useEffect(() => {
     const element = canvas.current;
-    if (!element || collapsed) return;
+    if (!element || collapsed || !expanded) return;
     const zoom = (event: WheelEvent) => {
       event.preventDefault();
       const bounds = element.getBoundingClientRect();
@@ -189,7 +198,7 @@ export function EvidenceMap({
     };
     element.addEventListener("wheel", zoom, { passive: false });
     return () => element.removeEventListener("wheel", zoom);
-  }, [collapsed]);
+  }, [collapsed, expanded]);
 
   useEffect(() => {
     if (!expanded || !onExpand) return;
@@ -263,7 +272,7 @@ export function EvidenceMap({
 
   return (
     <aside
-      className={`evidence-rail${collapsed ? " is-collapsed" : ""}${expanded ? " is-expanded" : ""}${busy ? " is-working" : ""}`}
+      className={`evidence-rail${preview ? " is-preview" : ""}${collapsed ? " is-collapsed" : ""}${expanded ? " is-expanded" : ""}${busy ? " is-working" : ""}`}
       aria-label="Connected evidence"
     >
       <div className="rail-heading evidence-heading">
@@ -298,7 +307,7 @@ export function EvidenceMap({
               onExpand();
             }}
           >
-            {"‹›"}
+            {expanded ? "Close graph" : "Expand graph"}
           </button>
         )}
         {view.scale !== 1 && !collapsed && (
@@ -320,6 +329,15 @@ export function EvidenceMap({
         )}
       </div>
       <div id="evidence-panel-content" hidden={collapsed}>
+        {preview && (
+          <p className="graph-preview-caption">
+            {busy
+              ? "Searching connected evidence…"
+              : `${records.length} source records · showing up to 6`}
+            <br />
+            Tap a node or expand to explore.
+          </p>
+        )}
         <div
           ref={canvas}
           className={`evidence-canvas${compact ? " is-compact" : ""}`}
@@ -327,6 +345,7 @@ export function EvidenceMap({
           onDragStart={(event) => event.preventDefault()}
           onPointerDown={(event) => {
             if (
+              !expanded ||
               event.button !== 0 ||
               (event.target as Element).closest("button")
             )
@@ -446,15 +465,17 @@ export function EvidenceMap({
                 aria-pressed={selected === record.id}
                 title={`${record.title} · Drag to arrange, select to read`}
                 onClick={(event) => {
-                  if (event.detail === 0 || !grab.current?.moved)
-                    selectRecord(record.id);
+                  if (event.detail === 0 || !grab.current?.moved) {
+                    if (preview && onExpand) onExpand();
+                    else selectRecord(record.id);
+                  }
                 }}
                 onPointerEnter={() => setHovered(record.id)}
                 onPointerLeave={() => setHovered(null)}
                 onFocus={() => setHovered(record.id)}
                 onBlur={() => setHovered(null)}
                 onPointerDown={(event) => {
-                  if (event.button !== 0) return;
+                  if (!expanded || event.button !== 0) return;
                   // Native text dragging competes with pointer capture and can
                   // interrupt a node drag when it starts on the full label.
                   event.preventDefault();

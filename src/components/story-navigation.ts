@@ -7,6 +7,7 @@ export function useStoryNavigation() {
   const root = useRef<HTMLDivElement>(null);
   const [step, setStep] = useState(0);
   const [reduced, setReduced] = useState(false);
+  const [mobile, setMobile] = useState(false);
   const bypass = useRef(false);
   const stride = useRef(400);
   const current = useRef(0);
@@ -20,6 +21,12 @@ export function useStoryNavigation() {
   function navigate(next: number) {
     setStep(next);
     current.current = next;
+    if (mobile) {
+      root.current
+        ?.querySelectorAll<HTMLElement>(".story-scene")
+        [next]?.scrollIntoView({ behavior: "instant", block: "start" });
+      return;
+    }
     if (reduced) return;
     bypass.current = false;
     const element = root.current;
@@ -38,15 +45,35 @@ export function useStoryNavigation() {
     const media = window.matchMedia(
       "(prefers-reduced-motion: reduce), (max-height: 680px), (max-width: 800px) and (max-height: 780px)",
     );
+    const phone = window.matchMedia("(max-width: 800px)");
     let entered = 0,
       lastGesture = 0,
       armed = false,
       frame = 0;
     let previousOffset = 0;
-    const preference = () => setReduced(media.matches);
+    const preference = () => {
+      setReduced(media.matches);
+      setMobile(phone.matches);
+    };
     preference();
     const position = () => {
       frame = 0;
+      if (phone.matches) {
+        const scenes = [
+          ...element.querySelectorAll<HTMLElement>(".story-scene"),
+        ];
+        const next = scenes.reduce(
+          (active, scene, index) =>
+            !scene.hidden &&
+            scene.getBoundingClientRect().top <= window.innerHeight * 0.4
+              ? index
+              : active,
+          0,
+        );
+        current.current = next;
+        setStep(next);
+        return;
+      }
       if (
         media.matches ||
         getComputedStyle(element.firstElementChild as Element).position !==
@@ -99,6 +126,7 @@ export function useStoryNavigation() {
     const wheel = (event: WheelEvent) => {
       if (
         event.ctrlKey ||
+        phone.matches ||
         event.deltaY <= 0 ||
         bypass.current ||
         !entered ||
@@ -147,6 +175,7 @@ export function useStoryNavigation() {
     window.addEventListener("pointerdown", intent, { passive: true });
     window.addEventListener("keydown", key);
     media.addEventListener("change", preference);
+    phone.addEventListener("change", preference);
     return () => {
       cancelAnimationFrame(frame);
       window.removeEventListener("hashchange", anchor);
@@ -157,7 +186,8 @@ export function useStoryNavigation() {
       window.removeEventListener("pointerdown", intent);
       window.removeEventListener("keydown", key);
       media.removeEventListener("change", preference);
+      phone.removeEventListener("change", preference);
     };
   }, []);
-  return { root, step, navigate, chat, reduced };
+  return { root, step, navigate, chat, reduced, mobile };
 }

@@ -595,6 +595,22 @@ html:has(.profile-hero) {
   overscroll-behavior: contain;
   cursor: grab;
 }
+.evidence-rail:not(.is-expanded) :is(.evidence-canvas, .evidence-node) {
+  touch-action: pan-y;
+  overscroll-behavior: auto;
+  cursor: pointer;
+}
+.graph-preview-caption {
+  color: #a9c5cc;
+  font-size: 12px;
+  padding: 0 16px;
+}
+.public-experience .graph-expand {
+  width: auto;
+  min-height: 44px;
+  padding: 10px 14px;
+  font-size: 13px;
+}
 .evidence-canvas:active {
   cursor: grabbing;
 }
@@ -1300,6 +1316,70 @@ html:has(.profile-hero) {
     grid-column: 1;
     height: calc(100dvh - 64px);
     max-height: none;
+  }
+}
+@media (max-width: 800px) {
+  .public-experience .explorer-rail nav :is(a, button) {
+    min-height: 44px;
+    font-size: 13px;
+    padding: 12px;
+  }
+  .public-experience .career-studio :is(input, textarea, select) {
+    font-size: 16px;
+  }
+  .public-experience .composer-tools button {
+    min-height: 44px;
+  }
+  .career-studio,
+  .career-studio.evidence-expanded {
+    height: auto;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .evidence-expanded > .chat-column {
+    display: block;
+  }
+  .chat-column {
+    height: auto;
+    min-height: 70svh;
+    padding-bottom: 24px;
+  }
+  .chat-results {
+    overflow: visible;
+    overscroll-behavior: auto;
+  }
+  .chat-view,
+  .catalog-view {
+    height: auto;
+  }
+  .evidence-rail.is-preview {
+    position: relative;
+    grid-column: 1;
+    height: 300px;
+    max-height: none;
+  }
+  .is-preview .evidence-canvas {
+    height: 220px;
+    min-height: 220px;
+  }
+  .evidence-expanded > .evidence-rail {
+    grid-column: 1;
+    height: 80dvh;
+    min-height: 420px;
+    max-height: none;
+  }
+  .is-expanded .evidence-heading {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: #101e29;
+  }
+  .public-experience .is-preview .evidence-node {
+    width: 40px;
+    height: 40px;
+  }
+  .is-preview .node-label {
+    font-size: 10px;
+    width: 90px;
   }
 }
 @media print {

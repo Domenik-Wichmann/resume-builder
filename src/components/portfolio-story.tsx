@@ -21,7 +21,7 @@ export function PortfolioStoryHero({
   story: PortfolioStory;
   presentation: Presentation;
 }) {
-  const { root, step, navigate, chat } = useStoryNavigation();
+  const { root, step, navigate, chat, mobile } = useStoryNavigation();
   return (
     <div
       ref={root}
@@ -59,7 +59,7 @@ export function PortfolioStoryHero({
             <div
               className={`story-scene story-scene-${index}`}
               key={scene.chapter}
-              hidden={step !== index}
+              hidden={!mobile && step !== index}
             >
               <div className="story-copy">
                 <p className="eyebrow">
@@ -174,7 +174,7 @@ export function PortfolioStoryHero({
             </div>
           ))}
         </section>
-        {step === 0 && (
+        {!mobile && step === 0 && (
           <div className="story-handoff story-intro-handoff wrap">
             <button
               type="button"
@@ -227,7 +227,7 @@ export function PortfolioStoryHero({
               disabled={step === 0}
               onClick={() => navigate(step - 1)}
             >
-              {"\u2191"}
+              <span aria-hidden="true">←</span> <span>Previous</span>
             </button>
             <button
               type="button"
@@ -240,7 +240,10 @@ export function PortfolioStoryHero({
                 step === finalStoryStep ? chat() : navigate(step + 1)
               }
             >
-              {"\u2193"}
+              <span>
+                {step === finalStoryStep ? "Conversation" : "Next chapter"}
+              </span>{" "}
+              <span aria-hidden="true">→</span>
             </button>
           </div>
         </div>
