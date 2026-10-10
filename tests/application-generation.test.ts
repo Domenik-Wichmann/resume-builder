@@ -16,6 +16,7 @@ import {
   applicationRelevance,
   recoveryInventory,
   recoverApplication,
+  recoverySchemaForPlan,
   type Writing,
 } from "../src/lib/applications/generation";
 import { compileResumeIR } from "../src/lib/resume-ir";
@@ -245,14 +246,13 @@ it.each([
           ),
         },
       ],
-      coverage: [
-        {
-          requirement: focus,
+      coverage: {
+        "0": {
           support: "DIRECT",
-          refs: proposal.refs,
+          refs: id === "data" ? [] : proposal.refs,
           note: "Exact published evidence",
         },
-      ],
+      },
     });
     vi.mocked(complete).mockImplementationOnce(async (_system, input) => {
       const request = JSON.parse(input as string) as {
@@ -284,6 +284,7 @@ it.each([
       "account",
     );
     expect(result.added).toBe(2);
+    expect(result.review).toHaveLength(id === "data" ? 1 : 0);
     expect(result.writing.skills.flatMap((g) => g.items)).toEqual([proposal]);
     expect(result.writing.summary).toEqual([]);
     const assembled = assembleWriting(
@@ -309,7 +310,7 @@ it.each([
   },
 );
 
-it("does not recover unverified or job-irrelevant additions, and requires coverage of every requirement", async () => {
+it("warns about invalid advisory coverage without blocking the verified draft, and rejects irrelevant additions", async () => {
   const plan = {
     focus: "Data",
     requirements: [
@@ -329,10 +330,20 @@ it("does not recover unverified or job-irrelevant additions, and requires covera
     pass: true,
     reason: "Supported",
   }));
-  vi.mocked(complete).mockResolvedValueOnce({ additions: [], coverage: [] });
-  await expect(
-    recoverApplication(plan, original, evidence, rows, initialAudit, "account"),
-  ).rejects.toThrow("Coverage review was incomplete");
+  vi.mocked(complete).mockResolvedValueOnce({ additions: [], coverage: {} });
+  const partial = await recoverApplication(
+    plan,
+    original,
+    evidence,
+    rows,
+    initialAudit,
+    "account",
+  );
+  expect(partial.writing.coverage).toEqual([]);
+  expect(partial.review).toEqual([
+    expect.stringContaining("does not establish missing evidence"),
+  ]);
+  expect(partial.writing.skills).toEqual(original.skills);
   vi.mocked(complete).mockResolvedValueOnce({
     additions: [
       {
@@ -342,14 +353,13 @@ it("does not recover unverified or job-irrelevant additions, and requires covera
         statement: statement("Translation", "customer"),
       },
     ],
-    coverage: [
-      {
-        requirement: "Data",
+    coverage: {
+      "0": {
         support: "DIRECT",
         refs: ["data:0"],
         note: "Supported",
       },
-    ],
+    },
   });
   vi.mocked(complete).mockImplementationOnce(async (_system, input) => {
     const request = JSON.parse(input as string) as {
@@ -385,6 +395,90 @@ it("does not recover unverified or job-irrelevant additions, and requires covera
     result.writing.skills.flatMap((g) => g.items).map((s) => s.text),
   ).not.toContain("Translation");
 });
+it("uses required requirement IDs instead of copied prose or positional coverage rows", () => {
+  const plan = {
+    focus: "Fictional job",
+    requirements: ["First requirement", "Second requirement"].map(
+      (requirement) => ({
+        requirement,
+        importance: "ESSENTIAL" as const,
+        query: requirement,
+        transferable_query: requirement,
+      }),
+    ),
+  };
+  const schema = recoverySchemaForPlan(plan);
+  const assessment = {
+    support: "GAP",
+    refs: [],
+    note: "No relevant evidence is currently stored.",
+  };
+  const valid = schema.parse({
+    additions: [],
+    coverage: { "1": assessment, "0": assessment },
+  });
+  expect(Object.keys(valid.coverage).sort()).toEqual(["0", "1"]);
+  expect(
+    schema.safeParse({ additions: [], coverage: { "0": assessment } }).success,
+  ).toBe(false);
+  expect(
+    schema.safeParse({
+      additions: [],
+      coverage: { "0": assessment, "1": assessment, "2": assessment },
+    }).success,
+  ).toBe(false);
+  expect(
+    schema.safeParse({
+      additions: [],
+      coverage: [{ requirement: "Paraphrased", ...assessment }],
+    }).success,
+  ).toBe(false);
+});
+
+it.each([
+  { support: "DIRECT", refs: [], note: "Unsupported direct assessment" },
+  { support: "TRANSFERABLE", refs: ["unknown:0"], note: "Unknown source" },
+])(
+  "does not turn invalid coverage into missing evidence: $note",
+  async (assessment) => {
+    const plan = {
+      focus: "Fictional job",
+      requirements: [
+        {
+          requirement: "Spreadsheet validation",
+          importance: "ESSENTIAL" as const,
+          query: "spreadsheets",
+          transferable_query: "validation",
+        },
+      ],
+    };
+    const original = writing("data", "Data", "Data");
+    const evidence = packetInventory(rows);
+    const audit = writingInputs(original, evidence).map((i) => ({
+      text: i.bullet,
+      refs: i.claims.map((c) => c.ref),
+      pass: true,
+      reason: "Supported",
+    }));
+    vi.mocked(complete).mockResolvedValueOnce({
+      additions: [],
+      coverage: { "0": assessment },
+    });
+    const result = await recoverApplication(
+      plan,
+      original,
+      evidence,
+      rows,
+      audit,
+      "account",
+    );
+    expect(result.writing.coverage).toEqual([]);
+    expect(result.review).toHaveLength(1);
+    expect(result.writing.skills).toEqual(original.skills);
+    expect(complete).toHaveBeenCalledTimes(1);
+  },
+);
+
 it("does not call Cohere with an empty follow-up batch for preferred-only vacancies", async () => {
   vi.mocked(retrieveCareerEvidence).mockResolvedValue(career.experiences);
   const evidence = await findRequirementEvidence(
