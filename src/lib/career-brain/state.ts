@@ -24,6 +24,7 @@ export type StateRecord = Omit<RichCanonical, "claims"> & {
 };
 export type StatePacket = Omit<EvidencePacket, "claims"> & {
   claims: StateClaim[];
+  timeline_note?: string;
 };
 export type ActorContext = {
   name: string;

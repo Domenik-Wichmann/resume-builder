@@ -4,6 +4,7 @@ import { createRoot, type Root } from "react-dom/client";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { ApplicationManager } from "../src/components/application-manager";
 import type { applicationDashboard } from "../src/lib/applications/repository";
+import { designPreview } from "../src/lib/resume-design/preview";
 
 const navigation = vi.hoisted(() => ({ push: vi.fn(), refresh: vi.fn() }));
 vi.mock("next/navigation", () => ({ useRouter: () => navigation }));
@@ -49,6 +50,41 @@ afterEach(async () => {
   await act(async () => root.unmount());
   container.remove();
   vi.unstubAllGlobals();
+});
+
+it("shows the completed résumé immediately before composition controls with private review collapsed", async () => {
+  vi.stubGlobal(
+    "fetch",
+    vi
+      .fn()
+      .mockResolvedValueOnce(Response.json({ preview_id: "draft" }))
+      .mockResolvedValueOnce(
+        Response.json({
+          stage: 4,
+          options: { TRADITIONAL: designPreview },
+          review: ["Fictional review note"],
+        }),
+      ),
+  );
+  await act(async () =>
+    container
+      .querySelector("#create-resume form")!
+      .dispatchEvent(new Event("submit", { bubbles: true, cancelable: true })),
+  );
+  const sheet = container.querySelector(".resume-design")!;
+  const composition = Array.from(container.querySelectorAll("label")).find(
+    (label) => label.textContent?.includes("Preview composition"),
+  )!;
+  expect(sheet).not.toBeNull();
+  expect(composition).toBeDefined();
+  expect(
+    sheet.compareDocumentPosition(composition) &
+      Node.DOCUMENT_POSITION_FOLLOWING,
+  ).toBeTruthy();
+  const review = Array.from(container.querySelectorAll("details")).find(
+    (detail) => detail.textContent?.includes("Fictional review note"),
+  );
+  expect(review?.open).toBe(false);
 });
 
 it("places saved résumés before creation and exposes a link to their analytics", () => {

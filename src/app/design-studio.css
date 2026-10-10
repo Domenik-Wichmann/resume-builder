@@ -225,6 +225,17 @@
 .resume-designed-header {
   position: relative;
 }
+.resume-design .resume-sheet .resume-invitation {
+  font-size: 8.5pt;
+  line-height: 1.25;
+  color: var(--resume-accent);
+  margin-top: 2pt;
+}
+.resume-design .resume-sheet .resume-timeline {
+  font-size: 9pt;
+  color: var(--resume-text);
+  margin: 2pt 0 4pt;
+}
 .resume-portrait {
   float: right;
   object-fit: cover;

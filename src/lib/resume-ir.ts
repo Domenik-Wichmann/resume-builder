@@ -13,6 +13,7 @@ const sectionRecord = z.object({
   bullets: z.array(z.string()),
   evidence_ids: z.array(z.string()),
   priority: z.number(),
+  timeline_note: z.string().max(500).optional(),
   locked_id: z.string().optional(),
   links: z
     .array(

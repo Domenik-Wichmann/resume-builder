@@ -451,6 +451,10 @@ export function ApplicationManager({ data }: { data: Dashboard }) {
       </section>
       {preview && (
         <section>
+          <ResumeRenderer ir={preview.options[strategy]} />
+          <ResumeLengthNotice
+            design={preview.options[strategy].design || clearSignalDesign}
+          />
           <div className="surface">
             <label>
               Preview composition
@@ -473,7 +477,7 @@ export function ApplicationManager({ data }: { data: Dashboard }) {
               URL.
             </p>
             {review.length > 0 && (
-              <details open>
+              <details>
                 <summary>Private coverage and factual review</summary>
                 <ul>
                   {review.map((note, i) => (
@@ -504,10 +508,6 @@ export function ApplicationManager({ data }: { data: Dashboard }) {
               Save résumé & get tracking link
             </button>
           </div>
-          <ResumeLengthNotice
-            design={preview.options[strategy].design || clearSignalDesign}
-          />
-          <ResumeRenderer ir={preview.options[strategy]} />
         </section>
       )}
       <section className="surface">

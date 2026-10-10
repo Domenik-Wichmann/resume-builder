@@ -59,7 +59,7 @@ export function ResumeRenderer({
           {contact.work_authorization && <p>{contact.work_authorization}</p>}
           {ir.portfolio_url && (
             <p className="resume-links">
-              Portfolio &amp; AI demo:{" "}
+              <strong>Portfolio &amp; AI demo:</strong>{" "}
               <a href={ir.portfolio_url}>{readable(ir.portfolio_url)}</a>
               {ir.github_url && (
                 <>
@@ -70,7 +70,9 @@ export function ResumeRenderer({
               )}
             </p>
           )}
-          {ir.invitation && <p className="muted">{ir.invitation}</p>}
+          {ir.invitation && (
+            <p className="resume-invitation">{ir.invitation}</p>
+          )}
         </header>
         {ir.summary && (
           <section className="resume-summary">
@@ -100,7 +102,11 @@ export function ResumeRenderer({
                 ([label, records]) =>
                   records.length > 0 && (
                     <section key={label}>
-                      <h2>{label}</h2>
+                      <h2>
+                        {label === "Achievements"
+                          ? "Additional relevant work"
+                          : label}
+                      </h2>
                       {records.map((record, index) => (
                         <div
                           className="resume-record"
@@ -112,10 +118,17 @@ export function ResumeRenderer({
                               .filter(Boolean)
                               .join(" | ")}
                           </p>
-                          {record.dates.start && (
-                            <p className="muted">
-                              {record.dates.start} –{" "}
-                              {record.dates.end || "End date not recorded"}
+                          {(label === "Experience" ||
+                            record.dates.start ||
+                            record.dates.end ||
+                            record.timeline_note) && (
+                            <p className="resume-timeline">
+                              {record.timeline_note ||
+                                (record.dates.start
+                                  ? `${record.dates.start} – ${record.dates.end || "End date not recorded"}`
+                                  : record.dates.end
+                                    ? `Start date not recorded – ${record.dates.end}`
+                                    : "Dates not recorded")}
                             </p>
                           )}
                           <ul>

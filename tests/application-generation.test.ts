@@ -12,6 +12,8 @@ import {
   admittedInputs,
   writingInputs,
   compactApplicationEvidence,
+  applicationAuditBatchSize,
+  applicationRelevance,
   type Writing,
 } from "../src/lib/applications/generation";
 import { compileResumeIR } from "../src/lib/resume-ir";
@@ -27,6 +29,10 @@ import { ResumeRenderer } from "../src/components/resume-renderer";
 import type { BrainRecord } from "../src/lib/career-brain/repository";
 import type { StatePacket } from "../src/lib/career-brain/state";
 import type { Career } from "../src/lib/career/model";
+import {
+  reportedTimeline,
+  timelineSortKey,
+} from "../src/lib/applications/timeline";
 vi.mock("../src/lib/ai/openrouter", () => ({ complete: vi.fn() }));
 vi.mock("../src/lib/embeddings/retrieval", () => ({
   retrieveCareerEvidence: vi.fn(),
@@ -355,7 +361,9 @@ it("reviews bounded batches in parallel while preserving global statement IDs an
     const payload = JSON.parse(input as string) as {
       inputs: { id: string; bullet: string; claims: { ref: string }[] }[];
     };
-    expect(payload.inputs.length).toBeLessThanOrEqual(12);
+    expect(payload.inputs.length).toBeLessThanOrEqual(
+      applicationAuditBatchSize,
+    );
     return {
       decisions: payload.inputs
         .map((i) => ({
@@ -378,8 +386,174 @@ it("reviews bounded batches in parallel while preserving global statement IDs an
   expect(audit).toHaveLength(expected.length);
   expect(audit.map((a) => a.text)).toEqual(expected.map((i) => i.bullet));
   expect(audit.every((a) => a.pass)).toBe(true);
-  expect(complete).toHaveBeenCalledTimes(Math.ceil(expected.length / 12));
-  expect(reserveAIQuota).toHaveBeenCalledTimes(Math.ceil(expected.length / 12));
+  expect(complete).toHaveBeenCalledTimes(
+    Math.ceil(expected.length / applicationAuditBatchSize),
+  );
+  expect(reserveAIQuota).toHaveBeenCalledTimes(
+    Math.ceil(expected.length / applicationAuditBatchSize),
+  );
+});
+
+it("prioritizes essential AI and RAG claims beyond the old packet limit and keeps source constraints", () => {
+  const plan = {
+    focus: "AI automation and knowledge bases",
+    requirements: [
+      {
+        requirement: "AI RAG knowledge bases",
+        importance: "ESSENTIAL" as const,
+        query: "AI automation RAG",
+        transferable_query: "retrieval",
+      },
+      {
+        requirement: "translation",
+        importance: "CONTEXT" as const,
+        query: "translation",
+        transferable_query: "",
+      },
+    ],
+  };
+  expect(applicationRelevance("AI RAG automation", plan)).toBeGreaterThan(
+    applicationRelevance("translation", plan),
+  );
+  const project = record(
+    "kb",
+    "Fictional knowledge base",
+    "Built an AI RAG knowledge base.",
+    "project",
+  );
+  const relevant = project.claims[0];
+  project.claims = [
+    ...Array.from({ length: 27 }, (_, i) => ({
+      ...relevant,
+      value: `Translation task ${i}`,
+    })),
+    relevant,
+    {
+      ...relevant,
+      attribute: "denial",
+      value: "No production deployment",
+      attribution: "NEGATED",
+      availability: "DISPUTED",
+    },
+  ];
+  const original = JSON.stringify(project);
+  const packet = packetInventory([project], plan)[0];
+  expect(packet.claims).toContain(relevant);
+  expect(packet.claims[0].value).toBe("No production deployment");
+  expect(packet.claims[1].value).toBe(relevant.value);
+  expect(packet.claims[1].evidence).toEqual(relevant.evidence);
+  expect(JSON.stringify(project)).toBe(original);
+});
+
+it("shows only unambiguous reported start months without inventing an end or current employment", () => {
+  const claim = {
+    ...rows[0].claims[0],
+    value:
+      "CV reports a September 2022 start month; current/end date unresolved",
+  };
+  expect(reportedTimeline([claim])).toBe(
+    "Reported start: Sep 2022 · end date unconfirmed",
+  );
+  expect(
+    reportedTimeline([{ ...claim, availability: "PENDING_REVIEW" }]),
+  ).toBeUndefined();
+  expect(
+    reportedTimeline([{ ...claim, attribution: "NEGATED" }]),
+  ).toBeUndefined();
+  expect(
+    reportedTimeline([
+      claim,
+      { ...claim, value: "Reported start month January 2023" },
+    ]),
+  ).toBeUndefined();
+  expect(
+    reportedTimeline([{ ...claim, value: "Worked on AI systems" }]),
+  ).toBeUndefined();
+  expect(
+    timelineSortKey({
+      dates: { start: null, end: null },
+      timeline_note: reportedTimeline([claim]),
+    }),
+  ).toBe("2022-09");
+  expect(timelineSortKey({ dates: { start: null, end: null } })).toBe("");
+});
+
+it("renders honest experience timelines and a compact invitation with a bold portfolio label", () => {
+  const ir = base();
+  ir.experiences = [
+    {
+      ...ir.experiences[0],
+      dates: { start: null, end: null },
+      timeline_note: "Reported start: Sep 2022 · end date unconfirmed",
+    },
+    { ...ir.experiences[1], dates: { start: "2022-01-01", end: null } },
+    { ...ir.experiences[2], dates: { start: null, end: null } },
+  ];
+  ir.portfolio_url = "https://example.invalid";
+  ir.invitation = "Explore my projects and ask about my experience online.";
+  const html = renderToStaticMarkup(createElement(ResumeRenderer, { ir }));
+  expect(html).toContain("Reported start: Sep 2022 · end date unconfirmed");
+  expect(html).toContain("2022-01-01 – End date not recorded");
+  expect(html).toContain("Dates not recorded");
+  expect(html).not.toContain("Present");
+  expect(html).toContain("<strong>Portfolio &amp; AI demo:</strong>");
+  expect(html).toContain('<p class="resume-invitation">Explore my projects');
+});
+
+it("recovers a rejected headline using only complete audited capability phrases", () => {
+  const evidence = packetInventory(rows);
+  const draft = writing("ai", "Unsupported senior architect", "RAG retrieval");
+  const audit = writingInputs(draft, evidence).map((i) => ({
+    text: i.bullet,
+    refs: i.claims.map((c) => c.ref),
+    pass: i.bullet !== draft.headline.text,
+    reason: "Synthetic audit",
+  }));
+  expect(assembleWriting(base(), draft, evidence, audit).headline).toBe(
+    "RAG retrieval",
+  );
+  expect(
+    assembleWriting(
+      base(),
+      draft,
+      evidence,
+      audit.map((a) => ({ ...a, pass: false })),
+    ).headline,
+  ).toBe("");
+});
+
+it("includes verified additional project work while excluding locked projects and preserving timeline uncertainty", () => {
+  const draft = writing("ai", "AI implementation", "RAG");
+  const evidence = packetInventory(rows);
+  evidence[0].timeline_note = "Reported start: Sep 2022 · end date unconfirmed";
+  const original = base();
+  const project = {
+    ...original.experiences[0],
+    dates: { start: null, end: null },
+  };
+  original.projects = [project];
+  original.experiences = [];
+  const audit = writingInputs(draft, evidence).map((i) => ({
+    text: i.bullet,
+    refs: i.claims.map((c) => c.ref),
+    pass: true,
+    reason: "Synthetic verified fixture",
+  }));
+  const result = assembleWriting(original, draft, evidence, audit);
+  expect(result.supporting_sections[0].bullets).toEqual([
+    rows[0].claims[0].value,
+  ]);
+  expect(result.supporting_sections[0].timeline_note).toContain(
+    "end date unconfirmed",
+  );
+  expect(result.supporting_sections[0].dates).toEqual({
+    start: null,
+    end: null,
+  });
+  expect(
+    assembleWriting(original, draft, evidence, audit, ["ai"])
+      .supporting_sections,
+  ).toEqual([]);
 });
 it("finds an accomplishment outside the original hits, expands the actual parent and excludes unpublished/archive evidence", () => {
   const achievement = record(
