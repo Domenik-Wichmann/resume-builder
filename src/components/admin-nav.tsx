@@ -59,7 +59,7 @@ export function AdminNav() {
             {link("/admin/projects", "Project showcase")}
             {link("/admin/answers", "Quick Answers")}
             <span className="owner-menu-label">Workflow</span>
-            {link("/admin/applications", "Applications & experiments")}
+            {link("/admin/applications", "Résumé generator & history")}
             {link("/admin/usage", "Usage & credits")}
             <span className="owner-menu-label">Overview sections</span>
             {link("/admin#applications", "Tracking links")}

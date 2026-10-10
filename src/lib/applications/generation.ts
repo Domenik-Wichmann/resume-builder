@@ -93,6 +93,13 @@ export type Writing = z.infer<typeof writingSchema>;
 type Account = Awaited<ReturnType<typeof requireAccount>>;
 type Application = z.infer<typeof applicationInput>;
 type Plan = z.infer<typeof jobPlanSchema>;
+export async function loadApplicationEvidence(a: Account) {
+  // Owner generation uses the verified JWT and membership RLS. The consolidated
+  // public snapshot RPC is service-only and cannot run on this client.
+  return (await loadBrain(a.db, a.accountId)).filter(
+    (r) => r.published && !r.archived,
+  );
+}
 export async function findRequirementEvidence(
   plan: Plan,
   career: Career,
@@ -431,7 +438,7 @@ export async function startGeneration(a: Account, application: Application) {
       "Use the learning-page URL, separate from the LMS homepage.",
     );
   if (context.fixed?.version === 0) {
-    const records = await loadBrain(a.db, a.accountId, true);
+    const records = await loadApplicationEvidence(a);
     const candidates = records.filter(
       (r) => r.kind === "project" && r.published && !r.archived,
     );
@@ -484,14 +491,31 @@ export async function startGeneration(a: Account, application: Application) {
 export async function generationStatus(a: Account, id: string) {
   const r = await a.db
     .from("application_previews")
-    .select("id,generation_stage,resume_options,generation_review")
+    .select(
+      "id,generation_stage,resume_options,generation_review,expires_at,saved_application_id",
+    )
     .eq("account_id", a.accountId)
     .eq("id", id)
     .maybeSingle();
   if (r.error || !r.data)
     throw new HttpError(404, "Application draft not found.");
+  if (r.data.saved_application_id)
+    return {
+      id: String(r.data.saved_application_id),
+      stage: 4,
+      preview_id: id,
+      label: generationStages[4],
+      options: r.data.resume_options,
+      review: r.data.generation_review,
+    };
+  if (new Date(r.data.expires_at).getTime() <= Date.now())
+    throw new HttpError(
+      410,
+      "This draft has expired. Start a fresh generation below.",
+    );
   const stage = z.number().int().min(0).max(4).parse(r.data.generation_stage);
   return {
+    id: undefined,
     preview_id: id,
     stage,
     label: generationStages[stage],
@@ -558,9 +582,7 @@ export async function advanceGeneration(
           "Publish a career profile before generating an application.",
         );
       const hits = await findRequirementEvidence(plan, career, a.accountId);
-      const records = career.demo
-        ? []
-        : await loadBrain(a.db, a.accountId, true);
+      const records = career.demo ? [] : await loadApplicationEvidence(a);
       const selected = selectInventory(
         records,
         plan,
@@ -577,9 +599,7 @@ export async function advanceGeneration(
         : [];
     } else if (expected === 2 || expected === 3) {
       const career = await getCareer(a.accountId);
-      const records = career.demo
-        ? []
-        : await loadBrain(a.db, a.accountId, true);
+      const records = career.demo ? [] : await loadApplicationEvidence(a);
       const selected = z
         .array(
           z.object({

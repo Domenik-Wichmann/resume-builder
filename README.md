@@ -128,7 +128,10 @@ GitHub is the canonical source. Import the repository into Vercel, use the Next.
 framework preset, add environment variables, and deploy from `main`. Supabase
 migrations are applied explicitly through its CLI. No Docker, Railway, queues,
 Redis, or custom hosting scripts are required. The canonical production domain is
-[resume-builder-amber-sigma.vercel.app](https://resume-builder-amber-sigma.vercel.app).
+[domenik-wichmann.vercel.app](https://domenik-wichmann.vercel.app).
+Keep production `NEXT_PUBLIC_SITE_URL` and `OPENROUTER_SITE_URL` on this origin.
+Supabase Auth redirect URLs must include `/auth/callback` and `/auth/recovery`
+on this domain for OAuth and password recovery.
 
 ## Privacy and security
 

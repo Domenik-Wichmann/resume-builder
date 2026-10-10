@@ -1,6 +1,11 @@
 import "server-only";
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { experimentAnalytics, coverageSuggestions } from "./analytics";
+import {
+  experimentAnalytics,
+  applicationAnalytics,
+  coverageSuggestions,
+  type AnalyticsInput,
+} from "./analytics";
 import { getCareer } from "../career/repository";
 import { resumeIRSchema } from "../resume-ir";
 export async function applicationDashboard(
@@ -42,7 +47,7 @@ export async function applicationDashboard(
     outcomes,
     topics,
   ] = results.map((r) => r.data || []);
-  const analytics = experimentAnalytics({
+  const activity: AnalyticsInput = {
     applications: apps as { id: string; sent_at: string | null }[],
     snapshots: snapshots as {
       application_id: string;
@@ -64,7 +69,8 @@ export async function applicationDashboard(
     events: events as { workspace_id: string; event_type: string }[],
     explorer: explorer as { workspace_id: string }[],
     outcomes: outcomes as { application_id: string; status: string }[],
-  });
+  };
+  const analytics = experimentAnalytics(activity);
   const career = await getCareer(accountId);
   const included = new Set<string>();
   for (const s of snapshots) {
@@ -78,18 +84,24 @@ export async function applicationDashboard(
         for (const id of r.evidence_ids) included.add(id);
   }
   return {
-    applications: apps.map((a) => ({
-      id: a.id,
-      organization: a.organization,
-      role: a.role,
-      status: a.status,
-      code:
-        snapshots.find((s) => s.application_id === a.id)?.tracking_code ||
-        links.find((l) => l.application_id === a.id)?.code,
-      strategy:
-        snapshots.find((s) => s.application_id === a.id)?.strategy ||
-        "Legacy tracking only",
-    })),
+    applications: apps
+      .sort((a, b) => b.created_at.localeCompare(a.created_at))
+      .map((a) => ({
+        id: a.id,
+        organization: a.organization,
+        role: a.role,
+        status: a.status,
+        market: a.metadata?.market as "US" | "BG" | undefined,
+        generated_at: snapshots.find((s) => s.application_id === a.id)
+          ?.generated_at as string | undefined,
+        activity: applicationAnalytics(activity, a.id),
+        code:
+          snapshots.find((s) => s.application_id === a.id)?.tracking_code ||
+          links.find((l) => l.application_id === a.id)?.code,
+        strategy:
+          snapshots.find((s) => s.application_id === a.id)?.strategy ||
+          "Legacy tracking only",
+      })),
     experiments: experiments.map((e) => ({
       id: e.id,
       name: e.name,

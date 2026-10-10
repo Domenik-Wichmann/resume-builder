@@ -15,3 +15,4 @@ tests/
 scripts/
 AGENTS.md
 release-*
+tmp/

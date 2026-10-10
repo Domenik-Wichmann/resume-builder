@@ -16,6 +16,41 @@ export type AnalyticsInput = {
   explorer: { workspace_id: string }[];
   outcomes: { application_id: string; status: string }[];
 };
+export function applicationAnalytics(
+  input: AnalyticsInput,
+  applicationId: string,
+) {
+  const links = new Set(
+    input.links
+      .filter((l) => l.application_id === applicationId)
+      .map((l) => l.id),
+  );
+  const workspaces = new Set(
+    input.workspaces
+      .filter((w) => w.tracking_link_id && links.has(w.tracking_link_id))
+      .map((w) => w.id),
+  );
+  return {
+    visits: new Set(
+      input.visits
+        .filter((v) => links.has(v.link_id))
+        .map((v) => `${v.link_id}:${v.session_id}`),
+    ).size,
+    workspaces: workspaces.size,
+    questions: input.questions.filter((q) => workspaces.has(q.workspace_id))
+      .length,
+    engagement: input.explorer.filter((e) => workspaces.has(e.workspace_id))
+      .length,
+    previews: input.events.filter(
+      (e) =>
+        workspaces.has(e.workspace_id) && e.event_type === "resume_preview",
+    ).length,
+    exports: input.events.filter(
+      (e) =>
+        workspaces.has(e.workspace_id) && e.event_type === "workspace_export",
+    ).length,
+  };
+}
 export function experimentAnalytics(input: AnalyticsInput) {
   return input.variants.map((v) => {
     const apps = new Set(

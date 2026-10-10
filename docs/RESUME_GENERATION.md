@@ -6,6 +6,13 @@ records or embeddings change, so a reindex is unnecessary.
 
 The application builder saves a private preview before generation. Four bounded
 requests understand the job, find evidence, write the résumé and verify the draft.
+Owner generation reads verified source evidence with the owner's JWT and membership
+RLS, then filters for published, unarchived records. It does not call the service-only
+public snapshot RPC with an authenticated client. Hash and exact-source checks still apply.
+The résumé library appears first, with search, saved dates, region and attributed
+activity. Each saved version opens its preview and private analytics. Region selection
+uses the configured US or Bulgarian contact profile and Letter or A4 paper; it does
+not change residence or career facts. Advanced metadata and experiments are collapsed.
 The UI displays the actual saved stage. Reloading the browser exposes **Resume
 saved generation**; stage leases prevent concurrent calls from overwriting work.
 Provider failures retain the last completed stage. A crashed lease expires after

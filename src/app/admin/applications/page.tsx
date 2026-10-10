@@ -5,7 +5,7 @@ import { applicationDashboard } from "@/lib/applications/repository";
 import { ApplicationManager } from "@/components/application-manager";
 export const dynamic = "force-dynamic";
 export const metadata = {
-  title: "Applications & experiments · Resume Builder",
+  title: "Résumé generator · Resume Builder",
   robots: { index: false, follow: false },
 };
 export default async function Applications() {
@@ -23,8 +23,13 @@ export default async function Applications() {
   }
   return (
     <main className="wrap portfolio-main">
-      <Link href="/account">← Account</Link>
-      <h1>Applications & experiments.</h1>
+      <Link href="/admin">← Overview</Link>
+      <p className="eyebrow">Your private résumé library</p>
+      <h1>Résumés for your next move.</h1>
+      <p className="lead">
+        Create a tailored résumé, review it, and follow the interest it
+        receives. Your saved versions stay here.
+      </p>
       <ApplicationManager
         data={await applicationDashboard(a.db, a.accountId)}
       />

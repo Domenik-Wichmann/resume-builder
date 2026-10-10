@@ -11,6 +11,7 @@ import { readFile } from "node:fs/promises";
 import { semanticHash } from "../src/lib/ingestion/diff";
 import type { BrainRecord } from "../src/lib/career-brain/repository";
 import { candidateSchema } from "../src/lib/ingestion/model";
+import { loadApplicationEvidence } from "../src/lib/applications/generation";
 vi.mock("../src/lib/ingestion/repository", () => ({ loadCanonical: vi.fn() }));
 async function sample(): Promise<BrainRecord> {
   const data = JSON.parse(
@@ -90,6 +91,48 @@ function database(tables: Record<string, unknown[]>) {
     },
   } as unknown as SupabaseClient;
 }
+it("loads published application evidence through membership RLS without the service-only snapshot RPC", async () => {
+  const r = await sample();
+  const quote = r.claims[0].evidence[0].quote;
+  const sourceId = "11111111-1111-4111-8111-111111111111";
+  const published = { ...r, published: true, archived: false };
+  vi.mocked(loadCanonical).mockResolvedValueOnce([
+    published,
+    { ...published, id: "private", published: false },
+    { ...published, id: "archived", archived: true },
+  ]);
+  const db = database({
+    career_record_evidence: [
+      {
+        kind: r.kind,
+        entity_id: r.id,
+        canonical_hash: r.hash,
+        aliases: [],
+        updated_at: r.updated_at,
+        claims: [
+          {
+            ...r.claims[0],
+            availability: "CONFIRMED",
+            evidence: [
+              { quote, start: 0, end: quote.length, source_id: sourceId },
+            ],
+          },
+        ],
+      },
+    ],
+    career_sources: [{ id: sourceId, evidence_text: quote }],
+  });
+  const rpc = vi.spyOn(db, "rpc");
+  const evidence = await loadApplicationEvidence({
+    db,
+    accountId: "tenant",
+    userId: "verified-user",
+  });
+  expect(rpc).not.toHaveBeenCalled();
+  expect(loadCanonical).toHaveBeenLastCalledWith(db, "tenant", false);
+  expect(evidence.map((e) => e.id)).toEqual([r.id]);
+  expect(evidence[0].claims[0].availability).toBe("CONFIRMED");
+});
 it("persists explicit owner presentation corrections without calling wording a factual update or rewriting native unchanged imports", async () => {
   const source = "Synthetic fixture: Sam built validation checks.";
   const sourceId = "11111111-1111-4111-8111-111111111111";
