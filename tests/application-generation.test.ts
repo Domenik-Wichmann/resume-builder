@@ -249,7 +249,7 @@ it("uses bounded planning, writing and complete-assertion verification for three
     });
     const audit = await auditWriting(result, evidence, "account");
     expect(vi.mocked(complete).mock.calls.at(-1)![3]).toMatchObject({
-      maxTokens: 24000,
+      maxTokens: 10000,
       reasoningEffort: "medium",
       timeoutMs: 120000,
     });
@@ -323,6 +323,63 @@ it("rejects incomplete and unexpected verifier IDs instead of accepting a partia
   await expect(auditWriting(draft, evidence, "account")).rejects.toThrow(
     "unexpected statement ID",
   );
+});
+it("reviews bounded batches in parallel while preserving global statement IDs and source refs", async () => {
+  const evidence = packetInventory(rows);
+  const draft = writing("data", "Data Operations", "Validation");
+  draft.skills = [
+    {
+      label: "Relevant capabilities",
+      items: Array.from({ length: 6 }, () => ({
+        text: rows[1].claims[0].value,
+        refs: ["data:0"],
+      })),
+    },
+    {
+      label: "Practical tools",
+      items: Array.from({ length: 6 }, () => ({
+        text: rows[1].claims[0].value,
+        refs: ["data:0"],
+      })),
+    },
+  ];
+  draft.entries = rows.map((row) => ({
+    record_id: row.id,
+    bullets: Array.from({ length: 4 }, () => ({
+      text: row.claims[0].value,
+      refs: [`${row.id}:0`],
+    })),
+  }));
+  const expected = writingInputs(draft, evidence);
+  vi.mocked(complete).mockImplementation(async (_system, input) => {
+    const payload = JSON.parse(input as string) as {
+      inputs: { id: string; bullet: string; claims: { ref: string }[] }[];
+    };
+    expect(payload.inputs.length).toBeLessThanOrEqual(12);
+    return {
+      decisions: payload.inputs
+        .map((i) => ({
+          id: i.id,
+          verdict: "PASS",
+          assertions: [
+            {
+              text: i.bullet,
+              verdict: "SUPPORTED",
+              claimRefs: i.claims.map((c) => c.ref),
+              reason: "Synthetic test evidence",
+            },
+          ],
+          reason: "Synthetic test evidence",
+        }))
+        .reverse(),
+    };
+  });
+  const audit = await auditWriting(draft, evidence, "account");
+  expect(audit).toHaveLength(expected.length);
+  expect(audit.map((a) => a.text)).toEqual(expected.map((i) => i.bullet));
+  expect(audit.every((a) => a.pass)).toBe(true);
+  expect(complete).toHaveBeenCalledTimes(Math.ceil(expected.length / 12));
+  expect(reserveAIQuota).toHaveBeenCalledTimes(Math.ceil(expected.length / 12));
 });
 it("finds an accomplishment outside the original hits, expands the actual parent and excludes unpublished/archive evidence", () => {
   const achievement = record(
