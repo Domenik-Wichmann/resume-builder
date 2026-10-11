@@ -16,13 +16,29 @@ export function WorkspaceList({ question = "" }: { question?: string }) {
       Pick<Workspace, "id" | "title" | "market" | "updated_at">[]
     >([]),
     [error, setError] = useState(""),
-    [busy, setBusy] = useState(false);
+    [busy, setBusy] = useState(false),
+    [loading, setLoading] = useState(true),
+    [attempt, setAttempt] = useState(0);
   const router = useRouter();
   useEffect(() => {
+    let cancelled = false;
     browserListWorkspaces()
-      .then(setItems)
-      .catch((err) => setError(err.message));
-  }, []);
+      .then((saved) => {
+        if (!cancelled) setItems(saved);
+      })
+      .catch((err: unknown) => {
+        if (!cancelled)
+          setError(
+            err instanceof Error ? err.message : "Cannot load saved chats.",
+          );
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [attempt]);
   return (
     <div>
       <div className="workspace-list">
@@ -65,11 +81,12 @@ export function WorkspaceList({ question = "" }: { question?: string }) {
           </article>
         ))}
       </div>
-      {!items.length && (
-        <p>No saved workspaces yet. Start with a role or a question.</p>
+      {loading && <p role="status">Loading your saved chats…</p>}
+      {!loading && !error && !items.length && (
+        <p>No saved chats in this browser. Start with a role or a question.</p>
       )}
       <button
-        disabled={busy || items.length >= 2}
+        disabled={loading || Boolean(error) || busy || items.length >= 2}
         onClick={async () => {
           setBusy(true);
           try {
@@ -90,9 +107,19 @@ export function WorkspaceList({ question = "" }: { question?: string }) {
         questions and projections.
       </p>
       {error && (
-        <p role="alert" className="error">
+        <div role="alert" className="error">
           {error}
-        </p>
+          <button
+            type="button"
+            onClick={() => {
+              setError("");
+              setLoading(true);
+              setAttempt(attempt + 1);
+            }}
+          >
+            Retry loading chats
+          </button>
+        </div>
       )}
     </div>
   );

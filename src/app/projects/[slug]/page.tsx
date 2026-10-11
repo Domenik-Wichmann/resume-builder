@@ -23,7 +23,7 @@ export default async function ProjectPage({
     <>
       <PortfolioHeader />
       <main className="wrap portfolio-main">
-        <Link href="/projects">← All projects</Link>
+        <Link href="/projects">← Selected projects</Link>
         <ProjectDisplay
           project={p}
           media={media}

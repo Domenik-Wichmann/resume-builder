@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { SafeMarkdown } from "./safe-markdown";
 import type { Project, ProjectMedia } from "@/lib/portfolio/model";
+import { showcaseTitle } from "@/lib/portfolio/selection";
 export function ProjectDisplay({
   project,
   media,
@@ -20,7 +21,8 @@ export function ProjectDisplay({
         {project.status.replaceAll("_", " ")}
         {project.organization ? ` · ${project.organization}` : ""}
       </p>
-      <h1>{project.title}</h1>
+      <h1>{showcaseTitle(project)}</h1>
+      {project.subtitle && <p className="eyebrow">{project.subtitle}</p>}
       <p className="lead">{project.summary}</p>
       {cover && (
         <figure>

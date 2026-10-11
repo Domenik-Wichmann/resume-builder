@@ -21,7 +21,8 @@ export function PortfolioStoryHero({
   story: PortfolioStory;
   presentation: Presentation;
 }) {
-  const { root, step, navigate, chat, mobile } = useStoryNavigation();
+  const { root, step, navigate, chat, mobile, completed, inStory } =
+    useStoryNavigation();
   return (
     <div
       ref={root}
@@ -43,7 +44,7 @@ export function PortfolioStoryHero({
         )}
         <header className="site-header wrap story-header">
           <Link className="wordmark" href="/">
-            career<span> / </span>connected.
+            Domenik Wichmann
           </Link>
           <span className="story-header-context">
             {step === 0
@@ -155,6 +156,21 @@ export function PortfolioStoryHero({
                           : "The person behind the work"}
                       </div>
                     </div>
+                    {!mobile && (
+                      <button
+                        type="button"
+                        className="story-portrait-next"
+                        onClick={() => navigate(1)}
+                      >
+                        <span>More about me &amp; this project</span>
+                        <span
+                          className="portrait-next-arrow"
+                          aria-hidden="true"
+                        >
+                          →
+                        </span>
+                      </button>
+                    )}
                   </div>
                 )}
                 {index > 0 && index < finalStoryStep && (
@@ -174,15 +190,33 @@ export function PortfolioStoryHero({
             </div>
           ))}
         </section>
-        {!mobile && step === 0 && (
-          <div className="story-handoff story-intro-handoff wrap">
-            <button
-              type="button"
-              className="story-intro-next"
-              onClick={() => navigate(1)}
-            >
-              More about me &amp; this project{" "}
-              <span aria-hidden="true">{"\u2193"}</span>
+        {mobile && inStory && (step === 0 || completed) && (
+          <div className="story-mobile-actions">
+            {step === 0 && (
+              <button
+                type="button"
+                className="story-intro-next"
+                onClick={() => navigate(1)}
+              >
+                More about me &amp; this project{" "}
+                <span aria-hidden="true">↓</span>
+              </button>
+            )}
+            {completed && (
+              <button
+                type="button"
+                className="story-return-chat"
+                onClick={chat}
+              >
+                Jump to chat <span aria-hidden="true">↓</span>
+              </button>
+            )}
+          </div>
+        )}
+        {!mobile && completed && step !== finalStoryStep && (
+          <div className="story-handoff wrap">
+            <button type="button" className="story-return-chat" onClick={chat}>
+              Jump to chat <span aria-hidden="true">↓</span>
             </button>
           </div>
         )}

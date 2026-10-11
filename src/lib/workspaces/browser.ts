@@ -19,6 +19,13 @@ import {
 } from "./slots";
 const storageKey = "resume-builder-demo-workspaces-v1";
 const slotsKey = "resume-builder-workspace-slots-v1";
+function rememberSlots(slots: WorkspaceSlots) {
+  try {
+    localStorage.setItem(slotsKey, JSON.stringify(slots));
+  } catch {
+    // The verified server listing remains available when local storage fails.
+  }
+}
 function storedSlots(): WorkspaceSlots {
   try {
     const parsed = workspaceSchema.shape.id
@@ -37,7 +44,7 @@ export async function browserWorkspaceSlots(): Promise<WorkspaceSlots> {
     workspaces.map((value) => value.id),
     storedSlots(),
   );
-  localStorage.setItem(slotsKey, JSON.stringify(slots));
+  rememberSlots(slots);
   return slots;
 }
 export function browserRememberWorkspaceSlot(id: string, slot: WorkspaceSlot) {
@@ -47,7 +54,7 @@ export function browserRememberWorkspaceSlot(id: string, slot: WorkspaceSlot) {
     previous[1] === id ? null : previous[1],
   ];
   slots[slot] = id;
-  localStorage.setItem(slotsKey, JSON.stringify(slots));
+  rememberSlots(slots);
 }
 function demoWorkspaces(): Workspace[] {
   try {
@@ -99,10 +106,11 @@ export async function browserListWorkspaces() {
   const response = await requestJson("/api/workspaces", { cache: "no-store" });
   return response.mode === "demo"
     ? demoWorkspaces()
-    : (response.workspaces as Pick<
-        Workspace,
-        "id" | "title" | "market" | "updated_at"
-      >[]);
+    : workspaceSchema
+        .pick({ id: true, title: true, market: true, updated_at: true })
+        .array()
+        .max(2)
+        .parse(response.workspaces);
 }
 export async function browserCreateWorkspace() {
   const local = demoWorkspaces();

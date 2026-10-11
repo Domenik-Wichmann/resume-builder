@@ -19,7 +19,7 @@ export default async function Home() {
         <CareerChat design={design} />
       </main>
       <footer className="wrap footer">
-        <span>Career, connected.</span>
+        <span>Domenik Wichmann</span>
         <Link href="/privacy">Privacy & data</Link>
       </footer>
     </div>

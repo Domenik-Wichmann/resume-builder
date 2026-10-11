@@ -26,8 +26,13 @@ export default async function Account() {
         </Link>
       </p>
       <Link className="button" href="/admin/career">
-        Open Career Master & Interview
+        Open Career Master
       </Link>
+      <p>
+        <Link className="button" href="/admin/interviews">
+          Resume Career Interview &amp; saved conversations
+        </Link>
+      </p>
       <div className="stack">
         <Link href="/admin/projects">Manage project showcase →</Link>
         <Link href="/admin/answers">Manage Quick Answers →</Link>

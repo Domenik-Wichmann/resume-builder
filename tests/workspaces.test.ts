@@ -197,6 +197,34 @@ describe("offline browser workspace persistence", () => {
     await browserCreateWorkspace();
     expect(await browserListWorkspaces()).toHaveLength(2);
   });
+  it("loads verified server-owned chats even when browser storage throws", async () => {
+    const workspace = newWorkspace(randomUUID(), "US", false);
+    const blocked = () => {
+      throw new Error("Storage blocked");
+    };
+    vi.stubGlobal("localStorage", { getItem: blocked, setItem: blocked });
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url: string) =>
+        url === "/api/workspaces"
+          ? Response.json({
+              mode: "live",
+              workspaces: [
+                {
+                  id: workspace.id,
+                  title: workspace.title,
+                  market: workspace.market,
+                  updated_at: workspace.updated_at,
+                },
+              ],
+            })
+          : Response.json({ workspace }),
+      ),
+    );
+    expect(await browserWorkspaceSlots()).toEqual([workspace.id, null]);
+    expect(() => browserRememberWorkspaceSlot(workspace.id, 0)).not.toThrow();
+    expect(await browserLoadWorkspace(workspace.id)).toEqual(workspace);
+  });
   it("supports starting Workspace 2 first and keeps both conversations in stable slots", async () => {
     const second = await browserCreateWorkspace();
     browserRememberWorkspaceSlot(second.id, 1);

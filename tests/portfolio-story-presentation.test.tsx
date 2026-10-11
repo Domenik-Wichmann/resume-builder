@@ -7,6 +7,9 @@ import { portfolioStory } from "../src/lib/portfolio/story";
 import { finalStoryStep, storyScenes } from "../src/lib/portfolio/story-scenes";
 const navigation = vi.hoisted(() => ({
   step: 0,
+  mobile: false,
+  completed: false,
+  inStory: true,
   chat: vi.fn(),
   navigate: vi.fn(),
 }));
@@ -58,7 +61,7 @@ it("introduces the owner first and expands public answers without navigation, dr
     ]);
     await act(async () =>
       host
-        .querySelector<HTMLButtonElement>(".story-intro-handoff > button")!
+        .querySelector<HTMLButtonElement>(".portrait-layout > button")!
         .click(),
     );
     expect(navigation.navigate).toHaveBeenCalledWith(1);
@@ -101,6 +104,73 @@ it("introduces the owner first and expands public answers without navigation, dr
     host.remove();
     window.removeEventListener("portfolio-question", draft);
     navigation.step = 0;
+    vi.clearAllMocks();
+    vi.unstubAllGlobals();
+  }
+});
+
+it("places the intro control beside the portrait on desktop and at the bottom on phones, with a gated return to chat", async () => {
+  vi.stubGlobal("IS_REACT_ACT_ENVIRONMENT", true);
+  const host = document.createElement("div");
+  document.body.append(host);
+  const root = createRoot(host);
+  const render = () =>
+    root.render(
+      <PortfolioStoryHero
+        story={portfolioStory(fixture)}
+        presentation={{
+          market: "US",
+          location: "",
+          phone: "",
+          contact_email: "",
+          work_authorization: "",
+        }}
+      />,
+    );
+  try {
+    await act(async () => render());
+    expect(
+      host.querySelector(".portrait-layout > button")?.textContent,
+    ).toContain("→");
+    expect(host.querySelector(".story-mobile-actions")).toBeNull();
+    expect(host.querySelector(".story-return-chat")).toBeNull();
+    expect(host.textContent).not.toMatch(/career\s*\/\s*connected/i);
+    navigation.mobile = true;
+    await act(async () => render());
+    expect(host.querySelector(".portrait-layout > button")).toBeNull();
+    expect(
+      host.querySelector(".story-mobile-actions > button")?.textContent,
+    ).toContain("↓");
+    navigation.completed = true;
+    for (let step = 0; step < finalStoryStep; step++) {
+      navigation.step = step;
+      await act(async () => render());
+      expect(
+        host.querySelector(".story-mobile-actions .story-return-chat"),
+      ).not.toBeNull();
+    }
+    await act(async () =>
+      host.querySelector<HTMLButtonElement>(".story-return-chat")!.click(),
+    );
+    expect(navigation.chat).toHaveBeenCalledOnce();
+    navigation.inStory = false;
+    await act(async () => render());
+    expect(host.querySelector(".story-mobile-actions")).toBeNull();
+    navigation.mobile = false;
+    navigation.step = 2;
+    await act(async () => render());
+    expect(
+      host.querySelector(".story-handoff .story-return-chat"),
+    ).not.toBeNull();
+  } finally {
+    await act(async () => root.unmount());
+    host.remove();
+    Object.assign(navigation, {
+      step: 0,
+      mobile: false,
+      completed: false,
+      inStory: true,
+    });
     vi.clearAllMocks();
     vi.unstubAllGlobals();
   }

@@ -21,7 +21,10 @@ import {
   initialInputKind,
   submitComposerOnEnter,
 } from "@/lib/workspaces/input";
-import { rememberWorkspace } from "./explore-signal";
+import {
+  rememberWorkspace,
+  selectedWorkspace,
+} from "@/lib/workspaces/selection";
 import { SafeMarkdown } from "./safe-markdown";
 import { HumanVerification } from "./human-verification";
 import { EvidenceMap } from "./evidence-map";
@@ -30,6 +33,7 @@ import { ResumeDocument } from "./resume-document";
 import { ResumeRenderer } from "./resume-renderer";
 import type { ResumeDesign } from "@/lib/resume-design/model";
 import { RecruiterExplorer, type StudioPanel } from "./recruiter-explorer";
+import { SelectedProjects } from "./selected-projects";
 
 export function CareerChat({
   initialWorkspace = null,
@@ -103,9 +107,7 @@ export function CareerChat({
     let cancelled = false;
     browserWorkspaceSlots()
       .then(async (available) => {
-        const remembered =
-          initialWorkspace?.id ||
-          sessionStorage.getItem("rb_selected_workspace");
+        const remembered = initialWorkspace?.id || selectedWorkspace();
         const selected: WorkspaceSlot =
           available[1] && (available[1] === remembered || !available[0])
             ? 1
@@ -197,7 +199,7 @@ export function CareerChat({
       setInput("");
       setMode("auto");
       if (loaded) rememberWorkspace(loaded.id);
-      else sessionStorage.removeItem("rb_selected_workspace");
+      else rememberWorkspace(null);
     } catch (err) {
       setError(
         err instanceof Error ? err.message : "Cannot switch workspaces.",
@@ -310,29 +312,35 @@ export function CareerChat({
           </button>
         </div>
         <div id="explorer-panel-content" hidden={explorerCollapsed}>
-          <Link className="studio-brand" href="/">
-            career<span> / </span>connected
-          </Link>
           <nav aria-label="Career explorer">
             {(
               [
+                ["projects", "□", "Selected projects"],
                 ["chat", "✧", "Ask anything"],
                 ["explorer", "⌘", "Career explorer"],
-                ["projects", "□", "Projects"],
                 ["answers", "↗", "Quick answers"],
               ] as const
             ).map(([value, icon, label]) => (
               <button
                 type="button"
                 key={value}
+                className={
+                  value === "projects" ? "selected-projects-nav" : undefined
+                }
                 aria-current={panel === value ? "page" : undefined}
                 onClick={() => selectPanel(value)}
               >
                 <span>{icon}</span> {label}
+                {value === "projects" && (
+                  <small>Apps, demos &amp; case studies</small>
+                )}
               </button>
             ))}
             <Link href="/resume">
               <span>≡</span> Full résumé
+            </Link>
+            <Link href="/workspace">
+              <span>↺</span> Saved chats
             </Link>
           </nav>
           <div className="rail-bottom">
@@ -340,7 +348,6 @@ export function CareerChat({
               One career.
               <br />A view shaped around your questions.
             </p>
-            <Link href="/workspace">Saved workspaces ↗</Link>
             <Link href="/privacy">Privacy & data</Link>
           </div>
         </div>
@@ -356,7 +363,11 @@ export function CareerChat({
             hidden={panel !== opened}
             key={`${opened}-${panelVersions[opened]}`}
           >
-            <RecruiterExplorer panel={opened} />
+            {opened === "projects" ? (
+              <SelectedProjects />
+            ) : (
+              <RecruiterExplorer panel={opened} />
+            )}
           </div>
         ))}
         <div className="chat-view" hidden={panel !== "chat"}>
@@ -435,9 +446,9 @@ export function CareerChat({
                   </div>
                 </details>
                 <label>
-                  <span className="sr-only">Workspace</span>
+                  <span className="sr-only">Saved conversation</span>
                   <select
-                    aria-label="Workspace"
+                    aria-label="Saved conversation"
                     title={
                       slots[slot]
                         ? "Saved workspace"
@@ -449,8 +460,12 @@ export function CareerChat({
                       void switchWorkspace(event.target.value === "1" ? 1 : 0)
                     }
                   >
-                    <option value="0">Workspace 1</option>
-                    <option value="1">Workspace 2</option>
+                    <option value="0">
+                      {slots[0] ? "Saved chat 1" : "New chat 1"}
+                    </option>
+                    <option value="1">
+                      {slots[1] ? "Saved chat 2" : "New chat 2"}
+                    </option>
                   </select>
                 </label>
               </div>

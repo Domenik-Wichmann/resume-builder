@@ -18,10 +18,11 @@ export default async function Workspaces({
       <IdentityHeader career={career} presentation={presentation} />
       <main id="main" className="wrap prose workspace-index">
         <p className="eyebrow">Your career exploration</p>
-        <h1>Two spaces to find the fit.</h1>
+        <h1>Your saved chats.</h1>
         <p>
           Resume a saved exploration, or start with a job description or
-          question. No recruiter account is needed.
+          question. Chats belong to this browser on this website. Signing in
+          does not move them between browsers or website domains.
         </p>
         <WorkspaceList question={suggestedQuestion} />
       </main>

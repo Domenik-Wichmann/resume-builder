@@ -51,13 +51,16 @@ export default async function InterviewsPage({
     );
   }
   const { db, accountId } = await requireAccount();
-  const [sessions, records, current] = await Promise.all([
+  const [sessions, records] = await Promise.all([
     listInterviews(db, accountId),
     loadBrain(db, accountId),
-    query.session
-      ? readInterview(db, accountId, z.uuid().parse(query.session))
-      : null,
   ]);
+  const selected = query.session
+    ? z.uuid().parse(query.session)
+    : sessions[0]?.id;
+  const current = selected
+    ? await readInterview(db, accountId, selected)
+    : null;
   return (
     <main id="main" className="wrap">
       <CareerInterviews

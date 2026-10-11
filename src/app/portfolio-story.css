@@ -1751,7 +1751,6 @@ html:has(.story-runway) {
   max-width: 540px;
 }
 .portrait-layout {
-  display: block;
   padding: 0;
 }
 .story-art .hero-portrait {
@@ -1766,8 +1765,34 @@ html:has(.story-runway) {
   display: inline-flex;
   align-items: center;
 }
-.story-intro-handoff {
-  padding-bottom: 20px;
+.public-experience .story-return-chat {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 48px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  background: #183c35;
+  color: #e3fff4;
+  border: 1px solid #71d9b980;
+}
+.public-experience .story-portrait-next {
+  min-height: 48px;
+  color: #e3fff4;
+  font-size: 14px;
+}
+.story-portrait-next:hover .portrait-next-arrow {
+  background: #183c35;
+  border-color: #71d9b9;
+  transform: translateX(4px);
+}
+.portrait-next-arrow {
+  transition:
+    transform 0.2s,
+    background 0.2s;
+}
+.story-mobile-actions {
+  display: none;
 }
 .import-human-inputs {
   display: grid;
@@ -1972,9 +1997,6 @@ html:has(.story-runway) {
     padding: 11px 18px;
     gap: 20px;
   }
-  .story-intro-handoff {
-    padding-bottom: 14px;
-  }
   .import-human-inputs {
     gap: 10px;
     grid-template-columns: 1.8fr 1fr;
@@ -2087,6 +2109,36 @@ html:has(.story-runway) {
 }
 /* Phones use document scrolling; the chapter controls never capture a swipe. */
 @media (max-width: 800px) {
+  .portrait-layout {
+    display: block;
+  }
+  .public-experience .story-portrait-next {
+    display: none;
+  }
+  .story-mobile-actions {
+    position: fixed;
+    z-index: 30;
+    bottom: max(18px, env(safe-area-inset-bottom));
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    max-width: calc(100% - 32px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .public-experience .story-mobile-actions button {
+    min-height: 48px;
+    box-shadow: 0 6px 24px #0008;
+  }
+  .story-mobile-actions .story-intro-next {
+    background: #c9b7fb;
+    color: #111b28;
+  }
+  .story-scene-0 {
+    padding-bottom: 112px;
+  }
   .story-description {
     font-size: 16px;
   }

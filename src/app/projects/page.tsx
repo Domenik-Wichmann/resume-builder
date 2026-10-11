@@ -1,71 +1,28 @@
 import Link from "next/link";
-import Image from "next/image";
-import { publicProjects, projectMedia } from "@/lib/portfolio/repository";
-import { database } from "@/lib/db";
-import { primaryAccountId } from "@/lib/account-id";
+import { publicShowcase } from "@/lib/portfolio/showcase-server";
 import { PortfolioHeader } from "@/components/portfolio-shell";
-import { validateEnv } from "@/lib/env";
+import { ProjectCards } from "@/components/project-cards";
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Projects · Resume Builder" };
+export const metadata = { title: "Selected Projects · Domenik Wichmann" };
 export default async function Projects() {
-  const [projects, media] = await Promise.all([
-    publicProjects(),
-    validateEnv(process.env).mode === "demo"
-      ? Promise.resolve([])
-      : projectMedia(database(), primaryAccountId),
-  ]);
+  const projects = await publicShowcase();
   return (
     <>
       <PortfolioHeader />
       <main className="wrap portfolio-main">
-        <p className="eyebrow">Work, in context</p>
-        <h1>Projects & case studies.</h1>
+        <p className="eyebrow">Selected work</p>
+        <h1>Apps I’ve built.</h1>
         <p className="lead">
-          Approved work, the ideas behind it, and the evidence it contributes.
+          Explore the projects, how they work, and the ideas behind them.
         </p>
         {!projects.length ? (
           <div className="empty-state">
-            <h2>No projects published yet.</h2>
-            <p>
-              Projects appear here after their owner reviews and publishes them.
-            </p>
+            <h2>No selected projects published yet.</h2>
+            <p>Selected apps appear here after owner review and publication.</p>
             <Link href="/explore">Explore published skills →</Link>
           </div>
         ) : (
-          <div className="project-grid">
-            {projects.map((p) => {
-              const cover = media.find(
-                (m) => m.project_id === p.id && m.is_cover,
-              );
-              return (
-                <Link
-                  href={`/projects/${p.slug}`}
-                  className="project-card"
-                  key={p.id}
-                >
-                  {cover && (
-                    <Image
-                      unoptimized
-                      width={1200}
-                      height={800}
-                      src={`/media/${cover.id}`}
-                      alt={cover.alt}
-                      loading="lazy"
-                    />
-                  )}
-                  <div>
-                    <p className="eyebrow">
-                      {p.featured ? "Featured · " : ""}
-                      {p.status.toLowerCase()}
-                    </p>
-                    <h2>{p.title}</h2>
-                    <p>{p.summary}</p>
-                    <span className="text-link">View project ↗</span>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
+          <ProjectCards projects={projects} />
         )}
       </main>
     </>

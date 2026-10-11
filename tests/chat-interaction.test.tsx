@@ -166,6 +166,31 @@ it("can retry failed initialization rather than keeping Send permanently disable
   expect(container.querySelector('[role="alert"]')).toBeNull();
 });
 
+it("resumes the last saved chat across sessions and ignores selection hints outside the owned slots", async () => {
+  const second = { ...answered(), id: "00000000-0000-4000-8000-000000000002" };
+  localStorage.setItem("rb_selected_workspace", second.id);
+  browser.browserWorkspaceSlots.mockResolvedValue([workspace.id, second.id]);
+  browser.browserLoadWorkspace.mockResolvedValue(second);
+  await mount(null);
+  expect(browser.browserLoadWorkspace).toHaveBeenCalledWith(second.id);
+  expect(
+    container
+      .querySelector('select[aria-label="Saved conversation"]')
+      ?.getAttribute("aria-label"),
+  ).toBe("Saved conversation");
+  expect(container.textContent).toContain("Published SQL evidence.");
+  await act(async () => root.unmount());
+  root = createRoot(container);
+  sessionStorage.clear();
+  localStorage.setItem("rb_selected_workspace", "forged-private-id");
+  browser.browserLoadWorkspace.mockClear().mockResolvedValue(workspace);
+  await mount(null);
+  expect(browser.browserLoadWorkspace).toHaveBeenCalledWith(workspace.id);
+  expect(browser.browserLoadWorkspace).not.toHaveBeenCalledWith(
+    "forged-private-id",
+  );
+});
+
 it("keeps a committed role match when its automatic resume preview fails", async () => {
   const matched: Workspace = {
     ...workspace,

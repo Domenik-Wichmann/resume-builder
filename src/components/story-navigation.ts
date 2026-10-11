@@ -1,16 +1,61 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { finalStoryStep } from "@/lib/portfolio/story-scenes";
 import { deliberateStoryExit, storyStep } from "@/lib/portfolio/story";
+
+const completionKey = "resume-builder-story-completed-v1";
+function savedCompletion() {
+  try {
+    return localStorage.getItem(completionKey) === "true";
+  } catch {
+    return false;
+  }
+}
+function watchCompletion(changed: () => void) {
+  window.addEventListener("storage", changed);
+  return () => window.removeEventListener("storage", changed);
+}
+const serverCompletion = () => false;
 
 export function useStoryNavigation() {
   const root = useRef<HTMLDivElement>(null);
   const [step, setStep] = useState(0);
   const [reduced, setReduced] = useState(false);
   const [mobile, setMobile] = useState(false);
+  const [completedHere, setCompleted] = useState(false);
+  const completed =
+    useSyncExternalStore(watchCompletion, savedCompletion, serverCompletion) ||
+    completedHere;
+  const [inStory, setInStory] = useState(true);
+  const visited = useRef(new Set([0]));
+  const completionRecorded = useRef(false);
   const bypass = useRef(false);
   const stride = useRef(400);
   const current = useRef(0);
+  function visit(next: number, scrolled = false) {
+    if (scrolled) {
+      for (
+        let i = Math.min(current.current, next);
+        i <= Math.max(current.current, next);
+        i++
+      )
+        visited.current.add(i);
+    } else visited.current.add(next);
+    current.current = next;
+    setStep(next);
+    if (
+      visited.current.size === finalStoryStep + 1 &&
+      !completionRecorded.current
+    ) {
+      completionRecorded.current = true;
+      setCompleted(true);
+      try {
+        localStorage.setItem(completionKey, "true");
+      } catch {
+        // Completion still works for this visit when browser storage is blocked.
+      }
+    }
+  }
   function chat() {
     bypass.current = true;
     if (location.hash !== "#ask") history.pushState(null, "", "#ask");
@@ -19,8 +64,7 @@ export function useStoryNavigation() {
       ?.scrollIntoView({ behavior: "instant", block: "start" });
   }
   function navigate(next: number) {
-    setStep(next);
-    current.current = next;
+    visit(next);
     if (mobile) {
       root.current
         ?.querySelectorAll<HTMLElement>(".story-scene")
@@ -51,6 +95,7 @@ export function useStoryNavigation() {
       armed = false,
       frame = 0;
     let previousOffset = 0;
+    let positioned = false;
     const preference = () => {
       setReduced(media.matches);
       setMobile(phone.matches);
@@ -58,6 +103,11 @@ export function useStoryNavigation() {
     preference();
     const position = () => {
       frame = 0;
+      const bounds = element.getBoundingClientRect();
+      const visible =
+        bounds.top < window.innerHeight &&
+        bounds.bottom > window.innerHeight * 0.5;
+      setInStory(visible);
       if (phone.matches) {
         const scenes = [
           ...element.querySelectorAll<HTMLElement>(".story-scene"),
@@ -70,8 +120,12 @@ export function useStoryNavigation() {
               : active,
           0,
         );
-        current.current = next;
-        setStep(next);
+        if (visible) visit(next, positioned);
+        else {
+          current.current = next;
+          setStep(next);
+        }
+        positioned = visible;
         return;
       }
       if (
@@ -116,9 +170,13 @@ export function useStoryNavigation() {
       previousOffset = offset;
       const next = storyStep(offset, stride.current);
       if (next !== current.current) {
-        current.current = next;
-        setStep(next);
+        if (visible) visit(next, positioned);
+        else {
+          current.current = next;
+          setStep(next);
+        }
       }
+      positioned = visible;
     };
     const scroll = () => {
       if (!frame) frame = requestAnimationFrame(position);
@@ -189,5 +247,5 @@ export function useStoryNavigation() {
       phone.removeEventListener("change", preference);
     };
   }, []);
-  return { root, step, navigate, chat, reduced, mobile };
+  return { root, step, navigate, chat, reduced, mobile, completed, inStory };
 }
