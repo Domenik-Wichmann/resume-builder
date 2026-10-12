@@ -8,6 +8,7 @@ import { explorerData } from "@/lib/career-brain/record-management";
 import { loadDesignStudio } from "@/lib/resume-design/server";
 import { ProfileIdentityEditor } from "@/components/profile-identity-editor";
 import { PresentationManager } from "@/components/presentation-manager";
+import { AdminPageHeader } from "@/components/admin-page-header";
 export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Profile & contact · Resume Builder",
@@ -38,15 +39,22 @@ export default async function PresentationPage() {
   }
   return (
     <main id="main" className="wrap admin-main">
-      <p className="eyebrow">Profile presentation</p>
-      <h1>Personal information & photos</h1>
-      <p>
-        Manage the portrait, address and contact details shown for each market.
-        Your career evidence stays shared.
-      </p>
-      <ProfileIdentityEditor initial={brain} />
-      <h2>Contact details & portrait</h2>
-      <PresentationManager initial={settings} initialAssets={assets} />
+      <AdminPageHeader
+        section="Portfolio"
+        title="Profile & contact"
+        description="Edit your introduction and portrait, then configure the contact details shown for each market. All regions use the same career evidence."
+      />
+      <nav className="admin-section-links" aria-label="Profile sections">
+        <a href="#profile-identity">Name & introduction</a>
+        <a href="#profile-contact">Contact details & portraits</a>
+      </nav>
+      <section id="profile-identity">
+        <ProfileIdentityEditor initial={brain} />
+      </section>
+      <section id="profile-contact" className="section">
+        <h2>Contact details & portrait</h2>
+        <PresentationManager initial={settings} initialAssets={assets} />
+      </section>
     </main>
   );
 }

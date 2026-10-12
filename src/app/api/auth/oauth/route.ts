@@ -1,6 +1,7 @@
 ﻿import { NextRequest, NextResponse } from "next/server";
 import { oauthClient } from "@/lib/oauth";
 import { validateEnv } from "@/lib/env";
+import { adminReturnPath } from "@/lib/auth-navigation";
 export async function GET(request: NextRequest) {
   const provider = request.nextUrl.searchParams.get("provider");
   if (
@@ -25,5 +26,17 @@ export async function GET(request: NextRequest) {
       { error: "Unable to start authentication." },
       { status: 503 },
     );
-  return NextResponse.redirect(data.url);
+  const response = NextResponse.redirect(data.url);
+  response.cookies.set(
+    "rb_auth_next",
+    adminReturnPath(request.nextUrl.searchParams.get("next")),
+    {
+      httpOnly: true,
+      secure: request.nextUrl.protocol === "https:",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 600,
+    },
+  );
+  return response;
 }

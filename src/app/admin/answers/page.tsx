@@ -3,6 +3,7 @@ import { requireAccount } from "@/lib/accounts";
 import { HttpError } from "@/lib/http";
 import { loadCards } from "@/lib/portfolio/answers-server";
 import { loadCanonical } from "@/lib/ingestion/repository";
+import { AdminPageHeader } from "@/components/admin-page-header";
 import { AnswerManager } from "@/components/answer-manager";
 export const dynamic = "force-dynamic";
 export const metadata = {
@@ -43,9 +44,12 @@ export default async function AnswersAdmin() {
     .sort((a, b) => b.workspaces - a.workspaces)
     .slice(0, 8);
   return (
-    <main className="wrap portfolio-main">
-      <Link href="/account">← Account</Link>
-      <h1>Quick Answers.</h1>
+    <main id="main" className="wrap admin-main">
+      <AdminPageHeader
+        section="Portfolio"
+        title="Quick answers"
+        description="Prepare grounded answers to common recruiter questions. Review their evidence and choose which answers appear on your public portfolio."
+      />
       <AnswerManager
         initialCards={cards}
         records={records}

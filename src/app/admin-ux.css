@@ -1,0 +1,341 @@
+.admin-shell {
+  min-height: 100dvh;
+}
+.admin-shell .owner-header {
+  background: #0d1c28f2;
+}
+.admin-shell .owner-nav {
+  width: 100%;
+  max-width: none;
+  gap: 18px;
+  min-height: 82px;
+}
+.admin-shell .owner-brand {
+  flex-shrink: 0;
+  font-size: 0.9rem;
+}
+.admin-shell .owner-nav-links {
+  gap: 2px;
+}
+.admin-shell .owner-nav-links > a,
+.admin-shell .owner-menu > summary {
+  min-height: 44px;
+  padding: 10px 12px;
+}
+.admin-shell .owner-menu > summary.active {
+  background: var(--surface-hover);
+  color: var(--purple);
+  font-weight: 700;
+}
+.admin-shell .owner-menu-panel {
+  width: 310px;
+  max-height: min(580px, 75dvh);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  box-shadow: 0 20px 60px #0005;
+}
+.admin-shell .owner-menu-panel a {
+  display: block;
+  padding: 12px;
+  min-height: 44px;
+}
+.admin-shell .owner-menu-panel strong {
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+.admin-shell .owner-menu-panel small {
+  display: block;
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-top: 3px;
+}
+.owner-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.76rem;
+  white-space: nowrap;
+}
+.owner-nav-actions button {
+  padding: 10px 12px;
+  min-height: 44px;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--line);
+}
+.owner-nav-actions button:hover {
+  background: var(--surface-hover);
+  color: var(--ink);
+}
+.owner-signout {
+  position: relative;
+}
+.owner-signout > p {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  width: 240px;
+  padding: 14px;
+  background: var(--panel);
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  white-space: normal;
+  z-index: 35;
+}
+.owner-mobile-navigation {
+  display: none;
+}
+.admin-shell main.wrap {
+  padding-top: 36px;
+  padding-bottom: 80px;
+  min-width: 0;
+}
+.admin-page-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+.admin-shell main > h1,
+.admin-shell :is(.admin-page-heading, .interview-heading, .snapshot-note) h1 {
+  font-size: clamp(1.9rem, 3.4vw, 2.8rem);
+  letter-spacing: -0.04em;
+  line-height: 1.18;
+  margin: 10px 0 16px;
+}
+.admin-page-heading p {
+  max-width: 760px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.admin-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.admin-breadcrumb a:hover {
+  color: var(--purple);
+}
+.admin-shell
+  :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
+  min-width: 0;
+  min-height: 44px;
+  border-radius: 9px;
+}
+.admin-shell textarea {
+  width: 100%;
+  min-height: 8rem;
+  max-height: 32rem;
+  field-sizing: content;
+  resize: vertical;
+  line-height: 1.65;
+}
+.admin-shell .interview-composer textarea {
+  min-height: 88px;
+  max-height: 220px;
+}
+.admin-shell
+  :is(.ai-panel, .editor-form, .presentation-form)
+  > :is(input, select, textarea) {
+  width: 100%;
+}
+.admin-shell .ai-panel > label {
+  display: block;
+  margin: 16px 0 7px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.admin-shell :is(input, select, textarea, button, a, summary):focus-visible,
+.admin-sign-in :is(input, button, a):focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 3px;
+}
+.admin-shell fieldset {
+  min-width: 0;
+}
+.admin-shell :is(.surface, .project-card, .ai-panel, .analytics-chart) {
+  min-width: 0;
+}
+.admin-shell .manager-grid {
+  grid-template-columns: 250px minmax(0, 1fr);
+  gap: 24px;
+}
+.admin-shell .manager-grid > aside {
+  position: sticky;
+  top: 24px;
+  max-height: calc(100dvh - 48px);
+  overflow-y: auto;
+}
+.admin-shell .choice-button[aria-pressed="true"] {
+  border: 1px solid var(--purple);
+  background: var(--surface-hover);
+}
+.admin-shell .admin-shortcuts {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 24px 0 36px;
+}
+.admin-shell .admin-shortcuts a {
+  padding: 22px;
+}
+.admin-shell .admin-shortcuts strong {
+  font-size: 1rem;
+}
+.admin-overview-details {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin: 24px 0;
+  background: var(--card);
+}
+.admin-overview-details > summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.admin-overview-details > p {
+  overflow-wrap: anywhere;
+}
+.admin-count-notes {
+  margin: 16px 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.admin-count-notes summary {
+  cursor: pointer;
+}
+.admin-shell .result {
+  overflow-wrap: anywhere;
+}
+.admin-section-links {
+  max-width: none;
+  justify-content: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+.admin-section-links a {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 0.8rem;
+}
+.admin-section-links a:hover {
+  background: var(--surface-hover);
+}
+.admin-session-notice {
+  padding: 16px 20px;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  margin-top: 20px;
+  background: var(--panel);
+}
+.admin-session-notice a {
+  text-decoration: underline;
+  color: var(--purple);
+}
+.admin-sign-in {
+  max-width: 520px;
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+.admin-sign-in .owner-login {
+  margin-top: 24px;
+  padding: 30px;
+}
+.admin-sign-in h1 {
+  font-size: clamp(2rem, 5vw, 2.6rem);
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  margin: 0 0 20px;
+}
+.admin-shell .analytics-periods {
+  max-width: none;
+}
+.admin-sign-in :is(input, button) {
+  width: 100%;
+  min-height: 48px;
+}
+.admin-sign-in label {
+  display: block;
+  margin: 18px 0 8px;
+}
+.admin-sign-in .owner-login button[type="button"] {
+  background: transparent;
+  color: var(--purple);
+}
+@media (max-width: 1100px) {
+  .admin-shell .owner-desktop-navigation {
+    display: none;
+  }
+  .admin-shell .owner-nav {
+    flex-wrap: nowrap;
+    padding: 12px 0;
+    min-height: 76px;
+  }
+  .owner-mobile-navigation {
+    display: block;
+  }
+  .owner-nav-actions {
+    margin-left: auto;
+  }
+  .admin-shell .owner-mobile-navigation .owner-menu-panel {
+    width: min(370px, calc(100vw - 40px));
+  }
+  .owner-mobile-group {
+    display: grid;
+  }
+  .owner-mobile-group + .owner-mobile-group {
+    border-top: 1px solid var(--line);
+    margin-top: 8px;
+  }
+}
+@media (max-width: 700px) {
+  .admin-shell .owner-brand {
+    font-size: 0.8rem;
+  }
+  .admin-shell .owner-brand-mark {
+    display: none;
+  }
+  .owner-nav-actions > a {
+    display: none;
+  }
+  .admin-shell .owner-nav {
+    gap: 10px;
+  }
+  .admin-shell main.wrap {
+    padding-top: 24px;
+  }
+  .admin-page-heading {
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .admin-shell .admin-shortcuts,
+  .admin-shell .manager-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .admin-shell .manager-grid > aside {
+    position: static;
+    max-height: 300px;
+  }
+  .admin-shell :is(input, select, textarea) {
+    font-size: 16px;
+  }
+  .admin-shell :is(.surface, .ai-panel) {
+    padding: 20px;
+  }
+  .admin-overview-details {
+    padding: 18px;
+  }
+}
+@media print {
+  .admin-shell :is(.owner-header, .admin-session-notice) {
+    display: none;
+  }
+}

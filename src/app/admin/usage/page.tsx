@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { requireAccount } from "@/lib/accounts";
 import { HttpError } from "@/lib/http";
+import { AdminPageHeader } from "@/components/admin-page-header";
 export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Usage records · Resume Builder",
@@ -40,20 +41,17 @@ export default async function Usage() {
   if (usage.error || ledger.error || balance.error)
     throw new Error("Cannot load usage.");
   return (
-    <main className="wrap portfolio-main">
-      <Link href="/account">← Account</Link>
-      <h1>Usage & ledger.</h1>
+    <main id="main" className="wrap admin-main">
+      <AdminPageHeader
+        section="Insights"
+        title="AI usage"
+        description="Review recent AI requests, provider-reported costs and request status. Unknown costs or token counts appear as —."
+      />
       <section className="surface">
         <h2>{usage.count || 0} provider events</h2>
         <p>
-          Costs are recorded only when supplied by the provider. Unknown
-          quantities appear as —. Platform credit charging, purchases and public
-          trial grants are disabled. BYOK key persistence is deferred.
-        </p>
-        <p>
-          Gross ledger balance: {String(balance.data)} micro-units. Expiry is
-          readiness metadata; credit redemption and expiry allocation are not
-          enabled.
+          Showing the latest 50 events. Provider costs are in millionths of a US
+          dollar: 1,000,000 µUSD = $1.
         </p>
         <div className="table-scroll">
           <table>
@@ -86,8 +84,12 @@ export default async function Usage() {
           </table>
         </div>
       </section>
-      <section className="surface">
-        <h2>Recent credit transactions</h2>
+      <details className="admin-overview-details">
+        <summary>Credit ledger details</summary>
+        <p>
+          Recorded balance: {String(balance.data)} micro-units. Credit purchases
+          and redemption are not enabled.
+        </p>
         {!ledger.data?.length && <p>No credit transactions.</p>}
         {(ledger.data || []).map((t, i) => (
           <p key={i}>
@@ -97,7 +99,7 @@ export default async function Usage() {
               : ""}
           </p>
         ))}
-      </section>
+      </details>
     </main>
   );
 }

@@ -11,6 +11,7 @@ import { getResume } from "@/lib/resume";
 import { currentMarket, getPresentation } from "@/lib/market-server";
 import { generalResumeIR } from "@/lib/resume-design/from-career";
 import { ResumeTemplateStudio } from "@/components/resume-template-studio";
+import { AdminPageHeader } from "@/components/admin-page-header";
 export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Resume design & templates",
@@ -48,13 +49,11 @@ export default async function TemplatesPage() {
   }
   return (
     <main id="main" className="wrap admin-main design-studio-page">
-      <p className="eyebrow">Design once. Reuse reliably.</p>
-      <h1>Resume design & templates</h1>
-      <p className="muted">
-        Upload a reference image or PDF, describe your preferred design, and
-        review the AI interpretation. Save the layout for consistent future
-        resumes. Your career facts remain in the Career Brain.
-      </p>
+      <AdminPageHeader
+        section="Applications"
+        title="Résumé design & templates"
+        description="Upload a reference image or PDF, describe your preferred design and preview it. Save reusable layouts here; generate job-specific résumés in the résumé library."
+      />
       <ResumeTemplateStudio
         initialAssets={data.assets}
         initialTemplates={data.templates}

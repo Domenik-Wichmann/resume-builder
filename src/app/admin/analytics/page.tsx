@@ -3,9 +3,10 @@ import { isOwner } from "@/lib/admin";
 import { OwnerLogin } from "@/components/admin-controls";
 import { AnalyticsChart, AnalyticsTrend } from "@/components/analytics-chart";
 import { loadAnalytics } from "@/lib/analytics/server";
+import { AdminPageHeader } from "@/components/admin-page-header";
 export const dynamic = "force-dynamic";
 export const metadata = {
-  title: "Analytics ? Resume Builder",
+  title: "Analytics · Resume Builder",
   robots: { index: false, follow: false },
 };
 export default async function Analytics({
@@ -26,16 +27,11 @@ export default async function Analytics({
     summary = data.summary;
   return (
     <main id="main" className="wrap admin-main">
-      <Link href="/admin">? Overview</Link>
-      <div className="workspace-top">
-        <div>
-          <p className="eyebrow">Private owner analytics</p>
-          <h1>Interest, in context.</h1>
-          <p className="muted">
-            Visits, questions and workspace activity over the last {days} UTC
-            calendar days.
-          </p>
-        </div>
+      <AdminPageHeader
+        section="Insights"
+        title="Visitor analytics"
+        description={`Visits, questions and recruiter workspace activity over the last ${days} UTC calendar days.`}
+      >
         <nav className="analytics-periods" aria-label="Analytics period">
           {[7, 30, 90].map((period) => (
             <Link
@@ -47,13 +43,13 @@ export default async function Analytics({
             </Link>
           ))}
         </nav>
-      </div>
+      </AdminPageHeader>
       <section className="admin-metrics" aria-label="Activity totals">
         {[
           ["Page views", data.visits.total],
           ["Browser sessions", summary.sessions],
           ["Questions saved", data.questions.total],
-          ["R?sum? previews", summary.previews],
+          ["Résumé previews", summary.previews],
           ["Export opens", summary.exports],
         ].map(([label, value]) => (
           <article className="project-card" key={label}>

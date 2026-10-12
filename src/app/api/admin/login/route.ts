@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { readJson, errorResponse, HttpError, requireOrigin } from "@/lib/http";
-import { ownerAuthClient, ownerCookie } from "@/lib/admin";
+import { ownerAuthClient } from "@/lib/admin";
+import { clearSession, writeSession } from "@/lib/auth-session";
 export async function POST(request: NextRequest) {
   try {
     const credentials = await readJson(
@@ -18,13 +19,7 @@ export async function POST(request: NextRequest) {
     if (error || !data.session || data.user?.id !== process.env.OWNER_USER_ID)
       throw new HttpError(401, "Invalid owner credentials.");
     const response = NextResponse.json({ authenticated: true });
-    response.cookies.set(ownerCookie, data.session.access_token, {
-      httpOnly: true,
-      secure: request.nextUrl.protocol === "https:",
-      sameSite: "strict",
-      path: "/",
-      maxAge: Math.min(data.session.expires_in, 3600),
-    });
+    writeSession(response, data.session, request.nextUrl.protocol === "https:");
     return response;
   } catch (error) {
     return errorResponse(error);
@@ -34,7 +29,7 @@ export async function DELETE(request: NextRequest) {
   try {
     requireOrigin(request);
     const response = NextResponse.json({ authenticated: false });
-    response.cookies.delete(ownerCookie);
+    clearSession(response);
     return response;
   } catch (error) {
     return errorResponse(error);

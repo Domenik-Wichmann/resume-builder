@@ -7,6 +7,7 @@ import { ProjectManager } from "@/components/project-manager";
 import { requireOwner } from "@/lib/admin";
 import { demoProject } from "@/lib/portfolio/demo";
 import { loadCaseStudies } from "@/lib/portfolio/case-study-server";
+import { AdminPageHeader } from "@/components/admin-page-header";
 export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Project manager · Resume Builder",
@@ -24,7 +25,11 @@ export default async function ProjectsAdmin({
           FICTIONAL PROJECT MANAGER PREVIEW · sample facts are not owner
           evidence
         </p>
-        <h1>Project showcase.</h1>
+        <AdminPageHeader
+          section="Portfolio"
+          title="Project showcase"
+          description="Choose a project to edit its case study, screenshots, links and public visibility. Fill a private draft from your stored career evidence, then review it before publishing."
+        />
         <ProjectManager
           initialProjects={[demoProject]}
           initialMedia={[]}
@@ -52,9 +57,12 @@ export default async function ProjectsAdmin({
     loadCaseStudies(account.db, account.accountId),
   ]);
   return (
-    <main className="wrap portfolio-main">
-      <Link href="/account">← Account</Link>
-      <h1>Project showcase.</h1>
+    <main id="main" className="wrap admin-main">
+      <AdminPageHeader
+        section="Portfolio"
+        title="Project showcase"
+        description="Choose a project to edit its case study, screenshots, links and public visibility. Fill a private draft from your stored career evidence, then review it before publishing."
+      />
       <ProjectManager
         initialProjects={projects}
         initialMedia={media}

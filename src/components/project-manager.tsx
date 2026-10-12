@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { projectImageLimit } from "@/lib/portfolio/model";
 import type {
   Project,
@@ -116,6 +117,7 @@ export function ProjectManager({
           {projects.map((p) => (
             <button
               className="choice-button"
+              aria-pressed={form.id === p.id}
               key={p.id}
               onClick={() => select(p)}
             >
@@ -182,7 +184,14 @@ export function ProjectManager({
             {(["title", "slug", "subtitle", "organization"] as const).map(
               (k) => (
                 <label key={k}>
-                  {k.replaceAll("_", " ")}
+                  {
+                    {
+                      title: "Project name",
+                      slug: "Page URL name",
+                      subtitle: "Tagline",
+                      organization: "Organization",
+                    }[k]
+                  }
                   <input
                     required={k === "title" || k === "slug"}
                     maxLength={
@@ -220,7 +229,7 @@ export function ProjectManager({
             <div className="field-row">
               {(["start_date", "end_date"] as const).map((k) => (
                 <label key={k}>
-                  {k.replace("_", " ")}
+                  {k === "start_date" ? "Start date" : "End date"}
                   <input
                     type="date"
                     value={form[k] || ""}
@@ -238,7 +247,9 @@ export function ProjectManager({
                 >
                   {["PLANNED", "ACTIVE", "COMPLETED", "PAUSED", "OTHER"].map(
                     (s) => (
-                      <option key={s}>{s}</option>
+                      <option key={s} value={s}>
+                        {s.charAt(0) + s.slice(1).toLowerCase()}
+                      </option>
                     ),
                   )}
                 </select>
@@ -264,13 +275,17 @@ export function ProjectManager({
                     checked={form[k]}
                     onChange={(e) => change(k, e.target.checked)}
                   />
-                  {k === "is_public" ? "Published" : k}
+                  {k === "is_public"
+                    ? "Published"
+                    : k === "featured"
+                      ? "Featured"
+                      : "Archived"}
                 </label>
               ))}
             </div>
             {(["skill", "achievement"] as const).map((kind) => (
               <fieldset key={kind}>
-                <legend>Canonical {kind}s</legend>
+                <legend>Linked {kind}s</legend>
                 {records
                   .filter((r) => r.kind === kind && !r.archived)
                   .map((r) => {
@@ -296,7 +311,12 @@ export function ProjectManager({
                     );
                   })}
                 {!records.some((r) => r.kind === kind && !r.archived) && (
-                  <p>Create these records in Career Master first.</p>
+                  <p>
+                    No {kind} records yet.{" "}
+                    <Link className="text-link" href="/admin/explore">
+                      Add them in Career records →
+                    </Link>
+                  </p>
                 )}
               </fieldset>
             ))}

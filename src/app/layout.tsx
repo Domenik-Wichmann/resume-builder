@@ -7,6 +7,7 @@ import "./admin.css";
 import "./design-studio.css";
 import "./interviews.css";
 import "./projects.css";
+import "./admin-ux.css";
 export const metadata: Metadata = {
   title: "Resume Builder · Evidence behind the experience",
   description:

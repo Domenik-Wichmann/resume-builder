@@ -61,6 +61,7 @@ export function AnswerManager({
           <div className="answer-list-item" key={c.id}>
             <button
               className="choice-button"
+              aria-pressed={form.id === c.id}
               onClick={() =>
                 setForm({
                   id: c.id,

@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { SafeMarkdown } from "./safe-markdown";
+import { AdminPageHeader } from "./admin-page-header";
 import { submitComposerOnEnter } from "@/lib/workspaces/input";
 import {
   messageSchema,
@@ -247,15 +248,11 @@ export function CareerInterviews({
           These sample career facts are not owner evidence.
         </p>
       )}
-      <div className="interview-heading">
-        <div>
-          <p className="eyebrow">Private career workspace</p>
-          <h1>Career Interviews</h1>
-          <p className="muted">
-            Discover the work worth telling. Review it before it becomes career
-            evidence.
-          </p>
-        </div>
+      <AdminPageHeader
+        section="Career"
+        title="Career Interviews"
+        description="Capture your experience in a private conversation. Saved interviews stay here; review discoveries before they become career evidence."
+      >
         <button
           className="secondary"
           disabled={busy}
@@ -268,7 +265,7 @@ export function CareerInterviews({
         >
           New interview
         </button>
-      </div>
+      </AdminPageHeader>
       <div className="interview-shell">
         <aside className="interview-sessions" aria-label="Saved interviews">
           <details open ref={sessionPanel}>

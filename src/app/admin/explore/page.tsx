@@ -3,6 +3,7 @@ import { requireAccount } from "@/lib/accounts";
 import { HttpError } from "@/lib/http";
 import { explorerData } from "@/lib/career-brain/record-management";
 import { CareerRecordWorkspace } from "@/components/career-record-explorer";
+import { AdminPageHeader } from "@/components/admin-page-header";
 export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Career explorer · Resume Builder",
@@ -29,14 +30,11 @@ export default async function AdminExplorer() {
   }
   return (
     <main id="main" className="wrap admin-main explorer-page">
-      <div className="explorer-page-heading">
-        <p className="eyebrow">Your career, connected</p>
-        <h1>Career explorer.</h1>
-        <p className="muted">
-          Browse your skills, projects, experiences and the evidence that
-          connects them.
-        </p>
-      </div>
+      <AdminPageHeader
+        section="Career"
+        title="Career records"
+        description="Search your skills, projects and experience. Open a record to see its evidence, follow connections, edit it or manage publication."
+      />
       <CareerRecordWorkspace
         initialData={await explorerData(account.db, account.accountId)}
       />

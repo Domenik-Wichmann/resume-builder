@@ -2,74 +2,120 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
+import { adminGroups, activeAdminLink } from "@/lib/admin-navigation";
+import { OwnerLogout } from "./admin-controls";
 export function AdminNav() {
   const path = usePathname();
-  const menu = useRef<HTMLDetailsElement>(null);
+  const nav = useRef<HTMLElement>(null);
   useEffect(() => {
     const close = (event: PointerEvent) => {
-      if (menu.current && !menu.current.contains(event.target as Node))
-        menu.current.open = false;
+      if (!nav.current?.contains(event.target as Node))
+        nav.current
+          ?.querySelectorAll("details[open]")
+          .forEach((menu) => menu.removeAttribute("open"));
     };
     document.addEventListener("pointerdown", close);
     return () => document.removeEventListener("pointerdown", close);
   }, []);
-  const link = (href: string, label: string) => (
-    <Link
-      key={href}
-      href={href}
-      aria-current={path === href ? "page" : undefined}
-      onClick={(event) =>
-        event.currentTarget.closest("details")?.removeAttribute("open")
-      }
-    >
-      {label}
-    </Link>
-  );
+  const links = (group: (typeof adminGroups)[number]) =>
+    group.links.map(({ href, label, description }) => (
+      <Link
+        key={href}
+        href={href}
+        aria-current={activeAdminLink(path, href) ? "page" : undefined}
+        onClick={() =>
+          nav.current
+            ?.querySelectorAll("details[open]")
+            .forEach((menu) => menu.removeAttribute("open"))
+        }
+      >
+        <strong>{label}</strong>
+        <small>{description}</small>
+      </Link>
+    ));
   return (
-    <nav className="owner-nav" aria-label="Admin navigation">
+    <nav
+      ref={nav}
+      className="owner-nav"
+      aria-label="Admin navigation"
+      onKeyDown={(event) => {
+        if (event.key === "Escape") {
+          const menu =
+            event.target instanceof Element
+              ? event.target.closest("details")
+              : null;
+          menu?.removeAttribute("open");
+          menu?.querySelector("summary")?.focus();
+        }
+      }}
+    >
       <Link className="owner-brand" href="/admin">
-        <span className="owner-brand-mark">C</span>
+        <span className="owner-brand-mark">D</span>
         <span>
-          Career workspace<small>Private owner area</small>
+          Career workspace<small>Private admin</small>
         </span>
       </Link>
-      <div className="owner-nav-links">
-        {link("/admin", "Overview")}
-        {link("/admin/analytics", "Analytics")}
-        {link("/admin/explore", "Explorer")}
-        <details
-          ref={menu}
-          className="owner-menu"
-          onKeyDown={(event) => {
-            if (event.key === "Escape") {
-              event.currentTarget.open = false;
-              event.currentTarget.querySelector("summary")?.focus();
-            }
-          }}
+      <div className="owner-nav-links owner-desktop-navigation">
+        <Link
+          href="/admin"
+          aria-current={path === "/admin" ? "page" : undefined}
         >
-          <summary>
-            Manage <span aria-hidden="true">⌄</span>
-          </summary>
-          <div className="owner-menu-panel">
-            <span className="owner-menu-label">Career & content</span>
-            {link("/admin/presentation", "Personal information & photos")}
-            {link("/admin/templates", "Resume design & templates")}
-            {link("/admin/career", "Career imports & review")}
-            {link("/admin/interviews", "Career Interviews")}
-            {link("/admin/projects", "Project showcase")}
-            {link("/admin/answers", "Quick Answers")}
-            <span className="owner-menu-label">Workflow</span>
-            {link("/admin/applications", "Résumé generator & history")}
-            {link("/admin/usage", "Usage & credits")}
-            <span className="owner-menu-label">Overview sections</span>
-            {link("/admin#applications", "Tracking links")}
-            {link("/admin#workspaces", "Workspaces")}
-            {link("/admin/analytics#questions", "Questions & signals")}
-            <span className="owner-menu-label">Public site</span>
-            {link("/", "View portfolio ↗")}
-          </div>
-        </details>
+          Overview
+        </Link>
+        {adminGroups.map((group) => (
+          <details
+            className="owner-menu"
+            key={group.label}
+            onToggle={(event) => {
+              if (event.currentTarget.open)
+                nav.current
+                  ?.querySelectorAll("details[open]")
+                  .forEach((menu) => {
+                    if (menu !== event.currentTarget)
+                      menu.removeAttribute("open");
+                  });
+            }}
+          >
+            <summary
+              className={
+                group.links.some(({ href }) => activeAdminLink(path, href))
+                  ? "active"
+                  : undefined
+              }
+            >
+              {group.label}
+              <span aria-hidden="true">⌄</span>
+            </summary>
+            <div className="owner-menu-panel">{links(group)}</div>
+          </details>
+        ))}
       </div>
+      <div className="owner-nav-actions">
+        <Link href="/">View portfolio ↗</Link>
+        <OwnerLogout />
+      </div>
+      <details className="owner-menu owner-mobile-navigation">
+        <summary>
+          Menu<span aria-hidden="true">⌄</span>
+        </summary>
+        <div className="owner-menu-panel">
+          <Link
+            href="/admin"
+            aria-current={path === "/admin" ? "page" : undefined}
+            onClick={(event) =>
+              event.currentTarget.closest("details")?.removeAttribute("open")
+            }
+          >
+            <strong>Overview</strong>
+          </Link>
+          {adminGroups.map((group) => (
+            <div className="owner-mobile-group" key={group.label}>
+              <span className="owner-menu-label">{group.label}</span>
+              {links(group)}
+            </div>
+          ))}
+        </div>
+      </details>
     </nav>
   );
 }

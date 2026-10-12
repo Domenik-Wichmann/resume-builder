@@ -3,6 +3,7 @@ import { requireAccount } from "@/lib/accounts";
 import { CareerManager, type ImportDraft } from "@/components/career-manager";
 import { explorerData } from "@/lib/career-brain/record-management";
 import { HttpError } from "@/lib/http";
+import { AdminPageHeader } from "@/components/admin-page-header";
 export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Career Master · Resume Builder",
@@ -48,10 +49,18 @@ export default async function CareerPage({
   ]);
   if (imports.error) throw new Error("Cannot load import drafts.");
   return (
-    <main className="wrap admin-main">
-      <Link href="/admin">← Overview</Link>
-      <p className="eyebrow">Private career workspace</p>
-      <h1>Career Master & Review.</h1>
+    <main id="main" className="wrap admin-main">
+      <AdminPageHeader
+        section="Career"
+        title="Import & review"
+        description="Add a career document, review proposed changes and choose what to publish. New evidence stays private until you approve it."
+      />
+      <nav className="admin-section-links" aria-label="Import sections">
+        <a href="#import-document">Add a document</a>
+        <a href="#import-review">Review proposals</a>
+        <a href="#career-publication">Records & publication</a>
+        <Link href="/admin/interviews">Career interviews →</Link>
+      </nav>
       <CareerManager
         initialImportId={query.import}
         initialRecords={data.records}

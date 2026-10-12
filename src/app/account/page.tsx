@@ -1,9 +1,12 @@
 ﻿import Link from "next/link";
 import { requireAccount } from "@/lib/accounts";
 import { OwnerLogout } from "@/components/admin-controls";
+import { isOwner } from "@/lib/admin";
+import { redirect } from "next/navigation";
 import { HttpError } from "@/lib/http";
 export const dynamic = "force-dynamic";
 export default async function Account() {
+  if (await isOwner()) redirect("/admin");
   try {
     await requireAccount();
   } catch (error) {

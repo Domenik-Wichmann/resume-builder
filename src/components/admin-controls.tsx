@@ -9,6 +9,7 @@ export function OwnerLogin() {
   async function login(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setBusy(true);
+    setError("");
     const form = new FormData(event.currentTarget);
     try {
       const response = await fetch("/api/admin/login", {
@@ -32,8 +33,8 @@ export function OwnerLogin() {
     <form className="ai-panel owner-login" onSubmit={login}>
       <h2>Owner sign in</h2>
       <p className="muted">
-        Use the owner account created in Supabase Auth. Public administrator
-        signup is unavailable.
+        Sign in with your owner email and password to manage your portfolio.
+        Sessions renew automatically on this browser.
       </p>
       <label htmlFor="owner-email">Email</label>
       <input
@@ -63,15 +64,32 @@ export function OwnerLogout({
   endpoint?: string;
 }) {
   const router = useRouter();
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
   return (
-    <button
-      onClick={async () => {
-        const response = await fetch(endpoint, { method: "DELETE" });
-        if (response.ok) router.refresh();
-      }}
-    >
-      Sign out
-    </button>
+    <div className="owner-signout">
+      <button
+        disabled={busy}
+        onClick={async () => {
+          setBusy(true);
+          setError("");
+          try {
+            const response = await fetch(endpoint, { method: "DELETE" });
+            if (!response.ok)
+              throw new Error("Sign out failed. Please try again.");
+            router.replace("/auth/login");
+            router.refresh();
+          } catch {
+            setError("Sign out failed. Check your connection and try again.");
+          } finally {
+            setBusy(false);
+          }
+        }}
+      >
+        {busy ? "Signing out…" : "Sign out"}
+      </button>
+      {error && <p role="alert">{error}</p>}
+    </div>
   );
 }
 export function TrackingLinkForm() {

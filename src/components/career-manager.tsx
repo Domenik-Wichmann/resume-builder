@@ -107,8 +107,8 @@ export function CareerManager({
   }
   return (
     <div className="career-manager">
-      <section className="section">
-        <h2>Career Master</h2>
+      <section id="import-document" className="section">
+        <h2>Add a career document</h2>
         <p>
           Paste your career document or upload plain text / Markdown (up to
           100,000 characters). Extraction proposes facts; nothing is published
@@ -126,12 +126,14 @@ export function CareerManager({
               )
             }
           >
-            <option value="MASTER">Complete Career Master</option>
-            <option value="MANUAL">
-              Supplemental document (adds evidence; does not replace unrelated
-              records)
-            </option>
+            <option value="MASTER">Complete career master</option>
+            <option value="MANUAL">Supplemental evidence</option>
           </select>
+          <p className="muted">
+            {sourceKind === "MASTER"
+              ? "A complete master replaces the previous master. Missing records are proposed for archive; review them before applying changes."
+              : "Supplemental evidence adds to your existing records without replacing unrelated career information."}
+          </p>
           <label htmlFor="master-file">Text or Markdown file</label>
           <input
             id="master-file"
@@ -183,7 +185,7 @@ export function CareerManager({
         ))}
       </section>
       {draft && (
-        <section className="section">
+        <section id="import-review" className="section">
           <h2>Review import</h2>
           <button
             disabled={busy}
@@ -347,8 +349,8 @@ export function CareerManager({
           Start or continue a Career Interview →
         </Link>
       </section>
-      <section className="section">
-        <h2>Canonical records & publication</h2>
+      <section id="career-publication" className="section">
+        <h2>Records & publication</h2>
         <p>
           Publish only approved facts. Updates to an existing fact return it to
           private review. Publishing and unpublishing refresh only changed or
