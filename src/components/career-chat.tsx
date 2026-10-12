@@ -34,6 +34,7 @@ import { ResumeRenderer } from "./resume-renderer";
 import type { ResumeDesign } from "@/lib/resume-design/model";
 import { RecruiterExplorer, type StudioPanel } from "./recruiter-explorer";
 import { SelectedProjects } from "./selected-projects";
+import { ProjectEvidence } from "./project-evidence";
 
 export function CareerChat({
   initialWorkspace = null,
@@ -574,6 +575,12 @@ export function CareerChat({
                       bulletLists
                       text={answerDisplay(question.answer)}
                     />
+                    {"evidence_ids" in question && (
+                      <ProjectEvidence
+                        ids={question.evidence_ids}
+                        query={question.question}
+                      />
+                    )}
                   </div>
                 )}
               </article>

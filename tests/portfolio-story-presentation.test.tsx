@@ -93,9 +93,15 @@ it("introduces the owner first and expands public answers without navigation, dr
     expect(fetch).not.toHaveBeenCalled();
     await act(async () => button.click());
     expect(answer.hidden).toBe(true);
-    const handoff =
-      host.querySelector<HTMLAnchorElement>(".story-handoff > a")!;
-    expect(handoff.textContent).toContain("Explore my experience");
+    const handoff = host.querySelector<HTMLAnchorElement>(
+      ".story-handoff .story-cta",
+    )!;
+    expect(handoff.textContent).toContain("Ask me about my work");
+    expect(
+      host
+        .querySelector<HTMLAnchorElement>(".story-projects-cta")
+        ?.getAttribute("href"),
+    ).toBe("/projects");
     await act(async () => handoff.click());
     expect(navigation.chat).toHaveBeenCalledOnce();
     expect(draft).not.toHaveBeenCalled();
@@ -156,6 +162,16 @@ it("places the intro control beside the portrait on desktop and at the bottom on
     navigation.inStory = false;
     await act(async () => render());
     expect(host.querySelector(".story-mobile-actions")).toBeNull();
+    navigation.inStory = true;
+    navigation.step = finalStoryStep;
+    await act(async () => render());
+    expect(
+      host.querySelector('.story-mobile-actions a[href="/projects"]')
+        ?.textContent,
+    ).toContain("Check out my projects");
+    expect(
+      host.querySelector(".story-mobile-actions button")?.textContent,
+    ).toContain("Ask me about my work");
     navigation.mobile = false;
     navigation.step = 2;
     await act(async () => render());

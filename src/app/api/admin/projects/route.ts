@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { requireAccount } from "@/lib/accounts";
+import { requireOwner } from "@/lib/admin";
 import { readJson, errorResponse, HttpError } from "@/lib/http";
 import { projectSchema } from "@/lib/portfolio/model";
 import { loadProjects, projectMedia } from "@/lib/portfolio/repository";
@@ -10,6 +11,7 @@ import { reindexCareer } from "@/lib/embeddings/indexer";
 export const maxDuration = 60;
 export async function GET() {
   try {
+    await requireOwner();
     const { db, accountId } = await requireAccount();
     return Response.json(
       {
@@ -24,6 +26,7 @@ export async function GET() {
 }
 export async function POST(request: Request) {
   try {
+    await requireOwner();
     const { db, accountId } = await requireAccount();
     const action = await readJson(
       request,

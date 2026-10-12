@@ -1,23 +1,46 @@
 import { randomUUID } from "node:crypto";
 import { z } from "zod";
 import { requireAccount } from "@/lib/accounts";
+import { requireOwner } from "@/lib/admin";
 import { database } from "@/lib/db";
 import { readJson, requireOrigin, errorResponse, HttpError } from "@/lib/http";
 import { mediaSchema, projectImageLimit } from "@/lib/portfolio/model";
 import { imageType } from "@/lib/portfolio/images";
+import { screenshotDescription } from "@/lib/portfolio/case-study";
 export async function POST(request: Request) {
   try {
+    await requireOwner();
     const { db, accountId } = await requireAccount();
     requireOrigin(request);
     const id = z
       .uuid()
       .safeParse(new URL(request.url).searchParams.get("project"));
+    const params = new URL(request.url).searchParams;
+    const header = (name: string) => {
+      const value = request.headers.get(name);
+      if (!value) return null;
+      try {
+        return decodeURIComponent(value);
+      } catch {
+        throw new HttpError(400, "Invalid screenshot description.");
+      }
+    };
+    const filename =
+      (header("x-screenshot-filename") || params.get("filename") || "")
+        .split(/[\\/]/)
+        .at(-1)
+        ?.replace(/[\u0000-\u001f\u007f]/g, "")
+        .slice(0, 255) || "";
     const alt = z
       .string()
       .trim()
       .min(1)
       .max(300)
-      .safeParse(new URL(request.url).searchParams.get("alt"));
+      .safeParse(
+        header("x-screenshot-description") ||
+          params.get("alt") ||
+          screenshotDescription(filename),
+      );
     if (!id.success || !alt.success)
       throw new HttpError(400, "Select a saved project and provide alt text.");
     const parent = await db
@@ -61,6 +84,9 @@ export async function POST(request: Request) {
       storage_path: path,
       mime_type: type.mime,
       alt: alt.data,
+      caption: screenshotDescription(filename),
+      source_filename: filename,
+      is_public: false,
     });
     if (result.error) {
       await storage.remove([path]);
@@ -73,20 +99,17 @@ export async function POST(request: Request) {
 }
 export async function PATCH(request: Request) {
   try {
+    await requireOwner();
     const { db, accountId } = await requireAccount();
     const media = await readJson(request, mediaSchema);
-    const { id, ...fields } = media;
-    const result = await db
-      .from("project_media")
-      .update(fields)
-      .eq("account_id", accountId)
-      .eq("id", id)
-      .select("id")
-      .maybeSingle();
+    const result = await db.rpc("save_project_media", {
+      p_account: accountId,
+      p_media: media,
+    });
     if (result.error)
       throw new HttpError(
         400,
-        "Cannot update image. Only one cover is allowed; unset the current cover first.",
+        "Cannot update image. Check that its project is active and try again.",
       );
     if (!result.data) throw new HttpError(404, "Image not found.");
     return Response.json({ saved: true });
@@ -96,6 +119,7 @@ export async function PATCH(request: Request) {
 }
 export async function DELETE(request: Request) {
   try {
+    await requireOwner();
     const { db, accountId } = await requireAccount();
     const { id } = await readJson(request, z.object({ id: z.uuid() }).strict());
     const row = await db

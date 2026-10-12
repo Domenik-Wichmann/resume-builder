@@ -190,29 +190,45 @@ export function PortfolioStoryHero({
             </div>
           ))}
         </section>
-        {mobile && inStory && (step === 0 || completed) && (
-          <div className="story-mobile-actions">
-            {step === 0 && (
-              <button
-                type="button"
-                className="story-intro-next"
-                onClick={() => navigate(1)}
-              >
-                More about me &amp; this project{" "}
-                <span aria-hidden="true">↓</span>
-              </button>
-            )}
-            {completed && (
-              <button
-                type="button"
-                className="story-return-chat"
-                onClick={chat}
-              >
-                Jump to chat <span aria-hidden="true">↓</span>
-              </button>
-            )}
-          </div>
-        )}
+        {mobile &&
+          inStory &&
+          (step === 0 || completed || step === finalStoryStep) && (
+            <div className="story-mobile-actions">
+              {step === 0 && (
+                <button
+                  type="button"
+                  className="story-intro-next"
+                  onClick={() => navigate(1)}
+                >
+                  More about me &amp; this project{" "}
+                  <span aria-hidden="true">↓</span>
+                </button>
+              )}
+              {step === finalStoryStep && (
+                <>
+                  <Link className="button story-projects-cta" href="/projects">
+                    Check out my projects <span aria-hidden="true">↗</span>
+                  </Link>
+                  <button
+                    type="button"
+                    className="story-return-chat"
+                    onClick={chat}
+                  >
+                    Ask me about my work <span aria-hidden="true">↓</span>
+                  </button>
+                </>
+              )}
+              {completed && step !== finalStoryStep && (
+                <button
+                  type="button"
+                  className="story-return-chat"
+                  onClick={chat}
+                >
+                  Jump to chat <span aria-hidden="true">↓</span>
+                </button>
+              )}
+            </div>
+          )}
         {!mobile && completed && step !== finalStoryStep && (
           <div className="story-handoff wrap">
             <button type="button" className="story-return-chat" onClick={chat}>
@@ -221,7 +237,10 @@ export function PortfolioStoryHero({
           </div>
         )}
         {step === finalStoryStep && (
-          <div className="story-handoff wrap">
+          <div className="story-handoff story-final-handoff wrap">
+            <Link className="button story-projects-cta" href="/projects">
+              Check out my projects <span aria-hidden="true">↗</span>
+            </Link>
             <a
               className="button story-cta"
               href="#ask"
@@ -230,7 +249,7 @@ export function PortfolioStoryHero({
                 chat();
               }}
             >
-              Explore my experience <span aria-hidden="true">{"\u2193"}</span>
+              Ask me about my work <span aria-hidden="true">{"\u2193"}</span>
             </a>
             <p>Or continue scrolling to the conversation.</p>
           </div>

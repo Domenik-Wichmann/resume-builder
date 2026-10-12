@@ -2,6 +2,7 @@ import { z } from "zod";
 export const projectImageLimit = 4 * 1024 * 1024;
 
 export function safeProjectUrl(value: string) {
+  if (value === "/") return true;
   if (
     /^\/(?:projects|explore|answers|workspace|resume)(?:\/[a-z0-9-]+)?(?:#[a-z0-9-]+)?$/.test(
       value,
@@ -81,6 +82,8 @@ export const mediaSchema = z
     caption: z.string().max(500),
     display_order: z.number().int().min(0).max(10000),
     is_cover: z.boolean(),
+    source_filename: z.string().max(255).optional(),
+    is_public: z.boolean().optional(),
   })
   .strict();
 export type ProjectMedia = z.infer<typeof mediaSchema> & { project_id: string };

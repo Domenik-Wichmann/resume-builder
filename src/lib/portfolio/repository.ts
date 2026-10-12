@@ -75,13 +75,17 @@ export async function projectMedia(
   db: SupabaseClient,
   accountId: string,
   projectId?: string,
+  publicOnly = false,
 ): Promise<ProjectMedia[]> {
   let query = db
     .from("project_media")
-    .select("id,project_id,alt,caption,display_order,is_cover")
+    .select(
+      "id,project_id,alt,caption,display_order,is_cover,source_filename,is_public",
+    )
     .eq("account_id", accountId)
     .order("display_order");
   if (projectId) query = query.eq("project_id", projectId);
+  if (publicOnly) query = query.eq("is_public", true);
   const result = await query;
   if (result.error) throw new Error("Cannot load media.");
   return result.data || [];

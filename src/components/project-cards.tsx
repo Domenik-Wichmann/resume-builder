@@ -23,7 +23,13 @@ export function ProjectCards({ projects }: { projects: ShowcaseCard[] }) {
           ) : (
             <div className="selected-project-art" aria-hidden="true">
               <span>{String(index + 1).padStart(2, "0")}</span>
-              <strong>{project.title}</strong>
+              <strong>
+                {project.title
+                  .split(/\s+/)
+                  .slice(0, 2)
+                  .map((part) => part[0])
+                  .join("")}
+              </strong>
               <span>↗</span>
             </div>
           )}

@@ -11,9 +11,10 @@ export default async function Projects() {
       <PortfolioHeader />
       <main className="wrap portfolio-main">
         <p className="eyebrow">Selected work</p>
-        <h1>Apps I’ve built.</h1>
+        <h1>Projects worth exploring.</h1>
         <p className="lead">
-          Explore the projects, how they work, and the ideas behind them.
+          Go behind the work. Explore the ideas, systems, skill stacks and
+          details that bring each project to life.
         </p>
         {!projects.length ? (
           <div className="empty-state">

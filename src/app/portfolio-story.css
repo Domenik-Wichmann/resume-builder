@@ -1794,6 +1794,29 @@ html:has(.story-runway) {
 .story-mobile-actions {
   display: none;
 }
+.story-handoff:has(.story-projects-cta) {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+.public-experience .story-projects-cta,
+.public-experience .story-handoff .story-cta {
+  min-height: 52px;
+  padding: 15px 26px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 14px;
+}
+.public-experience .story-projects-cta {
+  background: #c9b7fb;
+  color: #141b28;
+}
+.story-handoff:has(.story-projects-cta) > p {
+  flex-basis: 100%;
+  text-align: center;
+  margin: 0;
+}
 .import-human-inputs {
   display: grid;
   grid-template-columns: 1.8fr 1fr;
@@ -2131,6 +2154,16 @@ html:has(.story-runway) {
   .public-experience .story-mobile-actions button {
     min-height: 48px;
     box-shadow: 0 6px 24px #0008;
+  }
+  .story-mobile-actions .story-projects-cta {
+    width: 100%;
+    box-shadow: 0 6px 24px #0008;
+  }
+  .story-final-handoff {
+    display: none;
+  }
+  .story-scene-8 {
+    padding-bottom: 160px;
   }
   .story-mobile-actions .story-intro-next {
     background: #c9b7fb;

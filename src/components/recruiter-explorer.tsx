@@ -10,6 +10,7 @@ import {
   type CatalogCategory,
 } from "@/lib/career/catalog";
 import { SafeMarkdown } from "./safe-markdown";
+import { ProjectEvidence } from "./project-evidence";
 
 export type StudioPanel = "chat" | "explorer" | "projects" | "answers";
 
@@ -164,6 +165,7 @@ export function RecruiterExplorer({
               </p>
             )}
             <SafeMarkdown text={selected.description || selected.summary} />
+            <ProjectEvidence key={selected.id} ids={[selected.id]} browse />
             {selected.outcomes?.length ? (
               <ul>
                 {selected.outcomes.map((outcome) => (

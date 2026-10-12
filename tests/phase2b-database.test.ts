@@ -43,6 +43,157 @@ beforeAll(async () => {
 afterAll(async () => {
   await db?.close();
 });
+it("stores case-study presentation separately, enforces owner scope and detects stale project and draft versions", async () => {
+  const parent = (
+    await db.query<{ id: string; updated_at: string }>(
+      "insert into projects(account_id,slug,title,summary,is_public) values($1,'fictional-case-study','Fictional canonical project','Canonical summary',true) returning id,updated_at",
+      [a],
+    )
+  ).rows[0];
+  const content = {
+    title: "Fictional case study",
+    tagline: "",
+    summary: "Presentation copy",
+    overview: "",
+    highlights: [],
+    implementation: "",
+    outcomes: [],
+    limitations: [],
+  };
+  const save = (
+    baseline: string | null,
+    version = parent.updated_at,
+    publish = false,
+  ) =>
+    asUser(userA, () =>
+      db.query<{ version: string }>(
+        "select save_project_case_study($1,$2,$3,$4,$5::jsonb,$6,true,$7) version",
+        [
+          a,
+          parent.id,
+          version,
+          baseline,
+          JSON.stringify(content),
+          "a".repeat(64),
+          publish,
+        ],
+      ),
+    );
+  const first = (await save(null)).rows[0].version;
+  await expect(save(null)).rejects.toThrow("STALE_CASE_STUDY");
+  await expect(
+    asUser(userB, () =>
+      db.query(
+        "select save_project_case_study($1,$2,$3,null,$4::jsonb,$5,true,false)",
+        [
+          a,
+          parent.id,
+          parent.updated_at,
+          JSON.stringify(content),
+          "a".repeat(64),
+        ],
+      ),
+    ),
+  ).rejects.toThrow("ACCOUNT_FORBIDDEN");
+  await expect(
+    asUser(userB, () =>
+      db.query(
+        "insert into project_case_studies(project_id,account_id,content,source_hash) values($1,$2,$3::jsonb,$4)",
+        [parent.id, b, JSON.stringify(content), "a".repeat(64)],
+      ),
+    ),
+  ).rejects.toThrow("CROSS_ACCOUNT_REFERENCE");
+  await asUser(userB, async () =>
+    expect(
+      (await db.query("select * from project_case_studies")).rows,
+    ).toHaveLength(0),
+  );
+  expect(
+    (
+      await db.query<{ title: string }>(
+        "select title from projects where id=$1",
+        [parent.id],
+      )
+    ).rows[0].title,
+  ).toBe("Fictional canonical project");
+  await db.query("update projects set is_public=false where id=$1", [
+    parent.id,
+  ]);
+  await expect(save(first)).rejects.toThrow("STALE_PROJECT");
+  const version = (
+    await db.query<{ updated_at: string }>(
+      "select updated_at from projects where id=$1",
+      [parent.id],
+    )
+  ).rows[0].updated_at;
+  await expect(save(first, version, true)).rejects.toThrow(
+    "PROJECT_NOT_PUBLISHED",
+  );
+  expect(
+    (
+      await db.query<{ is_public: boolean }>(
+        "select is_public from project_case_studies where project_id=$1",
+        [parent.id],
+      )
+    ).rows[0].is_public,
+  ).toBe(false);
+});
+it("uploads screenshots privately and switches covers atomically with image publication and metadata", async () => {
+  const parent = (
+    await db.query<{ id: string }>(
+      "insert into projects(account_id,slug,title,summary) values($1,'fictional-screenshot-parent','Fictional screenshots','') returning id",
+      [a],
+    )
+  ).rows[0].id;
+  const images = await db.query<{ id: string; is_public: boolean }>(
+    "insert into project_media(account_id,project_id,storage_path,mime_type,alt,source_filename) values($1,$2,$3,'image/png','Fictional graph review','graph_review.png'),($1,$2,$4,'image/png','Fictional approval screen','approval_screen.png') returning id,is_public",
+    [a, parent, `${a}/${parent}/first.png`, `${a}/${parent}/second.png`],
+  );
+  expect(images.rows.every((row) => row.is_public === false)).toBe(true);
+  const change = (id: string, alt = "Fictional screenshot") =>
+    asUser(userA, () =>
+      db.query("select save_project_media($1,$2::jsonb)", [
+        a,
+        JSON.stringify({
+          id,
+          alt,
+          caption: "Fictional caption",
+          display_order: 0,
+          is_cover: true,
+          is_public: true,
+        }),
+      ]),
+    );
+  await change(images.rows[0].id);
+  await expect(change(images.rows[1].id, "")).rejects.toThrow(
+    "check constraint",
+  );
+  expect(
+    (
+      await db.query<{ id: string }>(
+        "select id from project_media where project_id=$1 and is_cover",
+        [parent],
+      )
+    ).rows[0].id,
+  ).toBe(images.rows[0].id);
+  await change(images.rows[1].id);
+  const covers = (
+    await db.query<{ id: string; is_public: boolean }>(
+      "select id,is_public from project_media where project_id=$1 and is_cover",
+      [parent],
+    )
+  ).rows;
+  expect(covers).toHaveLength(1);
+  expect(covers[0]).toMatchObject({ id: images.rows[1].id, is_public: true });
+  await expect(
+    asUser(userB, () =>
+      db.query("select save_project_media($1,$2::jsonb)", [
+        a,
+        JSON.stringify({ id: images.rows[1].id }),
+      ]),
+    ),
+  ).rejects.toThrow("ACCOUNT_FORBIDDEN");
+});
 async function asUser<T>(user: string, fn: () => Promise<T>) {
   await db.query("select set_config('request.jwt.claim.sub',$1,false)", [user]);
   await db.exec("set role authenticated");

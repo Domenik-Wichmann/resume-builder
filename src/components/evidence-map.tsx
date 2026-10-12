@@ -8,6 +8,7 @@ import {
   type CSSProperties,
 } from "react";
 import type { CareerRecord } from "@/lib/career/model";
+import { ProjectEvidence } from "./project-evidence";
 import {
   graphPointer,
   initialGraphView,
@@ -535,6 +536,7 @@ export function EvidenceMap({
             <h4>{detail.title}</h4>
             <p>{detail.subtitle}</p>
             <p>{detail.summary}</p>
+            <ProjectEvidence key={detail.id} ids={[detail.id]} browse />
             <div className="tags">
               {detail.skills.map((skill) => (
                 <span key={skill}>{skill}</span>

@@ -4,14 +4,37 @@ import { HttpError } from "@/lib/http";
 import { loadProjects, projectMedia } from "@/lib/portfolio/repository";
 import { loadCanonical } from "@/lib/ingestion/repository";
 import { ProjectManager } from "@/components/project-manager";
+import { requireOwner } from "@/lib/admin";
+import { demoProject } from "@/lib/portfolio/demo";
+import { loadCaseStudies } from "@/lib/portfolio/case-study-server";
 export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Project manager · Resume Builder",
   robots: { index: false, follow: false },
 };
-export default async function ProjectsAdmin() {
+export default async function ProjectsAdmin({
+  searchParams,
+}: {
+  searchParams: Promise<{ preview?: string }>;
+}) {
+  if (process.env.APP_MODE === "demo" && (await searchParams).preview === "1")
+    return (
+      <main className="wrap portfolio-main">
+        <p className="demo-banner">
+          FICTIONAL PROJECT MANAGER PREVIEW · sample facts are not owner
+          evidence
+        </p>
+        <h1>Project showcase.</h1>
+        <ProjectManager
+          initialProjects={[demoProject]}
+          initialMedia={[]}
+          records={[]}
+        />
+      </main>
+    );
   let account;
   try {
+    await requireOwner();
     account = await requireAccount();
   } catch (e) {
     if (!(e instanceof HttpError) || e.status !== 403) throw e;
@@ -22,10 +45,11 @@ export default async function ProjectsAdmin() {
       </main>
     );
   }
-  const [projects, media, records] = await Promise.all([
+  const [projects, media, records, cases] = await Promise.all([
     loadProjects(account.db, account.accountId),
     projectMedia(account.db, account.accountId),
     loadCanonical(account.db, account.accountId),
+    loadCaseStudies(account.db, account.accountId),
   ]);
   return (
     <main className="wrap portfolio-main">
@@ -35,6 +59,9 @@ export default async function ProjectsAdmin() {
         initialProjects={projects}
         initialMedia={media}
         records={records}
+        initialSelection={Object.fromEntries(
+          cases.map((value) => [value.project_id, value.selected]),
+        )}
       />
     </main>
   );

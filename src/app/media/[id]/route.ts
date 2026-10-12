@@ -13,7 +13,7 @@ export async function GET(
     const db = database();
     const row = await db
       .from("project_media")
-      .select("account_id,project_id,storage_path,mime_type")
+      .select("account_id,project_id,storage_path,mime_type,is_public")
       .eq("id", parsed.data)
       .maybeSingle();
     if (row.error || !row.data) throw new HttpError(404, "Image not found.");
@@ -23,8 +23,11 @@ export async function GET(
       .eq("id", row.data.project_id)
       .eq("account_id", row.data.account_id)
       .maybeSingle();
+    if (project.error)
+      throw new HttpError(503, "Cannot verify image publication.");
     const isPublic =
       row.data.account_id === primaryAccountId &&
+      row.data.is_public === true &&
       project.data?.is_public &&
       !project.data.archived_at;
     if (!isPublic) {
