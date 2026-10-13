@@ -193,8 +193,10 @@ export function PortfolioStoryHero({
         {mobile &&
           inStory &&
           (step === 0 || completed || step === finalStoryStep) && (
-            <div className="story-mobile-actions">
-              {step === 0 && (
+            <div
+              className={`story-mobile-actions${completed || step === finalStoryStep ? " completed" : ""}`}
+            >
+              {step === 0 && !completed && (
                 <button
                   type="button"
                   className="story-intro-next"
@@ -219,18 +221,26 @@ export function PortfolioStoryHero({
                 </>
               )}
               {completed && step !== finalStoryStep && (
-                <button
-                  type="button"
-                  className="story-return-chat"
-                  onClick={chat}
-                >
-                  Jump to chat <span aria-hidden="true">↓</span>
-                </button>
+                <>
+                  <Link className="button story-projects-cta" href="/projects">
+                    Check out my projects <span aria-hidden="true">↗</span>
+                  </Link>
+                  <button
+                    type="button"
+                    className="story-return-chat"
+                    onClick={chat}
+                  >
+                    Jump to chat <span aria-hidden="true">↓</span>
+                  </button>
+                </>
               )}
             </div>
           )}
         {!mobile && completed && step !== finalStoryStep && (
           <div className="story-handoff wrap">
+            <Link className="button story-projects-cta" href="/projects">
+              Check out my projects <span aria-hidden="true">↗</span>
+            </Link>
             <button type="button" className="story-return-chat" onClick={chat}>
               Jump to chat <span aria-hidden="true">↓</span>
             </button>

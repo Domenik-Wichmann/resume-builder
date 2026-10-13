@@ -16,7 +16,7 @@ export default async function ProjectPage({
   const { project: p, content, skills, media } = item;
   return (
     <>
-      <PortfolioHeader />
+      <PortfolioHeader homeOnly />
       <main className="wrap portfolio-main">
         <Link href="/projects">← Selected projects</Link>
         <ProjectDisplay

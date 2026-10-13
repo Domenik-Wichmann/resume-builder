@@ -2159,6 +2159,19 @@ html:has(.story-runway) {
     width: 100%;
     box-shadow: 0 6px 24px #0008;
   }
+  .story-mobile-actions.completed {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(560px, calc(100% - 32px));
+  }
+  .public-experience .story-mobile-actions.completed :is(button, .button) {
+    width: 100%;
+    min-height: 52px;
+    padding: 10px;
+    font-size: 12px;
+    line-height: 1.4;
+    text-align: center;
+  }
   .story-final-handoff {
     display: none;
   }

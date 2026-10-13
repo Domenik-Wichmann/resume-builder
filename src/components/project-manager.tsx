@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { projectImageLimit } from "@/lib/portfolio/model";
@@ -32,6 +32,29 @@ const blank: ProjectInput = {
   achievement_ids: [],
   links: [],
 };
+const editorTabs = [
+  "content",
+  "links",
+  "screenshots",
+  "settings",
+  "preview",
+] as const;
+type EditorTab = (typeof editorTabs)[number];
+function projectInput(project?: Project): ProjectInput {
+  if (!project) return { ...blank };
+  const { updated_at, ...value } = project;
+  return { ...value, baseline_version: updated_at };
+}
+function projectSlug(value: string) {
+  return value
+    .normalize("NFKD")
+    .replace(/\p{Diacritic}/gu, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "")
+    .slice(0, 100)
+    .replace(/-$/, "");
+}
 export function ProjectManager({
   initialProjects,
   initialMedia,
@@ -45,16 +68,49 @@ export function ProjectManager({
 }) {
   const [projects, setProjects] = useState(initialProjects),
     [media, setMedia] = useState(initialMedia),
-    [form, setForm] = useState<ProjectInput>(blank),
+    [form, setForm] = useState<ProjectInput>(() =>
+      projectInput(initialProjects.find((project) => !project.archived)),
+    ),
     [message, setMessage] = useState(""),
     [busy, setBusy] = useState(false),
     [alt, setAlt] = useState("");
   const [selection, setSelection] = useState(initialSelection);
+  const [tab, setTab] = useState<EditorTab>(
+    initialProjects.some((project) => !project.archived)
+      ? "content"
+      : "settings",
+  );
+  const [search, setSearch] = useState("");
+  const [caseDirty, setCaseDirty] = useState(false);
+  const [caseBusy, setCaseBusy] = useState(false);
+  const [settingsDirty, setSettingsDirty] = useState(false);
+  const [mediaDirty, setMediaDirty] = useState<string[]>([]);
+  const unsaved = caseDirty || settingsDirty || mediaDirty.length > 0;
+  useEffect(() => {
+    const warn = (event: BeforeUnloadEvent) => {
+      if (unsaved) {
+        event.preventDefault();
+        event.returnValue = "";
+      }
+    };
+    window.addEventListener("beforeunload", warn);
+    return () => window.removeEventListener("beforeunload", warn);
+  }, [unsaved]);
   function change<K extends keyof ProjectInput>(
     key: K,
     value: ProjectInput[K],
   ) {
-    setForm({ ...form, [key]: value });
+    setForm((previous) => ({
+      ...previous,
+      [key]: value,
+      ...(key === "title" &&
+      typeof value === "string" &&
+      !previous.id &&
+      (!previous.slug || previous.slug === projectSlug(previous.title))
+        ? { slug: projectSlug(value) }
+        : {}),
+    }));
+    setSettingsDirty(true);
   }
   async function refresh() {
     const r = await fetch("/api/admin/projects");
@@ -76,6 +132,12 @@ export function ProjectManager({
     }
   }
   async function save() {
+    if (caseDirty) {
+      setMessage(
+        "Save your page edits in Content or Links before updating its career record.",
+      );
+      return;
+    }
     await run(async () => {
       const r = await fetch("/api/admin/projects", {
         method: "POST",
@@ -86,13 +148,25 @@ export function ProjectManager({
       if (!r.ok) throw new Error(d.error);
       const rows = await refresh();
       const p = rows.find((p) => p.id === d.id);
-      if (p) select(p);
+      if (p) setForm(projectInput(p));
+      setSettingsDirty(false);
+      if (!form.id) setTab("content");
       return d.indexing;
     });
   }
-  function select(p: Project) {
-    const { updated_at, ...value } = p;
-    setForm({ ...value, baseline_version: updated_at });
+  function select(p?: Project) {
+    if (
+      unsaved &&
+      !window.confirm("Discard unsaved changes and switch projects?")
+    )
+      return;
+    setForm(projectInput(p));
+    setCaseDirty(false);
+    setSettingsDirty(false);
+    setMediaDirty([]);
+    setMessage("");
+    setAlt("");
+    if (!p || p.archived) setTab("settings");
   }
   async function updateMedia(m: ProjectMedia, remove = false) {
     await run(async () => {
@@ -106,70 +180,185 @@ export function ProjectManager({
       const d = await r.json();
       if (!r.ok) throw new Error(d.error);
       await refresh();
+      setMediaDirty((previous) => previous.filter((id) => id !== m.id));
       return "Media saved.";
     });
   }
   return (
-    <div className="manager-grid">
-      <aside className="surface">
-        <button onClick={() => setForm({ ...blank })}>New project</button>
+    <div className="manager-grid project-manager">
+      <aside className="surface project-picker">
+        <div className="project-picker-heading">
+          <h2>Your projects</h2>
+          <button
+            type="button"
+            disabled={busy || caseBusy}
+            onClick={() => select()}
+          >
+            + New project
+          </button>
+        </div>
+        <label>
+          Find a project
+          <input
+            type="search"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+            placeholder="Search project names"
+          />
+        </label>
         <div className="stack">
-          {projects.map((p) => (
+          {projects
+            .filter((project) =>
+              showcaseTitle(project)
+                .toLowerCase()
+                .includes(search.toLowerCase()),
+            )
+            .map((project) => (
+              <button
+                type="button"
+                className="choice-button"
+                aria-pressed={form.id === project.id}
+                disabled={busy || caseBusy}
+                key={project.id}
+                onClick={() => select(project)}
+              >
+                {showcaseTitle(project)}
+                <small>
+                  {project.archived
+                    ? "Archived"
+                    : project.is_public
+                      ? "Published record"
+                      : "Private record"}
+                  {(selection[project.id] ??
+                  (project.featured ||
+                    Object.hasOwn(selectedProjectNames, project.id)))
+                    ? " · Selected"
+                    : ""}
+                </small>
+              </button>
+            ))}
+          {!projects.length && (
+            <p className="muted">
+              Create your first project to start building its page.
+            </p>
+          )}
+          {projects.length > 0 &&
+            !projects.some((project) =>
+              showcaseTitle(project)
+                .toLowerCase()
+                .includes(search.toLowerCase()),
+            ) && <p className="muted">No projects match your search.</p>}
+        </div>
+      </aside>
+      <section className="surface project-editor-surface">
+        <div className="project-manager-heading">
+          <div>
+            <p className="eyebrow">Your project workspace</p>
+            <h2>
+              {form.id
+                ? projects.find((project) => project.id === form.id)?.title
+                : "New project"}
+            </h2>
+          </div>
+          <span className="resume-badge">
+            {unsaved ? "Unsaved changes" : "Ready to edit"}
+          </span>
+        </div>
+        <div
+          className="project-editor-tabs"
+          role="tablist"
+          aria-label="Project editing sections"
+        >
+          {editorTabs.map((item) => (
             <button
-              className="choice-button"
-              aria-pressed={form.id === p.id}
-              key={p.id}
-              onClick={() => select(p)}
+              type="button"
+              role="tab"
+              id={"project-tab-" + item}
+              aria-selected={tab === item}
+              aria-controls={"project-panel-" + item}
+              tabIndex={tab === item ? 0 : -1}
+              disabled={!form.id && item !== "settings"}
+              key={item}
+              onClick={() => setTab(item)}
+              onKeyDown={(event) => {
+                if (
+                  !form.id ||
+                  !["ArrowLeft", "ArrowRight", "Home", "End"].includes(
+                    event.key,
+                  )
+                )
+                  return;
+                event.preventDefault();
+                const index = editorTabs.indexOf(item);
+                const next =
+                  event.key === "Home"
+                    ? editorTabs[0]
+                    : event.key === "End"
+                      ? editorTabs[editorTabs.length - 1]
+                      : editorTabs[
+                          (index +
+                            (event.key === "ArrowRight" ? 1 : -1) +
+                            editorTabs.length) %
+                            editorTabs.length
+                        ];
+                setTab(next);
+                document.getElementById("project-tab-" + next)?.focus();
+              }}
             >
-              {showcaseTitle(p)}
-              <small>
-                {p.archived ? "Archived" : p.is_public ? "Public" : "Private"}
-                {p.featured ? " · Featured" : ""}
-                {(selection[p.id] ??
-                (p.featured || Object.hasOwn(selectedProjectNames, p.id)))
-                  ? " · Selected"
-                  : ""}
-              </small>
+              {item.charAt(0).toUpperCase() + item.slice(1)}
             </button>
           ))}
         </div>
-        <button
-          disabled={busy}
-          onClick={() =>
-            run(async () => {
-              const r = await fetch("/api/admin/projects", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ action: "reindex" }),
-              });
-              if (!r.ok) throw new Error("Indexing failed. Retry later.");
-              return "Index refreshed.";
-            })
+        <div
+          hidden={tab === "settings" || tab === "screenshots"}
+          role="tabpanel"
+          id={
+            tab === "settings" || tab === "screenshots"
+              ? undefined
+              : "project-panel-" + tab
           }
+          aria-labelledby={"project-tab-" + tab}
         >
-          Retry indexing
-        </button>
-      </aside>
-      <section className="surface">
-        {form.id && projects.find((p) => p.id === form.id) && (
-          <ProjectCaseEditor
-            key={`${form.id}-${form.baseline_version}`}
-            project={projects.find((p) => p.id === form.id)!}
-            media={media.filter((m) => m.project_id === form.id)}
-            skills={records
-              .filter((r) => form.skill_ids.includes(r.id))
-              .map((r) => r.title)}
-            onSaved={(value) =>
-              setSelection((current) => ({
-                ...current,
-                [value.project_id]: value.selected,
-              }))
-            }
-          />
-        )}
-        <details className="project-record-editor" open={!form.id}>
-          <summary>Project record, skill links &amp; external URLs</summary>
-          <h2>{form.id ? "Edit project" : "Create a project"}</h2>
+          {form.id && projects.find((p) => p.id === form.id) && (
+            <ProjectCaseEditor
+              key={`${form.id}-${form.baseline_version}`}
+              project={projects.find((p) => p.id === form.id)!}
+              media={media.filter((m) => m.project_id === form.id)}
+              section={
+                tab === "links"
+                  ? "links"
+                  : tab === "preview"
+                    ? "preview"
+                    : "content"
+              }
+              onDirtyChange={setCaseDirty}
+              onBusyChange={setCaseBusy}
+              skills={records
+                .filter((r) => form.skill_ids.includes(r.id))
+                .map((r) => r.title)}
+              onSaved={(value) =>
+                setSelection((current) => ({
+                  ...current,
+                  [value.project_id]: value.selected,
+                }))
+              }
+            />
+          )}
+        </div>
+        <section
+          className="project-record-editor"
+          hidden={tab !== "settings"}
+          role="tabpanel"
+          id="project-panel-settings"
+          aria-labelledby="project-tab-settings"
+        >
+          <h3>
+            {form.id ? "Career record & visibility" : "Create your project"}
+          </h3>
+          <p className="muted">
+            Content and Links edit your public project page. These settings
+            manage its underlying career record, page address and linked skills.
+          </p>
           <p>
             Markdown supports paragraphs, headings and lists. Publication is
             your approval of the project’s facts and images.
@@ -276,7 +465,7 @@ export function ProjectManager({
                     onChange={(e) => change(k, e.target.checked)}
                   />
                   {k === "is_public"
-                    ? "Published"
+                    ? "Publish career record (required for the public page)"
                     : k === "featured"
                       ? "Featured"
                       : "Archived"}
@@ -320,145 +509,8 @@ export function ProjectManager({
                 )}
               </fieldset>
             ))}
-            <fieldset>
-              <legend>Project links</legend>
-              {form.links.map((l, i) => (
-                <div className="link-editor" key={i}>
-                  <label>
-                    Label
-                    <input
-                      value={l.label}
-                      maxLength={100}
-                      required
-                      onChange={(e) =>
-                        change(
-                          "links",
-                          form.links.map((r, j) =>
-                            j === i ? { ...r, label: e.target.value } : r,
-                          ),
-                        )
-                      }
-                    />
-                  </label>
-                  <label>
-                    URL
-                    <input
-                      value={l.url}
-                      required
-                      maxLength={2000}
-                      onChange={(e) =>
-                        change(
-                          "links",
-                          form.links.map((r, j) =>
-                            j === i ? { ...r, url: e.target.value } : r,
-                          ),
-                        )
-                      }
-                    />
-                  </label>
-                  <label>
-                    Type
-                    <select
-                      value={l.link_type}
-                      onChange={(e) =>
-                        change(
-                          "links",
-                          form.links.map((r, j) =>
-                            j === i
-                              ? {
-                                  ...r,
-                                  link_type: e.target
-                                    .value as typeof l.link_type,
-                                }
-                              : r,
-                          ),
-                        )
-                      }
-                    >
-                      {[
-                        "LIVE",
-                        "GITHUB",
-                        "DEMO",
-                        "TRIAL",
-                        "CASE_STUDY",
-                        "DOCUMENTATION",
-                        "OTHER",
-                      ].map((t) => (
-                        <option key={t}>{t}</option>
-                      ))}
-                    </select>
-                  </label>
-                  <label>
-                    Display order
-                    <input
-                      type="number"
-                      min={0}
-                      max={10000}
-                      value={l.display_order}
-                      onChange={(e) =>
-                        change(
-                          "links",
-                          form.links.map((r, j) =>
-                            j === i
-                              ? { ...r, display_order: Number(e.target.value) }
-                              : r,
-                          ),
-                        )
-                      }
-                    />
-                  </label>
-                  <label className="check-label">
-                    <input
-                      type="checkbox"
-                      checked={l.is_public}
-                      onChange={(e) =>
-                        change(
-                          "links",
-                          form.links.map((r, j) =>
-                            j === i ? { ...r, is_public: e.target.checked } : r,
-                          ),
-                        )
-                      }
-                    />
-                    Public
-                  </label>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      change(
-                        "links",
-                        form.links.filter((_, j) => j !== i),
-                      )
-                    }
-                  >
-                    Remove
-                  </button>
-                </div>
-              ))}
-              <button
-                type="button"
-                disabled={form.links.length >= 12}
-                onClick={() =>
-                  change("links", [
-                    ...form.links,
-                    {
-                      label: "",
-                      url: "",
-                      link_type: "OTHER",
-                      display_order: form.links.length,
-                      is_public: false,
-                    },
-                  ])
-                }
-              >
-                Add link
-              </button>
-              <p>
-                Lower display-order values appear first. Use HTTPS or supported
-                internal portfolio routes.
-              </p>
-            </fieldset>
-            <button disabled={busy} type="submit">
+
+            <button disabled={busy || caseBusy} type="submit">
               Save project
             </button>
             {form.id && (
@@ -470,74 +522,94 @@ export function ProjectManager({
               </a>
             )}
           </form>
-        </details>
-        <p role="status">{message}</p>
-        {form.id && (
-          <section>
-            <h2>Screenshots &amp; gallery</h2>
-            <p>
-              Name each screenshot descriptively: “Sonaway graph review with
-              approval controls.png”, for example. The filename fills its
-              description, which you can edit before publishing. PNG, JPEG, WebP
-              or GIF; up to 4 MB each.
-            </p>
-            <label>
-              Optional description override
-              <input
-                maxLength={300}
-                value={alt}
-                onChange={(e) => setAlt(e.target.value)}
-              />
-            </label>
-            <input
-              type="file"
-              accept="image/png,image/jpeg,image/webp,image/gif"
-              disabled={busy}
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (!file) return;
-                void run(async () => {
-                  if (file.size > projectImageLimit)
-                    throw new Error("Image limit is 4 MB.");
-                  const description =
-                    alt.trim() || screenshotDescription(file.name);
-                  if (!description)
-                    throw new Error(
-                      "Give the screenshot a descriptive filename or enter a description.",
-                    );
-                  const r = await fetch(
-                    `/api/admin/project-media?project=${form.id}`,
-                    {
-                      method: "POST",
-                      headers: {
-                        "Content-Type": file.type,
-                        "X-Screenshot-Description":
-                          encodeURIComponent(description),
-                        "X-Screenshot-Filename": encodeURIComponent(file.name),
-                      },
-                      body: file,
-                    },
-                  );
-                  const d = await r.json();
-                  if (!r.ok) throw new Error(d.error);
-                  await refresh();
-                  return "Screenshot uploaded privately. Review its caption, then enable Publish image and save.";
-                });
-                e.target.value = "";
-              }}
-            />
-            {media
-              .filter((m) => m.project_id === form.id)
-              .map((m) => (
-                <MediaEditor
-                  key={`${m.id}-${m.alt}-${m.caption}-${m.is_public}-${m.is_cover}`}
-                  media={m}
-                  busy={busy}
-                  save={updateMedia}
-                />
-              ))}
-          </section>
+        </section>
+        {message && (
+          <p className="record-notice" role="status">
+            {message}
+          </p>
         )}
+        <div
+          hidden={tab !== "screenshots"}
+          role="tabpanel"
+          id="project-panel-screenshots"
+          aria-labelledby="project-tab-screenshots"
+        >
+          {form.id && (
+            <section>
+              <h2>Screenshots &amp; gallery</h2>
+              <p>
+                Name each screenshot descriptively: “Sonaway graph review with
+                approval controls.png”, for example. The filename fills its
+                description, which you can edit before publishing. PNG, JPEG,
+                WebP or GIF; up to 4 MB each.
+              </p>
+              <label>
+                Optional description override
+                <input
+                  maxLength={300}
+                  value={alt}
+                  onChange={(e) => setAlt(e.target.value)}
+                />
+              </label>
+              <input
+                type="file"
+                accept="image/png,image/jpeg,image/webp,image/gif"
+                disabled={busy}
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (!file) return;
+                  void run(async () => {
+                    if (file.size > projectImageLimit)
+                      throw new Error("Image limit is 4 MB.");
+                    const description =
+                      alt.trim() || screenshotDescription(file.name);
+                    if (!description)
+                      throw new Error(
+                        "Give the screenshot a descriptive filename or enter a description.",
+                      );
+                    const r = await fetch(
+                      `/api/admin/project-media?project=${form.id}`,
+                      {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": file.type,
+                          "X-Screenshot-Description":
+                            encodeURIComponent(description),
+                          "X-Screenshot-Filename": encodeURIComponent(
+                            file.name,
+                          ),
+                        },
+                        body: file,
+                      },
+                    );
+                    const d = await r.json();
+                    if (!r.ok) throw new Error(d.error);
+                    await refresh();
+                    return "Screenshot uploaded privately. Review its caption, then enable Publish image and save.";
+                  });
+                  e.target.value = "";
+                }}
+              />
+              {media
+                .filter((m) => m.project_id === form.id)
+                .map((m) => (
+                  <MediaEditor
+                    key={`${m.id}-${m.alt}-${m.caption}-${m.is_public}-${m.is_cover}`}
+                    media={m}
+                    busy={busy}
+                    save={updateMedia}
+                    onDirty={() =>
+                      setMediaDirty((previous) =>
+                        previous.includes(m.id)
+                          ? previous
+                          : [...previous, m.id],
+                      )
+                    }
+                  />
+                ))}
+            </section>
+          )}
+        </div>
       </section>
     </div>
   );
@@ -546,12 +618,18 @@ function MediaEditor({
   media,
   busy,
   save,
+  onDirty,
 }: {
   media: ProjectMedia;
   busy: boolean;
   save: (m: ProjectMedia, remove?: boolean) => Promise<void>;
+  onDirty?: () => void;
 }) {
-  const [m, setM] = useState(media);
+  const [m, setValue] = useState(media);
+  function setM(next: ProjectMedia) {
+    setValue(next);
+    onDirty?.();
+  }
   return (
     <div className="media-editor">
       <Image

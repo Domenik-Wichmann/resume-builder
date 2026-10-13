@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { SafeMarkdown } from "./safe-markdown";
 import type { Project, ProjectMedia } from "@/lib/portfolio/model";
+import { safeProjectUrl } from "@/lib/portfolio/model";
 import { showcaseTitle } from "@/lib/portfolio/selection";
 import type { CaseContent } from "@/lib/portfolio/case-study";
 export function ProjectDisplay({
@@ -19,8 +20,8 @@ export function ProjectDisplay({
 }) {
   const cover = media.find((m) => m.is_cover);
   const links = content
-    ? content.links.filter((link) => link.is_public)
-    : project.links;
+    ? content.links.filter((link) => link.is_public && safeProjectUrl(link.url))
+    : project.links.filter((link) => safeProjectUrl(link.url));
   return (
     <article className="project-detail case-study">
       <p className="eyebrow">

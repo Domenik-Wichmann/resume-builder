@@ -8,7 +8,7 @@ export default async function Projects() {
   const projects = await publicShowcase();
   return (
     <>
-      <PortfolioHeader />
+      <PortfolioHeader homeOnly />
       <main className="wrap portfolio-main">
         <p className="eyebrow">Selected work</p>
         <h1>Projects worth exploring.</h1>

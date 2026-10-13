@@ -65,7 +65,7 @@ describe("owner authorization", () => {
     });
     expect(await isOwner(request)).toBe(false);
     mocks.getUser.mockRejectedValue(new Error("Auth unavailable"));
-    expect(await isOwner(request)).toBe(false);
+    await expect(isOwner(request)).rejects.toMatchObject({ status: 503 });
   });
   it("checks Supabase user authority and exact owner ID, never trusting a browser token alone", async () => {
     mocks.cookie.mockReturnValue({ value: "untrusted-jwt" });

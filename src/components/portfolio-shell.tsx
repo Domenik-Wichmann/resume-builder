@@ -1,5 +1,13 @@
 import Link from "next/link";
-export function PortfolioHeader() {
+export function PortfolioHeader({ homeOnly = false }: { homeOnly?: boolean }) {
+  if (homeOnly)
+    return (
+      <header className="project-home-header wrap">
+        <Link className="button" href="/">
+          ← Back to main page
+        </Link>
+      </header>
+    );
   return (
     <header className="site-header wrap">
       <Link className="wordmark" href="/">

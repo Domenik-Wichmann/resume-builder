@@ -2,26 +2,23 @@ import { NextRequest, NextResponse } from "next/server";
 import {
   accessCookie,
   accessSeconds,
-  renewSession,
-  writeSession,
+  verifyOwnerSession,
 } from "@/lib/auth-session";
-import { requireOwner } from "@/lib/admin";
 import { requireOrigin, errorResponse } from "@/lib/http";
 
 export async function POST(request: NextRequest) {
   try {
     requireOrigin(request);
-    if (accessSeconds(request.cookies.get(accessCookie)?.value) > 300) {
-      await requireOwner();
-      return NextResponse.json(
-        { active: true },
-        { headers: { "Cache-Control": "no-store" } },
-      );
-    }
-    const session = await renewSession(request);
-    const response = NextResponse.json({ active: true });
-    writeSession(response, session, request.nextUrl.protocol === "https:");
-    return response;
+    // Proxy renews once and forwards the rotated session to this handler.
+    // Verification failures from the provider keep their status: an outage is not a logout.
+    const token =
+      request.cookies.get(accessCookie)?.value ||
+      request.cookies.get("rb_owner")?.value;
+    await verifyOwnerSession(token);
+    return NextResponse.json(
+      { active: true, expiresIn: Math.max(0, accessSeconds(token)) },
+      { headers: { "Cache-Control": "no-store" } },
+    );
   } catch (error) {
     return errorResponse(error);
   }

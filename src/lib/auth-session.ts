@@ -1,12 +1,13 @@
 import "server-only";
 import type { Session } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
-import { ownerAuthClient } from "./admin";
+import { ownerAuthClient, verifiedSessionUser } from "./admin";
 import { HttpError } from "./http";
 
 export const accessCookie = "rb_account";
 export const refreshCookie = "rb_refresh";
-export const sessionLifetime = 30 * 24 * 60 * 60;
+// Browsers bound persistent cookies; renew this window rather than timing out an idle owner.
+export const sessionLifetime = 400 * 24 * 60 * 60;
 const sessionCookies = [accessCookie, "rb_owner", refreshCookie];
 
 export function clearSession(response: NextResponse) {
@@ -67,16 +68,14 @@ export async function renewSession(request: NextRequest) {
       );
     throw new HttpError(401, "Your session ended. Sign in to continue.");
   }
-  const verified = await auth.getUser(data.session.access_token);
-  if (
-    verified.error &&
-    (verified.error.status === 0 || Number(verified.error.status) >= 500)
-  )
-    throw new HttpError(
-      503,
-      "Sign-in service is temporarily unavailable. Try again.",
-    );
-  if (verified.error || verified.data.user?.id !== process.env.OWNER_USER_ID)
-    throw new HttpError(401, "Sign in with the portfolio owner account.");
+  await verifyOwnerSession(data.session.access_token);
   return data.session;
+}
+
+export async function verifyOwnerSession(token?: string) {
+  if (!token)
+    throw new HttpError(401, "Your session ended. Sign in to continue.");
+  const user = await verifiedSessionUser(token);
+  if (user?.id !== process.env.OWNER_USER_ID)
+    throw new HttpError(401, "Sign in with the portfolio owner account.");
 }

@@ -23,7 +23,8 @@ export function AdminSession() {
         checking = false;
       }
     };
-    const interval = setInterval(check, 4 * 60 * 1000);
+    void check();
+    const interval = setInterval(check, 60 * 1000);
     window.addEventListener("focus", check);
     document.addEventListener("visibilitychange", check);
     return () => {

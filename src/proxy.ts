@@ -25,7 +25,7 @@ export async function proxy(request: NextRequest) {
   const token =
     request.cookies.get(accessCookie)?.value ||
     request.cookies.get("rb_owner")?.value;
-  if (accessSeconds(token) > 60) return next();
+  if (accessSeconds(token) > 300) return next();
   if (!request.cookies.has(refreshCookie)) {
     if (!token && (path.startsWith("/admin") || path === "/account"))
       return NextResponse.redirect(
@@ -43,6 +43,7 @@ export async function proxy(request: NextRequest) {
   try {
     const session = await renewSession(request);
     request.cookies.set(accessCookie, session.access_token);
+    request.cookies.set(refreshCookie, session.refresh_token);
     request.cookies.delete("rb_owner");
     headers.set("cookie", request.cookies.toString());
     const response = next();
@@ -65,5 +66,10 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/account", "/api/admin/:path*"],
+  matcher: [
+    "/admin/:path*",
+    "/account",
+    "/api/admin/:path*",
+    "/api/auth/session",
+  ],
 };

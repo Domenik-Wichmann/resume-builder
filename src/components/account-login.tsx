@@ -43,8 +43,8 @@ export function AccountLogin({
     <form className="ai-panel owner-login" onSubmit={login}>
       <h1>Welcome back.</h1>
       <p>
-        Sign in to continue where you left off. Owner sessions renew
-        automatically on this browser for up to 30 days between visits.
+        Sign in to continue where you left off. This browser remembers your
+        sign-in and renews it automatically until you sign out.
       </p>
       <label htmlFor="account-email">Email</label>
       <input

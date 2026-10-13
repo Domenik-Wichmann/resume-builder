@@ -117,7 +117,7 @@ it("preserves a local application deep link, search and fragment", () =>
     "/admin/applications/fixture?tab=review#draft",
   ));
 it.each([login, ownerLogin])(
-  "issues a private 30-day renewable owner session without exposing tokens in JSON",
+  "issues a persistent renewable owner session without exposing tokens in JSON",
   async (handler) => {
     const response = await handler(request("/api/admin/login", "", "POST"));
     expect(response.status).toBe(200);
@@ -255,13 +255,58 @@ it("rejects cross-origin heartbeats and avoids rotation for cross-origin API wri
   expect(auth.refresh).not.toHaveBeenCalled();
 });
 it("renews an idle editor's access token through a same-origin heartbeat", async () => {
-  const response = await heartbeat(
+  const renewed = await proxy(
     request("/api/auth/session", "rb_refresh=test-refresh", "POST"),
   );
+  const response = await heartbeat(
+    request(
+      "/api/auth/session",
+      renewed.headers.get("x-middleware-request-cookie")!,
+      "POST",
+    ),
+  );
   expect(response.status).toBe(200);
-  expect(response.headers.get("set-cookie")).toContain(
+  expect(renewed.headers.get("set-cookie")).toContain(
     "rb_refresh=rotated-test-refresh",
   );
+  expect(renewed.headers.get("x-middleware-request-cookie")).toContain(
+    "rb_refresh=rotated-test-refresh",
+  );
+  expect(auth.refresh).toHaveBeenCalledOnce();
+});
+it("renews before a short-lived access token can expire during editing", async () => {
+  await proxy(
+    request(
+      "/api/auth/session",
+      `rb_account=${token(90)}; rb_refresh=test-refresh`,
+      "POST",
+    ),
+  );
+  expect(auth.refresh).toHaveBeenCalledOnce();
+});
+it("keeps a valid session during provider verification failures without claiming it expired", async () => {
+  auth.user.mockResolvedValue({ data: { user: null }, error: { status: 503 } });
+  const response = await heartbeat(
+    request("/api/auth/session", `rb_account=${token(3600)}`, "POST"),
+  );
+  expect(response.status).toBe(503);
+  expect(response.headers.get("set-cookie")).toBeNull();
+  auth.user.mockRejectedValue(new Error("Network unavailable"));
+  expect(
+    (
+      await heartbeat(
+        request("/api/auth/session", `rb_account=${token(3600)}`, "POST"),
+      )
+    ).status,
+  ).toBe(503);
+});
+it("verifies the exact owner on heartbeat even with a forged future expiry", async () => {
+  auth.user.mockResolvedValue({ data: { user: { id: other } }, error: null });
+  const response = await heartbeat(
+    request("/api/auth/session", `rb_account=${token(3600)}`, "POST"),
+  );
+  expect(response.status).toBe(401);
+  expect(auth.refresh).not.toHaveBeenCalled();
 });
 it.each([logout, ownerLogout])(
   "clears both legacy and current sessions on sign out",
