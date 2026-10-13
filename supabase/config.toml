@@ -7,5 +7,12 @@ major_version = 17
 enabled = false
 
 [auth]
-site_url = "https://resume-builder-amber-sigma.vercel.app"
-additional_redirect_urls = ["https://resume-builder-amber-sigma.vercel.app/auth/recovery", "https://resume-builder-amber-sigma.vercel.app/auth/callback"]
+site_url = "https://domenik-wichmann.com"
+additional_redirect_urls = [
+  "https://domenik-wichmann.com/auth/recovery",
+  "https://domenik-wichmann.com/auth/callback",
+  "https://domenik-wichmann.vercel.app/auth/recovery",
+  "https://domenik-wichmann.vercel.app/auth/callback",
+  "https://resume-builder-amber-sigma.vercel.app/auth/recovery",
+  "https://resume-builder-amber-sigma.vercel.app/auth/callback",
+]
