@@ -375,4 +375,20 @@ it("saves additional fixed projects and longer bullet lists atomically without c
     ],
   );
   expect(empty.rows[0].v).toBe(result.rows[0].v + 1);
+  const unlinked = {
+    ...next,
+    version: empty.rows[0].v,
+    projects: [...clearSignalContent.projects, { ...babycat, record_id: null }],
+  };
+  await db.query("select save_resume_fixed_content($1,$2)", [
+    account,
+    JSON.stringify(unlinked),
+  ]);
+  const persisted = (
+    await db.query<{ spec: typeof unlinked }>(
+      "select spec from resume_fixed_content where account_id=$1",
+      [account],
+    )
+  ).rows[0].spec;
+  expect(persisted.projects[2]).toEqual({ ...babycat, record_id: null });
 });
