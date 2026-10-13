@@ -15,6 +15,7 @@ export function accessConfig(env: Record<string, string | undefined>) {
     siteKey,
     secret,
     spacing: number("AI_VISITOR_SPACING_SECONDS", 5),
+    hourly: number("AI_VISITOR_HOURLY_LIMIT", 20),
     daily: number("AI_VISITOR_DAILY_LIMIT", 25),
     weekly: number("AI_VISITOR_WEEKLY_LIMIT", 50),
     configured: Boolean(siteKey && secret),

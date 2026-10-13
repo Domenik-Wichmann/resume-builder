@@ -123,7 +123,35 @@ it("validates tracked access and still enforces visitor quota before providers",
       p_daily: 25,
       p_weekly: 50,
       p_spacing: 5,
+      p_hourly: 20,
     }),
+  );
+  expect(mocks.analyze).not.toHaveBeenCalled();
+});
+it("allows a verified visitor without a tracking code and applies the rolling-hour quota before providers", async () => {
+  const visitor = createVisitor();
+  mocks.maybeSingle.mockResolvedValue({
+    data: { verified_until: "2099-01-01" },
+    error: null,
+  });
+  expect(
+    (await handleAI(request(`${visitorCookie}=${visitor.cookie}`), "ask"))
+      .status,
+  ).toBe(200);
+  expect(mocks.resolveLink).not.toHaveBeenCalled();
+  expect(mocks.rpc).toHaveBeenCalledWith(
+    "reserve_visitor_ai",
+    expect.objectContaining({ p_visitor: visitor.id, p_hourly: 20 }),
+  );
+  mocks.analyze.mockClear();
+  mocks.rpc.mockResolvedValue({ data: "HOURLY", error: null });
+  const response = await handleAI(
+    request(`${visitorCookie}=${visitor.cookie}`),
+    "ask",
+  );
+  expect(response.status).toBe(429);
+  expect((await response.json()).error).toContain(
+    "20 AI requests in the last hour",
   );
   expect(mocks.analyze).not.toHaveBeenCalled();
 });

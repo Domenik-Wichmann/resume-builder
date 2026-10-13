@@ -24,6 +24,11 @@ const responseSchema = z.object({
   preview_id: z.string().optional(),
   stage: z.number().optional(),
   label: z.string().optional(),
+  tracking_code: z
+    .string()
+    .regex(/^[A-Za-z0-9_-]{8}$/)
+    .optional(),
+  strategy: z.enum(strategies).optional(),
   options: z.record(z.string(), resumeIRSchema).optional(),
   review: z.array(z.string()).optional(),
   error: z.string().optional(),
@@ -39,6 +44,8 @@ export function ApplicationManager({ data }: { data: Dashboard }) {
     [preview, setPreview] = useState<{
       id: string;
       options: Record<string, ResumeIR>;
+      applicationId: string;
+      trackingCode: string;
     } | null>(null),
     [strategy, setStrategy] = useState<string>("TRADITIONAL"),
     [busy, setBusy] = useState(false),
@@ -95,7 +102,7 @@ export function ApplicationManager({ data }: { data: Dashboard }) {
   async function continueDraft(id: string) {
     setPreview(null);
     let state = await action({ action: "status", preview_id: id });
-    if (state.id) {
+    if (state.id && !state.options) {
       rememberDraft(null);
       router.push(`/admin/applications/${state.id}`);
       return;
@@ -111,12 +118,24 @@ export function ApplicationManager({ data }: { data: Dashboard }) {
     }
     if (!state.options || state.stage !== 4)
       throw new Error("Draft status is unavailable.");
-    setPreview({ id, options: state.options });
+    if (!state.id || !state.tracking_code || !state.strategy)
+      throw new Error(
+        "Your draft is ready, but its tracking link is not saved yet. Retry the saved generation before downloading.",
+      );
+    setPreview({
+      id,
+      options: state.options,
+      applicationId: state.id,
+      trackingCode: state.tracking_code,
+    });
+    setStrategy(state.strategy);
     setStage(4);
     setReview(state.review || []);
     setMessage(
-      "Private preview ready. Review the facts and gaps, then save to obtain the real tracking link before exporting.",
+      "Resume saved with its tracking link. Review the content, then download. This generation is also in your saved resumes.",
     );
+    rememberDraft(null);
+    router.refresh();
   }
   async function run(task: () => Promise<void>) {
     setBusy(true);
@@ -226,8 +245,8 @@ export function ApplicationManager({ data }: { data: Dashboard }) {
           <div className="resume-empty">
             <h3>Your first résumé starts here.</h3>
             <p>
-              Add a job description below. Review the draft, then save it to
-              keep a version and get its tracking link.
+              Add a job description below. Generation automatically saves a
+              version with its own tracking link. Review it before sending.
             </p>
           </div>
         )}
@@ -243,12 +262,13 @@ export function ApplicationManager({ data }: { data: Dashboard }) {
       </section>
       <section id="create-resume" className="surface resume-create">
         <p className="eyebrow">
-          1. Add the job · 2. Review your draft · 3. Save & export
+          1. Choose location & add the job · 2. Generate · 3. Review & download
         </p>
         <h2>Create a tailored résumé</h2>
         <p>
           Paste the job description and choose your résumé region. The draft
-          uses your published career evidence. Review it before saving.
+          uses your published career evidence. Each completed resume is saved
+          automatically with a tracking link. Review it before sending.
         </p>
         <form
           className="editor-form"
@@ -272,6 +292,47 @@ export function ApplicationManager({ data }: { data: Dashboard }) {
           }}
         >
           <fieldset disabled={busy} className="resume-form-fields">
+            <fieldset className="resume-region">
+              <legend>Resume location</legend>
+              <p className="muted">
+                Choose the contact profile and paper size for this application.
+                Its tracking link opens the same profile on your portfolio. Your
+                career facts and physical residence stay the same.
+              </p>
+              <div className="resume-region-options">
+                {(
+                  [
+                    [
+                      "US",
+                      "United States",
+                      "US contact profile · Letter paper",
+                    ],
+                    ["BG", "Bulgaria", "Bulgarian contact profile · A4 paper"],
+                  ] as const
+                ).map(([value, label, hint]) => (
+                  <label
+                    key={value}
+                    className={metadata.market === value ? "selected" : ""}
+                  >
+                    <input
+                      type="radio"
+                      name="resume-region"
+                      value={value}
+                      checked={metadata.market === value}
+                      onChange={() => {
+                        setMetadata({ ...metadata, market: value });
+                        setPreview(null);
+                      }}
+                    />
+                    <span>
+                      <strong>{label}</strong>
+                      <small>{hint}</small>
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+
             <div className="field-row">
               <label>
                 Company
@@ -311,45 +372,6 @@ export function ApplicationManager({ data }: { data: Dashboard }) {
                 }}
               />
             </label>
-            <fieldset className="resume-region">
-              <legend>Résumé region</legend>
-              <p className="muted">
-                Uses your configured regional contact details and paper size.
-                Your career facts and physical residence stay the same.
-              </p>
-              <div className="resume-region-options">
-                {(
-                  [
-                    [
-                      "US",
-                      "United States",
-                      "US contact profile · Letter paper",
-                    ],
-                    ["BG", "Bulgaria", "Bulgarian contact profile · A4 paper"],
-                  ] as const
-                ).map(([value, label, hint]) => (
-                  <label
-                    key={value}
-                    className={metadata.market === value ? "selected" : ""}
-                  >
-                    <input
-                      type="radio"
-                      name="resume-region"
-                      value={value}
-                      checked={metadata.market === value}
-                      onChange={() => {
-                        setMetadata({ ...metadata, market: value });
-                        setPreview(null);
-                      }}
-                    />
-                    <span>
-                      <strong>{label}</strong>
-                      <small>{hint}</small>
-                    </span>
-                  </label>
-                ))}
-              </div>
-            </fieldset>
             <details className="resume-advanced">
               <summary>Optional details & experiment settings</summary>
               <label>
@@ -453,30 +475,37 @@ export function ApplicationManager({ data }: { data: Dashboard }) {
       {preview && (
         <section>
           <ResumeRenderer ir={preview.options[strategy]} />
-          <ResumeExportControls ir={preview.options[strategy]} preview />
+          <ResumeExportControls
+            ir={preview.options[strategy]}
+            filename={`${organization || "application"}-${role || "resume"}-${preview.trackingCode}`}
+          />
           <ResumeLengthNotice
             design={preview.options[strategy].design || clearSignalDesign}
           />
           <div className="surface">
-            <label>
-              Preview composition
-              <select
-                value={strategy}
-                onChange={(e) => setStrategy(e.target.value)}
-              >
-                {strategies.map((s) => (
-                  <option key={s}>{s}</option>
-                ))}
-              </select>
-            </label>
+            <h3>Saved resume &amp; tracking</h3>
             <p>
-              The same visual template and canonical facts are used throughout.
-              Preview choice does not bias experiment assignment.
+              Tracking code: <strong>{preview.trackingCode}</strong>
+            </p>
+            <p className="muted">
+              {preview.options[strategy].profile.contact.market === "US"
+                ? "United States contact profile · Letter"
+                : "Bulgaria contact profile · A4"}
             </p>
             <p>
-              Tracking link pending: saving finalizes this application and
-              replaces every portfolio occurrence with its persisted tracking
-              URL.
+              <a
+                className="text-link"
+                href={preview.options[strategy].portfolio_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {preview.options[strategy].portfolio_url}
+              </a>
+            </p>
+            <p>
+              This link is included in the resume and opens your portfolio with
+              the selected contact location. Visits and chat activity appear in
+              this resume’s analytics when tracking is allowed.
             </p>
             {review.length > 0 && (
               <details>
@@ -488,27 +517,12 @@ export function ApplicationManager({ data }: { data: Dashboard }) {
                 </ul>
               </details>
             )}
-            <button
-              disabled={busy}
-              onClick={() =>
-                run(async () => {
-                  const d = await action({
-                    action: "save",
-                    preview_id: preview.id,
-                  });
-                  if (!d.id)
-                    throw new Error(
-                      "The saved résumé could not be opened. Try saving again.",
-                    );
-                  setPreview(null);
-                  rememberDraft(null);
-                  router.refresh();
-                  router.push(`/admin/applications/${d.id}`);
-                })
-              }
+            <Link
+              className="button"
+              href={`/admin/applications/${preview.applicationId}`}
             >
-              Save résumé & get tracking link
-            </button>
+              Open saved resume &amp; analytics
+            </Link>
           </div>
         </section>
       )}

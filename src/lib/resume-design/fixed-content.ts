@@ -141,8 +141,8 @@ export function applyFixedContent(
 export function withTrackingUrl(ir: ResumeIR, code: string): ResumeIR {
   if (!/^[A-Za-z0-9_-]{8}$/.test(code))
     throw new Error("Invalid saved tracking code");
-  if (!ir.portfolio_url) return ir;
-  const origin = new URL(ir.portfolio_url).origin;
+  const origin = new URL(ir.portfolio_url || clearSignalContent.portfolio)
+    .origin;
   const url = `${origin}/r/${code}`;
   return {
     ...ir,

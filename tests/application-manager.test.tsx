@@ -5,6 +5,7 @@ import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { ApplicationManager } from "../src/components/application-manager";
 import type { applicationDashboard } from "../src/lib/applications/repository";
 import { designPreview } from "../src/lib/resume-design/preview";
+import { withTrackingUrl } from "../src/lib/resume-design/fixed-content";
 
 const navigation = vi.hoisted(() => ({ push: vi.fn(), refresh: vi.fn() }));
 vi.mock("next/navigation", () => ({ useRouter: () => navigation }));
@@ -52,7 +53,7 @@ afterEach(async () => {
   vi.unstubAllGlobals();
 });
 
-it("shows the completed résumé immediately before composition controls with private review collapsed", async () => {
+it("shows the saved tracked resume immediately with export and analytics controls, without a second save action", async () => {
   vi.stubGlobal(
     "fetch",
     vi
@@ -61,7 +62,15 @@ it("shows the completed résumé immediately before composition controls with pr
       .mockResolvedValueOnce(
         Response.json({
           stage: 4,
-          options: { TRADITIONAL: designPreview },
+          id: "00000000-0000-4000-8000-000000000001",
+          tracking_code: "saved001",
+          strategy: "TRADITIONAL",
+          options: {
+            TRADITIONAL: withTrackingUrl(
+              { ...designPreview, portfolio_url: "https://portfolio.test" },
+              "saved001",
+            ),
+          },
           review: ["Fictional review note"],
         }),
       ),
@@ -72,8 +81,8 @@ it("shows the completed résumé immediately before composition controls with pr
       .dispatchEvent(new Event("submit", { bubbles: true, cancelable: true })),
   );
   const sheet = container.querySelector(".resume-design")!;
-  const composition = Array.from(container.querySelectorAll("label")).find(
-    (label) => label.textContent?.includes("Preview composition"),
+  const composition = Array.from(container.querySelectorAll("h3")).find(
+    (label) => label.textContent?.includes("Saved resume & tracking"),
   )!;
   expect(sheet).not.toBeNull();
   expect(composition).toBeDefined();
@@ -90,6 +99,42 @@ it("shows the completed résumé immediately before composition controls with pr
     container.querySelector(".resume-export-controls select")?.textContent,
   ).toContain("DOC (Word-compatible)");
   expect(container.textContent).toContain("Download PDF");
+  expect(container.textContent).toContain("saved001");
+  expect(container.textContent).not.toContain("Tracking link pending");
+  expect(container.textContent).not.toContain("Draft download");
+  expect(
+    container.querySelector('a[href="https://portfolio.test/r/saved001"]'),
+  ).not.toBeNull();
+  expect(
+    container.querySelector(
+      'a[href="/admin/applications/00000000-0000-4000-8000-000000000001"]',
+    ),
+  ).not.toBeNull();
+  expect(navigation.refresh).toHaveBeenCalled();
+  expect(navigation.push).not.toHaveBeenCalled();
+  expect(localStorage.getItem("resume-application-draft")).toBeNull();
+});
+
+it("retains the draft and withholds downloads when tracking finalization is incomplete", async () => {
+  vi.stubGlobal(
+    "fetch",
+    vi
+      .fn()
+      .mockResolvedValueOnce(Response.json({ preview_id: "draft" }))
+      .mockResolvedValueOnce(
+        Response.json({ stage: 4, options: { TRADITIONAL: designPreview } }),
+      ),
+  );
+  await act(async () =>
+    container
+      .querySelector("#create-resume form")!
+      .dispatchEvent(new Event("submit", { bubbles: true, cancelable: true })),
+  );
+  expect(container.querySelector(".resume-export-controls")).toBeNull();
+  expect(container.querySelector('[role="alert"]')?.textContent).toContain(
+    "tracking link is not saved",
+  );
+  expect(localStorage.getItem("resume-application-draft")).toBe("draft");
 });
 
 it("places saved résumés before creation and exposes a link to their analytics", () => {

@@ -560,6 +560,47 @@ it("enforces visitor spacing, concurrency, daily and rolling-week limits in the 
     ).rejects.toThrow("permission denied");
   });
 });
+it("atomically allows twenty requests in a rolling hour across operation types and restores capacity as requests age", async () => {
+  const visitor = randomUUID();
+  await db.query(
+    "insert into anonymous_visitors(id,account_id) values($1,$2)",
+    [visitor, a],
+  );
+  await db.query(
+    "insert into visitor_ai_operations(account_id,visitor_id,operation,created_at) select $1,$2,'ask',now()-interval '10 seconds' from generate_series(1,19)",
+    [a, visitor],
+  );
+  const reserve = async () =>
+    (
+      await db.query<{ result: string }>(
+        "select reserve_visitor_ai($1,$2,null,'match',1,100,500,20) result",
+        [a, visitor],
+      )
+    ).rows[0].result;
+  expect(await reserve()).toBe("OK");
+  await db.query(
+    "update anonymous_visitors set ai_lease_until=null where id=$1",
+    [visitor],
+  );
+  await db.query(
+    "update visitor_ai_operations set created_at=now()-interval '10 seconds' where visitor_id=$1",
+    [visitor],
+  );
+  expect(await reserve()).toBe("HOURLY");
+  expect(
+    (
+      await db.query<{ n: number }>(
+        "select count(*)::integer n from visitor_ai_operations where visitor_id=$1",
+        [visitor],
+      )
+    ).rows[0].n,
+  ).toBe(20);
+  await db.query(
+    "update visitor_ai_operations set created_at=now()-interval '61 minutes' where id=(select id from visitor_ai_operations where visitor_id=$1 limit 1)",
+    [visitor],
+  );
+  expect(await reserve()).toBe("OK");
+});
 it("keeps credits auditable, integer, idempotent, service-only and non-overdrawn", async () => {
   const grant = await db.query<{ id: string }>(
     "select append_credit($1,1000000,'TRIAL_GRANT','one-trial',null,now()+interval '30 days') id",

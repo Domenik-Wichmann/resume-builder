@@ -8,7 +8,7 @@ import {
   generationStatus,
 } from "@/lib/applications/generation";
 import { requireOwner } from "@/lib/admin";
-import { createTrackingCode } from "@/lib/tracking/codes";
+import { completeApplication } from "@/lib/applications/completion";
 import { ProviderError } from "@/lib/ai/openrouter";
 import { timedResponse } from "@/lib/performance";
 export const maxDuration = 300;
@@ -68,12 +68,21 @@ async function handleApplication(request: Request) {
         headers: { "Cache-Control": "no-store" },
       });
     if (action.action === "status")
-      return Response.json(await generationStatus(a, action.preview_id), {
-        headers: { "Cache-Control": "no-store" },
-      });
+      return Response.json(
+        await completeApplication(
+          a,
+          await generationStatus(a, action.preview_id),
+        ),
+        {
+          headers: { "Cache-Control": "no-store" },
+        },
+      );
     if (action.action === "generate")
       return Response.json(
-        await advanceGeneration(a, action.preview_id, action.stage),
+        await completeApplication(
+          a,
+          await advanceGeneration(a, action.preview_id, action.stage),
+        ),
         { headers: { "Cache-Control": "no-store" } },
       );
     if (action.action === "save") {
@@ -83,20 +92,9 @@ async function handleApplication(request: Request) {
           409,
           "Finish generation before saving this application.",
         );
-      for (let attempt = 0; attempt < 3; attempt++) {
-        const saved = await a.db.rpc("finalize_application", {
-          p_account: a.accountId,
-          p_preview: action.preview_id,
-          p_code: createTrackingCode(),
-        });
-        if (!saved.error) return Response.json({ id: saved.data });
-        if (saved.error.code !== "23505")
-          throw new HttpError(
-            409,
-            "Application was not saved. Refresh or prepare a new preview.",
-          );
-      }
-      throw new Error("Cannot allocate tracking code.");
+      return Response.json(await completeApplication(a, state), {
+        headers: { "Cache-Control": "no-store" },
+      });
     }
     if (action.action === "outcome") {
       const saved = await a.db.rpc("record_application_outcome", {

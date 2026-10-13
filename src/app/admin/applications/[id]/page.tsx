@@ -128,9 +128,9 @@ export default async function Application({
         </p>
         {snapshot.data && (
           <p>
-            Historical snapshot ·{" "}
+            Tracking code: <strong>{snapshot.data.tracking_code}</strong> ·{" "}
             <a className="text-link" href={`/r/${snapshot.data.tracking_code}`}>
-              Tracking link ↗
+              Open tracking link ↗
             </a>
           </p>
         )}

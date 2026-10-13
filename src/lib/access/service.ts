@@ -75,6 +75,7 @@ export async function reservePublicAction(
     p_workspace: workspaceId || null,
     p_operation: operation,
     p_spacing: c.spacing,
+    p_hourly: c.hourly,
     p_daily: c.daily,
     p_weekly: c.weekly,
   });
@@ -86,7 +87,9 @@ export async function reservePublicAction(
         ? "Another AI operation is running. Please wait."
         : reserved.data === "SPACING"
           ? `Wait at least ${c.spacing} seconds between AI operations.`
-          : "Visitor AI limit reached. Please try later.",
+          : reserved.data === "HOURLY"
+            ? `You have reached ${c.hourly} AI requests in the last hour. Please try again as earlier requests leave that window. No tracking link is required.`
+            : "Visitor AI limit reached. Please try later.",
     );
   const release = async () => {
     await db

@@ -20,12 +20,14 @@ export default function Privacy() {
       </p>
       <p>
         AI operations are limited per opaque visitor: normally one at a time, at
-        least five seconds apart, 25 per UTC day and 50 in seven rolling days.
-        Resetting browser cookies creates a new identifier; the global fuse
-        still limits spending. Provider accounting stores model names, usage
-        quantities and costs when available, with no prompts or answers in the
-        accounting records. Recent quota reservations are pruned after seven
-        days when the visitor next uses AI.
+        least five seconds apart, 20 in a rolling hour, 25 per UTC day and 50 in
+        seven rolling days. A tracking link is not required to use AI; untracked
+        visitors can complete human verification when it is configured and use
+        the same limits. Resetting browser cookies creates a new identifier; the
+        global fuse still limits spending. Provider accounting stores model
+        names, usage quantities and costs when available, with no prompts or
+        answers in the accounting records. Recent quota reservations are pruned
+        after seven days when the visitor next uses AI.
       </p>
       <p>
         Public portfolio pages record optional page views using an HttpOnly,

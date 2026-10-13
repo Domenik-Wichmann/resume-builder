@@ -18,6 +18,7 @@ import { newWorkspace } from "../workspaces/model";
 import { applicationTemplate } from "../resume-design/server";
 import {
   applyFixedContent,
+  clearSignalContent,
   fixedContentSchema,
 } from "../resume-design/fixed-content";
 import { designSchema, clearSignalDesign } from "../resume-design/model";
@@ -1572,6 +1573,7 @@ export async function advanceGeneration(
         }
         ir = resumeIRSchema.parse({
           ...ir,
+          portfolio_url: ir.portfolio_url || clearSignalContent.portfolio,
           design: {
             ...context.design,
             page: p.metadata.market === "US" ? "LETTER" : "A4",
