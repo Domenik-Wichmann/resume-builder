@@ -139,8 +139,8 @@ export function ResumeContentEditor({
         >
           <h3>Choose project evidence links</h3>
           <p>
-            Your text, bullets and homepage stay intact. An unavailable ID may
-            be old, from another record type, or from another account.
+            Your text, bullets and homepage stay intact. Options show your
+            showcase name alongside the stored Career Brain title.
           </p>
           {bindingIssues.map((issue) => (
             <label key={issue.id}>

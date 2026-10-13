@@ -9,15 +9,20 @@ const mocks = vi.hoisted(() => ({
   rpc: vi.fn(),
   eq: vi.fn(),
   linked: vi.fn(),
+  cases: vi.fn(),
 }));
 vi.mock("../src/lib/admin", () => ({ requireOwner: mocks.owner }));
 vi.mock("../src/lib/accounts", () => ({ requireAccount: mocks.account }));
+vi.mock("../src/lib/portfolio/case-study-server", () => ({
+  loadCaseStudies: mocks.cases,
+}));
 import { POST } from "../src/app/api/admin/resume-content/route";
 beforeEach(() => {
   vi.stubEnv("APP_MODE", "demo");
   vi.stubEnv("NEXT_PUBLIC_SITE_URL", "https://portfolio.test");
   vi.clearAllMocks();
   mocks.owner.mockResolvedValue(undefined);
+  mocks.cases.mockResolvedValue([]);
   const query = {
     select: vi.fn().mockReturnThis(),
     eq: mocks.eq,
@@ -99,6 +104,53 @@ it("retains a valid owned evidence binding", async () => {
   });
   expect((await POST(request())).status).toBe(200);
   expect(mocks.rpc.mock.calls[0][1].p_spec.projects[2]).toEqual(babycat);
+});
+it("lists the same BabyCat alias as Selected Projects, retaining its actual canonical title and UUID", async () => {
+  const id = "937f2379-7dbc-4eae-a12f-5c3dacc13b0c";
+  mocks.linked.mockResolvedValue({
+    data: [
+      {
+        id,
+        title: "Configurable Excel and VBA Rules Engine",
+        archived_at: null,
+      },
+    ],
+    error: null,
+  });
+  const response = await POST(request());
+  const result = await response.json();
+  expect(result.project_options).toEqual([
+    {
+      id,
+      title: "BabyCat / Rules Engine — Configurable Excel and VBA Rules Engine",
+    },
+  ]);
+  expect(result.invalid_bindings[0].record_id).toBe(babycat.record_id);
+  expect(mocks.rpc).not.toHaveBeenCalled();
+  expect(mocks.cases).toHaveBeenCalledWith(
+    expect.anything(),
+    "verified-account",
+  );
+});
+it("uses the owner's saved showcase title without hiding the underlying project identity or listing archived records", async () => {
+  const id = "00000000-0000-4000-8000-000000000001";
+  mocks.linked.mockResolvedValue({
+    data: [
+      { id, title: "Fictional original career title", archived_at: null },
+      {
+        id: "00000000-0000-4000-8000-000000000002",
+        title: "Fictional archived project",
+        archived_at: "2026-01-01",
+      },
+    ],
+    error: null,
+  });
+  mocks.cases.mockResolvedValue([
+    { project_id: id, content: { title: "Fictional showcase title" } },
+  ]);
+  expect((await (await POST(request())).json()).project_options).toEqual([
+    { id, title: "Fictional showcase title — Fictional original career title" },
+  ]);
 });
 it("distinguishes a stale revision from content validation and sanitizes unknown database failures", async () => {
   mocks.linked.mockResolvedValue({

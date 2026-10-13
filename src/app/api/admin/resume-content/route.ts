@@ -4,6 +4,8 @@ import { requireAccount } from "@/lib/accounts";
 import { readJson, errorResponse, HttpError } from "@/lib/http";
 import { fixedContentSchema } from "@/lib/resume-design/fixed-content";
 import { applicationTemplate } from "@/lib/resume-design/server";
+import { loadCaseStudies } from "@/lib/portfolio/case-study-server";
+import { showcaseTitle } from "@/lib/portfolio/selection";
 export async function GET() {
   try {
     await requireOwner();
@@ -47,6 +49,7 @@ export async function POST(request: Request) {
         (p) => p.record_id && !found.has(p.record_id),
       );
       if (missing.length) {
+        const cases = await loadCaseStudies(a.db, a.accountId);
         return Response.json(
           {
             code: "INVALID_PROJECT",
@@ -59,7 +62,18 @@ export async function POST(request: Request) {
             })),
             project_options: projects
               .filter((p) => !p.archived_at)
-              .map((p) => ({ id: p.id, title: p.title })),
+              .map((p) => {
+                const display =
+                  cases.find((c) => c.project_id === p.id)?.content.title ||
+                  showcaseTitle(p);
+                // Display aliases help the owner find the app; the canonical
+                // title stays visible so similarly named projects cannot be confused.
+                return {
+                  id: p.id,
+                  title:
+                    display === p.title ? display : `${display} — ${p.title}`,
+                };
+              }),
           },
           { status: 422, headers: { "Cache-Control": "no-store" } },
         );
