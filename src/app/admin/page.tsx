@@ -4,13 +4,42 @@ import { isOwner } from "@/lib/admin";
 import { requireAccount } from "@/lib/accounts";
 import { OwnerLogin, TrackingLinkForm } from "@/components/admin-controls";
 import { AdminPageHeader } from "@/components/admin-page-header";
-import { AnalyticsTrend } from "@/components/analytics-chart";
+import { OverviewAnalytics } from "@/components/overview-analytics";
+import {
+  defaultAnalyticsFilters,
+  type AnalyticsQuery,
+} from "@/lib/analytics/filters";
+import { fictionalAnalytics } from "@/lib/analytics/demo";
 export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Owner · Resume Builder",
   robots: { index: false, follow: false },
 };
-export default async function Admin() {
+export default async function Admin({
+  searchParams,
+}: {
+  searchParams: Promise<AnalyticsQuery>;
+}) {
+  if (process.env.APP_MODE === "demo" && (await searchParams).preview === "1") {
+    const filters = defaultAnalyticsFilters(30);
+    return (
+      <main id="main" className="wrap admin-main">
+        <p className="demo-banner">
+          FICTIONAL OVERVIEW PREVIEW · sample activity is not real visitor data
+        </p>
+        <AdminPageHeader
+          section="Your workspace"
+          title="Overview"
+          description="Portfolio activity at a glance."
+        />
+        <OverviewAnalytics
+          data={fictionalAnalytics(filters)}
+          filters={filters}
+        />
+      </main>
+    );
+  }
+
   if (!(await isOwner()))
     return (
       <main id="main" className="wrap prose">
@@ -18,41 +47,29 @@ export default async function Admin() {
         <OwnerLogin />
       </main>
     );
-  const { db } = await requireAccount();
-  const [landing, workspaces, questions, events, links, career] =
-    await Promise.all([
-      db
-        .from("tracking_events")
-        .select("id", { count: "exact", head: true })
-        .eq("event_type", "page_view"),
-      db
-        .from("workspaces")
-        .select("id,title,market,updated_at", { count: "exact" })
-        .order("updated_at", { ascending: false })
-        .limit(20),
-      db
-        .from("workspace_questions")
-        .select("id", { count: "exact", head: true }),
-      db
-        .from("workspace_events")
-        .select("event_type")
-        .order("created_at", { ascending: false })
-        .in("event_type", ["resume_preview", "workspace_export"])
-        .limit(10000),
-      db
-        .from("tracking_links")
-        .select("code,label,market,active")
-        .order("created_at", { ascending: false })
-        .limit(20),
-      db.from("projects").select("title,is_public").limit(20),
-    ]);
-  if (
-    [landing, workspaces, questions, events, links, career].some(
-      (result) => result.error,
-    )
-  )
+  const { db, accountId } = await requireAccount();
+  const [workspaces, links, career, analytics] = await Promise.all([
+    db
+      .from("workspaces")
+      .select("id,title,market,updated_at", { count: "exact" })
+      .eq("account_id", accountId)
+      .order("updated_at", { ascending: false })
+      .limit(20),
+    db
+      .from("tracking_links")
+      .select("code,label,market,active")
+      .eq("account_id", accountId)
+      .order("created_at", { ascending: false })
+      .limit(20),
+    db
+      .from("projects")
+      .select("title,is_public")
+      .eq("account_id", accountId)
+      .limit(20),
+    loadAnalytics(30, false),
+  ]);
+  if ([workspaces, links, career].some((result) => result.error))
     throw new Error("Cannot load owner overview.");
-  const analytics = await loadAnalytics(30, false);
   return (
     <main id="main" className="wrap admin-main">
       <AdminPageHeader
@@ -60,6 +77,7 @@ export default async function Admin() {
         title="Overview"
         description="Manage your career evidence, public portfolio and job applications. See recent interest here, or open a tool to pick up your work."
       />
+      <OverviewAnalytics data={analytics} filters={analytics.filters} />
       <section
         className="admin-shortcuts"
         aria-label="Manage your career workspace"
@@ -92,59 +110,6 @@ export default async function Admin() {
           <strong>Project showcase</strong>
           <span>Manage project pages, links and project images</span>
         </Link>
-      </section>
-      <section id="overview" className="admin-metrics">
-        {[
-          ["Tracked page views", landing.count || 0],
-          ["Saved workspaces", workspaces.count || 0],
-          ["Questions saved", questions.count || 0],
-          [
-            "Résumé previews (latest 10k events)",
-            events.data?.filter(
-              (event) => event.event_type === "resume_preview",
-            ).length || 0,
-          ],
-          [
-            "Export opens (latest 10k events)",
-            events.data?.filter(
-              (event) => event.event_type === "workspace_export",
-            ).length || 0,
-          ],
-        ].map(([label, value]) => (
-          <article className="project-card" key={label}>
-            <strong>{value}</strong>
-            <p>{label}</p>
-          </article>
-        ))}
-      </section>
-      <details className="admin-count-notes">
-        <summary>How activity is counted</summary>
-        <p className="muted">
-          Public page views are tracked from the analytics update onward, except
-          when privacy signals or signed-in owner access disable tracking.
-          Historical visits reflect short-link landings only. Completed browser
-          PDF saves are not measured. Export opens do not prove a file was
-          downloaded. Counts reflect retained records.
-        </p>
-      </details>
-      <section
-        className="analytics-grid section"
-        aria-label="Last 30 days of activity"
-      >
-        <AnalyticsTrend
-          title="Page views · last 30 days"
-          rows={analytics.summary.daily.map((day) => ({
-            label: day.label,
-            count: day.views,
-          }))}
-        />
-        <AnalyticsTrend
-          title="Questions · last 30 days"
-          rows={analytics.summary.daily.map((day) => ({
-            label: day.label,
-            count: day.questions,
-          }))}
-        />
       </section>
       <nav className="admin-section-links" aria-label="Overview sections">
         <a href="#questions">Questions & topics</a>
@@ -201,9 +166,9 @@ export default async function Admin() {
         <div className="admin-grid">
           <article className="project-card">
             <h3>Most asked questions</h3>
-            {analytics.summary.questions.length ? (
+            {analytics.questions.length ? (
               <ol>
-                {analytics.summary.questions.slice(0, 3).map((q) => (
+                {analytics.questions.slice(0, 3).map((q) => (
                   <li key={q.label}>
                     {q.label} <span className="muted">· {q.count} asked</span>
                   </li>
@@ -215,9 +180,9 @@ export default async function Admin() {
           </article>
           <article className="project-card">
             <h3>Top topics</h3>
-            {analytics.summary.topics.length ? (
+            {analytics.topics.length ? (
               <ol>
-                {analytics.summary.topics.slice(0, 3).map((t) => (
+                {analytics.topics.slice(0, 3).map((t) => (
                   <li key={t.label}>
                     {t.label}{" "}
                     <span className="muted">· {t.count} questions</span>
@@ -229,9 +194,6 @@ export default async function Admin() {
             )}
           </article>
         </div>
-        {analytics.truncated && (
-          <p className="muted">Highlights use up to 10,000 rows per source.</p>
-        )}
       </section>
       <details id="career" className="admin-overview-details">
         <summary>Project publication status</summary>

@@ -7,6 +7,9 @@ const mocks = vi.hoisted(() => ({
 }));
 vi.mock("../src/lib/db", () => ({ database: () => ({ rpc: mocks.rpc }) }));
 vi.mock("../src/lib/admin", () => ({ isOwner: mocks.owner }));
+vi.mock("../src/lib/market-server", () => ({
+  currentMarket: async () => "US",
+}));
 vi.mock("../src/lib/tracking/service", async (importOriginal) => {
   const original =
     await importOriginal<typeof import("../src/lib/tracking/service")>();
@@ -54,6 +57,7 @@ it("sets an HttpOnly signed session and writes only server-resolved fields", asy
     p_session: readSession(cookie)!.sessionId,
     p_path: "/",
     p_link: null,
+    p_market: "US",
   });
 });
 it("reuses a signed session and verifies attribution on the server", async () => {
@@ -64,6 +68,7 @@ it("reuses a signed session and verifies attribution on the server", async () =>
     p_session: session.sessionId,
     p_path: "/",
     p_link: "verified-link",
+    p_market: "US",
   });
 });
 it("suppresses writes for privacy signals, owner sessions and demo mode", async () => {

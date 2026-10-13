@@ -3,7 +3,7 @@ export function AnalyticsChart({
   rows,
 }: {
   title: string;
-  rows: { label: string; count: number }[];
+  rows: { label: string; count: number; href?: string }[];
 }) {
   const maximum = Math.max(1, ...rows.map((r) => r.count));
   return (
@@ -13,7 +13,15 @@ export function AnalyticsChart({
         <ol>
           {rows.map((row) => (
             <li key={row.label}>
-              <span className="analytics-label">{row.label}</span>
+              <span className="analytics-label">
+                {row.href ? (
+                  <a className="text-link" href={row.href}>
+                    {row.label}
+                  </a>
+                ) : (
+                  row.label
+                )}
+              </span>
               <span className="analytics-bar-track" aria-hidden="true">
                 <span style={{ width: (row.count / maximum) * 100 + "%" }} />
               </span>
@@ -33,7 +41,7 @@ export function AnalyticsTrend({
   rows,
 }: {
   title: string;
-  rows: { label: string; count: number }[];
+  rows: { label: string; count: number; href?: string }[];
 }) {
   const maximum = Math.max(1, ...rows.map((row) => row.count));
   const points = rows.map((row, index) => ({
@@ -82,6 +90,25 @@ export function AnalyticsTrend({
               stroke="var(--accent)"
               strokeWidth="3"
             />
+            {points.map(
+              (point, index) =>
+                rows[index].href && (
+                  <a
+                    key={rows[index].label}
+                    href={rows[index].href}
+                    aria-label={`${rows[index].label}: ${rows[index].count}. Filter to this day.`}
+                  >
+                    <circle
+                      cx={point.x}
+                      cy={point.y}
+                      r="5"
+                      fill="var(--accent)"
+                    >
+                      <title>{`${rows[index].label}: ${rows[index].count} · click to inspect`}</title>
+                    </circle>
+                  </a>
+                ),
+            )}
             <text x="40" y="208">
               {rows[0]?.label}
             </text>
@@ -102,7 +129,15 @@ export function AnalyticsTrend({
                 <tbody>
                   {rows.map((row) => (
                     <tr key={row.label}>
-                      <td>{row.label}</td>
+                      <td>
+                        {row.href ? (
+                          <a className="text-link" href={row.href}>
+                            {row.label}
+                          </a>
+                        ) : (
+                          row.label
+                        )}
+                      </td>
                       <td>{row.count}</td>
                     </tr>
                   ))}

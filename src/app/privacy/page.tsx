@@ -45,6 +45,12 @@ export default function Privacy() {
         Do Not Track and Global Privacy Control disable tracking.
       </p>
       <p>
+        When page-view tracking is allowed, analytics also record the coarse US
+        or Bulgaria contact profile shown on that page. This is presentation
+        context, not your physical location. Older untracked visits without that
+        context remain unknown.
+      </p>
+      <p>
         Up to two workspaces are saved for an opaque browser identifier in an
         HttpOnly cookie. Live workspaces store job descriptions, questions,
         answers, evidence references, and résumé projections. You can delete

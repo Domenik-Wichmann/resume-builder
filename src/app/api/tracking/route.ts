@@ -4,6 +4,7 @@ import { isOwner } from "@/lib/admin";
 import { validateEnv } from "@/lib/env";
 import { database } from "@/lib/db";
 import { pageViewSchema } from "@/lib/tracking/paths";
+import { currentMarket } from "@/lib/market-server";
 import {
   createSession,
   readSession,
@@ -43,6 +44,7 @@ export async function POST(request: NextRequest) {
       p_session: sessionId,
       p_path: path,
       p_link: linkId,
+      p_market: await currentMarket(),
     });
     if (result.error) throw new Error("Cannot record page view.");
     if (!linkId && existing?.code !== "siteView")

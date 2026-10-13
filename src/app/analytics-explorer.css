@@ -1,0 +1,213 @@
+.analytics-filter-panel {
+  margin: 24px 0;
+}
+.analytics-filter-heading {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.analytics-filter-heading h2 {
+  margin: 0 0 8px;
+}
+.analytics-filter-heading p {
+  max-width: 600px;
+  margin: 0;
+}
+.analytics-filter-fields {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+.analytics-filter-fields label {
+  display: grid;
+  gap: 8px;
+  font-size: 0.85rem;
+}
+.analytics-filter-fields :is(input, select) {
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+}
+.analytics-more-filters {
+  margin-top: 24px;
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+}
+.analytics-more-filters summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.analytics-more-filters .analytics-filter-fields {
+  margin-top: 20px;
+}
+.analytics-more-filters p {
+  font-size: 0.78rem;
+}
+.analytics-filter-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 24px;
+}
+.analytics-selection {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 28px 0;
+  font-size: 0.85rem;
+}
+.analytics-metrics {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+.analytics-metrics .project-card {
+  min-width: 0;
+  padding: 20px;
+}
+.analytics-metrics .project-card p {
+  margin: 8px 0;
+}
+.analytics-metrics small {
+  display: block;
+  font-size: 0.74rem;
+}
+.analytics-comparison-note {
+  margin-top: 18px;
+  font-size: 0.8rem;
+}
+.analytics-hourly {
+  margin: 24px 0;
+}
+.analytics-hourly summary {
+  font-weight: 600;
+  cursor: pointer;
+}
+.analytics-hourly .analytics-chart {
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+.analytics-hourly .analytics-chart ol {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 32px;
+}
+.analytics-link-performance {
+  margin-top: 24px;
+}
+.analytics-table-detail {
+  display: block;
+  color: var(--muted);
+  font-size: 0.75rem;
+  margin: 8px 0;
+  max-width: 250px;
+  white-space: normal;
+}
+.analytics-event-table {
+  min-width: 780px;
+}
+.analytics-event-table th {
+  text-align: left;
+}
+.analytics-event-table td:last-child {
+  white-space: normal;
+  width: 35%;
+  min-width: 250px;
+  overflow-wrap: anywhere;
+}
+.analytics-event-table details {
+  max-width: 440px;
+}
+.analytics-event-table summary {
+  cursor: pointer;
+}
+.analytics-event-table details p {
+  margin-top: 16px;
+  white-space: pre-wrap;
+}
+.analytics-pagination {
+  display: flex;
+  justify-content: space-between;
+  max-width: none;
+  gap: 16px;
+  margin-top: 24px;
+}
+.analytics-pagination .button {
+  min-height: 44px;
+}
+.analytics-trend circle {
+  transition: r 0.15s;
+}
+.analytics-trend a:hover circle,
+.analytics-trend a:focus circle {
+  r: 8;
+  stroke: var(--purple);
+  stroke-width: 3;
+}
+.overview-analytics {
+  margin: 28px 0 48px;
+}
+.overview-pulse {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+.overview-pulse a {
+  padding: 20px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  display: grid;
+  gap: 8px;
+}
+.overview-pulse a:hover {
+  border-color: var(--purple);
+}
+.overview-pulse strong {
+  font-size: 2rem;
+  color: var(--purple);
+}
+.overview-pulse small {
+  color: var(--muted);
+  font-size: 0.74rem;
+}
+@media (max-width: 1000px) {
+  .analytics-filter-heading {
+    flex-direction: column;
+    gap: 18px;
+  }
+  .analytics-filter-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 700px) {
+  .analytics-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .analytics-filter-fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .overview-pulse {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .overview-pulse a {
+    grid-template-columns: 70px 1fr;
+    align-items: center;
+  }
+  .overview-pulse small {
+    grid-column: 2;
+  }
+  .analytics-hourly .analytics-chart ol {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .analytics-filter-panel {
+    padding: 20px;
+  }
+  .analytics-selection {
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
