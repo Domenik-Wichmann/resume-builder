@@ -1,0 +1,15 @@
+{
+  "id": "babycat",
+  "record_id": "54f7fd1c-b6e1-4cd4-a9f4-0c3fc4676a2f",
+  "title": "BabyCat — Catalog Management & AI-Assisted Rules Engine",
+  "metadata": "2026 | Project owner and architect; AI-assisted development | Independent project",
+  "bullets": [
+    "Multi-tenant platform: Python, JavaScript, Azure Functions, Azure SQL, Blob Storage; RBAC, versioning, audit trails.",
+    "AST-based DSL: transformations, validation, aggregation, formatting, governance; execution caching and indexed composite-key lookups.",
+    "OpenRouter AI rule generation: schema-grounded prompts, structured outputs, clarification, DSL validation, human review.",
+    "Interactive data workbench: change visualization, DSL filtering, cell-level provenance, syntax highlighting, dependency graphs and impact analysis.",
+    "OAuth API, SFTP and webhook imports; reference tables; multi-destination exports, approval gates, durable queues and duplicate protection.",
+    "232 automated tests; end-to-end pipelines, desktop/mobile browser checks, tenant isolation and retry recovery."
+  ],
+  "homepage": "https://black-glacier-0b870d20f.1.azurestaticapps.net/demo.html"
+}

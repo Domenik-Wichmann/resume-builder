@@ -22,7 +22,7 @@ export async function POST(request: Request) {
     const input = await readJson(
       request,
       z.object({ content: fixedContentSchema }).strict(),
-      16000,
+      100000,
     );
     const saved = await a.db.rpc("save_resume_fixed_content", {
       p_account: a.accountId,

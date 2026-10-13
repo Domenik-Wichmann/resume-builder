@@ -9,6 +9,7 @@ import {
 } from "../src/lib/resume-design/fixed-content";
 import { clearSignalDesign } from "../src/lib/resume-design/model";
 import { designPreview } from "../src/lib/resume-design/preview";
+import babycat from "./fixtures/owner-approved-babycat.json";
 let db: PGlite, account: string, otherAccount: string;
 const owner = randomUUID(),
   other = randomUUID();
@@ -293,4 +294,85 @@ it("initializes the v4 design and fixed content together once, retaining subsequ
       )
     ).rows[0].spec.closing,
   ).toBe("Owner revised closing");
+});
+it("saves additional fixed projects and longer bullet lists atomically without changing historical revisions", async () => {
+  await member();
+  const binding = (
+    await db.query<{ id: string }>(
+      "insert into projects(account_id,slug,title,summary) values($1,'fixed-block-fixture','Explicitly fictional binding fixture','Test binding only, not new owner evidence.') returning id",
+      [account],
+    )
+  ).rows[0].id;
+  const current = (
+    await db.query<{ version: number; spec: unknown }>(
+      "select version,spec from resume_fixed_content where account_id=$1",
+      [account],
+    )
+  ).rows[0];
+  const next = {
+    ...clearSignalContent,
+    version: current.version,
+    projects: [
+      ...clearSignalContent.projects,
+      { ...babycat, record_id: binding },
+    ],
+  };
+  const result = await db.query<{ v: number }>(
+    "select save_resume_fixed_content($1,$2) v",
+    [account, JSON.stringify(next)],
+  );
+  expect(result.rows[0].v).toBe(current.version + 1);
+  const saved = (
+    await db.query<{ spec: typeof next }>(
+      "select spec from resume_fixed_content where account_id=$1",
+      [account],
+    )
+  ).rows[0].spec;
+  expect(saved.projects).toHaveLength(3);
+  expect(saved.projects[2].bullets).toEqual(babycat.bullets);
+  expect(
+    (
+      await db.query<{ spec: unknown }>(
+        "select spec from resume_fixed_content_revisions where account_id=$1 and version=$2",
+        [account, current.version],
+      )
+    ).rows[0].spec,
+  ).toEqual(current.spec);
+  await expect(
+    db.query("select save_resume_fixed_content($1,$2)", [
+      account,
+      JSON.stringify(next),
+    ]),
+  ).rejects.toThrow("STALE_CONTENT");
+  await expect(
+    db.query("select save_resume_fixed_content($1,$2)", [
+      account,
+      JSON.stringify({
+        ...next,
+        version: result.rows[0].v,
+        projects: [babycat],
+      }),
+    ]),
+  ).rejects.toThrow("INVALID_PROJECT");
+  await expect(
+    db.query("select save_resume_fixed_content($1,$2)", [
+      account,
+      JSON.stringify({
+        ...next,
+        version: result.rows[0].v,
+        projects: [
+          { ...babycat, record_id: binding },
+          { ...babycat, record_id: binding },
+        ],
+      }),
+    ]),
+  ).rejects.toThrow("INVALID_CONTENT");
+  const empty = await db.query<{ v: number }>(
+    "select save_resume_fixed_content($1,$2) v",
+    [
+      account,
+      JSON.stringify({ ...next, version: result.rows[0].v, projects: [] }),
+    ],
+  );
+  expect(empty.rows[0].v).toBe(result.rows[0].v + 1);
 });

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   fixedContentSchema,
+  fixedProjectSchema,
   type FixedContent,
 } from "@/lib/resume-design/fixed-content";
 export function ResumeContentEditor({
@@ -16,24 +17,92 @@ export function ResumeContentEditor({
   );
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
+  const [addition, setAddition] = useState("");
+  let projectCount: number | null = null;
+  let bulletCount = 0;
+  try {
+    const parsed = fixedContentSchema.safeParse(JSON.parse(value));
+    if (parsed.success) {
+      projectCount = parsed.data.projects.length;
+      bulletCount = parsed.data.projects.reduce(
+        (total, project) => total + project.bullets.length,
+        0,
+      );
+    }
+  } catch {
+    /* Count updates once the edited JSON is valid. */
+  }
   return (
     <section className="surface editor-form">
       <h2>Fixed application content</h2>
       <p>
-        The v4 projects stay in this order. Generation cannot rewrite these
-        blocks. Header identity and contact details come from your career
+        Fixed projects appear in the order listed. Generation cannot rewrite
+        these blocks. Header identity and contact details come from your career
         profile and market settings. Set learning_demo to an HTTPS learning-page
         URL, or leave it null to omit the optional link. record_id can bind a
-        project to its canonical evidence for conflict review.
+        project to its canonical evidence for conflict review. There is no
+        project or bullet count cap. The personal_portfolio block gets your
+        tracking link; learning_demo applies only to the block with id lms.
+      </p>
+      <p className="resume-badge" role="status" aria-live="polite">
+        {projectCount === null
+          ? "Item count available when the JSON is valid"
+          : `${projectCount} fixed ${projectCount === 1 ? "project" : "projects"} · ${bulletCount} ${bulletCount === 1 ? "bullet" : "bullets"}`}
       </p>
       <label>
         Approved project text, links and invitations
         <textarea
+          aria-label="Approved project text, links and invitations"
           rows={18}
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
       </label>
+      <details className="admin-overview-details">
+        <summary>Add a fixed project</summary>
+        <p>
+          Paste one project object below. Add it to your draft, review the
+          updated count, then save approved content.
+        </p>
+        <label>
+          New project JSON
+          <textarea
+            rows={10}
+            value={addition}
+            onChange={(event) => setAddition(event.target.value)}
+            placeholder={
+              '{ "id": "your-project", "record_id": null, "title": "Project name", "metadata": "Your role and scope", "bullets": ["Your approved text"], "homepage": null }'
+            }
+          />
+        </label>
+        <button
+          type="button"
+          disabled={busy || !addition.trim()}
+          onClick={() => {
+            try {
+              const content = fixedContentSchema.parse(JSON.parse(value));
+              const project = fixedProjectSchema.parse(JSON.parse(addition));
+              const next = fixedContentSchema.parse({
+                ...content,
+                projects: [...content.projects, project],
+              });
+              setValue(JSON.stringify(next, null, 2));
+              setAddition("");
+              setMessage(
+                `Added ${project.title} to your draft. Save approved content to use it in future applications.`,
+              );
+            } catch (error) {
+              setMessage(
+                error instanceof Error
+                  ? error.message
+                  : "Check the project JSON.",
+              );
+            }
+          }}
+        >
+          Add project to draft
+        </button>
+      </details>
       <button
         disabled={busy}
         onClick={async () => {

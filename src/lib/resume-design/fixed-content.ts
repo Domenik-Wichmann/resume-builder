@@ -8,13 +8,13 @@ export const resumeUrl = z
     const url = new URL(value);
     return url.protocol === "https:" && !url.username && !url.password;
   }, "Use an HTTPS URL without credentials.");
-const fixedProject = z
+export const fixedProjectSchema = z
   .object({
     id: z.string().min(1).max(100),
     record_id: z.uuid().nullable(),
     title: z.string().min(1).max(200),
     metadata: z.string().min(1).max(400),
-    bullets: z.array(z.string().min(1).max(700)).min(1).max(4),
+    bullets: z.array(z.string().min(1).max(700)).min(1),
     homepage: resumeUrl.nullable(),
   })
   .strict();
@@ -26,15 +26,23 @@ export const fixedContentSchema = z
     invitation: z.string().min(1).max(200),
     closing: z.string().min(1).max(200),
     learning_demo: resumeUrl.nullable(),
-    projects: z.tuple([fixedProject, fixedProject]),
+    projects: z.array(fixedProjectSchema),
   })
   .strict()
   .refine(
     (value) =>
       !value.learning_demo ||
       value.learning_demo.replace(/\/$/, "") !==
-        value.projects[1].homepage?.replace(/\/$/, ""),
+        value.projects
+          .find((project) => project.id === "lms")
+          ?.homepage?.replace(/\/$/, ""),
     "Learning demo must have its own destination, separate from the LMS homepage.",
+  )
+  .refine(
+    (value) =>
+      new Set(value.projects.map((project) => project.id)).size ===
+      value.projects.length,
+    "Each fixed project needs a unique id.",
   );
 export type FixedContent = z.infer<typeof fixedContentSchema>;
 
@@ -111,10 +119,10 @@ export function applyFixedContent(
         (project) => p.record_id && project.evidence_ids.includes(p.record_id),
       )?.job_specific_bullet,
       evidence_ids: p.record_id ? [p.record_id] : [],
-      priority: 2 - index,
+      priority: fixed.projects.length - index,
       locked_id: p.id,
       links:
-        index === 0
+        p.id === "personal_portfolio"
           ? [
               {
                 label: "Explore this project",
@@ -124,7 +132,7 @@ export function applyFixedContent(
             ]
           : [
               ...(p.homepage ? [{ label: "Homepage", url: p.homepage }] : []),
-              ...(demo
+              ...(demo && p.id === "lms"
                 ? [{ label: "Learning demo", url: resumeUrl.parse(demo) }]
                 : []),
             ],

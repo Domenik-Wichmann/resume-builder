@@ -1213,7 +1213,9 @@ export async function startGeneration(a: Account, application: Application) {
   if (
     application.learning_demo &&
     application.learning_demo.replace(/\/$/, "") ===
-      context.fixed?.projects[1].homepage?.replace(/\/$/, "")
+      context.fixed?.projects
+        .find((project) => project.id === "lms")
+        ?.homepage?.replace(/\/$/, "")
   )
     throw new HttpError(
       400,
@@ -1226,12 +1228,15 @@ export async function startGeneration(a: Account, application: Application) {
     );
     const matchProject = (
       project: NonNullable<typeof context.fixed>["projects"][number],
-      i: number,
     ) => {
+      if (project.record_id) return project;
       const pattern =
-        i === 0
+        project.id === "personal_portfolio"
           ? /career.portfolio|resume.builder|career.brain/i
-          : /systemwright.*lms|mini.lms|multilingual.onboarding/i;
+          : project.id === "lms"
+            ? /systemwright.*lms|mini.lms|multilingual.onboarding/i
+            : null;
+      if (!pattern) return project;
       const matches = candidates.filter((r) =>
         pattern.test(`${r.title} ${r.key} ${r.aliases.join(" ")}`),
       );
@@ -1242,10 +1247,7 @@ export async function startGeneration(a: Account, application: Application) {
     };
     context.fixed = {
       ...context.fixed,
-      projects: [
-        matchProject(context.fixed.projects[0], 0),
-        matchProject(context.fixed.projects[1], 1),
-      ],
+      projects: context.fixed.projects.map(matchProject),
     };
     const imported = await a.db.rpc("initialize_resume_v4", {
       p_account: a.accountId,
