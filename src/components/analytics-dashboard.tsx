@@ -7,6 +7,8 @@ import {
   type AnalyticsFilters,
 } from "@/lib/analytics/filters";
 import { analyticsChange, type AnalyticsReport } from "@/lib/analytics/report";
+import { VisitorAnalytics, visitorValueLabel } from "./analytics-visitors";
+import { durationLabel } from "@/lib/tracking/dimensions";
 export function contactRegionLabel(region: string | null) {
   if (region === "mixed") return "Multiple contact profiles";
   return region === "US"
@@ -62,6 +64,28 @@ export function AnalyticsMetrics({ data }: { data: AnalyticsReport }) {
           data.totals.tracked_views,
           "Attributed page views",
         ],
+        [
+          "Button / link clicks",
+          data.totals.clicks,
+          "Selected public controls and links",
+        ],
+        [
+          "Average active time / session",
+          durationLabel(data.engagement.avg_session_seconds),
+          `${data.engagement.measured_sessions} sessions with measured page time`,
+        ],
+        [
+          "Engaged sessions",
+          data.engagement.engaged_sessions,
+          "10+ active seconds, 2+ views, or a recorded click",
+        ],
+        [
+          "Total active time",
+          data.totals.measured_views
+            ? durationLabel(data.totals.active_seconds)
+            : "Not measured",
+          `${data.totals.measured_views} timed page views; idle/background time excluded`,
+        ],
       ].map(([label, value, note]) => (
         <article className="project-card" key={label}>
           <strong>{value}</strong>
@@ -111,7 +135,7 @@ export function TrackingPerformance({
             <thead>
               <tr>
                 <th>Tracking code / application</th>
-                <th>Region</th>
+                <th>Contact profile</th>
                 <th>Views</th>
                 <th>Sessions</th>
                 <th>Questions</th>
@@ -181,6 +205,7 @@ export function AnalyticsDashboard({
       <AnalyticsFiltersForm
         filters={filters}
         links={data.links}
+        countries={data.countries}
         preview={preview}
       />
       <div className="analytics-selection">
@@ -203,12 +228,28 @@ export function AnalyticsDashboard({
             {analyticsEventLabels[filters.event]}
           </span>
         )}
+        {(["country", "device", "browser", "os", "referrer", "action"] as const)
+          .filter((key) => filters[key] !== "all")
+          .map((key) => (
+            <span className="resume-badge" key={key}>
+              {visitorValueLabel(key, filters[key])}
+            </span>
+          ))}
+        {filters.session && (
+          <Link
+            className="text-link"
+            href={analyticsHref(filters, { session: "" }, preview)}
+          >
+            One session selected · Clear
+          </Link>
+        )}
       </div>
       <AnalyticsMetrics data={data} />
       <p className="muted analytics-comparison-note">
         Comparisons use the preceding {data.daily.length} calendar days with the
         same filters. Today is partial; counts reflect retained records.
       </p>
+      <VisitorAnalytics data={data} filters={filters} preview={preview} />
       <section className="analytics-grid section" aria-label="Activity trends">
         <AnalyticsTrend
           title="Page views by day"
@@ -347,8 +388,9 @@ export function AnalyticsDashboard({
           <div>
             <h2>Activity log</h2>
             <p className="muted">
-              Newest first · {data.totals.activities.toLocaleString("en-US")}{" "}
-              matching activities. Expand a saved question to read its answer.
+              {filters.session ? "Journey order · " : "Newest first · "}
+              {data.totals.activities.toLocaleString("en-US")} matching
+              activities. Expand a saved question to read its answer.
             </p>
           </div>
           <span className="resume-badge">
@@ -363,7 +405,8 @@ export function AnalyticsDashboard({
                   <th>Time (UTC)</th>
                   <th>Activity</th>
                   <th>Tracking / application</th>
-                  <th>Region</th>
+                  <th>Contact profile</th>
+                  <th>Visitor / session</th>
                   <th>Details</th>
                 </tr>
               </thead>
@@ -413,13 +456,55 @@ export function AnalyticsDashboard({
                     </td>
                     <td>{contactRegionLabel(event.region)}</td>
                     <td>
+                      {visitorValueLabel("country", event.visitor_country)}
+                      <span className="analytics-table-detail">
+                        {visitorValueLabel("device", event.device)} ·{" "}
+                        {visitorValueLabel("browser", event.browser)} ·{" "}
+                        {visitorValueLabel("os", event.os)}
+                      </span>
+                      <span className="analytics-table-detail">
+                        {visitorValueLabel("referrer", event.referrer)}
+                      </span>
+                      {event.session_id && (
+                        <Link
+                          className="text-link"
+                          href={
+                            analyticsHref(
+                              filters,
+                              { session: event.session_id },
+                              preview,
+                            ) + "#activity"
+                          }
+                        >
+                          Inspect session
+                        </Link>
+                      )}
+                    </td>
+                    <td>
                       {event.question ? (
                         <details>
                           <summary>{event.question}</summary>
                           <p>{event.answer}</p>
                         </details>
                       ) : (
-                        <span>{event.subject}</span>
+                        <span>
+                          {event.action
+                            ? visitorValueLabel("action", event.action)
+                            : event.subject}
+                          {event.event_type === "interaction" && (
+                            <span className="analytics-table-detail">
+                              On {event.page_path}
+                            </span>
+                          )}
+                          {event.event_type === "page_view" && (
+                            <span className="analytics-table-detail">
+                              {durationLabel(event.active_seconds)} active ·{" "}
+                              {event.scroll_depth === null
+                                ? "Scroll not measured"
+                                : `${event.scroll_depth}% scroll`}
+                            </span>
+                          )}
+                        </span>
                       )}
                     </td>
                   </tr>
@@ -477,8 +562,14 @@ export function AnalyticsDashboard({
           privately in recruiter workspaces. Deleted workspaces remove their
           questions and activity. Privacy signals, blocked scripts and signed-in
           owner page views are excluded. Views are retained for up to 90 days.
-          Export opens do not prove a file was downloaded. Referrer URLs, IP
-          addresses and fingerprints are not recorded.
+          Export opens do not prove a file was downloaded. Approximate country,
+          coarse device/browser/OS, arrival-source category and selected clicks
+          are recorded for new visits. Referrer URLs, IP addresses, raw browser
+          headers, form values and fingerprints are not recorded. Active time
+          and scroll are estimates; closed tabs and blocked requests can leave
+          them incomplete. Page time is capped at four hours per view. Visitor
+          filters omit records without matching context; older visits are not
+          backfilled.
         </p>
       </details>
     </>

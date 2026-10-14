@@ -135,17 +135,27 @@ custom SMTP before enabling recovery for other existing accounts. Auth email
 rate limits remain enforced by Supabase.
 
 The owner overview shows retained counts, recent workspaces, tracking links,
-and three leading questions/topics. `/admin/analytics` provides 7/30/90-day UTC
+and three leading questions/topics. `/admin/analytics` provides 1/7/30/90-day UTC
 charts for page views and questions, browser sessions, source attribution,
-page categories, topic evidence strength and recent Q&A. Apply
-`202610060004_portfolio_analytics.sql` before deploying this update. It allows
-unattributed visits and adds a service-only page-view RPC. Public-page views
+page categories, topic evidence strength and recent Q&A. Apply all committed
+migrations through `202610140001_visitor_insights.sql` before deploying this
+update. The new service-only RPC records optional approximate country,
+device/browser/OS categories, arrival source and allowlisted button/link clicks.
+Time and scroll updates modify their original page view without adding views.
+Public-page views
 are recorded through `/api/tracking` after a page opens, including direct visits;
 short-link redirects set attribution but no longer count an additional view.
 Demo mode, signed-in owners and DNT/GPC traffic are excluded. Historical traffic
 contains only short-link landing events. Completed PDF saves are not measured.
-Chart detail is bounded to 10,000 rows per source, with an explicit notice when
-truncated; page-view and question totals remain exact for the selected period.
+The report filters in SQL before aggregation and returns 50 activity records per
+page and the latest 20 matching session journeys. Totals are not capped by those
+display limits. Filter by country, device, browser, OS, arrival source, action,
+active seconds per page or a browser session alongside the existing date/hour,
+application code, contact profile, activity, page and text filters. Session logs
+are chronological; other activity is newest first. Existing rows remain unknown
+for details not collected previously. Browser sessions are random 24-hour IDs,
+not login identities. Active time and scroll are best-effort measurements;
+background/idle time is excluded and incomplete delivery can undercount time.
 
 Create a private `job_applications` record, then run:
 
@@ -183,10 +193,12 @@ becomes résumé bullets. Résumé and workspace export have separate print layo
 choose Save as PDF in your browser. Text export is also available. Export omits
 IDs, vectors, scores, prompts, private application metadata, and analytics.
 
-Tracking links select market before preferences or coarse request country.
-Manual switching clears the current link presentation override and remembers
-the choice; a subsequent tracking-link visit overrides it again. The Vercel-only
-country header is never stored as location history. Browser GPS is never used.
+Verified tracking context selects contact presentation before approximate visitor
+country and the configured default. Legacy manual preferences are ignored; the
+public portfolio has no region selector. Optional analytics store approximate
+country separately from contact presentation, only when Vercel supplies it.
+Other hosts report unknown country. Browser GPS is never used and the owner's
+physical residence is not changed by presentation or visitor analytics.
 
 ## Operational limits
 

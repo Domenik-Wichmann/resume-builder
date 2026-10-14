@@ -4,6 +4,7 @@ import {
   analyticsHref,
   defaultAnalyticsFilters,
 } from "../src/lib/analytics/filters";
+import { fictionalAnalytics } from "../src/lib/analytics/demo";
 const now = new Date("2026-10-13T12:00:00Z");
 it("uses inclusive UTC calendar days and extracts a pasted tracking link without trusting its host", () => {
   const parsed = parseAnalyticsFilters(
@@ -36,6 +37,13 @@ it.each([
   { page_number: "0" },
   { search: "x".repeat(201) },
   { code: ["demoLink", "demoBGbg"] },
+  { country: "USA" },
+  { device: "fingerprint" },
+  { referrer: "https://private.example" },
+  { action: "private text" },
+  { min_seconds: "100", max_seconds: "20" },
+  { max_seconds: "14401" },
+  { session: "forged" },
 ])("rejects malformed or unbounded analytics filters: %j", (query) =>
   expect(parseAnalyticsFilters(query, now).success).toBe(false),
 );
@@ -47,6 +55,10 @@ it("preserves the selection when drilling down and resets pagination", () => {
     source: "tracked" as const,
     page_number: 4,
     search: "RAG & automation",
+    country: "DE",
+    device: "mobile" as const,
+    referrer: "linkedin" as const,
+    min_seconds: 30,
   };
   const href = analyticsHref(filters, { from: "2026-10-12", to: "2026-10-12" });
   const query = new URL(href, "https://portfolio.test").searchParams;
@@ -54,4 +66,33 @@ it("preserves the selection when drilling down and resets pagination", () => {
   expect(query.get("region")).toBe("US");
   expect(query.get("search")).toBe("RAG & automation");
   expect(query.get("page_number")).toBe("1");
+  expect(query.get("country")).toBe("DE");
+  expect(query.get("device")).toBe("mobile");
+  expect(query.get("referrer")).toBe("linkedin");
+  expect(query.get("min_seconds")).toBe("30");
+});
+
+it("keeps fictional visitor totals consistent and shows a selected journey chronologically", () => {
+  const filters = {
+    ...defaultAnalyticsFilters(30, now),
+    country: "DE",
+    device: "mobile" as const,
+  };
+  const data = fictionalAnalytics(filters, now);
+  expect(data.totals.sessions).toBeGreaterThan(0);
+  expect(data.countries).toEqual([
+    { label: "DE", count: data.totals.sessions },
+  ]);
+  expect(
+    data.events.every(
+      (row) => row.device === "mobile" && row.visitor_country === "DE",
+    ),
+  ).toBe(true);
+  const journey = fictionalAnalytics(
+    { ...filters, session: data.journeys[0].session_id },
+    now,
+  );
+  expect(journey.events.map((row) => row.created_at)).toEqual(
+    journey.events.map((row) => row.created_at).sort(),
+  );
 });

@@ -53,23 +53,31 @@ it("sets an HttpOnly signed session and writes only server-resolved fields", asy
   const cookie = response.cookies.get("rb_site_visit")!.value;
   expect(readSession(cookie)?.code).toBe("siteView");
   expect(response.headers.get("set-cookie")).toContain("HttpOnly");
-  expect(mocks.rpc).toHaveBeenCalledWith("record_portfolio_page_view", {
-    p_session: readSession(cookie)!.sessionId,
-    p_path: "/",
-    p_link: null,
-    p_market: "US",
-  });
+  expect(mocks.rpc).toHaveBeenCalledWith(
+    "record_portfolio_activity",
+    expect.objectContaining({
+      p_session: readSession(cookie)!.sessionId,
+      p_path: "/",
+      p_link: null,
+      p_market: "US",
+      p_kind: "page_view",
+    }),
+  );
+  expect(response.headers.get("X-Analytics-Recorded")).toBe("1");
 });
 it("reuses a signed session and verifies attribution on the server", async () => {
   const session = createSession("demoLink");
   await POST(request(undefined, { cookie: "rb_visit=" + session.cookie }));
   expect(mocks.link).toHaveBeenCalledWith("demoLink");
-  expect(mocks.rpc).toHaveBeenCalledWith("record_portfolio_page_view", {
-    p_session: session.sessionId,
-    p_path: "/",
-    p_link: "verified-link",
-    p_market: "US",
-  });
+  expect(mocks.rpc).toHaveBeenCalledWith(
+    "record_portfolio_activity",
+    expect.objectContaining({
+      p_session: session.sessionId,
+      p_path: "/",
+      p_link: "verified-link",
+      p_market: "US",
+    }),
+  );
 });
 it("suppresses writes for privacy signals, owner sessions and demo mode", async () => {
   const privacyHeaders: Record<string, string>[] = [
@@ -105,4 +113,156 @@ it("forged session cookies do not supply authoritative identifiers", async () =>
   expect(mocks.link).not.toHaveBeenCalled();
   expect(mocks.rpc.mock.calls[0][1].p_link).toBeNull();
   expect(mocks.rpc.mock.calls[0][1].p_session).not.toBe(forged.sessionId);
+});
+
+const viewId = "11111111-1111-4111-8111-111111111111";
+it("stores only coarse server-derived browser context and trusted hosting country", async () => {
+  const headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0) Chrome/120.0 Safari/537.36",
+    "x-vercel-ip-country": "DE",
+    "x-forwarded-for": "192.0.2.10",
+  };
+  const body = JSON.stringify({
+    kind: "page_view",
+    path: "/",
+    view_id: viewId,
+    referrer: "linkedin",
+  });
+  vi.stubEnv("VERCEL", "0");
+  await POST(request(body, headers));
+  expect(mocks.rpc.mock.calls[0][1]).toMatchObject({
+    p_country: null,
+    p_device: "desktop",
+    p_browser: "Chrome",
+    p_os: "Windows",
+    p_referrer: "linkedin",
+    p_view: viewId,
+  });
+  vi.stubEnv("VERCEL", "1");
+  await POST(request(body, headers));
+  expect(mocks.rpc.mock.calls[1][1].p_country).toBe("DE");
+  expect(JSON.stringify(mocks.rpc.mock.calls)).not.toMatch(
+    /Mozilla|192\.0\.2\.10/,
+  );
+});
+it.each(["engagement", "interaction"])(
+  "requires a signed existing session for %s and never accepts browser ownership fields",
+  async (kind) => {
+    const event = {
+      kind,
+      path: "/projects",
+      view_id: viewId,
+      ...(kind === "engagement"
+        ? { active_seconds: 30, scroll_depth: 75 }
+        : { action: "email" }),
+    };
+    const body = JSON.stringify(event);
+    expect((await POST(request(body))).status).toBe(204);
+    expect(mocks.rpc).not.toHaveBeenCalled();
+    const session = createSession("siteView");
+    await POST(
+      request(body, { cookie: "rb_site_visit=" + session.cookie + "forged" }),
+    );
+    expect(mocks.rpc).not.toHaveBeenCalled();
+    const headers = { cookie: "rb_site_visit=" + session.cookie };
+    const result = await POST(request(body, headers));
+    expect(result.headers.get("set-cookie")).toBeNull();
+    expect(mocks.rpc).toHaveBeenCalledWith(
+      "record_portfolio_activity",
+      expect.objectContaining({
+        p_session: session.sessionId,
+        p_view: viewId,
+        p_kind: kind,
+      }),
+    );
+    mocks.rpc.mockClear();
+    for (const extra of [
+      { session_id: session.sessionId },
+      { country: "US" },
+      { href: "https://private.test/secret" },
+    ]) {
+      expect(
+        (await POST(request(JSON.stringify({ ...event, ...extra }), headers)))
+          .status,
+      ).toBe(400);
+    }
+    expect(mocks.rpc).not.toHaveBeenCalled();
+  },
+);
+it("suppresses all telemetry for owners, privacy signals and recognizable bots", async () => {
+  const session = createSession("siteView");
+  const events = [
+    { kind: "page_view", path: "/", view_id: viewId },
+    {
+      kind: "engagement",
+      path: "/",
+      view_id: viewId,
+      active_seconds: 10,
+      scroll_depth: 25,
+    },
+    { kind: "interaction", path: "/", view_id: viewId, action: "email" },
+  ];
+  for (const event of events) {
+    mocks.owner.mockResolvedValue(true);
+    expect(
+      (
+        await POST(
+          request(JSON.stringify(event), {
+            cookie: "rb_site_visit=" + session.cookie,
+          }),
+        )
+      ).headers.get("X-Analytics-Recorded"),
+    ).toBeNull();
+    mocks.owner.mockResolvedValue(false);
+    const excluded: Record<string, string>[] = [
+      { dnt: "1" },
+      { "sec-gpc": "1" },
+      { "user-agent": "Googlebot/2.1" },
+    ];
+    for (const headers of excluded) {
+      await POST(
+        request(JSON.stringify(event), {
+          ...headers,
+          cookie: "rb_site_visit=" + session.cookie,
+        }),
+      );
+    }
+  }
+  expect(mocks.rpc).not.toHaveBeenCalled();
+});
+it.each(["/admin", "/admin/analytics", "/auth/login", "/account"])(
+  "never accepts the private path %s for any telemetry kind",
+  async (path) => {
+    for (const event of [
+      { kind: "page_view" },
+      { kind: "engagement", active_seconds: 10, scroll_depth: 50 },
+      { kind: "interaction", action: "email" },
+    ]) {
+      expect(
+        (
+          await POST(
+            request(JSON.stringify({ ...event, path, view_id: viewId })),
+          )
+        ).status,
+      ).toBe(400);
+    }
+    expect(mocks.rpc).not.toHaveBeenCalled();
+  },
+);
+it("rejects arbitrary actions, URL sources, invalid views and unbounded engagement", async () => {
+  for (const event of [
+    { kind: "interaction", action: "text from a private message" },
+    { kind: "page_view", referrer: "https://example.test/private" },
+    { kind: "engagement", active_seconds: 14401, scroll_depth: 100 },
+    { kind: "engagement", active_seconds: 10, scroll_depth: 101 },
+    { kind: "page_view", view_id: "forged" },
+  ])
+    expect(
+      (
+        await POST(
+          request(JSON.stringify({ path: "/", view_id: viewId, ...event })),
+        )
+      ).status,
+    ).toBe(400);
+  expect(mocks.rpc).not.toHaveBeenCalled();
 });

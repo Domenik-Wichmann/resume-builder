@@ -9,13 +9,25 @@ import {
 } from "@/lib/analytics/filters";
 import { outcomes } from "@/lib/applications/model";
 import type { AnalyticsReport } from "@/lib/analytics/report";
+import {
+  arrivalSources,
+  arrivalLabels,
+  browserTypes,
+  deviceTypes,
+  operatingSystems,
+  interactionActions,
+  interactionLabels,
+  countryLabel,
+} from "@/lib/tracking/dimensions";
 export function AnalyticsFiltersForm({
   filters,
   links,
+  countries = [],
   preview = false,
 }: {
   filters: AnalyticsFilters;
   links: AnalyticsReport["links"];
+  countries?: AnalyticsReport["countries"];
   preview?: boolean;
 }) {
   return (
@@ -125,6 +137,145 @@ export function AnalyticsFiltersForm({
             </select>
           </label>
         </div>
+        <details
+          className="analytics-more-filters"
+          open={
+            filters.country !== "all" ||
+            filters.device !== "all" ||
+            filters.browser !== "all" ||
+            filters.os !== "all" ||
+            filters.referrer !== "all" ||
+            filters.action !== "all" ||
+            filters.min_seconds !== 0 ||
+            filters.max_seconds !== 14400 ||
+            Boolean(filters.session)
+          }
+        >
+          <summary>
+            Visitor country, device, source, buttons &amp; active time
+          </summary>
+          <div className="analytics-filter-fields">
+            <label>
+              Visitor country (two-letter code)
+              <input
+                name="country"
+                defaultValue={filters.country === "all" ? "" : filters.country}
+                maxLength={7}
+                placeholder="All, US, BG, DE or unknown"
+                list="analytics-countries"
+              />
+              <datalist id="analytics-countries">
+                {[
+                  ...new Set([
+                    "unknown",
+                    ...countries.map((row) => row.label),
+                    "US",
+                    "BG",
+                    "DE",
+                    "GB",
+                  ]),
+                ].map((code) => (
+                  <option key={code} value={code}>
+                    {countryLabel(code)}
+                  </option>
+                ))}
+              </datalist>
+            </label>
+            <label>
+              Device type
+              <select name="device" defaultValue={filters.device}>
+                <option value="all">All devices</option>
+                {deviceTypes.map((value) => (
+                  <option key={value} value={value}>
+                    {value === "unknown" ? "Unknown / not recorded" : value}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              Browser
+              <select name="browser" defaultValue={filters.browser}>
+                <option value="all">All browsers</option>
+                {browserTypes.map((value) => (
+                  <option key={value} value={value}>
+                    {value}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              Operating system
+              <select name="os" defaultValue={filters.os}>
+                <option value="all">All operating systems</option>
+                {operatingSystems.map((value) => (
+                  <option key={value} value={value}>
+                    {value}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              Arrival source
+              <select name="referrer" defaultValue={filters.referrer}>
+                <option value="all">All arrival sources</option>
+                {arrivalSources.map((value) => (
+                  <option key={value} value={value}>
+                    {arrivalLabels[value]}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              Button / link action
+              <select name="action" defaultValue={filters.action}>
+                <option value="all">All actions</option>
+                {interactionActions.map((value) => (
+                  <option key={value} value={value}>
+                    {interactionLabels[value]}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              Minimum active seconds per page
+              <input
+                type="number"
+                name="min_seconds"
+                min={0}
+                max={14400}
+                step={1}
+                defaultValue={filters.min_seconds}
+              />
+            </label>
+            <label>
+              Maximum active seconds per page
+              <input
+                type="number"
+                name="max_seconds"
+                min={0}
+                max={14400}
+                step={1}
+                defaultValue={filters.max_seconds}
+              />
+            </label>
+            <label>
+              Browser session
+              <input
+                name="session"
+                defaultValue={filters.session}
+                maxLength={36}
+                placeholder="Select a session from its journey"
+                spellCheck={false}
+              />
+            </label>
+          </div>
+          <p className="muted">
+            Visitor details are available for newly recorded public activity.
+            Workspace questions and older records without this context remain
+            unknown. Active-time limits apply to the page containing an
+            activity.
+          </p>
+        </details>
         <details
           className="analytics-more-filters"
           open={

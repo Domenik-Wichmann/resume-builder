@@ -70,8 +70,16 @@ export function WorkspaceView({
         <div className="resume-toolbar">
           <Link href={`/workspace/${id}`}>← Workspace</Link>
           <div className="workspace-actions">
-            <button onClick={textDownload}>Download text</button>
-            <button onClick={() => window.print()}>
+            <button
+              onClick={textDownload}
+              data-analytics-action="export_resume"
+            >
+              Download text
+            </button>
+            <button
+              onClick={() => window.print()}
+              data-analytics-action="export_resume"
+            >
               Print / save workspace PDF ↗
             </button>
           </div>

@@ -37,12 +37,26 @@ export default function Privacy() {
       </p>
       <p>
         Events contain a random session identifier, event type, timestamp, and
-        coarse page category, with a link reference when applicable. Query
-        strings, project identifiers and referrer URLs are not stored. The
-        application does not store IP addresses, recruiter identity, browser
-        fingerprints, or keystrokes. Questions and topic signals are saved
-        privately when you use a live workspace, and the owner can review them.
-        Do Not Track and Global Privacy Control disable tracking.
+        coarse page category, with a link reference when applicable. New visits
+        also include approximate country (when supplied by the hosting
+        provider), broad device type, browser and operating-system family, and
+        an arrival category such as search, LinkedIn or direct. Query strings,
+        project identifiers and referrer URLs are not stored. Raw browser
+        headers are reduced to categories and discarded. The application does
+        not store IP addresses, recruiter identity, browser fingerprints, or
+        keystrokes. Questions and topic signals are saved privately when you use
+        a live workspace, and the owner can review them. Do Not Track and Global
+        Privacy Control disable tracking.
+      </p>
+      <p>
+        Selected public buttons and links record fixed action names, without
+        button text, destination URLs or form contents. Page measurements
+        estimate active time in a visible, focused tab and the furthest quarter
+        of the page reached. Timing pauses after 30 seconds without interaction
+        and is capped at four hours per page view. Measurements can be
+        incomplete if requests are blocked or a tab closes. Admin and sign-in
+        pages are excluded. These anonymous session measurements do not identify
+        who visited or signed in.
       </p>
       <p>
         When page-view tracking is allowed, analytics also record the coarse US

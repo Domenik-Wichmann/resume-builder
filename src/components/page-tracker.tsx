@@ -2,27 +2,20 @@
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { analyticsPath } from "@/lib/tracking/paths";
+import { startPageTracking } from "@/lib/tracking/browser";
 export function PageTracker() {
   const pathname = usePathname();
-  const lastPath = useRef<string | null>(null);
+  const view = useRef<{ pathname: string; id: string } | null>(null);
   useEffect(() => {
     const path = analyticsPath(pathname);
-    if (
-      !path ||
-      navigator.doNotTrack === "1" ||
-      ("globalPrivacyControl" in navigator &&
-        navigator.globalPrivacyControl === true)
-    )
+    if (!path) {
+      view.current = null;
       return;
-    if (lastPath.current === pathname) return;
-    lastPath.current = pathname;
-    // A route category is sufficient: never send query strings or project identifiers.
-    void fetch("/api/tracking", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ path }),
-      keepalive: true,
-    }).catch(() => {});
+    }
+    // Repeated effect mounts share one view; deliberate navigation creates another.
+    if (view.current?.pathname !== pathname)
+      view.current = { pathname, id: crypto.randomUUID() };
+    return startPageTracking(path, view.current.id);
   }, [pathname]);
   return null;
 }

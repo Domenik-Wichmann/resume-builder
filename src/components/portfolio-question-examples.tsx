@@ -21,6 +21,7 @@ export function PortfolioQuestionExamples({
           <article className="question-example" key={example.topic}>
             <button
               type="button"
+              data-analytics-action="example"
               id={`example-question-${example.topic}`}
               aria-expanded={open}
               aria-controls={`example-answer-${example.topic}`}

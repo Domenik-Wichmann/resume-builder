@@ -1,6 +1,16 @@
 .analytics-filter-panel {
   margin: 24px 0;
 }
+.analytics-visitor-table {
+  padding: 24px;
+  margin: 24px 0;
+}
+.analytics-visitor-table h3 {
+  margin-top: 0;
+}
+.analytics-visitor-table table {
+  min-width: 720px;
+}
 .analytics-filter-heading {
   display: flex;
   gap: 24px;

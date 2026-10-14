@@ -98,10 +98,19 @@ async function report(
     active: null,
     search: null,
     offset: 0,
+    country: null,
+    device: null,
+    browser: null,
+    os: null,
+    referrer: null,
+    action: null,
+    min_seconds: null,
+    max_seconds: null,
+    session: null,
     ...patch,
   };
   const r = await db.query<{ value: unknown }>(
-    "select owner_analytics_report($1,$2::date,$3::date,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) value",
+    "select owner_analytics_report($1,$2::date,$3::date,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23) value",
     [account, ...Object.values(value)],
   );
   return analyticsReportSchema.parse(r.rows[0].value);
@@ -224,4 +233,272 @@ it("records contact presentation while letting verified tracking context win, an
     ).rows,
   ).toHaveLength(1);
   expect(otherAccount).not.toBe(account);
+});
+
+async function activity(
+  session: string,
+  view: string,
+  patch: Record<string, unknown> = {},
+) {
+  const values = {
+    session,
+    view,
+    path: "/projects",
+    kind: "page_view",
+    link: us,
+    market: "BG",
+    country: "DE",
+    device: "mobile",
+    browser: "Safari",
+    os: "iOS",
+    referrer: "linkedin",
+    action: null,
+    seconds: null,
+    scroll: null,
+    ...patch,
+  };
+  return (
+    await db.query<{ accepted: boolean }>(
+      "select record_portfolio_activity($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) accepted",
+      Object.values(values),
+    )
+  ).rows[0].accepted;
+}
+it("binds telemetry to its signed browser session and page, deduplicates mounts and clamps cumulative time without adding views", async () => {
+  await db.exec("reset role");
+  const session = randomUUID(),
+    view = randomUUID();
+  expect(await activity(session, view)).toBe(true);
+  expect(await activity(session, view)).toBe(true);
+  await expect(
+    activity(session, randomUUID(), { path: "/admin" }),
+  ).rejects.toThrow("INVALID_PORTFOLIO_EVENT");
+  expect(await activity(randomUUID(), view)).toBe(false);
+  expect(
+    await activity(randomUUID(), view, {
+      kind: "engagement",
+      seconds: 10,
+      scroll: 50,
+    }),
+  ).toBe(false);
+  expect(
+    await activity(session, view, {
+      kind: "engagement",
+      path: "/",
+      seconds: 10,
+      scroll: 50,
+    }),
+  ).toBe(false);
+  expect(
+    await activity(session, randomUUID(), {
+      kind: "interaction",
+      action: "email",
+    }),
+  ).toBe(false);
+  await db.query(
+    "update tracking_events set created_at=now()-interval '120 seconds' where id=$1",
+    [view],
+  );
+  expect(
+    await activity(session, view, {
+      kind: "engagement",
+      seconds: 60,
+      scroll: 75,
+    }),
+  ).toBe(true);
+  expect(
+    await activity(session, view, {
+      kind: "engagement",
+      seconds: 30,
+      scroll: 25,
+    }),
+  ).toBe(true);
+  expect(
+    (
+      await db.query(
+        "select active_seconds,scroll_depth,contact_market,visitor_country from tracking_events where id=$1",
+        [view],
+      )
+    ).rows[0],
+  ).toEqual({
+    active_seconds: 60,
+    scroll_depth: 75,
+    contact_market: "US",
+    visitor_country: "DE",
+  });
+  await expect(
+    activity(session, view, {
+      kind: "engagement",
+      seconds: 14401,
+      scroll: 100,
+    }),
+  ).rejects.toThrow("INVALID_ENGAGEMENT");
+  await activity(session, view, {
+    kind: "engagement",
+    seconds: 14000,
+    scroll: 100,
+  });
+  const time = (
+    await db.query<{ active_seconds: number }>(
+      "select active_seconds from tracking_events where id=$1",
+      [view],
+    )
+  ).rows[0].active_seconds;
+  expect(time).toBeGreaterThanOrEqual(120);
+  expect(time).toBeLessThan(125);
+  expect(
+    await activity(session, view, {
+      kind: "interaction",
+      action: "email",
+      country: "US",
+      device: "desktop",
+    }),
+  ).toBe(true);
+  expect(
+    await activity(session, view, { kind: "interaction", action: "email" }),
+  ).toBe(false);
+  const clicks = (
+    await db.query(
+      "select visitor_country,device from tracking_events where page_view_id=$1",
+      [view],
+    )
+  ).rows;
+  expect(clicks).toEqual([{ visitor_country: "DE", device: "mobile" }]);
+  expect(
+    (
+      await db.query("select id from tracking_events where session_id=$1", [
+        session,
+      ])
+    ).rows,
+  ).toHaveLength(2);
+  await expect(
+    activity(session, view, {
+      kind: "interaction",
+      action: "arbitrary private button text",
+    }),
+  ).rejects.toThrow();
+});
+it("applies visitor, action, duration and session filters before aggregation and pagination, preserving unknown history", async () => {
+  await db.exec("reset role");
+  const session = randomUUID(),
+    first = randomUUID(),
+    second = randomUUID();
+  await activity(session, first);
+  await activity(session, first, { kind: "interaction", action: "email" });
+  await activity(session, second, { path: "/" });
+  await activity(session, second, {
+    path: "/",
+    kind: "interaction",
+    action: "project",
+  });
+  await db.query(
+    "update tracking_events set created_at='2026-10-09T10:00:00Z',active_seconds=60,scroll_depth=75 where id=$1",
+    [first],
+  );
+  await db.query(
+    "update tracking_events set created_at='2026-10-09T10:02:00Z',active_seconds=30,scroll_depth=50 where id=$1",
+    [second],
+  );
+  await db.query(
+    "update tracking_events set created_at=case when page_view_id=$1 then '2026-10-09T10:01:00Z'::timestamptz else '2026-10-09T10:03:00Z'::timestamptz end where session_id=$2 and event_type='interaction'",
+    [first, session],
+  );
+  const selection = {
+    from: "2026-10-09",
+    to: "2026-10-09",
+    country: "DE",
+    device: "mobile",
+    browser: "Safari",
+    os: "iOS",
+    referrer: "linkedin",
+    code: "demoLink",
+    region: "US",
+    hour_from: 10,
+    hour_to: 10,
+  };
+  await member();
+  const data = await report(selection);
+  expect(data.totals).toMatchObject({
+    activities: 4,
+    views: 2,
+    sessions: 1,
+    clicks: 2,
+    active_seconds: 90,
+    measured_views: 2,
+  });
+  expect(data.engagement).toEqual({
+    avg_session_seconds: 90,
+    measured_sessions: 1,
+    engaged_sessions: 1,
+  });
+  expect(data.countries).toEqual([{ label: "DE", count: 1 }]);
+  expect(data.journeys[0]).toMatchObject({
+    entry_page: "/projects",
+    last_page: "/",
+    active_seconds: 90,
+  });
+  const journey = await report({ ...selection, session });
+  expect(journey.events.map((row) => row.event_type)).toEqual([
+    "page_view",
+    "interaction",
+    "page_view",
+    "interaction",
+  ]);
+  expect(
+    (await report({ ...selection, action: "email" })).totals,
+  ).toMatchObject({ views: 0, clicks: 1, active_seconds: 0 });
+  expect(
+    (await report({ ...selection, min_seconds: 45, max_seconds: 90 })).totals,
+  ).toMatchObject({ views: 1, clicks: 1, active_seconds: 60 });
+  expect(
+    (await report({ ...selection, country: "BG" })).totals.activities,
+  ).toBe(0);
+  const historical = await report({
+    from: "2026-10-12",
+    to: "2026-10-13",
+    country: "unknown",
+  });
+  expect(historical.totals.views).toBe(4);
+  expect(historical.engagement.avg_session_seconds).toBeNull();
+  expect(historical.events.every((row) => row.visitor_country === null)).toBe(
+    true,
+  );
+  await expect(
+    report({ ...selection, min_seconds: 90, max_seconds: 10 }),
+  ).rejects.toThrow("INVALID_ANALYTICS_FILTER");
+  await expect(
+    report({ ...selection, country: "precise-location" }),
+  ).rejects.toThrow("INVALID_ANALYTICS_FILTER");
+});
+it("keeps writes service-only, enforces session event limits, and denies another account's new analytics", async () => {
+  await db.exec("reset role");
+  const session = randomUUID(),
+    view = randomUUID();
+  await activity(session, view);
+  await db.query(
+    "insert into tracking_events(account_id,session_id,event_type,page_path) select $1,$2,'page_view','/' from generate_series(1,499)",
+    [account, session],
+  );
+  expect(await activity(session, randomUUID())).toBe(false);
+  expect(
+    await activity(session, view, { kind: "interaction", action: "email" }),
+  ).toBe(false);
+  await member();
+  await expect(activity(session, randomUUID())).rejects.toThrow(
+    "permission denied",
+  );
+  await member(other);
+  await expect(report({ country: "DE" })).rejects.toThrow("ACCOUNT_FORBIDDEN");
+  expect(
+    (
+      await db.query(
+        "select * from owner_analytics_activity where session_id=$1",
+        [session],
+      )
+    ).rows,
+  ).toHaveLength(0);
+  await db.exec("reset role;set role anon");
+  await expect(activity(session, randomUUID())).rejects.toThrow(
+    "permission denied",
+  );
 });

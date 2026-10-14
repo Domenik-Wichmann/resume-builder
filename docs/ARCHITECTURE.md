@@ -111,11 +111,22 @@ forwarded link identifies link engagement, not a particular person.
 `/api/tracking` accepts only bounded, same-origin public page categories. It
 uses signed HttpOnly 24-hour cookies, resolves active links in the primary
 account, and excludes verified owner traffic and DNT/GPC. The service-only
-`record_portfolio_page_view` RPC suppresses repeated same-page writes within
-five seconds and caps a session at 500 views per rolling day. Direct visits
-have a null link; no query strings, project slugs or referrers are stored.
+`record_portfolio_activity` RPC deduplicates page-view UUIDs, verifies the
+signed session and page for follow-ups, and caps a session at 500 page views
+and clicks per rolling day. Cumulative heartbeats update the original view,
+never its count. The server caps measured time by elapsed time and four hours;
+the browser counts only visible, focused time with interaction in the last
+30 seconds. Scroll depth uses 25% buckets. Clicks use a fixed action allowlist.
+Approximate country comes only from Vercel's country header on Vercel; device,
+browser and OS are broad user-agent categories. Referrers are classified into
+fixed arrival categories in the browser. Direct visits have a null link; no
+query strings, project slugs, referring URLs, raw user agents or IPs are stored.
+Private routes, verified owner visits, demo mode, DNT/GPC and recognizable bots
+are excluded. Unknown historical fields are never inferred or backfilled.
 The private Analytics page verifies the configured owner and reads through
-their Supabase JWT and membership RLS.
+their Supabase JWT and membership RLS. All filters apply in SQL before totals
+and pagination; session journeys summarize only matching activity. Workspace-only
+events have no browser context and remain unknown under visitor filters.
 
 `prune_tracking_events()` deletes records older than 90 days and is called on
 new page-view writes. For a silent portfolio the owner should invoke it manually

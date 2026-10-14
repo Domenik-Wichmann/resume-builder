@@ -40,6 +40,15 @@ export async function loadAnalytics(
     p_active: filters.active === "all" ? null : filters.active === "active",
     p_search: filters.search || null,
     p_offset: (filters.page_number - 1) * 50,
+    p_country: filters.country === "all" ? null : filters.country,
+    p_device: filters.device === "all" ? null : filters.device,
+    p_browser: filters.browser === "all" ? null : filters.browser,
+    p_os: filters.os === "all" ? null : filters.os,
+    p_referrer: filters.referrer === "all" ? null : filters.referrer,
+    p_action: filters.action === "all" ? null : filters.action,
+    p_min_seconds: filters.min_seconds === 0 ? null : filters.min_seconds,
+    p_max_seconds: filters.max_seconds === 14400 ? null : filters.max_seconds,
+    p_session: filters.session || null,
   });
   const report = analyticsReportSchema.safeParse(result.data);
   if (result.error || !report.success)
@@ -47,6 +56,7 @@ export async function loadAnalytics(
   return {
     ...report.data,
     events: includeDetails ? report.data.events : [],
+    journeys: includeDetails ? report.data.journeys : [],
     filters,
   };
 }

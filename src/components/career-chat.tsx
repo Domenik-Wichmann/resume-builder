@@ -397,6 +397,9 @@ export function CareerChat({
               />
               <button
                 className="composer-send"
+                data-analytics-action={
+                  kind === "match" ? "create_workspace" : "question"
+                }
                 type="submit"
                 disabled={!canSubmit}
                 aria-busy={busy}
@@ -592,6 +595,7 @@ export function CareerChat({
                 className="secondary-button"
                 disabled={busy}
                 onClick={preview}
+                data-analytics-action="preview_resume"
               >
                 {ir ? "Refresh résumé" : "Preview résumé"}
               </button>
@@ -599,6 +603,7 @@ export function CareerChat({
                 <button
                   className="secondary-button"
                   onClick={() => window.print()}
+                  data-analytics-action="export_resume"
                 >
                   Print résumé / PDF
                 </button>

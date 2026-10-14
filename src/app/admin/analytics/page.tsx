@@ -40,7 +40,10 @@ export default async function Analytics({
         />
         <p className="record-notice error" role="alert">
           Check your filters: use valid dates in a range of up to 90 days, hours
-          from 00 to 23, and an eight-character tracking code or its full link.
+          from 00 to 23, an eight-character tracking code or its full link, a
+          two-letter country code (or unknown), and ordered active-time limits
+          from 0 to 14,400 seconds. Session IDs must come from a session
+          journey.
         </p>
         <AnalyticsFiltersForm
           filters={defaultAnalyticsFilters()}

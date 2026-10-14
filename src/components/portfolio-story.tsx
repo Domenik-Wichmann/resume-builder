@@ -60,6 +60,7 @@ export function PortfolioStoryHero({
             <div
               className={`story-scene story-scene-${index}`}
               key={scene.chapter}
+              data-analytics-action="story_scene"
               hidden={!mobile && step !== index}
             >
               <div className="story-copy">
@@ -160,6 +161,7 @@ export function PortfolioStoryHero({
                       <button
                         type="button"
                         className="story-portrait-next"
+                        data-analytics-action="story_next"
                         onClick={() => navigate(1)}
                       >
                         <span>More about me &amp; this project</span>
@@ -200,6 +202,7 @@ export function PortfolioStoryHero({
                 <button
                   type="button"
                   className="story-intro-next"
+                  data-analytics-action="story_next"
                   onClick={() => navigate(1)}
                 >
                   More about me &amp; this project{" "}
@@ -214,6 +217,7 @@ export function PortfolioStoryHero({
                   <button
                     type="button"
                     className="story-return-chat"
+                    data-analytics-action="open_chat"
                     onClick={chat}
                   >
                     Ask me about my work <span aria-hidden="true">↓</span>
@@ -228,6 +232,7 @@ export function PortfolioStoryHero({
                   <button
                     type="button"
                     className="story-return-chat"
+                    data-analytics-action="open_chat"
                     onClick={chat}
                   >
                     Jump to chat <span aria-hidden="true">↓</span>
@@ -241,7 +246,12 @@ export function PortfolioStoryHero({
             <Link className="button story-projects-cta" href="/projects">
               Check out my projects <span aria-hidden="true">↗</span>
             </Link>
-            <button type="button" className="story-return-chat" onClick={chat}>
+            <button
+              type="button"
+              className="story-return-chat"
+              data-analytics-action="open_chat"
+              onClick={chat}
+            >
               Jump to chat <span aria-hidden="true">↓</span>
             </button>
           </div>
@@ -253,6 +263,7 @@ export function PortfolioStoryHero({
             </Link>
             <a
               className="button story-cta"
+              data-analytics-action="open_chat"
               href="#ask"
               onClick={(event) => {
                 event.preventDefault();
@@ -274,6 +285,7 @@ export function PortfolioStoryHero({
               <button
                 type="button"
                 key={scene.chapter}
+                data-analytics-action="story_scene"
                 aria-label={`${index + 1}. ${scene.chapter}`}
                 aria-current={step === index ? "step" : undefined}
                 onClick={() => navigate(index)}
@@ -287,6 +299,7 @@ export function PortfolioStoryHero({
             <button
               type="button"
               aria-label="Previous chapter"
+              data-analytics-action="story_previous"
               disabled={step === 0}
               onClick={() => navigate(step - 1)}
             >
@@ -301,6 +314,9 @@ export function PortfolioStoryHero({
               }
               onClick={() =>
                 step === finalStoryStep ? chat() : navigate(step + 1)
+              }
+              data-analytics-action={
+                step === finalStoryStep ? "open_chat" : "story_next"
               }
             >
               <span>

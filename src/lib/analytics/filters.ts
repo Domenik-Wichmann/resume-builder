@@ -1,8 +1,16 @@
 import { z } from "zod";
 import { outcomes } from "../applications/model";
+import {
+  arrivalSources,
+  browserTypes,
+  deviceTypes,
+  operatingSystems,
+  interactionActions,
+} from "../tracking/dimensions";
 export const analyticsEvents = [
   "all",
   "page_view",
+  "interaction",
   "question",
   "created",
   "resume_preview",
@@ -17,6 +25,7 @@ export const analyticsEventLabels: Record<
 > = {
   all: "All activity",
   page_view: "Page view",
+  interaction: "Button / link click",
   question: "Question saved",
   created: "Workspace started",
   resume_preview: "Resume preview",
@@ -48,11 +57,20 @@ export const analyticsFiltersSchema = z
     status: z.enum(["all", ...outcomes]),
     active: z.enum(["all", "active", "inactive"]),
     search: z.string().trim().max(200),
+    country: z.string().regex(/^(all|unknown|[A-Z]{2})$/),
+    device: z.enum(["all", ...deviceTypes]),
+    browser: z.enum(["all", ...browserTypes]),
+    os: z.enum(["all", ...operatingSystems]),
+    referrer: z.enum(["all", ...arrivalSources]),
+    action: z.enum(["all", ...interactionActions]),
+    min_seconds: z.coerce.number().int().min(0).max(14400),
+    max_seconds: z.coerce.number().int().min(0).max(14400),
+    session: z.union([z.literal(""), z.uuid()]),
     page_number: z.coerce.number().int().min(1).max(1000),
   })
   .refine((value) => {
     const span = (Date.parse(value.to) - Date.parse(value.from)) / 86400000;
-    return span >= 0 && span < 90;
+    return span >= 0 && span < 90 && value.min_seconds <= value.max_seconds;
   }, "Choose an ordered date range of up to 90 days.");
 export type AnalyticsFilters = z.infer<typeof analyticsFiltersSchema>;
 export type AnalyticsQuery = Record<string, string | string[] | undefined>;
@@ -76,6 +94,15 @@ export function defaultAnalyticsFilters(
     status: "all",
     active: "all",
     search: "",
+    country: "all",
+    device: "all",
+    browser: "all",
+    os: "all",
+    referrer: "all",
+    action: "all",
+    min_seconds: 0,
+    max_seconds: 14400,
+    session: "",
     page_number: 1,
   };
 }
@@ -89,6 +116,12 @@ export function parseAnalyticsFilters(query: AnalyticsQuery, now = new Date()) {
   const input: Record<string, unknown> = { ...defaults };
   for (const key of Object.keys(defaults)) {
     if (query[key] !== undefined && query[key] !== "") input[key] = query[key];
+  }
+  if (typeof input.country === "string") {
+    const country = input.country.trim();
+    input.country = ["all", "unknown"].includes(country.toLowerCase())
+      ? country.toLowerCase()
+      : country.toUpperCase();
   }
   if (typeof input.code === "string") {
     input.code = input.code.trim();
