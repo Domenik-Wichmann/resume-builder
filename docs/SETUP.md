@@ -138,7 +138,7 @@ The owner overview shows retained counts, recent workspaces, tracking links,
 and three leading questions/topics. `/admin/analytics` provides 1/7/30/90-day UTC
 charts for page views and questions, browser sessions, source attribution,
 page categories, topic evidence strength and recent Q&A. Apply all committed
-migrations through `202610140001_visitor_insights.sql` before deploying this
+migrations through `202610150001_unique_visitors.sql` before deploying this
 update. The new service-only RPC records optional approximate country,
 device/browser/OS categories, arrival source and allowlisted button/link clicks.
 Time and scroll updates modify their original page view without adding views.
@@ -149,9 +149,24 @@ Demo mode, signed-in owners and DNT/GPC traffic are excluded. Historical traffic
 contains only short-link landing events. Completed PDF saves are not measured.
 The report filters in SQL before aggregation and returns 50 activity records per
 page and the latest 20 matching session journeys. Totals are not capped by those
-display limits. Filter by country, device, browser, OS, arrival source, action,
+display limits. The left sidebar contains all filters and collapses on mobile.
+Total page views, 24-hour sessions, recognized unique visitors and unidentified
+sessions are separate metrics. Charts switch between total activity and unique
+visitors. The visitor table combines sessions, page views, clicks, active time,
+page/action summaries and associated workspace activity per anonymous browser,
+with independent 20-visitor pagination. A signed optional HttpOnly 90-day
+`rb_analytics_visitor` cookie recognizes repeat sessions; it is separate from
+workspace ownership, AI quota and tracking-link cookies. Cleared/expired cookies
+and different browsers count separately. Only verified workspace ownership can
+associate a workspace with an analytics visitor, through a service-only RPC in
+the atomic slot-creation transaction. Existing workspaces can be associated on a
+later allowed page view when both cookies are verified. Owner and DNT/GPC requests
+do not create this association. Old session identifiers never substitute for a
+missing visitor identity. Unique totals are deduplicated across the entire
+selected period, not summed from daily unique counts.
+Filter by country, device, browser, OS, arrival source, action,
 active seconds per page or a browser session alongside the existing date/hour,
-application code, contact profile, activity, page and text filters. Session logs
+application code, contact profile, activity, page, anonymous visitor and text filters. Visitor/session logs
 are chronological; other activity is newest first. Existing rows remain unknown
 for details not collected previously. Browser sessions are random 24-hour IDs,
 not login identities. Active time and scroll are best-effort measurements;

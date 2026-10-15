@@ -7,7 +7,12 @@ import { database } from "@/lib/db";
 import { trackingEventSchema } from "@/lib/tracking/paths";
 import { visitorContext } from "@/lib/tracking/visitor-context";
 import { currentMarket } from "@/lib/market-server";
+import { readVisitor, visitorCookie } from "@/lib/workspaces/identity";
 import {
+  analyticsVisitorCookie,
+  analyticsVisitorMaxAge,
+  createAnalyticsVisitor,
+  readAnalyticsVisitor,
   createSession,
   readSession,
   resolveLink,
@@ -24,6 +29,7 @@ export async function POST(request: NextRequest) {
     if (trackingDisabled(request.headers)) {
       response.cookies.delete("rb_site_visit");
       response.cookies.delete("rb_visit");
+      response.cookies.delete(analyticsVisitorCookie);
       return response;
     }
     if (validateEnv(process.env).mode === "demo" || (await isOwner(request)))
@@ -47,6 +53,11 @@ export async function POST(request: NextRequest) {
         : existing?.code === "siteView"
           ? existing.sessionId
           : created.sessionId;
+    const visitor = readAnalyticsVisitor(
+      request.cookies.get(analyticsVisitorCookie)?.value,
+    );
+    const newVisitor =
+      !visitor && event.kind === "page_view" ? createAnalyticsVisitor() : null;
     const result = await database().rpc("record_portfolio_activity", {
       p_session: sessionId,
       p_view: event.view_id || randomUUID(),
@@ -62,9 +73,21 @@ export async function POST(request: NextRequest) {
       p_action: event.kind === "interaction" ? event.action : null,
       p_seconds: event.kind === "engagement" ? event.active_seconds : null,
       p_scroll: event.kind === "engagement" ? event.scroll_depth : null,
+      p_visitor: visitor || newVisitor?.sessionId || null,
+      p_workspace_visitor: readVisitor(
+        request.cookies.get(visitorCookie)?.value,
+      ),
     });
     if (result.error) throw new Error("Cannot record portfolio activity.");
     if (result.data === true) response.headers.set("X-Analytics-Recorded", "1");
+    if (result.data === true && newVisitor)
+      response.cookies.set(analyticsVisitorCookie, newVisitor.cookie, {
+        httpOnly: true,
+        secure: request.nextUrl.protocol === "https:",
+        sameSite: "lax",
+        path: "/",
+        maxAge: analyticsVisitorMaxAge,
+      });
     if (event.kind === "page_view" && !linkId && existing?.code !== "siteView")
       response.cookies.set("rb_site_visit", created.cookie, {
         httpOnly: true,

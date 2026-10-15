@@ -156,7 +156,11 @@ on this domain for OAuth and password recovery.
   `/admin/analytics` page shows visit trends, question frequency and topic signals.
   New visits also include approximate country, device/browser/OS categories,
   arrival-source categories, selected clicks, active time and scroll depth.
-  Combined filters and session journeys help inspect activity without identifying people.
+  Total views and recognized unique browsers are shown separately. A separate optional
+  signed 90-day cookie combines repeat sessions and associated workspace activity
+  into visitor summaries, without granting workspace access. Historical sessions
+  without this identity remain unidentified. Charts switch between total activity
+  and unique visitors; filters live in a left sidebar (collapsible on mobile).
   No stored IP addresses, fingerprints, identities, or keystrokes. DNT/GPC disables
   tracking. Retention cleanup deletes events older than 90 days on new writes;
   invoke the cleanup RPC for inactive portfolios that need immediate expiry.

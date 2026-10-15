@@ -17,6 +17,11 @@ import {
   trackingDisabled,
 } from "@/lib/tracking/service";
 import { randomUUID } from "node:crypto";
+import { isOwner } from "@/lib/admin";
+import {
+  analyticsVisitorCookie,
+  readAnalyticsVisitor,
+} from "@/lib/tracking/service";
 export async function GET(request: NextRequest) {
   try {
     if (validateEnv(process.env).mode === "demo")
@@ -51,10 +56,17 @@ export async function POST(request: NextRequest) {
     const link = session ? await resolveLink(session.code) : null;
     const db = database();
     await db.rpc("prune_workspaces");
-    const { data, error } = await db.rpc("create_workspace", {
+    const analyticsVisitor =
+      trackingDisabled(request.headers) || (await isOwner(request))
+        ? null
+        : readAnalyticsVisitor(
+            request.cookies.get(analyticsVisitorCookie)?.value,
+          );
+    const { data, error } = await db.rpc("create_workspace_with_analytics", {
       p_visitor_id: visitorId,
       p_market: market,
       p_tracking_link_id: link,
+      p_analytics_visitor_id: analyticsVisitor,
     });
     if (error) {
       if (error.message.includes("WORKSPACE_LIMIT"))

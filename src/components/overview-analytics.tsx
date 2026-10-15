@@ -33,6 +33,7 @@ export function OverviewAnalytics({
       <div className="overview-pulse">
         {[
           ["Page views today", today?.views || 0],
+          ["Unique visitors today", today?.visitors || 0],
           [
             "Page views · last 7 days",
             week.reduce((n, day) => n + day.views, 0),
@@ -45,13 +46,17 @@ export function OverviewAnalytics({
           <Link
             key={label}
             href={analyticsHref(filters, {
-              from:
-                label === "Page views today"
-                  ? filters.to
-                  : week[0]?.label || filters.from,
+              from: String(label).endsWith("today")
+                ? filters.to
+                : week[0]?.label || filters.from,
               to: filters.to,
               event:
-                label === "Questions · last 7 days" ? "question" : "page_view",
+                label === "Unique visitors today"
+                  ? "all"
+                  : label === "Questions · last 7 days"
+                    ? "question"
+                    : "page_view",
+              metric: label === "Unique visitors today" ? "unique" : "total",
             })}
           >
             <strong>{value}</strong>

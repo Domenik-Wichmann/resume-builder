@@ -37,7 +37,7 @@ export function AnalyticsFiltersForm({
     >
       <div className="analytics-filter-heading">
         <div>
-          <h2>Explore your activity</h2>
+          <h2>Filters</h2>
           <p className="muted">
             Every filter applies to totals, charts, links and the activity log.
             Dates and hours use UTC.
@@ -63,6 +63,7 @@ export function AnalyticsFiltersForm({
       </div>
       <Form action="/admin/analytics" key={analyticsHref(filters)}>
         {preview && <input type="hidden" name="preview" value="1" />}
+        <input type="hidden" name="metric" value={filters.metric} />
         <div className="analytics-filter-fields">
           <label>
             From date (UTC)
@@ -148,7 +149,8 @@ export function AnalyticsFiltersForm({
             filters.action !== "all" ||
             filters.min_seconds !== 0 ||
             filters.max_seconds !== 14400 ||
-            Boolean(filters.session)
+            Boolean(filters.session) ||
+            Boolean(filters.visitor)
           }
         >
           <summary>
@@ -256,6 +258,16 @@ export function AnalyticsFiltersForm({
                 max={14400}
                 step={1}
                 defaultValue={filters.max_seconds}
+              />
+            </label>
+            <label>
+              Anonymous visitor
+              <input
+                name="visitor"
+                defaultValue={filters.visitor}
+                maxLength={36}
+                placeholder="Select from combined visitors"
+                spellCheck={false}
               />
             </label>
             <label>

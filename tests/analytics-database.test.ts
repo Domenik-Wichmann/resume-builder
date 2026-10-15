@@ -107,10 +107,12 @@ async function report(
     min_seconds: null,
     max_seconds: null,
     session: null,
+    visitor: null,
+    visitor_offset: 0,
     ...patch,
   };
   const r = await db.query<{ value: unknown }>(
-    "select owner_analytics_report($1,$2::date,$3::date,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23) value",
+    "select owner_analytics_report($1,$2::date,$3::date,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25) value",
     [account, ...Object.values(value)],
   );
   return analyticsReportSchema.parse(r.rows[0].value);
@@ -255,11 +257,13 @@ async function activity(
     action: null,
     seconds: null,
     scroll: null,
+    visitor: null,
+    workspace_visitor: null,
     ...patch,
   };
   return (
     await db.query<{ accepted: boolean }>(
-      "select record_portfolio_activity($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) accepted",
+      "select record_portfolio_activity($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16) accepted",
       Object.values(values),
     )
   ).rows[0].accepted;
@@ -427,11 +431,12 @@ it("applies visitor, action, duration and session filters before aggregation and
     measured_views: 2,
   });
   expect(data.engagement).toEqual({
+    avg_visitor_seconds: null,
     avg_session_seconds: 90,
     measured_sessions: 1,
     engaged_sessions: 1,
   });
-  expect(data.countries).toEqual([{ label: "DE", count: 1 }]);
+  expect(data.countries).toEqual([{ label: "DE", count: 4, visitors: 0 }]);
   expect(data.journeys[0]).toMatchObject({
     entry_page: "/projects",
     last_page: "/",
@@ -501,4 +506,169 @@ it("keeps writes service-only, enforces session event limits, and denies another
   await expect(activity(session, randomUUID())).rejects.toThrow(
     "permission denied",
   );
+});
+
+it("combines returning visitors across sessions and dates, including verified workspace activity, without guessing historical identities", async () => {
+  await db.exec("reset role");
+  const visitor = randomUUID(),
+    secondVisitor = randomUUID(),
+    workspaceOwner = randomUUID();
+  const firstSession = randomUUID(),
+    secondSession = randomUUID();
+  const firstView = randomUUID(),
+    repeatView = randomUUID(),
+    returnView = randomUUID();
+  for (const [session, view] of [
+    [firstSession, firstView],
+    [firstSession, repeatView],
+    [secondSession, returnView],
+  ]) {
+    await activity(session, view, { visitor });
+    await db.query(
+      "update tracking_events set created_at=now()-interval '120 seconds' where id=$1",
+      [view],
+    );
+  }
+  await activity(firstSession, firstView, {
+    kind: "engagement",
+    seconds: 30,
+    scroll: 50,
+    visitor,
+  });
+  await activity(firstSession, repeatView, {
+    kind: "engagement",
+    seconds: 60,
+    scroll: 100,
+    visitor,
+  });
+  await activity(secondSession, returnView, {
+    kind: "engagement",
+    seconds: 15,
+    scroll: 25,
+    visitor,
+  });
+  // Follow-ups inherit the parent's identity even if the visitor cookie has changed.
+  await activity(firstSession, firstView, {
+    kind: "interaction",
+    action: "email",
+    visitor: secondVisitor,
+  });
+  await activity(secondSession, returnView, {
+    kind: "interaction",
+    action: "email",
+    visitor,
+  });
+  await db.query(
+    "update tracking_events set created_at=case when session_id=$1 then '2026-10-07T10:00:00Z'::timestamptz else '2026-10-08T10:00:00Z'::timestamptz end where session_id in ($1,$2)",
+    [firstSession, secondSession],
+  );
+  const secondView = randomUUID(),
+    legacyView = randomUUID();
+  await activity(randomUUID(), secondView, { visitor: secondVisitor });
+  await activity(randomUUID(), legacyView);
+  await db.query(
+    "update tracking_events set created_at='2026-10-08T12:00:00Z' where id in ($1,$2)",
+    [secondView, legacyView],
+  );
+  const saved = (
+    await db.query<{ id: string }>(
+      "select create_workspace_with_analytics($1,'US',$2,$3) id",
+      [workspaceOwner, us, visitor],
+    )
+  ).rows[0].id;
+  await db.query(
+    "insert into workspace_questions(account_id,workspace_id,question,answer,created_at) values($1,$2,'Explicit fictional question','Explicit fictional answer','2026-10-08T11:01:00Z')",
+    [account, saved],
+  );
+  await db.query(
+    "update workspace_events set created_at='2026-10-08T11:00:00Z' where workspace_id=$1",
+    [saved],
+  );
+  await db.query(
+    "insert into workspace_events(account_id,workspace_id,event_type,created_at) values($1,$2,'resume_preview','2026-10-08T11:02:00Z'),($1,$2,'workspace_export','2026-10-08T11:03:00Z')",
+    [account, saved],
+  );
+  await member();
+  const period = { from: "2026-10-07", to: "2026-10-08" };
+  const data = await report(period);
+  expect(data.totals).toMatchObject({
+    views: 5,
+    sessions: 4,
+    visitors: 2,
+    unidentified_sessions: 1,
+  });
+  expect(data.daily.map((day) => day.visitors)).toEqual([1, 2]);
+  expect(data.daily.map((day) => day.question_visitors)).toEqual([0, 1]);
+  expect(data.visitors.find((row) => row.visitor_id === visitor)).toMatchObject(
+    {
+      views: 3,
+      sessions: 2,
+      clicks: 2,
+      questions: 1,
+      workspace_starts: 1,
+      previews: 1,
+      exports: 1,
+      active_seconds: 105,
+      scroll_depth: 100,
+    },
+  );
+  expect(data.actions).toEqual([{ label: "email", count: 2, visitors: 1 }]);
+  expect(data.pages).toEqual([{ label: "/projects", count: 5, visitors: 2 }]);
+  expect(JSON.stringify(data)).not.toContain(workspaceOwner);
+  const detail = await report({ ...period, visitor });
+  expect(detail.totals).toMatchObject({
+    activities: 9,
+    visitors: 1,
+    views: 3,
+    sessions: 2,
+    active_seconds: 105,
+  });
+  expect(
+    detail.events.every((row) => row.analytics_visitor_id === visitor),
+  ).toBe(true);
+  expect(detail.events.map((row) => row.created_at)).toEqual(
+    detail.events.map((row) => row.created_at).sort(),
+  );
+  expect(
+    (await report({ ...period, visitor, action: "email" })).totals,
+  ).toMatchObject({ visitors: 1, views: 0, clicks: 2 });
+  expect((await report({ ...period, visitor_offset: 20 })).visitors).toEqual(
+    [],
+  );
+  expect(
+    (await report({ ...period, visitor_offset: 20 })).totals.visitors,
+  ).toBe(2);
+  await expect(report({ ...period, visitor_offset: -1 })).rejects.toThrow(
+    "INVALID_ANALYTICS_FILTER",
+  );
+  await expect(
+    db.query("select create_workspace_with_analytics($1,'US',null,$2)", [
+      randomUUID(),
+      visitor,
+    ]),
+  ).rejects.toThrow("permission denied");
+  await member(other);
+  expect(
+    (
+      await db.query(
+        "select * from analytics_workspace_visitors where analytics_visitor_id=$1",
+        [visitor],
+      )
+    ).rows,
+  ).toEqual([]);
+  expect(
+    (
+      await db.query(
+        "select * from owner_analytics_activity where analytics_visitor_id=$1",
+        [visitor],
+      )
+    ).rows,
+  ).toEqual([]);
+  await db.exec("reset role");
+  await expect(
+    db.query(
+      "insert into analytics_workspace_visitors(account_id,workspace_visitor_id,analytics_visitor_id) values($1,$2,$3)",
+      [otherAccount, workspaceOwner, randomUUID()],
+    ),
+  ).rejects.toThrow("CROSS_ACCOUNT_REFERENCE");
 });

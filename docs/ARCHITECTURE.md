@@ -94,7 +94,8 @@ a model risk even with valid IDs; grounded answer evaluation is a next step.
 
 ## Tracking
 
-Only valid application short links create a session. Codes use six random bytes
+Public page views create anonymous sessions; valid application short links add
+attribution. Codes use six random bytes
 (eight URL-safe characters, 48 bits). Database uniqueness and CLI retries handle
 collisions. Invalid and inactive codes share a 404 response. Tracking mappings and
 events are denied to anonymous roles; authenticated account members see only their
@@ -126,7 +127,28 @@ are excluded. Unknown historical fields are never inferred or backfilled.
 The private Analytics page verifies the configured owner and reads through
 their Supabase JWT and membership RLS. All filters apply in SQL before totals
 and pagination; session journeys summarize only matching activity. Workspace-only
-events have no browser context and remain unknown under visitor filters.
+events have no device/country context and remain unknown under those filters.
+
+`rb_analytics_visitor` is a separate signed, HttpOnly, same-site 90-day cookie.
+Its random ID never grants workspace access and never reuses an ownership or
+AI quota identifier. Page views persist this verified ID; clicks inherit their
+parent view's identity and heartbeats cannot reassign it. Historical sessions
+with no visitor ID remain unidentified. Uniqueness is per recognized browser
+within the selected range; expired/cleared cookies and separate browsers count
+separately. No fingerprinting or identity inference is used.
+`analytics_workspace_visitors` privately associates a verified workspace owner
+cookie with the independent analytics ID. The service-only creation wrapper
+calls the existing atomic slot allocator and saves the optional association in
+the same transaction; the tracking RPC can associate an existing workspace when
+both cookies are verified. The first association cannot be rebound by later
+cookies. Owner traffic and DNT/GPC never create associations. Membership RLS and
+account-reference triggers apply to the association table, and workspace
+ownership IDs are never returned in reports.
+The invoker report groups recognized visitors across sessions and associated
+workspace records, filtering before aggregation and independently paginating
+20 visitor summaries and 50 events. Total and distinct-visitor counts are
+returned together for chart categories, days, hours and application links.
+Period uniqueness is computed directly, never by summing daily unique counts.
 
 `prune_tracking_events()` deletes records older than 90 days and is called on
 new page-view writes. For a silent portfolio the owner should invoke it manually

@@ -40,10 +40,22 @@ function signature(payload: string) {
     .update(payload)
     .digest("base64url");
 }
-export function createSession(code: string) {
+export const analyticsVisitorCookie = "rb_analytics_visitor";
+export const analyticsVisitorMaxAge = 90 * 86400;
+function signedSession(code: string, seconds: number) {
   const sessionId = randomUUID();
-  const payload = `${code}.${sessionId}.${Date.now() + 86400000}`;
+  const payload = `${code}.${sessionId}.${Date.now() + seconds * 1000}`;
   return { sessionId, cookie: `${payload}.${signature(payload)}` };
+}
+export function createSession(code: string) {
+  return signedSession(code, 86400);
+}
+export function createAnalyticsVisitor() {
+  return signedSession("visitor1", analyticsVisitorMaxAge);
+}
+export function readAnalyticsVisitor(cookie: string | undefined) {
+  const value = readSession(cookie || "");
+  return value?.code === "visitor1" ? value.sessionId : null;
 }
 export function readSession(cookie: string) {
   const parts = cookie.split(".");

@@ -53,6 +53,7 @@ export function fictionalAnalytics(
         application_id: null,
         organization: link ? "Fictional employer" : null,
         role: link ? "Fictional role" : null,
+        analytics_visitor_id: `10000000-0000-4000-8000-${String(Math.floor(index / 27) + 1).padStart(12, "0")}`,
         session_id: browserEvent
           ? `00000000-0000-4000-8000-${String(Math.floor(index / 9) + 1).padStart(12, "0")}`
           : null,
@@ -115,6 +116,7 @@ export function fictionalAnalytics(
       (filters.referrer === "all" ||
         (event.referrer || "unknown") === filters.referrer) &&
       (filters.action === "all" || event.action === filters.action) &&
+      (!filters.visitor || event.analytics_visitor_id === filters.visitor) &&
       (!filters.session || event.session_id === filters.session) &&
       (filters.min_seconds === 0 ||
         (event.active_seconds !== null &&
@@ -142,12 +144,23 @@ export function fictionalAnalytics(
     .sort((a, b) => b.created_at.localeCompare(a.created_at));
   const count = (type: string) =>
     rows.filter((event) => event.event_type === type).length;
-  const ranks = (values: string[]) =>
-    [...new Set(values)]
-      .map((label) => ({
-        label,
-        count: values.filter((value) => value === label).length,
-      }))
+  const ranks = (
+    selected: typeof rows,
+    labelFor: (row: (typeof rows)[number]) => string,
+  ) =>
+    [...new Set(selected.map(labelFor))]
+      .map((label) => {
+        const matching = selected.filter((row) => labelFor(row) === label);
+        return {
+          label,
+          count: matching.length,
+          visitors: new Set(
+            matching.flatMap((row) =>
+              row.analytics_visitor_id ? [row.analytics_visitor_id] : [],
+            ),
+          ).size,
+        };
+      })
       .sort((a, b) => b.count - a.count);
   const days =
     Math.round((Date.parse(filters.to) - Date.parse(filters.from)) / 86400000) +
@@ -170,6 +183,7 @@ export function fictionalAnalytics(
       last = selected[0];
     return {
       session_id,
+      analytics_visitor_id: first.analytics_visitor_id,
       first_seen: first.created_at,
       last_seen: last.created_at,
       entry_page: first.page_path,
@@ -191,11 +205,71 @@ export function fictionalAnalytics(
     };
   });
   const views = rows.filter((row) => row.event_type === "page_view");
+  const visitorRows: AnalyticsReport["visitors"] = [
+    ...new Set(
+      rows.flatMap((row) =>
+        row.analytics_visitor_id ? [row.analytics_visitor_id] : [],
+      ),
+    ),
+  ].map((visitor_id) => {
+    const selected = rows.filter(
+      (row) => row.analytics_visitor_id === visitor_id,
+    );
+    const pageViews = selected.filter((row) => row.event_type === "page_view");
+    const measured = pageViews.filter((row) => row.active_seconds !== null);
+    const context = (
+      key: "visitor_country" | "device" | "browser" | "os" | "referrer",
+    ) =>
+      [
+        ...new Set(selected.flatMap((row) => (row[key] ? [row[key]] : []))),
+      ].sort();
+    const n = (type: string) =>
+      selected.filter((row) => row.event_type === type).length;
+    return {
+      visitor_id,
+      first_seen: selected.at(-1)!.created_at,
+      last_seen: selected[0].created_at,
+      activities: selected.length,
+      sessions: new Set(
+        selected.flatMap((row) => (row.session_id ? [row.session_id] : [])),
+      ).size,
+      views: n("page_view"),
+      clicks: n("interaction"),
+      questions: n("question"),
+      workspace_starts: n("created"),
+      previews: n("resume_preview"),
+      exports: n("workspace_export"),
+      explorations:
+        n("project_viewed") + n("skill_explored") + n("category_explored"),
+      active_seconds: measured.length
+        ? measured.reduce((sum, row) => sum + row.active_seconds!, 0)
+        : null,
+      scroll_depth: measured.length
+        ? Math.max(...measured.map((row) => row.scroll_depth || 0))
+        : null,
+      countries: context("visitor_country"),
+      devices: context("device"),
+      browsers: context("browser"),
+      operating_systems: context("os"),
+      referrers: context("referrer"),
+      pages: ranks(pageViews, (row) => row.page_path || "Historical landing"),
+      actions: ranks(
+        selected.filter((row) => row.action !== null),
+        (row) => row.action!,
+      ),
+    };
+  });
   return {
     totals: {
       activities: rows.length,
       views: count("page_view"),
       sessions: journeys.length,
+      visitors: visitorRows.length,
+      unidentified_sessions: new Set(
+        rows
+          .filter((row) => !row.analytics_visitor_id)
+          .flatMap((row) => (row.session_id ? [row.session_id] : [])),
+      ).size,
       questions: count("question"),
       workspace_starts: count("created"),
       previews: count("resume_preview"),
@@ -214,13 +288,38 @@ export function fictionalAnalytics(
         0,
       ),
     },
-    countries: ranks(journeys.map((row) => row.visitor_country || "unknown")),
-    devices: ranks(journeys.map((row) => row.device || "unknown")),
-    browsers: ranks(journeys.map((row) => row.browser || "unknown")),
-    operating_systems: ranks(journeys.map((row) => row.os || "unknown")),
-    referrers: ranks(journeys.map((row) => row.referrer || "unknown")),
-    actions: ranks(rows.flatMap((row) => (row.action ? [row.action] : []))),
+    countries: ranks(
+      rows.filter((row) => row.session_id !== null),
+      (row) => row.visitor_country || "unknown",
+    ),
+    devices: ranks(
+      rows.filter((row) => row.session_id !== null),
+      (row) => row.device || "unknown",
+    ),
+    browsers: ranks(
+      rows.filter((row) => row.session_id !== null),
+      (row) => row.browser || "unknown",
+    ),
+    operating_systems: ranks(
+      rows.filter((row) => row.session_id !== null),
+      (row) => row.os || "unknown",
+    ),
+    referrers: ranks(
+      rows.filter((row) => row.session_id !== null),
+      (row) => row.referrer || "unknown",
+    ),
+    actions: ranks(
+      rows.filter((row) => row.action !== null),
+      (row) => row.action!,
+    ),
+    visitors: visitorRows.slice(
+      (filters.visitor_page - 1) * 20,
+      filters.visitor_page * 20,
+    ),
     engagement: {
+      avg_visitor_seconds: average(
+        visitorRows.map((row) => row.active_seconds),
+      ),
       avg_session_seconds: average(journeys.map((row) => row.active_seconds)),
       measured_sessions: journeys.filter((row) => row.measured_views > 0)
         .length,
@@ -230,14 +329,16 @@ export function fictionalAnalytics(
       ).length,
     },
     page_engagement: ranks(
-      views.map((row) => row.page_path || "Historical landing"),
-    ).map(({ label, count }) => {
+      views,
+      (row) => row.page_path || "Historical landing",
+    ).map(({ label, count, visitors }) => {
       const selected = views.filter(
         (row) => (row.page_path || "Historical landing") === label,
       );
       return {
         label,
         views: count,
+        visitors,
         measured_views: selected.filter((row) => row.active_seconds !== null)
           .length,
         avg_seconds: average(selected.map((row) => row.active_seconds)),
@@ -245,7 +346,7 @@ export function fictionalAnalytics(
       };
     }),
     journeys: journeys.slice(0, 20),
-    previous: { views: 0, sessions: 0, questions: 0 },
+    previous: { views: 0, sessions: 0, visitors: 0, questions: 0 },
     daily: Array.from({ length: days }, (_, index) => {
       const date = new Date(filters.from);
       date.setUTCDate(date.getUTCDate() + index);
@@ -255,25 +356,38 @@ export function fictionalAnalytics(
         label,
         views: day.filter((row) => row.event_type === "page_view").length,
         questions: day.filter((row) => row.event_type === "question").length,
+        question_visitors: new Set(
+          day
+            .filter((row) => row.event_type === "question")
+            .flatMap((row) =>
+              row.analytics_visitor_id ? [row.analytics_visitor_id] : [],
+            ),
+        ).size,
         activity: day.length,
+        visitors: new Set(
+          day.flatMap((row) =>
+            row.analytics_visitor_id ? [row.analytics_visitor_id] : [],
+          ),
+        ).size,
       };
     }),
     hourly: Array.from({ length: 24 }, (_, hour) => ({
       hour,
+      visitors: new Set(
+        rows
+          .filter((row) => new Date(row.created_at).getUTCHours() === hour)
+          .flatMap((row) =>
+            row.analytics_visitor_id ? [row.analytics_visitor_id] : [],
+          ),
+      ).size,
       count: rows.filter(
         (row) => new Date(row.created_at).getUTCHours() === hour,
       ).length,
     })),
-    pages: ranks(
-      rows
-        .filter((row) => row.event_type === "page_view")
-        .map((row) => row.page_path || "Historical landing"),
-    ),
-    regions: ranks(rows.map((row) => row.region || "unknown")),
-    sources: ranks(
-      rows.map((row) =>
-        row.code ? "Application link" : "Without application link",
-      ),
+    pages: ranks(views, (row) => row.page_path || "Historical landing"),
+    regions: ranks(rows, (row) => row.region || "unknown"),
+    sources: ranks(rows, (row) =>
+      row.code ? "Application link" : "Without application link",
     ),
     tracking: links
       .filter((link) => rows.some((row) => row.code === link.code))
@@ -287,7 +401,14 @@ export function fictionalAnalytics(
           region: link.market,
           application_id: null,
           views: n("page_view"),
-          sessions: n("page_view"),
+          sessions: new Set(
+            selected.flatMap((row) => (row.session_id ? [row.session_id] : [])),
+          ).size,
+          visitors: new Set(
+            selected.flatMap((row) =>
+              row.analytics_visitor_id ? [row.analytics_visitor_id] : [],
+            ),
+          ).size,
           questions: n("question"),
           workspace_starts: n("created"),
           previews: n("resume_preview"),
@@ -301,6 +422,13 @@ export function fictionalAnalytics(
           {
             label: "Fictional automation topic",
             count: count("question"),
+            visitors: new Set(
+              rows
+                .filter((row) => row.event_type === "question")
+                .flatMap((row) =>
+                  row.analytics_visitor_id ? [row.analytics_visitor_id] : [],
+                ),
+            ).size,
             strong: 0,
             partial: count("question"),
             none: 0,
@@ -308,12 +436,13 @@ export function fictionalAnalytics(
         ]
       : [],
     questions: ranks(
-      rows.filter((row) => row.question).map((row) => row.question!),
+      rows.filter((row) => row.question !== null),
+      (row) => row.question!,
     ),
-    events: (filters.session ? [...rows].reverse() : rows).slice(
-      (filters.page_number - 1) * 50,
-      filters.page_number * 50,
-    ),
+    events: (filters.session || filters.visitor
+      ? [...rows].reverse()
+      : rows
+    ).slice((filters.page_number - 1) * 50, filters.page_number * 50),
     links,
   };
 }

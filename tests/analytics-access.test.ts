@@ -41,6 +41,7 @@ it("uses only the verified account's JWT client with bounded filters and paginat
     }),
   );
   expect(result.events).toEqual([]);
+  expect(result.visitors).toEqual([]);
 });
 it("verifies configured owner authority before account bootstrap or analytics reads", async () => {
   mocks.owner.mockRejectedValue(new Error("Owner authentication required."));

@@ -32,7 +32,7 @@ export default async function Analytics({
   const parsed = parseAnalyticsFilters(query);
   if (!parsed.success)
     return (
-      <main id="main" className="wrap admin-main">
+      <main id="main" className="wrap admin-main analytics-main">
         <AdminPageHeader
           section="Insights"
           title="Visitor analytics"
@@ -42,8 +42,8 @@ export default async function Analytics({
           Check your filters: use valid dates in a range of up to 90 days, hours
           from 00 to 23, an eight-character tracking code or its full link, a
           two-letter country code (or unknown), and ordered active-time limits
-          from 0 to 14,400 seconds. Session IDs must come from a session
-          journey.
+          from 0 to 14,400 seconds. Visitor and session IDs must come from the
+          analytics report.
         </p>
         <AnalyticsFiltersForm
           filters={defaultAnalyticsFilters()}
@@ -57,7 +57,7 @@ export default async function Analytics({
     ? fictionalAnalytics(filters)
     : await loadAnalytics(filters);
   return (
-    <main id="main" className="wrap admin-main">
+    <main id="main" className="wrap admin-main analytics-main">
       {preview && (
         <p className="demo-banner">
           FICTIONAL ANALYTICS PREVIEW · sample activity is not real visitor data

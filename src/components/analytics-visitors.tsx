@@ -47,9 +47,10 @@ export function VisitorAnalytics({
         <div>
           <h2 id="visitor-insights-heading">Visitors &amp; engagement</h2>
           <p className="muted">
-            Anonymous browser sessions, not login identities. Visitor breakdowns
-            count sessions; buttons count clicks. Click any breakdown to filter
-            the report.
+            {filters.metric === "unique"
+              ? "Charts count each recognized visitor once per category."
+              : "Charts count matching activity; buttons count clicks."}{" "}
+            Click any breakdown to filter the report.
           </p>
         </div>
       </div>
@@ -60,6 +61,7 @@ export function VisitorAnalytics({
             title={title}
             rows={rows.map((row) => ({
               ...row,
+              count: filters.metric === "unique" ? row.visitors : row.count,
               label: visitorValueLabel(key, row.label),
               href: analyticsHref(filters, { [key]: row.label }, preview),
             }))}
@@ -67,13 +69,14 @@ export function VisitorAnalytics({
         ))}
       </div>
       <p className="muted analytics-comparison-note">
-        Breakdowns count browser sessions; buttons count clicks. A session can
-        appear in multiple categories if its context changes. Country is an
-        approximate hosting-provider signal, separate from the contact profile
-        shown. Devices and browsers are best-effort categories. A missing
-        referrer can mean a direct visit, an app, or a privacy setting. Older
-        records and workspace-only events have no browser details. Clicks
-        indicate intent, not a completed submission or download.
+        In unique mode, a visitor counts once per category, across sessions and
+        repeat actions. A visitor can appear in multiple categories if its
+        context changes. Country is an approximate hosting-provider signal,
+        separate from the contact profile shown. Devices and browsers are
+        best-effort categories. A missing referrer can mean a direct visit, an
+        app, or a privacy setting. Older records and workspace-only events have
+        no browser details. Clicks indicate intent, not a completed submission
+        or download.
       </p>
       <section
         className="surface section analytics-visitor-table"
@@ -92,6 +95,7 @@ export function VisitorAnalytics({
                 <tr>
                   <th>Page category</th>
                   <th>Views</th>
+                  <th>Unique visitors</th>
                   <th>Timed views</th>
                   <th>Average active time</th>
                   <th>Average scroll depth</th>
@@ -118,6 +122,7 @@ export function VisitorAnalytics({
                       </Link>
                     </td>
                     <td>{row.views}</td>
+                    <td>{row.visitors}</td>
                     <td>{row.measured_views}</td>
                     <td>{durationLabel(row.avg_seconds)}</td>
                     <td>
@@ -134,11 +139,10 @@ export function VisitorAnalytics({
           <p className="muted">No page views match this selection.</p>
         )}
       </section>
-      <section
-        className="surface section analytics-visitor-table"
-        aria-labelledby="session-journeys-heading"
-      >
-        <h3 id="session-journeys-heading">Session journeys</h3>
+      <details className="surface section analytics-visitor-table">
+        <summary id="session-journeys-heading">
+          Individual session journeys
+        </summary>
         <p className="muted">
           Latest 20 browser sessions with matching activity. First and last
           pages, counts and time reflect this selection; visitor context comes
@@ -204,7 +208,7 @@ export function VisitorAnalytics({
         ) : (
           <p className="muted">No browser sessions match these filters.</p>
         )}
-      </section>
+      </details>
     </section>
   );
 }

@@ -36,6 +36,17 @@ export default function Privacy() {
         signed-in owner visits are excluded.
       </p>
       <p>
+        A separate optional HttpOnly, same-site cookie recognizes this browser
+        for up to 90 days so analytics can combine repeat sessions into an
+        anonymous visitor summary. It does not identify a person or grant access
+        to a workspace. Different browsers, cookie deletion or expiry create
+        separate visitors. When both cookies are verified, saved workspace
+        activity can be associated with this anonymous visitor. Workspace access
+        continues to require its separate ownership cookie. Do Not Track and
+        Global Privacy Control suppress this association and visitor tracking.
+        Historical sessions without a visitor identifier remain unidentified.
+      </p>
+      <p>
         Events contain a random session identifier, event type, timestamp, and
         coarse page category, with a link reference when applicable. New visits
         also include approximate country (when supplied by the hosting

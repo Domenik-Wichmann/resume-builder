@@ -66,6 +66,9 @@ export const analyticsFiltersSchema = z
     min_seconds: z.coerce.number().int().min(0).max(14400),
     max_seconds: z.coerce.number().int().min(0).max(14400),
     session: z.union([z.literal(""), z.uuid()]),
+    visitor: z.union([z.literal(""), z.uuid()]),
+    metric: z.enum(["total", "unique"]),
+    visitor_page: z.coerce.number().int().min(1).max(1000),
     page_number: z.coerce.number().int().min(1).max(1000),
   })
   .refine((value) => {
@@ -103,6 +106,9 @@ export function defaultAnalyticsFilters(
     min_seconds: 0,
     max_seconds: 14400,
     session: "",
+    visitor: "",
+    metric: "total",
+    visitor_page: 1,
     page_number: 1,
   };
 }
@@ -140,7 +146,7 @@ export function analyticsHref(
   patch: Partial<AnalyticsFilters> = {},
   preview = false,
 ) {
-  const value = { ...filters, page_number: 1, ...patch };
+  const value = { ...filters, page_number: 1, visitor_page: 1, ...patch };
   const query = new URLSearchParams();
   for (const [key, item] of Object.entries(value)) {
     if (item !== "" && item !== "all") query.set(key, String(item));

@@ -49,6 +49,8 @@ export async function loadAnalytics(
     p_min_seconds: filters.min_seconds === 0 ? null : filters.min_seconds,
     p_max_seconds: filters.max_seconds === 14400 ? null : filters.max_seconds,
     p_session: filters.session || null,
+    p_visitor: filters.visitor || null,
+    p_visitor_offset: (filters.visitor_page - 1) * 20,
   });
   const report = analyticsReportSchema.safeParse(result.data);
   if (result.error || !report.success)
@@ -57,6 +59,7 @@ export async function loadAnalytics(
     ...report.data,
     events: includeDetails ? report.data.events : [],
     journeys: includeDetails ? report.data.journeys : [],
+    visitors: includeDetails ? report.data.visitors : [],
     filters,
   };
 }

@@ -16,7 +16,14 @@ vi.mock("../src/lib/tracking/service", async (importOriginal) => {
   return { ...original, resolveLink: mocks.link };
 });
 import { POST } from "../src/app/api/tracking/route";
-import { createSession, readSession } from "../src/lib/tracking/service";
+import {
+  createSession,
+  readSession,
+  createAnalyticsVisitor,
+  readAnalyticsVisitor,
+  analyticsVisitorCookie,
+} from "../src/lib/tracking/service";
+import { createVisitor, visitorCookie } from "../src/lib/workspaces/identity";
 beforeEach(() => {
   vi.stubEnv("APP_MODE", "live");
   vi.stubEnv("NEXT_PUBLIC_SITE_URL", "https://portfolio.test");
@@ -64,6 +71,67 @@ it("sets an HttpOnly signed session and writes only server-resolved fields", asy
     }),
   );
   expect(response.headers.get("X-Analytics-Recorded")).toBe("1");
+});
+it("recognizes repeat sessions using a separate 90-day signed visitor cookie without exposing workspace ownership", async () => {
+  const first = await POST(request());
+  if (!(first instanceof NextResponse))
+    throw new Error("Expected cookie response");
+  const value = first.cookies.get(analyticsVisitorCookie)!.value;
+  const visitor = readAnalyticsVisitor(value);
+  expect(visitor).not.toBeNull();
+  expect(mocks.rpc.mock.calls[0][1].p_visitor).toBe(visitor);
+  expect(first.headers.get("set-cookie")).toContain("Max-Age=7776000");
+  const session = createSession("demoLink"),
+    workspace = createVisitor();
+  await POST(
+    request(undefined, {
+      cookie: `${analyticsVisitorCookie}=${value}; rb_visit=${session.cookie}; ${visitorCookie}=${workspace.cookie}`,
+    }),
+  );
+  expect(mocks.rpc.mock.calls[1][1]).toMatchObject({
+    p_visitor: visitor,
+    p_session: session.sessionId,
+    p_workspace_visitor: workspace.id,
+  });
+  const duplicate = await POST(
+    request(undefined, { cookie: `${analyticsVisitorCookie}=${value}` }),
+  );
+  if (!(duplicate instanceof NextResponse))
+    throw new Error("Expected cookie response");
+  expect(duplicate.cookies.has(analyticsVisitorCookie)).toBe(false);
+  expect(readAnalyticsVisitor(createSession("siteView").cookie)).toBeNull();
+  expect(readAnalyticsVisitor(value + "forged")).toBeNull();
+  const expired = createAnalyticsVisitor();
+  vi.spyOn(Date, "now").mockReturnValue(Date.now() + 91 * 86400000);
+  expect(readAnalyticsVisitor(expired.cookie)).toBeNull();
+  vi.restoreAllMocks();
+});
+it("never accepts client visitor identities or uses forged ownership cookies, and deletes optional identity on opt-out", async () => {
+  const visitor = createAnalyticsVisitor(),
+    workspace = createVisitor();
+  await POST(
+    request(undefined, {
+      cookie: `${analyticsVisitorCookie}=${visitor.cookie}x; ${visitorCookie}=${workspace.cookie}x`,
+    }),
+  );
+  expect(mocks.rpc.mock.calls[0][1].p_visitor).not.toBe(visitor.sessionId);
+  expect(mocks.rpc.mock.calls[0][1].p_workspace_visitor).toBeNull();
+  expect(
+    (
+      await POST(
+        request(JSON.stringify({ path: "/", visitor_id: visitor.sessionId })),
+      )
+    ).status,
+  ).toBe(400);
+  const response = await POST(
+    request(undefined, {
+      DNT: "1",
+      cookie: `${analyticsVisitorCookie}=${visitor.cookie}`,
+    }),
+  );
+  expect(response.headers.get("set-cookie")).toContain(
+    `${analyticsVisitorCookie}=;`,
+  );
 });
 it("reuses a signed session and verifies attribution on the server", async () => {
   const session = createSession("demoLink");

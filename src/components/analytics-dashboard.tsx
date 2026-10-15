@@ -8,6 +8,8 @@ import {
 } from "@/lib/analytics/filters";
 import { analyticsChange, type AnalyticsReport } from "@/lib/analytics/report";
 import { VisitorAnalytics, visitorValueLabel } from "./analytics-visitors";
+import { AnalyticsSidebar } from "./analytics-sidebar";
+import { AnalyticsVisitorSummary } from "./analytics-visitor-summary";
 import { durationLabel } from "@/lib/tracking/dimensions";
 export function contactRegionLabel(region: string | null) {
   if (region === "mixed") return "Multiple contact profiles";
@@ -25,14 +27,29 @@ export function AnalyticsMetrics({ data }: { data: AnalyticsReport }) {
     >
       {[
         [
-          "Page views",
+          "Total page views",
           data.totals.views,
           analyticsChange(data.totals.views, data.previous.views),
+        ],
+        [
+          "Unique visitors",
+          data.totals.visitors,
+          analyticsChange(data.totals.visitors, data.previous.visitors),
         ],
         [
           "Browser sessions",
           data.totals.sessions,
           analyticsChange(data.totals.sessions, data.previous.sessions),
+        ],
+        [
+          "Unidentified sessions",
+          data.totals.unidentified_sessions,
+          "Historical visits without a recognized visitor cookie",
+        ],
+        [
+          "Avg. active time / visitor",
+          durationLabel(data.engagement.avg_visitor_seconds),
+          "Combined measured time across each visitor’s sessions",
         ],
         [
           "Questions saved",
@@ -138,6 +155,7 @@ export function TrackingPerformance({
                 <th>Contact profile</th>
                 <th>Views</th>
                 <th>Sessions</th>
+                <th>Unique visitors</th>
                 <th>Questions</th>
                 <th>Workspaces</th>
                 <th>Explorations</th>
@@ -168,6 +186,7 @@ export function TrackingPerformance({
                   <td>{contactRegionLabel(row.region)}</td>
                   <td>{row.views}</td>
                   <td>{row.sessions}</td>
+                  <td>{row.visitors}</td>
                   <td>{row.questions}</td>
                   <td>{row.workspace_starts}</td>
                   <td>{row.explorations}</td>
@@ -201,377 +220,481 @@ export function AnalyticsDashboard({
     href: analyticsHref(filters, { from: day.label, to: day.label }, preview),
   }));
   return (
-    <>
-      <AnalyticsFiltersForm
-        filters={filters}
-        links={data.links}
-        countries={data.countries}
-        preview={preview}
-      />
-      <div className="analytics-selection">
-        <strong>
-          {filters.from} – {filters.to} · UTC
-        </strong>
-        <span>
-          {data.totals.activities.toLocaleString("en-US")} matching activities
-        </span>
-        {filters.code && (
-          <span className="resume-badge">Code: {filters.code}</span>
-        )}
-        {filters.region !== "all" && (
-          <span className="resume-badge">
-            {contactRegionLabel(filters.region)}
+    <div className="analytics-layout">
+      <AnalyticsSidebar>
+        <AnalyticsFiltersForm
+          filters={filters}
+          links={data.links}
+          countries={data.countries}
+          preview={preview}
+        />
+      </AnalyticsSidebar>
+      <div className="analytics-results">
+        <div className="analytics-selection">
+          <strong>
+            {filters.from} – {filters.to} · UTC
+          </strong>
+          <span>
+            {data.totals.activities.toLocaleString("en-US")} matching activities
           </span>
-        )}
-        {filters.event !== "all" && (
-          <span className="resume-badge">
-            {analyticsEventLabels[filters.event]}
-          </span>
-        )}
-        {(["country", "device", "browser", "os", "referrer", "action"] as const)
-          .filter((key) => filters[key] !== "all")
-          .map((key) => (
-            <span className="resume-badge" key={key}>
-              {visitorValueLabel(key, filters[key])}
+          {filters.code && (
+            <span className="resume-badge">Code: {filters.code}</span>
+          )}
+          {filters.region !== "all" && (
+            <span className="resume-badge">
+              {contactRegionLabel(filters.region)}
             </span>
-          ))}
-        {filters.session && (
-          <Link
-            className="text-link"
-            href={analyticsHref(filters, { session: "" }, preview)}
-          >
-            One session selected · Clear
-          </Link>
-        )}
-      </div>
-      <AnalyticsMetrics data={data} />
-      <p className="muted analytics-comparison-note">
-        Comparisons use the preceding {data.daily.length} calendar days with the
-        same filters. Today is partial; counts reflect retained records.
-      </p>
-      <VisitorAnalytics data={data} filters={filters} preview={preview} />
-      <section className="analytics-grid section" aria-label="Activity trends">
-        <AnalyticsTrend
-          title="Page views by day"
-          rows={dateRows.map((day, index) => ({
-            ...day,
-            count: data.daily[index].views,
-          }))}
-        />
-        <AnalyticsTrend
-          title="Questions by day"
-          rows={dateRows.map((day, index) => ({
-            ...day,
-            count: data.daily[index].questions,
-          }))}
-        />
-      </section>
-      <details className="surface analytics-hourly">
-        <summary>Activity by hour of day (UTC)</summary>
-        <p className="muted">
-          Combined across selected dates. Click an hour to filter all activity
-          to it.
-        </p>
-        <AnalyticsChart
-          title="Matching activities by hour"
-          rows={data.hourly.map((row) => ({
-            label: `${String(row.hour).padStart(2, "0")}:00–${String(row.hour).padStart(2, "0")}:59`,
-            count: row.count,
-            href: analyticsHref(
-              filters,
-              { hour_from: row.hour, hour_to: row.hour },
-              preview,
-            ),
-          }))}
-        />
-      </details>
-      <section
-        className="analytics-grid section"
-        aria-label="Activity breakdowns"
-      >
-        <AnalyticsChart
-          title="Pages viewed"
-          rows={data.pages.map((row) => ({
-            ...row,
-            href: analyticsHref(
-              filters,
-              {
-                page:
-                  row.label === "Historical landing"
-                    ? "legacy"
-                    : (row.label as AnalyticsFilters["page"]),
-              },
-              preview,
-            ),
-          }))}
-        />
-        <AnalyticsChart
-          title="Activity by contact profile"
-          rows={data.regions.map((row) => ({
-            ...row,
-            label: contactRegionLabel(row.label),
-            href: analyticsHref(
-              filters,
-              { region: row.label as AnalyticsFilters["region"] },
-              preview,
-            ),
-          }))}
-        />
-        <AnalyticsChart
-          title="Application attribution"
-          rows={data.sources.map((row) => ({
-            ...row,
-            href: analyticsHref(
-              filters,
-              {
-                source:
-                  row.label === "Application link" ? "tracked" : "untracked",
-              },
-              preview,
-            ),
-          }))}
-        />
-        <AnalyticsChart
-          title="Most asked questions"
-          rows={data.questions.slice(0, 10)}
-        />
-      </section>
-      <TrackingPerformance data={data} filters={filters} preview={preview} />
-      <section className="section surface" id="questions">
-        <h2>Topics &amp; evidence signals</h2>
-        <p className="muted">
-          Counts use saved questions matching the filters. Evidence strength
-          describes stored answer support, not proof of a skill gap.
-        </p>
-        {data.topics.length ? (
-          <div className="table-scroll">
-            <table>
-              <thead>
-                <tr>
-                  <th>Topic</th>
-                  <th>Questions</th>
-                  <th>Strong</th>
-                  <th>Partial</th>
-                  <th>No evidence</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.topics.map((topic) => (
-                  <tr key={topic.label}>
-                    <td>
-                      <Link
-                        className="text-link"
-                        href={analyticsHref(
-                          filters,
-                          { search: topic.label, event: "question" },
-                          preview,
-                        )}
-                      >
-                        {topic.label}
-                      </Link>
-                    </td>
-                    <td>{topic.count}</td>
-                    <td>{topic.strong}</td>
-                    <td>{topic.partial}</td>
-                    <td>{topic.none}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        ) : (
-          <p>No saved topic signals match these filters.</p>
-        )}
-      </section>
-      <section className="surface section" id="activity">
-        <div className="workspace-top">
-          <div>
-            <h2>Activity log</h2>
-            <p className="muted">
-              {filters.session ? "Journey order · " : "Newest first · "}
-              {data.totals.activities.toLocaleString("en-US")} matching
-              activities. Expand a saved question to read its answer.
-            </p>
-          </div>
-          <span className="resume-badge">
-            Page {filters.page_number} of {pages}
-          </span>
+          )}
+          {filters.event !== "all" && (
+            <span className="resume-badge">
+              {analyticsEventLabels[filters.event]}
+            </span>
+          )}
+          {(
+            [
+              "country",
+              "device",
+              "browser",
+              "os",
+              "referrer",
+              "action",
+            ] as const
+          )
+            .filter((key) => filters[key] !== "all")
+            .map((key) => (
+              <span className="resume-badge" key={key}>
+                {visitorValueLabel(key, filters[key])}
+              </span>
+            ))}
+          {filters.session && (
+            <Link
+              className="text-link"
+              href={analyticsHref(filters, { session: "" }, preview)}
+            >
+              One session selected · Clear
+            </Link>
+          )}
+          {filters.visitor && (
+            <Link
+              className="text-link"
+              href={analyticsHref(
+                filters,
+                { visitor: "", session: "" },
+                preview,
+              )}
+            >
+              Visitor {filters.visitor.slice(-8)} selected · Clear
+            </Link>
+          )}
         </div>
-        {data.events.length ? (
-          <div className="table-scroll">
-            <table className="analytics-event-table">
-              <thead>
-                <tr>
-                  <th>Time (UTC)</th>
-                  <th>Activity</th>
-                  <th>Tracking / application</th>
-                  <th>Contact profile</th>
-                  <th>Visitor / session</th>
-                  <th>Details</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.events.map((event) => (
-                  <tr key={`${event.event_type}:${event.id}`}>
-                    <td>
-                      {new Date(event.created_at)
-                        .toISOString()
-                        .slice(0, 19)
-                        .replace("T", " ")}
-                    </td>
-                    <td>
-                      <Link
-                        className="text-link"
-                        href={analyticsHref(
-                          filters,
-                          { event: event.event_type },
-                          preview,
-                        )}
-                      >
-                        {analyticsEventLabels[event.event_type]}
-                      </Link>
-                    </td>
-                    <td>
-                      {event.code ? (
-                        <>
-                          <Link
-                            className="text-link"
-                            href={analyticsHref(
-                              filters,
-                              { code: event.code },
-                              preview,
-                            )}
-                          >
-                            {event.code}
-                          </Link>
-                          <span className="analytics-table-detail">
-                            {[event.organization, event.role]
-                              .filter(Boolean)
-                              .join(" · ")}
-                          </span>
-                        </>
-                      ) : (
-                        <span className="muted">No application link</span>
-                      )}
-                    </td>
-                    <td>{contactRegionLabel(event.region)}</td>
-                    <td>
-                      {visitorValueLabel("country", event.visitor_country)}
-                      <span className="analytics-table-detail">
-                        {visitorValueLabel("device", event.device)} ·{" "}
-                        {visitorValueLabel("browser", event.browser)} ·{" "}
-                        {visitorValueLabel("os", event.os)}
-                      </span>
-                      <span className="analytics-table-detail">
-                        {visitorValueLabel("referrer", event.referrer)}
-                      </span>
-                      {event.session_id && (
+        <AnalyticsMetrics data={data} />
+        <p className="muted analytics-comparison-note">
+          Comparisons use the preceding {data.daily.length} calendar days with
+          the same filters. Today is partial; counts reflect retained records.
+        </p>
+        <AnalyticsVisitorSummary
+          data={data}
+          filters={filters}
+          preview={preview}
+        />
+        <nav className="analytics-count-mode" aria-label="Chart counting mode">
+          <strong>Chart counts</strong>
+          <Link
+            aria-current={filters.metric === "total" ? "page" : undefined}
+            href={analyticsHref(filters, { metric: "total" }, preview)}
+          >
+            Total activity
+          </Link>
+          <Link
+            aria-current={filters.metric === "unique" ? "page" : undefined}
+            href={analyticsHref(filters, { metric: "unique" }, preview)}
+          >
+            Unique visitors
+          </Link>
+          <span className="muted">
+            {filters.metric === "unique"
+              ? "Each recognized visitor counts once in each category. Unidentified history is excluded."
+              : "Counts include repeat views and actions."}
+          </span>
+        </nav>
+        <VisitorAnalytics data={data} filters={filters} preview={preview} />
+        <section
+          className="analytics-grid section"
+          aria-label="Activity trends"
+        >
+          <AnalyticsTrend
+            title={
+              filters.metric === "unique"
+                ? "Unique visitors by day"
+                : "Page views by day"
+            }
+            rows={dateRows.map((day, index) => ({
+              ...day,
+              count:
+                filters.metric === "unique"
+                  ? data.daily[index].visitors
+                  : data.daily[index].views,
+            }))}
+          />
+          <AnalyticsTrend
+            title={
+              filters.metric === "unique"
+                ? "Visitors who asked questions by day"
+                : "Questions by day"
+            }
+            rows={dateRows.map((day, index) => ({
+              ...day,
+              count:
+                filters.metric === "unique"
+                  ? data.daily[index].question_visitors
+                  : data.daily[index].questions,
+            }))}
+          />
+        </section>
+        <details className="surface analytics-hourly">
+          <summary>Activity by hour of day (UTC)</summary>
+          <p className="muted">
+            Combined across selected dates. Click an hour to filter all activity
+            to it.
+          </p>
+          <AnalyticsChart
+            title={
+              filters.metric === "unique"
+                ? "Unique visitors by hour"
+                : "Matching activities by hour"
+            }
+            rows={data.hourly.map((row) => ({
+              label: `${String(row.hour).padStart(2, "0")}:00–${String(row.hour).padStart(2, "0")}:59`,
+              count: filters.metric === "unique" ? row.visitors : row.count,
+              href: analyticsHref(
+                filters,
+                { hour_from: row.hour, hour_to: row.hour },
+                preview,
+              ),
+            }))}
+          />
+        </details>
+        <section
+          className="analytics-grid section"
+          aria-label="Activity breakdowns"
+        >
+          <AnalyticsChart
+            title="Pages viewed"
+            rows={data.pages.map((row) => ({
+              ...row,
+              count: filters.metric === "unique" ? row.visitors : row.count,
+              href: analyticsHref(
+                filters,
+                {
+                  page:
+                    row.label === "Historical landing"
+                      ? "legacy"
+                      : (row.label as AnalyticsFilters["page"]),
+                },
+                preview,
+              ),
+            }))}
+          />
+          <AnalyticsChart
+            title="Activity by contact profile"
+            rows={data.regions.map((row) => ({
+              ...row,
+              count: filters.metric === "unique" ? row.visitors : row.count,
+              label: contactRegionLabel(row.label),
+              href: analyticsHref(
+                filters,
+                { region: row.label as AnalyticsFilters["region"] },
+                preview,
+              ),
+            }))}
+          />
+          <AnalyticsChart
+            title="Application attribution"
+            rows={data.sources.map((row) => ({
+              ...row,
+              count: filters.metric === "unique" ? row.visitors : row.count,
+              href: analyticsHref(
+                filters,
+                {
+                  source:
+                    row.label === "Application link" ? "tracked" : "untracked",
+                },
+                preview,
+              ),
+            }))}
+          />
+          <AnalyticsChart
+            title="Most asked questions"
+            rows={data.questions.slice(0, 10).map((row) => ({
+              ...row,
+              count: filters.metric === "unique" ? row.visitors : row.count,
+            }))}
+          />
+        </section>
+        <TrackingPerformance data={data} filters={filters} preview={preview} />
+        <section className="section surface" id="questions">
+          <h2>Topics &amp; evidence signals</h2>
+          <p className="muted">
+            Counts use saved questions matching the filters. Evidence strength
+            describes stored answer support, not proof of a skill gap.
+          </p>
+          {data.topics.length ? (
+            <div className="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Topic</th>
+                    <th>Questions</th>
+                    <th>Unique visitors</th>
+                    <th>Strong</th>
+                    <th>Partial</th>
+                    <th>No evidence</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.topics.map((topic) => (
+                    <tr key={topic.label}>
+                      <td>
                         <Link
                           className="text-link"
-                          href={
-                            analyticsHref(
-                              filters,
-                              { session: event.session_id },
-                              preview,
-                            ) + "#activity"
-                          }
+                          href={analyticsHref(
+                            filters,
+                            { search: topic.label, event: "question" },
+                            preview,
+                          )}
                         >
-                          Inspect session
+                          {topic.label}
                         </Link>
-                      )}
-                    </td>
-                    <td>
-                      {event.question ? (
-                        <details>
-                          <summary>{event.question}</summary>
-                          <p>{event.answer}</p>
-                        </details>
-                      ) : (
-                        <span>
-                          {event.action
-                            ? visitorValueLabel("action", event.action)
-                            : event.subject}
-                          {event.event_type === "interaction" && (
-                            <span className="analytics-table-detail">
-                              On {event.page_path}
-                            </span>
-                          )}
-                          {event.event_type === "page_view" && (
-                            <span className="analytics-table-detail">
-                              {durationLabel(event.active_seconds)} active ·{" "}
-                              {event.scroll_depth === null
-                                ? "Scroll not measured"
-                                : `${event.scroll_depth}% scroll`}
-                            </span>
-                          )}
-                        </span>
-                      )}
-                    </td>
+                      </td>
+                      <td>{topic.count}</td>
+                      <td>{topic.visitors}</td>
+                      <td>{topic.strong}</td>
+                      <td>{topic.partial}</td>
+                      <td>{topic.none}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <p>No saved topic signals match these filters.</p>
+          )}
+        </section>
+        <section className="surface section" id="activity">
+          <div className="workspace-top">
+            <div>
+              <h2>Activity log</h2>
+              <p className="muted">
+                {filters.session || filters.visitor
+                  ? "Journey order · "
+                  : "Newest first · "}
+                {data.totals.activities.toLocaleString("en-US")} matching
+                activities. Expand a saved question to read its answer.
+              </p>
+            </div>
+            <span className="resume-badge">
+              Page {filters.page_number} of {pages}
+            </span>
+          </div>
+          {data.events.length ? (
+            <div className="table-scroll">
+              <table className="analytics-event-table">
+                <thead>
+                  <tr>
+                    <th>Time (UTC)</th>
+                    <th>Activity</th>
+                    <th>Tracking / application</th>
+                    <th>Contact profile</th>
+                    <th>Visitor / session</th>
+                    <th>Details</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        ) : (
-          <div className="resume-empty">
-            <h3>No activity matches these filters.</h3>
-            <p>
-              Try a wider date range, a different tracking code, or reset the
-              filters. Older untracked visits may have no recorded region.
-            </p>
-          </div>
-        )}
-        <nav className="analytics-pagination" aria-label="Activity log pages">
-          {filters.page_number > 1 && (
-            <Link
-              className="button"
-              href={
-                analyticsHref(
-                  filters,
-                  { page_number: filters.page_number - 1 },
-                  preview,
-                ) + "#activity"
-              }
-            >
-              ← Previous 50
-            </Link>
+                </thead>
+                <tbody>
+                  {data.events.map((event) => (
+                    <tr key={`${event.event_type}:${event.id}`}>
+                      <td>
+                        {new Date(event.created_at)
+                          .toISOString()
+                          .slice(0, 19)
+                          .replace("T", " ")}
+                      </td>
+                      <td>
+                        <Link
+                          className="text-link"
+                          href={analyticsHref(
+                            filters,
+                            { event: event.event_type },
+                            preview,
+                          )}
+                        >
+                          {analyticsEventLabels[event.event_type]}
+                        </Link>
+                      </td>
+                      <td>
+                        {event.code ? (
+                          <>
+                            <Link
+                              className="text-link"
+                              href={analyticsHref(
+                                filters,
+                                { code: event.code },
+                                preview,
+                              )}
+                            >
+                              {event.code}
+                            </Link>
+                            <span className="analytics-table-detail">
+                              {[event.organization, event.role]
+                                .filter(Boolean)
+                                .join(" · ")}
+                            </span>
+                          </>
+                        ) : (
+                          <span className="muted">No application link</span>
+                        )}
+                      </td>
+                      <td>{contactRegionLabel(event.region)}</td>
+                      <td>
+                        {event.analytics_visitor_id && (
+                          <Link
+                            className="text-link analytics-table-detail"
+                            href={
+                              analyticsHref(
+                                filters,
+                                {
+                                  visitor: event.analytics_visitor_id,
+                                  session: "",
+                                },
+                                preview,
+                              ) + "#visitors"
+                            }
+                          >
+                            Visitor {event.analytics_visitor_id.slice(-8)} →
+                          </Link>
+                        )}
+                        {visitorValueLabel("country", event.visitor_country)}
+                        <span className="analytics-table-detail">
+                          {visitorValueLabel("device", event.device)} ·{" "}
+                          {visitorValueLabel("browser", event.browser)} ·{" "}
+                          {visitorValueLabel("os", event.os)}
+                        </span>
+                        <span className="analytics-table-detail">
+                          {visitorValueLabel("referrer", event.referrer)}
+                        </span>
+                        {event.session_id && (
+                          <Link
+                            className="text-link"
+                            href={
+                              analyticsHref(
+                                filters,
+                                { session: event.session_id },
+                                preview,
+                              ) + "#activity"
+                            }
+                          >
+                            Inspect session
+                          </Link>
+                        )}
+                      </td>
+                      <td>
+                        {event.question ? (
+                          <details>
+                            <summary>{event.question}</summary>
+                            <p>{event.answer}</p>
+                          </details>
+                        ) : (
+                          <span>
+                            {event.action
+                              ? visitorValueLabel("action", event.action)
+                              : event.subject}
+                            {event.event_type === "interaction" && (
+                              <span className="analytics-table-detail">
+                                On {event.page_path}
+                              </span>
+                            )}
+                            {event.event_type === "page_view" && (
+                              <span className="analytics-table-detail">
+                                {durationLabel(event.active_seconds)} active ·{" "}
+                                {event.scroll_depth === null
+                                  ? "Scroll not measured"
+                                  : `${event.scroll_depth}% scroll`}
+                              </span>
+                            )}
+                          </span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <div className="resume-empty">
+              <h3>No activity matches these filters.</h3>
+              <p>
+                Try a wider date range, a different tracking code, or reset the
+                filters. Older untracked visits may have no recorded region.
+              </p>
+            </div>
           )}
-          {filters.page_number < pages && filters.page_number < 1000 && (
-            <Link
-              className="button"
-              href={
-                analyticsHref(
-                  filters,
-                  { page_number: filters.page_number + 1 },
-                  preview,
-                ) + "#activity"
-              }
-            >
-              Next 50 →
-            </Link>
-          )}
-        </nav>
-      </section>
-      <details className="admin-count-notes">
-        <summary>What these analytics mean</summary>
-        <p>
-          Contact region is the US or Bulgaria contact profile shown on the
-          site, not a visitor’s physical location. Older untracked views without
-          a recorded profile remain Unknown. Browser sessions use a random
-          24-hour identifier; they do not identify people. Questions are saved
-          privately in recruiter workspaces. Deleted workspaces remove their
-          questions and activity. Privacy signals, blocked scripts and signed-in
-          owner page views are excluded. Views are retained for up to 90 days.
-          Export opens do not prove a file was downloaded. Approximate country,
-          coarse device/browser/OS, arrival-source category and selected clicks
-          are recorded for new visits. Referrer URLs, IP addresses, raw browser
-          headers, form values and fingerprints are not recorded. Active time
-          and scroll are estimates; closed tabs and blocked requests can leave
-          them incomplete. Page time is capped at four hours per view. Visitor
-          filters omit records without matching context; older visits are not
-          backfilled.
-        </p>
-      </details>
-    </>
+          <nav className="analytics-pagination" aria-label="Activity log pages">
+            {filters.page_number > 1 && (
+              <Link
+                className="button"
+                href={
+                  analyticsHref(
+                    filters,
+                    { page_number: filters.page_number - 1 },
+                    preview,
+                  ) + "#activity"
+                }
+              >
+                ← Previous 50
+              </Link>
+            )}
+            {filters.page_number < pages && filters.page_number < 1000 && (
+              <Link
+                className="button"
+                href={
+                  analyticsHref(
+                    filters,
+                    { page_number: filters.page_number + 1 },
+                    preview,
+                  ) + "#activity"
+                }
+              >
+                Next 50 →
+              </Link>
+            )}
+          </nav>
+        </section>
+        <details className="admin-count-notes">
+          <summary>What these analytics mean</summary>
+          <p>
+            Contact region is the US or Bulgaria contact profile shown on the
+            site, not a visitor’s physical location. Older untracked views
+            without a recorded profile remain Unknown. Browser sessions use a
+            random 24-hour identifier. Unique visitors use a separate anonymous
+            cookie lasting up to 90 days, across sessions and application links.
+            Cookie deletion, expiry and different browsers produce separate
+            visitors. Historical sessions without this cookie remain
+            unidentified. Only server-verified workspace ownership can associate
+            saved questions and workspace activity with a visitor; the analytics
+            ID grants no workspace access. Questions are saved privately in
+            recruiter workspaces. Deleted workspaces remove their questions and
+            activity. Privacy signals, blocked scripts and signed-in owner page
+            views are excluded. Views are retained for up to 90 days. Export
+            opens do not prove a file was downloaded. Approximate country,
+            coarse device/browser/OS, arrival-source category and selected
+            clicks are recorded for new visits. Referrer URLs, IP addresses, raw
+            browser headers, form values and fingerprints are not recorded.
+            Active time and scroll are estimates; closed tabs and blocked
+            requests can leave them incomplete. Page time is capped at four
+            hours per view. Visitor filters omit records without matching
+            context; older visits are not backfilled.
+          </p>
+        </details>
+      </div>
+    </div>
   );
 }

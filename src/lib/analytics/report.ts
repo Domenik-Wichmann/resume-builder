@@ -1,11 +1,14 @@
 import { z } from "zod";
 import { analyticsEvents } from "./filters";
 const count = z.number().int().nonnegative();
-const ranked = z.object({ label: z.string(), count });
+const counts = z.object({ label: z.string(), count });
+const ranked = counts.extend({ visitors: count });
 export const analyticsTotalsSchema = z.object({
   activities: count,
   views: count,
   sessions: count,
+  visitors: count,
+  unidentified_sessions: count,
   questions: count,
   workspace_starts: count,
   previews: count,
@@ -18,16 +21,25 @@ export const analyticsTotalsSchema = z.object({
 });
 export const analyticsReportSchema = z.object({
   totals: analyticsTotalsSchema,
-  previous: z.object({ views: count, sessions: count, questions: count }),
+  previous: z.object({
+    views: count,
+    sessions: count,
+    visitors: count,
+    questions: count,
+  }),
   daily: z.array(
     z.object({
       label: z.string(),
       views: count,
       questions: count,
       activity: count,
+      visitors: count,
+      question_visitors: count,
     }),
   ),
-  hourly: z.array(z.object({ hour: z.number().int().min(0).max(23), count })),
+  hourly: z.array(
+    z.object({ hour: z.number().int().min(0).max(23), count, visitors: count }),
+  ),
   pages: z.array(ranked),
   regions: z.array(ranked),
   sources: z.array(ranked),
@@ -38,6 +50,7 @@ export const analyticsReportSchema = z.object({
   referrers: z.array(ranked),
   actions: z.array(ranked),
   engagement: z.object({
+    avg_visitor_seconds: z.number().nonnegative().nullable(),
     avg_session_seconds: z.number().nonnegative().nullable(),
     measured_sessions: count,
     engaged_sessions: count,
@@ -46,6 +59,7 @@ export const analyticsReportSchema = z.object({
     z.object({
       label: z.string(),
       views: count,
+      visitors: count,
       measured_views: count,
       avg_seconds: z.number().nonnegative().nullable(),
       avg_scroll: z.number().min(0).max(100).nullable(),
@@ -54,6 +68,7 @@ export const analyticsReportSchema = z.object({
   journeys: z.array(
     z.object({
       session_id: z.string(),
+      analytics_visitor_id: z.string().nullable(),
       first_seen: z.string(),
       last_seen: z.string(),
       entry_page: z.string().nullable(),
@@ -70,6 +85,31 @@ export const analyticsReportSchema = z.object({
       referrer: z.string().nullable(),
     }),
   ),
+  visitors: z.array(
+    z.object({
+      visitor_id: z.uuid(),
+      first_seen: z.string(),
+      last_seen: z.string(),
+      activities: count,
+      sessions: count,
+      views: count,
+      clicks: count,
+      questions: count,
+      workspace_starts: count,
+      previews: count,
+      exports: count,
+      explorations: count,
+      active_seconds: count.nullable(),
+      scroll_depth: count.nullable(),
+      countries: z.array(z.string()),
+      devices: z.array(z.string()),
+      browsers: z.array(z.string()),
+      operating_systems: z.array(z.string()),
+      referrers: z.array(z.string()),
+      pages: z.array(counts),
+      actions: z.array(counts),
+    }),
+  ),
   tracking: z.array(
     z.object({
       code: z.string(),
@@ -78,6 +118,7 @@ export const analyticsReportSchema = z.object({
       application_id: z.string().nullable(),
       views: count,
       sessions: count,
+      visitors: count,
       questions: count,
       workspace_starts: count,
       previews: count,
@@ -104,6 +145,7 @@ export const analyticsReportSchema = z.object({
       organization: z.string().nullable(),
       role: z.string().nullable(),
       session_id: z.string().nullable(),
+      analytics_visitor_id: z.string().nullable(),
       visitor_country: z.string().nullable(),
       device: z.string().nullable(),
       browser: z.string().nullable(),

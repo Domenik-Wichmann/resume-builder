@@ -44,6 +44,9 @@ it.each([
   { min_seconds: "100", max_seconds: "20" },
   { max_seconds: "14401" },
   { session: "forged" },
+  { visitor: "forged" },
+  { metric: "fingerprint" },
+  { visitor_page: "1001" },
 ])("rejects malformed or unbounded analytics filters: %j", (query) =>
   expect(parseAnalyticsFilters(query, now).success).toBe(false),
 );
@@ -81,7 +84,11 @@ it("keeps fictional visitor totals consistent and shows a selected journey chron
   const data = fictionalAnalytics(filters, now);
   expect(data.totals.sessions).toBeGreaterThan(0);
   expect(data.countries).toEqual([
-    { label: "DE", count: data.totals.sessions },
+    {
+      label: "DE",
+      count: data.totals.activities,
+      visitors: data.totals.visitors,
+    },
   ]);
   expect(
     data.events.every(
@@ -95,4 +102,24 @@ it("keeps fictional visitor totals consistent and shows a selected journey chron
   expect(journey.events.map((row) => row.created_at)).toEqual(
     journey.events.map((row) => row.created_at).sort(),
   );
+});
+it("keeps visitor identity and counting mode through filter and pagination links", () => {
+  const filters = {
+    ...defaultAnalyticsFilters(30, now),
+    visitor: "10000000-0000-4000-8000-000000000001",
+    metric: "unique" as const,
+    visitor_page: 3,
+  };
+  const query = new URL(
+    analyticsHref(filters, { device: "mobile" }, true),
+    "https://portfolio.test",
+  ).searchParams;
+  expect(query.get("visitor")).toBe(filters.visitor);
+  expect(query.get("metric")).toBe("unique");
+  expect(query.get("visitor_page")).toBe("1");
+  expect(query.get("preview")).toBe("1");
+  const data = fictionalAnalytics({ ...filters, visitor_page: 1 }, now);
+  expect(data.totals.visitors).toBe(1);
+  expect(data.visitors[0].sessions).toBeGreaterThan(1);
+  expect(data.totals.views).toBe(data.visitors[0].views);
 });
