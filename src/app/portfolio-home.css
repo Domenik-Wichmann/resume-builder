@@ -12,8 +12,137 @@ html:has(.portfolio-home) {
   position: relative;
 }
 .personal-hero .profile-hero {
-  padding: 44px 0 76px;
+  padding: 24px 0;
   gap: 8%;
+}
+.personal-hero h1 {
+  margin-block: 18px;
+}
+.personal-hero .hero-intro {
+  line-height: 1.65;
+}
+.personal-hero .personal-highlights {
+  margin-block: 14px;
+}
+.personal-hero .personal-hero-actions {
+  margin-top: 18px;
+}
+.hero-composer {
+  flex-shrink: 0;
+  margin: auto auto 24px;
+  position: relative;
+}
+.hero-composer > label {
+  display: block;
+  margin-bottom: 12px;
+  color: #e7e2f3;
+  font-size: clamp(17px, 1.6vw, 22px);
+  letter-spacing: -0.025em;
+}
+.hero-input-shell {
+  position: relative;
+  border: 1px solid #a98de18c;
+  border-radius: 24px;
+  background: linear-gradient(120deg, #1b293b, #172c31);
+  box-shadow:
+    0 18px 70px #0003,
+    0 0 38px #ac8af010;
+  transition:
+    border-color 180ms,
+    box-shadow 180ms;
+}
+.hero-input-shell:focus-within {
+  border-color: #c5a7ff;
+  box-shadow:
+    0 0 0 3px #b397ed20,
+    0 18px 70px #0003;
+}
+.hero-input-shell textarea {
+  display: block;
+  width: 100%;
+  min-height: 146px;
+  max-height: 240px;
+  resize: vertical;
+  margin: 0;
+  padding: 24px 200px 24px 26px;
+  border: 0;
+  border-radius: 24px;
+  background: transparent;
+  color: #f0edf6;
+  font: inherit;
+  font-size: clamp(17px, 1.6vw, 21px);
+  line-height: 1.6;
+}
+.hero-input-shell textarea::placeholder {
+  color: #b4becf;
+  opacity: 1;
+}
+.hero-input-shell textarea:focus-visible {
+  outline: none;
+}
+.hero-composer .hero-send {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  min-height: 56px;
+  padding: 14px 20px;
+  border: 1px solid #e2d7fa66;
+  border-radius: 16px;
+  background: linear-gradient(120deg, #d9c8ff, #b4e4d7);
+  color: #15252c;
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow: 0 5px 22px #b4c7eb20;
+  transition:
+    transform 180ms,
+    box-shadow 180ms;
+}
+.hero-composer .hero-send:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px #b4c7eb40;
+}
+.hero-composer .hero-send:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.hero-composer-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+}
+.hero-input-modes {
+  display: flex;
+  gap: 6px;
+}
+.hero-input-modes button {
+  min-height: 38px;
+  padding: 7px 12px;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  background: transparent;
+  color: #abbcca;
+  font-size: 12px;
+}
+.hero-input-modes button[aria-pressed="true"] {
+  background: #b397ed15;
+  border-color: #b397ed45;
+  color: #e0d1fc;
+}
+.hero-composer-footer p {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #abbcca;
+}
+.hero-composer-footer a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 .personal-hero .hero-contact {
   margin-top: 26px;
@@ -75,18 +204,31 @@ html:has(.portfolio-home) {
   scroll-snap-align: end;
 }
 @media (min-width: 801px) and (max-height: 800px) {
+  .personal-hero .site-header {
+    padding-block: 18px;
+  }
+  .personal-hero .personal-highlights {
+    display: none;
+  }
+  .personal-hero .hero-intro {
+    font-size: 15px;
+  }
+  .personal-hero h1 > span {
+    margin-top: 12px;
+    font-size: 24px;
+  }
   .personal-hero .profile-hero {
-    padding-block: 16px 30px;
+    padding-block: 10px;
   }
   .personal-hero h1 {
-    margin-block: 16px;
-    font-size: clamp(36px, 4.6vw, 60px);
+    margin-block: 12px;
+    font-size: clamp(36px, 4vw, 50px);
   }
   .personal-hero .personal-portrait {
-    max-width: min(310px, calc((100svh - 190px) * 5 / 6));
+    max-width: min(260px, calc((100svh - 340px) * 5 / 6));
   }
   .personal-hero .hero-contact {
-    margin-top: 18px;
+    margin-top: 12px;
   }
 }
 @media (max-width: 800px) {
@@ -210,22 +352,51 @@ html:has(.portfolio-home) {
   }
 }
 @media (max-width: 560px) {
+  .hero-composer {
+    margin-bottom: 16px;
+  }
+  .hero-composer > label {
+    margin-bottom: 10px;
+  }
+  .hero-input-shell {
+    border-radius: 20px;
+  }
+  .hero-input-shell textarea {
+    min-height: 174px;
+    padding: 18px 20px 76px;
+    font-size: 16px;
+    border-radius: 20px;
+  }
+  .hero-composer .hero-send {
+    right: 12px;
+    bottom: 12px;
+    min-height: 46px;
+    padding: 10px 16px;
+    font-size: 13px;
+    gap: 12px;
+  }
+  .hero-composer-footer {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .hero-input-modes button {
+    min-height: 44px;
+  }
   .personal-hero .profile-hero {
-    display: flex;
-    flex-direction: column-reverse;
-    gap: 18px;
-    align-items: stretch;
+    display: block;
+    padding: 24px 0;
   }
   .personal-hero .personal-portrait {
-    width: 140px;
-    max-width: 40vw;
-    align-self: center;
+    position: absolute;
+    top: 28px;
+    right: 0;
+    width: 76px;
   }
   .personal-hero .portrait-initials > span {
-    font-size: 64px;
+    font-size: 36px;
   }
   .personal-hero .portrait-initials small {
-    font-size: 7px;
+    display: none;
     letter-spacing: 0.08em;
     text-align: center;
   }
@@ -233,20 +404,26 @@ html:has(.portfolio-home) {
     inset: -10px 6px;
   }
   .personal-hero h1 {
-    margin-block: 18px;
+    margin-block: 14px;
+    padding-right: 88px;
+    font-size: 32px;
   }
   .personal-hero h1 > span {
-    margin-top: 14px;
-    font-size: 24px;
+    margin-top: 12px;
+    font-size: 21px;
   }
   .personal-hero .personal-highlights {
-    margin-block: 16px;
+    display: none;
   }
   .personal-hero-actions {
     margin-top: 18px;
   }
   .personal-hero-actions .button {
-    flex: 1 1 200px;
+    flex: 1 1 140px;
+    min-height: 46px;
+    padding: 12px;
+    font-size: 12px;
+    gap: 8px;
   }
   .personal-scroll-cue {
     padding-bottom: 20px;
@@ -268,10 +445,41 @@ html:has(.portfolio-home) {
     font-size: 12px;
   }
 }
+@media (max-width: 560px) and (max-height: 820px) {
+  .personal-hero .site-header {
+    padding-block: 14px;
+  }
+  .personal-hero .profile-hero {
+    padding-block: 16px;
+  }
+  .personal-hero h1 {
+    margin-block: 12px;
+    font-size: 28px;
+  }
+  .personal-hero h1 > span {
+    font-size: 18px;
+  }
+  .personal-hero .hero-intro {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .personal-hero .hero-contact {
+    display: none;
+  }
+  .personal-hero-actions .button {
+    padding: 10px;
+    min-height: 44px;
+    font-size: 11px;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   html:has(.portfolio-home) {
     scroll-behavior: auto;
     scroll-snap-type: none;
+  }
+  .hero-input-shell,
+  .hero-composer .hero-send {
+    transition: none;
   }
 }
 @media print {

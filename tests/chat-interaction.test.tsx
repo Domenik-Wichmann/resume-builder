@@ -253,3 +253,59 @@ it("drafts hero suggestions in the existing composer without sending or creating
   });
   expect(field().value).toBe("How have you used SQL?");
 });
+
+it("waits for owned slots before submitting a hero question exactly once and preserves failed input", async () => {
+  const slots = deferred<[string | null, string | null]>();
+  const answer = deferred<{ workspace: Workspace }>();
+  browser.browserWorkspaceSlots.mockReturnValue(slots.promise);
+  browser.browserWorkspaceAction.mockReturnValue(answer.promise);
+  const request = { id: 1, input: question, kind: "ask" as const };
+  const render = () => root.render(<CareerChat heroSubmission={request} />);
+  await act(async () => render());
+  expect(browser.browserWorkspaceAction).not.toHaveBeenCalled();
+  expect(field().value).toBe(question);
+  await act(async () => slots.resolve([workspace.id, null]));
+  expect(browser.browserWorkspaceAction).toHaveBeenCalledExactlyOnceWith(
+    workspace,
+    "ask",
+    question,
+  );
+  await act(async () => render());
+  expect(browser.browserWorkspaceAction).toHaveBeenCalledTimes(1);
+  await act(async () =>
+    answer.reject(new Error("Please complete human verification.")),
+  );
+  expect(field().value).toBe(question);
+  expect(container.querySelector('[role="alert"]')?.textContent).toContain(
+    "human verification",
+  );
+  expect(browser.browserWorkspaceAction).toHaveBeenCalledTimes(1);
+});
+
+it("submits a hero job description as a match even when returning to an existing conversation", async () => {
+  const description =
+    "Responsibilities: build systems. Required skills: SQL and automation.";
+  const existing = answered();
+  const matched = { ...existing, job_description: description };
+  browser.browserLoadWorkspace.mockResolvedValue(existing);
+  browser.browserWorkspaceAction.mockResolvedValue({ workspace: matched });
+  await act(async () =>
+    root.render(
+      <CareerChat
+        heroSubmission={{ id: 1, input: description, kind: "match" }}
+      />,
+    ),
+  );
+  expect(browser.browserWorkspaceAction).toHaveBeenNthCalledWith(
+    1,
+    existing,
+    "match",
+    description,
+  );
+  expect(browser.browserWorkspaceAction).toHaveBeenNthCalledWith(
+    2,
+    matched,
+    "compile",
+  );
+  expect(browser.browserWorkspaceAction).toHaveBeenCalledTimes(2);
+});

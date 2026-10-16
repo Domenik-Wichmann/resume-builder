@@ -67,7 +67,9 @@ owner's physical residence or requests precise GPS. Ignore legacy manual region
 preferences.
 
 The homepage hero introduces the owner, with “Explore my experience” and
-“Explore my projects” actions. Scrolling continues smoothly into a full-screen
+“Explore my projects” actions and a large bottom composer for career questions
+or job descriptions. Explicit submission scrolls smoothly into the chat and
+uses its existing guarded submission flow. Scrolling continues into a full-screen
 conversation; preserve intentional chat deep links and application/workspace
 routes. Resume Builder's published project detail page hosts the scroll-through
 project walkthrough, followed by its existing case study. Other project pages

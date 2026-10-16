@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { ReactNode } from "react";
 import type { PortfolioStory } from "@/lib/portfolio/story";
 import type { Presentation } from "@/lib/markets";
 import {
@@ -7,12 +8,18 @@ import {
   portfolioIntroTitle,
 } from "@/lib/portfolio/story-scenes";
 
+export type IntroStory = Pick<
+  PortfolioStory,
+  "profile" | "highlights" | "demo"
+>;
 export function PortfolioIntro({
   story,
   presentation,
+  composer,
 }: {
-  story: PortfolioStory;
+  story: IntroStory;
   presentation: Presentation;
+  composer?: ReactNode;
 }) {
   return (
     <section
@@ -110,13 +117,15 @@ export function PortfolioIntro({
           </div>
         </div>
       </div>
-      <a
-        className="personal-scroll-cue"
-        href="#ask"
-        data-analytics-action="open_chat"
-      >
-        Scroll to explore my experience <span aria-hidden="true">↓</span>
-      </a>
+      {composer || (
+        <a
+          className="personal-scroll-cue"
+          href="#ask"
+          data-analytics-action="open_chat"
+        >
+          Scroll to explore my experience <span aria-hidden="true">↓</span>
+        </a>
+      )}
     </section>
   );
 }

@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { CareerChat } from "@/components/career-chat";
-import { PortfolioIntro } from "@/components/portfolio-intro";
+import { HomeExperience } from "@/components/home-experience";
 import { currentMarket, getPresentation } from "@/lib/market-server";
 import { publicResumeDesign } from "@/lib/resume-design/server";
 import { getPortfolioStory } from "@/lib/portfolio/story-server";
@@ -15,10 +14,15 @@ export default async function Home() {
   return (
     <div className="public-experience portfolio-home">
       <main id="main">
-        <PortfolioIntro story={story} presentation={presentation} />
-        <div className="homepage-conversation">
-          <CareerChat design={design} />
-        </div>
+        <HomeExperience
+          story={{
+            profile: story.profile,
+            highlights: story.highlights,
+            demo: story.demo,
+          }}
+          presentation={presentation}
+          design={design}
+        />
       </main>
       <footer className="wrap footer">
         <span>Domenik Wichmann</span>

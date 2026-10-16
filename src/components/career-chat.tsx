@@ -36,14 +36,23 @@ import { RecruiterExplorer, type StudioPanel } from "./recruiter-explorer";
 import { SelectedProjects } from "./selected-projects";
 import { ProjectEvidence } from "./project-evidence";
 
+export type HeroSubmission = {
+  id: number;
+  input: string;
+  kind: "ask" | "match";
+};
 export function CareerChat({
   initialWorkspace = null,
   initialInput = "",
   design,
+  heroSubmission,
+  onBusyChange,
 }: {
   initialWorkspace?: Workspace | null;
   initialInput?: string;
   design?: ResumeDesign;
+  heroSubmission?: HeroSubmission;
+  onBusyChange?: (busy: boolean) => void;
 }) {
   const [panel, setPanel] = useState<StudioPanel>("chat");
   const [openedPanels, setOpenedPanels] = useState<
@@ -91,6 +100,22 @@ export function CareerChat({
   const results = useRef<HTMLDivElement>(null);
   const pendingMessage = useRef<HTMLElement>(null);
   const lock = useRef(false);
+  const composerForm = useRef<HTMLFormElement>(null);
+  const handledHero = useRef<number | null>(null);
+  const [stagedHero, setStagedHero] = useState<HeroSubmission>();
+  if (heroSubmission && stagedHero?.id !== heroSubmission.id) {
+    setStagedHero(heroSubmission);
+    setPanel("chat");
+    setEvidenceExpanded(false);
+    setInput(heroSubmission.input);
+    setMode(heroSubmission.kind);
+  }
+  useEffect(() => {
+    onBusyChange?.(
+      busy ||
+        Boolean(heroSubmission && handledHero.current !== heroSubmission.id),
+    );
+  }, [busy, heroSubmission, onBusyChange]);
   useEffect(() => {
     const draft = (event: Event) => {
       const detail: unknown = (event as CustomEvent<unknown>).detail;
@@ -184,6 +209,21 @@ export function CareerChat({
     input.trim().length >= 3 &&
     (kind !== "ask" ||
       (input.length <= 1000 && (workspace?.questions.length || 0) < 50));
+  useEffect(() => {
+    if (
+      !heroSubmission ||
+      handledHero.current === heroSubmission.id ||
+      !slotsReady ||
+      busy ||
+      input !== heroSubmission.input ||
+      mode !== heroSubmission.kind
+    )
+      return;
+    // Wait for the server-owned workspace slots and the staged input before
+    // using the same guarded submit path as the chat's own composer.
+    handledHero.current = heroSubmission.id;
+    composerForm.current?.requestSubmit();
+  }, [heroSubmission, slotsReady, busy, input, mode]);
   async function switchWorkspace(next: WorkspaceSlot) {
     if (lock.current || next === slot) return;
     lock.current = true;
@@ -218,7 +258,15 @@ export function CareerChat({
   }
   async function submit(event: FormEvent) {
     event.preventDefault();
-    if (lock.current || !canSubmit) return;
+    if (lock.current) return;
+    if (!canSubmit) {
+      if (kind === "ask" && (workspace?.questions.length || 0) >= 50)
+        setError(
+          "This conversation has reached its question limit. Switch to another saved chat to continue.",
+        );
+      onBusyChange?.(false);
+      return;
+    }
     lock.current = true;
     setBusy(true);
     setError("");
@@ -227,7 +275,7 @@ export function CareerChat({
     let committed = false;
     setPending(submitted);
     setInput("");
-    messageField.current?.focus();
+    messageField.current?.focus({ preventScroll: true });
     try {
       const existing = slots[slot];
       const current =
@@ -369,7 +417,12 @@ export function CareerChat({
           </div>
         ))}
         <div className="chat-view" hidden={panel !== "chat"}>
-          <form id="composer" className="chat-composer" onSubmit={submit}>
+          <form
+            ref={composerForm}
+            id="composer"
+            className="chat-composer"
+            onSubmit={submit}
+          >
             <div className="chat-input-shell">
               <label className="sr-only" htmlFor="career-message">
                 Ask a question or paste a job description
