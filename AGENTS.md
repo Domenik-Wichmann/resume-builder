@@ -81,6 +81,12 @@ navigate, draft or send chat questions, create workspace actions, or call AI.
 Portfolio demo and layout-preview examples use Domenik Wichmann as the display
 name. Keep fictional sample career facts explicitly labeled as demonstrations.
 
+Broad project answers lead with published Resume Builder, SystemWright LMS and
+BabyCat evidence and their public links, followed by other projects relevant to
+the current conversation or recruiter-provided workspace role context. Specific
+project questions remain focused. Private tracked application notes are not
+public career evidence.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 # This is NOT the Next.js you know

@@ -2,6 +2,7 @@ import "server-only";
 import type { Career, CareerRecord } from "../career/model";
 import { deduplicate } from "../career/utils";
 import { answerEvidenceLimit } from "./contracts";
+import { isProjectOverview, priorityProjectIds } from "../portfolio/selection";
 export { answerEvidenceLimit } from "./contracts";
 
 function mentions(question: string, name: string) {
@@ -78,6 +79,23 @@ export function answerEvidence(
   const examples = candidates.filter((record) =>
     [...career.experiences, ...career.projects].includes(record),
   );
+  if (isProjectOverview(question)) {
+    // Explicit portfolio choices lead; retrieval and current topics rank the rest.
+    const priority = priorityProjectIds.flatMap((id) =>
+      career.projects.filter((project) => project.id === id),
+    );
+    return deduplicate(
+      [
+        ...priority,
+        ...candidates.filter((record) => career.projects.includes(record)),
+        ...connected.filter((record) => career.projects.includes(record)),
+        ...focus,
+        ...examples,
+        ...candidates,
+      ],
+      answerEvidenceLimit,
+    );
+  }
   return deduplicate(
     [
       ...(jobsOverview ? career.experiences : []),

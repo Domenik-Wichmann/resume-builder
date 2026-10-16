@@ -15,6 +15,7 @@ import { proposeBrain } from "../src/lib/career-brain/propose";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { BrainRecord } from "../src/lib/career-brain/repository";
 import { completeSource } from "../src/lib/career-brain/source";
+import { priorityProjectIds } from "../src/lib/portfolio/selection";
 vi.mock("../src/lib/ai/openrouter", () => ({ complete: vi.fn() }));
 const gate: Gate = async (_label, _provider, call) => call();
 const presentation = {
@@ -39,6 +40,31 @@ async function input() {
   };
 }
 beforeEach(() => vi.mocked(complete).mockReset());
+it("leads project overviews with freshly supplied priority evidence and contextual supporting projects", async () => {
+  const q = await input();
+  const ids = priorityProjectIds.slice(0, 2);
+  vi.mocked(complete).mockResolvedValueOnce({
+    answer: "Fictional project overview.",
+    evidence_ids: ids,
+  });
+  await answerPackets(
+    "What projects has he built?",
+    {
+      actor: {
+        name: "Fictional candidate",
+        aliases: [],
+        firstPersonOwner: true,
+      },
+      packets: ids.map((id) => ({ ...q.packet, id })),
+    },
+    {},
+    gate,
+  );
+  const call = vi.mocked(complete).mock.calls[0];
+  expect(JSON.parse(String(call[1])).priority_project_ids).toEqual(ids);
+  expect(call[0]).toContain("Other relevant projects");
+  expect(call[0]).toContain("never invent URLs");
+});
 it("answers with exactly one Luna call and preserves structured evidence IDs when cleaning public prose", async () => {
   const q = await input();
   const id = "057c18d5-d70a-4fff-9ccc-d1ca94e02e99";

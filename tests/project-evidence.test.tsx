@@ -11,6 +11,7 @@ it("renders published project links and screenshots beside an answer without cha
         {
           title: "Fictional project",
           url: "/projects/fictional-project",
+          links: [{ label: "Live website", url: "https://fictional.example" }],
           images: [
             {
               id: "22222222-2222-4222-8222-222222222222",
@@ -44,6 +45,9 @@ it("renders published project links and screenshots beside an answer without cha
     expect(host.querySelector("figcaption")?.textContent).toBe(
       "Fictional approval controls",
     );
+    expect(
+      host.querySelector('a[href="https://fictional.example"]')?.textContent,
+    ).toBe("Live website");
     expect(fetch).toHaveBeenCalledExactlyOnceWith(
       "/api/project-context",
       expect.objectContaining({

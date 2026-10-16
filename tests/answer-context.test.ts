@@ -5,6 +5,7 @@ import {
 } from "../src/lib/ai/answer-evidence";
 import type { Career, CareerRecord } from "../src/lib/career/model";
 import { newWorkspace } from "../src/lib/workspaces/model";
+import { priorityProjectIds } from "../src/lib/portfolio/selection";
 
 const mocks = vi.hoisted(() => ({
   retrieve: vi.fn(),
@@ -60,6 +61,41 @@ beforeEach(() => {
     answer: "Fictional verified answer.",
     evidence_ids: ["sql"],
   });
+});
+it("leads project overviews with chosen public projects, then relevance-ranked supporting projects", () => {
+  const priority = priorityProjectIds.map((id) =>
+    record(id, "Fictional project fixture"),
+  );
+  const relevant = record("relevant", "Fictional SQL reporting project");
+  const other = record("other", "Fictional other project");
+  expect(
+    answerEvidence(
+      career({ projects: [...priority].reverse().concat(other, relevant) }),
+      [relevant, other],
+      "What projects has he done?",
+      "Role context: SQL reporting",
+    ),
+  ).toEqual([...priority, relevant, other]);
+  // Stale retrieval cannot restore a removed or unpublished priority project.
+  expect(
+    answerEvidence(
+      career({ projects: [priority[1], relevant] }),
+      priority,
+      "Show his projects",
+    ),
+  ).toEqual([priority[1]]);
+});
+it("keeps specific project questions focused", () => {
+  const priority = priorityProjectIds.map((id) =>
+    record(id, "Fictional fixture"),
+  );
+  expect(
+    answerEvidence(
+      career({ projects: priority }),
+      [priority[0]],
+      "How does Resume Builder work?",
+    ),
+  ).toEqual([priority[0]]);
 });
 afterEach(() => vi.unstubAllEnvs());
 

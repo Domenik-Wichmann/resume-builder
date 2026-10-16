@@ -1,5 +1,6 @@
 import { z } from "zod";
 import type { ProjectMedia } from "./model";
+import { linkSchema } from "./model";
 
 export const projectContextSchema = z.object({
   projects: z
@@ -7,6 +8,11 @@ export const projectContextSchema = z.object({
       z.object({
         title: z.string(),
         url: z.string().regex(/^\/projects\/[a-z0-9-]+$/),
+        links: linkSchema
+          .pick({ label: true, url: true })
+          .array()
+          .max(12)
+          .default([]),
         images: z
           .array(
             z.object({ id: z.uuid(), alt: z.string(), caption: z.string() }),

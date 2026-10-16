@@ -12,8 +12,11 @@ import { usable } from "../career-brain/state";
 import { validateEnv } from "../env";
 import { relevantScreenshots, type ProjectContext } from "./project-context";
 import { demoProject, demoCaseContent } from "./demo";
+import { safeProjectUrl } from "./model";
 import {
   selectShowcaseProjects,
+  isProjectOverview,
+  priorityProjectIds,
   showcaseTitle,
   type ShowcaseCard,
 } from "./selection";
@@ -132,14 +135,20 @@ export async function publicProjectContext(
   query: string,
   browse: boolean,
 ): Promise<ProjectContext> {
-  const projects = await publicProjectDetails({ ids });
+  const orderedIds = isProjectOverview(query)
+    ? [...new Set([...priorityProjectIds, ...ids])]
+    : ids;
+  const projects = await publicProjectDetails({ ids: orderedIds });
   let remainingImages = 3;
-  // Cited project identities, rather than model-generated URLs, establish which
-  // published case studies and screenshots can accompany an answer.
+  // Published identities establish links; broad overviews include the owner's
+  // chosen projects even if the model omits one from its citations.
   return {
     projects: projects
-      .filter((item) => ids.includes(item.project.id))
-      .sort((a, b) => ids.indexOf(a.project.id) - ids.indexOf(b.project.id))
+      .filter((item) => orderedIds.includes(item.project.id))
+      .sort(
+        (a, b) =>
+          orderedIds.indexOf(a.project.id) - orderedIds.indexOf(b.project.id),
+      )
       .slice(0, 6)
       .map(({ project, content, media }) => {
         const images = browse
@@ -149,6 +158,10 @@ export async function publicProjectContext(
         return {
           title: content.title || showcaseTitle(project),
           url: `/projects/${project.slug}`,
+          links: content.links
+            .filter((link) => link.is_public && safeProjectUrl(link.url))
+            .sort((a, b) => a.display_order - b.display_order)
+            .map(({ label, url }) => ({ label, url })),
           images: images.map((m) => ({
             id: m.id,
             alt: m.alt,

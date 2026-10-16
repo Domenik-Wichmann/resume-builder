@@ -57,6 +57,17 @@ export function ProjectEvidence({
           <Link className="project-evidence-link" href={project.url}>
             {project.title} <span aria-hidden="true">↗</span>
           </Link>
+          {project.links.length > 0 && (
+            <ul>
+              {project.links.map((link) => (
+                <li key={`${link.label}:${link.url}`}>
+                  <a href={link.url} rel="noopener noreferrer">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
           <div className="project-evidence-images">
             {project.images.map((image) => (
               <figure key={image.id}>
