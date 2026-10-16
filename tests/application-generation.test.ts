@@ -629,6 +629,8 @@ it("uses bounded planning, writing and complete-assertion verification for three
     );
     const result = await writeApplication(job, evidence, "account");
     const writeCall = vi.mocked(complete).mock.calls.at(-1)!;
+    expect(writeCall[0]).toContain("first-person implied");
+    expect(writeCall[0]).toContain("private review notes");
     expect(writeCall[3]).toMatchObject({
       maxTokens: 16000,
       reasoningEffort: "low",
@@ -934,7 +936,7 @@ it("shows only unambiguous reported start months without inventing an end or cur
   expect(timelineSortKey({ dates: { start: null, end: null } })).toBe("");
 });
 
-it("renders honest experience timelines and a compact invitation with a bold portfolio label", () => {
+it("omits incomplete experience dates and private timeline notes while preserving the invitation", () => {
   const ir = base();
   ir.experiences = [
     {
@@ -950,9 +952,10 @@ it("renders honest experience timelines and a compact invitation with a bold por
   ir.profile.contact.work_authorization = "U.S. citizen // Available to work";
   ir.invitation = "Explore my projects and ask about my experience online.";
   const html = renderToStaticMarkup(createElement(ResumeRenderer, { ir }));
-  expect(html).toContain("Reported start: Sep 2022 · end date unconfirmed");
-  expect(html).toContain("2022-01-01 – End date not recorded");
-  expect(html).toContain("Dates not recorded");
+  expect(html).not.toContain("end date unconfirmed");
+  expect(html).not.toContain("Reported start");
+  expect(html).not.toContain("2022-01-01");
+  expect(html).not.toContain("Dates not recorded");
   expect(html).not.toContain("Present");
   expect(html).toContain("<strong>Portfolio &amp; AI demo:</strong>");
   expect(html).toContain("<strong>GitHub:</strong>");

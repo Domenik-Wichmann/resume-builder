@@ -87,6 +87,12 @@ the current conversation or recruiter-provided workspace role context. Specific
 project questions remain focused. Private tracked application notes are not
 public career evidence.
 
+Resume generation uses the owner's own resume voice: implied first person and
+action-led bullets, with verification notes kept private. Omit incomplete date
+ranges from previews and exports; never infer Present from a missing end date.
+For tech roles, prefer relevant Juno Freeze Dried / Juno Farms business evidence
+over Sutherland phone support unless German or customer support is relevant.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 # This is NOT the Next.js you know

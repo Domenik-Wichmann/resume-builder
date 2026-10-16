@@ -20,10 +20,10 @@ export const exportSections = (ir: ResumeIR) => {
   ].filter((section) => section.records.length);
 };
 export const exportTimeline = (record: ResumeIR["experiences"][number]) =>
-  record.timeline_note ||
-  (record.dates.start || record.dates.end
-    ? `${record.dates.start || "Start date not recorded"} – ${record.dates.end || "End date not recorded"}`
-    : "");
+  // Incomplete dates stay private; a missing end never implies current work.
+  record.dates.start && record.dates.end
+    ? `${record.dates.start} – ${record.dates.end}`
+    : "";
 export const exportContact = (ir: ResumeIR) =>
   [
     ir.profile.contact.location,

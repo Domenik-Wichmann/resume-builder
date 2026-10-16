@@ -1,7 +1,11 @@
 import type { ResumeIR } from "@/lib/resume-ir";
 import { defaultDesign, type ResumeDesign } from "@/lib/resume-design/model";
 import { ResumeDesignFrame, ResumePortrait } from "./resume-design-frame";
-import { exportContact, exportWorkAuthorization } from "@/lib/resume-export";
+import {
+  exportContact,
+  exportWorkAuthorization,
+  exportTimeline,
+} from "@/lib/resume-export";
 export function ResumeRenderer({
   ir,
   design,
@@ -127,17 +131,9 @@ export function ResumeRenderer({
                               .filter(Boolean)
                               .join(" | ")}
                           </p>
-                          {(label === "Experience" ||
-                            record.dates.start ||
-                            record.dates.end ||
-                            record.timeline_note) && (
+                          {exportTimeline(record) && (
                             <p className="resume-timeline">
-                              {record.timeline_note ||
-                                (record.dates.start
-                                  ? `${record.dates.start} – ${record.dates.end || "End date not recorded"}`
-                                  : record.dates.end
-                                    ? `Start date not recorded – ${record.dates.end}`
-                                    : "Dates not recorded")}
+                              {exportTimeline(record)}
                             </p>
                           )}
                           <ul>

@@ -4,6 +4,7 @@ import type { Workspace } from "./workspaces/model";
 import { presentationSchema, type Presentation } from "./markets";
 import { designSchema } from "./resume-design/model";
 import { resumeUrl } from "./resume-design/fixed-content";
+import { resumeExperiencePreference } from "./resume-relevance";
 const sectionRecord = z.object({
   title: z.string(),
   context: z.string(),
@@ -82,6 +83,8 @@ export function compileResumeIR(
   const explored = new Set(
     workspace.questions.flatMap((question) => question.evidence_ids),
   );
+  const roleContext =
+    workspace.job_description || workspace.requirements.join(" ");
   function section(records: CareerRecord[]) {
     return records
       .filter((record) => allowed.has(record.id))
@@ -119,7 +122,11 @@ export function compileResumeIR(
     skill_groups: skills.length
       ? [{ label: "Supported capabilities", skills }]
       : [],
-    experiences: section(career.experiences),
+    experiences: section(
+      career.experiences.filter(
+        (record) => resumeExperiencePreference(record, roleContext) >= 0,
+      ),
+    ),
     projects: section(career.projects),
     education: section(career.education),
     certifications: section(career.certifications),
