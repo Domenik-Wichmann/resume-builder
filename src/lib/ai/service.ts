@@ -60,7 +60,12 @@ export async function analyze(
           }
         : await answerPackets(
             input,
-            await publishedPackets(ids, usage.accountId, answerEvidenceLimit),
+            await publishedPackets(
+              ids,
+              usage.accountId,
+              answerEvidenceLimit,
+              input,
+            ),
             usage,
             undefined,
             context,

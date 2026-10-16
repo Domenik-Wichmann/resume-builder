@@ -2,7 +2,11 @@ import "server-only";
 import type { Career, CareerRecord } from "../career/model";
 import { deduplicate } from "../career/utils";
 import { answerEvidenceLimit } from "./contracts";
-import { isProjectOverview, priorityProjectIds } from "../portfolio/selection";
+import {
+  isProjectOverview,
+  priorityProjectIds,
+  selectedProjectNames,
+} from "../portfolio/selection";
 export { answerEvidenceLimit } from "./contracts";
 
 function mentions(question: string, name: string) {
@@ -35,6 +39,15 @@ export function answerEvidence(
   const candidates = retrieved.flatMap((record) => {
     const publicRecord = current.get(record.id);
     return publicRecord ? [publicRecord] : [];
+  });
+  const compactName = (value: string) =>
+    value
+      .normalize("NFKC")
+      .toLowerCase()
+      .replace(/[^\p{L}\p{N}]/gu, "");
+  const requestedProjects = career.projects.filter((project) => {
+    const name = selectedProjectNames[project.id]?.split("/")[0].trim();
+    return name && compactName(question).includes(compactName(name));
   });
   const namedLanguages = languages.filter((record) =>
     record.title.split(/\s+/).some((name) => mentions(question, name)),
@@ -98,6 +111,7 @@ export function answerEvidence(
   }
   return deduplicate(
     [
+      ...requestedProjects,
       ...(jobsOverview ? career.experiences : []),
       ...focus,
       ...connected,

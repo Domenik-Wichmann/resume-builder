@@ -97,6 +97,28 @@ it("keeps specific project questions focused", () => {
     ),
   ).toEqual([priority[0]]);
 });
+
+it("resolves the four named portfolio projects from fresh public records even without vector hits", () => {
+  const names = [
+    ["c05d7b83-2c3d-412c-918a-d468e27adee3", "Sonaway"],
+    [priorityProjectIds[0], "Resume Builder"],
+    [priorityProjectIds[1], "systemwrightLMS"],
+    [priorityProjectIds[2], "Babycat"],
+  ];
+  const projects = names.map(([id]) => record(id, "Fictional project fixture"));
+  for (const [index, [, name]] of names.entries()) {
+    expect(
+      answerEvidence(
+        career({ projects }),
+        [],
+        `What stack does ${name} use?`,
+      )[0],
+    ).toEqual(projects[index]);
+  }
+  expect(answerEvidence(career(), projects, "Tell me about Babycat")).toEqual(
+    [],
+  );
+});
 afterEach(() => vi.unstubAllEnvs());
 
 it("finds published Dutch learning even when vector results contain only other languages", () => {
@@ -230,6 +252,7 @@ it("rechecks selected language evidence before generation, without requiring a l
     [dutch.id],
     undefined,
     answerEvidenceLimit,
+    "Does he speak Dutch?",
   );
   expect(result.evidence).toEqual([dutch]);
 });
@@ -292,6 +315,7 @@ it("recovers fresh citations for ordinal follow-ups without a keyword gate", asy
     ["sql"],
     undefined,
     answerEvidenceLimit,
+    "And the second one?",
   );
   expect(mocks.answer.mock.calls[0][4].turns[0].answer).toBe(
     "1. First. 2. Second.",

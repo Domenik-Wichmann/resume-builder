@@ -24,11 +24,72 @@ export type EvidencePacket = {
   support?: Support;
   reason?: string;
 };
+function questionWords(text: string) {
+  return new Set(
+    (normalize(text).match(/[\p{L}\p{N}+#]+/gu) || []).map((word) =>
+      word.length > 4 ? word.replace(/ies$/, "y").replace(/s$/, "") : word,
+    ),
+  );
+}
 export function packets(
   records: RichCanonical[],
   ids: string[],
   limit = 8,
+  question = "",
 ): EvidencePacket[] {
+  const terms = [...questionWords(question)].filter(
+    (term) =>
+      term.length > 2 &&
+      ![
+        "what",
+        "which",
+        "how",
+        "why",
+        "does",
+        "did",
+        "has",
+        "the",
+        "and",
+        "for",
+        "his",
+        "this",
+        "that",
+        "project",
+        "projects",
+        "about",
+        "tell",
+        "can",
+        "you",
+        "with",
+      ].includes(term),
+  );
+  const stackQuestion =
+    /\b(stack|technolog(?:y|ies)|tools?|frameworks?|libraries|languages?|built with|written in)\b/i.test(
+      question,
+    );
+  const purposeQuestion =
+    /\b(why|purpose|decisions?|trade.?offs?|chose|choose|choices?)\b/i.test(
+      question,
+    );
+  const relevance = (claim: RichCandidate["claims"][number]) => {
+    if (!question) return 0;
+    // Ownership and negative/corrected evidence must survive topic selection.
+    if (
+      ["ownership", "denial", "correction"].includes(claim.attribute) ||
+      ["NEGATED", "UNCERTAIN"].includes(claim.attribution)
+    )
+      return 10000;
+    const words = questionWords(claim.value);
+    const quoteWords = questionWords(
+      claim.evidence.map((span) => span.quote).join(" "),
+    );
+    return (
+      terms.filter((term) => words.has(term)).length * 20 +
+      terms.filter((term) => quoteWords.has(term)).length * 2 +
+      (stackQuestion && claim.attribute === "tool" ? 30 : 0) +
+      (purposeQuestion && claim.attribute === "context" ? 15 : 0)
+    );
+  };
   const publicRecords = records.filter((r) => r.published && !r.archived);
   return ids.slice(0, Math.max(0, Math.min(limit, 12))).flatMap((id) => {
     const r = publicRecords.find((r) => r.id === id);
@@ -63,7 +124,11 @@ export function packets(
         .filter((x) => x.kind === "achievement")
         .flatMap((x) => x.claims),
     ]
-      .sort((a, b) => priority(a) - priority(b))
+      .map((claim) => ({ claim, score: relevance(claim) }))
+      .sort(
+        (a, b) => b.score - a.score || priority(a.claim) - priority(b.claim),
+      )
+      .map(({ claim }) => claim)
       .filter((c) => {
         const size = c.evidence.reduce((n, e) => n + e.quote.length, 0);
         if (quoteCharacters + size > 10000) return false;

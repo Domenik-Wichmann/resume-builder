@@ -33,11 +33,12 @@ export async function publishedPackets(
   ids: string[],
   accountId = primaryAccountId,
   limit = 8,
+  question = "",
 ): Promise<{ actor: ActorContext; packets: StatePacket[] }> {
   const records = await measure("evidence_recheck", () =>
     loadBrain(database(), accountId, true),
   );
-  const selected = packets(records, ids, limit) as StatePacket[];
+  const selected = packets(records, ids, limit, question) as StatePacket[];
   // Display summaries/relationship labels are not factual shortcuts to generation.
   return {
     actor: actorFor(records),
