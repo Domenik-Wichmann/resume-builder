@@ -1,306 +1,138 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import type { PortfolioStory } from "@/lib/portfolio/story";
-import type { Presentation } from "@/lib/markets";
-import {
-  finalStoryStep,
-  storyScenes,
-  portfolioIntroTitle,
-  portfolioIntroDescription,
-} from "@/lib/portfolio/story-scenes";
+import { finalStoryStep, storyScenes } from "@/lib/portfolio/story-scenes";
 import { CaseStudyArt } from "./portfolio-case-study-art";
 import { PortfolioQuestionExamples } from "./portfolio-question-examples";
 import { useStoryNavigation } from "./story-navigation";
 
-export function PortfolioStoryHero({
-  story,
-  presentation,
-}: {
-  story: PortfolioStory;
-  presentation: Presentation;
-}) {
-  const { root, step, navigate, chat, mobile, completed, inStory } =
-    useStoryNavigation();
+const firstStep = 1;
+const chapters = storyScenes.slice(firstStep);
+
+export function PortfolioStoryHero({ story }: { story: PortfolioStory }) {
+  const {
+    root,
+    step,
+    navigate,
+    chat: continueToDetails,
+    mobile,
+  } = useStoryNavigation({ firstStep, targetId: "project-details" });
   return (
     <div
       ref={root}
-      className="story-runway"
+      className="story-runway project-story-runway"
       style={
         {
-          "--story-scroll-height": `${100 + 55 * finalStoryStep}svh`,
+          "--story-scroll-height": `${100 + 55 * (finalStoryStep - firstStep)}svh`,
         } as CSSProperties
       }
     >
       <div className="story-pin">
         {story.demo && (
           <div className="demo-banner">
-            DEMO PORTFOLIO{" "}
-            <span>
-              Fictional career facts. The display name is Domenik Wichmann.
-            </span>
+            DEMO PROJECT WALKTHROUGH · Fictional career facts.
           </div>
         )}
         <header className="site-header wrap story-header">
           <Link className="wordmark" href="/">
             Domenik Wichmann
           </Link>
-          <span className="story-header-context">
-            {step === 0
-              ? `Portfolio / ${story.profile.name}`
-              : "Resume Builder / project walkthrough"}
-          </span>
+          <Link className="story-header-context" href="/projects">
+            ← All projects
+          </Link>
         </header>
         <section
           className="story-stage wrap"
-          aria-label="Domenik and the portfolio project"
+          aria-label="Resume Builder project walkthrough"
         >
-          {storyScenes.map((scene, index) => (
-            <div
-              className={`story-scene story-scene-${index}`}
-              key={scene.chapter}
-              data-analytics-action="story_scene"
-              hidden={!mobile && step !== index}
-            >
-              <div className="story-copy">
-                <p className="eyebrow">
-                  <span className="status-dot" />{" "}
-                  {index === 0
-                    ? "The person behind the work"
-                    : `Resume Builder / ${scene.chapter}`}
-                </p>
-                {index === 0 ? (
-                  <>
-                    <h1>
-                      {story.profile.name ||
-                        "Career profile pending publication."}
-                      <span>{portfolioIntroTitle}</span>
-                    </h1>
-                    <p className="story-description story-profile-intro">
-                      {portfolioIntroDescription}
-                    </p>
-                    <p className="story-personal-invitation">
-                      Explore the work and projects behind my skills.
-                    </p>
-                    <div className="story-highlights">
-                      {story.highlights.map((skill) => (
-                        <span key={skill}>{skill}</span>
-                      ))}
-                    </div>
-                    <div className="hero-contact">
-                      {[
-                        presentation.location,
-                        presentation.address,
-                        presentation.work_authorization,
-                      ]
-                        .filter(Boolean)
-                        .map((text) => (
-                          <span key={text}>{text}</span>
-                        ))}
-                      {presentation.contact_email && (
-                        <a href={`mailto:${presentation.contact_email}`}>
-                          {presentation.contact_email}
-                        </a>
-                      )}
-                      {presentation.phone && (
-                        <a
-                          href={`tel:${presentation.phone.replace(/[^+\d]/g, "")}`}
-                        >
-                          {presentation.phone}
-                        </a>
-                      )}
-                    </div>
-                    <div className="story-links">
-                      <Link href="/resume">View résumé</Link>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <h2>{scene.title}</h2>
-                    <p className="story-description">{scene.description}</p>
-                    <p className="story-footnote">{scene.footnote}</p>
-                  </>
-                )}
-              </div>
-              <div className={`story-art story-art-${index}`}>
-                {index === 0 && (
-                  <div className="portrait-layout">
-                    <div className="hero-portrait">
-                      <div className="portrait-orbit" />
-                      <div className="portrait-frame">
-                        {presentation.photo_url ? (
-                          <Image
-                            src={presentation.photo_url}
-                            alt={`Portrait of ${story.profile.name}`}
-                            width={600}
-                            height={720}
-                            unoptimized
-                            preload
-                          />
-                        ) : (
-                          <div className="portrait-initials">
-                            <span>
-                              {story.profile.name
-                                .split(" ")
-                                .map((part) => part[0])
-                                .join("") || "DW"}
-                            </span>
-                            <small>Portrait coming soon</small>
-                          </div>
-                        )}
+          {chapters.map((scene, position) => {
+            const index = position + firstStep;
+            const Heading = index === firstStep ? "h1" : "h2";
+            return (
+              <div
+                className={`story-scene story-scene-${index}`}
+                key={scene.chapter}
+                hidden={!mobile && step !== index}
+              >
+                <div className="story-copy">
+                  <p className="eyebrow">
+                    <span className="status-dot" /> Resume Builder /{" "}
+                    {scene.chapter}
+                  </p>
+                  <Heading>{scene.title}</Heading>
+                  <p className="story-description">{scene.description}</p>
+                  <p className="story-footnote">{scene.footnote}</p>
+                </div>
+                <div className={`story-art story-art-${index}`}>
+                  {index < finalStoryStep ? (
+                    <CaseStudyArt step={index} story={story} />
+                  ) : (
+                    <div className="invitation-art">
+                      <div className="artifact-label">
+                        Example questions / expand to read
                       </div>
-                      <div className="portrait-caption">
-                        <span className="status-dot" />{" "}
-                        {story.demo
-                          ? "Illustrative demo profile"
-                          : "The person behind the work"}
-                      </div>
+                      <PortfolioQuestionExamples
+                        examples={story.questionExamples}
+                      />
                     </div>
-                    {!mobile && (
-                      <button
-                        type="button"
-                        className="story-portrait-next"
-                        data-analytics-action="story_next"
-                        onClick={() => navigate(1)}
-                      >
-                        <span>More about me &amp; this project</span>
-                        <span
-                          className="portrait-next-arrow"
-                          aria-hidden="true"
-                        >
-                          →
-                        </span>
-                      </button>
-                    )}
-                  </div>
-                )}
-                {index > 0 && index < finalStoryStep && (
-                  <CaseStudyArt step={index} story={story} />
-                )}
-                {index === finalStoryStep && (
-                  <div className="invitation-art">
-                    <div className="artifact-label">
-                      Example questions / expand to read
-                    </div>
-                    <PortfolioQuestionExamples
-                      examples={story.questionExamples}
-                    />
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </section>
-        {mobile &&
-          inStory &&
-          (step === 0 || completed || step === finalStoryStep) && (
-            <div
-              className={`story-mobile-actions${completed || step === finalStoryStep ? " completed" : ""}`}
-            >
-              {step === 0 && !completed && (
-                <button
-                  type="button"
-                  className="story-intro-next"
-                  data-analytics-action="story_next"
-                  onClick={() => navigate(1)}
-                >
-                  More about me &amp; this project{" "}
-                  <span aria-hidden="true">↓</span>
-                </button>
-              )}
-              {step === finalStoryStep && (
-                <>
-                  <Link className="button story-projects-cta" href="/projects">
-                    Check out my projects <span aria-hidden="true">↗</span>
-                  </Link>
-                  <button
-                    type="button"
-                    className="story-return-chat"
-                    data-analytics-action="open_chat"
-                    onClick={chat}
-                  >
-                    Ask me about my work <span aria-hidden="true">↓</span>
-                  </button>
-                </>
-              )}
-              {completed && step !== finalStoryStep && (
-                <>
-                  <Link className="button story-projects-cta" href="/projects">
-                    Check out my projects <span aria-hidden="true">↗</span>
-                  </Link>
-                  <button
-                    type="button"
-                    className="story-return-chat"
-                    data-analytics-action="open_chat"
-                    onClick={chat}
-                  >
-                    Jump to chat <span aria-hidden="true">↓</span>
-                  </button>
-                </>
-              )}
-            </div>
-          )}
-        {!mobile && completed && step !== finalStoryStep && (
-          <div className="story-handoff wrap">
-            <Link className="button story-projects-cta" href="/projects">
-              Check out my projects <span aria-hidden="true">↗</span>
-            </Link>
-            <button
-              type="button"
-              className="story-return-chat"
-              data-analytics-action="open_chat"
-              onClick={chat}
-            >
-              Jump to chat <span aria-hidden="true">↓</span>
-            </button>
-          </div>
-        )}
         {step === finalStoryStep && (
           <div className="story-handoff story-final-handoff wrap">
-            <Link className="button story-projects-cta" href="/projects">
-              Check out my projects <span aria-hidden="true">↗</span>
+            <Link
+              className="button story-projects-cta"
+              href="/#ask"
+              data-analytics-action="open_chat"
+            >
+              Explore my experience <span aria-hidden="true">↗</span>
             </Link>
             <a
               className="button story-cta"
-              data-analytics-action="open_chat"
-              href="#ask"
+              href="#project-details"
               onClick={(event) => {
                 event.preventDefault();
-                chat();
+                continueToDetails();
               }}
             >
-              Ask me about my work <span aria-hidden="true">{"\u2193"}</span>
+              Read the project details <span aria-hidden="true">↓</span>
             </a>
-            <p>Or continue scrolling to the conversation.</p>
+            <p>Continue scrolling for the full case study.</p>
           </div>
         )}
         <div className="story-navigation wrap">
           <span className="story-count" aria-live="polite">
-            {String(step + 1).padStart(2, "0")}{" "}
-            <span>/ {String(storyScenes.length).padStart(2, "0")}</span>
+            {String(step - firstStep + 1).padStart(2, "0")}{" "}
+            <span>/ {String(chapters.length).padStart(2, "0")}</span>
           </span>
           <nav aria-label="Story chapters">
-            {storyScenes.map((scene, index) => (
-              <button
-                type="button"
-                key={scene.chapter}
-                data-analytics-action="story_scene"
-                aria-label={`${index + 1}. ${scene.chapter}`}
-                aria-current={step === index ? "step" : undefined}
-                onClick={() => navigate(index)}
-              >
-                <span className="chapter-line" />
-                <span className="chapter-name">{scene.chapter}</span>
-              </button>
-            ))}
+            {chapters.map((scene, position) => {
+              const index = position + firstStep;
+              return (
+                <button
+                  type="button"
+                  key={scene.chapter}
+                  data-analytics-action="story_scene"
+                  aria-label={`${position + 1}. ${scene.chapter}`}
+                  aria-current={step === index ? "step" : undefined}
+                  onClick={() => navigate(index)}
+                >
+                  <span className="chapter-line" />
+                  <span className="chapter-name">{scene.chapter}</span>
+                </button>
+              );
+            })}
           </nav>
           <div className="story-arrows">
             <button
               type="button"
               aria-label="Previous chapter"
               data-analytics-action="story_previous"
-              disabled={step === 0}
+              disabled={step === firstStep}
               onClick={() => navigate(step - 1)}
             >
               <span aria-hidden="true">←</span> <span>Previous</span>
@@ -309,27 +141,27 @@ export function PortfolioStoryHero({
               type="button"
               aria-label={
                 step === finalStoryStep
-                  ? "Continue to the conversation"
+                  ? "Continue to project details"
                   : "Next chapter"
               }
+              data-analytics-action="story_next"
               onClick={() =>
-                step === finalStoryStep ? chat() : navigate(step + 1)
-              }
-              data-analytics-action={
-                step === finalStoryStep ? "open_chat" : "story_next"
+                step === finalStoryStep
+                  ? continueToDetails()
+                  : navigate(step + 1)
               }
             >
               <span>
-                {step === finalStoryStep ? "Conversation" : "Next chapter"}
+                {step === finalStoryStep ? "Project details" : "Next chapter"}
               </span>{" "}
               <span aria-hidden="true">→</span>
             </button>
           </div>
         </div>
         <noscript>
-          <style>{`.story-runway { height: auto; } .story-pin { position: relative; height: auto; min-height: 100svh; }`}</style>
+          <style>{`.project-story-runway { height: auto; } .project-story-runway .story-pin { position: relative; height: auto; } .project-story-runway .story-scene[hidden] { display: grid; }`}</style>
           <p className="wrap">
-            Enable JavaScript for the interactive project walkthrough.
+            Scroll through the project walkthrough and case study.
           </p>
         </noscript>
       </div>

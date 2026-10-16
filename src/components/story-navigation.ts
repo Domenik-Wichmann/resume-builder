@@ -17,9 +17,12 @@ function watchCompletion(changed: () => void) {
 }
 const serverCompletion = () => false;
 
-export function useStoryNavigation() {
+export function useStoryNavigation({
+  firstStep = 0,
+  targetId = "ask",
+}: { firstStep?: number; targetId?: string } = {}) {
   const root = useRef<HTMLDivElement>(null);
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(firstStep);
   const [reduced, setReduced] = useState(false);
   const [mobile, setMobile] = useState(false);
   const [completedHere, setCompleted] = useState(false);
@@ -27,11 +30,11 @@ export function useStoryNavigation() {
     useSyncExternalStore(watchCompletion, savedCompletion, serverCompletion) ||
     completedHere;
   const [inStory, setInStory] = useState(true);
-  const visited = useRef(new Set([0]));
+  const visited = useRef(new Set([firstStep]));
   const completionRecorded = useRef(false);
   const bypass = useRef(false);
   const stride = useRef(400);
-  const current = useRef(0);
+  const current = useRef(firstStep);
   function visit(next: number, scrolled = false) {
     if (scrolled) {
       for (
@@ -44,7 +47,7 @@ export function useStoryNavigation() {
     current.current = next;
     setStep(next);
     if (
-      visited.current.size === finalStoryStep + 1 &&
+      visited.current.size === finalStoryStep - firstStep + 1 &&
       !completionRecorded.current
     ) {
       completionRecorded.current = true;
@@ -58,17 +61,22 @@ export function useStoryNavigation() {
   }
   function chat() {
     bypass.current = true;
-    if (location.hash !== "#ask") history.pushState(null, "", "#ask");
-    document
-      .getElementById("ask")
-      ?.scrollIntoView({ behavior: "instant", block: "start" });
+    if (location.hash !== `#${targetId}`)
+      history.pushState(null, "", `#${targetId}`);
+    document.getElementById(targetId)?.scrollIntoView({
+      behavior: reduced || targetId === "ask" ? "instant" : "smooth",
+      block: "start",
+    });
   }
   function navigate(next: number) {
     visit(next);
     if (mobile) {
       root.current
         ?.querySelectorAll<HTMLElement>(".story-scene")
-        [next]?.scrollIntoView({ behavior: "instant", block: "start" });
+        [next - firstStep]?.scrollIntoView({
+          behavior: "instant",
+          block: "start",
+        });
       return;
     }
     if (reduced) return;
@@ -79,7 +87,7 @@ export function useStoryNavigation() {
         top:
           window.scrollY +
           element.getBoundingClientRect().top +
-          next * stride.current,
+          (next - firstStep) * stride.current,
         behavior: "instant",
       });
   }
@@ -116,9 +124,9 @@ export function useStoryNavigation() {
           (active, scene, index) =>
             !scene.hidden &&
             scene.getBoundingClientRect().top <= window.innerHeight * 0.4
-              ? index
+              ? index + firstStep
               : active,
-          0,
+          firstStep,
         );
         if (visible) visit(next, positioned);
         else {
@@ -138,10 +146,10 @@ export function useStoryNavigation() {
         (element.offsetHeight -
           (element.firstElementChild?.clientHeight || window.innerHeight) -
           140) /
-        finalStoryStep;
+        (finalStoryStep - firstStep);
       const top = window.scrollY + element.getBoundingClientRect().top;
       const offset = window.scrollY - top;
-      const final = finalStoryStep * stride.current;
+      const final = (finalStoryStep - firstStep) * stride.current;
       if (offset < final - 10) {
         entered = 0;
         armed = false;
@@ -168,7 +176,10 @@ export function useStoryNavigation() {
         chat();
       }
       previousOffset = offset;
-      const next = storyStep(offset, stride.current);
+      const next = Math.min(
+        finalStoryStep,
+        firstStep + storyStep(offset, stride.current),
+      );
       if (next !== current.current) {
         if (visible) visit(next, positioned);
         else {
@@ -210,21 +221,21 @@ export function useStoryNavigation() {
         intent();
     };
     previousOffset = -element.getBoundingClientRect().top;
-    if (location.hash === "#ask") bypass.current = true;
+    if (location.hash === `#${targetId}`) bypass.current = true;
     position();
     const anchor = () => {
       frame = 0;
-      if (location.hash !== "#ask") {
+      if (location.hash !== `#${targetId}`) {
         bypass.current = false;
         return;
       }
       bypass.current = true;
       entered = 0;
       document
-        .getElementById("ask")
+        .getElementById(targetId)
         ?.scrollIntoView({ behavior: "instant", block: "start" });
     };
-    if (location.hash === "#ask") frame = requestAnimationFrame(anchor);
+    if (location.hash === `#${targetId}`) frame = requestAnimationFrame(anchor);
     window.addEventListener("hashchange", anchor);
     window.addEventListener("scroll", scroll, { passive: true });
     window.addEventListener("resize", scroll);
@@ -246,6 +257,6 @@ export function useStoryNavigation() {
       media.removeEventListener("change", preference);
       phone.removeEventListener("change", preference);
     };
-  }, []);
+  }, [firstStep, targetId]);
   return { root, step, navigate, chat, reduced, mobile, completed, inStory };
 }

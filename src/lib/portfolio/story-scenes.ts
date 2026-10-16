@@ -3,7 +3,7 @@ export const storyScenes = [
   { chapter: "Intro", title: "", description: "", footnote: "" },
   {
     chapter: "The Project",
-    title: "This portfolio website\nis also one of my projects.",
+    title: "Resume Builder\nThe project behind this portfolio.",
     description:
       "I built Resume Builder to keep my career history organized and make it easier to explore. This portfolio shows the project, and the project runs the portfolio you are using.",
     footnote:
@@ -60,7 +60,7 @@ export const storyScenes = [
     chapter: "Ask Me Anything",
     title: "Ask about my work.",
     description:
-      "Ask about my work, projects, skills or how my experience might fit your team. Open an example below to see an answer, then continue to the conversation.",
+      "Ask about my work, projects, skills or how my experience might fit your team. Open an example below to see a saved answer, or return to the portfolio to start a conversation.",
     footnote:
       "Open an example to read a saved answer. Start the conversation when you are ready.",
   },

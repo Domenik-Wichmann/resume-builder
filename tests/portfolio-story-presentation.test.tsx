@@ -4,12 +4,10 @@ import { createRoot } from "react-dom/client";
 import { expect, it, vi } from "vitest";
 import { fixture } from "../src/lib/career/fixture";
 import { portfolioStory } from "../src/lib/portfolio/story";
-import { finalStoryStep, storyScenes } from "../src/lib/portfolio/story-scenes";
+import { finalStoryStep } from "../src/lib/portfolio/story-scenes";
 const navigation = vi.hoisted(() => ({
-  step: 0,
+  step: 1,
   mobile: false,
-  completed: false,
-  inStory: true,
   chat: vi.fn(),
   navigate: vi.fn(),
 }));
@@ -17,177 +15,130 @@ vi.mock("../src/components/story-navigation", () => ({
   useStoryNavigation: () => ({ root: { current: null }, ...navigation }),
 }));
 import { PortfolioStoryHero } from "../src/components/portfolio-story";
-it("introduces the owner first and expands public answers without navigation, drafting or provider calls", async () => {
+import { PortfolioIntro } from "../src/components/portfolio-intro";
+const presentation = {
+  market: "US" as const,
+  location: "Configured residence",
+  phone: "",
+  contact_email: "",
+  work_authorization: "",
+};
+
+it("introduces the person on the homepage with direct experience and project actions", async () => {
   vi.stubGlobal("IS_REACT_ACT_ENVIRONMENT", true);
   const host = document.createElement("div");
   document.body.append(host);
   const root = createRoot(host);
-  const draft = vi.fn();
-  const fetch = vi.fn();
+  try {
+    await act(async () =>
+      root.render(
+        <PortfolioIntro
+          story={portfolioStory(fixture)}
+          presentation={presentation}
+        />,
+      ),
+    );
+    expect(host.querySelector("h1")?.textContent).toContain("Domenik Wichmann");
+    expect(
+      host.querySelector('.personal-hero-actions a[href="#ask"]')?.textContent,
+    ).toContain("Explore my experience");
+    expect(
+      host.querySelector('.personal-hero-actions a[href="/projects"]')
+        ?.textContent,
+    ).toContain("Explore my projects");
+    expect(host.textContent).toContain("Configured residence");
+    expect(
+      host.querySelector(".story-runway, .story-scene, select, .market-switch"),
+    ).toBeNull();
+    expect(host.textContent).not.toContain("project walkthrough");
+  } finally {
+    await act(async () => root.unmount());
+    host.remove();
+    vi.unstubAllGlobals();
+  }
+});
+
+it("starts the project walkthrough at Resume Builder and expands saved examples without drafting or provider calls", async () => {
+  vi.stubGlobal("IS_REACT_ACT_ENVIRONMENT", true);
+  const host = document.createElement("div");
+  document.body.append(host);
+  const root = createRoot(host),
+    draft = vi.fn(),
+    fetch = vi.fn();
   vi.stubGlobal("fetch", fetch);
   window.addEventListener("portfolio-question", draft);
   const story = portfolioStory(fixture);
-  const render = () =>
-    root.render(
-      <PortfolioStoryHero
-        story={story}
-        presentation={{
-          market: "US",
-          location: "Configured residence",
-          phone: "",
-          contact_email: "",
-          work_authorization: "",
-        }}
-      />,
-    );
+  const render = () => root.render(<PortfolioStoryHero story={story} />);
   try {
     await act(async () => render());
     const active = () => host.querySelector(".story-scene:not([hidden])")!;
-    expect(active().textContent).toContain(story.profile.name);
-    expect(active().textContent).not.toContain("recursive portfolio");
-    expect(active().querySelector('[href="#ask"]')).toBeNull();
-    expect(host.querySelector("select, .market-switch")).toBeNull();
-    expect(host.querySelectorAll(".story-scene")).toHaveLength(9);
-    expect(storyScenes.map((scene) => scene.chapter)).toEqual([
-      "Intro",
-      "The Project",
-      "Import",
-      "Structure",
-      "Diff",
-      "Use",
-      "Feedback",
-      "Stack",
-      "Ask Me Anything",
-    ]);
+    expect(active().querySelector("h1")?.textContent).toContain(
+      "Resume Builder",
+    );
+    expect(host.querySelector(".story-scene-0, .portrait-layout")).toBeNull();
+    expect(host.querySelectorAll(".story-scene")).toHaveLength(8);
+    expect(
+      host.querySelector<HTMLButtonElement>('[aria-label="Previous chapter"]')
+        ?.disabled,
+    ).toBe(true);
     await act(async () =>
       host
-        .querySelector<HTMLButtonElement>(".portrait-layout > button")!
+        .querySelector<HTMLButtonElement>('[aria-label="Next chapter"]')!
         .click(),
     );
-    expect(navigation.navigate).toHaveBeenCalledWith(1);
-    expect(navigation.chat).not.toHaveBeenCalled();
-    navigation.step = 1;
-    await act(async () => render());
-    expect(active().textContent).toContain("the project runs the portfolio");
+    expect(navigation.navigate).toHaveBeenCalledWith(2);
     navigation.step = finalStoryStep;
     await act(async () => render());
-    const button = active().querySelector<HTMLButtonElement>(
+    const example = active().querySelector<HTMLButtonElement>(
       ".question-example > button",
     )!;
     const initialHash = location.hash;
-    const initialY = window.scrollY;
-    expect(button.getAttribute("aria-expanded")).toBe("false");
-    await act(async () => button.click());
-    expect(button.getAttribute("aria-expanded")).toBe("true");
-    const answer = document.getElementById(
-      button.getAttribute("aria-controls")!,
-    )!;
-    expect(answer.hidden).toBe(false);
-    expect(answer.textContent).toContain(
-      story.questionExamples[0].items[0].details[0],
-    );
+    await act(async () => example.click());
+    expect(example.getAttribute("aria-expanded")).toBe("true");
+    expect(
+      document.getElementById(example.getAttribute("aria-controls")!)
+        ?.textContent,
+    ).toContain(story.questionExamples[0].items[0].details[0]);
     expect(location.hash).toBe(initialHash);
-    expect(window.scrollY).toBe(initialY);
-    expect(navigation.chat).not.toHaveBeenCalled();
     expect(draft).not.toHaveBeenCalled();
     expect(fetch).not.toHaveBeenCalled();
-    await act(async () => button.click());
-    expect(answer.hidden).toBe(true);
-    const handoff = host.querySelector<HTMLAnchorElement>(
-      ".story-handoff .story-cta",
-    )!;
-    expect(handoff.textContent).toContain("Ask me about my work");
-    expect(
+    expect(navigation.chat).not.toHaveBeenCalled();
+    expect(host.querySelector('a[href="/#ask"]')?.textContent).toContain(
+      "Explore my experience",
+    );
+    await act(async () =>
       host
-        .querySelector<HTMLAnchorElement>(".story-projects-cta")
-        ?.getAttribute("href"),
-    ).toBe("/projects");
-    await act(async () => handoff.click());
+        .querySelector<HTMLAnchorElement>('a[href="#project-details"]')!
+        .click(),
+    );
     expect(navigation.chat).toHaveBeenCalledOnce();
-    expect(draft).not.toHaveBeenCalled();
   } finally {
     await act(async () => root.unmount());
     host.remove();
     window.removeEventListener("portfolio-question", draft);
-    navigation.step = 0;
+    navigation.step = 1;
     vi.clearAllMocks();
     vi.unstubAllGlobals();
   }
 });
 
-it("places the intro control beside the portrait on desktop and at the bottom on phones, with a gated return to chat", async () => {
+it("keeps all project chapters in the native mobile document flow", async () => {
   vi.stubGlobal("IS_REACT_ACT_ENVIRONMENT", true);
+  navigation.mobile = true;
   const host = document.createElement("div");
   document.body.append(host);
   const root = createRoot(host);
-  const render = () =>
-    root.render(
-      <PortfolioStoryHero
-        story={portfolioStory(fixture)}
-        presentation={{
-          market: "US",
-          location: "",
-          phone: "",
-          contact_email: "",
-          work_authorization: "",
-        }}
-      />,
-    );
   try {
-    await act(async () => render());
-    expect(
-      host.querySelector(".portrait-layout > button")?.textContent,
-    ).toContain("→");
-    expect(host.querySelector(".story-mobile-actions")).toBeNull();
-    expect(host.querySelector(".story-return-chat")).toBeNull();
-    expect(host.textContent).not.toMatch(/career\s*\/\s*connected/i);
-    navigation.mobile = true;
-    await act(async () => render());
-    expect(host.querySelector(".portrait-layout > button")).toBeNull();
-    expect(
-      host.querySelector(".story-mobile-actions > button")?.textContent,
-    ).toContain("↓");
-    navigation.completed = true;
-    for (let step = 0; step < finalStoryStep; step++) {
-      navigation.step = step;
-      await act(async () => render());
-      expect(
-        host.querySelector(".story-mobile-actions .story-return-chat"),
-      ).not.toBeNull();
-    }
     await act(async () =>
-      host.querySelector<HTMLButtonElement>(".story-return-chat")!.click(),
+      root.render(<PortfolioStoryHero story={portfolioStory(fixture)} />),
     );
-    expect(navigation.chat).toHaveBeenCalledOnce();
-    navigation.inStory = false;
-    await act(async () => render());
+    expect(host.querySelectorAll(".story-scene[hidden]")).toHaveLength(0);
+    expect(host.querySelectorAll(".story-scene")).toHaveLength(8);
     expect(host.querySelector(".story-mobile-actions")).toBeNull();
-    navigation.inStory = true;
-    navigation.step = finalStoryStep;
-    await act(async () => render());
-    expect(
-      host.querySelector('.story-mobile-actions a[href="/projects"]')
-        ?.textContent,
-    ).toContain("Check out my projects");
-    expect(
-      host.querySelector(".story-mobile-actions button")?.textContent,
-    ).toContain("Ask me about my work");
-    navigation.mobile = false;
-    navigation.step = 2;
-    await act(async () => render());
-    expect(
-      host.querySelector(".story-handoff .story-return-chat"),
-    ).not.toBeNull();
   } finally {
     await act(async () => root.unmount());
     host.remove();
-    Object.assign(navigation, {
-      step: 0,
-      mobile: false,
-      completed: false,
-      inStory: true,
-    });
-    vi.clearAllMocks();
+    navigation.mobile = false;
     vi.unstubAllGlobals();
   }
 });

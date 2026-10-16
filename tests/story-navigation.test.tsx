@@ -129,3 +129,58 @@ it("unlocks the persistent chat shortcut only after visiting every story chapter
     vi.unstubAllGlobals();
   }
 });
+
+it("counts project chapters from the project introduction and continues to its case study", async () => {
+  vi.stubGlobal("IS_REACT_ACT_ENVIRONMENT", true);
+  localStorage.clear();
+  vi.spyOn(window, "matchMedia").mockImplementation((query) => ({
+    matches: query.includes("prefers-reduced-motion"),
+    media: query,
+    onchange: null,
+    addListener: vi.fn(),
+    removeListener: vi.fn(),
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  }));
+  const intoView = vi
+    .spyOn(HTMLElement.prototype, "scrollIntoView")
+    .mockImplementation(() => {});
+  let navigation: ReturnType<typeof useStoryNavigation> | undefined;
+  function Project() {
+    navigation = useStoryNavigation({
+      firstStep: 1,
+      targetId: "project-details",
+    });
+    return (
+      <>
+        <div ref={navigation.root}>
+          <div />
+        </div>
+        <section id="project-details" />
+      </>
+    );
+  }
+  const host = document.createElement("div");
+  document.body.append(host);
+  const root = createRoot(host);
+  try {
+    await act(async () => root.render(<Project />));
+    expect(navigation!.step).toBe(1);
+    for (let i = 2; i <= 8; i++) await act(async () => navigation!.navigate(i));
+    expect(navigation!.completed).toBe(true);
+    await act(async () => navigation!.chat());
+    expect(location.hash).toBe("#project-details");
+    expect(intoView).toHaveBeenCalledWith({
+      behavior: "instant",
+      block: "start",
+    });
+  } finally {
+    await act(async () => root.unmount());
+    host.remove();
+    history.replaceState(null, "", "/");
+    localStorage.clear();
+    vi.restoreAllMocks();
+    vi.unstubAllGlobals();
+  }
+});

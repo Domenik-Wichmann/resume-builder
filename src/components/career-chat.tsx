@@ -284,6 +284,7 @@ export function CareerChat({
   }
   return (
     <div
+      id="ask"
       className={`career-studio${explorerCollapsed ? " explorer-collapsed" : ""}${evidenceCollapsed ? " evidence-collapsed" : ""}${evidenceExpanded ? " evidence-expanded" : ""}`}
     >
       <aside
@@ -353,11 +354,7 @@ export function CareerChat({
           </div>
         </div>
       </aside>
-      <section
-        id="ask"
-        className="chat-column"
-        aria-label="Career conversation"
-      >
+      <section className="chat-column" aria-label="Career conversation">
         {openedPanels.map((opened) => (
           <div
             className="catalog-view"

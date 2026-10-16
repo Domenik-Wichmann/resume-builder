@@ -66,15 +66,15 @@ wins. Region selects configured contact presentation; it never changes the
 owner's physical residence or requests precise GPS. Ignore legacy manual region
 preferences.
 
-On the normal public portfolio entry path, the storytelling hero introduces the
-owner and Resume Builder as a project demonstrating the owner's abilities before
-handing off to conversational exploration. Do not add a prominent skip-to-chat
-control inside the hero. The final story scene and deliberate continued scrolling
-transition into chat. Preserve intentional deep links and application/workspace
-routes. Recruiter-facing copy explains what the owner built, how it works, and
-what the project demonstrates, using published evidence for career claims.
-The hero is an explanatory project walkthrough: introduce the owner first, then
-show the project, input, structure, reconciliation, use, feedback and architecture.
+The homepage hero introduces the owner, with “Explore my experience” and
+“Explore my projects” actions. Scrolling continues smoothly into a full-screen
+conversation; preserve intentional chat deep links and application/workspace
+routes. Resume Builder's published project detail page hosts the scroll-through
+project walkthrough, followed by its existing case study. Other project pages
+retain their own case studies. Recruiter-facing copy explains what the owner
+built, how it works, and what the project demonstrates, using published evidence
+for career claims. The project walkthrough shows the project, input, structure,
+reconciliation, use, feedback and architecture.
 Use literal headings and plain explanations of the owner's work and abilities.
 Final example questions expand precomputed public answers inline; they never
 navigate, draft or send chat questions, create workspace actions, or call AI.

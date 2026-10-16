@@ -1,3 +1,19 @@
+.project-case-details {
+  scroll-margin-top: 24px;
+}
+.project-case-details .case-title {
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 1.12;
+  margin: 24px 0;
+}
+.project-story-runway .story-copy h1 {
+  font-size: clamp(32px, 3.8vw, 56px);
+}
+.project-story-runway .story-header-context {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
 .public-experience .story-arrows button {
   width: auto;
   min-height: 48px;

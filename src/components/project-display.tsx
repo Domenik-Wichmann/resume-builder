@@ -11,13 +11,16 @@ export function ProjectDisplay({
   skills,
   outcomes,
   content,
+  headingLevel = 1,
 }: {
   project: Project;
   media: ProjectMedia[];
   skills: string[];
   outcomes: string[];
   content?: CaseContent;
+  headingLevel?: 1 | 2;
 }) {
+  const Heading = headingLevel === 1 ? "h1" : "h2";
   const cover = media.find((m) => m.is_cover);
   const links = content
     ? content.links.filter((link) => link.is_public && safeProjectUrl(link.url))
@@ -30,7 +33,9 @@ export function ProjectDisplay({
           : project.status.replaceAll("_", " ")}
         {project.organization ? ` · ${project.organization}` : ""}
       </p>
-      <h1>{content?.title || showcaseTitle(project)}</h1>
+      <Heading className="case-title">
+        {content?.title || showcaseTitle(project)}
+      </Heading>
       {(content?.tagline || project.subtitle) && (
         <p className="case-tagline">{content?.tagline || project.subtitle}</p>
       )}
