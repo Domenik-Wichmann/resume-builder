@@ -49,9 +49,7 @@ export function HomeExperience({
             onSubmit={submit}
             aria-label="Start a career conversation"
           >
-            <label htmlFor="hero-message">
-              Let’s talk about your next hire.
-            </label>
+            <label htmlFor="hero-message">What do you want to know?</label>
             <div className="hero-input-shell">
               <textarea
                 id="hero-message"
