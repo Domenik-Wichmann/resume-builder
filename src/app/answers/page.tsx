@@ -1,7 +1,7 @@
 import { publicAnswers } from "@/lib/portfolio/answers-server";
 import { PortfolioHeader } from "@/components/portfolio-shell";
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Quick Answers · Resume Builder" };
+export const metadata = { title: "Quick Answers" };
 export default async function Answers() {
   const cards = await publicAnswers();
   return (

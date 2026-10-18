@@ -6,7 +6,7 @@ import { HttpError } from "@/lib/http";
 import { AdminPageHeader } from "@/components/admin-page-header";
 export const dynamic = "force-dynamic";
 export const metadata = {
-  title: "Career Master · Resume Builder",
+  title: "Career Master",
   robots: { index: false, follow: false },
 };
 export default async function CareerPage({

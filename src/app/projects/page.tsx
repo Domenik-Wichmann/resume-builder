@@ -3,7 +3,7 @@ import { publicShowcase } from "@/lib/portfolio/showcase-server";
 import { PortfolioHeader } from "@/components/portfolio-shell";
 import { ProjectCards } from "@/components/project-cards";
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Projects · Domenik Wichmann" };
+export const metadata = { title: "Projects" };
 export default async function Projects() {
   const projects = await publicShowcase();
   return (

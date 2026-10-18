@@ -6,7 +6,7 @@ import { CareerRecordWorkspace } from "@/components/career-record-explorer";
 import { AdminPageHeader } from "@/components/admin-page-header";
 export const dynamic = "force-dynamic";
 export const metadata = {
-  title: "Career explorer · Resume Builder",
+  title: "Career explorer",
   robots: { index: false, follow: false },
 };
 export default async function AdminExplorer() {

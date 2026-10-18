@@ -4,7 +4,7 @@ import { HttpError } from "@/lib/http";
 import { AdminPageHeader } from "@/components/admin-page-header";
 export const dynamic = "force-dynamic";
 export const metadata = {
-  title: "Usage records · Resume Builder",
+  title: "Usage records",
   robots: { index: false, follow: false },
 };
 export default async function Usage() {

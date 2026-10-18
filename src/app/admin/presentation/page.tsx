@@ -11,7 +11,7 @@ import { PresentationManager } from "@/components/presentation-manager";
 import { AdminPageHeader } from "@/components/admin-page-header";
 export const dynamic = "force-dynamic";
 export const metadata = {
-  title: "Profile & contact · Resume Builder",
+  title: "Profile & contact",
   robots: { index: false, follow: false },
 };
 export default async function PresentationPage() {

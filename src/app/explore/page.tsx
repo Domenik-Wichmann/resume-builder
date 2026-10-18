@@ -2,7 +2,7 @@ import { PortfolioHeader } from "@/components/portfolio-shell";
 import { CareerExplorer } from "@/components/career-explorer";
 import { getExplorer } from "@/lib/portfolio/explorer-server";
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Career explorer · Resume Builder" };
+export const metadata = { title: "Career explorer" };
 export default async function Explore() {
   const data = await getExplorer();
   return (

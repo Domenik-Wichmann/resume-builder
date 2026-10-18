@@ -9,7 +9,7 @@ import { HttpError } from "@/lib/http";
 import { demoMessages, demoSession, demoSessions } from "@/lib/interview/demo";
 export const dynamic = "force-dynamic";
 export const metadata = {
-  title: "Career Interviews · Resume Builder",
+  title: "Career Interviews",
   robots: { index: false, follow: false },
 };
 export default async function InterviewsPage({

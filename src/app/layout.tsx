@@ -11,7 +11,11 @@ import "./admin-ux.css";
 import "./project-manager.css";
 import "./analytics-explorer.css";
 export const metadata: Metadata = {
-  title: "Resume Builder · Evidence behind the experience",
+  title: {
+    default: "domenik-wichmann.com",
+    template: "%s · domenik-wichmann.com",
+  },
+  applicationName: "domenik-wichmann.com",
   description:
     "Explore a structured career portfolio, ask grounded questions, and compare job requirements with career evidence.",
 };

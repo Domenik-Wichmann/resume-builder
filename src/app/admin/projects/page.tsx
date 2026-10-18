@@ -10,7 +10,7 @@ import { loadCaseStudies } from "@/lib/portfolio/case-study-server";
 import { AdminPageHeader } from "@/components/admin-page-header";
 export const dynamic = "force-dynamic";
 export const metadata = {
-  title: "Project manager · Resume Builder",
+  title: "Project manager",
   robots: { index: false, follow: false },
 };
 export default async function ProjectsAdmin({

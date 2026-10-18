@@ -12,7 +12,7 @@ import { AnalyticsFiltersForm } from "@/components/analytics-filters";
 import { AdminPageHeader } from "@/components/admin-page-header";
 export const dynamic = "force-dynamic";
 export const metadata = {
-  title: "Analytics · Resume Builder",
+  title: "Analytics",
   robots: { index: false, follow: false },
 };
 export default async function Analytics({

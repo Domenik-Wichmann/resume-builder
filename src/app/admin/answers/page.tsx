@@ -7,7 +7,7 @@ import { AdminPageHeader } from "@/components/admin-page-header";
 import { AnswerManager } from "@/components/answer-manager";
 export const dynamic = "force-dynamic";
 export const metadata = {
-  title: "Quick Answer manager · Resume Builder",
+  title: "Quick Answer manager",
   robots: { index: false, follow: false },
 };
 export default async function AnswersAdmin() {

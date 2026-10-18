@@ -12,7 +12,7 @@ import {
 import { fictionalAnalytics } from "@/lib/analytics/demo";
 export const dynamic = "force-dynamic";
 export const metadata = {
-  title: "Owner · Resume Builder",
+  title: "Owner",
   robots: { index: false, follow: false },
 };
 export default async function Admin({

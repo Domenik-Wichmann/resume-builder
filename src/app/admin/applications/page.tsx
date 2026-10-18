@@ -6,7 +6,7 @@ import { ApplicationManager } from "@/components/application-manager";
 import { AdminPageHeader } from "@/components/admin-page-header";
 export const dynamic = "force-dynamic";
 export const metadata = {
-  title: "Résumé generator · Resume Builder",
+  title: "Résumé generator",
   robots: { index: false, follow: false },
 };
 export default async function Applications() {

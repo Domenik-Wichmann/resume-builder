@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <title>DW</title>
+  <rect x="0.5" y="0.5" width="31" height="31" rx="8" fill="#10212d" stroke="#8c77b1"/>
+  <path d="M5 10v12h3c3 0 5-2 5-6s-2-6-5-6H5Z" fill="none" stroke="#eee7ff" stroke-width="2.1" stroke-linejoin="round"/>
+  <path d="m16 10 2.5 12 3-8 3 8L27 10" fill="none" stroke="#8de0cc" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
