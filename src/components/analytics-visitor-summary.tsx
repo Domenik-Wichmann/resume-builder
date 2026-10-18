@@ -48,6 +48,7 @@ export function AnalyticsVisitorSummary({
                 <th>Last seen (UTC)</th>
                 <th>Sessions</th>
                 <th>Views / clicks</th>
+                <th>Questions asked</th>
                 <th>Active time</th>
                 <th>Combined details</th>
               </tr>
@@ -83,6 +84,7 @@ export function AnalyticsVisitorSummary({
                   <td>
                     {row.views} / {row.clicks}
                   </td>
+                  <td>{row.questions}</td>
                   <td>{durationLabel(row.active_seconds)}</td>
                   <td>
                     <details className="analytics-visitor-detail">
