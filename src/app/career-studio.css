@@ -226,6 +226,11 @@ html:has(.profile-hero) {
 .is-collapsed .rail-heading {
   justify-content: center;
 }
+@media (min-width: 801px) {
+  .explorer-rail.is-collapsed #explorer-panel-content {
+    display: none;
+  }
+}
 .explorer-rail,
 .evidence-rail {
   padding: 38px 24px;
@@ -1336,6 +1341,10 @@ html:has(.profile-hero) {
   }
   .career-studio > .explorer-rail {
     grid-row: 1;
+    padding: 4px 16px;
+  }
+  .career-studio .explorer-rail > .rail-heading {
+    display: none;
   }
   .evidence-expanded > .chat-column {
     display: none;

@@ -361,7 +361,7 @@ export function CareerChat({
             {explorerCollapsed ? "›" : "‹"}
           </button>
         </div>
-        <div id="explorer-panel-content" hidden={explorerCollapsed}>
+        <div id="explorer-panel-content">
           <nav aria-label="Career explorer">
             {(
               [

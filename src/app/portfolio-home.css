@@ -256,12 +256,9 @@ html:has(.portfolio-home) {
   }
   .homepage-conversation .explorer-rail {
     grid-row: 1;
-    padding: 10px 16px;
+    padding: 4px 16px;
     position: relative;
     overflow: visible;
-  }
-  .homepage-conversation .explorer-rail .rail-heading {
-    margin-bottom: 6px;
   }
   .homepage-conversation .explorer-rail nav {
     flex-direction: row;
@@ -271,7 +268,7 @@ html:has(.portfolio-home) {
     gap: 4px;
   }
   .homepage-conversation .explorer-rail nav {
-    margin-top: 6px;
+    margin-top: 0;
   }
   .portfolio-home
     .homepage-conversation
