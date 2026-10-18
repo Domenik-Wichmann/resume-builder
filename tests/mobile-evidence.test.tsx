@@ -4,7 +4,7 @@ import { createRoot } from "react-dom/client";
 import { expect, it, vi } from "vitest";
 import { EvidenceMap } from "../src/components/evidence-map";
 
-it("lets phone visitors scroll the preview and expand all evidence without losing records", async () => {
+it("keeps the full animated graph visible on phones and expands without losing records", async () => {
   vi.stubGlobal("IS_REACT_ACT_ENVIRONMENT", true);
   vi.spyOn(window, "matchMedia").mockImplementation((query) => ({
     matches: query.includes("max-width"),
@@ -41,7 +41,7 @@ it("lets phone visitors scroll the preview and expand all evidence without losin
       <EvidenceMap
         records={records}
         busy={false}
-        collapsed={false}
+        collapsed
         expanded={expanded}
         onExpand={expand}
         onToggle={() => {}}
@@ -49,7 +49,12 @@ it("lets phone visitors scroll the preview and expand all evidence without losin
     );
   try {
     await act(async () => render(false));
-    expect(host.querySelectorAll(".evidence-node")).toHaveLength(6);
+    expect(host.querySelectorAll(".evidence-node")).toHaveLength(12);
+    expect(
+      host.querySelector("#evidence-panel-content")?.hasAttribute("hidden"),
+    ).toBe(false);
+    expect(host.querySelector(".evidence-rail.is-preview")).not.toBeNull();
+    expect(host.querySelector(".graph-preview-caption")).toBeNull();
     const wheel = new WheelEvent("wheel", {
       bubbles: true,
       cancelable: true,
@@ -64,14 +69,14 @@ it("lets phone visitors scroll the preview and expand all evidence without losin
     await act(async () => render(true));
     expect(host.querySelectorAll(".evidence-node")).toHaveLength(12);
     expect(
-      host.querySelector('[aria-label="Restore graph size"]')?.textContent,
-    ).toBe("Close graph");
+      host.querySelector('[aria-label="Collapse graph"]')?.textContent,
+    ).toBe("Collapse graph");
     await act(async () =>
       window.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" })),
     );
     expect(expand).toHaveBeenCalledTimes(2);
     await act(async () => render(false));
-    expect(host.querySelectorAll(".evidence-node")).toHaveLength(6);
+    expect(host.querySelectorAll(".evidence-node")).toHaveLength(12);
     expect(records).toHaveLength(12);
   } finally {
     await act(async () => root.unmount());

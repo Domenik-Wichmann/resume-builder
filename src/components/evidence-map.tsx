@@ -45,6 +45,7 @@ export function EvidenceMap({
   const [view, setView] = useState<GraphView>(initialGraphView);
   const [mobile, setMobile] = useState(false);
   const preview = mobile && !expanded;
+  const railCollapsed = collapsed && !mobile;
   useEffect(() => {
     const media = window.matchMedia("(max-width: 800px)");
     const update = () => setMobile(media.matches);
@@ -80,7 +81,7 @@ export function EvidenceMap({
   const canvas = useRef<HTMLDivElement>(null);
   // Every retrieved record stays on the graph, including while an answer loads.
   const pool = records;
-  const visible = preview ? records.slice(0, 6) : records;
+  const visible = records;
   const edges = useMemo(() => {
     const metadata = new Map(
       connectionRecords.map((record) => [record.id, record]),
@@ -101,10 +102,12 @@ export function EvidenceMap({
     return evidenceEdges(linked, skillIds);
   }, [records, connectionRecords, skillIds]);
   const active = dragging || selected || hovered;
-  const compact = visible.length > 12;
+  const compact = preview || visible.length > 12;
   const layoutSize = expanded
     ? { width: size.width / 1.5, height: size.height / 1.5 }
-    : size;
+    : preview
+      ? { width: size.width * 2, height: size.height * 2 }
+      : size;
   const points = visible.map((record, i) => {
     const floating = active !== record.id && dragging !== record.id;
     return {
@@ -138,7 +141,7 @@ export function EvidenceMap({
   );
 
   useEffect(() => {
-    if (collapsed) return;
+    if (railCollapsed) return;
     const controller = new AbortController();
     // Published metadata only restores connections between existing workspace
     // nodes. Catalog records never become additional displayed evidence.
@@ -162,22 +165,22 @@ export function EvidenceMap({
         /* Keep the workspace evidence if browsing is unavailable. */
       });
     return () => controller.abort();
-  }, [busy, collapsed]);
+  }, [busy, railCollapsed]);
 
   useEffect(() => {
     const element = canvas.current;
-    if (!element || collapsed) return;
+    if (!element || railCollapsed) return;
     const observer = new ResizeObserver(([entry]) => {
       const { width, height } = entry.contentRect;
       if (width > 0 && height > 0) setSize({ width, height });
     });
     observer.observe(element);
     return () => observer.disconnect();
-  }, [collapsed]);
+  }, [railCollapsed]);
 
   useEffect(() => {
     const element = canvas.current;
-    if (!element || collapsed || !expanded) return;
+    if (!element || railCollapsed || !expanded) return;
     const zoom = (event: WheelEvent) => {
       event.preventDefault();
       const bounds = element.getBoundingClientRect();
@@ -199,7 +202,7 @@ export function EvidenceMap({
     };
     element.addEventListener("wheel", zoom, { passive: false });
     return () => element.removeEventListener("wheel", zoom);
-  }, [collapsed, expanded]);
+  }, [railCollapsed, expanded]);
 
   useEffect(() => {
     if (!expanded || !onExpand) return;
@@ -214,7 +217,7 @@ export function EvidenceMap({
   }, [expanded, onExpand]);
 
   useEffect(() => {
-    if (collapsed || (!records.length && !busy)) return;
+    if (railCollapsed || (!records.length && !busy)) return;
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     let frame = 0;
     let last = 0;
@@ -235,7 +238,7 @@ export function EvidenceMap({
       cancelAnimationFrame(frame);
       preference.removeEventListener("change", update);
     };
-  }, [collapsed, records.length, busy]);
+  }, [railCollapsed, records.length, busy]);
 
   function selectRecord(id: string) {
     if (!pool.some((record) => record.id === id)) return;
@@ -273,7 +276,7 @@ export function EvidenceMap({
 
   return (
     <aside
-      className={`evidence-rail${preview ? " is-preview" : ""}${collapsed ? " is-collapsed" : ""}${expanded ? " is-expanded" : ""}${busy ? " is-working" : ""}`}
+      className={`evidence-rail${preview ? " is-preview" : ""}${railCollapsed ? " is-collapsed" : ""}${expanded ? " is-expanded" : ""}${busy ? " is-working" : ""}`}
       aria-label="Connected evidence"
     >
       <div className="rail-heading evidence-heading">
@@ -281,37 +284,37 @@ export function EvidenceMap({
           type="button"
           className="rail-toggle"
           aria-controls="evidence-panel-content"
-          aria-expanded={!collapsed}
+          aria-expanded={!railCollapsed}
           aria-label={
-            collapsed
+            railCollapsed
               ? "Expand connected evidence"
               : "Collapse connected evidence"
           }
           title={
-            collapsed
+            railCollapsed
               ? "Expand connected evidence"
               : "Collapse connected evidence"
           }
           onClick={onToggle}
         >
-          {collapsed ? "‹" : "›"}
+          {railCollapsed ? "‹" : "›"}
         </button>
-        {!collapsed && onExpand && (
+        {!railCollapsed && onExpand && (
           <button
             type="button"
             className="rail-toggle graph-expand"
-            aria-label={expanded ? "Restore graph size" : "Expand graph"}
-            title={expanded ? "Restore graph size" : "Expand graph"}
+            aria-label={expanded ? "Collapse graph" : "Expand graph"}
+            title={expanded ? "Collapse graph" : "Expand graph"}
             aria-pressed={expanded}
             onClick={() => {
               changeView(initialGraphView);
               onExpand();
             }}
           >
-            {expanded ? "Close graph" : "Expand graph"}
+            {expanded ? "Collapse graph" : "Expand graph"}
           </button>
         )}
-        {view.scale !== 1 && !collapsed && (
+        {view.scale !== 1 && !railCollapsed && (
           <button
             type="button"
             className="graph-reset"
@@ -329,16 +332,7 @@ export function EvidenceMap({
           />
         )}
       </div>
-      <div id="evidence-panel-content" hidden={collapsed}>
-        {preview && (
-          <p className="graph-preview-caption">
-            {busy
-              ? "Searching connected evidence…"
-              : `${records.length} source records · showing up to 6`}
-            <br />
-            Tap a node or expand to explore.
-          </p>
-        )}
+      <div id="evidence-panel-content" hidden={railCollapsed}>
         <div
           ref={canvas}
           className={`evidence-canvas${compact ? " is-compact" : ""}`}

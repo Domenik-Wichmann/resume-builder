@@ -251,7 +251,7 @@ html:has(.portfolio-home) {
   }
   .portfolio-home .homepage-conversation .career-studio {
     grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: auto minmax(0, 1fr) auto;
+    grid-template-rows: auto minmax(0, 1fr) min(20dvh, 220px);
     min-height: 0;
   }
   .homepage-conversation .explorer-rail {
@@ -312,27 +312,11 @@ html:has(.portfolio-home) {
   }
   .homepage-conversation .evidence-rail {
     grid-row: 3;
-    height: auto;
+    height: 100%;
     min-height: 0;
     max-height: none;
-    padding: 8px 16px;
+    padding: 0;
     overflow: hidden;
-  }
-  .homepage-conversation
-    .evidence-rail:not(.is-expanded)
-    #evidence-panel-content {
-    display: none;
-  }
-  .homepage-conversation .evidence-heading {
-    min-height: 44px;
-    margin: 0;
-    gap: 8px;
-  }
-  .homepage-conversation .evidence-heading::before {
-    content: "Connected evidence";
-    margin-right: auto;
-    font-size: 12px;
-    color: var(--muted);
   }
   .portfolio-home .homepage-conversation .career-studio.evidence-expanded {
     grid-template-rows: auto minmax(0, 1fr);
@@ -347,8 +331,8 @@ html:has(.portfolio-home) {
     overflow-y: auto;
   }
   .homepage-conversation .is-expanded .evidence-canvas {
-    height: calc(100dvh - 240px);
-    min-height: 240px;
+    height: 100%;
+    min-height: 0;
   }
 }
 @media (max-width: 560px) {
