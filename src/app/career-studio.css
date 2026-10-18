@@ -1329,6 +1329,10 @@ html:has(.profile-hero) {
   }
 }
 @media (max-width: 800px) {
+  .conversation-footer:has(> .chat-resume-preview:only-child),
+  .conversation-footer .chat-resume-preview {
+    display: none;
+  }
   .public-experience .explorer-rail nav :is(a, button) {
     min-height: 44px;
     font-size: 13px;

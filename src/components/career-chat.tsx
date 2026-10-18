@@ -608,7 +608,7 @@ export function CareerChat({
           {started && (
             <div className="conversation-footer">
               <button
-                className="secondary-button"
+                className="secondary-button chat-resume-preview"
                 disabled={busy}
                 onClick={preview}
                 data-analytics-action="preview_resume"
