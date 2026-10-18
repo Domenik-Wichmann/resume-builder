@@ -357,7 +357,7 @@ export function CareerChat({
           <nav aria-label="Career explorer">
             {(
               [
-                ["projects", "□", "Selected projects"],
+                ["projects", "□", "Projects"],
                 ["chat", "✧", "Ask anything"],
                 ["explorer", "⌘", "Career explorer"],
                 ["answers", "↗", "Quick answers"],

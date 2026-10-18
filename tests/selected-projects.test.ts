@@ -42,12 +42,18 @@ it("showcases the selected apps and owner-featured work while excluding private,
     project("private", { featured: true, is_public: false }),
     project("archived", { featured: true, archived: true }),
   ]);
-  expect(selected.map((p) => p.id)).toEqual([...ids, "featured"]);
-  expect(selected.slice(0, 4).map(showcaseTitle)).toEqual([
-    "Sonaway",
+  expect(selected.map((p) => p.id)).toEqual([
+    ...ids.slice(1),
+    "featured",
+    ids[0],
+  ]);
+  expect(
+    selected.filter((p) => p.id !== "featured").map(showcaseTitle),
+  ).toEqual([
     "SystemWright LMS",
     "Resume Builder",
     "BabyCat / Rules Engine",
+    "Sonaway",
   ]);
   expect(
     selectShowcaseProjects(ids.map((id) => project(id, { is_public: false }))),

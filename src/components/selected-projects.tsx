@@ -16,12 +16,12 @@ export function SelectedProjects() {
           cache: "no-store",
           signal: controller.signal,
         });
-        if (!response.ok) throw new Error("Cannot load selected projects.");
+        if (!response.ok) throw new Error("Cannot load projects.");
         const result = showcaseSchema.parse(await response.json());
         if (!controller.signal.aborted) setProjects(result.projects);
       } catch {
         if (!controller.signal.aborted)
-          setError("Cannot load selected projects. Please try again.");
+          setError("Cannot load projects. Please try again.");
       } finally {
         if (!controller.signal.aborted) setLoading(false);
       }
@@ -31,12 +31,12 @@ export function SelectedProjects() {
   }, [attempt]);
   return (
     <div className="selected-projects-panel">
-      <p className="eyebrow">Selected work</p>
+      <p className="eyebrow">Projects</p>
       <h2>Apps I’ve built</h2>
       <p className="showcase-intro">
         Explore the projects, how they work, and the ideas behind them.
       </p>
-      {loading && <p role="status">Loading selected projects…</p>}
+      {loading && <p role="status">Loading projects…</p>}
       {error && (
         <div role="alert">
           <p>{error}</p>
@@ -57,7 +57,7 @@ export function SelectedProjects() {
         (projects.length ? (
           <ProjectCards projects={projects} />
         ) : (
-          <p>No selected projects published yet.</p>
+          <p>No projects published yet.</p>
         ))}
     </div>
   );

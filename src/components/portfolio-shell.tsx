@@ -14,7 +14,7 @@ export function PortfolioHeader({ homeOnly = false }: { homeOnly?: boolean }) {
         Domenik Wichmann
       </Link>
       <nav aria-label="Main navigation">
-        <Link href="/projects">Selected projects</Link>
+        <Link href="/projects">Projects</Link>
         <Link href="/explore">Explore</Link>
         <Link href="/answers">Quick Answers</Link>
         <Link href="/workspace">Saved chats</Link>

@@ -27,6 +27,12 @@ export const selectedProjectNames: Readonly<Record<string, string>> = {
   "937f2379-7dbc-4eae-a12f-5c3dacc13b0c": "BabyCat / Rules Engine",
 };
 
+// Preserve the existing order of other projects while putting Sonaway last.
+export function compareProjectOrder(a: { id: string }, b: { id: string }) {
+  const sonaway = "c05d7b83-2c3d-412c-918a-d468e27adee3";
+  return Number(a.id === sonaway) - Number(b.id === sonaway);
+}
+
 export function selectShowcaseProjects(projects: Project[]): Project[] {
   return projects
     .filter(
@@ -39,7 +45,11 @@ export function selectShowcaseProjects(projects: Project[]): Project[] {
       const ids = Object.keys(selectedProjectNames);
       const rank = (id: string) =>
         ids.includes(id) ? ids.indexOf(id) : ids.length;
-      return rank(a.id) - rank(b.id) || a.display_order - b.display_order;
+      return (
+        compareProjectOrder(a, b) ||
+        rank(a.id) - rank(b.id) ||
+        a.display_order - b.display_order
+      );
     });
 }
 

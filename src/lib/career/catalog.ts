@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { careerSchema } from "./model";
+import { compareProjectOrder } from "../portfolio/selection";
 import {
   groupingKey,
   isLanguageCategory,
@@ -34,6 +35,8 @@ export type CatalogCategory = (typeof catalogCategories)[number][0];
 export type CatalogGroup = { id: string; title: string; recordIds: string[] };
 
 export function catalogRecords(data: Catalog, category: CatalogCategory) {
+  if (category === "projects")
+    return [...data.career.projects].sort(compareProjectOrder);
   if (category !== "skill_records" && category !== "languages")
     return data.career[category] || [];
   const languageIds = new Set(

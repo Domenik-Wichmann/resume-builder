@@ -15,6 +15,7 @@ import { demoProject, demoCaseContent } from "./demo";
 import { safeProjectUrl } from "./model";
 import {
   selectShowcaseProjects,
+  compareProjectOrder,
   isProjectOverview,
   priorityProjectIds,
   showcaseTitle,
@@ -72,7 +73,7 @@ export async function publicProjectDetails(
         ...projects.filter(
           (project) => !defaults.some((item) => item.id === project.id),
         ),
-      ]
+      ].sort(compareProjectOrder)
     : projects;
   return Promise.all(
     ordered

@@ -1,4 +1,5 @@
 import type { Career, CareerRecord } from "../career/model";
+import { compareProjectOrder } from "./selection";
 import {
   groupingKey,
   isLanguageCategory,
@@ -27,6 +28,7 @@ export function deriveExplorer(
   categories: Category[],
   assignments: { id: string; category_id: string | null }[],
 ) {
+  const projectRecords = [...career.projects].sort(compareProjectOrder);
   const languageCategories = new Set(
     categories
       .filter((category) => isLanguageCategory(category.title))
@@ -68,7 +70,7 @@ export function deriveExplorer(
     const experiences = career.experiences.filter((r) =>
       r.skills.includes(skill.title),
     );
-    const projects = career.projects.filter((r) =>
+    const projects = projectRecords.filter((r) =>
       r.skills.includes(skill.title),
     );
     const achievements = career.achievements.filter((r) =>
