@@ -75,6 +75,21 @@ it("distinguishes a role brief conservatively without sending text to a provider
   ).toBe("ask");
   expect(initialInputKind("Tell me about the projects.")).toBe("ask");
   expect(initialInputKind("SQL React")).toBe("ask");
+  expect(
+    initialInputKind(
+      "Who we are\nExample company.\nResponsibilities: build APIs.\nRequirements: TypeScript and SQL.",
+    ),
+  ).toBe("match");
+  expect(
+    initialInputKind(
+      "Responsibilities: build APIs. Requirements: TypeScript and SQL.",
+    ),
+  ).toBe("match");
+  expect(
+    initialInputKind(
+      "Could you compare his qualifications to the requirements in this job description?",
+    ),
+  ).toBe("ask");
 });
 it("renders useful Markdown without interpreting executable HTML or links", () => {
   const html = renderToStaticMarkup(

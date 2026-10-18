@@ -329,8 +329,8 @@ html:has(.profile-hero) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding: 7px 2px 0;
+  gap: 8px;
+  padding: 2px 0 0;
 }
 .composer-tools label {
   margin: 0;
@@ -344,6 +344,10 @@ html:has(.profile-hero) {
   max-width: 100%;
   font-size: 11px;
 }
+.public-experience .career-studio .composer-tools select {
+  min-height: 32px;
+  font-size: 12px;
+}
 .composer-tools option {
   background: #152632;
   color: #bdcbd6;
@@ -352,14 +356,18 @@ html:has(.profile-hero) {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-left: auto;
+  gap: 8px;
+  width: 100%;
+  justify-content: space-between;
 }
 .workspace-privacy summary {
+  display: flex;
+  align-items: center;
+  min-height: 32px;
   cursor: pointer;
   list-style: none;
   color: #9bafbc;
-  font-size: 10px;
+  font-size: 11px;
 }
 .workspace-privacy summary::-webkit-details-marker {
   display: none;
@@ -606,10 +614,12 @@ html:has(.profile-hero) {
   cursor: pointer;
 }
 .public-experience .graph-expand {
-  width: auto;
-  min-height: 44px;
-  padding: 10px 14px;
-  font-size: 13px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  min-height: 40px;
+  padding: 8px;
 }
 .evidence-canvas:active {
   cursor: grabbing;

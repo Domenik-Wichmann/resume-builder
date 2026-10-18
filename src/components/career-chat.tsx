@@ -81,7 +81,6 @@ export function CareerChat({
   const [workspace, setWorkspace] = useState(initialWorkspace);
   const [ir, setIR] = useState<ResumeIR | null>(null);
   const [input, setInput] = useState(initialInput);
-  const [mode, setMode] = useState<"auto" | "ask" | "match">("auto");
   const [busy, setBusy] = useState(false);
   const [pending, setPending] = useState<{
     input: string;
@@ -108,7 +107,6 @@ export function CareerChat({
     setPanel("chat");
     setEvidenceExpanded(false);
     setInput(heroSubmission.input);
-    setMode(heroSubmission.kind);
   }
   useEffect(() => {
     onBusyChange?.(
@@ -123,7 +121,6 @@ export function CareerChat({
         return;
       setPanel("chat");
       setInput(detail);
-      setMode("ask");
       messageField.current?.focus({ preventScroll: true });
     };
     window.addEventListener("portfolio-question", draft);
@@ -201,8 +198,7 @@ export function CareerChat({
   const started = Boolean(
     workspace?.questions.length || workspace?.job_description,
   );
-  const kind =
-    mode === "auto" ? (started ? "ask" : initialInputKind(input)) : mode;
+  const kind = initialInputKind(input);
   const canSubmit =
     !busy &&
     slotsReady &&
@@ -216,14 +212,14 @@ export function CareerChat({
       !slotsReady ||
       busy ||
       input !== heroSubmission.input ||
-      mode !== heroSubmission.kind
+      kind !== heroSubmission.kind
     )
       return;
     // Wait for the server-owned workspace slots and the staged input before
     // using the same guarded submit path as the chat's own composer.
     handledHero.current = heroSubmission.id;
     composerForm.current?.requestSubmit();
-  }, [heroSubmission, slotsReady, busy, input, mode]);
+  }, [heroSubmission, slotsReady, busy, input, kind]);
   async function switchWorkspace(next: WorkspaceSlot) {
     if (lock.current || next === slot) return;
     lock.current = true;
@@ -238,7 +234,6 @@ export function CareerChat({
       setWorkspace(loaded);
       setIR(null);
       setInput("");
-      setMode("auto");
       if (loaded) rememberWorkspace(loaded.id);
       else rememberWorkspace(null);
     } catch (err) {
@@ -271,7 +266,6 @@ export function CareerChat({
     setBusy(true);
     setError("");
     const submitted = { input, kind };
-    const submittedMode = mode;
     let committed = false;
     setPending(submitted);
     setInput("");
@@ -299,13 +293,11 @@ export function CareerChat({
       setWorkspace(result.workspace);
       setPending(null);
       setIR(null);
-      setMode("auto");
       if (submitted.kind === "match") await compile(result.workspace);
     } catch (err) {
       // A failed preview must not turn a persisted role match into a second send.
       if (!committed) {
         setInput(submitted.input);
-        setMode(submittedMode);
       }
       setError(err instanceof Error ? err.message : "Please try again.");
     } finally {
@@ -435,7 +427,7 @@ export function CareerChat({
                 onKeyDown={(event) => submitComposerOnEnter(event, canSubmit)}
                 placeholder={
                   started
-                    ? "Ask a follow-up question…"
+                    ? "Ask another question or paste a job description…"
                     : "Ask a question or paste a job description…"
                 }
                 minLength={3}
@@ -461,24 +453,6 @@ export function CareerChat({
               </button>
             </div>
             <div className="composer-tools">
-              <label>
-                <span className="sr-only">Message type</span>
-                <select
-                  value={mode}
-                  onChange={(event) =>
-                    setMode(event.target.value as typeof mode)
-                  }
-                  disabled={busy || !slotsReady}
-                >
-                  <option value="auto">
-                    {started
-                      ? "Follow-up question"
-                      : "Auto-detect first message"}
-                  </option>
-                  <option value="ask">Question</option>
-                  <option value="match">Job description</option>
-                </select>
-              </label>
               <div className="workspace-tools">
                 <details className="workspace-privacy">
                   <summary
@@ -514,26 +488,18 @@ export function CareerChat({
                       void switchWorkspace(event.target.value === "1" ? 1 : 0)
                     }
                   >
-                    <option value="0">
-                      {slots[0] ? "Saved chat 1" : "New chat 1"}
-                    </option>
-                    <option value="1">
-                      {slots[1] ? "Saved chat 2" : "New chat 2"}
-                    </option>
+                    <option value="0">Chat 1</option>
+                    <option value="1">Chat 2</option>
                   </select>
                 </label>
               </div>
             </div>
           </form>
-          {input.trim() && (
+          {kind === "ask" && input.length > 1000 && (
             <div className="composer-note">
               <span>
-                {input.trim()
-                  ? `Sending as ${kind === "match" ? "a job description" : "a question"}.`
-                  : ""}
-                {kind === "ask" && input.length > 1000
-                  ? " Questions are limited to 1,000 characters; choose Job description for a role."
-                  : ""}
+                Questions are limited to 1,000 characters. Job descriptions are
+                detected automatically.
               </span>
             </div>
           )}

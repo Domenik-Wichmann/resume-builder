@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { HomeExperience } from "@/components/home-experience";
 import { currentMarket, getPresentation } from "@/lib/market-server";
 import { publicResumeDesign } from "@/lib/resume-design/server";
@@ -24,10 +23,6 @@ export default async function Home() {
           design={design}
         />
       </main>
-      <footer className="wrap footer">
-        <span>Domenik Wichmann</span>
-        <Link href="/privacy">Privacy & data</Link>
-      </footer>
     </div>
   );
 }

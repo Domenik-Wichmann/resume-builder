@@ -39,12 +39,15 @@ function deferred<T>() {
   });
   return { promise, resolve, reject };
 }
-async function mount(initialWorkspace: Workspace | null = workspace) {
+async function mount(
+  initialWorkspace: Workspace | null = workspace,
+  initialInput = question,
+) {
   await act(async () => {
     root.render(
       <CareerChat
         initialWorkspace={initialWorkspace}
-        initialInput={question}
+        initialInput={initialInput}
       />,
     );
   });
@@ -191,10 +194,13 @@ it("resumes the last saved chat across sessions and ignores selection hints outs
   );
 });
 
-it("keeps a committed role match when its automatic resume preview fails", async () => {
+it("auto-detects a new role in an existing chat and keeps the committed match if preview fails", async () => {
+  const description =
+    "Responsibilities: build systems. Required skills: SQL and automation.";
+  const existing = answered();
   const matched: Workspace = {
-    ...workspace,
-    job_description: question,
+    ...existing,
+    job_description: description,
     match: {
       overall_summary: "Stored role fit.",
       strong_matches: [],
@@ -207,20 +213,14 @@ it("keeps a committed role match when its automatic resume preview fails", async
   browser.browserWorkspaceAction
     .mockResolvedValueOnce({ workspace: matched })
     .mockRejectedValueOnce(new Error("Preview unavailable"));
-  await mount();
-  await act(async () => {
-    const mode = container.querySelector<HTMLSelectElement>(
-      '.composer-tools select:not([aria-label="Workspace"])',
-    )!;
-    mode.value = "match";
-    mode.dispatchEvent(new Event("change", { bubbles: true }));
-  });
+  await mount(existing, description);
+  expect(container.querySelectorAll(".composer-tools select")).toHaveLength(1);
   await send();
   expect(browser.browserWorkspaceAction).toHaveBeenNthCalledWith(
     1,
-    workspace,
+    existing,
     "match",
-    question,
+    description,
   );
   expect(browser.browserWorkspaceAction).toHaveBeenNthCalledWith(
     2,
@@ -229,8 +229,26 @@ it("keeps a committed role match when its automatic resume preview fails", async
   );
   expect(field().value).toBe("");
   expect(container.textContent).toContain("Stored role fit.");
-  expect(container.querySelectorAll(".question-bubble")).toHaveLength(1);
+  expect(container.querySelectorAll(".question-bubble")).toHaveLength(2);
   expect(sendButton().getAttribute("aria-busy")).toBe("false");
+});
+
+it("automatically treats a question about role requirements as a question after a job match", async () => {
+  const existing = {
+    ...workspace,
+    job_description:
+      "We are hiring. Responsibilities: build systems. Required skills: SQL.",
+  };
+  const input =
+    "What qualifications match the requirements in this job description?";
+  browser.browserWorkspaceAction.mockResolvedValue({ workspace: existing });
+  await mount(existing, input);
+  await send();
+  expect(browser.browserWorkspaceAction).toHaveBeenCalledExactlyOnceWith(
+    existing,
+    "ask",
+    input,
+  );
 });
 
 it("drafts hero suggestions in the existing composer without sending or creating a workspace", async () => {

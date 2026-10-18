@@ -1,16 +1,24 @@
 import type { KeyboardEvent } from "react";
 
-/** A conservative first-message hint; the visitor can correct it before sending. */
+/** Conservatively distinguish pasted job descriptions from career questions. */
 export function initialInputKind(text: string): "ask" | "match" {
   const value = text.trim();
+  const jobHeading =
+    /^(who we are|what (we offer|you(?:'ll| will) do|you bring))\b/i.test(
+      value,
+    );
   if (
-    /^(what|how|why|when|where|who|can|does|did|has|is|tell me)\b/i.test(value)
+    !jobHeading &&
+    /^(what|how|why|when|where|who|can|could|would|should|do|does|did|has|is|are|tell me|compare|explain|describe|show me|please)\b/i.test(
+      value,
+    )
   )
     return "ask";
   const signals = [
-    /\b(responsibilities|requirements|qualifications)\b/i,
+    /\b(responsibilities|duties)\b/i,
+    /\b(requirements|qualifications|required skills|must have)\b/i,
     /\b(we are hiring|we.re looking|job description|about the role)\b/i,
-    /\b(you will|you.ll|must have|required skills|ideal candidate)\b/i,
+    /\b(you will|you.ll|ideal candidate)\b/i,
   ];
   return signals.filter((pattern) => pattern.test(value)).length >= 2
     ? "match"

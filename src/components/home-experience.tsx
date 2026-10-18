@@ -19,10 +19,9 @@ export function HomeExperience({
   design?: ResumeDesign;
 }) {
   const [input, setInput] = useState("");
-  const [mode, setMode] = useState<"auto" | "ask" | "match">("auto");
   const [request, setRequest] = useState<HeroSubmission>();
   const [busy, setBusy] = useState(false);
-  const kind = mode === "auto" ? initialInputKind(input) : mode;
+  const kind = initialInputKind(input);
   const tooLong = kind === "ask" && input.length > 1000;
   const canSubmit = !busy && input.trim().length >= 3 && !tooLong;
   function submit(event: FormEvent) {
@@ -95,30 +94,9 @@ export function HomeExperience({
               </button>
             </div>
             <div className="hero-composer-footer">
-              <div
-                className="hero-input-modes"
-                aria-label="Choose message type"
-              >
-                <button
-                  type="button"
-                  aria-pressed={kind === "ask"}
-                  disabled={busy}
-                  onClick={() => setMode("ask")}
-                >
-                  Ask a question
-                </button>
-                <button
-                  type="button"
-                  aria-pressed={kind === "match"}
-                  disabled={busy}
-                  onClick={() => setMode("match")}
-                >
-                  Compare a job
-                </button>
-              </div>
               <p id="hero-message-help">
                 {tooLong ? (
-                  "Questions can be up to 1,000 characters. Choose Compare a job for a job description."
+                  "Questions can be up to 1,000 characters. Job descriptions are detected automatically."
                 ) : (
                   <>
                     {story.demo

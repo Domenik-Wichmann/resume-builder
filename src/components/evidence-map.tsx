@@ -311,7 +311,25 @@ export function EvidenceMap({
               onExpand();
             }}
           >
-            {expanded ? "Collapse graph" : "Expand graph"}
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d={
+                  expanded
+                    ? "M4 9h5V4m6 0v5h5M20 15h-5v5M9 20v-5H4"
+                    : "M9 4H4v5m11-5h5v5m0 6v5h-5M4 15v5h5"
+                }
+                stroke="currentColor"
+                strokeWidth="1.7"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </button>
         )}
         {view.scale !== 1 && !railCollapsed && (

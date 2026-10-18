@@ -68,9 +68,9 @@ it("keeps the full animated graph visible on phones and expands without losing r
     expect(expand).toHaveBeenCalledOnce();
     await act(async () => render(true));
     expect(host.querySelectorAll(".evidence-node")).toHaveLength(12);
-    expect(
-      host.querySelector('[aria-label="Collapse graph"]')?.textContent,
-    ).toBe("Collapse graph");
+    const collapse = host.querySelector('[aria-label="Collapse graph"]');
+    expect(collapse?.textContent).toBe("");
+    expect(collapse?.querySelector('svg[aria-hidden="true"]')).not.toBeNull();
     await act(async () =>
       window.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" })),
     );
