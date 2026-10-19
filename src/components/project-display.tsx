@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { ReactNode } from "react";
 import { SafeMarkdown } from "./safe-markdown";
 import type { Project, ProjectMedia } from "@/lib/portfolio/model";
 import { safeProjectUrl } from "@/lib/portfolio/model";
@@ -12,6 +13,7 @@ export function ProjectDisplay({
   outcomes,
   content,
   headingLevel = 1,
+  editorial,
 }: {
   project: Project;
   media: ProjectMedia[];
@@ -19,6 +21,7 @@ export function ProjectDisplay({
   outcomes: string[];
   content?: CaseContent;
   headingLevel?: 1 | 2;
+  editorial?: ReactNode;
 }) {
   const Heading = headingLevel === 1 ? "h1" : "h2";
   const cover = media.find((m) => m.is_cover);
@@ -51,9 +54,11 @@ export function ProjectDisplay({
             {link.label} <span aria-hidden="true">↗</span>
           </a>
         ))}
-        <a className="secondary-button" href="#project-screenshots">
-          Explore screenshots <span aria-hidden="true">↓</span>
-        </a>
+        {(!editorial || media.length > 0) && (
+          <a className="secondary-button" href="#project-screenshots">
+            Explore screenshots <span aria-hidden="true">↓</span>
+          </a>
+        )}
       </div>
       {cover && (
         <figure className="case-cover" id={`screenshot-${cover.id}`}>
@@ -81,95 +86,105 @@ export function ProjectDisplay({
           {project.end_date || "End date not recorded"}
         </p>
       )}
-      <div className="project-layout case-layout">
+      <div
+        className={`project-layout case-layout${editorial ? " case-layout-editorial" : ""}`}
+      >
         <div>
-          <section className="case-section" id="project-overview">
-            <p className="eyebrow">The project</p>
-            <h2>Overview</h2>
-            <SafeMarkdown
-              text={content?.overview || project.description || project.summary}
-            />
-          </section>
-          {Boolean(content?.highlights.length) && (
-            <section className="case-section">
-              <p className="eyebrow">What’s involved</p>
-              <h2>Capabilities &amp; features</h2>
-              <ul className="case-highlights">
-                {content!.highlights.map((value, index) => (
-                  <li key={index}>
-                    <SafeMarkdown text={value} />
-                  </li>
+          {editorial || (
+            <>
+              <section className="case-section" id="project-overview">
+                <p className="eyebrow">The project</p>
+                <h2>Overview</h2>
+                <SafeMarkdown
+                  text={
+                    content?.overview || project.description || project.summary
+                  }
+                />
+              </section>
+              {Boolean(content?.highlights.length) && (
+                <section className="case-section">
+                  <p className="eyebrow">What’s involved</p>
+                  <h2>Capabilities &amp; features</h2>
+                  <ul className="case-highlights">
+                    {content!.highlights.map((value, index) => (
+                      <li key={index}>
+                        <SafeMarkdown text={value} />
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+              {content?.implementation && (
+                <section className="case-section">
+                  <p className="eyebrow">Under the hood</p>
+                  <h2>How it works</h2>
+                  <SafeMarkdown text={content.implementation} />
+                </section>
+              )}
+              {outcomes.length > 0 && (
+                <section className="case-section">
+                  <h2>Outcomes</h2>
+                  <ul>
+                    {outcomes.map((o, i) => (
+                      <li key={i}>{o}</li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+              {Boolean(content?.limitations.length) && (
+                <section className="case-section">
+                  <h2>Scope &amp; limitations</h2>
+                  <ul>
+                    {content!.limitations.map((value, index) => (
+                      <li key={index}>{value}</li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+            </>
+          )}
+          {(!editorial || media.length > 0) && (
+            <section
+              className="case-section case-gallery"
+              id="project-screenshots"
+            >
+              <p className="eyebrow">A closer look</p>
+              <h2>Screenshots</h2>
+              {!media.length && (
+                <p className="muted">Screenshots will be added here.</p>
+              )}
+              {media
+                .filter((m) => !m.is_cover)
+                .map((m) => (
+                  <figure key={m.id} id={`screenshot-${m.id}`}>
+                    <a
+                      href={`/media/${m.id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Open full screenshot: ${m.alt}`}
+                    >
+                      <Image
+                        unoptimized
+                        width={1200}
+                        height={800}
+                        className="project-cover"
+                        src={`/media/${m.id}`}
+                        alt={m.alt}
+                        loading="lazy"
+                      />
+                    </a>
+                    <figcaption>{m.caption || m.alt}</figcaption>
+                  </figure>
                 ))}
-              </ul>
-            </section>
-          )}
-          {content?.implementation && (
-            <section className="case-section">
-              <p className="eyebrow">Under the hood</p>
-              <h2>How it works</h2>
-              <SafeMarkdown text={content.implementation} />
-            </section>
-          )}
-          {outcomes.length > 0 && (
-            <section className="case-section">
-              <h2>Outcomes</h2>
-              <ul>
-                {outcomes.map((o, i) => (
-                  <li key={i}>{o}</li>
-                ))}
-              </ul>
-            </section>
-          )}
-          {Boolean(content?.limitations.length) && (
-            <section className="case-section">
-              <h2>Scope &amp; limitations</h2>
-              <ul>
-                {content!.limitations.map((value, index) => (
-                  <li key={index}>{value}</li>
-                ))}
-              </ul>
-            </section>
-          )}
-          <section
-            className="case-section case-gallery"
-            id="project-screenshots"
-          >
-            <p className="eyebrow">A closer look</p>
-            <h2>Screenshots</h2>
-            {!media.length && (
-              <p className="muted">Screenshots will be added here.</p>
-            )}
-            {media
-              .filter((m) => !m.is_cover)
-              .map((m) => (
-                <figure key={m.id} id={`screenshot-${m.id}`}>
-                  <a
-                    href={`/media/${m.id}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Open full screenshot: ${m.alt}`}
-                  >
-                    <Image
-                      unoptimized
-                      width={1200}
-                      height={800}
-                      className="project-cover"
-                      src={`/media/${m.id}`}
-                      alt={m.alt}
-                      loading="lazy"
-                    />
+              {cover && (
+                <p>
+                  <a className="text-link" href={`#screenshot-${cover.id}`}>
+                    View featured screenshot ↑
                   </a>
-                  <figcaption>{m.caption || m.alt}</figcaption>
-                </figure>
-              ))}
-            {cover && (
-              <p>
-                <a className="text-link" href={`#screenshot-${cover.id}`}>
-                  View featured screenshot ↑
-                </a>
-              </p>
-            )}
-          </section>
+                </p>
+              )}
+            </section>
+          )}
         </div>
         <aside className="surface case-stack">
           <p className="eyebrow">Tools &amp; techniques</p>

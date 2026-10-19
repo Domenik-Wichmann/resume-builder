@@ -8,6 +8,10 @@ import { PortfolioStoryHero } from "@/components/portfolio-story";
 import { getPortfolioStory } from "@/lib/portfolio/story-server";
 import { selectedProjectNames } from "@/lib/portfolio/selection";
 import { demoProject } from "@/lib/portfolio/demo";
+import {
+  SonawayCaseStudy,
+  sonawayIntroduction,
+} from "@/components/sonaway-case-study";
 import "../../portfolio-story.css";
 export const dynamic = "force-dynamic";
 export default async function ProjectPage({
@@ -19,6 +23,7 @@ export default async function ProjectPage({
   const item = (await publicProjectDetails({ slug }))[0];
   if (!item) notFound();
   const { project: p, content, skills, media } = item;
+  const sonaway = selectedProjectNames[p.id] === "Sonaway";
   const walkthrough =
     selectedProjectNames[p.id] === "Resume Builder" ||
     (process.env.APP_MODE === "demo" && p.id === demoProject.id);
@@ -63,7 +68,8 @@ export default async function ProjectPage({
           media={media}
           skills={skills}
           outcomes={content.outcomes}
-          content={content}
+          content={sonaway ? { ...content, ...sonawayIntroduction } : content}
+          editorial={sonaway ? <SonawayCaseStudy /> : undefined}
         />
         <ExploreSignal kind="project" id={p.id} />
       </main>
