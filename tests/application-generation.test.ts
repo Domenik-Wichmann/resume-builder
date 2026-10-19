@@ -168,6 +168,176 @@ function writing(id: string, headline: string, skill: string): Writing {
   };
 }
 beforeEach(() => vi.clearAllMocks());
+it("excludes true but contextless skills independently of factual and job-fit checks", async () => {
+  const good =
+    "Built spreadsheet validation workflows with reusable rules to check product data before e-commerce imports.";
+  const isolated =
+    "Product-matching evaluation: 38/38 EXACT precision and 38/76 recall.";
+  const inventory =
+    "Project exposure includes ingestion, embeddings and retrieval.";
+  const fixture = record(
+    "data",
+    "Fictional catalog workflow",
+    `${good} ${isolated} Found data errors and applied corrections. ${inventory}`,
+  );
+  const draft = writing("data", "Data operations", "Unused");
+  draft.headline.refs = draft.summary[0].refs = ["data:0"];
+  draft.entries = [
+    {
+      record_id: "data",
+      bullets: [statement(good, "data"), statement(isolated, "data")],
+    },
+  ];
+  draft.skills = [
+    {
+      label: "Catalog automation",
+      items: [
+        good,
+        isolated,
+        "Found data errors and applied corrections.",
+        inventory,
+      ].map((text) => statement(text, "data")),
+    },
+  ];
+  const evidence = packetInventory([fixture]);
+  const plan = {
+    focus: "Product-data workflow automation",
+    requirements: [
+      {
+        requirement: "Automate product-data validation",
+        importance: "ESSENTIAL" as const,
+        query: "validation",
+        transferable_query: "automation",
+      },
+    ],
+  };
+  vi.mocked(complete).mockImplementation(async (_system, payload, schema) => {
+    const data = JSON.parse(payload as string) as {
+      skill_statement_ids: string[];
+      inputs: { id: string; bullet: string; claims: { ref: string }[] }[];
+    };
+    return schema.parse({
+      decisions: data.inputs.map((input) => ({
+        id: input.id,
+        verdict: "PASS",
+        job_fit: "DIRECT",
+        skill_quality: data.skill_statement_ids.includes(input.id)
+          ? input.bullet === good || input.bullet === inventory
+            ? "PASS"
+            : "FAIL"
+          : "NOT_APPLICABLE",
+        reason:
+          "Factual; only the complete workflow explains method and purpose.",
+        assertions: [
+          {
+            text: input.bullet,
+            verdict: "SUPPORTED",
+            claimRefs: input.claims.map((claim) => claim.ref),
+            reason: "Supported by fictional fixture",
+          },
+        ],
+      })),
+    });
+  });
+  const audit = await auditWriting(draft, evidence, "account", plan);
+  expect(audit.slice(2, 6).map((result) => result.pass)).toEqual([
+    true,
+    false,
+    false,
+    false,
+  ]);
+  expect(audit[3].reason).toContain("action, method and purpose");
+  const assembled = assembleWriting(base(), draft, evidence, audit);
+  expect(assembled.skill_groups).toEqual([
+    { label: "Catalog automation", skills: [good] },
+  ]);
+  // The editorial skill rule must not discard the same supported work in experience.
+  expect(assembled.experiences[0].bullets).toEqual([good, isolated]);
+});
+
+it.each([undefined, "NOT_APPLICABLE"])(
+  "requires an affirmative skill-context decision, received %s",
+  async (quality) => {
+    const evidence = packetInventory(rows);
+    const draft = writing("data", "Data operations", "Spreadsheet validation");
+    vi.mocked(complete).mockImplementation(async (_system, payload) => {
+      const data = JSON.parse(payload as string) as {
+        inputs: { id: string; bullet: string; claims: { ref: string }[] }[];
+      };
+      return {
+        decisions: data.inputs.map((input) => ({
+          id: input.id,
+          verdict: "PASS",
+          skill_quality: quality,
+          reason: "No affirmative skill context assessment",
+          assertions: [
+            {
+              text: input.bullet,
+              verdict: "SUPPORTED",
+              claimRefs: input.claims.map((c) => c.ref),
+              reason: "Supported",
+            },
+          ],
+        })),
+      };
+    });
+    const audit = await auditWriting(draft, evidence, "account");
+    expect(audit.map((item) => item.pass)).toEqual([true, true, false, true]);
+  },
+);
+
+it("allows room for skill context while bounding total section size", () => {
+  const plan = {
+    focus: "Fictional automation job",
+    requirements: [
+      {
+        requirement: "Automation",
+        importance: "ESSENTIAL" as const,
+        query: "automation",
+        transferable_query: "workflow",
+      },
+    ],
+  };
+  const candidate = {
+    introduction: { headline: null, summary: [] },
+    additions: [],
+    skills: [
+      {
+        label: "Workflow automation",
+        items: [
+          {
+            text: "Built a fictional workflow with spreadsheet rules to validate catalog records for downstream imports, checking duplicate identifiers and field combinations before preparing the export.",
+            refs: ["c0"],
+          },
+        ],
+      },
+    ],
+    coverage: {
+      "0": { support: "DIRECT", refs: ["c0"], note: "Fictional support" },
+    },
+  };
+  const schema = recoverySchemaForPlan(plan, ["c0"]);
+  expect(schema.safeParse(candidate).success).toBe(true);
+  const item = candidate.skills[0].items[0];
+  expect(item.text.length).toBeGreaterThan(150);
+  expect(
+    schema.safeParse({
+      ...candidate,
+      skills: [
+        { label: "Too many", items: Array.from({ length: 5 }, () => item) },
+      ],
+    }).success,
+  ).toBe(false);
+  expect(
+    schema.safeParse({
+      ...candidate,
+      skills: [
+        { label: "Too long", items: [{ ...item, text: "x".repeat(301) }] },
+      ],
+    }).success,
+  ).toBe(false);
+});
+
 it("recovery sees late claims and unselected records without changing original refs or exposing private evidence", () => {
   const crowded = record("crowded", "Fictional work", "Original claim");
   crowded.claims = Array.from({ length: 40 }, (_, i) => ({
@@ -257,6 +427,7 @@ it.each([
         decisions: request.inputs.map((i) => ({
           id: i.id,
           verdict: "PASS",
+          skill_quality: "PASS",
           job_fit: "DIRECT",
           reason: "Supported",
           assertions: [
@@ -349,6 +520,7 @@ it("rebuilds skills around the job rather than appending to previously accepted 
       decisions: request.inputs.map((i) => ({
         id: i.id,
         verdict: "PASS",
+        skill_quality: "PASS",
         job_fit: "DIRECT",
         reason: "Supported",
         assertions: [
@@ -438,6 +610,7 @@ it("warns about invalid advisory coverage without blocking the verified draft, a
       decisions: request.inputs.map((i) => ({
         id: i.id,
         verdict: "PASS",
+        skill_quality: "PASS",
         job_fit: "IRRELEVANT",
         reason: "Unrelated",
         assertions: [
@@ -653,6 +826,7 @@ it("uses bounded planning, writing and complete-assertion verification for three
       decisions: inputs.map((i) => ({
         id: i.id,
         verdict: "PASS",
+        skill_quality: "PASS",
         assertions: [
           {
             text: i.bullet,
@@ -718,6 +892,7 @@ it("checks complete statements with admitted short refs and rejects partial or f
         decisions: request.inputs.map((input) => ({
           id: input.id,
           verdict: "PASS",
+          skill_quality: "PASS",
           reason: "Exact fictional proof",
           assertions: [
             {
@@ -780,6 +955,7 @@ it("rejects incomplete and unexpected verifier IDs instead of accepting a partia
     decisions: inputs.map((i, index) => ({
       id: index ? i.id : "unexpected",
       verdict: "PASS",
+      skill_quality: "PASS",
       assertions: [],
       reason: "Synthetic response",
     })),
@@ -827,6 +1003,7 @@ it("reviews bounded batches in parallel while preserving global statement IDs an
         .map((i) => ({
           id: i.id,
           verdict: "PASS",
+          skill_quality: "PASS",
           assertions: [
             {
               text: i.bullet,
@@ -1009,6 +1186,7 @@ it("rejects factual but job-irrelevant skills while accepting them for a matchin
       decisions: data.inputs.map((input) => ({
         id: input.id,
         verdict: "PASS",
+        skill_quality: "PASS",
         job_fit: jobFit,
         assertions: [
           {

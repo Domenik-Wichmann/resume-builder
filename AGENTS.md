@@ -95,6 +95,12 @@ ranges from previews and exports; never infer Present from a missing end date.
 For tech roles, prefer relevant Juno Freeze Dried / Juno Farms business evidence
 over Sutherland phone support unless German or customer support is relevant.
 
+Technical skills describe coherent, job-relevant capabilities: what was built or
+done, the supported tools/methods used, how they were applied, and their practical
+purpose. Prefer fewer contextual statements over narrow project tidbits, vague
+chores, vendor lists or unexplained benchmark figures. Do not join tools and work
+from unrelated projects into an invented implementation.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 # This is NOT the Next.js you know

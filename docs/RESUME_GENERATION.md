@@ -45,6 +45,20 @@ uncertainties separately from the printable résumé. Verification is a bounded
 model judgment with deterministic reference/coverage checks, not a guarantee of
 factual accuracy. Review the complete draft before applying.
 
+The technical skills editorial pass writes fewer, contextual capability statements:
+what was built or done, the tools or methods actually used, how they were applied,
+and the practical purpose. It targets 6–10 items in at most three groups of four,
+with up to 300 characters per item to preserve context and material qualifiers.
+It prioritizes the job's essential work across the complete published catalog,
+rather than filling a quota with narrow project details, routine duties or vendor
+lists. Standalone test counts and unexplained precision/recall figures do not belong
+in skills. The existing independent verifier returns a separate `skill_quality`
+decision alongside factual support and job fit; only an affirmative PASS admits a
+skill. A true, relevant but contextless snippet still fails this editorial check.
+Tools, methods and purpose must share actual source support; this pass cannot join
+unrelated facts into a fictional implementation. Saved application snapshots retain
+the content that was sent; the new policy applies when generating a new draft.
+
 The v4 base is a single column with 11-point text, off-white paper, navy text, teal
 rules and underlined links. Select **Use Clear Signal v4 base** in Templates to
 save it as the default. Without a saved default it is the application fallback.
