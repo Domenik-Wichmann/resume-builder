@@ -1,4 +1,4 @@
-import { afterEach, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { z } from "zod";
 vi.mock("../src/lib/usage/service", async (original) => ({
   ...(await original<typeof import("../src/lib/usage/service")>()),
@@ -6,11 +6,82 @@ vi.mock("../src/lib/usage/service", async (original) => ({
 }));
 import { recordUsage } from "../src/lib/usage/service";
 import { complete, ProviderError } from "../src/lib/ai/openrouter";
+beforeEach(() => vi.spyOn(console, "error").mockImplementation(() => {}));
 
 afterEach(() => {
   vi.unstubAllEnvs();
   vi.unstubAllGlobals();
   vi.clearAllMocks();
+  vi.restoreAllMocks();
+});
+
+it("identifies a review timeout without logging private inputs or a raw provider error", async () => {
+  vi.stubEnv("APP_MODE", "demo");
+  vi.stubGlobal(
+    "fetch",
+    vi
+      .fn()
+      .mockRejectedValue(
+        new DOMException("private raw provider detail", "TimeoutError"),
+      ),
+  );
+  await expect(
+    complete(
+      "Private system prompt",
+      "Private job description",
+      z.object({ answer: z.string() }),
+      {
+        timeoutMs: 120000,
+        usage: {
+          accountId: "private-account",
+          operation: "application_verify",
+        },
+      },
+    ),
+  ).rejects.toMatchObject({
+    reason: "TIMEOUT",
+    message: expect.stringContaining(
+      "reviewing resume statements after 120 seconds",
+    ),
+  });
+  expect(recordUsage).toHaveBeenCalledTimes(1);
+  const diagnostic = vi.mocked(console.error).mock.calls;
+  expect(diagnostic).toEqual([
+    [
+      "ai_provider_failed",
+      expect.objectContaining({
+        operation: "application_verify",
+        reason: "TIMEOUT",
+        timeout_ms: 120000,
+      }),
+    ],
+  ]);
+  expect(JSON.stringify(diagnostic)).not.toMatch(
+    /Private|private|raw provider/,
+  );
+});
+
+it("distinguishes a disconnected connection and an HTTP rate limit from a timeout", async () => {
+  vi.stubEnv("APP_MODE", "demo");
+  const fetcher = vi
+    .fn()
+    .mockRejectedValueOnce(new TypeError("sensitive network detail"))
+    .mockResolvedValueOnce({ ok: false, status: 429 });
+  vi.stubGlobal("fetch", fetcher);
+  await expect(
+    complete("System", "Input", z.object({ answer: z.string() }), {
+      usage: { operation: "application_recovery" },
+    }),
+  ).rejects.toMatchObject({
+    reason: "UNAVAILABLE",
+    message: expect.stringContaining(
+      "connection was interrupted while revising",
+    ),
+  });
+  await expect(
+    complete("System", "Input", z.object({ answer: z.string() })),
+  ).rejects.toThrow("rate-limiting");
+  expect(recordUsage).toHaveBeenCalledTimes(2);
 });
 it("records an unknown-cost failed call once when headers arrive but the response body aborts", async () => {
   vi.stubEnv("APP_MODE", "demo");

@@ -1425,6 +1425,32 @@ it("reviews bounded batches in parallel while preserving global statement IDs an
   );
 });
 
+it("settles other review calls before propagating a failed batch and releasing its lease", async () => {
+  const evidence = packetInventory(rows);
+  const draft = writing("data", "Data Operations", "Validation");
+  draft.skills[0].items = Array.from({ length: 8 }, () =>
+    statement(rows[1].claims[0].value, "data"),
+  );
+  let rejectPending!: (error: Error) => void;
+  const pending = new Promise<never>((_resolve, reject) => {
+    rejectPending = reject;
+  });
+  vi.mocked(complete)
+    .mockRejectedValueOnce(new Error("First failed batch"))
+    .mockReturnValueOnce(pending);
+  let settled = false;
+  const result = auditWriting(draft, evidence, "account").catch(
+    (error: Error) => {
+      settled = true;
+      return error;
+    },
+  );
+  await vi.waitFor(() => expect(complete).toHaveBeenCalledTimes(2));
+  expect(settled).toBe(false);
+  rejectPending(new Error("Second failed batch"));
+  expect(await result).toMatchObject({ message: "First failed batch" });
+});
+
 it("prioritizes essential AI and RAG claims beyond the old packet limit and keeps source constraints", () => {
   const plan = {
     focus: "AI automation and knowledge bases",

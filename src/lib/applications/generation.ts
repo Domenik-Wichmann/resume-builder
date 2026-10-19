@@ -1,6 +1,6 @@
 import "server-only";
 import { z } from "zod";
-import { complete } from "../ai/openrouter";
+import { complete, ProviderError } from "../ai/openrouter";
 import { productionGate } from "../career-brain/provider";
 import { loadBrain, type BrainRecord } from "../career-brain/repository";
 import { usable, type StatePacket } from "../career-brain/state";
@@ -33,13 +33,18 @@ import {
 } from "../resume-relevance";
 import { skillContextSchema, skillContextIssue } from "./skill-context";
 import {
+  checkpointAudit,
+  reviewCheckpointKey,
+  reviewCheckpointSchema,
+} from "./review-checkpoint";
+import {
   priorityAIWork,
   isAIRole,
   applicationPositioningInstructions,
 } from "./priorities";
 
 export const maxApplicationStatements = 52;
-export const applicationAuditBatchSize = 14;
+export const applicationAuditBatchSize = 8;
 
 const technicalSkillsInstructions = `
 Recompose the ENTIRE technical skills section for this job, using the complete published evidence catalog.
@@ -618,7 +623,7 @@ export async function auditWriting(
         organization: null,
       };
   // A complete review used to decode every assertion in one long response.
-  // At most four independent batches share the same grounding rules and quota
+  // At most seven smaller batches share the same grounding rules and quota
   // gate. Nothing is assembled unless all batches complete successfully.
   const groups = Array.from(
     { length: Math.ceil(inputs.length / applicationAuditBatchSize) },
@@ -628,7 +633,7 @@ export async function auditWriting(
         (index + 1) * applicationAuditBatchSize,
       ),
   );
-  const responses = await Promise.all(
+  const settled = await Promise.allSettled(
     groups.map(async (group) => {
       const aliases = new Map<string, string>();
       const byRef = new Map<string, string>();
@@ -785,7 +790,13 @@ export async function auditWriting(
       }));
     }),
   );
-  const decisions = responses.flat();
+  // Account for every in-flight call before releasing the generation lease.
+  // A failed batch never allows the other batches to become an accepted draft.
+  const failure = settled.find((result) => result.status === "rejected");
+  if (failure?.status === "rejected") throw failure.reason;
+  const decisions = settled.flatMap((result) =>
+    result.status === "fulfilled" ? result.value : [],
+  );
   return inputs.map((input, index) => {
     const decision = decisions.find((d) => d.id === input.id);
     if (!decision)
@@ -1240,7 +1251,7 @@ export async function recoverApplication(
         {
           maxTokens: 14000,
           reasoningEffort: "medium",
-          timeoutMs: 75000,
+          timeoutMs: 120000,
           usage: { accountId, operation: "application_recovery" },
         },
       ),
@@ -1355,7 +1366,7 @@ export async function recoverApplication(
       accountId,
       plan,
       lockedBlocks,
-      60000,
+      90000,
       true,
     );
   }
@@ -1578,6 +1589,7 @@ const contextSchema = z.object({
   fixed: fixedContentSchema.nullable(),
   design: designSchema,
   design_version: z.number(),
+  review_checkpoint: reviewCheckpointSchema.optional(),
 });
 export type GenerationContext = z.infer<typeof contextSchema>;
 export async function startGeneration(a: Account, application: Application) {
@@ -1648,7 +1660,7 @@ export async function generationStatus(a: Account, id: string) {
   const r = await a.db
     .from("application_previews")
     .select(
-      "id,generation_stage,resume_options,generation_review,expires_at,saved_application_id",
+      "id,generation_stage,resume_options,generation_review,generation_context,expires_at,saved_application_id",
     )
     .eq("account_id", a.accountId)
     .eq("id", id)
@@ -1674,7 +1686,13 @@ export async function generationStatus(a: Account, id: string) {
     id: undefined,
     preview_id: id,
     stage,
-    label: generationStages[stage],
+    label:
+      stage === 3 &&
+      reviewCheckpointSchema.safeParse(
+        r.data.generation_context?.review_checkpoint,
+      ).success
+        ? "Finishing the reviewed resume"
+        : generationStages[stage],
     options: r.data.resume_options,
     review: r.data.generation_review,
   };
@@ -1842,14 +1860,45 @@ export async function advanceGeneration(
         const review = [...(row.data.generation_review || [])] as string[];
         if (!career.demo) {
           let writing = writingSchema.parse(row.data.generation_writing);
-          let audit = await auditWriting(
+          const key = reviewCheckpointKey({
             writing,
             evidence,
-            a.accountId,
-            jobPlanSchema.parse(row.data.generation_plan),
+            plan,
             lockedBlocks,
-            90000,
-          );
+          });
+          let audit = checkpointAudit(context.review_checkpoint, key);
+          if (!audit) {
+            audit = await auditWriting(
+              writing,
+              evidence,
+              a.accountId,
+              plan,
+              lockedBlocks,
+              120000,
+            );
+            // End this bounded request after persisting review. A later repair
+            // timeout must not discard and rerun the successful first review.
+            const checkpoint = await a.db
+              .from("application_previews")
+              .update({
+                generation_context: {
+                  ...context,
+                  review_checkpoint: { key, audit },
+                },
+                generation_lease: null,
+              })
+              .eq("account_id", a.accountId)
+              .eq("id", id)
+              .eq("generation_lease", lease.data)
+              .select("id")
+              .maybeSingle();
+            if (checkpoint.error || !checkpoint.data)
+              throw new HttpError(
+                503,
+                "The review could not be saved. Continue the saved generation to retry.",
+              );
+            return generationStatus(a, id);
+          }
           const recovered = await finishApplication(
             jobPlanSchema.parse(row.data.generation_plan),
             writing,
@@ -1985,11 +2034,13 @@ export async function advanceGeneration(
     console.error("resume_generation_failed", {
       stage: expected,
       category:
-        e instanceof HttpError
-          ? "APPLICATION"
-          : e instanceof z.ZodError
-            ? "VALIDATION"
-            : "INTERNAL",
+        e instanceof ProviderError
+          ? e.reason
+          : e instanceof HttpError
+            ? "APPLICATION"
+            : e instanceof z.ZodError
+              ? "VALIDATION"
+              : "INTERNAL",
     });
     await a.db
       .from("application_previews")

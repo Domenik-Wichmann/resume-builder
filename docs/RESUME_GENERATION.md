@@ -4,15 +4,30 @@ Apply `202610060005_resume_generation.sql` before deploying this version. Existi
 designs, applications and tracking codes remain compatible. No canonical career
 records or embeddings change, so a reindex is unnecessary.
 
-The application builder saves a private preview before generation. Four bounded
-requests understand the job, find evidence, write the résumé and verify the draft.
+The application builder saves a private preview before generation. Bounded
+requests understand the job, find evidence, write the résumé, verify the draft,
+then finish any required repairs.
 Writing uses an explicit low reasoning effort and a 16,000-token output budget,
 including reasoning, with a 120-second timeout. The job plan appears once beside
 the exact evidence packets. Output-limit, incomplete JSON and schema-invalid
 responses fail closed and retain billed usage as failed calls. The owner sees a
 specific retry message, and the saved generation stage remains resumable.
 Independent verification uses medium reasoning effort in parallel batches of at
-most 14 statements, with a 10,000-token budget per batch and up to 52 statements.
+most 8 statements, with a 10,000-token budget per batch and up to 52 statements.
+The initial review has a 120-second provider deadline and saves its decisions in
+the private generation context before returning. The browser continues stage 3
+in a new leased request. Repairs allow 120 seconds for writing and 90 seconds
+for checking the smaller batches, keeping this work within the four-minute lease
+and five-minute route budget. All in-flight batches settle before a failed review
+releases its lease; failed or incomplete batches never authorize output.
+The checkpoint is keyed to the exact draft, plan, source packets, locked content
+and review-policy version. Current publication/hash/revision checks still run
+before reuse. A later failure preserves the initial review so continuing the same
+draft does not repeatedly pay for successful checks. No database migration is
+needed: this uses the existing owner-scoped private JSON context.
+Provider errors distinguish timeouts, interrupted connections and HTTP rejections.
+Diagnostic logs include only a fixed operation/reason, HTTP status and elapsed
+time/deadline; no prompts, job descriptions, responses or account identifiers.
 Owner generation reads verified source evidence with the owner's JWT and membership
 RLS, then filters for published, unarchived records. It does not call the service-only
 public snapshot RPC with an authenticated client. Hash and exact-source checks still apply.
