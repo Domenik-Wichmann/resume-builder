@@ -1,0 +1,120 @@
+.resume-page {
+  max-width: none;
+  margin: 0;
+  min-height: 100dvh;
+  padding: 24px 20px 64px;
+  background: #e9edf0;
+}
+.resume-page .resume-toolbar {
+  max-width: 210mm;
+  margin: 0 auto 20px;
+  color: #354753;
+  font-size: 13px;
+}
+.resume-page .resume-design {
+  box-shadow: 0 16px 65px #23374618;
+}
+.resume-page .resume-sheet {
+  line-height: 1.45;
+}
+.resume-page .resume-designed-header {
+  border-bottom: 2px solid var(--resume-accent);
+  padding-bottom: 18px;
+  margin-bottom: 22px;
+}
+.resume-page .resume-sheet h1 {
+  font-size: 2.65em;
+  letter-spacing: -0.035em;
+  margin-bottom: 8px;
+}
+.resume-page .resume-title {
+  font-size: 1.06em;
+  font-weight: 500;
+  max-width: 60ch;
+  margin-bottom: 12px !important;
+}
+.resume-page .resume-sheet h2 {
+  font-size: 0.79em;
+  letter-spacing: 0.13em;
+  padding-bottom: 7px;
+  margin: 24px 0 12px;
+}
+.resume-page .resume-sheet h3 {
+  font-size: 1.02em;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.resume-page .resume-record {
+  margin: 0 0 20px;
+}
+.resume-page .resume-sheet li {
+  padding-left: 2px;
+  margin-bottom: 5px;
+}
+.resume-page .resume-language {
+  margin-bottom: 8px;
+}
+.resume-page .resume-designed-skills .resume-skill-groups {
+  gap: 12px 24px;
+}
+.resume-page .resume-skill-group ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px 12px;
+  list-style: none;
+  padding: 0;
+}
+.resume-page .resume-skill-group li {
+  margin: 0;
+  padding: 0;
+}
+.resume-page .resume-invitation,
+.resume-page .resume-closing {
+  font-weight: 400 !important;
+  font-style: normal !important;
+  color: var(--resume-text) !important;
+}
+@media (max-width: 600px) {
+  .resume-page {
+    padding: 14px 0 0;
+  }
+  .resume-page .resume-toolbar {
+    padding: 0 18px;
+  }
+  .resume-page .resume-sheet {
+    padding: 30px 22px;
+    font-size: 13px;
+  }
+  .resume-page .resume-sheet h1 {
+    font-size: 2.15em;
+  }
+  .resume-page .resume-skill-groups {
+    grid-template-columns: 1fr;
+  }
+}
+@media print {
+  .resume-page {
+    min-height: 0;
+    padding: 0;
+    background: white;
+  }
+  .resume-page .resume-design {
+    box-shadow: none;
+  }
+  .resume-page .resume-sheet {
+    padding: 0;
+    font-size: var(--resume-font-size);
+    line-height: 1.35;
+  }
+  .resume-page .resume-designed-header {
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+  }
+  .resume-page .resume-sheet h2 {
+    margin-top: 18px;
+    break-after: avoid;
+  }
+  .resume-page .resume-record {
+    margin-bottom: 14px;
+  }
+}

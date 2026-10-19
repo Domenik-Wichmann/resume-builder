@@ -34,6 +34,17 @@ signals, and career maintenance remain small rather than becoming a CMS.
 
 ## Career data
 
+The public `/resume` route selects an application résumé only from a signed,
+unexpired functional tracking session and its active primary-account link. Both
+the application ID and tracking code must match the immutable snapshot. Only
+the résumé IR is selected; job descriptions, application notes, generation logs
+and analytics remain private. Invalid, revoked or legacy unassigned links use
+the default. This dynamic route must never enter a shared response cache.
+The default is rebuilt from current published career records, contact presentation
+and owner-configured fixed résumé blocks, with technical/teaching role selection
+and German, English and Mandarin language presentation. Display editing does not
+mutate canonical facts or rewrite a sent application snapshot.
+
 `getCareer()` selects only published canonical records. Profile, roles, projects,
 skills, accomplishments, education, and certifications remain separate tables;
 three junction tables express skill relationships. The first schema deliberately
