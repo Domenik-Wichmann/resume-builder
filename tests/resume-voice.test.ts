@@ -73,6 +73,10 @@ it("rejects third-person assessment prose even when a factual verifier returns P
     "His experience includes SQL.",
     "Evidence suggests SQL skills.",
     "Worked from January to end date unconfirmed.",
+    "I only use this personally, not as a team-wide tool.",
+    "Used ChatGPT only for personal use.",
+    "Built a prototype, not production experience.",
+    "Used an assistant without professional experience.",
   ]) {
     const input: BulletInput = {
       ...admittedInputs(packetInventory([business]), "")[0],
@@ -101,6 +105,8 @@ it("rejects third-person assessment prose even when a factual verifier returns P
     "Contributed to the team's data workflow.",
     "Reported customer incidents and resolved support requests.",
     "Python (basic)",
+    "Built a personal RAG assistant to search my documents.",
+    "Prototyped a course chatbot grounded in training material.",
   ]) {
     expect(resumeStyleIssue(text)).toBeUndefined();
   }

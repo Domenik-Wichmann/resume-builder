@@ -17,6 +17,9 @@ import {
   recoveryInventory,
   recoverApplication,
   recoverySchemaForPlan,
+  fullWritingInventory,
+  applicationNeedsRepair,
+  finishApplication,
   type Writing,
 } from "../src/lib/applications/generation";
 import { compileResumeIR } from "../src/lib/resume-ir";
@@ -54,6 +57,7 @@ vi.mock("../src/lib/http", () => ({
 import { complete } from "../src/lib/ai/openrouter";
 import { reserveAIQuota } from "../src/lib/http";
 import { retrieveCareerEvidence } from "../src/lib/embeddings/retrieval";
+import { priorityAIWork } from "../src/lib/applications/priorities";
 
 // Deliberately fictional career; no package sample employment becomes canonical.
 function record(
@@ -172,6 +176,257 @@ const readerContext = (text: string) => ({
   purpose: text.slice(0, 200),
   requirement_index: 0,
   priority: "CORE" as const,
+});
+
+const aiPlan = {
+  focus: "Fictional AI operations specialist",
+  requirements: [
+    {
+      requirement: "Evaluate model answers and maintain AI automation",
+      importance: "ESSENTIAL" as const,
+      query: "model evaluation accuracy",
+      transferable_query: "grounded answers",
+    },
+  ],
+};
+
+it("puts substantial AI implementations ahead of generic automation and exposes late project claims on the first pass", () => {
+  const aiProject = record(
+    "rag",
+    "Fictional knowledge assistant",
+    "Built a RAG assistant to search training documents.",
+    "project",
+  );
+  aiProject.claims.push({
+    ...aiProject.claims[0],
+    value: "Added embeddings for document search.",
+    evidence: [
+      { quote: "Added embeddings for document search.", start: 0, end: 37 },
+    ],
+  });
+  const crowded = record(
+    "large",
+    "Fictional large project",
+    "Built spreadsheet automation for model evaluation accuracy.",
+    "project",
+  );
+  crowded.claims = Array.from({ length: 35 }, (_, index) => ({
+    ...crowded.claims[0],
+    value: `Fictional separate claim ${index}`,
+  }));
+  const inventory = fullWritingInventory(
+    [
+      crowded,
+      ...rows,
+      aiProject,
+      { ...aiProject, id: "private", published: false },
+      { ...aiProject, id: "archive", archived: true },
+    ],
+    aiPlan,
+  );
+  expect(inventory[0].id).toBe("rag");
+  expect(inventory.find((p) => p.id === "large")!.claims).toHaveLength(35);
+  expect(inventory.some((p) => ["private", "archive"].includes(p.id))).toBe(
+    false,
+  );
+  const api = record(
+    "api",
+    "Fictional API",
+    "Implemented supplier JSON retrieval and pagination.",
+    "project",
+  );
+  expect(priorityAIWork(packetInventory([api]), aiPlan)).toEqual([]);
+  expect(
+    priorityAIWork(inventory, {
+      ...aiPlan,
+      focus: "Translator",
+      requirements: [],
+    }),
+  ).toEqual([]);
+  // Reconstruct exactly the same ref indexes from the saved record order.
+  const selected = inventory.map((p) =>
+    [crowded, ...rows, aiProject].find((r) => r.id === p.id)!,
+  );
+  expect(
+    recoveryInventory(selected, packetInventory(selected, aiPlan), aiPlan),
+  ).toEqual(inventory);
+});
+
+function completeDraftFixture() {
+  const projects = [
+    record(
+      "rag",
+      "Fictional knowledge assistant",
+      "Built a RAG assistant to answer questions from training documents.",
+      "project",
+    ),
+    record(
+      "chat",
+      "Fictional course chatbot",
+      "Integrated a Gemini chatbot to answer course questions.",
+      "project",
+    ),
+    rows[1],
+  ];
+  const evidence = fullWritingInventory(projects, aiPlan);
+  const draft: Writing = {
+    headline: statement("AI implementation", "rag"),
+    summary: [statement(projects[0].claims[0].value, "rag")],
+    skills: [
+      {
+        label: "AI applications",
+        items: [
+          statement(projects[0].claims[0].value, "rag"),
+          statement(projects[1].claims[0].value, "chat"),
+          statement("Fictional spreadsheet validation workflow.", "data"),
+          statement("Fictional product data transformation workflow.", "data"),
+        ],
+      },
+    ],
+    entries: [],
+    coverage: [
+      {
+        requirement: aiPlan.requirements[0].requirement,
+        support: "TRANSFERABLE",
+        refs: ["rag:0"],
+        note: "Fictional grounded answers",
+      },
+    ],
+    review: [],
+  };
+  const audit = writingInputs(draft, evidence).map((input, index) => ({
+    text: input.bullet,
+    refs: input.claims.map((claim) => claim.ref),
+    pass: true,
+    kind: index >= 2 ? ("skill" as const) : ("content" as const),
+    order: index === 3 ? 0 : 4,
+    reason: "Synthetic approved fixture, not real career evidence",
+  }));
+  return { projects, evidence, draft, audit };
+}
+
+it("finishes an independently approved full-catalog draft without another provider call and preserves skill ordering", async () => {
+  const { projects, evidence, draft, audit } = completeDraftFixture();
+  const result = await finishApplication(
+    aiPlan,
+    draft,
+    evidence,
+    projects,
+    audit,
+    "account",
+    [],
+    "Fictional job",
+    true,
+  );
+  expect(complete).not.toHaveBeenCalled();
+  expect(result.editedSkills).toBe(4);
+  expect(result.writing.skills[0].items[0].refs).toEqual(["chat:0"]);
+  expect(result.audit).toEqual(audit);
+});
+
+it("requires repair for failed or incomplete verification, missing coverage and omitted AI projects", () => {
+  const { evidence, draft, audit } = completeDraftFixture();
+  expect(applicationNeedsRepair(aiPlan, draft, evidence, audit)).toBe(false);
+  expect(applicationNeedsRepair(aiPlan, draft, evidence, audit.slice(1))).toBe(
+    true,
+  );
+  expect(
+    applicationNeedsRepair(
+      aiPlan,
+      draft,
+      evidence,
+      audit.map((item, i) => ({ ...item, pass: i !== 0 })),
+    ),
+  ).toBe(true);
+  expect(
+    applicationNeedsRepair(aiPlan, { ...draft, coverage: [] }, evidence, audit),
+  ).toBe(true);
+  const repeated = structuredClone(draft);
+  repeated.skills[0].items[1].refs = ["data:0"];
+  const approvedButWeak = audit.map((item, i) =>
+    i === 3 ? { ...item, refs: ["data:0"] } : item,
+  );
+  expect(
+    applicationNeedsRepair(aiPlan, repeated, evidence, approvedButWeak),
+  ).toBe(true);
+});
+
+it("resolves short writer citations to canonical refs while preserving unknown citations for rejection", async () => {
+  const { evidence, draft } = completeDraftFixture();
+  vi.mocked(complete).mockImplementationOnce(async (_system, input) => {
+    const payload = JSON.parse(input as string);
+    const ref = payload.evidence.inputs.find(
+      (p: { id: string }) => p.id === "rag",
+    ).claims[0].ref;
+    expect(ref).toMatch(/^c\d+$/);
+    expect(
+      payload.priority_ai_work.find(
+        (p: { record_id: string }) => p.record_id === "rag",
+      ).refs,
+    ).toContain(ref);
+    return {
+      ...draft,
+      headline: { ...draft.headline, refs: [ref] },
+      summary: [{ ...draft.summary[0], refs: ["unknown"] }],
+    };
+  });
+  const result = await writeApplication(
+    aiPlan,
+    evidence,
+    "account",
+    [],
+    [],
+    "Fictional role",
+  );
+  expect(result.headline.refs).toEqual(["rag:0"]);
+  expect(writingInputs(result, evidence)[1].claims).toEqual([]);
+});
+
+it("ranks verified AI implementation ahead of a literal spreadsheet match for an AI role", async () => {
+  const { evidence, draft, projects } = completeDraftFixture();
+  vi.mocked(complete).mockImplementation(async (_system, input) => {
+    const payload = JSON.parse(input as string);
+    return {
+      decisions: payload.inputs.map(
+        (item: { id: string; bullet: string; claims: { ref: string }[] }) => ({
+          id: item.id,
+          verdict: "PASS",
+          skill_quality: "PASS",
+          skill_context: readerContext(item.bullet),
+          job_fit: /spreadsheet|product data/i.test(item.bullet)
+            ? "DIRECT"
+            : "TRANSFERABLE",
+          assertions: [
+            {
+              text: item.bullet,
+              verdict: "SUPPORTED",
+              claimRefs: item.claims.map((c) => c.ref),
+              reason: "Synthetic support",
+            },
+          ],
+          reason: "Synthetic support",
+        }),
+      ),
+    };
+  });
+  const audit = await auditWriting(draft, evidence, "account", aiPlan);
+  expect(audit.every((item) => item.pass)).toBe(true);
+  expect(audit[2].order).toBeLessThan(audit[4].order!);
+  const result = await finishApplication(
+    aiPlan,
+    draft,
+    evidence,
+    projects,
+    audit,
+    "account",
+    [],
+    undefined,
+    true,
+  );
+  expect(
+    result.writing.skills[0].items.slice(0, 2).map((item) => item.refs[0]),
+  ).toEqual(["rag:0", "chat:0"]);
+  expect(complete).toHaveBeenCalledTimes(1); // Review only, no unconditional rewrite.
 });
 
 it("cannot promote a skill-only method list into completed project work even when the model approves it", async () => {

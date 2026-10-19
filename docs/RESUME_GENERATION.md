@@ -11,8 +11,8 @@ including reasoning, with a 120-second timeout. The job plan appears once beside
 the exact evidence packets. Output-limit, incomplete JSON and schema-invalid
 responses fail closed and retain billed usage as failed calls. The owner sees a
 specific retry message, and the saved generation stage remains resumable.
-Independent verification uses medium reasoning effort, a 24,000-token budget
-and a 120-second timeout for its assertion-level decisions across up to 40 statements.
+Independent verification uses medium reasoning effort in parallel batches of at
+most 14 statements, with a 10,000-token budget per batch and up to 52 statements.
 Owner generation reads verified source evidence with the owner's JWT and membership
 RLS, then filters for published, unarchived records. It does not call the service-only
 public snapshot RPC with an authenticated client. Hash and exact-source checks still apply.
@@ -36,11 +36,14 @@ unchanged. Interrupted regeneration retries the same new draft rather than
 creating another copy. Its draft is also available through Continue saved generation.
 
 Job planning distinguishes essential, preferred and contextual requirements and
-supplies separate search queries. Retrieval runs up to eight requirement searches
-and four transferable follow-up searches. An account-scoped inventory examines
-published, unarchived records and their exact confirmed source passages, ranks
-useful evidence, expands real achievement relationships and retains employment
-and language context. At most 28 records reach writing. Publication, canonical
+supplies role-specific evidence context. New drafts use the complete account-scoped
+published catalog from the first writing pass, with exact source passages and
+constraints. They no longer make two semantic-search calls just to order evidence
+that the writer must examine in full anyway. Substantial AI implementations rank
+ahead of generic tool use for AI roles; other roles keep their own relevance order.
+Version 3 packets preserve all claims, including late claims outside the former
+shortlist. Legacy packets retain their original reference indexes on retries.
+Publication, canonical
 hashes and source evidence revisions are checked again before both writing and
 verification. A changed revision requires a fresh draft.
 
@@ -54,7 +57,7 @@ uncertainties separately from the printable résumé. Verification is a bounded
 model judgment with deterministic reference/coverage checks, not a guarantee of
 factual accuracy. Review the complete draft before applying.
 
-The technical skills editorial pass writes fewer, contextual capability statements:
+The first writing pass also writes contextual technical capability statements:
 what was built or done, the tools or methods actually used, how they were applied,
 and the practical purpose. It targets 8–12 items in at most three groups of four,
 with up to 300 characters per item to preserve context and material qualifiers.
@@ -67,6 +70,26 @@ skill. A true, relevant but contextless snippet still fails this editorial check
 Tools, methods and purpose must share actual source support; this pass cannot join
 unrelated facts into a fictional implementation. Saved application snapshots retain
 the content that was sent; the new policy applies when generating a new draft.
+
+The writer receives the original job description and short claim aliases, which
+are resolved back to canonical references before verification. For AI roles,
+priority project references direct attention to RAG, grounded chatbots, model
+integration and related implementation. These are navigation hints, never evidence.
+The reviewer accepts a concrete transferable connection to AI operations or model
+evaluation without requiring the employer to literally request RAG. Core work
+ranks ahead of supporting techniques; within that tier, AI implementation ranks
+ahead of routine spreadsheet work for AI roles. Personal-project or prototype
+scope stays explicit and positive. Defensive asides such as "not a team-wide tool"
+fail the deterministic voice check rather than being stripped into a stronger claim.
+
+A complete full-catalog draft that passes independent review skips the second
+writing/review cycle. Failed statements, incomplete coverage, thin or duplicate
+skills and omission of available AI implementations trigger the existing bounded
+repair pass and independent verification of repairs. Legacy drafts still receive
+the full-catalog repair pass. Missing qualifications can remain private GAP notes;
+speed never permits accepting an unverified statement. This removes provider calls
+from the successful path; live wall-clock savings depend on the model and whether
+repairs are needed.
 
 Skill statements must cite at least one actual experience, project or achievement;
 a bare method/tool list in a skill record cannot establish completed personal work.

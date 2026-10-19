@@ -104,6 +104,13 @@ Completed-work skill statements need actual project/experience/achievement
 evidence, not only a list of methods or tools in a skill record. Name the work and
 its purpose in the exported sentence; reviewer notes cannot supply missing context.
 Rank substantial work for essential job responsibilities ahead of supporting methods.
+For AI roles, surface supported AI/RAG implementation across relevant projects in
+technical skills; a literal spreadsheet keyword match must not displace stronger
+AI work. Describe personal projects and prototypes positively without defensive
+asides about what was not deployed or adopted by a team. Keep truthful scope.
+New application drafts write from the full published catalog, then independently
+verify every statement. Run a second writing pass only for failed/incomplete
+drafts or omitted relevant AI implementation evidence; preserve legacy packet refs.
 
 <!-- BEGIN:nextjs-agent-rules -->
 
