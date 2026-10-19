@@ -23,7 +23,7 @@ export default async function Application({
   const [app, snapshot] = await Promise.all([
     a.db
       .from("job_applications")
-      .select("organization,role,status")
+      .select("organization,role,status,job_description")
       .eq("account_id", a.accountId)
       .eq("id", id)
       .maybeSingle(),
@@ -146,6 +146,12 @@ export default async function Application({
                 ),
               )}
             </ul>
+          </details>
+        )}
+        {app.data.job_description && (
+          <details>
+            <summary>Original job description</summary>
+            <p style={{ whiteSpace: "pre-wrap" }}>{app.data.job_description}</p>
           </details>
         )}
       </div>

@@ -65,7 +65,7 @@ export async function resumePdf(ir: ResumeIR) {
     const lines = pdf.splitTextToSize(value, width - indent) as string[];
     return lines.length * size * 0.352778 * leading + 1;
   }
-  function recordHeight(record: ResumeIR["experiences"][number]) {
+  function recordStartHeight(record: ResumeIR["experiences"][number]) {
     return (
       textHeight(record.title, design.font_pt, true) +
       textHeight(
@@ -73,19 +73,11 @@ export async function resumePdf(ir: ResumeIR) {
         9,
       ) +
       textHeight(exportTimeline(record), 9) +
-      record.bullets.reduce(
-        (total, bullet) =>
-          total + textHeight(`• ${bullet}`, design.font_pt, false, 2),
-        0,
-      ) +
-      (record.links || []).reduce(
-        (total, item) =>
-          total +
-          textHeight(
-            `${item.label}: ${item.url.replace(/^https:\/\//, "")}`,
-            9,
-          ),
-        0,
+      textHeight(
+        record.bullets[0] ? `• ${record.bullets[0]}` : "",
+        design.font_pt,
+        false,
+        2,
       ) +
       2
     );
@@ -199,53 +191,6 @@ export async function resumePdf(ir: ResumeIR) {
     }
     if (x > margin) y += lineHeight + 1;
   }
-  function prepareSkills(
-    group: ResumeIR["skill_groups"][number],
-    columnWidth: number,
-  ) {
-    const size = design.font_pt * 0.93;
-    const lineHeight = size * 0.352778 * leading;
-    pdf.setFont("Resume", "bold");
-    pdf.setFontSize(design.font_pt);
-    const label = pdf.splitTextToSize(group.label, columnWidth) as string[];
-    pdf.setFont("Resume", "normal");
-    pdf.setFontSize(size);
-    const items = group.skills.map(
-      (skill) => pdf.splitTextToSize(skill, columnWidth - 3) as string[],
-    );
-    const labelHeight = design.font_pt * 0.352778 * leading;
-    return {
-      label,
-      items,
-      size,
-      lineHeight,
-      labelHeight,
-      height:
-        label.length * labelHeight +
-        items.reduce((n, lines) => n + lines.length * lineHeight + 0.6, 0) +
-        3,
-    };
-  }
-  function drawSkills(group: ReturnType<typeof prepareSkills>, x: number) {
-    let baseline = y;
-    pdf.setTextColor(design.text);
-    pdf.setFont("Resume", "bold");
-    pdf.setFontSize(design.font_pt);
-    for (const line of group.label) {
-      pdf.text(line, x, baseline + design.font_pt * 0.352778);
-      baseline += group.labelHeight;
-    }
-    pdf.setFont("Resume", "normal");
-    pdf.setFontSize(group.size);
-    for (const lines of group.items) {
-      pdf.text("•", x, baseline + group.size * 0.352778);
-      for (const line of lines) {
-        pdf.text(line, x + 3, baseline + group.size * 0.352778);
-        baseline += group.lineHeight;
-      }
-      baseline += 0.6;
-    }
-  }
   if (ir.demo) text("Fictional demonstration résumé", 9);
   text(ir.profile.name, 24, true);
   text(ir.headline, design.font_pt, true, true);
@@ -258,39 +203,27 @@ export async function resumePdf(ir: ResumeIR) {
   }
   if (ir.skill_groups.length) {
     heading("Technical skills");
-    const pair = ir.skill_groups.length > 1 ? ir.skill_groups.slice(0, 2) : [];
-    const columns = pair.map((group) => prepareSkills(group, (width - 6) / 2));
-    const useColumns = columns.every(
-      (group) => group.height <= bottom - margin,
-    );
-    if (columns.length && useColumns) {
-      const height = Math.max(...columns.map((group) => group.height));
-      space(height);
-      columns.forEach((group, index) =>
-        drawSkills(group, margin + index * ((width + 6) / 2)),
+    for (const group of ir.skill_groups) {
+      const size = design.font_pt * 0.93;
+      space(
+        textHeight(group.label, design.font_pt, true) +
+          textHeight(`- ${group.skills[0] || ""}`, size, false, 2),
       );
-      y += height;
-    }
-    for (const group of ir.skill_groups.slice(useColumns ? pair.length : 0)) {
-      const prepared = prepareSkills(group, width);
-      if (prepared.height > bottom - margin) {
-        text(group.label, design.font_pt, true);
-        for (const skill of group.skills)
-          text(`• ${skill}`, design.font_pt * 0.93);
-      } else {
-        space(prepared.height);
-        drawSkills(prepared, margin);
-        y += prepared.height;
-      }
+      text(group.label, design.font_pt, true);
+      for (const skill of group.skills)
+        text(`- ${skill}`, size, false, false, 2);
+      y += 2;
     }
   }
+
   for (const section of exportSections(ir)) {
-    const firstHeight = section.records[0] && recordHeight(section.records[0]);
+    const firstHeight =
+      section.records[0] && recordStartHeight(section.records[0]);
     if (firstHeight && firstHeight + 18 <= bottom - margin)
       space(firstHeight + 18);
     heading(section.title);
     for (const record of section.records) {
-      const height = recordHeight(record);
+      const height = recordStartHeight(record);
       space(height <= bottom - margin ? height : 24);
       text(record.title, design.font_pt, true);
       text(

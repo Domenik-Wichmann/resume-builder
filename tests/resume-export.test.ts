@@ -51,3 +51,26 @@ it("omits incomplete timelines in exports without inferring current employment",
     }),
   ).toBe("2022-01-01 – 2023-01-01");
 });
+
+it("uses full-width skill statements without a paired half-page table", () => {
+  const ir = structuredClone(designPreview);
+  ir.skill_groups = [
+    {
+      label: "Fictional catalog operations",
+      skills: [
+        "Built a fictional catalog import with spreadsheet rules to check product identifiers before marketplace delivery.",
+      ],
+    },
+    {
+      label: "Fictional answer review",
+      skills: [
+        "Reviewed answers from a fictional procedures assistant against its source documents to correct missing context.",
+      ],
+    },
+  ];
+  const document = wordDocument(ir);
+  expect(document).not.toContain('table class="skills"');
+  expect(document).not.toContain("width:50%");
+  for (const group of ir.skill_groups)
+    expect(document).toContain(group.skills[0]);
+});

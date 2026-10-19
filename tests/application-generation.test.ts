@@ -167,6 +167,138 @@ function writing(id: string, headline: string, skill: string): Writing {
     review: [],
   };
 }
+const readerContext = (text: string) => ({
+  subject: text.slice(0, 120),
+  purpose: text.slice(0, 200),
+  requirement_index: 0,
+  priority: "CORE" as const,
+});
+
+it("cannot promote a skill-only method list into completed project work even when the model approves it", async () => {
+  const method = record(
+    "methods",
+    "Fictional evaluation skill",
+    "Frozen fixtures, repeatability, provenance, cost analysis",
+    "skill",
+  );
+  const text =
+    "Compared product matching results using fixed test inputs to improve catalog classification.";
+  const draft = writing("data", "Data operations", text);
+  draft.skills[0].items[0].refs = ["methods:0"];
+  draft.summary = [];
+  draft.entries = [];
+  vi.mocked(complete).mockImplementation(async (_system, payload) => {
+    const data = JSON.parse(payload as string) as {
+      inputs: { id: string; bullet: string; claims: { ref: string }[] }[];
+    };
+    return {
+      decisions: data.inputs.map((input) => ({
+        id: input.id,
+        verdict: "PASS",
+        skill_quality: "PASS",
+        skill_context: readerContext(input.bullet),
+        reason: "Mocked permissive model",
+        assertions: [
+          {
+            text: input.bullet,
+            verdict: "SUPPORTED",
+            claimRefs: input.claims.map((c) => c.ref),
+            reason: "Mocked approval",
+          },
+        ],
+      })),
+    };
+  });
+  const audit = await auditWriting(draft, packetInventory([method]), "account");
+  expect(audit.find((a) => a.kind === "skill")).toMatchObject({
+    pass: false,
+    reason: expect.stringContaining("skill/tool list alone"),
+  });
+});
+
+it("orders core job workflows before supporting evaluation methods after verification", async () => {
+  const plan = {
+    focus: "Fictional data and AI operations",
+    requirements: [
+      {
+        requirement: "Automate catalog validation",
+        importance: "ESSENTIAL" as const,
+        query: "data",
+        transferable_query: "automation",
+      },
+      {
+        requirement: "Review AI answers",
+        importance: "ESSENTIAL" as const,
+        query: "AI",
+        transferable_query: "evaluation",
+      },
+    ],
+  };
+  const original = writing("data", "Data operations", "Spreadsheet validation");
+  const evidence = packetInventory(rows);
+  const initial = writingInputs(original, evidence).map((i) => ({
+    text: i.bullet,
+    refs: i.claims.map((c) => c.ref),
+    pass: true,
+    reason: "Fictional approval",
+  }));
+  vi.mocked(complete).mockResolvedValueOnce({
+    additions: [],
+    skills: [
+      {
+        label: "Supporting evaluation",
+        items: [{ text: rows[0].claims[0].value, refs: ["c0"] }],
+      },
+      {
+        label: "Catalog automation",
+        items: [{ text: rows[1].claims[0].value, refs: ["c1"] }],
+      },
+    ],
+    coverage: {},
+  });
+  vi.mocked(complete).mockImplementationOnce(async (_system, payload) => {
+    const data = JSON.parse(payload as string) as {
+      source_records: { kind: string }[];
+      inputs: { id: string; bullet: string; claims: { ref: string }[] }[];
+    };
+    expect(data.source_records.some((r) => r.kind === "experience")).toBe(true);
+    return {
+      decisions: data.inputs.map((input) => ({
+        id: input.id,
+        verdict: "PASS",
+        job_fit: "DIRECT",
+        skill_quality: "PASS",
+        skill_context: {
+          ...readerContext(input.bullet),
+          priority:
+            input.bullet === rows[1].claims[0].value ? "CORE" : "SUPPORTING",
+          requirement_index: input.bullet === rows[1].claims[0].value ? 0 : 1,
+        },
+        reason: "Fictional review",
+        assertions: [
+          {
+            text: input.bullet,
+            verdict: "SUPPORTED",
+            claimRefs: input.claims.map((c) => c.ref),
+            reason: "Fictional proof",
+          },
+        ],
+      })),
+    };
+  });
+  const result = await recoverApplication(
+    plan,
+    original,
+    evidence,
+    rows,
+    initial,
+    "account",
+  );
+  expect(result.writing.skills.map((g) => g.label)).toEqual([
+    "Catalog automation",
+    "Supporting evaluation",
+  ]);
+});
 beforeEach(() => vi.clearAllMocks());
 it("excludes true but contextless skills independently of factual and job-fit checks", async () => {
   const good =
@@ -221,6 +353,7 @@ it("excludes true but contextless skills independently of factual and job-fit ch
         id: input.id,
         verdict: "PASS",
         job_fit: "DIRECT",
+        skill_context: readerContext(input.bullet),
         skill_quality: data.skill_statement_ids.includes(input.id)
           ? input.bullet === good || input.bullet === inventory
             ? "PASS"
@@ -269,6 +402,7 @@ it.each([undefined, "NOT_APPLICABLE"])(
           id: input.id,
           verdict: "PASS",
           skill_quality: quality,
+          skill_context: readerContext(input.bullet),
           reason: "No affirmative skill context assessment",
           assertions: [
             {
@@ -428,6 +562,7 @@ it.each([
           id: i.id,
           verdict: "PASS",
           skill_quality: "PASS",
+          skill_context: readerContext(i.bullet),
           job_fit: "DIRECT",
           reason: "Supported",
           assertions: [
@@ -521,6 +656,7 @@ it("rebuilds skills around the job rather than appending to previously accepted 
         id: i.id,
         verdict: "PASS",
         skill_quality: "PASS",
+        skill_context: readerContext(i.bullet),
         job_fit: "DIRECT",
         reason: "Supported",
         assertions: [
@@ -611,6 +747,7 @@ it("warns about invalid advisory coverage without blocking the verified draft, a
         id: i.id,
         verdict: "PASS",
         skill_quality: "PASS",
+        skill_context: readerContext(i.bullet),
         job_fit: "IRRELEVANT",
         reason: "Unrelated",
         assertions: [
@@ -827,6 +964,7 @@ it("uses bounded planning, writing and complete-assertion verification for three
         id: i.id,
         verdict: "PASS",
         skill_quality: "PASS",
+        skill_context: readerContext(i.bullet),
         assertions: [
           {
             text: i.bullet,
@@ -893,6 +1031,7 @@ it("checks complete statements with admitted short refs and rejects partial or f
           id: input.id,
           verdict: "PASS",
           skill_quality: "PASS",
+          skill_context: readerContext(input.bullet),
           reason: "Exact fictional proof",
           assertions: [
             {
@@ -956,6 +1095,7 @@ it("rejects incomplete and unexpected verifier IDs instead of accepting a partia
       id: index ? i.id : "unexpected",
       verdict: "PASS",
       skill_quality: "PASS",
+      skill_context: readerContext(i.bullet),
       assertions: [],
       reason: "Synthetic response",
     })),
@@ -1004,6 +1144,7 @@ it("reviews bounded batches in parallel while preserving global statement IDs an
           id: i.id,
           verdict: "PASS",
           skill_quality: "PASS",
+          skill_context: readerContext(i.bullet),
           assertions: [
             {
               text: i.bullet,
@@ -1168,7 +1309,7 @@ it("rejects factual but job-irrelevant skills while accepting them for a matchin
     "translation",
     "Translation",
     "Translated German onboarding materials.",
-    "skill",
+    "project",
   );
   const evidence = packetInventory([translation]);
   const draft = writing("data", "Data operations", "German translation");
@@ -1187,6 +1328,7 @@ it("rejects factual but job-irrelevant skills while accepting them for a matchin
         id: input.id,
         verdict: "PASS",
         skill_quality: "PASS",
+        skill_context: readerContext(input.bullet),
         job_fit: jobFit,
         assertions: [
           {

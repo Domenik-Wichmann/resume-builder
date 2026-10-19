@@ -190,6 +190,14 @@
 }
 .resume-design .resume-record {
   margin: var(--resume-gap) 0;
+  break-inside: auto;
+}
+.resume-design .resume-record h3,
+.resume-design .resume-record .muted,
+.resume-design .resume-record .resume-timeline {
+  break-after: avoid;
+}
+.resume-design .resume-record li {
   break-inside: avoid;
 }
 .resume-design .resume-sheet ul {
@@ -249,16 +257,17 @@
   text-align: right;
 }
 .resume-skill-groups {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 6pt 14pt;
+  display: block;
 }
 .resume-skill-group {
-  break-inside: avoid;
+  margin-bottom: 8pt;
+  break-inside: auto;
 }
-.resume-skill-group:nth-child(n + 3),
-.resume-skill-group:only-child {
-  grid-column: 1 / -1;
+.resume-skill-group h3 {
+  break-after: avoid;
+}
+.resume-skill-group li {
+  break-inside: avoid;
 }
 .resume-design .resume-sheet .resume-skill-group ul {
   margin: 2pt 0 0;

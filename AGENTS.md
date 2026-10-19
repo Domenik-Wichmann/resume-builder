@@ -100,6 +100,10 @@ done, the supported tools/methods used, how they were applied, and their practic
 purpose. Prefer fewer contextual statements over narrow project tidbits, vague
 chores, vendor lists or unexplained benchmark figures. Do not join tools and work
 from unrelated projects into an invented implementation.
+Completed-work skill statements need actual project/experience/achievement
+evidence, not only a list of methods or tools in a skill record. Name the work and
+its purpose in the exported sentence; reviewer notes cannot supply missing context.
+Rank substantial work for essential job responsibilities ahead of supporting methods.
 
 <!-- BEGIN:nextjs-agent-rules -->
 

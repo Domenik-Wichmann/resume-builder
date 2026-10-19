@@ -56,7 +56,7 @@ factual accuracy. Review the complete draft before applying.
 
 The technical skills editorial pass writes fewer, contextual capability statements:
 what was built or done, the tools or methods actually used, how they were applied,
-and the practical purpose. It targets 6–10 items in at most three groups of four,
+and the practical purpose. It targets 8–12 items in at most three groups of four,
 with up to 300 characters per item to preserve context and material qualifiers.
 It prioritizes the job's essential work across the complete published catalog,
 rather than filling a quota with narrow project details, routine duties or vendor
@@ -67,6 +67,23 @@ skill. A true, relevant but contextless snippet still fails this editorial check
 Tools, methods and purpose must share actual source support; this pass cannot join
 unrelated facts into a fictional implementation. Saved application snapshots retain
 the content that was sent; the new policy applies when generating a new draft.
+
+Skill statements must cite at least one actual experience, project or achievement;
+a bare method/tool list in a skill record cannot establish completed personal work.
+The reviewer identifies exact subject and purpose phrases in the visible sentence,
+ties the work to a job requirement and distinguishes core work from supporting
+methods. Missing, generic or privately supplied context fails closed. Verified
+core work for essential responsibilities ranks ahead of supporting techniques.
+Source record titles and kinds accompany the exact quotes as context, never proof.
+Classic skills use the full content width in the viewer, browser print, PDF and
+Word export. Individual statements stay together without moving an entire group
+or paired columns to the next page. The saved owner viewer also exposes the
+original private job description; it is excluded from the printed résumé.
+Record headings stay with their first bullet; remaining bullets can continue on
+the next page instead of leaving space for an entire unbroken project block.
+Job planning treats concrete day-to-day responsibilities as essential work unless
+the description marks them optional; employer-specific terminology does not make
+a responsibility mere background context.
 
 The v4 base is a single column with 11-point text, off-white paper, navy text, teal
 rules and underlined links. Select **Use Clear Signal v4 base** in Templates to
