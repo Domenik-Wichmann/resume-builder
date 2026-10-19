@@ -9,6 +9,7 @@ import { requireOwner } from "@/lib/admin";
 import { ResumeLengthNotice } from "@/components/resume-length-notice";
 import { defaultDesign } from "@/lib/resume-design/model";
 import { applicationDashboard } from "@/lib/applications/repository";
+import { ResumeRegenerateButton } from "@/components/resume-regenerate-button";
 export const dynamic = "force-dynamic";
 export const metadata = { robots: { index: false, follow: false } };
 export default async function Application({
@@ -42,6 +43,7 @@ export default async function Application({
     <main className="wrap portfolio-main">
       <div className="resume-toolbar">
         <Link href="/admin/applications">← Applications</Link>
+        <ResumeRegenerateButton key={id} applicationId={id} />
         {snapshot.data && (
           <ResumeExportControls
             ir={withTrackingUrl(

@@ -11,6 +11,7 @@ import { requireOwner } from "@/lib/admin";
 import { completeApplication } from "@/lib/applications/completion";
 import { ProviderError } from "@/lib/ai/openrouter";
 import { timedResponse } from "@/lib/performance";
+import { regenerateApplication } from "@/lib/applications/regeneration";
 export const maxDuration = 300;
 export async function POST(request: Request) {
   return timedResponse(() => handleApplication(request));
@@ -22,6 +23,7 @@ async function handleApplication(request: Request) {
     const action = await readJson(
       request,
       z.discriminatedUnion("action", [
+        z.object({ action: z.literal("regenerate"), id: z.uuid() }).strict(),
         z
           .object({
             action: z.literal("prepare"),
@@ -65,6 +67,10 @@ async function handleApplication(request: Request) {
     );
     if (action.action === "prepare")
       return Response.json(await startGeneration(a, action.application), {
+        headers: { "Cache-Control": "no-store" },
+      });
+    if (action.action === "regenerate")
+      return Response.json(await regenerateApplication(a, action.id), {
         headers: { "Cache-Control": "no-store" },
       });
     if (action.action === "status")

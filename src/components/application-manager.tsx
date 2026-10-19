@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import { z } from "zod";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
@@ -9,30 +8,20 @@ import {
   families,
   outcomes,
   outcomeAllowed,
-  strategies,
   type JobMetadata,
 } from "@/lib/applications/model";
 import type { applicationDashboard } from "@/lib/applications/repository";
-import { resumeIRSchema, type ResumeIR } from "@/lib/resume-ir";
+import type { ResumeIR } from "@/lib/resume-ir";
 import { ResumeRenderer } from "./resume-renderer";
+import { ResumeRegenerateButton } from "./resume-regenerate-button";
+import {
+  applicationAction as action,
+  continueApplicationGeneration,
+} from "@/lib/applications/client";
 import { ResumeLengthNotice } from "./resume-length-notice";
 import { ResumeExportControls } from "./resume-export-controls";
 import { clearSignalDesign } from "@/lib/resume-design/model";
 type Dashboard = Awaited<ReturnType<typeof applicationDashboard>>;
-const responseSchema = z.object({
-  id: z.string().optional(),
-  preview_id: z.string().optional(),
-  stage: z.number().optional(),
-  label: z.string().optional(),
-  tracking_code: z
-    .string()
-    .regex(/^[A-Za-z0-9_-]{8}$/)
-    .optional(),
-  strategy: z.enum(strategies).optional(),
-  options: z.record(z.string(), resumeIRSchema).optional(),
-  review: z.array(z.string()).optional(),
-  error: z.string().optional(),
-});
 export function ApplicationManager({ data }: { data: Dashboard }) {
   const router = useRouter();
   const [organization, setOrganization] = useState(""),
@@ -82,39 +71,16 @@ export function ApplicationManager({ data }: { data: Dashboard }) {
     });
     return () => cancelAnimationFrame(frame);
   }, []);
-  async function action(payload: unknown) {
-    const r = await fetch("/api/admin/applications", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    const raw: unknown = await r.json().catch(() => null);
-    const parsed = responseSchema.safeParse(raw);
-    if (!parsed.success)
-      throw new Error(
-        "The server response was interrupted. Resume your saved generation to try again.",
-      );
-    const d = parsed.data;
-    if (!r.ok)
-      throw new Error(d.error || "Unable to complete this step. Try again.");
-    return d;
-  }
   async function continueDraft(id: string) {
     setPreview(null);
-    let state = await action({ action: "status", preview_id: id });
+    const state = await continueApplicationGeneration(id, (stage, label) => {
+      setStage(stage);
+      setMessage(label);
+    });
     if (state.id && !state.options) {
       rememberDraft(null);
       router.push(`/admin/applications/${state.id}`);
       return;
-    }
-    while (state.stage !== undefined && state.stage < 4) {
-      setStage(state.stage);
-      setMessage(state.label || "Preparing your draft");
-      state = await action({
-        action: "generate",
-        preview_id: id,
-        stage: state.stage,
-      });
     }
     if (!state.options || state.stage !== 4)
       throw new Error("Draft status is unavailable.");
@@ -474,6 +440,11 @@ export function ApplicationManager({ data }: { data: Dashboard }) {
       </section>
       {preview && (
         <section>
+          <ResumeRegenerateButton
+            key={preview.applicationId}
+            applicationId={preview.applicationId}
+            disabled={busy}
+          />
           <ResumeRenderer ir={preview.options[strategy]} />
           <ResumeExportControls
             ir={preview.options[strategy]}

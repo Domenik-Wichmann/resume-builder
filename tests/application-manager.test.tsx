@@ -96,6 +96,9 @@ it("shows the saved tracked resume immediately with export and analytics control
   expect(review?.open).toBe(false);
   expect(container.textContent).toContain("Print preview");
   expect(
+    container.querySelector(".resume-regenerate-controls button")?.textContent,
+  ).toBe("Regenerate résumé");
+  expect(
     container.querySelector(".resume-export-controls select")?.textContent,
   ).toContain("DOC (Word-compatible)");
   expect(container.textContent).toContain("Download PDF");

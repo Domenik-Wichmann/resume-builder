@@ -26,6 +26,15 @@ Provider failures retain the last completed stage. A crashed lease expires after
 four minutes. Previews expire after one day. Resume the same draft to retry;
 starting a new generation deliberately creates a new preview.
 
+**Regenerate résumé** is available immediately above a completed preview and in
+the saved résumé viewer opened from history. It loads the original organization,
+role, job description, metadata and optional application learning-demo URL through
+the verified owner's JWT/RLS, then runs the normal staged generation with current
+published evidence and template settings. Completion opens a new saved version
+with its own tracking link; the source snapshot, link, outcomes and analytics stay
+unchanged. Interrupted regeneration retries the same new draft rather than
+creating another copy. Its draft is also available through Continue saved generation.
+
 Job planning distinguishes essential, preferred and contextual requirements and
 supplies separate search queries. Retrieval runs up to eight requirement searches
 and four transferable follow-up searches. An account-scoped inventory examines
