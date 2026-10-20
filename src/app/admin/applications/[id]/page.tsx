@@ -10,6 +10,7 @@ import { ResumeLengthNotice } from "@/components/resume-length-notice";
 import { defaultDesign } from "@/lib/resume-design/model";
 import { applicationDashboard } from "@/lib/applications/repository";
 import { ResumeRegenerateButton } from "@/components/resume-regenerate-button";
+import { ResumeReuseForm } from "@/components/resume-reuse-form";
 export const dynamic = "force-dynamic";
 export const metadata = { robots: { index: false, follow: false } };
 export default async function Application({
@@ -57,6 +58,14 @@ export default async function Application({
           />
         )}
       </div>
+      {snapshot.data && (
+        <ResumeReuseForm
+          key={id}
+          applicationId={id}
+          organization={app.data.organization}
+          role={app.data.role}
+        />
+      )}
       <section
         className="surface snapshot-note resume-activity"
         aria-labelledby="resume-activity-title"

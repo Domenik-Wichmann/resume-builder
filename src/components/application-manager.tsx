@@ -14,6 +14,7 @@ import type { applicationDashboard } from "@/lib/applications/repository";
 import type { ResumeIR } from "@/lib/resume-ir";
 import { ResumeRenderer } from "./resume-renderer";
 import { ResumeRegenerateButton } from "./resume-regenerate-button";
+import { ResumeReuseForm } from "./resume-reuse-form";
 import {
   applicationAction as action,
   continueApplicationGeneration,
@@ -181,6 +182,14 @@ export function ApplicationManager({ data }: { data: Dashboard }) {
                 </div>
                 <span className="text-link">View résumé & analytics →</span>
               </Link>
+              {a.generated_at && (
+                <ResumeReuseForm
+                  applicationId={a.id}
+                  organization={a.organization}
+                  role={a.role}
+                  disabled={busy}
+                />
+              )}
               <label>
                 Application status
                 <select
@@ -443,6 +452,13 @@ export function ApplicationManager({ data }: { data: Dashboard }) {
           <ResumeRegenerateButton
             key={preview.applicationId}
             applicationId={preview.applicationId}
+            disabled={busy}
+          />
+          <ResumeReuseForm
+            key={preview.applicationId}
+            applicationId={preview.applicationId}
+            organization={organization}
+            role={role}
             disabled={busy}
           />
           <ResumeRenderer ir={preview.options[strategy]} />

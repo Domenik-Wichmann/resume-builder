@@ -10,6 +10,7 @@ import {
 import { clearSignalDesign } from "../src/lib/resume-design/model";
 import { designPreview } from "../src/lib/resume-design/preview";
 import babycat from "./fixtures/owner-approved-babycat.json";
+import type { ResumeIR } from "../src/lib/resume-ir";
 let db: PGlite, account: string, otherAccount: string;
 const owner = randomUUID(),
   other = randomUUID();
@@ -34,6 +35,169 @@ beforeAll(async () => {
 });
 afterAll(async () => {
   await db?.close();
+});
+
+async function reuseFixture(code: string) {
+  await member();
+  const draft = await preview();
+  return (
+    await db.query<{ id: string }>("select finalize_application($1,$2,$3) id", [
+      account,
+      draft,
+      code,
+    ])
+  ).rows[0].id;
+}
+async function reuse(
+  source: string,
+  request: string,
+  code: string,
+  learning: string | null = "https://example.invalid/new-learner",
+  tenant = account,
+) {
+  return (
+    await db.query<{ result: { id: string; tracking_code: string } }>(
+      "select reuse_saved_resume($1,$2,$3,'Fictional new company','Fictional new role','New fictional vacancy',$4,$5) result",
+      [tenant, source, request, learning, code],
+    )
+  ).rows[0].result;
+}
+async function savedIR(id: string) {
+  return (
+    await db.query<{
+      resume_ir: ResumeIR;
+      generation_record: Record<string, unknown>;
+      experiment_id: string | null;
+      variant_id: string | null;
+    }>(
+      "select resume_ir,generation_record,experiment_id,variant_id from application_snapshots where application_id=$1",
+      [id],
+    )
+  ).rows[0];
+}
+
+it("reuses exact saved wording and design with separate tracking, LMS links and activity", async () => {
+  const source = await reuseFixture("reuse001");
+  const before = await savedIR(source);
+  const request = randomUUID();
+  const result = await reuse(source, request, "reuse002");
+  const after = await savedIR(result.id);
+  const expected = structuredClone(before.resume_ir);
+  expected.portfolio_url = "https://domenik-wichmann.com/r/reuse002";
+  for (const project of expected.projects) {
+    project.links = project.links?.map((link) =>
+      link.portfolio ? { ...link, url: expected.portfolio_url! } : link,
+    );
+    if (project.locked_id === "lms")
+      project.links?.push({
+        label: "Learning demo",
+        url: "https://example.invalid/new-learner",
+      });
+  }
+  expect(after.resume_ir).toEqual(expected);
+  expect(await savedIR(source)).toEqual(before);
+  expect(after.experiment_id).toBeNull();
+  expect(after.variant_id).toBeNull();
+  expect(after.generation_record).not.toHaveProperty("review");
+  expect(
+    (
+      await db.query(
+        "select organization,role,job_description,status from job_applications where id=$1",
+        [result.id],
+      )
+    ).rows,
+  ).toEqual([
+    {
+      organization: "Fictional new company",
+      role: "Fictional new role",
+      job_description: "New fictional vacancy",
+      status: "DRAFT",
+    },
+  ]);
+  expect(
+    (
+      await db.query(
+        "select code from tracking_links where application_id=$1",
+        [result.id],
+      )
+    ).rows,
+  ).toEqual([{ code: "reuse002" }]);
+  expect(
+    (
+      await db.query(
+        "select status from application_outcomes where application_id=$1",
+        [result.id],
+      )
+    ).rows,
+  ).toEqual([{ status: "DRAFT" }]);
+  expect(await reuse(source, request, "unused01")).toEqual(result);
+  await expect(reuse(source, request, "unused02", null)).rejects.toThrow(
+    "REUSE_REQUEST_CHANGED",
+  );
+  const replacement = await reuse(
+    result.id,
+    randomUUID(),
+    "reuse003",
+    "https://example.invalid/another-learner",
+  );
+  const lms = (await savedIR(replacement.id)).resume_ir.projects.find(
+    (p) => p.locked_id === "lms",
+  )!;
+  expect(lms.links?.filter((l) => l.label === "Learning demo")).toEqual([
+    { label: "Learning demo", url: "https://example.invalid/another-learner" },
+  ]);
+  const removed = await reuse(replacement.id, randomUUID(), "reuse004", null);
+  expect(
+    (await savedIR(removed.id)).resume_ir.projects.find(
+      (p) => p.locked_id === "lms",
+    )!.links,
+  ).toEqual([
+    { label: "Homepage", url: clearSignalContent.projects[1].homepage },
+  ]);
+});
+
+it("rolls back failed reuse, including tracking collisions and unsafe LMS destinations", async () => {
+  const source = await reuseFixture("reuse005");
+  const count = async () =>
+    (
+      await db.query<{ count: number }>(
+        "select count(*)::int count from job_applications",
+      )
+    ).rows[0].count;
+  const before = await count();
+  const request = randomUUID();
+  await expect(reuse(source, request, "reuse005")).rejects.toThrow(
+    "duplicate key",
+  );
+  for (const url of [
+    "javascript:alert(1)",
+    "https://user:secret@example.invalid/path",
+    clearSignalContent.projects[1].homepage!,
+  ]) {
+    await expect(reuse(source, request, "reuse006", url)).rejects.toThrow(
+      /INVALID_LEARNING_LINK|LEARNING_LINK_IS_HOMEPAGE/,
+    );
+  }
+  expect(await count()).toBe(before);
+  expect((await reuse(source, request, "reuse006")).tracking_code).toBe(
+    "reuse006",
+  );
+});
+
+it("keeps reuse behind membership RLS and denies anonymous or foreign sources", async () => {
+  const source = await reuseFixture("reuse007");
+  await member(other);
+  await expect(reuse(source, randomUUID(), "reuse008", null)).rejects.toThrow(
+    "ACCOUNT_FORBIDDEN",
+  );
+  await expect(
+    reuse(source, randomUUID(), "reuse008", null, otherAccount),
+  ).rejects.toThrow("SOURCE_NOT_FOUND");
+  await db.exec("reset role;set role anon");
+  await expect(reuse(source, randomUUID(), "reuse008")).rejects.toThrow(
+    "permission denied",
+  );
+  await member();
 });
 async function member(user = owner) {
   await db.exec("reset role;set role authenticated");

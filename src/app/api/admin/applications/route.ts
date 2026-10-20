@@ -12,6 +12,8 @@ import { completeApplication } from "@/lib/applications/completion";
 import { ProviderError } from "@/lib/ai/openrouter";
 import { timedResponse } from "@/lib/performance";
 import { regenerateApplication } from "@/lib/applications/regeneration";
+import { reuseInput } from "@/lib/applications/reuse-input";
+import { reuseApplication } from "@/lib/applications/reuse";
 export const maxDuration = 300;
 export async function POST(request: Request) {
   return timedResponse(() => handleApplication(request));
@@ -23,6 +25,7 @@ async function handleApplication(request: Request) {
     const action = await readJson(
       request,
       z.discriminatedUnion("action", [
+        reuseInput,
         z.object({ action: z.literal("regenerate"), id: z.uuid() }).strict(),
         z
           .object({
@@ -65,6 +68,10 @@ async function handleApplication(request: Request) {
           .strict(),
       ]),
     );
+    if (action.action === "reuse")
+      return Response.json(await reuseApplication(a, action), {
+        headers: { "Cache-Control": "no-store" },
+      });
     if (action.action === "prepare")
       return Response.json(await startGeneration(a, action.application), {
         headers: { "Cache-Control": "no-store" },

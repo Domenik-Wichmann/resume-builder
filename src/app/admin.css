@@ -1291,3 +1291,45 @@
   fill: var(--muted);
   font-size: 12px;
 }
+.resume-reuse {
+  margin: 18px 0;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+}
+.resume-reuse > summary {
+  cursor: pointer;
+  color: var(--purple);
+  font-weight: 600;
+  min-height: 28px;
+}
+.resume-reuse p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+.resume-reuse fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.resume-reuse label {
+  display: block;
+  margin: 14px 0;
+}
+.resume-reuse input,
+.resume-reuse textarea {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+}
+.resume-reuse-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 0 16px;
+}
+.resume-reuse button {
+  margin-top: 8px;
+  white-space: normal;
+}

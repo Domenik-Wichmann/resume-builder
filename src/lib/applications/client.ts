@@ -17,7 +17,10 @@ const responseSchema = z.object({
   error: z.string().optional(),
 });
 
-export async function applicationAction(payload: unknown) {
+export async function applicationAction(
+  payload: unknown,
+  interruptedMessage = "The server response was interrupted. Resume your saved generation to try again.",
+) {
   const response = await fetch("/api/admin/applications", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -26,10 +29,7 @@ export async function applicationAction(payload: unknown) {
   const parsed = responseSchema.safeParse(
     await response.json().catch(() => null),
   );
-  if (!parsed.success)
-    throw new Error(
-      "The server response was interrupted. Resume your saved generation to try again.",
-    );
+  if (!parsed.success) throw new Error(interruptedMessage);
   if (!response.ok)
     throw new Error(
       parsed.data.error || "Unable to complete this step. Try again.",
