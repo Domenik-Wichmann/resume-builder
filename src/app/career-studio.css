@@ -292,6 +292,9 @@ html:has(.profile-hero) {
   border-inline: 1px solid #ffffff0c;
   background: linear-gradient(180deg, #10202e77, #0a151d88);
 }
+.chat-composer {
+  margin-top: 14px;
+}
 .chat-input-shell {
   position: relative;
   overflow: hidden;
@@ -1068,7 +1071,7 @@ html:has(.profile-hero) {
     justify-content: space-between;
   }
 }
-/* The composer and footer stay visible while only the center content scrolls. */
+/* Conversation content scrolls above the bottom composer and its controls. */
 .chat-view {
   display: flex;
   flex-direction: column;

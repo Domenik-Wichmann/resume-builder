@@ -4,7 +4,7 @@
   min-height: 100vh;
 }
 .guide {
-  --accent: #7250b5;
+  --accent: #6744a1;
   --soft: #eeebf7;
   width: min(1240px, calc(100% - 64px));
   margin: auto;
@@ -12,22 +12,22 @@
   padding-bottom: 48px;
 }
 .guide[data-project="babycat"] {
-  --accent: #286d60;
+  --accent: #205d50;
   --soft: #e7f0ec;
 }
 .guide[data-project="kernel"] {
-  --accent: #526f35;
+  --accent: #3f5929;
   --soft: #edf1e5;
 }
 .guide[data-project="sonaway"] {
-  --accent: #846239;
+  --accent: #74532f;
   --soft: #f2ece2;
 }
 .topline {
   display: flex;
   justify-content: space-between;
   padding: 30px 0;
-  border-bottom: 1px solid #dce0e8;
+  border-bottom: 1px solid #768291;
   font-size: 14px;
 }
 .topline a {
@@ -64,7 +64,7 @@
 .summary {
   font-size: 16px;
   line-height: 1.8;
-  color: #536173;
+  color: #435063;
 }
 .actions {
   display: flex;
@@ -85,19 +85,20 @@
 }
 .actions a + a {
   background: var(--soft);
+  border: 1px solid var(--accent);
   color: var(--accent);
 }
 .status {
   font-size: 12px;
   line-height: 1.6;
-  color: #687486;
+  color: #4d596b;
 }
 .heroImage {
   margin: 0;
   padding: 22px;
   background: linear-gradient(140deg, var(--soft), #e3e9ef);
   border-radius: 26px;
-  border: 1px solid #d9dfe8;
+  border: 1px solid #768291;
   transform: rotate(-1.5deg);
   box-shadow: 0 24px 65px #26344e12;
 }
@@ -105,12 +106,12 @@
   width: 100%;
   height: auto;
   border-radius: 12px;
-  border: 1px solid #b8c1cd44;
+  border: 1px solid #768291;
   display: block;
 }
 .heroImage figcaption {
   font-size: 11px;
-  color: #536173;
+  color: #435063;
   margin: 12px 0 0;
 }
 .jump {
@@ -118,11 +119,11 @@
   flex-wrap: wrap;
   gap: 12px 28px;
   padding: 22px 0;
-  border-block: 1px solid #dce0e8;
+  border-block: 1px solid #768291;
   font-size: 13px;
 }
 .jump a {
-  color: #536173;
+  color: #435063;
   text-decoration: none;
 }
 .jump a:hover,
@@ -155,7 +156,7 @@
   max-width: 860px;
   font-size: 19px;
   line-height: 1.85;
-  color: #536173;
+  color: #435063;
 }
 .workflow {
   background: var(--soft);
@@ -175,7 +176,7 @@
   place-items: center;
   width: 38px;
   height: 38px;
-  border: 1px solid #9eabb766;
+  border: 1px solid #768291;
   border-radius: 50%;
   color: var(--accent);
   font-size: 12px;
@@ -188,7 +189,7 @@
 .workflow li p {
   font-size: 14px;
   line-height: 1.7;
-  color: #536173;
+  color: #435063;
   margin: 0;
 }
 .features {
@@ -198,9 +199,9 @@
 }
 .features > div {
   padding: 28px;
-  border: 1px solid #dce0e8;
+  border: 1px solid #768291;
   border-radius: 18px;
-  background: #ffffffb3;
+  background: #ffffff;
 }
 .featureIndex {
   color: var(--accent);
@@ -215,13 +216,13 @@
 .features p,
 .engineering p,
 .scope p {
-  color: #536173;
+  color: #435063;
   font-size: 16px;
   line-height: 1.8;
   margin-bottom: 0;
 }
 .galleryIntro {
-  color: #687486;
+  color: #4d596b;
   font-size: 14px;
   line-height: 1.7;
   max-width: 650px;
@@ -234,7 +235,7 @@
 .gallery figure {
   margin: 0;
   background: #fff;
-  border: 1px solid #dce0e8;
+  border: 1px solid #768291;
   border-radius: 20px;
   overflow: hidden;
 }
@@ -244,6 +245,7 @@
   gap: 12px;
   padding: 18px 24px;
   background: var(--soft);
+  border: 1px solid var(--accent);
   color: var(--accent);
   font-size: 11px;
   text-transform: uppercase;
@@ -273,7 +275,7 @@
 }
 .gallery figcaption p {
   margin: 0;
-  color: #687486;
+  color: #4d596b;
   line-height: 1.7;
   font-size: 15px;
   max-width: 800px;
@@ -282,7 +284,7 @@
   display: grid;
   grid-template-columns: 1.4fr 1fr;
   gap: 64px;
-  border-top: 1px solid #dce0e8;
+  border-top: 1px solid #768291;
 }
 .engineering aside {
   padding: 28px;
@@ -302,8 +304,8 @@
   margin: 0;
 }
 .engineering li {
-  background: #ffffffa3;
-  border: 1px solid #bac4ce55;
+  background: #ffffff;
+  border: 1px solid #768291;
   padding: 8px 12px;
   border-radius: 8px;
   font-size: 12px;
@@ -325,7 +327,7 @@
   gap: 16px;
   margin-top: 64px;
   padding-top: 36px;
-  border-top: 1px solid #dce0e8;
+  border-top: 1px solid #768291;
 }
 .footer > div {
   flex: 1;
@@ -340,6 +342,7 @@
 }
 .footer > a:last-child {
   background: var(--soft);
+  border: 1px solid var(--accent);
   color: var(--accent);
 }
 @media (max-width: 900px) {
@@ -447,7 +450,7 @@
 .contribution p {
   margin: 0;
   max-width: 940px;
-  color: #536173;
+  color: #435063;
   font-size: 16px;
   line-height: 1.8;
 }
@@ -455,4 +458,9 @@
   .contribution {
     padding: 22px;
   }
+}
+
+.workflow,
+.engineering aside {
+  border: 1px solid #768291;
 }

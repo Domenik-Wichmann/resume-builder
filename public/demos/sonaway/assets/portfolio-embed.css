@@ -8,3 +8,20 @@ body.portfolio-demo { margin:0; padding:14px; min-width:0; background:#f4f0e7; c
 .portfolio-demo .gi-head strong { font-size:25px; }
 .portfolio-demo .gi-body { height:500px; }
 @media(max-width:600px) { body.portfolio-demo { padding:8px; }.embed-note { font-size:11px; }.portfolio-demo .gi-body { height:auto; }.portfolio-demo .gi-head { padding:14px; }.portfolio-demo .gi-head strong { font-size:22px; } }
+
+/* Strong outlines and readable labels retain meaning on low-contrast displays. */
+.portfolio-demo :is(.gi-shell,.gi-conversation,.gi-chat-top,.gi-message-content,.gi-compose,.gi-choices button,.gi-review,.gi-output,.gi-output-tabs button,.kl-shell,.kl-tabs,.kl-tabs button,.kl-node,.kl-policy-detail,.kl-context-card,.kl-effective-view,.kl-audience-options button,.kl-audience-preview,.kl-audience-boundary,.kl-question-bubble,.kl-context-controls select,.kl-context-controls input) { border-color:#7a806d; }
+.portfolio-demo .kl-shell [data-rule=core] { --edge:#66839a; --rule:#365f82; }
+.portfolio-demo .kl-shell [data-rule=alpine] { --edge:#927232; --rule:#806022; }
+.portfolio-demo .kl-shell [data-rule=suites] { --edge:#966481; --rule:#825571; }
+.portfolio-demo .kl-shell [data-rule=chalet] { --edge:#4f8076; --rule:#2e7268; }
+.portfolio-demo :is(.kl-status,.kl-footer,.kl-kicker,.kl-context-controls label,.kl-map-key,.kl-context-card,.kl-context-date,.kl-context-origin,.kl-answer-source>span,.kl-answer-source>p,.kl-active-path,.kl-audience-options small,.kl-question-bubble>span,.kl-preview-top,.kl-audience-rows p,.kl-audience-citation>span,.kl-audience-citation>p,.kl-audience-boundary>p) { color:#43513e; }
+.portfolio-demo .kl-tabs button { color:#43513e; }
+.portfolio-demo .kl-tabs button[aria-selected=true] { background:#e2eadb; color:#273e2c; border-bottom-color:#365c40; }
+.portfolio-demo .kl-audience-options button[aria-pressed=true] { background:#2d503d; color:#fff; border-color:#2d503d; }
+.portfolio-demo .kl-audience-options button[aria-pressed=true] small { color:#e6efdf; }
+.portfolio-demo .kl-context-card.kl-answer-node { border:2px solid #365c40; }
+.portfolio-demo .gi-map { border-color:#a5b699; }
+.portfolio-demo .gi-web-edge { stroke:#bccaaa; stroke-width:1.5; }
+.portfolio-demo :is(button,select,input,a):focus-visible { outline:3px solid #75552d; outline-offset:3px; }
+.portfolio-demo .gi-map button:focus-visible { outline-color:#fff0bf; }

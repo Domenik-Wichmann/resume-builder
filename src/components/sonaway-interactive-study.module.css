@@ -1,10 +1,10 @@
 .study {
-  --accent: #846239;
+  --accent: #74532f;
   color: #20283a;
 }
 .section {
   padding: 60px 0;
-  border-top: 1px solid #dce0e8;
+  border-top: 1px solid #768291;
   scroll-margin-top: 24px;
 }
 .eyebrow {
@@ -23,7 +23,7 @@
   margin: 0 0 24px;
 }
 .lead {
-  color: #536173;
+  color: #435063;
   font-size: 18px;
   line-height: 1.85;
   max-width: 970px;
@@ -37,7 +37,7 @@
 .definitions > div {
   padding: 28px;
   background: #fff;
-  border: 1px solid #dce0e8;
+  border: 1px solid #768291;
   border-radius: 18px;
 }
 .study h3 {
@@ -47,7 +47,7 @@
   margin: 0 0 12px;
 }
 .study p {
-  color: #536173;
+  color: #435063;
   line-height: 1.8;
 }
 .definitions p {
@@ -63,7 +63,7 @@
   padding: 30px;
 }
 .planes span {
-  color: #846239;
+  color: #74532f;
   font-size: 12px;
   font-weight: 700;
 }
@@ -82,7 +82,7 @@
 .study blockquote {
   margin: 32px 0;
   padding: 28px 32px;
-  border-left: 3px solid #846239;
+  border-left: 3px solid #74532f;
   background: #f2ece2;
   border-radius: 0 16px 16px 0;
   font-size: 24px;
@@ -95,7 +95,7 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #846239;
+  color: #74532f;
   margin-bottom: 12px;
 }
 .example {
@@ -110,7 +110,7 @@
   justify-content: center;
   padding: 30px;
   background: #e5eee8;
-  border: 1px solid #bacfc2;
+  border: 1px solid #738c7d;
   border-radius: 20px;
 }
 .frame > span {
@@ -136,13 +136,13 @@
 }
 .bindings > div {
   padding: 22px;
-  border: 1px solid #dce0e8;
+  border: 1px solid #768291;
   border-radius: 14px;
   background: #fff;
 }
 .bindings span {
   font-size: 11px;
-  color: #846239;
+  color: #74532f;
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
@@ -156,7 +156,7 @@
 }
 .takeaway {
   padding: 26px 30px;
-  border-left: 3px solid #846239;
+  border-left: 3px solid #74532f;
   border-radius: 0 16px 16px 0;
   background: #f2ece2;
   font-size: 17px;
@@ -173,7 +173,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: #846239;
+  color: #74532f;
 }
 .demoIntro h3 {
   font-size: 27px;
@@ -196,7 +196,7 @@
 .projections {
   display: block;
   width: 100%;
-  border: 1px solid #c9c5b9;
+  border: 1px solid #827b6c;
   border-radius: 18px;
   background: #f4f0e7;
 }
@@ -209,7 +209,7 @@
 .demoLesson {
   font-size: 14px;
   padding: 12px 6px 24px;
-  border-bottom: 1px solid #dce0e8;
+  border-bottom: 1px solid #768291;
 }
 .demoLesson strong {
   color: #20283a;

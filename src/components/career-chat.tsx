@@ -409,100 +409,6 @@ export function CareerChat({
           </div>
         ))}
         <div className="chat-view" hidden={panel !== "chat"}>
-          <form
-            ref={composerForm}
-            id="composer"
-            className="chat-composer"
-            onSubmit={submit}
-          >
-            <div className="chat-input-shell">
-              <label className="sr-only" htmlFor="career-message">
-                Ask a question or paste a job description
-              </label>
-              <textarea
-                ref={messageField}
-                id="career-message"
-                value={input}
-                onChange={(event) => setInput(event.target.value)}
-                onKeyDown={(event) => submitComposerOnEnter(event, canSubmit)}
-                placeholder={
-                  started
-                    ? "Ask another question or paste a job description…"
-                    : "Ask a question or paste a job description…"
-                }
-                minLength={3}
-                maxLength={12000}
-                required
-                rows={1}
-                readOnly={busy}
-                disabled={!slotsReady}
-              />
-              <button
-                className="composer-send"
-                data-analytics-action={
-                  kind === "match" ? "create_workspace" : "question"
-                }
-                type="submit"
-                disabled={!canSubmit}
-                aria-busy={busy}
-                aria-label={
-                  kind === "match" ? "Build tailored résumé" : "Send question"
-                }
-              >
-                {busy ? "…" : "↑"}
-              </button>
-            </div>
-            <div className="composer-tools">
-              <div className="workspace-tools">
-                <details className="workspace-privacy">
-                  <summary
-                    title={
-                      workspace?.demo
-                        ? "Fictional demo evidence; workspaces are saved in this browser only."
-                        : "Questions and topics are saved privately and visible to the portfolio owner."
-                    }
-                  >
-                    Privacy
-                  </summary>
-                  <div className="workspace-privacy-note">
-                    <p>
-                      {workspace?.demo
-                        ? "Fictional demo evidence. Workspaces are saved only in this browser."
-                        : "Questions and topics are saved privately for this browser and can be reviewed by the portfolio owner."}
-                    </p>
-                    <Link href="/privacy">Privacy & data ↗</Link>
-                  </div>
-                </details>
-                <label>
-                  <span className="sr-only">Saved conversation</span>
-                  <select
-                    aria-label="Saved conversation"
-                    title={
-                      slots[slot]
-                        ? "Saved workspace"
-                        : "This workspace starts when you send a message"
-                    }
-                    value={slot}
-                    disabled={busy || !slotsReady}
-                    onChange={(event) =>
-                      void switchWorkspace(event.target.value === "1" ? 1 : 0)
-                    }
-                  >
-                    <option value="0">Chat 1</option>
-                    <option value="1">Chat 2</option>
-                  </select>
-                </label>
-              </div>
-            </div>
-          </form>
-          {kind === "ask" && input.length > 1000 && (
-            <div className="composer-note">
-              <span>
-                Questions are limited to 1,000 characters. Job descriptions are
-                detected automatically.
-              </span>
-            </div>
-          )}
           <HumanVerification />
           {status && (
             <div role="status" className="chat-status">
@@ -624,6 +530,100 @@ export function CareerChat({
                   Print résumé / PDF
                 </button>
               )}
+            </div>
+          )}
+          <form
+            ref={composerForm}
+            id="composer"
+            className="chat-composer"
+            onSubmit={submit}
+          >
+            <div className="chat-input-shell">
+              <label className="sr-only" htmlFor="career-message">
+                Ask a question or paste a job description
+              </label>
+              <textarea
+                ref={messageField}
+                id="career-message"
+                value={input}
+                onChange={(event) => setInput(event.target.value)}
+                onKeyDown={(event) => submitComposerOnEnter(event, canSubmit)}
+                placeholder={
+                  started
+                    ? "Ask another question or paste a job description…"
+                    : "Ask a question or paste a job description…"
+                }
+                minLength={3}
+                maxLength={12000}
+                required
+                rows={1}
+                readOnly={busy}
+                disabled={!slotsReady}
+              />
+              <button
+                className="composer-send"
+                data-analytics-action={
+                  kind === "match" ? "create_workspace" : "question"
+                }
+                type="submit"
+                disabled={!canSubmit}
+                aria-busy={busy}
+                aria-label={
+                  kind === "match" ? "Build tailored résumé" : "Send question"
+                }
+              >
+                {busy ? "…" : "↑"}
+              </button>
+            </div>
+            <div className="composer-tools">
+              <div className="workspace-tools">
+                <details className="workspace-privacy">
+                  <summary
+                    title={
+                      workspace?.demo
+                        ? "Fictional demo evidence; workspaces are saved in this browser only."
+                        : "Questions and topics are saved privately and visible to the portfolio owner."
+                    }
+                  >
+                    Privacy
+                  </summary>
+                  <div className="workspace-privacy-note">
+                    <p>
+                      {workspace?.demo
+                        ? "Fictional demo evidence. Workspaces are saved only in this browser."
+                        : "Questions and topics are saved privately for this browser and can be reviewed by the portfolio owner."}
+                    </p>
+                    <Link href="/privacy">Privacy & data ↗</Link>
+                  </div>
+                </details>
+                <label>
+                  <span className="sr-only">Saved conversation</span>
+                  <select
+                    aria-label="Saved conversation"
+                    title={
+                      slots[slot]
+                        ? "Saved workspace"
+                        : "This workspace starts when you send a message"
+                    }
+                    value={slot}
+                    disabled={busy || !slotsReady}
+                    onChange={(event) =>
+                      void switchWorkspace(event.target.value === "1" ? 1 : 0)
+                    }
+                  >
+                    <option value="0">Chat 1</option>
+                    <option value="1">Chat 2</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+          </form>
+          {kind === "ask" && input.length > 1000 && (
+            <div className="composer-note">
+              <span>
+                Questions are limited to 1,000 characters. Job descriptions are
+                detected automatically.
+              </span>
             </div>
           )}
         </div>

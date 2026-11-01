@@ -49,7 +49,7 @@ html:has(.portfolio-home) {
   min-width: 0;
   min-height: 108px;
   padding: 14px;
-  border: 1px solid #8eabb33d;
+  border: 1px solid #7e96a3;
   border-radius: 18px;
   background: linear-gradient(125deg, #182b3ae6, #122b2de6);
   text-decoration: none;
@@ -72,7 +72,7 @@ a.hero-project-card:focus-visible {
   width: 74px;
   height: 68px;
   flex-shrink: 0;
-  border: 1px solid #b8c8d433;
+  border: 1px solid #7e96a3;
   border-radius: 10px;
   object-fit: cover;
   object-position: top left;
@@ -583,7 +583,7 @@ a.hero-project-card:focus-visible {
   gap: 10px;
   max-width: 110px;
   padding: 12px;
-  border: 1px solid #8eabb33d;
+  border: 1px solid #7e96a3;
   border-radius: 16px;
   color: #d1bafa;
   font-size: 13px;

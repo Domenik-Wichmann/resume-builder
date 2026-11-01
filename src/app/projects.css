@@ -351,3 +351,17 @@
     transition: none;
   }
 }
+
+/* Keep project boundaries visible without relying on a shadow or viewing angle. */
+.selected-project-card {
+  border-color: #7e96a3;
+}
+.public-experience .selected-project-card {
+  border-color: #7e96a3;
+}
+.case-cover,
+.case-gallery figure,
+.case-section,
+.project-evidence img {
+  border-color: #7e96a3;
+}
