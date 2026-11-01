@@ -109,84 +109,93 @@ export function PortfolioIntro({
           </div>
         </div>
       </div>
-      <nav className="hero-projects wrap" aria-label="Featured projects">
-        <Link
-          className="hero-project-card"
-          href="/projects/configurable-excel-and-vba-rules-engine-78ff38898c"
-        >
-          <Image
-            className="hero-project-preview"
-            src="/images/projects/babycat-dashboard.jpg"
-            width={160}
-            height={110}
-            alt=""
-          />
-          <span className="hero-project-copy">
-            <strong>BabyCat</strong>
-            <span>Catalogs, rules & automation</span>
-            <small>
-              Explore project <span aria-hidden="true">↗</span>
-            </small>
-          </span>
-        </Link>
-        <Link
-          className="hero-project-card"
-          href="/projects/multilingual-onboarding-and-mini-lms-51f0eca038"
-        >
-          <Image
-            className="hero-project-preview"
-            src="/images/projects/systemwright-lms.jpg"
-            width={160}
-            height={110}
-            alt=""
-          />
-          <span className="hero-project-copy">
-            <strong>SystemWright LMS</strong>
-            <span>Interactive, multilingual learning</span>
-            <small>
-              Explore project <span aria-hidden="true">↗</span>
-            </small>
-          </span>
-        </Link>
-        <Link className="hero-project-card" href="/projects/kernel">
-          <Image
-            className="hero-project-preview"
-            src="/images/projects/kernel-planner-preview.svg"
-            width={160}
-            height={110}
-            alt=""
-          />
-          <span className="hero-project-copy">
-            <strong>Kernel</strong>
-            <span>Household meal planning</span>
-            <small>
-              Explore project <span aria-hidden="true">↗</span>
-            </small>
-          </span>
-        </Link>
-        <Link
-          className="hero-project-card"
-          href="/projects/sonaway-operational-knowledge-product-eb8c2d879b"
-        >
-          <Image
-            className="hero-project-preview"
-            src="/images/projects/sonaway-knowledge-preview.svg"
-            width={160}
-            height={110}
-            alt=""
-          />
-          <span className="hero-project-copy">
-            <strong>Sonaway</strong>
-            <span>Connected operational knowledge</span>
-            <small>
-              Explore project <span aria-hidden="true">↗</span>
-            </small>
-          </span>
-        </Link>
-        <Link className="hero-more-projects" href="/projects">
-          Explore more projects <span aria-hidden="true">↗</span>
-        </Link>
-      </nav>
+      <section
+        className="hero-projects-panel wrap"
+        aria-labelledby="selected-projects-heading"
+      >
+        <header className="hero-projects-heading">
+          <h2 id="selected-projects-heading">Selected projects</h2>
+          <p>What I built, how it works, and the skills behind it.</p>
+        </header>
+        <nav className="hero-projects" aria-label="Selected projects">
+          <Link
+            className="hero-project-card"
+            href="/projects/configurable-excel-and-vba-rules-engine-78ff38898c"
+          >
+            <Image
+              className="hero-project-preview"
+              src="/images/projects/babycat-dashboard.jpg"
+              width={160}
+              height={110}
+              alt=""
+            />
+            <span className="hero-project-copy">
+              <strong>BabyCat</strong>
+              <span>Catalogs, rules & automation</span>
+              <small>
+                Explore project <span aria-hidden="true">↗</span>
+              </small>
+            </span>
+          </Link>
+          <Link
+            className="hero-project-card"
+            href="/projects/multilingual-onboarding-and-mini-lms-51f0eca038"
+          >
+            <Image
+              className="hero-project-preview"
+              src="/images/projects/systemwright-lms.jpg"
+              width={160}
+              height={110}
+              alt=""
+            />
+            <span className="hero-project-copy">
+              <strong>SystemWright LMS</strong>
+              <span>Interactive, multilingual learning</span>
+              <small>
+                Explore project <span aria-hidden="true">↗</span>
+              </small>
+            </span>
+          </Link>
+          <Link className="hero-project-card" href="/projects/kernel">
+            <Image
+              className="hero-project-preview"
+              src="/images/projects/kernel-planner-preview.svg"
+              width={160}
+              height={110}
+              alt=""
+            />
+            <span className="hero-project-copy">
+              <strong>Kernel</strong>
+              <span>Household meal planning</span>
+              <small>
+                Explore project <span aria-hidden="true">↗</span>
+              </small>
+            </span>
+          </Link>
+          <Link
+            className="hero-project-card"
+            href="/projects/sonaway-operational-knowledge-product-eb8c2d879b"
+          >
+            <Image
+              className="hero-project-preview"
+              src="/images/projects/sonaway-knowledge-preview.svg"
+              width={160}
+              height={110}
+              alt=""
+            />
+            <span className="hero-project-copy">
+              <strong>Sonaway</strong>
+              <span>Connected operational knowledge</span>
+              <small>
+                Explore project <span aria-hidden="true">↗</span>
+              </small>
+            </span>
+          </Link>
+          <Link className="hero-more-projects" href="/projects">
+            Explore more projects <span aria-hidden="true">↗</span>
+          </Link>
+        </nav>
+      </section>
       {composer || (
         <a
           className="personal-scroll-cue"
