@@ -69,13 +69,13 @@ export function HomeExperience({
                 aria-label={
                   kind === "match"
                     ? "Compare job in chat"
-                    : "Send question to chat"
+                    : "Explore my experience"
                 }
                 data-analytics-action={
                   kind === "match" ? "create_workspace" : "question"
                 }
               >
-                <span>{busy ? "Opening chat" : "Let’s talk"}</span>
+                <span>{busy ? "Opening chat" : "Explore my experience"}</span>
                 <svg
                   width="24"
                   height="24"

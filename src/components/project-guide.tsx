@@ -1,0 +1,167 @@
+import Image from "next/image";
+import Link from "next/link";
+import type { ProjectGuide as Guide } from "@/lib/portfolio/project-guides";
+import styles from "./project-guide.module.css";
+
+export function ProjectGuide({ guide }: { guide: Guide }) {
+  return (
+    <div className={styles.page}>
+      <article className={styles.guide} data-project={guide.key}>
+        <div className={styles.topline}>
+          <Link href="/">← Domenik Wichmann</Link>
+          <Link href="/projects">All projects ↗</Link>
+        </div>
+        <header className={styles.hero}>
+          <div>
+            <p className={styles.eyebrow}>{guide.category}</p>
+            <h1>{guide.name}</h1>
+            <h2>{guide.headline}</h2>
+            <p className={styles.summary}>{guide.summary}</p>
+            <div className={styles.actions}>
+              <a href="#project-screenshots">Explore the screens ↓</a>
+              {guide.demo && (
+                <a
+                  href={guide.demo.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {guide.demo.label} ↗
+                </a>
+              )}
+            </div>
+            <p className={styles.status}>{guide.status}</p>
+          </div>
+          <figure className={styles.heroImage}>
+            <a
+              href={guide.screens[0].src}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Open full preview of ${guide.name}`}
+            >
+              <Image
+                src={guide.screens[0].src}
+                alt={guide.screens[0].title}
+                width={1200}
+                height={800}
+                unoptimized
+              />
+            </a>
+            <figcaption>{guide.screens[0].kind}</figcaption>
+          </figure>
+        </header>
+        <nav className={styles.jump} aria-label="Project sections">
+          <a href="#project-overview">The problem</a>
+          <a href="#project-workflow">The workflow</a>
+          <a href="#project-features">What it does</a>
+          <a href="#project-screenshots">Screens & previews</a>
+          <a href="#project-engineering">Under the hood</a>
+        </nav>
+        <section className={styles.problem} id="project-overview">
+          <p className={styles.eyebrow}>Why build it?</p>
+          <h2>The problem behind the project.</h2>
+          <p>{guide.problem}</p>
+        </section>
+        <section className={styles.workflow} id="project-workflow">
+          <p className={styles.eyebrow}>From start to finish</p>
+          <h2>How the workflow fits together.</h2>
+          <ol>
+            {guide.steps.map((step, index) => (
+              <li key={step.title}>
+                <span className={styles.number}>
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+        <section className={styles.section} id="project-features">
+          <p className={styles.eyebrow}>A closer look</p>
+          <h2>What the application does.</h2>
+          <div className={styles.features}>
+            {guide.features.map((feature, index) => (
+              <div key={feature.title}>
+                <span className={styles.featureIndex}>
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3>{feature.title}</h3>
+                <p>{feature.text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+        <section className={styles.section} id="project-screenshots">
+          <p className={styles.eyebrow}>See the work</p>
+          <h2>Screens, details and example workflows.</h2>
+          <p className={styles.galleryIntro}>
+            Open any image to see it at full size. Each caption identifies an
+            actual screen or an illustrative interface.
+          </p>
+          <div className={styles.gallery}>
+            {guide.screens.map((screen, index) => (
+              <figure key={screen.src}>
+                <div className={styles.screenHeading}>
+                  <span>
+                    {String(index + 1).padStart(2, "0")} / {screen.kind}
+                  </span>
+                  <span aria-hidden="true">↗</span>
+                </div>
+                <a
+                  href={screen.src}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Open full image: ${screen.title}`}
+                >
+                  <Image
+                    src={screen.src}
+                    alt={screen.title}
+                    width={1200}
+                    height={800}
+                    unoptimized
+                    loading="lazy"
+                  />
+                </a>
+                <figcaption>
+                  <h3>{screen.title}</h3>
+                  <p>{screen.caption}</p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+        <section
+          className={`${styles.section} ${styles.engineering}`}
+          id="project-engineering"
+        >
+          <div>
+            <p className={styles.eyebrow}>Under the hood</p>
+            <h2>How it is built.</h2>
+            <p>{guide.engineering}</p>
+          </div>
+          <aside>
+            <h3>Tools & foundations</h3>
+            <ul>
+              {guide.stack.map((tool) => (
+                <li key={tool}>{tool}</li>
+              ))}
+            </ul>
+          </aside>
+        </section>
+        <section className={styles.scope}>
+          <p className={styles.eyebrow}>Current scope</p>
+          <h2>Where the project stands.</h2>
+          <p>{guide.limits}</p>
+        </section>
+        <footer className={styles.footer}>
+          <div>
+            <p className={styles.eyebrow}>Keep exploring</p>
+            <h2>See how the projects connect.</h2>
+          </div>
+          <Link href="/projects">Explore more projects ↗</Link>
+          <Link href="/#ask">Explore my experience →</Link>
+        </footer>
+      </article>
+    </div>
+  );
+}

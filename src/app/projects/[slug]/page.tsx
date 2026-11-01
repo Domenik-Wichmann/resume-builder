@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { ProjectGuide } from "@/components/project-guide";
+import { projectGuideForSlug } from "@/lib/portfolio/project-guides";
 import { notFound } from "next/navigation";
 import { publicProjectDetails } from "@/lib/portfolio/showcase-server";
 import { ProjectDisplay } from "@/components/project-display";
@@ -20,6 +22,25 @@ export default async function ProjectPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const guide = projectGuideForSlug(slug);
+  if (guide)
+    return (
+      <main id="main">
+        <ProjectGuide guide={guide} />
+        {guide.key !== "kernel" && (
+          <ExploreSignal
+            kind="project"
+            id={
+              {
+                babycat: "937f2379-7dbc-4eae-a12f-5c3dacc13b0c",
+                lms: "1ba79f8b-7379-41b1-94d2-7268a7e66b51",
+                sonaway: "c05d7b83-2c3d-412c-918a-d468e27adee3",
+              }[guide.key as "babycat" | "lms" | "sonaway"]
+            }
+          />
+        )}
+      </main>
+    );
   const item = (await publicProjectDetails({ slug }))[0];
   if (!item) notFound();
   const { project: p, content, skills, media } = item;

@@ -24,7 +24,7 @@ const presentation = {
   work_authorization: "",
 };
 
-it("introduces the person on the homepage with direct experience and project actions", async () => {
+it("introduces the person with project cards and a single more-projects action", async () => {
   vi.stubGlobal("IS_REACT_ACT_ENVIRONMENT", true);
   const host = document.createElement("div");
   document.body.append(host);
@@ -39,13 +39,16 @@ it("introduces the person on the homepage with direct experience and project act
       ),
     );
     expect(host.querySelector("h1")?.textContent).toContain("Domenik Wichmann");
+    expect(host.querySelector(".personal-hero-actions")).toBeNull();
     expect(
-      host.querySelector('.personal-hero-actions a[href="#ask"]')?.textContent,
-    ).toContain("Explore my experience");
+      host.querySelectorAll(".hero-projects .hero-project-card"),
+    ).toHaveLength(4);
     expect(
-      host.querySelector('.personal-hero-actions a[href="/projects"]')
-        ?.textContent,
-    ).toContain("Explore my projects");
+      host.querySelector('.hero-projects a[href="/projects/kernel"]'),
+    ).not.toBeNull();
+    expect(
+      host.querySelector('.hero-projects a[href="/projects"]')?.textContent,
+    ).toContain("Explore more projects");
     expect(host.textContent).toContain("Configured residence");
     expect(
       host.querySelector(".story-runway, .story-scene, select, .market-switch"),

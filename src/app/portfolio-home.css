@@ -37,7 +37,7 @@ html:has(.portfolio-home) {
 }
 .hero-projects {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
   gap: 12px;
   flex-shrink: 0;
   margin: 0 auto 22px;
@@ -573,5 +573,63 @@ a.hero-project-card:focus-visible {
   .homepage-conversation .chat-view {
     height: auto;
     overflow: visible;
+  }
+}
+
+.hero-more-projects {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  max-width: 110px;
+  padding: 12px;
+  border: 1px solid #8eabb33d;
+  border-radius: 16px;
+  color: #d1bafa;
+  font-size: 13px;
+  line-height: 1.5;
+  text-decoration: none;
+}
+.hero-more-projects:hover {
+  border-color: #bda4ef;
+  background: #24364b66;
+}
+.hero-more-projects:focus-visible {
+  outline: 3px solid #c5a7ff;
+  outline-offset: 4px;
+}
+.hero-composer .hero-send {
+  max-width: 235px;
+}
+.hero-input-shell textarea {
+  padding-right: 260px;
+}
+@media (min-width: 801px) and (max-width: 1150px) {
+  .hero-project-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .hero-project-preview {
+    width: 100%;
+    height: 48px;
+  }
+  .hero-project-copy strong {
+    font-size: 14px;
+  }
+}
+@media (max-width: 800px) {
+  .hero-more-projects {
+    grid-column: 1 / -1;
+    max-width: none;
+    padding: 10px;
+  }
+}
+@media (max-width: 560px) {
+  .hero-input-shell textarea {
+    padding-right: 18px;
+    padding-bottom: 82px;
+  }
+  .hero-composer .hero-send {
+    max-width: calc(100% - 24px);
   }
 }

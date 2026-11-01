@@ -55,14 +55,6 @@ export function PortfolioIntro({
               <span key={skill}>{skill}</span>
             ))}
           </div>
-          <div className="personal-hero-actions">
-            <a className="button" href="#ask" data-analytics-action="open_chat">
-              Explore my experience <span aria-hidden="true">↓</span>
-            </a>
-            <Link className="button secondary-button" href="/projects">
-              Explore my projects <span aria-hidden="true">↗</span>
-            </Link>
-          </div>
           <div className="hero-contact">
             {[
               presentation.location,
@@ -156,32 +148,44 @@ export function PortfolioIntro({
             </small>
           </span>
         </Link>
-        <div className="hero-project-card hero-project-soon">
-          <span
-            className="hero-project-monogram kernel-mark"
-            aria-hidden="true"
-          >
-            K
-          </span>
+        <Link className="hero-project-card" href="/projects/kernel">
+          <Image
+            className="hero-project-preview"
+            src="/images/projects/kernel-planner-preview.svg"
+            width={160}
+            height={110}
+            alt=""
+          />
           <span className="hero-project-copy">
             <strong>Kernel</strong>
             <span>Household meal planning</span>
-            <small>Coming soon</small>
+            <small>
+              Explore project <span aria-hidden="true">↗</span>
+            </small>
           </span>
-        </div>
-        <div className="hero-project-card hero-project-soon">
-          <span
-            className="hero-project-monogram sonaway-mark"
-            aria-hidden="true"
-          >
-            S
-          </span>
+        </Link>
+        <Link
+          className="hero-project-card"
+          href="/projects/sonaway-operational-knowledge-product-eb8c2d879b"
+        >
+          <Image
+            className="hero-project-preview"
+            src="/images/projects/sonaway-knowledge-preview.svg"
+            width={160}
+            height={110}
+            alt=""
+          />
           <span className="hero-project-copy">
             <strong>Sonaway</strong>
             <span>Connected operational knowledge</span>
-            <small>Coming soon</small>
+            <small>
+              Explore project <span aria-hidden="true">↗</span>
+            </small>
           </span>
-        </div>
+        </Link>
+        <Link className="hero-more-projects" href="/projects">
+          Explore more projects <span aria-hidden="true">↗</span>
+        </Link>
       </nav>
       {composer || (
         <a

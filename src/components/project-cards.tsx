@@ -2,7 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ShowcaseCard } from "@/lib/portfolio/selection";
 
-export function ProjectCards({ projects }: { projects: ShowcaseCard[] }) {
+export function ProjectCards({
+  projects,
+}: {
+  projects: (ShowcaseCard & { previewSrc?: string })[];
+}) {
   return (
     <div className="selected-project-grid">
       {projects.map((project, index) => (
@@ -11,7 +15,16 @@ export function ProjectCards({ projects }: { projects: ShowcaseCard[] }) {
           className="selected-project-card"
           key={project.slug}
         >
-          {project.cover ? (
+          {project.previewSrc ? (
+            <Image
+              unoptimized
+              width={1200}
+              height={800}
+              src={project.previewSrc}
+              alt={`${project.title} preview`}
+              loading="lazy"
+            />
+          ) : project.cover ? (
             <Image
               unoptimized
               width={1200}
