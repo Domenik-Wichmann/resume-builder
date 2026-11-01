@@ -6,3 +6,4 @@ next-env.d.ts
 local-career-ingest
 docs/from_human
 tmp
+public/demos/sonaway/assets/**

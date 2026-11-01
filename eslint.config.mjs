@@ -5,6 +5,7 @@ export default defineConfig([
   ...nextVitals,
   ...nextTs,
   globalIgnores([
+    "public/demos/sonaway/assets/**", // Imported standalone demo code; tested separately.
     "local-career-ingest/**",
     "tmp/**",
     ".next/**",

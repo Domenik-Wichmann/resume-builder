@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ProjectGuide as Guide } from "@/lib/portfolio/project-guides";
 import styles from "./project-guide.module.css";
+import { SonawayInteractiveStudy } from "./sonaway-interactive-study";
 
 export function ProjectGuide({ guide }: { guide: Guide }) {
   return (
@@ -53,6 +54,12 @@ export function ProjectGuide({ guide }: { guide: Guide }) {
           <a href="#project-overview">My contribution</a>
           <a href="#project-workflow">Workflow design</a>
           <a href="#project-features">Skills demonstrated</a>
+          {guide.key === "sonaway" && (
+            <>
+              <a href="#sonaway-knowledge-model">Knowledge model</a>
+              <a href="#sonaway-live-demos">Try the demos</a>
+            </>
+          )}
           <a href="#project-screenshots">Screens & previews</a>
           <a href="#project-engineering">My approach</a>
         </nav>
@@ -95,6 +102,7 @@ export function ProjectGuide({ guide }: { guide: Guide }) {
             ))}
           </div>
         </section>
+        {guide.key === "sonaway" && <SonawayInteractiveStudy />}
         <section className={styles.section} id="project-screenshots">
           <p className={styles.eyebrow}>See the work</p>
           <h2>See the decisions in the interface.</h2>

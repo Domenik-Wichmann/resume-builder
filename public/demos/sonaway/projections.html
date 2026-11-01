@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'none'; connect-src 'none'; form-action 'none'; base-uri 'none'"
+    />
+    <title>Sonaway projections demonstration</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+    <link rel="stylesheet" href="assets/knowledge-demo.css" />
+    <link rel="stylesheet" href="assets/intake.css" />
+    <link rel="stylesheet" href="assets/resort-theme.css" />
+    <link rel="stylesheet" href="assets/luxury-editorial.css" />
+    <link rel="stylesheet" href="assets/portfolio-embed.css" />
+  </head>
+  <body class="portfolio-demo">
+    <main>
+      <p id="embed-description" class="embed-note">
+        Interactive policy inheritance, dates and audience views using fictional
+        resort data.
+      </p>
+      <div
+        id="knowledge-lab"
+        class="kl-shell"
+        aria-describedby="embed-description"
+      >
+        <div class="kl-topbar">
+          <span><i></i>THE CONNECTED RESORT</span
+          ><span>INTERACTIVE EXAMPLE · FICTIONAL DATA</span>
+        </div>
+        <div id="kl-interactive" hidden>
+          <div
+            class="kl-tabs"
+            role="tablist"
+            aria-label="Explore connected hospitality knowledge"
+          >
+            <button
+              type="button"
+              id="kl-tab-policy"
+              role="tab"
+              aria-selected="true"
+              aria-controls="kl-panel-policy"
+            >
+              <span>01</span> Across properties</button
+            ><button
+              type="button"
+              id="kl-tab-context"
+              role="tab"
+              aria-selected="false"
+              aria-controls="kl-panel-context"
+              tabindex="-1"
+            >
+              <span>02</span> Seasons &amp; events</button
+            ><button
+              type="button"
+              id="kl-tab-audience"
+              role="tab"
+              aria-selected="false"
+              aria-controls="kl-panel-audience"
+              tabindex="-1"
+            >
+              <span>03</span> For each person
+            </button>
+          </div>
+          <div
+            id="kl-panel-policy"
+            class="kl-panel"
+            role="tabpanel"
+            aria-labelledby="kl-tab-policy"
+            tabindex="0"
+          >
+            <div class="kl-panel-heading">
+              <div>
+                <h3>One standard. Room for local differences.</h3>
+                <p>
+                  Click any property to edit its checkout time. Watch the change
+                  flow to the views that inherit it.
+                </p>
+              </div>
+              <div class="kl-actions">
+                <button id="kl-reset" type="button" class="kl-reset">
+                  Reset ↺
+                </button>
+              </div>
+            </div>
+            <div class="kl-legend" aria-label="Approved policy sources"></div>
+            <div class="kl-tree kl-map">
+              <svg class="kl-edges" aria-hidden="true"></svg>
+              <div
+                class="kl-node kl-n-core"
+                data-policy-node="core"
+                data-rule="core"
+              >
+                <button
+                  type="button"
+                  class="kl-node-trigger"
+                  aria-expanded="false"
+                >
+                  <span class="kl-node-origin"></span
+                  ><strong>Grand Pines Collection</strong
+                  ><span class="kl-node-time"></span
+                  ><span class="kl-node-change"></span
+                  ><span class="kl-edit-hint" aria-hidden="true"
+                    >↗</span
+                  ></button
+                ><select
+                  class="kl-inline-time"
+                  aria-label="Checkout time for core"
+                  hidden
+                ></select>
+              </div>
+              <div
+                class="kl-node kl-n-lake"
+                data-policy-node="lake"
+                data-rule="core"
+                data-parent="core"
+              >
+                <button
+                  type="button"
+                  class="kl-node-trigger"
+                  aria-expanded="false"
+                >
+                  <span class="kl-node-origin"></span
+                  ><strong>Lakeside Resort</strong
+                  ><span class="kl-node-time"></span
+                  ><span class="kl-node-change"></span
+                  ><span class="kl-edit-hint" aria-hidden="true"
+                    >↗</span
+                  ></button
+                ><select
+                  class="kl-inline-time"
+                  aria-label="Checkout time for lake"
+                  hidden
+                ></select>
+              </div>
+              <div
+                class="kl-node kl-n-garden"
+                data-policy-node="garden"
+                data-rule="core"
+                data-parent="core"
+              >
+                <button
+                  type="button"
+                  class="kl-node-trigger"
+                  aria-expanded="false"
+                >
+                  <span class="kl-node-origin"></span
+                  ><strong>Garden Hotel</strong
+                  ><span class="kl-node-time"></span
+                  ><span class="kl-node-change"></span
+                  ><span class="kl-edit-hint" aria-hidden="true"
+                    >↗</span
+                  ></button
+                ><select
+                  class="kl-inline-time"
+                  aria-label="Checkout time for garden"
+                  hidden
+                ></select>
+              </div>
+              <div
+                class="kl-node kl-n-alpine"
+                data-policy-node="alpine"
+                data-rule="alpine"
+                data-parent="core"
+              >
+                <button
+                  type="button"
+                  class="kl-node-trigger"
+                  aria-expanded="false"
+                >
+                  <span class="kl-node-origin"></span
+                  ><strong>Alpine Lodges</strong
+                  ><span class="kl-node-time"></span
+                  ><span class="kl-node-change"></span
+                  ><span class="kl-edit-hint" aria-hidden="true"
+                    >↗</span
+                  ></button
+                ><select
+                  class="kl-inline-time"
+                  aria-label="Checkout time for alpine"
+                  hidden
+                ></select>
+              </div>
+              <div
+                class="kl-node kl-n-suites"
+                data-policy-node="suites"
+                data-rule="suites"
+                data-parent="lake"
+              >
+                <button
+                  type="button"
+                  class="kl-node-trigger"
+                  aria-expanded="false"
+                >
+                  <span class="kl-node-origin"></span><strong>Spa suites</strong
+                  ><span class="kl-node-time"></span
+                  ><span class="kl-node-change"></span
+                  ><span class="kl-edit-hint" aria-hidden="true"
+                    >↗</span
+                  ></button
+                ><select
+                  class="kl-inline-time"
+                  aria-label="Checkout time for suites"
+                  hidden
+                ></select>
+              </div>
+              <div
+                class="kl-node kl-n-rooms"
+                data-policy-node="rooms"
+                data-rule="core"
+                data-parent="garden"
+              >
+                <button
+                  type="button"
+                  class="kl-node-trigger"
+                  aria-expanded="false"
+                >
+                  <span class="kl-node-origin"></span
+                  ><strong>Standard rooms</strong
+                  ><span class="kl-node-time"></span
+                  ><span class="kl-node-change"></span
+                  ><span class="kl-edit-hint" aria-hidden="true"
+                    >↗</span
+                  ></button
+                ><select
+                  class="kl-inline-time"
+                  aria-label="Checkout time for rooms"
+                  hidden
+                ></select>
+              </div>
+              <div
+                class="kl-node kl-n-lodgeA"
+                data-policy-node="lodgeA"
+                data-rule="alpine"
+                data-parent="alpine"
+              >
+                <button
+                  type="button"
+                  class="kl-node-trigger"
+                  aria-expanded="false"
+                >
+                  <span class="kl-node-origin"></span><strong>Lodge A</strong
+                  ><span class="kl-node-time"></span
+                  ><span class="kl-node-change"></span
+                  ><span class="kl-edit-hint" aria-hidden="true"
+                    >↗</span
+                  ></button
+                ><select
+                  class="kl-inline-time"
+                  aria-label="Checkout time for lodgeA"
+                  hidden
+                ></select>
+              </div>
+              <div
+                class="kl-node kl-n-lodgeB"
+                data-policy-node="lodgeB"
+                data-rule="alpine"
+                data-parent="alpine"
+              >
+                <button
+                  type="button"
+                  class="kl-node-trigger"
+                  aria-expanded="false"
+                >
+                  <span class="kl-node-origin"></span><strong>Lodge B</strong
+                  ><span class="kl-node-time"></span
+                  ><span class="kl-node-change"></span
+                  ><span class="kl-edit-hint" aria-hidden="true"
+                    >↗</span
+                  ></button
+                ><select
+                  class="kl-inline-time"
+                  aria-label="Checkout time for lodgeB"
+                  hidden
+                ></select>
+              </div>
+              <div
+                class="kl-node kl-n-chalet"
+                data-policy-node="chalet"
+                data-rule="chalet"
+                data-parent="alpine"
+              >
+                <button
+                  type="button"
+                  class="kl-node-trigger"
+                  aria-expanded="false"
+                >
+                  <span class="kl-node-origin"></span
+                  ><strong>Summit Chalet</strong
+                  ><span class="kl-node-time"></span
+                  ><span class="kl-node-change"></span
+                  ><span class="kl-edit-hint" aria-hidden="true"
+                    >↗</span
+                  ></button
+                ><select
+                  class="kl-inline-time"
+                  aria-label="Checkout time for chalet"
+                  hidden
+                ></select>
+              </div>
+            </div>
+            <div
+              id="kl-policy-detail"
+              class="kl-policy-detail"
+              data-rule="core"
+            >
+              <div>
+                <span class="kl-kicker">SELECTED VIEW</span>
+                <h4 id="kl-detail-name"></h4>
+                <strong id="kl-detail-time"></strong><span> checkout</span>
+              </div>
+              <div>
+                <p id="kl-detail-description"></p>
+                <strong id="kl-detail-source"></strong
+                ><span id="kl-detail-path"></span
+                ><button
+                  type="button"
+                  id="kl-inherit"
+                  class="kl-inherit"
+                  hidden
+                >
+                  Use parent rule
+                </button>
+              </div>
+            </div>
+            <p
+              id="kl-policy-status"
+              class="kl-status"
+              role="status"
+              aria-live="polite"
+            ></p>
+          </div>
+          <div
+            id="kl-panel-context"
+            class="kl-panel"
+            role="tabpanel"
+            aria-labelledby="kl-tab-context"
+            tabindex="0"
+            hidden
+          >
+            <div class="kl-panel-heading">
+              <div>
+                <h3>A date changes which rules apply.</h3>
+                <p>
+                  Pick a question and a date. Follow the highlighted path to the
+                  answer.
+                </p>
+              </div>
+            </div>
+            <div class="kl-context-controls">
+              <label for="kl-policy-select"
+                >Which policy?<select id="kl-policy-select">
+                  <option value="restaurant">Restaurant hours</option>
+                  <option value="buffet">Breakfast buffet</option>
+                  <option value="room">Room service hours</option>
+                </select></label
+              ><label for="kl-date"
+                >Choose an example date<select
+                  id="kl-date"
+                  aria-label="Example date"
+                >
+                  <option value="2026-06-15">Jun 15 · Ordinary day</option>
+                  <option value="2026-12-10">Dec 10 · Winter season</option>
+                  <option value="2026-12-18" selected>
+                    Dec 18 · Private wedding
+                  </option>
+                  <option value="2026-12-25">Dec 25 · Christmas week</option>
+                  <option value="2026-03-15">Mar 15 · Spring season</option>
+                  <option value="2026-04-12">Apr 12 · Food festival</option>
+                  <option value="2026-04-16">Apr 16 · Festival gala</option>
+                </select></label
+              ><button type="button" id="kl-context-reset" class="kl-reset">
+                Ordinary day ↺
+              </button>
+            </div>
+            <div class="kl-context-layout">
+              <div>
+                <div class="kl-map-key">
+                  <span><i></i>Active path</span
+                  ><span>Filled card = answer source</span
+                  ><span>Click any event to try its date</span>
+                </div>
+                <div class="kl-context-map kl-map">
+                  <svg class="kl-edges" aria-hidden="true"></svg
+                  ><button
+                    type="button"
+                    class="kl-context-card kl-c-base"
+                    data-context="base"
+                    aria-label="Preview Base policy"
+                  >
+                    <span class="kl-context-date">All year</span
+                    ><strong>Base policy</strong
+                    ><span class="kl-context-value"></span
+                    ><span class="kl-context-origin"></span></button
+                  ><button
+                    type="button"
+                    class="kl-context-card kl-c-winter"
+                    data-context="winter"
+                    data-parent="base"
+                    aria-label="Preview Winter season"
+                  >
+                    <span class="kl-context-date">Dec 1–Feb 28</span
+                    ><strong>Winter season</strong
+                    ><span class="kl-context-value"></span
+                    ><span class="kl-context-origin"></span></button
+                  ><button
+                    type="button"
+                    class="kl-context-card kl-c-spring"
+                    data-context="spring"
+                    data-parent="base"
+                    aria-label="Preview Spring season"
+                  >
+                    <span class="kl-context-date">Mar 1–May 31</span
+                    ><strong>Spring season</strong
+                    ><span class="kl-context-value"></span
+                    ><span class="kl-context-origin"></span></button
+                  ><button
+                    type="button"
+                    class="kl-context-card kl-c-christmas"
+                    data-context="christmas"
+                    data-parent="winter"
+                    aria-label="Preview Christmas week"
+                  >
+                    <span class="kl-context-date">Dec 24–30</span
+                    ><strong>Christmas week</strong
+                    ><span class="kl-context-value"></span
+                    ><span class="kl-context-origin"></span></button
+                  ><button
+                    type="button"
+                    class="kl-context-card kl-c-wedding"
+                    data-context="wedding"
+                    data-parent="winter"
+                    aria-label="Preview Private wedding"
+                  >
+                    <span class="kl-context-date">Dec 18 only</span
+                    ><strong>Private wedding</strong
+                    ><span class="kl-context-value"></span
+                    ><span class="kl-context-origin"></span></button
+                  ><button
+                    type="button"
+                    class="kl-context-card kl-c-festival"
+                    data-context="festival"
+                    data-parent="spring"
+                    aria-label="Preview Food festival"
+                  >
+                    <span class="kl-context-date">Apr 10–20</span
+                    ><strong>Food festival</strong
+                    ><span class="kl-context-value"></span
+                    ><span class="kl-context-origin"></span></button
+                  ><button
+                    type="button"
+                    class="kl-context-card kl-c-gala"
+                    data-context="gala"
+                    data-parent="festival"
+                    aria-label="Preview Festival gala"
+                  >
+                    <span class="kl-context-date">Apr 16 only</span
+                    ><strong>Festival gala</strong
+                    ><span class="kl-context-value"></span
+                    ><span class="kl-context-origin"></span>
+                  </button>
+                </div>
+              </div>
+              <aside
+                id="kl-effective"
+                class="kl-effective-view"
+                aria-label="Answer for the selected date"
+              >
+                <span class="kl-kicker"
+                  >ANSWER FOR <span id="kl-answer-date"></span
+                ></span>
+                <h4 id="kl-context-question"></h4>
+                <strong id="kl-context-value"></strong>
+                <p id="kl-context-answer"></p>
+                <div class="kl-answer-source">
+                  <span>THIS ANSWER COMES FROM</span
+                  ><strong id="kl-context-source"></strong>
+                  <p id="kl-context-reason"></p>
+                </div>
+                <div id="kl-active-path" class="kl-active-path"></div>
+              </aside>
+            </div>
+            <p
+              id="kl-context-status"
+              class="kl-status"
+              role="status"
+              aria-live="polite"
+            ></p>
+          </div>
+          <div
+            id="kl-panel-audience"
+            class="kl-panel"
+            role="tabpanel"
+            aria-labelledby="kl-tab-audience"
+            tabindex="0"
+            hidden
+          >
+            <div class="kl-panel-heading">
+              <div>
+                <h3>Same question. The detail each person needs.</h3>
+                <p>
+                  December 18 · a wedding has reserved the main buffet. Choose
+                  who’s asking.
+                </p>
+              </div>
+            </div>
+            <div class="kl-question-bubble">
+              <span id="kl-question-role">GUEST ASKS</span>
+              <p>“How does breakfast work on the wedding day?”</p>
+            </div>
+            <div class="kl-conversation">
+              <div class="kl-audience-sidebar">
+                <div
+                  class="kl-audience-options"
+                  role="group"
+                  aria-label="Who is asking?"
+                >
+                  <button
+                    type="button"
+                    data-audience="guest"
+                    aria-pressed="true"
+                  >
+                    Guest <small>My breakfast</small></button
+                  ><button
+                    type="button"
+                    data-audience="staff"
+                    aria-pressed="false"
+                  >
+                    Staff member <small>My next steps</small></button
+                  ><button
+                    type="button"
+                    data-audience="manager"
+                    aria-pressed="false"
+                  >
+                    Manager <small>My service plan</small>
+                  </button>
+                </div>
+                <aside class="kl-audience-boundary">
+                  <strong id="kl-boundary-title"></strong>
+                  <p id="kl-audience-boundary"></p>
+                </aside>
+              </div>
+              <article
+                id="kl-audience-preview"
+                class="kl-audience-preview"
+                data-audience="guest"
+              >
+                <div class="kl-preview-top">
+                  <span>SONAWAY · EXAMPLE ANSWER</span
+                  ><span id="kl-audience-tag"></span>
+                </div>
+                <p id="kl-audience-intro"></p>
+                <div id="kl-audience-rows" class="kl-audience-rows"></div>
+                <div class="kl-audience-citation">
+                  <span>APPROVED SOURCES</span>
+                  <p id="kl-audience-source"></p>
+                </div>
+              </article>
+            </div>
+            <p
+              id="kl-audience-status"
+              class="kl-sr-only"
+              role="status"
+              aria-live="polite"
+            ></p>
+          </div>
+        </div>
+        <noscript
+          ><p class="kl-nojs">
+            Enable JavaScript to explore shared policies, date-specific rules
+            and different answers for guests, staff and managers.
+          </p></noscript
+        >
+        <div class="kl-footer">
+          <span
+            >Illustrative schedules &amp; permissions, configured for your
+            operation.</span
+          ><a href="contact.html">Map your operation ↗</a>
+        </div>
+      </div>
+    </main>
+    <script src="assets/knowledge-model.js" defer></script>
+    <script src="assets/property-model.js" defer></script>
+    <script src="assets/knowledge-demo.js" defer></script>
+  </body>
+</html>

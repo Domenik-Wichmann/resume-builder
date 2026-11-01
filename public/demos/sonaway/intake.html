@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'none'; connect-src 'none'; form-action 'none'; base-uri 'none'"
+    />
+    <title>Sonaway intake demonstration</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+    <link rel="stylesheet" href="assets/knowledge-demo.css" />
+    <link rel="stylesheet" href="assets/intake.css" />
+    <link rel="stylesheet" href="assets/resort-theme.css" />
+    <link rel="stylesheet" href="assets/luxury-editorial.css" />
+    <link rel="stylesheet" href="assets/portfolio-embed.css" />
+  </head>
+  <body class="portfolio-demo">
+    <main>
+      <p id="embed-description" class="embed-note">
+        Scripted guided-update demonstration using fictional property records.
+      </p>
+      <section
+        id="guided-intake"
+        class="gi-shell"
+        aria-label="Guided knowledge update example"
+        aria-describedby="embed-description"
+      >
+        <div class="gi-head">
+          <strong>A simple update.<br />Made precise.</strong
+          ><span>SCRIPTED DEMO<br />NO LIVE CHANGES</span>
+        </div>
+        <div class="gi-interactive" hidden>
+          <div class="gi-meter">
+            <div class="gi-progress" aria-hidden="true"></div>
+            <span class="gi-counter"></span>
+          </div>
+          <div class="gi-body">
+            <div class="gi-conversation"></div>
+            <aside class="gi-aside" aria-label="Live example knowledge map">
+              <div class="gi-map">
+                <div class="gi-network-top">
+                  <span><i></i> KNOWLEDGE IN MOTION</span
+                  ><span>SIMULATED SEARCH</span>
+                </div>
+                <h4 class="gi-network-title"></h4>
+                <svg
+                  class="gi-network"
+                  viewBox="0 0 640 360"
+                  role="img"
+                  aria-label="Relevant knowledge records narrow as you answer"
+                >
+                  <defs>
+                    <radialGradient id="gi-glow">
+                      <stop offset="0" stop-color="#b8c99a" stop-opacity=".2" />
+                      <stop offset="1" stop-color="#b8c99a" stop-opacity="0" />
+                    </radialGradient>
+                    <pattern
+                      id="gi-grid"
+                      width="22"
+                      height="22"
+                      patternUnits="userSpaceOnUse"
+                    >
+                      <circle
+                        cx="1"
+                        cy="1"
+                        r=".65"
+                        fill="#c9d2b4"
+                        opacity=".2"
+                      />
+                    </pattern>
+                  </defs>
+                  <rect width="640" height="360" fill="url(#gi-grid)" />
+                  <ellipse
+                    cx="300"
+                    cy="145"
+                    rx="270"
+                    ry="160"
+                    fill="url(#gi-glow)"
+                  />
+                  <g class="gi-network-edges"></g>
+                  <g class="gi-network-nodes"></g>
+                </svg>
+                <p class="gi-network-caption" aria-live="off"></p>
+              </div>
+              <div class="gi-scope">
+                <h4>THE SCOPE SO FAR <span>SELECT A DETAIL TO REVISE</span></h4>
+                <p class="gi-scope-empty">
+                  Your replies connect the right property, procedure, dates and
+                  people.
+                </p>
+                <dl class="gi-summary"></dl>
+              </div>
+            </aside>
+          </div>
+          <div class="gi-foot">
+            <p class="gi-status" role="status" aria-live="polite"></p>
+            <div>
+              <button type="button" data-gi-back>Back</button
+              ><button type="button" data-gi-reset>Start again</button>
+            </div>
+          </div>
+        </div>
+        <p class="gi-fallback">
+          A simple breakfast update becomes a precise, reviewed change: choose
+          the property, venue, arrangement, dates, affected guests and approver.
+          Enable JavaScript to explore this scripted example.
+        </p>
+      </section>
+    </main>
+    <script src="assets/intake-model.js" defer></script>
+    <script src="assets/intake-graph.js" defer></script>
+    <script src="assets/intake-network.js" defer></script>
+    <script src="assets/intake.js" defer></script>
+  </body>
+</html>

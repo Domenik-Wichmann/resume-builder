@@ -1,0 +1,10 @@
+/* Portfolio framing only; the imported demo models and controllers are unchanged. */
+html { scroll-behavior:auto; color-scheme:light; }
+body.portfolio-demo { margin:0; padding:14px; min-width:0; background:#f4f0e7; color:#2e3029; font-family:Arial,Helvetica,sans-serif; }
+.portfolio-demo main { margin:0; width:100%; }
+.embed-note { font-size:12px; line-height:1.5; margin:0 0 12px; color:#59604f; }
+.portfolio-demo .gi-shell,.portfolio-demo .kl-shell { margin:0; width:100%; max-width:none; box-shadow:none; }
+.portfolio-demo .gi-head { padding:18px 22px; }
+.portfolio-demo .gi-head strong { font-size:25px; }
+.portfolio-demo .gi-body { height:500px; }
+@media(max-width:600px) { body.portfolio-demo { padding:8px; }.embed-note { font-size:11px; }.portfolio-demo .gi-body { height:auto; }.portfolio-demo .gi-head { padding:14px; }.portfolio-demo .gi-head strong { font-size:22px; } }

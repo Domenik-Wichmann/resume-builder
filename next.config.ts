@@ -14,6 +14,18 @@ const config: NextConfig = {
           },
         ],
       },
+      {
+        // Only these fictional, browser-local demos can be framed by this site.
+        source: "/demos/sonaway/:demo.html",
+        headers: [
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          {
+            key: "Content-Security-Policy",
+            value:
+              "frame-ancestors 'self'; connect-src 'none'; form-action 'none'",
+          },
+        ],
+      },
     ];
   },
 };
