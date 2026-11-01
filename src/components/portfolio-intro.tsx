@@ -117,6 +117,72 @@ export function PortfolioIntro({
           </div>
         </div>
       </div>
+      <nav className="hero-projects wrap" aria-label="Featured projects">
+        <Link
+          className="hero-project-card"
+          href="/projects/configurable-excel-and-vba-rules-engine-78ff38898c"
+        >
+          <Image
+            className="hero-project-preview"
+            src="/images/projects/babycat-dashboard.jpg"
+            width={160}
+            height={110}
+            alt=""
+          />
+          <span className="hero-project-copy">
+            <strong>BabyCat</strong>
+            <span>Catalogs, rules & automation</span>
+            <small>
+              Explore project <span aria-hidden="true">↗</span>
+            </small>
+          </span>
+        </Link>
+        <Link
+          className="hero-project-card"
+          href="/projects/multilingual-onboarding-and-mini-lms-51f0eca038"
+        >
+          <Image
+            className="hero-project-preview"
+            src="/images/projects/systemwright-lms.jpg"
+            width={160}
+            height={110}
+            alt=""
+          />
+          <span className="hero-project-copy">
+            <strong>SystemWright LMS</strong>
+            <span>Interactive, multilingual learning</span>
+            <small>
+              Explore project <span aria-hidden="true">↗</span>
+            </small>
+          </span>
+        </Link>
+        <div className="hero-project-card hero-project-soon">
+          <span
+            className="hero-project-monogram kernel-mark"
+            aria-hidden="true"
+          >
+            K
+          </span>
+          <span className="hero-project-copy">
+            <strong>Kernel</strong>
+            <span>Household meal planning</span>
+            <small>Coming soon</small>
+          </span>
+        </div>
+        <div className="hero-project-card hero-project-soon">
+          <span
+            className="hero-project-monogram sonaway-mark"
+            aria-hidden="true"
+          >
+            S
+          </span>
+          <span className="hero-project-copy">
+            <strong>Sonaway</strong>
+            <span>Connected operational knowledge</span>
+            <small>Coming soon</small>
+          </span>
+        </div>
+      </nav>
       {composer || (
         <a
           className="personal-scroll-cue"

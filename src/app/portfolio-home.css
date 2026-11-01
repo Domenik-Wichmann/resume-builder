@@ -32,6 +32,138 @@ html:has(.portfolio-home) {
   margin: auto auto 24px;
   position: relative;
 }
+.personal-hero .personal-portrait {
+  max-width: 280px;
+}
+.hero-projects {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  flex-shrink: 0;
+  margin: 0 auto 22px;
+}
+.hero-project-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  min-height: 108px;
+  padding: 14px;
+  border: 1px solid #8eabb33d;
+  border-radius: 18px;
+  background: linear-gradient(125deg, #182b3ae6, #122b2de6);
+  text-decoration: none;
+  transition:
+    border-color 180ms,
+    background 180ms,
+    transform 180ms;
+}
+a.hero-project-card:hover {
+  border-color: #bda4ef;
+  background: linear-gradient(125deg, #24364b, #183a36);
+  transform: translateY(-3px);
+}
+a.hero-project-card:focus-visible {
+  outline: 3px solid #c5a7ff;
+  outline-offset: 4px;
+}
+.hero-project-preview,
+.hero-project-monogram {
+  width: 74px;
+  height: 68px;
+  flex-shrink: 0;
+  border: 1px solid #b8c8d433;
+  border-radius: 10px;
+  object-fit: cover;
+  object-position: top left;
+}
+.hero-project-copy {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 5px;
+}
+.hero-project-copy strong {
+  color: #f2f5f7;
+  font-size: 15px;
+  line-height: 1.3;
+}
+.hero-project-copy > span {
+  color: #b8cbd3;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.hero-project-copy small {
+  color: #d1bafa;
+  font-size: 11px;
+  line-height: 1.4;
+}
+.hero-project-monogram {
+  display: grid;
+  place-items: center;
+  font-size: 32px;
+  font-weight: 400;
+}
+.kernel-mark {
+  background: radial-gradient(ellipse at top left, #526d40, #193a35);
+  color: #dce8ac;
+}
+.sonaway-mark {
+  background: radial-gradient(ellipse at top left, #65543a, #292c40);
+  color: #f2d39d;
+}
+.hero-project-soon {
+  border-style: dashed;
+  background: #14283480;
+}
+.hero-project-soon small {
+  color: #9fb5c0;
+}
+@media (min-width: 801px) and (max-width: 1150px) {
+  .hero-project-preview,
+  .hero-project-monogram {
+    width: 48px;
+    height: 58px;
+  }
+  .hero-project-card {
+    gap: 9px;
+    padding: 12px;
+  }
+}
+@media (max-width: 800px) {
+  .hero-projects {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+  .hero-project-card {
+    min-height: 100px;
+    padding: 12px;
+  }
+}
+@media (max-width: 560px) {
+  .hero-project-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .hero-project-preview,
+  .hero-project-monogram {
+    width: 100%;
+    height: 64px;
+  }
+  html:has(.portfolio-home) {
+    scroll-snap-type: y proximity;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-project-card {
+    transition: none;
+  }
+  a.hero-project-card:hover {
+    transform: none;
+  }
+}
 .hero-composer > label {
   display: block;
   margin-bottom: 12px;
