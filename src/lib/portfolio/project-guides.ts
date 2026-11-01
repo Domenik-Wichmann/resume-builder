@@ -8,6 +8,7 @@ export type ProjectGuide = {
   headline: string;
   summary: string;
   problem: string;
+  contribution: string;
   status: string;
   stack: string[];
   features: { title: string; text: string }[];
@@ -24,11 +25,13 @@ export const projectGuides: ProjectGuide[] = [
     slug: "configurable-excel-and-vba-rules-engine-78ff38898c",
     name: "BabyCat",
     category: "Catalog operations & automation",
-    headline: "From supplier spreadsheets to controlled catalog releases.",
+    headline: "Applying catalog experience to a traceable data workflow.",
     summary:
-      "A catalog workbench that brings incoming files, reusable transformation rules, change comparisons and release decisions into one workflow. Original uploads stay intact, and each export can be traced back to its source and rule revisions.",
+      "I built BabyCat to turn the catalog problems I work with into a coherent application: incoming supplier files, reusable rules, visible changes and controlled exports. The project demonstrates how I translate operational requirements into data structures, workflow rules and a usable interface.",
     problem:
       "Supplier files arrive with different columns, formats and mistakes. A corrected spreadsheet can quickly become another untraceable copy. BabyCat keeps the incoming file, the working data and the released result connected, so teams can inspect what changed and decide what should leave the system.",
+    contribution:
+      "I defined the catalog lifecycle, the rule-driven workflow and the points where a person needs to inspect or approve a result. I used AI-assisted development to build and refine the application around those requirements. My contribution connects practical catalog experience with system design, data quality and workflow automation.",
     status: "Working application · public sample and private demo workspaces",
     stack: [
       "Python",
@@ -41,20 +44,20 @@ export const projectGuides: ProjectGuide[] = [
     ],
     features: [
       {
-        title: "Import once. Reuse the mapping.",
-        text: "Accept CSV, XLSX and flat JSON, map supplier fields to a destination schema, and retain the mapping used for each incoming run. Organizations, suppliers and catalogs keep the work organized.",
+        title: "Catalog workflow design",
+        text: "I translated supplier-data work into an explicit sequence: receive, map, verify, transform, review and export. Saved mappings and retained upload history make repeated work more consistent and easier to investigate.",
       },
       {
-        title: "Make the transformation visible.",
-        text: "Apply ordered rules for values, columns, rows, calculations and formatting. Switch between Raw and Working data, inspect changed cells, and edit rules beside the table or on a dedicated page.",
+        title: "Rules and data transformation",
+        text: "I designed around reusable, ordered rules rather than one-off spreadsheet fixes. Raw and Working views, changed-cell inspection and a nearby rule editor make the effect of those rules visible.",
       },
       {
-        title: "Review before release.",
-        text: "Verify incoming data, validate transformed values and evaluate governance thresholds. Material changes can require an approval of the specific frozen export rather than a loosely defined current file.",
+        title: "Data quality and release controls",
+        text: "I separated incoming verification, output validation and export approval. The resulting workflow ties a release decision to a specific frozen output and its rule revisions.",
       },
       {
-        title: "Keep suppliers in the loop.",
-        text: "Assigned supplier access supports uploads, issue review, corrections and resubmission. Shared email templates, contextual assistance and reviewed AI rule drafting support the surrounding workflow.",
+        title: "Operational interface design",
+        text: "I brought supplier uploads, correction loops, email templates and contextual assistance into the same workflow. This shows how I connect a data engine to the people who need to use its results.",
       },
     ],
     steps: [
@@ -67,7 +70,7 @@ export const projectGuides: ProjectGuide[] = [
       },
     ],
     engineering:
-      "The product layer handles sessions, workspace membership, resource scope and lifecycle decisions; the underlying engines evaluate rules and comparisons. Local development uses SQLite and file storage. Hosted configuration uses Azure SQL and immutable Blob artifacts. Rule revisions and frozen exports preserve the inputs behind a decision.",
+      "I structured the application around separate responsibilities: the product layer owns access and lifecycle decisions, while the engines evaluate transformations and comparisons. The build uses Python and Azure Functions, with SQLite for local work and Azure SQL plus Blob Storage for hosted configuration. Keeping original uploads, rule revisions and frozen exports connected makes the result inspectable. This is an example of the architecture and validation decisions I work through with AI-assisted implementation.",
     limits:
       "The sample uses fictional suppliers. The application supports bounded catalog sizes and practical Excel preservation, rather than every Excel feature. Email, SFTP and connected imports depend on deployment configuration; a public sample simulation does not demonstrate a live external delivery.",
     demo: {
@@ -117,11 +120,14 @@ export const projectGuides: ProjectGuide[] = [
     slug: "multilingual-onboarding-and-mini-lms-51f0eca038",
     name: "SystemWright LMS",
     category: "Interactive training & media workflows",
-    headline: "A lesson people can watch, practise and ask about.",
+    headline:
+      "Turning a training problem into an interactive learning workflow.",
     summary:
-      "A multilingual learning application that combines video, synchronized guidance, narration, knowledge checks and course-grounded assistance. Personalized learner links make it useful for supplier onboarding, team training and customer education.",
+      "I built SystemWright LMS around a practical onboarding need: explain a process, let someone practise it, answer their questions and show the coordinator where they need help. The project brings together workflow design, multilingual content, media synchronization and course-grounded AI assistance.",
     problem:
       "A video explains the process, but a learner still needs the right template, a clear next step and a way to ask a question. Coordinators also need to see where people stop or get confused. SystemWright brings those pieces into one guided learning experience.",
+    contribution:
+      "I shaped the learner journey and the administrator workflows, including video checkpoints, translated guidance, narration, resources and progress tracking. Using AI-assisted development, I turned that experience into a working application and iterated on how its parts fit together. The work connects an operational training need with product design and media integration.",
     status: "Working learning platform · public overview available",
     stack: [
       "React",
@@ -135,20 +141,20 @@ export const projectGuides: ProjectGuide[] = [
     ],
     features: [
       {
-        title: "Learn by doing.",
-        text: "Configured checkpoints pause a native video player for a task or question. Guidance, resources and progress sit beside the explanation, so practice belongs to the lesson rather than a separate email.",
+        title: "Learning-experience design",
+        text: "I designed a journey that moves from explanation to practice: the video pauses at configured checkpoints while the learner has the relevant guidance and resources nearby.",
       },
       {
-        title: "One course, multiple languages.",
-        text: "Language-specific narration, captions, guidance and prompts share a course structure. The media workflow supports transcript handling, translation and narration preparation.",
+        title: "Multilingual media workflows",
+        text: "I connected course structure with language-specific narration, captions, instructions and prompts. This demonstrates how I organize content and coordinate media rather than treat translation as a separate final step.",
       },
       {
-        title: "Ask in the moment.",
-        text: "A course-grounded assistant uses the learning material as context. Learners can ask about the process while it is on screen, and administrators can review the questions being asked.",
+        title: "Grounded AI integration",
+        text: "I included course-grounded assistance so questions can be answered in the context of the lesson. The workflow also retains questions for administrator review, connecting assistance with content improvement.",
       },
       {
-        title: "Manage the whole learning journey.",
-        text: "Administration includes course and content management, learner access, video and narration workflows, quizzes, progress and recorded responses. Personalized links reduce learner setup.",
+        title: "Administration and operational visibility",
+        text: "I designed for the people running the training as well as the learner: course management, access links, quizzes, narration preparation and progress review belong to the same application.",
       },
     ],
     steps: [
@@ -170,7 +176,7 @@ export const projectGuides: ProjectGuide[] = [
       },
     ],
     engineering:
-      "A native HTML video element exposes timing events for checkpoints and synchronized instructions. Separate narration tracks allow language changes without creating a complete video for every language. React handles the learner interface; Firebase services provide hosted data, media and server-side provider calls.",
+      "I chose a native HTML video element because its timing events allow checkpoints and guidance to follow the lesson. Separate narration tracks support multiple languages without recreating an entire video for each one. The implementation combines React and Firebase with server-side Gemini and ElevenLabs calls. The design work was coordinating playback, language, course state and learner progress into one experience through AI-assisted development.",
     limits:
       "The gallery distinguishes public website screenshots from the illustrative learner preview. Course content and available languages depend on configuration. Personalized access links must be treated as credentials; the public overview is not an administrator session.",
     demo: {
@@ -206,11 +212,13 @@ export const projectGuides: ProjectGuide[] = [
     slug: "kernel",
     name: "Kernel",
     category: "Household planning & recipe knowledge",
-    headline: "Connect the meal plan to the food, the people and the work.",
+    headline: "Modeling the constraints behind an everyday planning problem.",
     summary:
-      "A household meal planner that connects recipe discovery, weekly planning, shopping, pantry stock and cooking. Underneath the daily interface, recipes can be represented as structured ingredients, actions and evidence-backed food knowledge.",
+      "I built Kernel to explore how a household planner can connect preferences, recipes, time, equipment, ingredients and nutrition constraints. The project demonstrates systems thinking: a plan has to remain consistent with shopping, pantry stock, preparation and what people actually eat.",
     problem:
       "A meal plan is only useful if it works with the household’s preferences, available equipment, time and ingredients. Buying food, cooking a meal, eating it and liking it are different events. Kernel keeps those distinctions so the plan can respond to what actually happened.",
+    contribution:
+      "I defined the household workflows and the distinctions the model needs to preserve: planning, buying, cooking, eating and liking are separate events. I used AI-assisted development to explore the implementation and refine its behavior. My focus is connecting a practical user need to a structured domain model, explicit constraints and checks on the resulting plan.",
     status:
       "Development build · planning and recipe-knowledge workflows implemented",
     stack: [
@@ -224,20 +232,20 @@ export const projectGuides: ProjectGuide[] = [
     ],
     features: [
       {
-        title: "Plan around the household.",
-        text: "Generate a week with time, equipment, ingredient and configured nutrition constraints. Preference, variety and ingredient-reuse objectives guide selection, followed by independent numerical validation.",
+        title: "Domain and state modeling",
+        text: "I distinguished planned meals from physical purchases, preparation and confirmed eating. That distinction shapes how replanning works without discarding pantry stock or treating a plan as completed activity.",
       },
       {
-        title: "Keep shopping connected.",
-        text: "Derive requirements from selected meals, account for confirmed pantry stock, record partial purchases and add extra items. Replanning does not make physical purchases disappear.",
+        title: "Constraint-based problem framing",
+        text: "I expressed the planning problem in terms of household restrictions, available time, equipment and configured nutrient bounds. Variety, preference and ingredient reuse guide selection within those constraints.",
       },
       {
-        title: "Support cooking as it happens.",
-        text: "Follow instructions and timers, retain preparation state, and record cooking and eating separately. Planned portions are not silently treated as consumed food.",
+        title: "Connected workflow design",
+        text: "I linked recipe discovery to planning, shopping and cooking instead of building separate lists. Partial purchases and meal requirements provide concrete examples of how one action affects the rest of the workflow.",
       },
       {
-        title: "Inspect the recipe’s structure.",
-        text: "The knowledge studio supports recursive ingredient and action graphs, shared cooking concepts, method-and-food search and source-linked review. Quantity and nutrition review precedes promotion into a household recipe.",
+        title: "Structured knowledge and validation",
+        text: "I explored recipes as ingredients and preparation actions with source-linked review. Quantity and nutrition checks separate an extracted recipe draft from a recipe ready to enter household planning.",
       },
     ],
     steps: [
@@ -256,7 +264,7 @@ export const projectGuides: ProjectGuide[] = [
       },
     ],
     engineering:
-      "An Expo client talks to a FastAPI backend backed by PostgreSQL. OR-Tools models meal selection as a constrained optimization problem. Recipe graphs retain source evidence and unresolved quantities; optional language adapters help with search and extraction while deterministic validation checks the resulting structure.",
+      "I organized the project around an Expo client, a FastAPI backend and PostgreSQL, with OR-Tools handling constrained meal selection. A separate numerical validation step checks the plan, while recipe graphs retain source evidence and unresolved quantities. Working through these boundaries with AI-assisted development demonstrates how I specify system behavior, inspect the resulting model and keep uncertain inputs explicit.",
     limits:
       "Kernel remains a development build. The previews below are illustrative and use fictional household data. Broader reviewed recipe coverage, package and retailer optimization, native-device acceptance and production hardening remain ongoing work. Configured nutrient limits are user inputs, not medical prescriptions.",
     screens: [
@@ -281,12 +289,13 @@ export const projectGuides: ProjectGuide[] = [
     slug: "sonaway-operational-knowledge-product-eb8c2d879b",
     name: "Sonaway",
     category: "Operational knowledge & governed change",
-    headline:
-      "Operational knowledge that stays connected when the work changes.",
+    headline: "Designing a knowledge model that can explain and govern change.",
     summary:
-      "Sonaway turns scattered operational explanations into connected, evidence-backed knowledge. Ingest, semantic comparison, clarification, authority and versioned publication are separate parts of the lifecycle, giving retrieval a model of the work underneath it.",
+      "I defined Sonaway’s operational problem, product behavior and architecture direction, then used AI-assisted development and experiments to evolve the implementation. The project demonstrates my approach to knowledge modeling, evidence-backed retrieval and the boundaries between AI interpretation, review and authorized change.",
     problem:
       "A procedure describes a step. A conversation explains the exception. A different document identifies the responsible role. When any of these change, a useful system needs to preserve the relationships, the evidence and the authority behind the change.",
+    contribution:
+      "My work centers on deciding what the system needs to represent, how meaning and evidence stay connected, and how a proposed update becomes an authorized version. I use experiments and failure reports to refine those decisions. AI contributes substantially to implementation; I drive requirements, architecture reasoning, acceptance criteria and iteration.",
     status:
       "Under development · governed runtime and illustrative public demonstrations",
     stack: [
@@ -300,20 +309,20 @@ export const projectGuides: ProjectGuide[] = [
     ],
     features: [
       {
-        title: "Capture meaning with its evidence.",
-        text: "Source material enters a semantic workspace containing connected actions, roles, conditions and other components. Evidence links preserve the passages behind an interpretation, and ambiguity remains a reviewable question.",
+        title: "Ontology and knowledge modeling",
+        text: "I defined the need to keep actions, roles, conditions and source evidence connected. This shows how I reason about operational meaning beyond a collection of documents or text chunks.",
       },
       {
-        title: "Review the specific change.",
-        text: "Semantic comparison works against an exact baseline. Proposed operations, evidence verification, clarification and formal authority remain distinct; resolving meaning does not itself authorize publication.",
+        title: "Evidence-backed AI architecture",
+        text: "I shaped a lifecycle in which AI interpretations remain linked to source material and unresolved ambiguity remains visible. Retrieval and review can then work with the model’s context and provenance.",
       },
       {
-        title: "Preserve the accepted knowledge.",
-        text: "Versioned Canonical records and bounded operation application preserve untouched components. Publication produces a new immutable version rather than silently overwriting the organization’s accepted model.",
+        title: "Governed change and versioning",
+        text: "I separated understanding a change from authorizing it. Exact-baseline comparison, bounded operations and immutable versions make the consequences of an update concrete and reviewable.",
       },
       {
-        title: "Show the right context.",
-        text: "The public demonstrations illustrate conversational updates, inherited policies, local exceptions, seasons, events and role-specific guidance. They explain the product direction using fictional browser-local scenarios.",
+        title: "Experiment-led product development",
+        text: "I used experiments and failure reports to investigate missing context, ownership and the behavior of proposed changes. The public demonstrations make inheritance, exceptions and role-specific guidance easier to inspect.",
       },
     ],
     steps: [
@@ -335,7 +344,7 @@ export const projectGuides: ProjectGuide[] = [
       },
     ],
     engineering:
-      "The active runtime separates ingest and staging, Canonical history, semantic comparison and approval, and the manager interface. Deterministic checks constrain model-proposed interpretations and changes. The consulting website separately demonstrates policy inheritance and guided updates; those demonstrations are scripted examples rather than live model reasoning.",
+      "I separated the lifecycle into ingest and staging, Canonical history, semantic comparison and approval, and the manager interface. The central design decision is where to allow probabilistic interpretation and where to require deterministic checks, current authority and an exact baseline. I used AI-assisted development to explore that architecture and refine it through experiments. The separate public website demonstrates contextual views and guided updates with scripted examples.",
     limits:
       "Sonaway is being developed rather than presented as a generally available operational platform. Runtime components, research and public website demonstrations have different readiness levels. The interface previews use fictional operations; the public website does not demonstrate production permissions or a live client deployment.",
     screens: [

@@ -50,20 +50,24 @@ export function ProjectGuide({ guide }: { guide: Guide }) {
           </figure>
         </header>
         <nav className={styles.jump} aria-label="Project sections">
-          <a href="#project-overview">The problem</a>
-          <a href="#project-workflow">The workflow</a>
-          <a href="#project-features">What it does</a>
+          <a href="#project-overview">My contribution</a>
+          <a href="#project-workflow">Workflow design</a>
+          <a href="#project-features">Skills demonstrated</a>
           <a href="#project-screenshots">Screens & previews</a>
-          <a href="#project-engineering">Under the hood</a>
+          <a href="#project-engineering">My approach</a>
         </nav>
         <section className={styles.problem} id="project-overview">
-          <p className={styles.eyebrow}>Why build it?</p>
-          <h2>The problem behind the project.</h2>
+          <p className={styles.eyebrow}>The starting point</p>
+          <h2>The problem I set out to solve.</h2>
           <p>{guide.problem}</p>
+          <div className={styles.contribution}>
+            <h3>My contribution</h3>
+            <p>{guide.contribution}</p>
+          </div>
         </section>
         <section className={styles.workflow} id="project-workflow">
-          <p className={styles.eyebrow}>From start to finish</p>
-          <h2>How the workflow fits together.</h2>
+          <p className={styles.eyebrow}>From requirements to behavior</p>
+          <h2>The workflow I designed around.</h2>
           <ol>
             {guide.steps.map((step, index) => (
               <li key={step.title}>
@@ -77,8 +81,8 @@ export function ProjectGuide({ guide }: { guide: Guide }) {
           </ol>
         </section>
         <section className={styles.section} id="project-features">
-          <p className={styles.eyebrow}>A closer look</p>
-          <h2>What the application does.</h2>
+          <p className={styles.eyebrow}>What this work demonstrates</p>
+          <h2>The skills behind the project.</h2>
           <div className={styles.features}>
             {guide.features.map((feature, index) => (
               <div key={feature.title}>
@@ -93,10 +97,11 @@ export function ProjectGuide({ guide }: { guide: Guide }) {
         </section>
         <section className={styles.section} id="project-screenshots">
           <p className={styles.eyebrow}>See the work</p>
-          <h2>Screens, details and example workflows.</h2>
+          <h2>See the decisions in the interface.</h2>
           <p className={styles.galleryIntro}>
-            Open any image to see it at full size. Each caption identifies an
-            actual screen or an illustrative interface.
+            These views connect the workflow and design decisions to the
+            resulting experience. Open any image at full size; captions identify
+            actual screens and illustrative interfaces.
           </p>
           <div className={styles.gallery}>
             {guide.screens.map((screen, index) => (
@@ -135,12 +140,12 @@ export function ProjectGuide({ guide }: { guide: Guide }) {
           id="project-engineering"
         >
           <div>
-            <p className={styles.eyebrow}>Under the hood</p>
-            <h2>How it is built.</h2>
+            <p className={styles.eyebrow}>Architecture & implementation</p>
+            <h2>How I approached the build.</h2>
             <p>{guide.engineering}</p>
           </div>
           <aside>
-            <h3>Tools & foundations</h3>
+            <h3>Implementation tools</h3>
             <ul>
               {guide.stack.map((tool) => (
                 <li key={tool}>{tool}</li>
@@ -155,8 +160,8 @@ export function ProjectGuide({ guide }: { guide: Guide }) {
         </section>
         <footer className={styles.footer}>
           <div>
-            <p className={styles.eyebrow}>Keep exploring</p>
-            <h2>See how the projects connect.</h2>
+            <p className={styles.eyebrow}>The person behind the work</p>
+            <h2>Explore how I approach problems.</h2>
           </div>
           <Link href="/projects">Explore more projects ↗</Link>
           <Link href="/#ask">Explore my experience →</Link>

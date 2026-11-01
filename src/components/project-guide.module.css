@@ -151,7 +151,7 @@
   margin: 0 0 24px;
   line-height: 1.2;
 }
-.problem > p:last-child {
+.problem > p:last-of-type {
   max-width: 860px;
   font-size: 19px;
   line-height: 1.85;
@@ -381,7 +381,7 @@
   .section {
     padding: 40px 0;
   }
-  .problem > p:last-child {
+  .problem > p:last-of-type {
     font-size: 17px;
   }
   .features,
@@ -429,5 +429,30 @@
   }
   .heroImage:hover {
     transform: rotate(0);
+  }
+}
+
+.contribution {
+  margin-top: 30px;
+  padding: 26px 30px;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 16px 16px 0;
+  background: var(--soft);
+}
+.contribution h3 {
+  margin: 0 0 12px;
+  font-size: 23px;
+  letter-spacing: -0.025em;
+}
+.contribution p {
+  margin: 0;
+  max-width: 940px;
+  color: #536173;
+  font-size: 16px;
+  line-height: 1.8;
+}
+@media (max-width: 560px) {
+  .contribution {
+    padding: 22px;
   }
 }
