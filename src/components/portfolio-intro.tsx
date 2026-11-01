@@ -40,75 +40,6 @@ export function PortfolioIntro({
           View résumé ↗
         </Link>
       </header>
-      <div className="profile-hero wrap">
-        <div className="personal-intro-copy">
-          <p className="eyebrow">
-            <span className="status-dot" /> The person behind the work
-          </p>
-          <h1 id="personal-intro-heading">
-            {story.profile.name || "Career profile pending publication."}
-            <span>{portfolioIntroTitle}</span>
-          </h1>
-          <p className="hero-intro">{portfolioIntroDescription}</p>
-          <div className="personal-highlights">
-            {story.highlights.map((skill) => (
-              <span key={skill}>{skill}</span>
-            ))}
-          </div>
-          <div className="hero-contact">
-            {[
-              presentation.location,
-              presentation.address,
-              presentation.work_authorization,
-            ]
-              .filter(Boolean)
-              .map((text) => (
-                <span key={text}>{text}</span>
-              ))}
-            {presentation.contact_email && (
-              <a href={`mailto:${presentation.contact_email}`}>
-                {presentation.contact_email}
-              </a>
-            )}
-            {presentation.phone && (
-              <a href={`tel:${presentation.phone.replace(/[^+\d]/g, "")}`}>
-                {presentation.phone}
-              </a>
-            )}
-          </div>
-        </div>
-        <div className="hero-portrait personal-portrait">
-          <div className="portrait-orbit" />
-          <div className="portrait-frame">
-            {presentation.photo_url ? (
-              <Image
-                src={presentation.photo_url}
-                alt={`Portrait of ${story.profile.name}`}
-                width={600}
-                height={720}
-                unoptimized
-                preload
-              />
-            ) : (
-              <div className="portrait-initials">
-                <span>
-                  {story.profile.name
-                    .split(" ")
-                    .map((part) => part[0])
-                    .join("") || "DW"}
-                </span>
-                <small>Portrait coming soon</small>
-              </div>
-            )}
-          </div>
-          <div className="portrait-caption">
-            <span className="status-dot" />{" "}
-            {story.demo
-              ? "Illustrative demo profile"
-              : "The person behind the work"}
-          </div>
-        </div>
-      </div>
       <section
         className="hero-projects-panel wrap"
         aria-labelledby="selected-projects-heading"
@@ -196,6 +127,75 @@ export function PortfolioIntro({
           </Link>
         </nav>
       </section>
+      <div className="profile-hero wrap">
+        <div className="personal-intro-copy">
+          <p className="eyebrow">
+            <span className="status-dot" /> The person behind the work
+          </p>
+          <h1 id="personal-intro-heading">
+            {story.profile.name || "Career profile pending publication."}
+            <span>{portfolioIntroTitle}</span>
+          </h1>
+          <p className="hero-intro">{portfolioIntroDescription}</p>
+          <div className="personal-highlights">
+            {story.highlights.map((skill) => (
+              <span key={skill}>{skill}</span>
+            ))}
+          </div>
+          <div className="hero-contact">
+            {[
+              presentation.location,
+              presentation.address,
+              presentation.work_authorization,
+            ]
+              .filter(Boolean)
+              .map((text) => (
+                <span key={text}>{text}</span>
+              ))}
+            {presentation.contact_email && (
+              <a href={`mailto:${presentation.contact_email}`}>
+                {presentation.contact_email}
+              </a>
+            )}
+            {presentation.phone && (
+              <a href={`tel:${presentation.phone.replace(/[^+\d]/g, "")}`}>
+                {presentation.phone}
+              </a>
+            )}
+          </div>
+        </div>
+        <div className="hero-portrait personal-portrait">
+          <div className="portrait-orbit" />
+          <div className="portrait-frame">
+            {presentation.photo_url ? (
+              <Image
+                src={presentation.photo_url}
+                alt={`Portrait of ${story.profile.name}`}
+                width={600}
+                height={720}
+                unoptimized
+                preload
+              />
+            ) : (
+              <div className="portrait-initials">
+                <span>
+                  {story.profile.name
+                    .split(" ")
+                    .map((part) => part[0])
+                    .join("") || "DW"}
+                </span>
+                <small>Portrait coming soon</small>
+              </div>
+            )}
+          </div>
+          <div className="portrait-caption">
+            <span className="status-dot" />{" "}
+            {story.demo
+              ? "Illustrative demo profile"
+              : "The person behind the work"}
+          </div>
+        </div>
+      </div>
       {composer || (
         <a
           className="personal-scroll-cue"
