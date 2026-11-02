@@ -7,7 +7,10 @@ import {
 } from "../src/lib/portfolio/rich-answer";
 import { RichCareerAnswer } from "../src/components/rich-career-answer";
 import { RichProjectEvidence } from "../src/components/rich-project-evidence";
-import { projectContextSchema } from "../src/lib/portfolio/project-context";
+import {
+  projectContextSchema,
+  projectConnectionSkills,
+} from "../src/lib/portfolio/project-context";
 import { RichRoleMatch } from "../src/components/rich-role-match";
 const flow =
   "```career-flow\n" +
@@ -142,4 +145,40 @@ it("recognizes only schema-valid workflows inside standard JSON fences", () => {
     richAnswerBlocks('```json\n{"html":"<script>alert(1)</script>"}\n```')[0]
       .type,
   ).toBe("code");
+});
+
+it("balances the connection graph across projects instead of hiding later projects' skills", () => {
+  const projects = projectContextSchema.parse({
+    projects: [
+      {
+        title: "First",
+        url: "/projects/first",
+        skills: Array.from({ length: 12 }, (_, i) => `First skill ${i}`),
+        images: [],
+      },
+      {
+        title: "Second",
+        url: "/projects/second",
+        skills: ["Shared skill", "Second skill"],
+        images: [],
+      },
+      {
+        title: "Third",
+        url: "/projects/third",
+        skills: ["Shared skill", "Third skill"],
+        images: [],
+      },
+      {
+        title: "Fourth",
+        url: "/projects/fourth",
+        skills: ["Fourth skill"],
+        images: [],
+      },
+    ],
+  }).projects;
+  const skills = projectConnectionSkills(projects);
+  expect(skills.length).toBeLessThanOrEqual(8);
+  expect(skills).toContain("Shared skill");
+  for (const project of projects)
+    expect(project.skills.some((skill) => skills.includes(skill))).toBe(true);
 });

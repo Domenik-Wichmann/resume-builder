@@ -79,3 +79,28 @@ export function relevantScreenshots(
     .slice(0, 3)
     .map(({ m }) => m);
 }
+
+/** Represent each project before filling the graph with extra skill nodes. */
+export function projectConnectionSkills(
+  projects: ProjectContext["projects"],
+  limit = 8,
+) {
+  const counts = new Map<string, number>();
+  for (const project of projects)
+    for (const skill of new Set(project.skills))
+      counts.set(skill, (counts.get(skill) || 0) + 1);
+  const rank = (a: string, b: string) =>
+    (counts.get(b) || 0) - (counts.get(a) || 0);
+  const selected: string[] = [];
+  for (const project of projects) {
+    if (selected.length >= limit) break;
+    if (project.skills.some((skill) => selected.includes(skill))) continue;
+    const skill = project.skills.toSorted(rank)[0];
+    if (skill) selected.push(skill);
+  }
+  for (const skill of [...counts.keys()].toSorted(rank)) {
+    if (selected.length >= limit) break;
+    if (!selected.includes(skill)) selected.push(skill);
+  }
+  return selected;
+}

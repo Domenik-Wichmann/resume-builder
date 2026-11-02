@@ -2,7 +2,10 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import type { ProjectContext } from "@/lib/portfolio/project-context";
+import {
+  projectConnectionSkills,
+  type ProjectContext,
+} from "@/lib/portfolio/project-context";
 import styles from "./rich-project-evidence.module.css";
 
 type Projects = ProjectContext["projects"];
@@ -10,7 +13,7 @@ export function RichProjectEvidence({ projects }: { projects: Projects }) {
   const [view, setView] = useState<"cards" | "connections">("cards");
   const [skill, setSkill] = useState("");
   const [projectUrl, setProjectUrl] = useState("");
-  const skills = [...new Set(projects.flatMap((p) => p.skills))].slice(0, 8);
+  const skills = projectConnectionSkills(projects);
   const shown = projects.filter(
     (p) =>
       (!skill || p.skills.includes(skill)) &&
@@ -60,7 +63,8 @@ export function RichProjectEvidence({ projects }: { projects: Projects }) {
       {view === "connections" && (
         <div className={styles.connections}>
           <p>
-            Follow a project or skill. Lines show published project–skill links.
+            Follow a project or skill. Lines show selected published
+            project–skill links.
           </p>
           <div
             className={styles.graph}
@@ -94,6 +98,7 @@ export function RichProjectEvidence({ projects }: { projects: Projects }) {
                 type="button"
                 key={p.url}
                 className={styles.projectNode}
+                title={p.title}
                 style={{ top: i * 64 + 6 }}
                 aria-pressed={projectUrl === p.url}
                 onClick={() => {
@@ -109,6 +114,7 @@ export function RichProjectEvidence({ projects }: { projects: Projects }) {
                 type="button"
                 key={name}
                 className={styles.skillNode}
+                title={name}
                 style={{ top: i * 64 + 6 }}
                 aria-pressed={skill === name}
                 onClick={() => {
