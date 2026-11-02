@@ -350,3 +350,10 @@
   color: #b6dece;
   font-size: 22px;
 }
+
+.sectionTitle {
+  margin: 12px 0 0;
+  color: #e3d5ff;
+  font-size: 18px;
+  line-height: 1.5;
+}

@@ -94,6 +94,12 @@ export function RichCareerAnswer({
                 </table>
               </div>
             );
+          if (block.type === "section" && !block.text)
+            return (
+              <h3 className={styles.sectionTitle} key={i}>
+                {block.title}
+              </h3>
+            );
           if (block.type === "section")
             return (
               <section className={styles.section} key={i}>

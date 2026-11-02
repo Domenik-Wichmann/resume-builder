@@ -133,3 +133,13 @@ it("does not repeat an identical role-fit answer as another supported match", ()
   expect(html.match(/Fictional supported work\./g)).toHaveLength(1);
   expect(html).toContain("Needs further evidence");
 });
+
+it("recognizes only schema-valid workflows inside standard JSON fences", () => {
+  const standard = flow.replace("career-flow", "json");
+  expect(richAnswerBlocks(standard)[0].type).toBe("flow");
+  expect(plainRichAnswer(standard)).toContain("1. Receive: Keep the original.");
+  expect(
+    richAnswerBlocks('```json\n{"html":"<script>alert(1)</script>"}\n```')[0]
+      .type,
+  ).toBe("code");
+});

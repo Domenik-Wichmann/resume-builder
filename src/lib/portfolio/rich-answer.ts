@@ -56,16 +56,22 @@ export function richAnswerBlocks(text: string): AnswerBlock[] {
       const body: string[] = [];
       while (++i < lines.length && !/^\s*```\s*$/.test(lines[i]))
         body.push(lines[i]);
-      if (fence[1] === "career-flow") {
+      if (fence[1] === "career-flow" || fence[1] === "json") {
         try {
           const parsed = flowSchema.safeParse(JSON.parse(body.join("\n")));
           blocks.push(
             parsed.success
               ? { type: "flow", flow: parsed.data }
-              : { type: "unavailable" },
+              : fence[1] === "career-flow"
+                ? { type: "unavailable" }
+                : { type: "code", text: body.join("\n") },
           );
         } catch {
-          blocks.push({ type: "unavailable" });
+          blocks.push(
+            fence[1] === "career-flow"
+              ? { type: "unavailable" }
+              : { type: "code", text: body.join("\n") },
+          );
         }
       } else blocks.push({ type: "code", text: body.join("\n") });
     } else if (lines[i].includes("|") && divider(lines[i + 1] || "")) {
@@ -130,4 +136,4 @@ export function plainRichAnswer(text: string): string {
     .join("\n\n");
 }
 
-export const richAnswerInstruction = ` The answer is shown inside a rich career chat. Continue to return the same JSON answer and evidence_ids. Within answer, use short ## headings to group substantial examples into distinct visual cards. For a genuine comparison, use a compact Markdown pipe table (2–4 columns, no more than 8 rows); preserve uncertainty in cells. For a documented workflow or architecture sequence, you MAY add one fenced career-flow block containing ONLY JSON of this shape: {"title":"Short descriptive title","steps":[{"title":"Step name","detail":"Brief grounded explanation"},{"title":"Next step","detail":"Brief grounded explanation"}]}. Use 2–6 steps, all directly established by the supplied CONFIRMED quotes; do not turn an unordered tool list into a process or invent order, causal links, results or implementation. Describe proposed designs as proposed in the diagram title and details. Place the diagram after a concise written explanation and avoid repeating all its details in prose. Never include executable code, HTML, SVG, Mermaid, arbitrary URLs or internal IDs in a visual block. Do not invent charts, proficiency scores, percentages, dates or metrics to decorate an answer. Simple questions need a simple answer, not forced cards or diagrams. Cite all supporting evidence in the existing evidence_ids field.`;
+export const richAnswerInstruction = ` The answer is shown inside a rich career chat. Continue to return the same JSON answer and evidence_ids. Within answer, use short ## headings to group substantial examples into distinct visual cards. For a genuine comparison, use a compact Markdown pipe table (2–4 columns, no more than 8 rows); preserve uncertainty in cells. For a documented workflow or architecture sequence, you MAY add one fenced career-flow block containing ONLY JSON of this shape: {"title":"Short descriptive title","steps":[{"title":"Step name","detail":"Brief grounded explanation"},{"title":"Next step","detail":"Brief grounded explanation"}]}. Use the exact fence label career-flow. Use 2–6 steps, all directly established by the supplied CONFIRMED quotes; do not turn an unordered tool list into a process or invent order, causal links, results or implementation. Describe proposed designs as proposed in the diagram title and details. Place the diagram after a concise written explanation and avoid repeating all its details in prose. Never include executable code, HTML, SVG, Mermaid, arbitrary URLs or internal IDs in a visual block. Do not invent charts, proficiency scores, percentages, dates or metrics to decorate an answer. Simple questions need a simple answer, not forced cards or diagrams. Cite all supporting evidence in the existing evidence_ids field.`;
