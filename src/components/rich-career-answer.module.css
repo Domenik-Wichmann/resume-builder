@@ -1,0 +1,352 @@
+.answer {
+  --rich-line: #667b8e;
+  --rich-surface: #142b39;
+  --rich-soft: #1a3342;
+  --rich-ink: #edf3f7;
+  --rich-muted: #bcd0dc;
+  color: var(--rich-ink);
+}
+.blocks {
+  display: grid;
+  gap: 18px;
+}
+.answer p {
+  line-height: 1.8;
+}
+.intro {
+  font-size: 16px;
+}
+.intro p:first-child {
+  margin-top: 0;
+}
+.section {
+  background: linear-gradient(135deg, var(--rich-surface), #102530);
+  border: 1px solid var(--rich-line);
+  border-radius: 17px;
+  padding: 22px 24px;
+}
+.section h3 {
+  color: #f3edff;
+  font-size: 19px;
+  margin: 0 0 14px;
+  line-height: 1.4;
+}
+.section h4 {
+  font-size: 16px;
+  color: #d5c4ff;
+  margin: 20px 0 10px;
+}
+.section li {
+  margin: 10px 0;
+  padding-left: 4px;
+}
+.section li::marker {
+  color: #bca5ec;
+}
+.section :is(p, ul, ol):last-child {
+  margin-bottom: 0;
+}
+.visual {
+  padding: 24px;
+  border: 1px solid #7f9d96;
+  border-radius: 18px;
+  background: linear-gradient(120deg, #163a3a, #132c38);
+}
+.kicker {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #b7e2d4;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.visual h3 {
+  margin: 0 0 24px;
+  color: #f0f8f4;
+  font-size: 20px;
+}
+.flow {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: grid;
+  gap: 22px;
+}
+.flow li {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  position: relative;
+  margin: 0;
+}
+.stepNumber {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid #a7cebd;
+  border-radius: 12px;
+  flex-shrink: 0;
+  background: #24504b;
+  color: #e8fff3;
+  font-size: 12px;
+  font-weight: 700;
+}
+.flow h4 {
+  margin: 0 0 5px;
+  font-size: 16px;
+  color: #e7f7f0;
+}
+.flow p {
+  margin: 0;
+  color: #c4dcd5;
+  font-size: 14px;
+}
+.connector {
+  position: absolute;
+  top: 39px;
+  left: 14px;
+  color: #a7cebd;
+  font-size: 15px;
+}
+.tableWrap {
+  max-width: 100%;
+  overflow: auto;
+  border: 1px solid var(--rich-line);
+  border-radius: 16px;
+  background: #132a37;
+  scrollbar-width: thin;
+}
+.tableWrap table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 14px;
+}
+.tableWrap caption {
+  text-align: left;
+  padding: 15px 20px;
+  color: #d5c4ff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: #1b3141;
+}
+.tableWrap :is(th, td) {
+  padding: 16px 20px;
+  border-top: 1px solid #607286;
+  min-width: 150px;
+  vertical-align: top;
+  line-height: 1.7;
+}
+.tableWrap thead {
+  background: #203746;
+  color: #f1f6f9;
+}
+.tableWrap tbody th {
+  color: #e2d6ff;
+}
+.tableWrap td {
+  color: #d3e0e8;
+}
+.tableWrap p {
+  margin: 0;
+}
+.code {
+  max-width: 100%;
+  overflow: auto;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--rich-line);
+  background: #091a26;
+  color: #d5e8f2;
+  font-size: 13px;
+}
+.notice {
+  color: var(--rich-muted);
+  font-size: 13px;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid #607286;
+}
+.answer .actions button {
+  background: transparent;
+  border: 1px solid #708698;
+  color: #dbd1f4;
+  font-size: 12px;
+  padding: 8px 12px;
+  border-radius: 9px;
+  cursor: pointer;
+}
+.answer .actions button:hover {
+  background: #293e50;
+}
+.actions span {
+  font-size: 12px;
+  color: #bfdfd2;
+}
+.answer :is(button, summary, a, div[tabindex]):focus-visible {
+  outline: 3px solid #c6b0fb;
+  outline-offset: 4px;
+}
+.match {
+  color: #edf3f7;
+}
+.matchGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+.matchPanel {
+  padding: 20px;
+  border: 1px solid #8ba69b;
+  border-top: 3px solid #a2dbc3;
+  border-radius: 14px;
+  background: #17342f;
+}
+.gaps {
+  border-color: #ab9175;
+  border-top-color: #efc78f;
+  background: #352e29;
+}
+.matchPanel h4 {
+  color: #edf5ef;
+  font-size: 15px;
+  margin: 0 0 14px;
+}
+.matchPanel ul {
+  padding-left: 18px;
+  margin: 0;
+}
+.matchPanel li {
+  font-size: 14px;
+  margin-bottom: 10px;
+  line-height: 1.75;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 16px 0;
+}
+.tags li {
+  padding: 7px 10px;
+  color: #e0d3fa;
+  border: 1px solid #8f80a5;
+  border-radius: 8px;
+  font-size: 12px;
+  background: #293147;
+}
+.match details {
+  padding: 15px 18px;
+  border: 1px solid #708698;
+  border-radius: 12px;
+  margin-top: 18px;
+}
+.match summary {
+  cursor: pointer;
+  font-size: 14px;
+  color: #ded0f6;
+}
+@media (max-width: 650px) {
+  .section,
+  .visual {
+    padding: 18px;
+  }
+  .matchGrid {
+    grid-template-columns: 1fr;
+  }
+  .tableWrap :is(th, td) {
+    padding: 12px;
+    min-width: 130px;
+  }
+  .actions {
+    align-items: flex-start;
+  }
+  .intro {
+    font-size: 15px;
+  }
+}
+@media print {
+  .actions {
+    display: none;
+  }
+  .answer {
+    color: #14212b;
+  }
+  .section,
+  .visual {
+    background: white;
+    color: #14212b;
+  }
+  .answer :is(h3, h4, p, li) {
+    color: #14212b;
+  }
+}
+.welcome {
+  margin: auto 0;
+  padding: 28px 0;
+  color: #eaf2f6;
+}
+.welcome h2 {
+  font-size: clamp(25px, 3vw, 34px);
+  line-height: 1.25;
+  letter-spacing: -0.035em;
+  margin: 12px 0;
+  max-width: 580px;
+}
+.welcome > p {
+  color: #bdd0dc;
+  font-size: 14px;
+  line-height: 1.8;
+  max-width: 560px;
+}
+.welcome .kicker {
+  color: #cebaf3;
+}
+.starters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+  gap: 12px;
+  margin: 24px 0;
+}
+.welcome .starters button {
+  text-align: left;
+  background: linear-gradient(135deg, #1e3645, #142b36);
+  color: #e5edf3;
+  padding: 20px;
+  border: 1px solid #8293a4;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.starters button:hover {
+  border-color: #cebaf3;
+  background: #294150;
+}
+.starters strong {
+  display: block;
+  font-size: 15px;
+  margin: 10px 0;
+  color: #e6d8ff;
+}
+.starters span {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #c9dae3;
+  display: block;
+}
+.starters b {
+  font-weight: 400;
+  color: #b6dece;
+  font-size: 22px;
+}

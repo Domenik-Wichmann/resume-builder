@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { RichProjectEvidence } from "./rich-project-evidence";
 import {
   projectContextSchema,
   type ProjectContext,
@@ -11,16 +12,23 @@ export function ProjectEvidence({
   ids,
   query = "",
   browse = false,
+  rich = false,
 }: {
   ids: string[];
   query?: string;
   browse?: boolean;
+  rich?: boolean;
 }) {
-  const [data, setData] = useState<ProjectContext>({ projects: [] });
+  const [loaded, setLoaded] = useState<{
+    key: string;
+    data: ProjectContext;
+  } | null>(null);
   const key = ids
     .filter((id) => /^[a-f0-9-]{36}$/i.test(id))
     .slice(0, 12)
     .join(",");
+  const requestKey = JSON.stringify([key, query.slice(0, 1000), browse]);
+  const data = loaded?.key === requestKey ? loaded.data : { projects: [] };
   useEffect(() => {
     if (!key) return;
     const controller = new AbortController();
@@ -38,15 +46,17 @@ export function ProjectEvidence({
       .then(async (response) => {
         if (response.ok) {
           const result = projectContextSchema.parse(await response.json());
-          if (!controller.signal.aborted) setData(result);
+          if (!controller.signal.aborted)
+            setLoaded({ key: requestKey, data: result });
         }
       })
       .catch(() => {
         /* An attachment failure must not hide the grounded answer. */
       });
     return () => controller.abort();
-  }, [key, query, browse]);
+  }, [key, query, browse, requestKey]);
   if (!data.projects.length) return null;
+  if (rich) return <RichProjectEvidence projects={data.projects} />;
   return (
     <div
       className="project-evidence"

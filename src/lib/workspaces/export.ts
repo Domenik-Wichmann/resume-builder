@@ -1,3 +1,4 @@
+import { plainRichAnswer } from "../portfolio/rich-answer";
 import type { Workspace } from "./model";
 import { answerDisplay } from "../answer-display";
 /** An explicit allowlist excludes source IDs, vectors, prompts, and attribution metadata. */
@@ -14,10 +15,10 @@ export function exportWorkspaceText(workspace: Workspace) {
   if (workspace.match)
     lines.push(
       "\nMATCH FINDINGS",
-      answerDisplay(workspace.match.overall_summary),
+      plainRichAnswer(answerDisplay(workspace.match.overall_summary)),
       "Supported matches:",
       ...workspace.match.strong_matches.map(
-        (item) => `- ${answerDisplay(item)}`,
+        (item) => `- ${plainRichAnswer(answerDisplay(item))}`,
       ),
       "Evidence gaps:",
       ...workspace.match.gaps.map((item) => `- ${item}`),
@@ -36,7 +37,7 @@ export function exportWorkspaceText(workspace: Workspace) {
     "\nQUESTIONS & ANSWERS",
     ...workspace.questions.flatMap((question) => [
       `Q: ${question.question}`,
-      `A: ${answerDisplay(question.answer)}`,
+      `A: ${plainRichAnswer(answerDisplay(question.answer))}`,
       "",
     ]),
   );

@@ -26,7 +26,9 @@ import {
   rememberWorkspace,
   selectedWorkspace,
 } from "@/lib/workspaces/selection";
-import { SafeMarkdown } from "./safe-markdown";
+import { RichCareerAnswer } from "./rich-career-answer";
+import { RichRoleMatch } from "./rich-role-match";
+import { CareerChatWelcome } from "./career-chat-welcome";
 import { HumanVerification } from "./human-verification";
 import { EvidenceMap } from "./evidence-map";
 import { answerDisplay } from "@/lib/answer-display";
@@ -441,6 +443,7 @@ export function CareerChat({
             </p>
           )}
           <div className="chat-results" ref={results}>
+            {!started && !pending && !ir && <CareerChatWelcome />}
             {ir &&
               (design ? (
                 <ResumeRenderer ir={ir} design={design} />
@@ -455,30 +458,7 @@ export function CareerChat({
                     {workspace.job_description}
                   </p>
                 )}
-                <p className="eyebrow">Role fit</p>
-                <h3>Where the experience connects</h3>
-                <SafeMarkdown
-                  bulletLists
-                  text={answerDisplay(workspace.match.overall_summary)}
-                />
-                <h4>Supported matches</h4>
-                <ul>
-                  {workspace.match.strong_matches.map((item, i) => (
-                    <li key={i}>
-                      <SafeMarkdown bulletLists text={answerDisplay(item)} />
-                    </li>
-                  ))}
-                </ul>
-                {workspace.match.gaps.length > 0 && (
-                  <>
-                    <h4>Evidence gaps</h4>
-                    <ul>
-                      {workspace.match.gaps.map((item, i) => (
-                        <li key={i}>{item}</li>
-                      ))}
-                    </ul>
-                  </>
-                )}
+                <RichRoleMatch match={workspace.match} />
               </article>
             )}
             {[
@@ -503,12 +483,10 @@ export function CareerChat({
                   </div>
                 ) : (
                   <div className="answer-content">
-                    <SafeMarkdown
-                      bulletLists
-                      text={answerDisplay(question.answer)}
-                    />
+                    <RichCareerAnswer text={answerDisplay(question.answer)} />
                     {"evidence_ids" in question && (
                       <ProjectEvidence
+                        rich
                         ids={question.evidence_ids}
                         query={question.question}
                       />

@@ -86,3 +86,42 @@ it("does not expose priority projects when their canonical evidence is unpublish
     (await publicProjectContext([], "Show his projects", false)).projects,
   ).toEqual([]);
 });
+
+it("includes only published, usable skill associations in rich project context", async () => {
+  const project = projectFixture();
+  mocks.projects.mockResolvedValue([project]);
+  mocks.brain.mockResolvedValue([
+    brainFixture({
+      skill_keys: ["visible-skill", "private-skill", "archived-skill"],
+    }),
+    brainFixture({
+      id: "22222222-2222-4222-8222-222222222222",
+      kind: "skill",
+      key: "visible-skill",
+      title: "Fictional public skill",
+    }),
+    brainFixture({
+      id: "33333333-3333-4333-8333-333333333333",
+      kind: "skill",
+      key: "private-skill",
+      title: "Fictional private skill",
+      published: false,
+    }),
+    brainFixture({
+      id: "44444444-4444-4444-8444-444444444444",
+      kind: "skill",
+      key: "archived-skill",
+      title: "Fictional archived skill",
+      archived: true,
+    }),
+  ]);
+  const result = await publicProjectContext(
+    [project.id],
+    "Fictional knowledge workspace",
+    false,
+  );
+  expect(result.projects[0].skills).toEqual(["Fictional public skill"]);
+  expect(JSON.stringify(result)).not.toContain("Fictional private skill");
+  expect(JSON.stringify(result)).not.toContain("Fictional archived skill");
+  expect(result.projects[0].summary.length).toBeGreaterThan(0);
+});

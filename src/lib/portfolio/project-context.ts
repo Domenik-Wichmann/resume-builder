@@ -7,6 +7,21 @@ export const projectContextSchema = z.object({
     .array(
       z.object({
         title: z.string(),
+        summary: z.string().max(1200).default(""),
+        skills: z.array(z.string().max(200)).max(16).default([]),
+        highlights: z.array(z.string().max(1200)).max(4).default([]),
+        preview: z
+          .object({
+            src: z
+              .string()
+              .regex(
+                /^\/(?:images\/projects\/[a-z0-9.-]+|media\/[a-f0-9-]{36})$/i,
+              ),
+            alt: z.string(),
+            label: z.string(),
+          })
+          .nullable()
+          .default(null),
         url: z.string().regex(/^\/projects\/[a-z0-9-]+$/),
         links: linkSchema
           .pick({ label: true, url: true })

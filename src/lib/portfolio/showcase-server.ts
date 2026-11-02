@@ -1,3 +1,4 @@
+import { projectGuideForSlug } from "./project-guides";
 import "server-only";
 import { database } from "../db";
 import { primaryAccountId } from "../account-id";
@@ -151,13 +152,31 @@ export async function publicProjectContext(
           orderedIds.indexOf(a.project.id) - orderedIds.indexOf(b.project.id),
       )
       .slice(0, 6)
-      .map(({ project, content, media }) => {
+      .map(({ project, content, skills, media }) => {
+        const guide = projectGuideForSlug(project.slug);
+        const cover = media.find((item) => item.is_cover) || media[0];
         const images = browse
           ? media.slice(0, 3)
           : relevantScreenshots(media, query).slice(0, remainingImages);
         if (!browse) remainingImages -= images.length;
         return {
           title: content.title || showcaseTitle(project),
+          summary: content.summary.slice(0, 1200),
+          skills: skills.slice(0, 16),
+          highlights: content.highlights.slice(0, 4),
+          preview: guide
+            ? {
+                src: guide.screens[0].src,
+                alt: guide.screens[0].title,
+                label: guide.screens[0].kind,
+              }
+            : cover
+              ? {
+                  src: `/media/${cover.id}`,
+                  alt: cover.alt,
+                  label: "Project preview",
+                }
+              : null,
           url: `/projects/${project.slug}`,
           links: content.links
             .filter((link) => link.is_public && safeProjectUrl(link.url))
