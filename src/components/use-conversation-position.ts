@@ -20,7 +20,7 @@ export function positionConversationTurn(
   });
 }
 
-/** Pin a new turn once. Response growth and image loads must never chase the reader. */
+/** Keep the new turn steady when older attachments load; never chase its own growth. */
 export function useConversationPosition({
   container,
   turn,
@@ -34,9 +34,11 @@ export function useConversationPosition({
   contextKey: string;
   panel: string;
 }) {
-  const aligned = useRef<{ request: object; element: HTMLElement } | null>(
-    null,
-  );
+  const anchor = useRef<{
+    request: object;
+    element: HTMLElement;
+    following: boolean;
+  } | null>(null);
   useLayoutEffect(() => {
     const element = container.current;
     if (!element) return;
@@ -53,14 +55,58 @@ export function useConversationPosition({
     return () => observer.disconnect();
   }, [container]);
   useLayoutEffect(() => {
-    const element = turn.current;
-    if (!request || !element || !container.current || panel !== "chat") return;
-    if (
-      aligned.current?.request === request &&
-      aligned.current.element === element
-    )
-      return;
-    positionConversationTurn(container.current, element);
-    aligned.current = { request, element };
+    const element = turn.current,
+      scroller = container.current;
+    if (!request || !element || !scroller || panel !== "chat") return;
+    const fresh = anchor.current?.request !== request;
+    const following = fresh || anchor.current?.following === true;
+    if (following && (fresh || anchor.current?.element !== element))
+      positionConversationTurn(scroller, element);
+    anchor.current = { request, element, following };
+    const stop = () => {
+      if (anchor.current?.request === request) anchor.current.following = false;
+    };
+    const keydown = (event: KeyboardEvent) => {
+      if (
+        [
+          "ArrowUp",
+          "ArrowDown",
+          "PageUp",
+          "PageDown",
+          "Home",
+          "End",
+          " ",
+        ].includes(event.key)
+      )
+        stop();
+    };
+    scroller.addEventListener("wheel", stop, { passive: true });
+    scroller.addEventListener("touchstart", stop, { passive: true });
+    scroller.addEventListener("pointerdown", stop, { passive: true });
+    scroller.addEventListener("keydown", keydown);
+    const observer = new ResizeObserver(() => {
+      if (
+        anchor.current?.request !== request ||
+        !anchor.current.following ||
+        !element.isConnected
+      )
+        return;
+      const offset =
+        element.getBoundingClientRect().top -
+        scroller.getBoundingClientRect().top;
+      if (Math.abs(offset) > 1) positionConversationTurn(scroller, element);
+    });
+    // Observe only older siblings: new response tokens, cards and diagrams grow below the anchor.
+    for (const sibling of scroller.children) {
+      if (sibling === element) break;
+      observer.observe(sibling);
+    }
+    return () => {
+      observer.disconnect();
+      scroller.removeEventListener("wheel", stop);
+      scroller.removeEventListener("touchstart", stop);
+      scroller.removeEventListener("pointerdown", stop);
+      scroller.removeEventListener("keydown", keydown);
+    };
   }, [request, contextKey, panel, container, turn]);
 }

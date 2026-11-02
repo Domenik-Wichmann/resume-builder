@@ -104,6 +104,10 @@ export function CareerChat({
   const results = useRef<HTMLDivElement>(null);
   const activeMessage = useRef<HTMLElement>(null);
   const [activeTurn, setActiveTurn] = useState<number | null>(null);
+  const [positionRequest, setPositionRequest] = useState<{
+    input: string;
+    kind: string;
+  } | null>(null);
   const lock = useRef(false);
   const composerForm = useRef<HTMLFormElement>(null);
   const handledHero = useRef<number | null>(null);
@@ -189,7 +193,7 @@ export function CareerChat({
   useConversationPosition({
     container: results,
     turn: activeMessage,
-    request: pending,
+    request: positionRequest,
     contextKey: `${workspace?.id || "new"}:${workspace?.questions.length || 0}`,
     panel,
   });
@@ -233,6 +237,7 @@ export function CareerChat({
       setSlots(available);
       setSlot(next);
       setActiveTurn(null);
+      setPositionRequest(null);
       setWorkspace(loaded);
       setIR(null);
       setInput("");
@@ -270,6 +275,7 @@ export function CareerChat({
     const submitted = { input, kind };
     let committed = false;
     setPending(submitted);
+    setPositionRequest(submitted);
     setIR(null);
     setInput("");
     messageField.current?.focus({ preventScroll: true });
@@ -304,6 +310,7 @@ export function CareerChat({
     } catch (err) {
       // A failed preview must not turn a persisted role match into a second send.
       if (!committed) {
+        setPositionRequest(null);
         setInput(submitted.input);
       }
       setError(err instanceof Error ? err.message : "Please try again.");
