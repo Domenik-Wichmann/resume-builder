@@ -1,4 +1,6 @@
 "use client";
+import { SavedChatsDropdown } from "./saved-chats-dropdown";
+import { useConversationPosition } from "./use-conversation-position";
 import { portfolioEmail } from "@/lib/portfolio/contact";
 import {
   useState,
@@ -100,7 +102,8 @@ export function CareerChat({
   const [evidenceExpanded, setEvidenceExpanded] = useState(false);
   const messageField = useRef<HTMLTextAreaElement>(null);
   const results = useRef<HTMLDivElement>(null);
-  const pendingMessage = useRef<HTMLElement>(null);
+  const activeMessage = useRef<HTMLElement>(null);
+  const [activeTurn, setActiveTurn] = useState<number | null>(null);
   const lock = useRef(false);
   const composerForm = useRef<HTMLFormElement>(null);
   const handledHero = useRef<number | null>(null);
@@ -183,21 +186,16 @@ export function CareerChat({
     observer.observe(field);
     return () => observer.disconnect();
   }, [input]);
-  useLayoutEffect(() => {
-    const container = results.current;
-    const message = pendingMessage.current;
-    if (!pending || !container || !message || panel !== "chat") return;
-    // Scroll only this conversation, without moving the page or its side panels.
-    container.scrollTo({
-      top:
-        container.scrollTop +
-        message.getBoundingClientRect().top -
-        container.getBoundingClientRect().top,
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ? "instant"
-        : "smooth",
-    });
-  }, [pending, panel]);
+  useConversationPosition({
+    container: results,
+    turn: activeMessage,
+    request: pending,
+    contextKey: `${workspace?.id || "new"}:${workspace?.questions.length || 0}`,
+    panel,
+  });
+  const currentTurnIndex = pending
+    ? workspace?.questions.length || 0
+    : activeTurn;
   const started = Boolean(
     workspace?.questions.length || workspace?.job_description,
   );
@@ -234,6 +232,7 @@ export function CareerChat({
       const loaded = id ? await browserLoadWorkspace(id) : null;
       setSlots(available);
       setSlot(next);
+      setActiveTurn(null);
       setWorkspace(loaded);
       setIR(null);
       setInput("");
@@ -271,6 +270,7 @@ export function CareerChat({
     const submitted = { input, kind };
     let committed = false;
     setPending(submitted);
+    setIR(null);
     setInput("");
     messageField.current?.focus({ preventScroll: true });
     try {
@@ -281,6 +281,7 @@ export function CareerChat({
           : existing
             ? await browserLoadWorkspace(existing)
             : await browserCreateWorkspace();
+      setActiveTurn(current.questions.length);
       setWorkspace(current);
       browserRememberWorkspaceSlot(current.id, slot);
       setSlots((previous) =>
@@ -293,6 +294,9 @@ export function CareerChat({
         submitted.input,
       );
       committed = true;
+      setActiveTurn(
+        submitted.kind === "ask" ? result.workspace.questions.length - 1 : null,
+      );
       setWorkspace(result.workspace);
       setPending(null);
       setIR(null);
@@ -384,9 +388,16 @@ export function CareerChat({
             <Link href="/resume">
               <span>≡</span> Full résumé
             </Link>
-            <Link href="/workspace">
-              <span>↺</span> Saved chats
-            </Link>
+            <SavedChatsDropdown
+              slots={slots}
+              activeSlot={slot}
+              busy={busy}
+              ready={slotsReady}
+              onSelect={(next) => {
+                selectPanel("chat");
+                void switchWorkspace(next);
+              }}
+            />
           </nav>
           <div className="rail-bottom">
             <p>
@@ -466,9 +477,9 @@ export function CareerChat({
               ...(pending ? [{ question: pending.input, answer: null }] : []),
             ].map((question, index) => (
               <article
-                className={`chat-answer${question.answer === null ? " pending-answer" : ""}`}
+                className={`chat-answer${question.answer === null ? " pending-answer" : ""}${index === currentTurnIndex ? " current-turn" : ""}`}
                 key={index}
-                ref={question.answer === null ? pendingMessage : undefined}
+                ref={index === currentTurnIndex ? activeMessage : undefined}
               >
                 <p className="question-bubble">
                   <span className="sr-only">You: </span>

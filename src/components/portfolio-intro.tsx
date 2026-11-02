@@ -1,4 +1,3 @@
-import { portfolioEmail } from "@/lib/portfolio/contact";
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
@@ -33,17 +32,6 @@ export function PortfolioIntro({
           Wichmann.
         </div>
       )}
-      <header className="site-header wrap">
-        <Link className="wordmark" href="/">
-          Domenik Wichmann
-        </Link>
-        <nav className="personal-contact-nav" aria-label="Contact and résumé">
-          <a href={`mailto:${portfolioEmail}`}>{portfolioEmail}</a>
-          <Link className="personal-resume-link" href="/resume">
-            View résumé ↗
-          </Link>
-        </nav>
-      </header>
       <section
         className="hero-projects-panel wrap"
         aria-labelledby="selected-projects-heading"
@@ -166,6 +154,9 @@ export function PortfolioIntro({
                 {presentation.phone}
               </a>
             )}
+            <Link className="personal-resume-link" href="/resume">
+              View résumé ↗
+            </Link>
           </div>
         </div>
         <div className="hero-portrait personal-portrait">

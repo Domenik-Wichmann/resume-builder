@@ -61,7 +61,7 @@ export function HomeExperience({
                 onKeyDown={(event) => submitComposerOnEnter(event, canSubmit)}
                 placeholder="Ask about my projects, skills, or experience—or paste a job description to compare."
                 aria-describedby="hero-message-help"
-                rows={3}
+                rows={2}
                 maxLength={12000}
                 readOnly={busy}
               />

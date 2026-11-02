@@ -1496,3 +1496,96 @@ html:has(.profile-hero) {
   color: #d8e6ee;
   font-size: 13px;
 }
+
+/* Contain wheel scrolling and turn off browser anchoring for growing replies. */
+.chat-results {
+  overscroll-behavior-y: contain;
+  overflow-anchor: none;
+}
+.chat-answer.current-turn {
+  min-height: var(--turn-min-height, 0px);
+}
+.saved-chats-dropdown {
+  flex-shrink: 0;
+}
+.saved-chats-dropdown > summary {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 11px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  color: #c3d1db;
+  cursor: pointer;
+  list-style: none;
+}
+.saved-chats-dropdown > summary::-webkit-details-marker {
+  display: none;
+}
+.saved-chats-dropdown > summary > span:first-child {
+  width: 24px;
+  color: #c2a9ed;
+}
+.saved-chats-dropdown .saved-chat-chevron {
+  margin-left: auto;
+  width: auto;
+}
+.saved-chats-dropdown[open] > summary {
+  background: #263747;
+  color: #f1e9ff;
+}
+.saved-chats-list {
+  display: grid;
+  gap: 7px;
+  padding: 10px;
+  margin-top: 7px;
+  border: 1px solid #8093a4;
+  border-radius: 12px;
+  background: #142b39;
+  min-width: 175px;
+}
+.saved-chats-list p {
+  font-size: 12px;
+  color: #c1d2dd;
+  line-height: 1.6;
+  margin: 4px;
+}
+.public-experience .saved-chats-list button {
+  width: 100%;
+  padding: 10px;
+  color: #e2d5fa;
+  border: 1px solid #718598;
+  border-radius: 8px;
+  background: #1c3545;
+  text-align: left;
+  line-height: 1.5;
+  cursor: pointer;
+}
+.saved-chats-list strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+}
+.saved-chats-list small {
+  display: block;
+  font-size: 10px;
+  margin-top: 5px;
+  color: #b8cedb;
+}
+.public-experience .saved-chats-list button[aria-current="true"] {
+  border-color: #c5adef;
+  background: #34445d;
+}
+.public-experience .saved-chats-list button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.saved-chats-dropdown :is(summary, button):focus-visible {
+  outline: 3px solid #c5adef;
+  outline-offset: 3px;
+}
+@media print {
+  .chat-answer.current-turn {
+    min-height: 0;
+  }
+}
