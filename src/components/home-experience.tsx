@@ -1,5 +1,5 @@
 "use client";
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { PortfolioIntro, type IntroStory } from "./portfolio-intro";
 import { CareerChat, type HeroSubmission } from "./career-chat";
 import type { Presentation } from "@/lib/markets";
@@ -19,6 +19,7 @@ export function HomeExperience({
   design?: ResumeDesign;
 }) {
   const [input, setInput] = useState("");
+  const heroMessage = useRef<HTMLTextAreaElement>(null);
   const [request, setRequest] = useState<HeroSubmission>();
   const [busy, setBusy] = useState(false);
   const kind = initialInputKind(input);
@@ -48,14 +49,17 @@ export function HomeExperience({
             onSubmit={submit}
             aria-label="Start a career conversation"
           >
-            <label htmlFor="hero-message">What do you want to know?</label>
+            <label htmlFor="hero-message" className="hero-knowledge-label">
+              Chat directly with my <span>career knowledge base</span>
+            </label>
             <div className="hero-input-shell">
               <textarea
+                ref={heroMessage}
                 id="hero-message"
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
                 onKeyDown={(event) => submitComposerOnEnter(event, canSubmit)}
-                placeholder="Ask about my career, skills & experience. Or paste a job description to compare."
+                placeholder="Ask about my projects, skills, or experience—or paste a job description to compare."
                 aria-describedby="hero-message-help"
                 rows={3}
                 maxLength={12000}
@@ -92,6 +96,40 @@ export function HomeExperience({
                   />
                 </svg>
               </button>
+            </div>
+            <div
+              className="hero-question-examples"
+              role="group"
+              aria-label="Example career questions"
+            >
+              <span>Try asking:</span>
+              {[
+                [
+                  "Where has he used SQL?",
+                  "In which implementations has he used SQL, and what did he build with it?",
+                ],
+                [
+                  "What languages does he speak?",
+                  "Which languages does he speak, and how has he used them professionally?",
+                ],
+                [
+                  "What has he automated?",
+                  "What operational workflows has he automated? Show concrete examples.",
+                ],
+              ].map(([label, question]) => (
+                <button
+                  key={label}
+                  type="button"
+                  disabled={busy}
+                  onClick={() => {
+                    setInput(question);
+                    heroMessage.current?.focus({ preventScroll: true });
+                  }}
+                >
+                  {label}
+                  <span aria-hidden="true">↗</span>
+                </button>
+              ))}
             </div>
             <div className="hero-composer-footer">
               <p id="hero-message-help">

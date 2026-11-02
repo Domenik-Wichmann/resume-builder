@@ -688,3 +688,78 @@ a.hero-project-card:focus-visible {
     justify-content: flex-start;
   }
 }
+
+/* A clear invitation and concrete questions without competing with the profile. */
+.hero-composer > .hero-knowledge-label {
+  border-left: 3px solid #bea4ef;
+  padding-left: 12px;
+  color: #eaf1f5;
+  font-weight: 500;
+  line-height: 1.45;
+}
+.hero-knowledge-label > span {
+  color: #d9c7ff;
+  font-weight: 650;
+}
+.hero-question-examples {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+.hero-question-examples > span {
+  color: #b9cbd6;
+  font-size: 12px;
+  margin-right: 4px;
+}
+.hero-composer .hero-question-examples button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border: 1px solid #8297a5;
+  border-radius: 9px;
+  background: #182e3d;
+  color: #e3dbf3;
+  font-size: 13px;
+  min-height: 36px;
+  line-height: 1.45;
+  cursor: pointer;
+  transition:
+    border-color 150ms,
+    background 150ms;
+}
+.hero-composer .hero-question-examples button:hover {
+  background: #293c4d;
+  border-color: #c4acef;
+}
+.hero-question-examples button > span {
+  color: #b9e3d5;
+}
+.hero-question-examples button:focus-visible {
+  outline: 3px solid #c4acef;
+  outline-offset: 3px;
+}
+.hero-composer .hero-question-examples button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+@media (max-width: 560px) {
+  .hero-question-examples {
+    gap: 8px;
+  }
+  .hero-question-examples > span {
+    flex-basis: 100%;
+  }
+  .hero-composer .hero-question-examples button {
+    font-size: 12px;
+    min-height: 44px;
+    padding: 8px 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-composer .hero-question-examples button {
+    transition: none;
+  }
+}
