@@ -31,12 +31,12 @@ export function HomeExperience({
     setBusy(true);
     setRequest((previous) => ({ id: (previous?.id || 0) + 1, input, kind }));
     setInput("");
-    document.getElementById("ask")?.scrollIntoView({
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ? "instant"
-        : "smooth",
-      block: "start",
-    });
+    const conversation = document.getElementById("ask");
+    if (conversation)
+      window.scrollTo({
+        top: window.scrollY + conversation.getBoundingClientRect().top,
+        behavior: "instant",
+      });
   }
   return (
     <>

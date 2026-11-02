@@ -1,5 +1,5 @@
 html:has(.portfolio-home) {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   scroll-snap-type: none;
   scroll-padding-top: 0;
 }
