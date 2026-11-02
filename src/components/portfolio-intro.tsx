@@ -115,7 +115,7 @@ export function PortfolioIntro({
             </span>
           </Link>
           <Link className="hero-more-projects" href="/projects">
-            Explore more projects <span aria-hidden="true">↗</span>
+            More Projects
           </Link>
         </nav>
       </section>

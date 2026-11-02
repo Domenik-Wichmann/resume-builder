@@ -48,7 +48,7 @@ it("introduces the person with project cards and a single more-projects action",
     ).not.toBeNull();
     expect(
       host.querySelector('.hero-projects a[href="/projects"]')?.textContent,
-    ).toContain("Explore more projects");
+    ).toBe("More Projects");
     expect(host.textContent).toContain("Configured residence");
     expect(
       host.querySelector(".story-runway, .story-scene, select, .market-switch"),
