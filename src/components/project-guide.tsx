@@ -1,3 +1,4 @@
+import { portfolioEmail } from "@/lib/portfolio/contact";
 import Image from "next/image";
 import Link from "next/link";
 import type { ProjectGuide as Guide } from "@/lib/portfolio/project-guides";
@@ -170,6 +171,10 @@ export function ProjectGuide({ guide }: { guide: Guide }) {
           <div>
             <p className={styles.eyebrow}>The person behind the work</p>
             <h2>Explore how I approach problems.</h2>
+            <p className={styles.contact}>
+              Email me:{" "}
+              <a href={`mailto:${portfolioEmail}`}>{portfolioEmail}</a>
+            </p>
           </div>
           <Link href="/projects">Explore more projects ↗</Link>
           <Link href="/#ask">Explore my experience →</Link>

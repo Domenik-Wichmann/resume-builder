@@ -1489,3 +1489,10 @@ html:has(.profile-hero) {
     color: #111;
   }
 }
+
+.rail-bottom .portfolio-email-link {
+  display: block;
+  margin-bottom: 14px;
+  color: #d8e6ee;
+  font-size: 13px;
+}

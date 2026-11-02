@@ -1,3 +1,4 @@
+import { portfolioEmail } from "@/lib/portfolio/contact";
 import Link from "next/link";
 export function PortfolioHeader({ homeOnly = false }: { homeOnly?: boolean }) {
   if (homeOnly)
@@ -6,6 +7,9 @@ export function PortfolioHeader({ homeOnly = false }: { homeOnly?: boolean }) {
         <Link className="button" href="/">
           ← Back to main page
         </Link>
+        <a className="portfolio-email-link" href={`mailto:${portfolioEmail}`}>
+          {portfolioEmail}
+        </a>
       </header>
     );
   return (
@@ -19,6 +23,7 @@ export function PortfolioHeader({ homeOnly = false }: { homeOnly?: boolean }) {
         <Link href="/answers">Quick Answers</Link>
         <Link href="/workspace">Saved chats</Link>
         <Link href="/resume">Résumé ↗</Link>
+        <a href={`mailto:${portfolioEmail}`}>{portfolioEmail}</a>
       </nav>
     </header>
   );

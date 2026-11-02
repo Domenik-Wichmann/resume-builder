@@ -1,3 +1,4 @@
+import { portfolioEmail } from "@/lib/portfolio/contact";
 import Link from "next/link";
 import { ProjectGuide } from "@/components/project-guide";
 import { projectGuideForSlug } from "@/lib/portfolio/project-guides";
@@ -74,6 +75,15 @@ export default async function ProjectPage({
             >
               Explore my experience →
             </Link>
+            <p>
+              Email me:{" "}
+              <a
+                className="portfolio-email-link"
+                href={`mailto:${portfolioEmail}`}
+              >
+                {portfolioEmail}
+              </a>
+            </p>
             <ExploreSignal kind="project" id={p.id} />
           </section>
         </main>

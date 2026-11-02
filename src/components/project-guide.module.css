@@ -465,3 +465,17 @@
 .engineering aside {
   border: 1px solid #768291;
 }
+
+.contact {
+  margin: 16px 0 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #435063;
+}
+.contact a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}

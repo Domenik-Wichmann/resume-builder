@@ -664,3 +664,27 @@ a.hero-project-card:focus-visible {
     max-width: calc(100% - 24px);
   }
 }
+
+.personal-contact-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px 24px;
+}
+.personal-contact-nav > a:first-child {
+  color: #e5edf2;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 560px) {
+  .personal-hero .site-header {
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .personal-contact-nav {
+    justify-content: flex-start;
+  }
+}

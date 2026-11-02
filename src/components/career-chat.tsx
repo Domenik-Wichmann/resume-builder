@@ -1,4 +1,5 @@
 "use client";
+import { portfolioEmail } from "@/lib/portfolio/contact";
 import {
   useState,
   useRef,
@@ -390,6 +391,12 @@ export function CareerChat({
               One career.
               <br />A view shaped around your questions.
             </p>
+            <a
+              className="portfolio-email-link"
+              href={`mailto:${portfolioEmail}`}
+            >
+              {portfolioEmail}
+            </a>
             <Link href="/privacy">Privacy & data</Link>
           </div>
         </div>

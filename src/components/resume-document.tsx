@@ -1,3 +1,4 @@
+import { ResumeContactDetails } from "./resume-contact-details";
 import type { ResumeIR } from "@/lib/resume-ir";
 
 /** Structured, Markdown-like presentation of the compiler output; no model HTML. */
@@ -17,14 +18,7 @@ export function ResumeDocument({ ir }: { ir: ResumeIR }) {
       <h2>{ir.profile.name || "Profile pending publication"}</h2>
       <p>{ir.headline}</p>
       <p className="muted">
-        {[
-          ir.profile.contact.location,
-          ir.profile.contact.address,
-          ir.profile.contact.contact_email,
-          ir.profile.contact.phone,
-        ]
-          .filter(Boolean)
-          .join(" · ")}
+        <ResumeContactDetails contact={ir.profile.contact} />
       </p>
       {ir.summary && (
         <>

@@ -1,11 +1,8 @@
+import { ResumeContactDetails } from "./resume-contact-details";
 import type { ResumeIR } from "@/lib/resume-ir";
 import { defaultDesign, type ResumeDesign } from "@/lib/resume-design/model";
 import { ResumeDesignFrame, ResumePortrait } from "./resume-design-frame";
-import {
-  exportContact,
-  exportWorkAuthorization,
-  exportTimeline,
-} from "@/lib/resume-export";
+import { exportWorkAuthorization, exportTimeline } from "@/lib/resume-export";
 export function ResumeRenderer({
   ir,
   design,
@@ -63,7 +60,9 @@ export function ResumeRenderer({
           <h1>{ir.profile.name}</h1>
           <p className="resume-title">{ir.headline}</p>
           <div className="resume-contact-row">
-            <p className="resume-contact-details">{exportContact(ir)}</p>
+            <p className="resume-contact-details">
+              <ResumeContactDetails contact={contact} />
+            </p>
             {exportWorkAuthorization(ir) && (
               <p className="resume-citizenship">
                 {exportWorkAuthorization(ir)}
