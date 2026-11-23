@@ -488,7 +488,7 @@ export function EvidenceMap({
                 onFocus={() => setHovered(record.id)}
                 onBlur={() => setHovered(null)}
                 onPointerDown={(event) => {
-                  if (!expanded || event.button !== 0) return;
+                  if (event.button !== 0) return;
                   // Native text dragging competes with pointer capture and can
                   // interrupt a node drag when it starts on the full label.
                   event.preventDefault();

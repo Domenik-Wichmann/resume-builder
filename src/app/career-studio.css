@@ -611,7 +611,7 @@ html:has(.profile-hero) {
   overscroll-behavior: contain;
   cursor: grab;
 }
-.evidence-rail:not(.is-expanded) :is(.evidence-canvas, .evidence-node) {
+.evidence-rail:not(.is-expanded) .evidence-canvas {
   touch-action: pan-y;
   overscroll-behavior: auto;
   cursor: pointer;

@@ -1,11 +1,15 @@
 html:has(.portfolio-home) {
   scroll-behavior: auto;
-  scroll-snap-type: none;
+  scroll-snap-type: y mandatory;
   scroll-padding-top: 0;
+  overscroll-behavior-y: none;
 }
 .portfolio-home .personal-hero,
 .portfolio-home .homepage-conversation {
-  scroll-snap-align: none;
+  scroll-snap-align: start;
+}
+.portfolio-home {
+  overflow: clip;
 }
 .portfolio-home .personal-hero {
   min-height: 100svh;
@@ -66,7 +70,7 @@ html:has(.portfolio-home) {
 }
 .hero-projects {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 12px;
   flex-shrink: 0;
   margin: 0;
@@ -182,9 +186,6 @@ a.hero-project-card:focus-visible {
   .hero-project-monogram {
     width: 100%;
     height: 64px;
-  }
-  html:has(.portfolio-home) {
-    scroll-snap-type: none;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -335,8 +336,10 @@ a.hero-project-card:focus-visible {
   color: #c9b7fb;
 }
 .portfolio-home .homepage-conversation {
-  min-height: 100dvh;
-  scroll-snap-stop: normal;
+  height: 100dvh;
+  min-height: 0;
+  overflow: clip;
+  scroll-snap-stop: always;
 }
 .portfolio-home .homepage-conversation .career-studio {
   height: 100dvh;
@@ -579,7 +582,6 @@ a.hero-project-card:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   html:has(.portfolio-home) {
     scroll-behavior: auto;
-    scroll-snap-type: none;
   }
   .hero-input-shell,
   .hero-composer .hero-send {
@@ -612,8 +614,8 @@ a.hero-project-card:focus-visible {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  max-width: 110px;
-  padding: 12px;
+  margin-left: auto;
+  padding: 8px 12px;
   border: 1px solid #7e96a3;
   border-radius: 16px;
   color: #d1bafa;

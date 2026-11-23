@@ -1,9 +1,10 @@
 "use client";
-import { useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { PortfolioIntro, type IntroStory } from "./portfolio-intro";
 import { CareerChat, type HeroSubmission } from "./career-chat";
 import type { Presentation } from "@/lib/markets";
 import type { ResumeDesign } from "@/lib/resume-design/model";
+import type { PortfolioProjectCard } from "@/lib/portfolio/selection";
 import {
   initialInputKind,
   submitComposerOnEnter,
@@ -13,10 +14,12 @@ export function HomeExperience({
   story,
   presentation,
   design,
+  projects = [],
 }: {
   story: IntroStory;
   presentation: Presentation;
   design?: ResumeDesign;
+  projects?: PortfolioProjectCard[];
 }) {
   const [input, setInput] = useState("");
   const heroMessage = useRef<HTMLTextAreaElement>(null);
@@ -25,6 +28,75 @@ export function HomeExperience({
   const kind = initialInputKind(input);
   const tooLong = kind === "ask" && input.length > 1000;
   const canSubmit = !busy && input.trim().length >= 3 && !tooLong;
+  useEffect(() => {
+    const conversation = document.querySelector<HTMLElement>(
+      ".homepage-conversation",
+    );
+    if (!conversation) return;
+    let accumulated = 0;
+    let previousTime = 0;
+    let settling = false;
+    let release = 0;
+    const wheel = (event: WheelEvent) => {
+      if (event.ctrlKey || Math.abs(event.deltaX) > Math.abs(event.deltaY))
+        return;
+      const delta =
+        event.deltaY *
+        (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? innerHeight : 1);
+      if (!delta) return;
+      // Replies and panels keep their own scrolling until their edge is reached.
+      for (
+        let node = event.target instanceof Element ? event.target : null;
+        node && node !== document.body;
+        node = node.parentElement
+      ) {
+        if (
+          /auto|scroll/.test(getComputedStyle(node).overflowY) &&
+          node.scrollHeight > node.clientHeight + 1 &&
+          (delta > 0
+            ? node.scrollTop + node.clientHeight < node.scrollHeight - 1
+            : node.scrollTop > 1)
+        )
+          return;
+      }
+      const chatTop = window.scrollY + conversation.getBoundingClientRect().top;
+      const heroEnd = Math.max(0, chatTop - innerHeight);
+      const forward =
+        delta > 0 && scrollY >= heroEnd - 2 && scrollY < chatTop - 2;
+      const backward = delta < 0 && Math.abs(scrollY - chatTop) < 2;
+      if (!settling && !forward && !backward) {
+        accumulated = 0;
+        return;
+      }
+      event.preventDefault();
+      if (settling) return;
+      const now = performance.now();
+      if (
+        now - previousTime > 250 ||
+        Math.sign(accumulated) !== Math.sign(delta)
+      )
+        accumulated = 0;
+      previousTime = now;
+      accumulated += delta;
+      if (Math.abs(accumulated) < 100) return;
+      accumulated = 0;
+      settling = true;
+      window.scrollTo({
+        top: forward ? chatTop : heroEnd,
+        behavior: matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "instant"
+          : "smooth",
+      });
+      release = window.setTimeout(() => {
+        settling = false;
+      }, 800);
+    };
+    window.addEventListener("wheel", wheel, { passive: false });
+    return () => {
+      window.removeEventListener("wheel", wheel);
+      window.clearTimeout(release);
+    };
+  }, []);
   function submit(event: FormEvent) {
     event.preventDefault();
     if (!canSubmit) return;
@@ -43,6 +115,7 @@ export function HomeExperience({
       <PortfolioIntro
         story={story}
         presentation={presentation}
+        projects={projects}
         composer={
           <form
             className="hero-composer wrap"
