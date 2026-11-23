@@ -55,6 +55,51 @@ it("keeps the full animated graph visible on phones and expands without losing r
     ).toBe(false);
     expect(host.querySelector(".evidence-rail.is-preview")).not.toBeNull();
     expect(host.querySelector(".graph-preview-caption")).toBeNull();
+    const node = host.querySelector<HTMLButtonElement>(".evidence-node")!;
+    const canvas = host.querySelector<HTMLElement>(".evidence-canvas")!;
+    vi.spyOn(canvas, "getBoundingClientRect").mockReturnValue(
+      new DOMRect(0, 0, 280, 160),
+    );
+    let captured = false;
+    node.setPointerCapture = () => {
+      captured = true;
+    };
+    node.hasPointerCapture = () => captured;
+    node.releasePointerCapture = () => {
+      captured = false;
+    };
+    const initialLeft = node.style.left;
+    await act(async () =>
+      node.dispatchEvent(
+        new PointerEvent("pointerdown", {
+          bubbles: true,
+          cancelable: true,
+          button: 0,
+          pointerId: 1,
+          clientX: 100,
+          clientY: 60,
+        }),
+      ),
+    );
+    expect(captured).toBe(true);
+    await act(async () =>
+      node.dispatchEvent(
+        new PointerEvent("pointermove", {
+          bubbles: true,
+          pointerId: 1,
+          clientX: 140,
+          clientY: 90,
+        }),
+      ),
+    );
+    expect(node.style.left).not.toBe(initialLeft);
+    await act(async () => {
+      node.dispatchEvent(
+        new PointerEvent("pointerup", { bubbles: true, pointerId: 1 }),
+      );
+      node.dispatchEvent(new MouseEvent("click", { bubbles: true, detail: 1 }));
+    });
+    expect(expand).not.toHaveBeenCalled();
     const wheel = new WheelEvent("wheel", {
       bubbles: true,
       cancelable: true,

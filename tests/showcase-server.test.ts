@@ -23,6 +23,7 @@ vi.mock("../src/lib/portfolio/case-study-server", async (importOriginal) => ({
 }));
 import {
   publicShowcase,
+  publicProjectCards,
   publicProjectContext,
 } from "../src/lib/portfolio/showcase-server";
 import { fillCaseStudy } from "../src/lib/portfolio/case-study-server";
@@ -65,6 +66,16 @@ beforeEach(() => {
   reads.brain.mockResolvedValue([brainFixture()]);
   reads.cases.mockResolvedValue([]);
   reads.media.mockResolvedValue([]);
+});
+it("adds newly selected public projects to the shared hero/gallery list without exposing private records", async () => {
+  const selected = projectFixture();
+  expect(
+    (await publicProjectCards()).some((card) => card.slug === selected.slug),
+  ).toBe(true);
+  reads.brain.mockResolvedValue([brainFixture({ published: false })]);
+  expect(
+    (await publicProjectCards()).some((card) => card.slug === selected.slug),
+  ).toBe(false);
 });
 it("reads media only for selected public parents in the primary account and projects a minimal card", async () => {
   const ids = Object.keys(selectedProjectNames);

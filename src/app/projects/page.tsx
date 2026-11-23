@@ -1,25 +1,11 @@
 import Link from "next/link";
-import { projectGuides } from "@/lib/portfolio/project-guides";
-import { publicShowcase } from "@/lib/portfolio/showcase-server";
+import { publicProjectCards } from "@/lib/portfolio/showcase-server";
 import { PortfolioHeader } from "@/components/portfolio-shell";
 import { ProjectCards } from "@/components/project-cards";
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Projects" };
 export default async function Projects() {
-  const existing = await publicShowcase();
-  const projects = [
-    ...projectGuides.map((guide) => ({
-      slug: guide.slug,
-      title: guide.name,
-      subtitle: guide.category,
-      summary: guide.summary,
-      cover: null,
-      previewSrc: guide.screens[0].src,
-    })),
-    ...existing.filter(
-      (project) => !projectGuides.some((guide) => guide.slug === project.slug),
-    ),
-  ];
+  const projects = await publicProjectCards();
   return (
     <>
       <PortfolioHeader homeOnly />

@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { ShowcaseCard } from "@/lib/portfolio/selection";
+import type { PortfolioProjectCard } from "@/lib/portfolio/selection";
 
 export function ProjectCards({
   projects,
 }: {
-  projects: (ShowcaseCard & { previewSrc?: string })[];
+  projects: PortfolioProjectCard[];
 }) {
   return (
     <div className="selected-project-grid">

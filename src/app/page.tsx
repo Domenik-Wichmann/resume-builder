@@ -2,13 +2,15 @@ import { HomeExperience } from "@/components/home-experience";
 import { currentMarket, getPresentation } from "@/lib/market-server";
 import { publicResumeDesign } from "@/lib/resume-design/server";
 import { getPortfolioStory } from "@/lib/portfolio/story-server";
+import { publicProjectCards } from "@/lib/portfolio/showcase-server";
 import "./portfolio-home.css";
 export const dynamic = "force-dynamic";
 export default async function Home() {
-  const [story, design, presentation] = await Promise.all([
+  const [story, design, presentation, projects] = await Promise.all([
     getPortfolioStory(),
     publicResumeDesign(),
     currentMarket().then(getPresentation),
+    publicProjectCards(),
   ]);
   return (
     <div className="public-experience portfolio-home">
@@ -21,6 +23,7 @@ export default async function Home() {
           }}
           presentation={presentation}
           design={design}
+          projects={projects}
         />
       </main>
     </div>

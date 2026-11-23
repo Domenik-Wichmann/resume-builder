@@ -16,6 +16,7 @@ vi.mock("../src/components/story-navigation", () => ({
 }));
 import { PortfolioStoryHero } from "../src/components/portfolio-story";
 import { PortfolioIntro } from "../src/components/portfolio-intro";
+import { projectGuides } from "../src/lib/portfolio/project-guides";
 const presentation = {
   market: "US" as const,
   location: "Configured residence",
@@ -35,6 +36,22 @@ it("introduces the person with project cards and a single more-projects action",
         <PortfolioIntro
           story={portfolioStory(fixture)}
           presentation={presentation}
+          projects={[
+            ...projectGuides.map((guide) => ({
+              slug: guide.slug,
+              title: guide.name,
+              subtitle: guide.category,
+              summary: guide.summary,
+              cover: null,
+            })),
+            {
+              slug: "fictional-workbench",
+              title: "Fictional newly selected workbench",
+              subtitle: "Fictional published project fixture",
+              summary: "Fictional sample",
+              cover: null,
+            },
+          ]}
         />,
       ),
     );
@@ -42,12 +59,18 @@ it("introduces the person with project cards and a single more-projects action",
     expect(host.querySelector(".personal-hero-actions")).toBeNull();
     expect(
       host.querySelectorAll(".hero-projects .hero-project-card"),
-    ).toHaveLength(4);
+    ).toHaveLength(5);
+    expect(
+      host.querySelector(
+        '.hero-projects a[href="/projects/fictional-workbench"]',
+      ),
+    ).not.toBeNull();
     expect(
       host.querySelector('.hero-projects a[href="/projects/kernel"]'),
     ).not.toBeNull();
     expect(
-      host.querySelector('.hero-projects a[href="/projects"]')?.textContent,
+      host.querySelector('.hero-projects-panel a[href="/projects"]')
+        ?.textContent,
     ).toBe("More Projects");
     expect(host.textContent).toContain("Configured residence");
     expect(

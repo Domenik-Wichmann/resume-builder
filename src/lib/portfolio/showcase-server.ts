@@ -1,4 +1,4 @@
-import { projectGuideForSlug } from "./project-guides";
+import { projectGuideForSlug, projectGuides } from "./project-guides";
 import "server-only";
 import { database } from "../db";
 import { primaryAccountId } from "../account-id";
@@ -21,7 +21,26 @@ import {
   priorityProjectIds,
   showcaseTitle,
   type ShowcaseCard,
+  type PortfolioProjectCard,
 } from "./selection";
+
+export async function publicProjectCards(): Promise<PortfolioProjectCard[]> {
+  const selected = await publicShowcase();
+  // The hero and gallery share one list, including newly published selections.
+  return [
+    ...projectGuides.map((guide) => ({
+      slug: guide.slug,
+      title: guide.name,
+      subtitle: guide.category,
+      summary: guide.summary,
+      cover: null,
+      previewSrc: guide.screens[0].src,
+    })),
+    ...selected.filter(
+      (project) => !projectGuides.some((guide) => guide.slug === project.slug),
+    ),
+  ];
+}
 
 export async function publicShowcase(): Promise<ShowcaseCard[]> {
   const data = await publicProjectDetails({ selectedOnly: true });

@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import type { PortfolioStory } from "@/lib/portfolio/story";
 import type { Presentation } from "@/lib/markets";
+import type { PortfolioProjectCard } from "@/lib/portfolio/selection";
 import {
   portfolioIntroDescription,
   portfolioIntroTitle,
@@ -16,10 +17,12 @@ export function PortfolioIntro({
   story,
   presentation,
   composer,
+  projects = [],
 }: {
   story: IntroStory;
   presentation: Presentation;
   composer?: ReactNode;
+  projects?: PortfolioProjectCard[];
 }) {
   return (
     <section
@@ -39,84 +42,41 @@ export function PortfolioIntro({
         <header className="hero-projects-heading">
           <h2 id="selected-projects-heading">Selected projects</h2>
           <p>What I built, how it works, and the skills behind it.</p>
-        </header>
-        <nav className="hero-projects" aria-label="Selected projects">
-          <Link
-            className="hero-project-card"
-            href="/projects/configurable-excel-and-vba-rules-engine-78ff38898c"
-          >
-            <Image
-              className="hero-project-preview"
-              src="/images/projects/babycat-dashboard.jpg"
-              width={160}
-              height={110}
-              alt=""
-            />
-            <span className="hero-project-copy">
-              <strong>BabyCat</strong>
-              <span>Catalogs, rules & automation</span>
-              <small>
-                Explore project <span aria-hidden="true">↗</span>
-              </small>
-            </span>
-          </Link>
-          <Link
-            className="hero-project-card"
-            href="/projects/multilingual-onboarding-and-mini-lms-51f0eca038"
-          >
-            <Image
-              className="hero-project-preview"
-              src="/images/projects/systemwright-lms.jpg"
-              width={160}
-              height={110}
-              alt=""
-            />
-            <span className="hero-project-copy">
-              <strong>SystemWright LMS</strong>
-              <span>Interactive, multilingual learning</span>
-              <small>
-                Explore project <span aria-hidden="true">↗</span>
-              </small>
-            </span>
-          </Link>
-          <Link className="hero-project-card" href="/projects/kernel">
-            <Image
-              className="hero-project-preview"
-              src="/images/projects/kernel-planner-preview.svg"
-              width={160}
-              height={110}
-              alt=""
-            />
-            <span className="hero-project-copy">
-              <strong>Kernel</strong>
-              <span>Household meal planning</span>
-              <small>
-                Explore project <span aria-hidden="true">↗</span>
-              </small>
-            </span>
-          </Link>
-          <Link
-            className="hero-project-card"
-            href="/projects/sonaway-operational-knowledge-product-eb8c2d879b"
-          >
-            <Image
-              className="hero-project-preview"
-              src="/images/projects/sonaway-knowledge-preview.svg"
-              width={160}
-              height={110}
-              alt=""
-            />
-            <span className="hero-project-copy">
-              <strong>Sonaway</strong>
-              <span>Connected operational knowledge</span>
-              <small>
-                Explore project <span aria-hidden="true">↗</span>
-              </small>
-            </span>
-          </Link>
           <Link className="hero-more-projects" href="/projects">
             More Projects
           </Link>
+        </header>
+        <nav className="hero-projects" aria-label="Selected projects">
+          {projects.map((project) => {
+            const image =
+              project.previewSrc ||
+              (project.cover ? `/media/${project.cover.id}` : null);
+            return (
+              <Link
+                className="hero-project-card"
+                href={`/projects/${project.slug}`}
+                key={project.slug}
+              >
+                {image && (
+                  <Image
+                    unoptimized
+                    className="hero-project-preview"
+                    src={image}
+                    width={160}
+                    height={110}
+                    alt=""
+                  />
+                )}
+                <span className="hero-project-copy">
+                  <strong>{project.title}</strong>
+                  <span>{project.subtitle}</span>
+                  <small>
+                    Explore project <span aria-hidden="true">↗</span>
+                  </small>
+                </span>
+              </Link>
+            );
+          })}
         </nav>
       </section>
       <div className="profile-hero wrap">

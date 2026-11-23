@@ -70,3 +70,4 @@ export const showcaseSchema = z
   .object({ projects: showcaseCardSchema.array() })
   .strict();
 export type ShowcaseCard = z.infer<typeof showcaseCardSchema>;
+export type PortfolioProjectCard = ShowcaseCard & { previewSrc?: string };
